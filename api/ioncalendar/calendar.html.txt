@@ -1,0 +1,12 @@
+<script src="//code.jquery.com/jquery-1.11..."></script>
+<script type="text/javascript" src="ion.calendar/js/moment-with-locales.min.js"></script>
+<script type="text/javascript" src="ion.calendar/js/moment.js"></script>
+<script type="text/javascript" src="ion.calendar/js/ion.calendar.min.js"></script>
+...
+<script type="text/javascript">
+$(function(){
+$("#myDatePicker-1").ionDatePicker(); 
+});
+</script>
+....
+<input class="myInput" id="myDatePicker-1" data-lang="es" data-years="1900-2017" data-sundayfirst="false"/>
