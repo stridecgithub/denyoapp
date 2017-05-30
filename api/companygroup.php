@@ -21,8 +21,8 @@
    // Retrieve specific parameter from supplied URL
    $key  = strip_tags($_REQUEST['key']);
    $data    = array();
-    $now=date("Y-m-d h:i:s",time());
-
+    $createdon_updatedon=date("Y-m-d h:i:s",time());
+ $createdby_updatedby   = filter_var($_REQUEST['createdby'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
 
    // Determine which mode is being requested
    switch($key)
@@ -32,29 +32,29 @@
       case "create":
 
          // Sanitise URL supplied values
-         $companyname       = filter_var($_REQUEST['companyname'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
+         $companygroup_name       = filter_var($_REQUEST['companygroup_name'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
          $address   = filter_var($_REQUEST['address'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
           $country   = filter_var($_REQUEST['country'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
            $contact   = filter_var($_REQUEST['contact'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
-           $createdby   = filter_var($_REQUEST['createdby'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
+          
          
 
          // Attempt to run PDO prepared statement
          try {
-            $sql  = "INSERT INTO companygroups(companygroup_name, address,country,contact,createdby,createdon) VALUES(:companyname, :address, :country, :contact,:createdby,:createdon)";
+            $sql  = "INSERT INTO companygroups(companygroup_name, address,country,contact,createdby,createdon) VALUES(:companygroup_name, :address, :country, :contact,:createdby,:createdon)";
             $stmt    = $pdo->prepare($sql);
             $stmt->execute(
                 array(
-                    ":companyname" => $companyname,
+                    ":companygroup_name" => $companygroup_name,
                      ":address" => $address,
                      ":country" => $country,
                      ":contact" => $contact,
-                     ":createdby" => $createdby,
-                      ":createdon" =>$now
+                     ":createdby" => $createdby_updatedby,
+                      ":createdon" =>$createdon_updatedon
                      
                     )
                     );
-            echo json_encode(array('message' => 'Congratulations the record ' . $companyname . ' was added to the database'));
+            echo json_encode(array('message' => 'Congratulations the record ' . $companygroup_name . ' was added to the database'));
          }
          // Catch any errors in running the prepared statement
          catch(PDOException $e)
@@ -86,23 +86,28 @@
       case "update":
 
          // Sanitise URL supplied values
-         $companyname          = filter_var($_REQUEST['companyname'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
+         $companygroup_name          = filter_var($_REQUEST['companygroup_name'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
          $address   = filter_var($_REQUEST['address'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
-
-         
+          $country   = filter_var($_REQUEST['country'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
+           $contact   = filter_var($_REQUEST['contact'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
          $recordID      = filter_var($_REQUEST['recordID'], FILTER_SANITIZE_NUMBER_INT);
 
          // Attempt to run PDO prepared statement
-         try {
-            $sql  = "UPDATE companygroups SET companygroup_name = :companyname, address = :address WHERE companygroup_id = :recordID";
+         try {             
+            $sql  = "UPDATE companygroups SET companygroup_name = :companygroup_name, address = :address, contact = :contact, country = :country, updatedby = :updatedby, updatedon = :updatedon WHERE companygroup_id = :recordID";
             //exit;
-            $stmt =  $pdo->prepare($sql);
-            $stmt->bindParam(':companyname', $companyname, PDO::PARAM_STR);
-            $stmt->bindParam(':address', $address, PDO::PARAM_STR);
-            $stmt->bindParam(':recordID', $recordID, PDO::PARAM_INT);
-            $stmt->execute();
+                $stmt =  $pdo->prepare($sql);
+                $stmt->bindParam(':companygroup_name', $companygroup_name, PDO::PARAM_STR);
+                $stmt->bindParam(':address', $address, PDO::PARAM_STR);
+                $stmt->bindParam(':contact', $contact, PDO::PARAM_STR);
+                $stmt->bindParam(':country', $country, PDO::PARAM_STR);
+                $stmt->bindParam(':recordID', $recordID, PDO::PARAM_INT);
+                 $stmt->bindParam(':updatedby', $createdby_updatedby, PDO::PARAM_INT);
+                 $stmt->bindParam(':updatedon', $createdon_updatedon, PDO::PARAM_INT);
+                $stmt->execute();
+            print_r($stmt);
 
-            echo json_encode('Congratulations the record ' . $name . ' was updated');
+            echo json_encode('Congratulations the record ' . $companygroup_name . ' was updated');
          }
          // Catch any errors in running the prepared statement
          catch(PDOException $e)
@@ -128,7 +133,7 @@
             $stmt->bindParam(':recordID', $recordID, PDO::PARAM_INT);
             $stmt->execute();
 
-            echo json_encode('Congratulations the record ' . $companyname . ' was removed');
+            echo json_encode('Congratulations the record ' . $companygroup_name . ' was removed');
          }
          // Catch any errors in running the prepared statement
          catch(PDOException $e)
