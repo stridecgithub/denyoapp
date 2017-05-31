@@ -18,6 +18,8 @@ export class ViewcompanygroupPage {
   public country: any;
   public contact: any;
   public userId: any;
+  public totaluser:any;
+  public totalunit:any;
   public responseResultCountry: any;
   public recordID: any = null;
   public pageTitle: string;
@@ -39,7 +41,9 @@ export class ViewcompanygroupPage {
     this.companygroup_name = item.companygroup_name;
     this.address = item.address;
     this.country = item.country;
-    this.contact = item.contact;
+    this.contact = item.contact;   
+    this.totaluser = item.totaluser;
+    this.totalunit = item.totalunit;
     this.recordID = item.companygroup_id;
    
   }
