@@ -28,60 +28,77 @@
    switch($key)
    {
 
-      // Add a new record to the companygroups table
-      case "create":
+        // Add a new record to the companygroups table
+        case "create":
 
-         // Sanitise URL supplied values
-         $companygroup_name       = filter_var($_REQUEST['companygroup_name'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
-         $address   = filter_var($_REQUEST['address'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
-          $country   = filter_var($_REQUEST['country'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
-           $contact   = filter_var($_REQUEST['contact'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
-          
-         
+        // Sanitise URL supplied values
+        $companygroup_name       = filter_var($_REQUEST['companygroup_name'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
+        $address   = filter_var($_REQUEST['address'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
+        $country   = filter_var($_REQUEST['country'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
+        $contact   = filter_var($_REQUEST['contact'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
 
-         // Attempt to run PDO prepared statement
-         try {
-            $sql  = "INSERT INTO companygroups(companygroup_name, address,country,contact,createdby,createdon) VALUES(:companygroup_name, :address, :country, :contact,:createdby,:createdon)";
-            $stmt    = $pdo->prepare($sql);
-            $stmt->execute(
+
+
+        // Attempt to run PDO prepared statement
+        try {
+                $sql  = "INSERT INTO companygroups(companygroup_name, address,country,contact,createdby,createdon) VALUES(:companygroup_name, :address, :country, :contact,:createdby,:createdon)";
+                $stmt    = $pdo->prepare($sql);
+                $stmt->execute(
                 array(
-                    ":companygroup_name" => $companygroup_name,
-                     ":address" => $address,
-                     ":country" => $country,
-                     ":contact" => $contact,
-                     ":createdby" => $createdby_updatedby,
-                      ":createdon" =>$createdon_updatedon
-                     
-                    )
-                    );
-            echo json_encode(array('message' => 'Congratulations the record ' . $companygroup_name . ' was added to the database'));
-         }
-         // Catch any errors in running the prepared statement
-         catch(PDOException $e)
-         {
-            echo $e->getMessage();
-         }
+                ":companygroup_name" => $companygroup_name,
+                ":address" => $address,
+                ":country" => $country,
+                ":contact" => $contact,
+                ":createdby" => $createdby_updatedby,
+                ":createdon" =>$createdon_updatedon
 
-      break;
+                )
+                );
+                echo json_encode(array('message' => 'Congratulations the record ' . $companygroup_name . ' was added to the database'));
+        }
+        // Catch any errors in running the prepared statement
+        catch(PDOException $e)
+        {
+        echo $e->getMessage();
+        }
 
- case "run":
- $wheredate="deletestatus='0'";
-    try {
-          $stmt    = $pdo->query("SELECT companygroup_id,companygroup_name,country,address,contact FROM companygroups where ".$wheredate);
-          while($row  = $stmt->fetch(PDO::FETCH_OBJ))
-          {
-            // Assign each row of data to associative array
-            $data[] = $row;
-          }
+        break;
 
-          // Return data as JSON
-          echo json_encode($data);
-      }
-      catch(PDOException $e)
-      {
-          echo $e->getMessage();
-      }
- break;
+    case "run":
+
+        $sortname=$_REQUEST['sort'];
+        $sortascdesc=$_REQUEST['dir'];
+        $startIndex=$_REQUEST['startIndex'];
+        $results=$_REQUEST['results']; 
+
+        $orderby="order by ".$sortname." ".$sortascdesc;
+        $limit="limit ".$startIndex.",".$results;
+        $wheredate="deletestatus='0'";
+        try {
+
+        $sql = "SELECT count(*) as totalCount FROM companygroups"; 
+        $result = $pdo->prepare($sql); 
+        $result->execute(); 
+        $number_of_rows = $result->fetchColumn(); 
+
+
+        $stmt    = $pdo->query("SELECT companygroup_id,companygroup_name,country,address,contact FROM companygroups where ".$wheredate." ".$orderby." ".$limit);
+        while($row  = $stmt->fetch(PDO::FETCH_OBJ))
+        {
+        // Assign each row of data to associative array
+
+        $row->totalCount=$number_of_rows;
+        $data[] = $row;
+        }
+
+        // Return data as JSON
+        echo json_encode($data);
+        }
+        catch(PDOException $e)
+        {
+        echo $e->getMessage();
+        }
+    break;
       // Update an existing record in the companygroups table
       case "update":
 
