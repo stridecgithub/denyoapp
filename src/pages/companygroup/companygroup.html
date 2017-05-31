@@ -10,7 +10,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>companygroup</ion-title>
+    <ion-title>{{pageTitle}}</ion-title>
     <ion-buttons end>
       <button (click)="doAdd()" style="background-color:transparent">
             <ion-icon name="ios-add-circle-outline"></ion-icon>           
@@ -20,13 +20,13 @@
 </ion-header>
 <ion-content padding>  
   <ion-item id="sortbar">
-    <button *ngIf="sortby==1" sortbutton clear (click)="doSort('companygroup_name')" sortbartextsel>
-       Company Name
+    <button *ngIf="sortby==1" class="sortbutton" clear (click)="doSort('companygroup_name')" sortbartextsel>
+      <div class="company-name">Company Name</div>
         <ion-icon *ngIf="ascending==false" ios="md-arrow-dropdown" md="md-arrow-dropdown"></ion-icon>
         <ion-icon *ngIf="ascending==true" ios="md-arrow-dropup" md="md-arrow-dropup"></ion-icon>
     </button>
-    <button *ngIf="sortby!=1" sortbutton clear (click)="doSort('companygroup_name')" sortbartext>
-         Company Name
+    <button *ngIf="sortby!=1"  class="sortbutton" clear (click)="doSort('companygroup_name')" sortbartext>
+       <div class="company-name">Company Name</div>
         <ion-icon *ngIf="ascending==false" ios="md-arrow-dropdown" md="md-arrow-dropdown"></ion-icon>
         <ion-icon *ngIf="ascending==true" ios="md-arrow-dropup" md="md-arrow-dropup"></ion-icon>
     </button>

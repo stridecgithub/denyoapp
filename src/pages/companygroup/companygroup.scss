@@ -35,6 +35,45 @@
 }
 
 
+ #sortbar {
+        width: 100%;
+        min-height: 3.3rem;
+        margin: 0;
+        ion-label {
+        margin: 0;
+        }
+        .item-inner {   
+        padding: 0px;
+        position: relative;
+        top: 3px;
+        }
+        .input-wrapper {
+        flex-direction: column;
+        margin: auto;
+        width: 285px;
+        }
+        .sort-line {
+        border-left: 1.5px solid #cccccc;
+        height: 100%;
+        position: relative;
+        top: 0.3rem;
+        }
+    } 
+/*.sortbutton{
+    font-size: 25px;  
+    background-color: transparent;
+    float: right;
+    position: absolute;
+    top: 6px;
+    left: 70%;
+  }*/
+
+  .company-name{
+    position: absolute;
+    top: 30%;
+    left: 10%;
+  }
+
 ion-icon{
             font-size: 25px;
             color: white;
