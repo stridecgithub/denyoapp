@@ -34,7 +34,7 @@ export class CompanygroupPage {
   public reportAllLists = [];
   constructor(public http: Http, public nav: NavController,
     public toastCtrl: ToastController, public alertCtrl: AlertController, public navParams: NavParams) {
-    this.pageTitle = 'Comapny Group';
+    this.pageTitle = 'Company Group';
   }
 
   ionViewDidLoad() {

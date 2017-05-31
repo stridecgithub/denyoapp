@@ -12,8 +12,6 @@
     <ion-title>{{ pageTitle }}</ion-title>
   </ion-navbar>
 </ion-header>
-
-
 <ion-content padding>
   <div>
     <div *ngIf="hideForm">
@@ -23,39 +21,29 @@
         <p>Simply go back to the home page and select the option you want to pursue.</p>
       </ion-item>
     </div>
-
-
     <div *ngIf="!hideForm">
       <form [formGroup]="form" (ngSubmit)="saveEntry()">
         <ion-list>
-          <ion-item-group>
-            <ion-item-divider color="light">Company Name *</ion-item-divider>
-            <ion-item>
-              <ion-input type="text" [disabled]="readOnly" placeholder="Name" formControlName="companygroup_name" [(ngModel)]="companygroup_name"></ion-input>
-            </ion-item>
-          </ion-item-group>
-          <ion-item-group>
-            <ion-item>
-              <ion-item-divider color="light">Country *</ion-item-divider>
-              <ion-select [disabled]="readOnly" [(ngModel)]="country" formControlName="country" [(ngModel)]="country">
-                <ion-option *ngFor="let countryData of responseResultCountry" value="{{countryData.country_name}}">{{countryData.country_name}}</ion-option>
-              </ion-select>
-            </ion-item>
-          </ion-item-group>
-          <ion-item-group>
-            <ion-item-divider color="light">Address </ion-item-divider>
-            <ion-item>
-              <ion-textarea [disabled]="readOnly" placeholder="Address" formControlName="address" rows="6" [(ngModel)]="address"></ion-textarea>
-            </ion-item>
-          </ion-item-group>
-          <ion-item-group>
-            <ion-item-divider color="light">Company Contact *</ion-item-divider>
-            <ion-item>
-              <ion-input [disabled]="readOnly" type="text" placeholder="Company Contact" formControlName="contact" [(ngModel)]="contact"></ion-input>
-            </ion-item>
-          </ion-item-group>
+          <ion-item>
+            <ion-label stacked class="stack-label">Company Name <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
+            <ion-input type="text" [disabled]="readOnly" formControlName="companygroup_name" [(ngModel)]="companygroup_name"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label stacked>Country <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
+            <ion-select [disabled]="readOnly" [(ngModel)]="country" formControlName="country" [(ngModel)]="country">
+              <ion-option *ngFor="let countryData of responseResultCountry" value="{{countryData.country_name}}">{{countryData.country_name}}</ion-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label stacked>Address</ion-label>
+            <ion-textarea [disabled]="readOnly" formControlName="address" rows="6" [(ngModel)]="address"></ion-textarea>
+          </ion-item>
+          <ion-item>
+            <ion-label stacked>Company Contact <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
+            <ion-input [disabled]="readOnly" type="text"  formControlName="contact" [(ngModel)]="contact"></ion-input>
+          </ion-item>
           <ion-item *ngIf="hideActionButton">
-            <button ion-button color="primary" text-center block [disabled]="!form.valid">Save</button>
+            <button ion-button color="primary" text-center block [disabled]="!form.valid">Complete and Save</button>
           </ion-item>
         </ion-list>
       </form>

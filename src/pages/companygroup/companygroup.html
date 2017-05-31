@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-  <ion-navbar   color="bluedark">
+  <ion-navbar color="bluedark">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
@@ -18,20 +18,20 @@
     </ion-buttons>
   </ion-navbar>
 </ion-header>
-<ion-content padding>  
+<ion-content padding>
   <ion-item id="sortbar">
     <button *ngIf="sortby==1" class="sortbutton" clear (click)="doSort('companygroup_name')" sortbartextsel>
       <div class="company-name">Company Name</div>
         <ion-icon *ngIf="ascending==false" ios="md-arrow-dropdown" md="md-arrow-dropdown"></ion-icon>
         <ion-icon *ngIf="ascending==true" ios="md-arrow-dropup" md="md-arrow-dropup"></ion-icon>
     </button>
-    <button *ngIf="sortby!=1"  class="sortbutton" clear (click)="doSort('companygroup_name')" sortbartext>
+    <button *ngIf="sortby!=1" class="sortbutton" clear (click)="doSort('companygroup_name')" sortbartext>
        <div class="company-name">Company Name</div>
         <ion-icon *ngIf="ascending==false" ios="md-arrow-dropdown" md="md-arrow-dropdown"></ion-icon>
         <ion-icon *ngIf="ascending==true" ios="md-arrow-dropup" md="md-arrow-dropup"></ion-icon>
     </button>
   </ion-item>
-
+  <div class="separator-line">&nbsp;</div>
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
     </ion-refresher-content>
@@ -42,25 +42,23 @@
         <div class="error">{{norecords}}</div>
       </ion-col>
     </ion-row>
-    <ion-item-sliding *ngFor="let item of reportAllLists">
+    <ion-item-sliding  *ngFor="let item of reportAllLists;">
       <ion-item>
         <h2><b>Company:</b>{{item.companygroup_name}}</h2>
         <h2><b>Total User:</b>{{item.totaluser}}</h2>
-         <h2><b>Total Unit:</b>{{item.totalunit}}</h2>
+        <h2><b>Total Unit:</b>{{item.totalunit}}</h2>
       </ion-item>
       <ion-item-options>
         <button class="viewcolor" (click)="doEdit(item,'view')">
                        <ion-icon name="eye" class="icon-size"></ion-icon>
                     </button>
-        <button class="editcolor" (click)="doEdit(item,'edit')">
-                       <!--ion-icon ios="ios-create" md="md-create"></ion-icon-->
+        <button class="editcolor" (click)="doEdit(item,'edit')">                      
                         <ion-icon name="create" class="icon-size"></ion-icon>
                     </button>
-        <button class="trashcolor" (click)="doConfirm(item.companygroup_id,item)">
-                         <!--ion-icon ios="ios-trash" md="md-trash"></ion-icon-->
+        <button class="trashcolor" (click)="doConfirm(item.companygroup_id,item)">                        
                          <ion-icon name="trash" class="icon-size"></ion-icon>
                     </button>
-      </ion-item-options>
+      </ion-item-options>     
     </ion-item-sliding>
   </ion-list>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">

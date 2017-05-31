@@ -11,7 +11,7 @@
     #sortbar {
         width: 100%;
         min-height: 3.3rem;
-        margin: 0;
+        margin: 0px 7px 1px 41px;
         ion-label {
         margin: 0;
         }
@@ -59,24 +59,28 @@
         top: 0.3rem;
         }
     } 
-/*.sortbutton{
-    font-size: 25px;  
-    background-color: transparent;
-    float: right;
-    position: absolute;
-    top: 6px;
-    left: 70%;
-  }*/
-
   .company-name{
     position: absolute;
     top: 30%;
     left: 10%;
   }
-
-ion-icon{
+    .odd-row-list{
+        background-color: #cccccc
+    }
+    .event-row-list{
+        background-color: #eaeaea;
+    }
+    ion-icon{
             font-size: 25px;
             color: white;
             background-color: transparent;
-        }
-
+        }   
+.mandatory{
+    color:red;
+}
+.separator-line{
+    border-top: 1px solid #cccccc;
+    position: relative;
+    margin-left: 6%;
+    margin-top: 3px;
+}
