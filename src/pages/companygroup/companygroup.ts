@@ -106,11 +106,11 @@ export class CompanygroupPage {
   }
 
   doAdd() {
-    this.nav.push(AddCompanygroup);
+    this.nav.push(AddcompanygroupPage);
   }
   doEdit(item, act) {
     console.log("Edit Data" + JSON.stringify(item));
-    this.nav.push(AddCompanygroup, {
+    this.nav.push(AddcompanygroupPage, {
       record: item,
       act: act
     });
