@@ -16,21 +16,40 @@
   <div>
     <ion-list>
       <ion-item>
-        <ion-label stacked>Company Name</ion-label>
-        {{companygroup_name}}
+        <ion-label stacked>Company Name
+          <br>
+          <span style="font-weight:normal">{{companygroup_name}}</span>
+        </ion-label>
       </ion-item>
       <ion-item>
-        <ion-label stacked>Country</ion-label>
-        {{country_name}}
+        <ion-label stacked>Country
+          <br>
+          <span style="font-weight:normal">{{country}}</span></ion-label>
       </ion-item>
       <ion-item>
-        <ion-label stacked>Address</ion-label>
-        {{address}}
+        <ion-label stacked>Address
+          <br>
+          <span style="font-weight:normal">{{address}}</span></ion-label>
       </ion-item>
       <ion-item>
-        <ion-label stacked>Company Contact</ion-label>
-        {{contact}}
+        <ion-label stacked>Company Contact
+          <br>
+          <span style="font-weight:normal">{{contact}}</span></ion-label>
       </ion-item>
+
+       <ion-item>
+        <ion-label stacked>Total User
+          <br>
+          <span style="font-weight:normal">{{totaluser}}</span></ion-label>
+      </ion-item>
+
+
+       <ion-item>
+        <ion-label stacked>Total Unit
+          <br>
+          <span style="font-weight:normal">{{totalunit}}</span></ion-label>
+      </ion-item>
+
     </ion-list>
   </div>
 </ion-content>

@@ -41,6 +41,6 @@ export class ViewcompanygroupPage {
     this.country = item.country;
     this.contact = item.contact;
     this.recordID = item.companygroup_id;
-    console.log(this.companygroup_name);
+   
   }
 }
