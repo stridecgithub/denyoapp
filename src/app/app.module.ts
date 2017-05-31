@@ -9,6 +9,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { OtherPage } from '../pages/other/other';
 import { CompanygroupPage } from '../pages/companygroup/companygroup';
 import { AddcompanygroupPage } from '../pages/addcompanygroup/addcompanygroup';
+import { HttpModule } from '@angular/http';
 @NgModule({
   declarations: [
     MyApp,
@@ -20,6 +21,7 @@ import { AddcompanygroupPage } from '../pages/addcompanygroup/addcompanygroup';
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
