@@ -101,6 +101,7 @@ export class CompanygroupPage {
     console.log('E');
   }
   ionViewWillEnter() {
+    this.reportData.startindex = 0;
     this.reportData.sort = "createdon";
     this.doReport();
   }
