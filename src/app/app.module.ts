@@ -8,13 +8,15 @@ import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { OtherPage } from '../pages/other/other';
 import { CompanygroupPage } from '../pages/companygroup/companygroup';
+import { AddcompanygroupPage } from '../pages/addcompanygroup/addcompanygroup';
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     TabsPage,
     OtherPage,
-    CompanygroupPage
+    CompanygroupPage,
+    AddcompanygroupPage
   ],
   imports: [
     BrowserModule,
@@ -26,7 +28,8 @@ import { CompanygroupPage } from '../pages/companygroup/companygroup';
     HomePage,
     TabsPage,
     OtherPage,
-    CompanygroupPage
+    CompanygroupPage,
+    AddcompanygroupPage
   ],
   providers: [
     StatusBar,

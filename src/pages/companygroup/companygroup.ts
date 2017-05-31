@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, ToastController, AlertController, NavParams } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 import { Http, Headers, RequestOptions } from '@angular/http';
-import { AddCompanygroup } from '../add-companygroup/add-companygroup';
+import { AddcompanygroupPage } from '../addcompanygroup/addcompanygroup';
 
 /**
  * Generated class for the CompanygroupPage page.
