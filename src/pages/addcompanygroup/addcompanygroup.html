@@ -25,12 +25,12 @@
       <form [formGroup]="form" (ngSubmit)="saveEntry()">
         <ion-list>
           <ion-item>
-            <ion-label stacked class="stack-label">Company Name <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
+            <ion-label stacked>Company Name <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
             <ion-input type="text" [disabled]="readOnly" formControlName="companygroup_name" [(ngModel)]="companygroup_name"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label stacked>Country <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
-            <ion-select [disabled]="readOnly" [(ngModel)]="country" formControlName="country" [(ngModel)]="country">
+            <ion-select [disabled]="readOnly" [(ngModel)]="country" formControlName="country">
               <ion-option *ngFor="let countryData of responseResultCountry" value="{{countryData.country_name}}">{{countryData.country_name}}</ion-option>
             </ion-select>
           </ion-item>
