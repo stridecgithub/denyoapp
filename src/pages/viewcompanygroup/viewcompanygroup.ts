@@ -35,11 +35,12 @@ export class ViewcompanygroupPage {
   // Assign the navigation retrieved data to properties
   // used as models on the page's HTML form
   selectEntry(item) {
-    console.log(this.companygroup_name);
+    
     this.companygroup_name = item.companygroup_name;
     this.address = item.address;
     this.country = item.country;
     this.contact = item.contact;
     this.recordID = item.companygroup_id;
+    console.log(this.companygroup_name);
   }
 }
