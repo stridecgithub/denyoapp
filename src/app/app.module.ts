@@ -9,6 +9,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { OtherPage } from '../pages/other/other';
 import { CompanygroupPage } from '../pages/companygroup/companygroup';
 import { AddcompanygroupPage } from '../pages/addcompanygroup/addcompanygroup';
+import { ViewcompanygroupPage } from '../pages/viewcompanygroup/viewcompanygroup';
 import { HttpModule } from '@angular/http';
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { HttpModule } from '@angular/http';
     TabsPage,
     OtherPage,
     CompanygroupPage,
-    AddcompanygroupPage
+    AddcompanygroupPage,
+    ViewcompanygroupPage
   ],
   imports: [
     BrowserModule,
@@ -31,7 +33,8 @@ import { HttpModule } from '@angular/http';
     TabsPage,
     OtherPage,
     CompanygroupPage,
-    AddcompanygroupPage
+    AddcompanygroupPage,
+    ViewcompanygroupPage
   ],
   providers: [
     StatusBar,

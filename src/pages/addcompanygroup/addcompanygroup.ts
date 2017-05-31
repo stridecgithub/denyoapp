@@ -63,20 +63,13 @@ export class AddcompanygroupPage {
   ionViewWillEnter() {
     this.resetFields();
     this.getJsonCountryListData();
-
     if (this.NP.get("record")) {
       console.log(this.NP.get("act"));
       this.isEdited = true;
       this.selectEntry(this.NP.get("record"));
-      if (this.NP.get("act") == 'edit') {
-        this.pageTitle = 'Edit Company Group';
-        this.readOnly = false;
-        this.hideActionButton = true;
-      } else {
-        this.pageTitle = 'View Company Group';
-        this.readOnly = true
-        this.hideActionButton = false;
-      }
+      this.pageTitle = 'Edit Company Group';
+      this.readOnly = false;
+      this.hideActionButton = true;
     }
     else {
       this.isEdited = false;

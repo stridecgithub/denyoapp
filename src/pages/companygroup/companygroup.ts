@@ -3,7 +3,7 @@ import { IonicPage, NavController, ToastController, AlertController, NavParams }
 import 'rxjs/add/operator/map';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { AddcompanygroupPage } from '../addcompanygroup/addcompanygroup';
-
+import { ViewcompanygroupPage } from '../viewcompanygroup/viewcompanygroup';
 /**
  * Generated class for the CompanygroupPage page.
  *
@@ -110,12 +110,20 @@ export class CompanygroupPage {
     this.nav.push(AddcompanygroupPage);
   }
   doEdit(item, act) {
-    console.log("Edit Data" + JSON.stringify(item));
-    this.nav.push(AddcompanygroupPage, {
+    if (act == 'edit') {
+      this.nav.push(AddcompanygroupPage, {
+        record: item,
+        act: act
+      });
+
+    }
+    this.nav.push(ViewcompanygroupPage, {
       record: item,
       act: act
     });
   }
+
+
 
 
   /******************************************/
@@ -180,7 +188,7 @@ export class CompanygroupPage {
     });
     notification.present();
   }
-  
+
 
   /********************/
   /* Sorting function */
