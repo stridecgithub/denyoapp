@@ -180,14 +180,7 @@ export class CompanygroupPage {
     });
     notification.present();
   }
-  onInput(evt) {
-    console.log(evt);
-    console.log(JSON.stringify(evt));
-  }
-  onCancel(evt) {
-    console.log(evt);
-    console.log(JSON.stringify(evt));
-  }
+  
 
   /********************/
   /* Sorting function */

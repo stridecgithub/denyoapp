@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar   color="bluedark">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
@@ -17,13 +17,8 @@
         </button>
     </ion-buttons>
   </ion-navbar>
-
 </ion-header>
-
-
-<ion-content padding>
-
-  <ion-searchbar [(ngModel)]="myInput" [showCancelButton]="shouldShowCancel" (ionInput)="onInput($event)" (ionCancel)="onCancel($event)"></ion-searchbar>
+<ion-content padding>  
   <ion-item id="sortbar">
     <button *ngIf="sortby==1" sortbutton clear (click)="doSort('companygroup_name')" sortbartextsel>
        Company Name
@@ -49,8 +44,9 @@
     </ion-row>
     <ion-item-sliding *ngFor="let item of reportAllLists">
       <ion-item>
-        <h2><b>Group Name:</b>{{item.companygroup_name}}</h2>
-        <h2><b>Contact Number:</b>{{item.contact}}</h2>
+        <h2><b>Company:</b>{{item.companygroup_name}}</h2>
+        <h2><b>Total User:</b>{{item.contact}}</h2>
+         <h2><b>Total Unit:</b>{{item.contact}}</h2>
       </ion-item>
       <ion-item-options>
         <button class="viewcolor" (click)="doEdit(item,'view')">

@@ -1,3 +1,43 @@
-page-companygroup {
-
+    page-companygroup {
+    .viewcolor{
+    background-color: #6D1511;
+    }
+    .editcolor{
+    background-color: #69BB7B;
+    }
+    .trashcolor{
+    background-color: #DB3223;
+    }
+    #sortbar {
+        width: 100%;
+        min-height: 3.3rem;
+        margin: 0;
+        ion-label {
+        margin: 0;
+        }
+        .item-inner {   
+        padding: 0px;
+        position: relative;
+        top: 3px;
+        }
+        .input-wrapper {
+        flex-direction: column;
+        margin: auto;
+        width: 285px;
+        }
+        .sort-line {
+        border-left: 1.5px solid #cccccc;
+        height: 100%;
+        position: relative;
+        top: 0.3rem;
+        }
+    } 
 }
+
+
+ion-icon{
+            font-size: 25px;
+            color: white;
+            background-color: transparent;
+        }
+
