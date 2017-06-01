@@ -1,0 +1,37 @@
+<!--
+  Generated template for the LoginPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-content padding class="login-content">
+  <div><img src="img/denyo_logo.png" class="logo"></div>
+  <form [formGroup]="form" (ngSubmit)="login()">
+    <ion-list>
+
+      <ion-item>
+        <ion-input type="text" placeholder="User ID" formControlName="userid" [(ngModel)]="userId"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input type="password" placeholder="Password" formControlName="password" [(ngModel)]="passWrd"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Keep me signed in</ion-label>
+        <ion-checkbox disabled="true"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <div>Forgot?</div>
+      </ion-item>
+      <ion-item>
+        <button ion-button color="primary" text-center block [disabled]="!form.valid">Sign In</button>
+      </ion-item>
+
+
+
+    </ion-list>
+  </form>
+
+
+
+</ion-content>

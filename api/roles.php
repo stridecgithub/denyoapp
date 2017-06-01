@@ -19,11 +19,11 @@ PDO::ATTR_EMULATE_PREPARES   => false,
 $pdo  = new PDO($dsn, $un, $pwd, $opt);
 $data = array();
 extract($_GET);
-$wheredate="country_name!=''";
+$wheredate="role_name!=''";
 
 // Attempt to query database table and retrieve data
 try {
-  $stmt    = $pdo->query("SELECT id,country_code,country_name FROM countries where ".$wheredate);
+  $stmt    = $pdo->query("SELECT id,rolee_name FROM roles where ".$wheredate);
   while($row  = $stmt->fetch(PDO::FETCH_OBJ))
   {
   // Assign each row of data to associative array

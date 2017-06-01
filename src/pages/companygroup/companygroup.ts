@@ -115,12 +115,12 @@ export class CompanygroupPage {
         record: item,
         act: act
       });
-
+    } else {
+      this.nav.push(ViewcompanygroupPage, {
+        record: item,
+        act: act
+      });
     }
-    this.nav.push(ViewcompanygroupPage, {
-      record: item,
-      act: act
-    });
   }
 
 
