@@ -70,19 +70,25 @@
         $sortascdesc=$_REQUEST['dir'];
         $startIndex=$_REQUEST['startIndex'];
         $results=$_REQUEST['results']; 
-
-        $orderby="order by ".$sortname." ".$sortascdesc;
+        if($sortname=='companygroup_name'){
+            $orderby="order by cg.".$sortname." ".$sortascdesc;
+        }else{
+            $orderby="order by u.".$sortname." ".$sortascdesc;  
+        }
+        
         $limit="limit ".$startIndex.",".$results;
-        $wheredate="deletestatus='0'";
+        $wheredate="u.id=ud.user_id and ud.company_group=cg.companygroup_id";  
+       // echo "select u.username,ud.first_name,ud.last_name,ud.email,cg.companygroup_name from users as u,userdetails as ud,companygroups as cg where ".$wheredate." ".$orderby." ".$limit;      
         try {
 
-        $sql = "SELECT count(*) as totalCount FROM companygroups"; 
+        //$sql = "SELECT count(*) as totalCount FROM companygroups"; 
+        $sql = "select count(*) from users as u,userdetails as ud,companygroups as cg where ".$wheredate; 
         $result = $pdo->prepare($sql); 
         $result->execute(); 
         $number_of_rows = $result->fetchColumn(); 
 
 
-        $stmt    = $pdo->query("SELECT companygroup_id,companygroup_name,country,address,contact,totaluser,totalunit FROM companygroups where ".$wheredate." ".$orderby." ".$limit);
+        $stmt    = $pdo->query("select u.username,ud.first_name,ud.last_name,ud.email,cg.companygroup_name from users as u,userdetails as ud,companygroups as cg where ".$wheredate." ".$orderby." ".$limit);
         while($row  = $stmt->fetch(PDO::FETCH_OBJ))
         {
         // Assign each row of data to associative array

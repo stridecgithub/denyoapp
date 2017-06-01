@@ -11,6 +11,7 @@ import { OtherPage } from '../pages/other/other';
 import { CompanygroupPage } from '../pages/companygroup/companygroup';
 import { AddcompanygroupPage } from '../pages/addcompanygroup/addcompanygroup';
 import { ViewcompanygroupPage } from '../pages/viewcompanygroup/viewcompanygroup';
+import { UserPage } from '../pages/user/user';
 import { HttpModule } from '@angular/http';
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { HttpModule } from '@angular/http';
     OtherPage,
     CompanygroupPage,
     AddcompanygroupPage,
-    ViewcompanygroupPage
+    ViewcompanygroupPage,
+    UserPage
   ],
   imports: [
     BrowserModule,
@@ -37,7 +39,8 @@ import { HttpModule } from '@angular/http';
     OtherPage,
     CompanygroupPage,
     AddcompanygroupPage,
-    ViewcompanygroupPage
+    ViewcompanygroupPage,
+    UserPage
   ],
   providers: [
     StatusBar,
