@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
@@ -18,6 +18,7 @@ import 'rxjs/add/operator/map';
 @Component({
   selector: 'page-adduser',
   templateUrl: 'adduser.html',
+  providers: [Camera, FileChooser, Transfer, File]
 })
 export class AdduserPage {
   // Define FormBuilder /model properties
@@ -29,11 +30,13 @@ export class AdduserPage {
   public contact: any;
   public userId: any;
   public responseResultCountry: any;
-
+  progress: number;
+  public isProgress = false;
+  public isUploaded: boolean = true;
   // Flag to be used for checking whether we are adding/editing an entry
   public isEdited: boolean = false;
   public readOnly: boolean = false;
-
+  public addedImgLists:any;
   // Flag to hide the form upon successful completion of remote operation
   public hideForm: boolean = false;
   public hideActionButton = true;
@@ -48,7 +51,10 @@ export class AdduserPage {
     public http: Http,
     public NP: NavParams,
     public fb: FormBuilder,
-    public toastCtrl: ToastController, public loadingCtrl: LoadingController) {
+    public toastCtrl: ToastController, public loadingCtrl: LoadingController, private camera: Camera,
+    private filechooser: FileChooser,
+    private transfer: Transfer,
+    private file: File, private ngZone: NgZone) {
 
     // Create form builder validation rules
     this.form = fb.group({
@@ -233,6 +239,69 @@ export class AdduserPage {
     }, (err) => {
       // Handle error
       this.sendNotification(err);
+    });
+  }
+
+  fileTrans(path) {
+    let fileName = path.substr(path.lastIndexOf('/') + 1);
+    const fileTransfer: TransferObject = this.transfer.create();
+    let currentName = path.replace(/^.*[\\\/]/, '');
+    console.log("File Name is:" + currentName);
+
+
+    /*var d = new Date(),
+        n = d.getTime(),
+        newFileName = n + ".jpg";*/
+
+    let options: FileUploadOptions = {
+      fileKey: 'file',
+      fileName: fileName,
+      headers: {},
+      chunkedMode: false,
+      mimeType: "text/plain",
+    }
+
+    //  http://127.0.0.1/ionic/upload_attach.php
+    //http://amahr.stridecdev.com/getgpsvalue.php?key=create&lat=34&long=45
+    fileTransfer.onProgress(this.onProgress);
+    fileTransfer.upload(path, this.apiServiceURL + 'upload_user_photo.php', options)
+      .then((data) => {
+
+        console.log("UPLOAD SUCCESS:" + data.response);
+        let successData = JSON.parse(data.response);
+        this.sendNotification("UPLOAD SUCCESS:");
+        console.log('http:' + '//' + successData.baseURL + '/' + successData.target_dir + '/' + successData.fileName);
+
+        //<img src="{{addedImgLists[i].imgSrc}}" width="75%" height="75%" />
+        let imgSrc;
+       
+          imgSrc = 'http:' + '//' + successData.baseURL + '/' + successData.target_dir + '/' + successData.fileName;
+          this.addedImgLists= imgSrc;
+         
+       
+        this.progress += 5;
+        this.isProgress = false;
+        this.isUploadedProcessing = false;
+        return false;
+
+
+
+        // Save in Backend and MysQL
+        //this.uploadToServer(data.response);
+        // Save in Backend and MysQL
+      }, (err) => {
+        //loading.dismiss();
+        console.log("Upload Error:");
+        this.sendNotification("Upload Error:" + JSON.stringify(err));
+      })
+  }
+  onProgress = (progressEvent: ProgressEvent): void => {
+    this.ngZone.run(() => {
+      if (progressEvent.lengthComputable) {
+        let progress = Math.round((progressEvent.loaded / progressEvent.total) * 95);
+        this.isProgress = true;
+        this.progress = progress;
+      }
     });
   }
 
