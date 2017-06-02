@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { UseraccountPage } from '../useraccount/useraccount';
@@ -18,8 +18,9 @@ import 'rxjs/add/operator/map';
 export class AdduserPage {
   // Define FormBuilder /model properties
   public form: FormGroup;
-  public companygroup_name: any;
-  public address: any;
+  public first_name: any;
+  public last_name: any;
+  public email: any;
   public country: any;
   public contact: any;
   public userId: any;
@@ -41,14 +42,15 @@ export class AdduserPage {
     public http: Http,
     public NP: NavParams,
     public fb: FormBuilder,
-    public toastCtrl: ToastController) {
+    public toastCtrl: ToastController, public loadingCtrl: LoadingController) {
 
     // Create form builder validation rules
     this.form = fb.group({
-      "companygroup_name": ["", Validators.required],
+      "first_name": ["", Validators.required],
+      "last_name": ["", Validators.required],
       "country": ["", Validators.required],
       "contact": ["", Validators.required],
-      "address": [""]
+      "email": ["", Validators.required]
     });
 
     this.userId = localStorage.getItem("userInfoId");
@@ -82,8 +84,9 @@ export class AdduserPage {
   // Assign the navigation retrieved data to properties
   // used as models on the page's HTML form
   selectEntry(item) {
-    this.companygroup_name = item.companygroup_name;
-    this.address = item.address;
+    this.first_name = item.first_name;
+    this.last_name = item.last_name;
+    this.email = item.email;
     this.country = item.country;
     this.contact = item.contact;
     this.recordID = item.companygroup_id;
@@ -96,7 +99,7 @@ export class AdduserPage {
   // to our remote PHP script (note the body variable we have created which
   // supplies a variable of key with a value of create followed by the key/value pairs
   // for the record data
-  createEntry(companygroup_name, address, country, contact, createdby) {
+  createEntry(first_name, last_name, email, country, contact, createdby) {
     this.navCtrl.push(UseraccountPage);
   }
 
@@ -107,7 +110,7 @@ export class AdduserPage {
   // to our remote PHP script (note the body variable we have created which
   // supplies a variable of key with a value of update followed by the key/value pairs
   // for the record data
-  updateEntry(companygroup_name, address, country, contact, createdby) {
+  updateEntry(first_name, last_name, email, country, contact, createdby) {
     this.navCtrl.push(UseraccountPage);
   }
 
@@ -119,7 +122,7 @@ export class AdduserPage {
   // supplies a variable of key with a value of delete followed by the key/value pairs
   // for the record ID we want to remove from the remote database
   deleteEntry() {
-    let companygroup_name: string = this.form.controls["companygroup_name"].value,
+    let first_name: string = this.form.controls["first_name"].value,
       body: string = "key=delete&recordID=" + this.recordID,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
@@ -131,7 +134,7 @@ export class AdduserPage {
         // If the request was successful notify the user
         if (data.status === 200) {
           this.hideForm = true;
-          this.sendNotification(`Congratulations the company group: ${companygroup_name} was successfully deleted`);
+          this.sendNotification(`Congratulations the company group: ${first_name} was successfully deleted`);
         }
         // Otherwise let 'em know anyway
         else {
@@ -146,16 +149,17 @@ export class AdduserPage {
   // Determine whether we are adding a new record or amending an
   // existing record
   saveEntry() {
-    let companygroup_name: string = this.form.controls["companygroup_name"].value,
-      address: string = this.form.controls["address"].value,
+    let first_name: string = this.form.controls["first_name"].value,
+      last_name: string = this.form.controls["last_name"].value,
+      email: string = this.form.controls["email"].value,
       country: string = this.form.controls["country"].value,
       contact: string = this.form.controls["contact"].value;
 
     if (this.isEdited) {
-      this.updateEntry(companygroup_name, address, country, contact, this.userId);
+      this.updateEntry(first_name, last_name, email, country, contact, this.userId);
     }
     else {
-      this.createEntry(companygroup_name, address, country, contact, this.userId);
+      this.createEntry(first_name, last_name, email, country, contact, this.userId);
     }
   }
 
@@ -163,8 +167,9 @@ export class AdduserPage {
 
   // Clear values in the page's HTML form fields
   resetFields(): void {
-    this.companygroup_name = "";
-    this.address = "";
+    this.first_name = "";
+    this.last_name = "";
+    this.email = "";
     this.country = "";
     this.contact = "";
   }
@@ -182,17 +187,33 @@ export class AdduserPage {
   }
 
   getJsonCountryListData() {
+
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
       url: any = this.apiServiceURL + "api/countries.php";
     let res;
+    this.presentLoading(1);
     this.http.get(url, options)
       .subscribe(data => {
         res = data.json();
         this.responseResultCountry = res;
+        this.presentLoading(0);
       });
 
   }
+  presentLoading(parm) {
+    let loader;
+    loader = this.loadingCtrl.create({
+      content: "Please wait...",
+      duration: 3000
+    });
+    if (parm > 0) {
+      loader.present();
+    } else {
+      loader.dismiss();
+    }
+  }
+
 
 }
