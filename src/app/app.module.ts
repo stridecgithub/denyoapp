@@ -12,7 +12,10 @@ import { CompanygroupPage } from '../pages/companygroup/companygroup';
 import { AddcompanygroupPage } from '../pages/addcompanygroup/addcompanygroup';
 import { ViewcompanygroupPage } from '../pages/viewcompanygroup/viewcompanygroup';
 import { UserPage } from '../pages/user/user';
+import { AdduserPage } from '../pages/adduser/adduser';
+import { UseraccountPage } from '../pages/useraccount/useraccount';
 import { HttpModule } from '@angular/http';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -23,7 +26,9 @@ import { HttpModule } from '@angular/http';
     CompanygroupPage,
     AddcompanygroupPage,
     ViewcompanygroupPage,
-    UserPage
+    UserPage,
+    AdduserPage,
+    UseraccountPage
   ],
   imports: [
     BrowserModule,
@@ -40,7 +45,9 @@ import { HttpModule } from '@angular/http';
     CompanygroupPage,
     AddcompanygroupPage,
     ViewcompanygroupPage,
-    UserPage
+    UserPage,
+    AdduserPage,
+    UseraccountPage
   ],
   providers: [
     StatusBar,

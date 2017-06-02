@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, ToastController, AlertController, NavParams } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 import { Http, Headers, RequestOptions } from '@angular/http';
-import { AddcompanygroupPage } from '../addcompanygroup/addcompanygroup';
+import { AdduserPage } from '../adduser/adduser';
 import { ViewcompanygroupPage } from '../viewcompanygroup/viewcompanygroup';
 
 /**
@@ -108,11 +108,11 @@ export class UserPage {
   }
 
   doAdd() {
-    this.nav.push(AddcompanygroupPage);
+    this.nav.push(AdduserPage);
   }
   doEdit(item, act) {
     if (act == 'edit') {
-      this.nav.push(AddcompanygroupPage, {
+      this.nav.push(AdduserPage, {
         record: item,
         act: act
       });
