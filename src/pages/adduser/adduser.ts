@@ -166,13 +166,15 @@ export class AdduserPage {
       email: string = this.form.controls["email"].value,
       country: string = this.form.controls["country"].value,
       contact: string = this.form.controls["contact"].value;
-
+console.log(this.form.controls);
+        if (this.isUploadedProcessing == false) {
     if (this.isEdited) {
       this.updateEntry(first_name, last_name, email, country, contact, this.userId);
     }
     else {
       this.createEntry(first_name, last_name, email, country, contact, this.userId);
     }
+        }
   }
 
 
@@ -264,7 +266,7 @@ export class AdduserPage {
     //  http://127.0.0.1/ionic/upload_attach.php
     //http://amahr.stridecdev.com/getgpsvalue.php?key=create&lat=34&long=45
     fileTransfer.onProgress(this.onProgress);
-    fileTransfer.upload(path, this.apiServiceURL + 'upload_user_photo.php', options)
+    fileTransfer.upload(path, this.apiServiceURL + 'api/upload_user_photo.php', options)
       .then((data) => {
 
         console.log("UPLOAD SUCCESS:" + data.response);
