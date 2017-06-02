@@ -3,6 +3,10 @@ import { IonicPage, NavController, NavParams, ToastController, LoadingController
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { UseraccountPage } from '../useraccount/useraccount';
+import { Camera, CameraOptions } from '@ionic-native/camera';
+import { FileChooser } from '@ionic-native/file-chooser';
+import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
+import { File } from '@ionic-native/file';
 import 'rxjs/add/operator/map';
 /**
  * Generated class for the AddcompanygroupPage page.
@@ -37,6 +41,8 @@ export class AdduserPage {
   public pageTitle: string;
   // Property to store the recordID for when an existing entry is being edited
   public recordID: any = null;
+  public isUploadedProcessing: boolean = false;
+  public uploadResultBase64Data;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com/";
   constructor(public navCtrl: NavController,
     public http: Http,
@@ -214,6 +220,20 @@ export class AdduserPage {
       loader.dismiss();
     }
   }
-
+  doUploadPhoto() {
+    this.isUploadedProcessing = true;
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.FILE_URI
+    }
+    this.camera.getPicture(options).then((imageData) => {
+      console.log(imageData);
+      this.fileTrans(imageData);
+      this.uploadResultBase64Data = imageData;
+    }, (err) => {
+      // Handle error
+      this.sendNotification(err);
+    });
+  }
 
 }

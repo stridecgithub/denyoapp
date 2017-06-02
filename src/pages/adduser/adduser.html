@@ -5,7 +5,7 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-  <ion-navbar hideBackButton *navbar color="bluedark">
+  <ion-navbar hideBackButton color="bluedark">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
@@ -22,7 +22,12 @@
         </button>
         </div>
         <div style="position: relative;
-    left: 38%;">Upload Photo</div>
+    left: 38%;">Upload Photo
+          <p>
+            <progress value="{{progress}}" max="100" *ngIf="isProgress"> </progress>
+            <span *ngIf="isProgress" style="padding:2px">{{progress}}%</span>
+          </p>
+        </div>
         <div style="position: relative;
     left: 6%;"><b>User Information*</b></div>
         <ion-item>
@@ -36,7 +41,7 @@
         </ion-item>
 
         <ion-item>
-          <ion-label stacked>Email<span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
+          <ion-label stacked>Email<span class="mandatory" *ngIf="hideActionButton"> *</span></ion-label>
           <ion-input type="text" [disabled]="readOnly" formControlName="email" [(ngModel)]="email"></ion-input>
         </ion-item>
 
