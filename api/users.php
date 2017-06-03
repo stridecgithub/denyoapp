@@ -30,13 +30,17 @@
 
         // Add a new record to the companygroups table
         case "create":
+        //echo '<pre>';
 print_r($_REQUEST);
-echo json_decode($_REQUEST['userdata']);
+//echo json_decode($_REQUEST['userdata']);
 
- $var = get_object_vars($_REQUEST['userdata']);
-    foreach ($var as &$value) {
-        print_r($value);
-    }
+//var_dump(json_encode($_REQUEST['userdata']));
+ //echo $_REQUEST['userdata'][0]['job_position'];
+   /* foreach ($var as $value) {
+       //echo $value[$var];
+       echo "dsfsdf";
+       echo $var;
+    }*/
         // Sanitise URL supplied values
         $companygroup_name       = filter_var($_REQUEST['companygroup_name'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
         $address   = filter_var($_REQUEST['address'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);

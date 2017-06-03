@@ -142,7 +142,24 @@ export class UserorgchartPage {
   // supplies a variable of key with a value of create followed by the key/value pairs
   // for the record data
   createEntry(userdata, userid) {
-    let body: string = "key=create&userdata=" + JSON.stringify(userdata),
+    let body: string = "key=create&userdata=" +
+      JSON.stringify(userdata) +
+      "&recordID=" + this.recordID +
+      "&first_name=" + this.first_name +
+      "&last_name=" + this.last_name +
+      "&photo=" + this.photo +
+      "&email=" + this.email +
+      "&country=" + this.country +
+      "&hashtag=" + this.contact +
+      "&createdby=" + this.createdby +
+      "&username=" + this.username +
+      "&password=" + this.password +
+      "&role=" + this.role +
+      "&hashtag=" + this.hashtag +
+      "&hashtag=" + this.hashtag +
+      "&report_to=" + this.report_to +
+      "&company_group=" + this.company_group +
+      "&job_position=" + this.job_position,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
@@ -171,7 +188,26 @@ export class UserorgchartPage {
   // supplies a variable of key with a value of update followed by the key/value pairs
   // for the record data
   updateEntry(userdata, userid) {
-    let body: string = "key=update&userdata=" + JSON.stringify(userdata) + "&recordID=" + this.recordID,
+    //[userdata] => [{"job_position":"Software Engineer","company_group":"4","report_to":"1","first_name":"Kannan","last_name":"Nagarathinam","photo":"1496426577824.jpg","email":"kannanrathvalli@gmail.com","country":"India","contact":"9443976954","createdby":"6","username":"webkannan","password":"webkannan","hashtag":"@India","role":"Admin"},{"job_position":"Software Engineer","company_group":"4","report_to":"1","first_name":"Kannan","last_name":"Nagarathinam","photo":"1496426577824.jpg","email":"kannanrathvalli@gmail.com","country":"India","contact":"9443976954","createdby":"6","username":"webkannan","password":"webkannan","hashtag":"@India","role":"Admin"},{"job_position":"Software Engineer","company_group":"4","report_to":"1","first_name":"Kannan","last_name":"Nagarathinam","photo":"1496426577824.jpg","email":"kannanrathvalli@gmail.com","country":"India","contact":"9443976954","createdby":"6","username":"webkannan","password":"webkannan","hashtag":"@India","role":"Admin"},{"job_position":"Software Engineer","company_group":"4","report_to":"1","first_name":"Kannan","last_name":"Nagarathinam","photo":"1496426577824.jpg","email":"kannanrathvalli@gmail.com","country":"India","contact":"9443976954","createdby":"6","username":"webkannan","password":"webkannan","hashtag":"@India","role":"Admin"},{"job_position":"Software Engineer","company_group":"4","report_to":"1","first_name":"Kannan","last_name":"Nagarathinam","photo":"1496426577824.jpg","email":"kannanrathvalli@gmail.com","country":"India","contact":"9443976954","createdby":"6","username":"webkannan","password":"webkannan","hashtag":"@India","role":"Admin"},{"job_position":"Software Engineer","company_group":"4","report_to":"1","first_name":"Kannan","last_name":"Nagarathinam","photo":"1496426577824.jpg","email":"kannanrathvalli@gmail.com","country":"India","contact":"9443976954","createdby":"6","username":"webkannan","password":"webkannan","hashtag":"@India","role":"Admin"},{"job_position":"Software Engineer","company_group":"4","report_to":"1","first_name":"Kannan","last_name":"Nagarathinam","photo":"1496426577824.jpg","email":"kannanrathvalli@gmail.com","country":"India","contact":"9443976954","createdby":"6","username":"webkannan","password":"webkannan","hashtag":"@India","role":"Admin"},{"job_position":"Software Engineer","company_group":"4","report_to":"1","first_name":"Kannan","last_name":"Nagarathinam","photo":"1496426577824.jpg","email":"kannanrathvalli@gmail.com","country":"India","contact":"9443976954","createdby":"6","username":"webkannan","password":"webkannan","hashtag":"@India","role":"Admin"},{"job_position":"Software Engineer","company_group":"4","report_to":"1","first_name":"Kannan","last_name":"Nagarathinam","photo":"1496426577824.jpg","email":"kannanrathvalli@gmail.com","country":"India","contact":"9443976954","createdby":"6","username":"webkannan","password":"webkannan","hashtag":"@India","role":"Admin"},{"job_position":"Software Engineer","company_group":"4","report_to":"1","first_name":"Kannan","last_name":"Nagarathinam","photo":"1496426577824.jpg","email":"kannanrathvalli@gmail.com","country":"India","contact":"9443976954","createdby":"6","username":"webkannan","password":"webkannan","hashtag":"@India","role":"Admin"},{"job_position":"Software Engineer","company_group":"4","report_to":"1","first_name":"Kannan","last_name":"Nagarathinam","photo":"1496426577824.jpg","email":"kannanrathvalli@gmail.com","country":"India","contact":"9443976954","createdby":"6","username":"webkannan","password":"webkannan","hashtag":"@India","role":"Admin"},{"job_position":"Software Engineer","company_group":"4","report_to":"1","first_name":"Kannan","last_name":"Nagarathinam","photo":"1496426577824.jpg","email":"kannanrathvalli@gmail.com","country":"India","contact":"9443976954","createdby":"6","username":"webkannan","password":"webkannan","hashtag":"@India","role":"Admin"}]
+
+    let body: string = "key=update&userdata=" +
+     JSON.stringify(userdata) +
+      "&recordID=" + this.recordID +
+      "&first_name=" + this.first_name +
+      "&last_name=" + this.last_name +
+      "&photo=" + this.photo +
+      "&email=" + this.email +
+      "&country=" + this.country +
+      "&hashtag=" + this.contact +
+      "&createdby=" + this.createdby +
+      "&username=" + this.username +
+      "&password=" + this.password +
+      "&role=" + this.role +
+      "&hashtag=" + this.hashtag +
+      "&hashtag=" + this.hashtag +
+      "&report_to=" + this.report_to +
+      "&company_group=" + this.company_group +
+      "&job_position=" + this.job_position,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
