@@ -99,6 +99,27 @@
         echo $e->getMessage();
         }
     break;
+
+
+    case "all":       
+        try {      
+
+
+        $stmt    = $pdo->query("SELECT companygroup_id,companygroup_name FROM companygroups");
+        while($row  = $stmt->fetch(PDO::FETCH_OBJ))
+        {        
+        $data[] = $row;
+        }
+
+        // Return data as JSON
+        echo json_encode($data);
+        }
+        catch(PDOException $e)
+        {
+        echo $e->getMessage();
+        }
+    break;
+
       // Update an existing record in the companygroups table
       case "update":
 

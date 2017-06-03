@@ -8,6 +8,7 @@ import { FileChooser } from '@ionic-native/file-chooser';
 import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
 import 'rxjs/add/operator/map';
+import { PasswordValidator } from '../../validators/password';
 /**
  * Generated class for the AddcompanygroupPage page.
  *
@@ -26,6 +27,7 @@ export class AdduserPage {
   public first_name: any;
   public last_name: any;
   public email: any;
+  public photo: any;
   public country: any;
   public contact: any;
   public userId: any;
@@ -36,7 +38,8 @@ export class AdduserPage {
   // Flag to be used for checking whether we are adding/editing an entry
   public isEdited: boolean = false;
   public readOnly: boolean = false;
-  public addedImgLists:any;
+  public addedImgLists: any;
+  public userInfo = [];
   // Flag to hide the form upon successful completion of remote operation
   public hideForm: boolean = false;
   public hideActionButton = true;
@@ -62,14 +65,16 @@ export class AdduserPage {
       "last_name": ["", Validators.required],
       "country": ["", Validators.required],
       "contact": ["", Validators.required],
-      "email": ["", Validators.required]
+      /// "email": ["", Validators.required]
+      'email': ['', Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(50), Validators.pattern(/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i)])],
+      'validator': PasswordValidator.isMatching
     });
-
     this.userId = localStorage.getItem("userInfoId");
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddcompanygroupPage');
+
   }
 
   // Determine whether we adding or editing a record
@@ -77,7 +82,7 @@ export class AdduserPage {
   ionViewWillEnter() {
     this.resetFields();
     this.getJsonCountryListData();
-    if (this.NP.get("record")) {
+    if (this.NP.get("editId")) {
       console.log(this.NP.get("act"));
       this.isEdited = true;
       this.selectEntry(this.NP.get("record"));
@@ -89,6 +94,11 @@ export class AdduserPage {
       this.isEdited = false;
       this.pageTitle = 'New User';
     }
+    this.first_name = "Kannan";
+    this.last_name = "Nagarathinam";
+    this.email = "kannanrathvalli@gmail.com";
+    this.country = "India";
+    this.contact = "9443976954";
   }
 
 
@@ -112,7 +122,19 @@ export class AdduserPage {
   // supplies a variable of key with a value of create followed by the key/value pairs
   // for the record data
   createEntry(first_name, last_name, email, country, contact, createdby) {
-    this.navCtrl.push(UseraccountPage);
+    this.userInfo.push({
+      photo: this.photo,
+      first_name: first_name,
+      last_name: last_name,
+      email: email,
+      country: country,
+      contact: contact,
+      createdby: createdby,
+
+    });
+    this.navCtrl.push(UseraccountPage, {
+      accountInfo: this.userInfo
+    });
   }
 
 
@@ -166,15 +188,15 @@ export class AdduserPage {
       email: string = this.form.controls["email"].value,
       country: string = this.form.controls["country"].value,
       contact: string = this.form.controls["contact"].value;
-console.log(this.form.controls);
-        if (this.isUploadedProcessing == false) {
-    if (this.isEdited) {
-      this.updateEntry(first_name, last_name, email, country, contact, this.userId);
+    console.log(this.form.controls);
+    if (this.isUploadedProcessing == false) {
+      if (this.isEdited) {
+        this.updateEntry(first_name, last_name, email, country, contact, this.userId);
+      }
+      else {
+        this.createEntry(first_name, last_name, email, country, contact, this.userId);
+      }
     }
-    else {
-      this.createEntry(first_name, last_name, email, country, contact, this.userId);
-    }
-        }
   }
 
 
@@ -248,6 +270,7 @@ console.log(this.form.controls);
     let fileName = path.substr(path.lastIndexOf('/') + 1);
     const fileTransfer: TransferObject = this.transfer.create();
     let currentName = path.replace(/^.*[\\\/]/, '');
+    this.photo = currentName;
     console.log("File Name is:" + currentName);
 
 
@@ -268,19 +291,22 @@ console.log(this.form.controls);
     fileTransfer.onProgress(this.onProgress);
     fileTransfer.upload(path, this.apiServiceURL + 'api/upload_user_photo.php', options)
       .then((data) => {
-
         console.log("UPLOAD SUCCESS:" + data.response);
         let successData = JSON.parse(data.response);
-        this.sendNotification("UPLOAD SUCCESS:");
+        this.userInfo.push({
+          photo: successData
+        });
+        this.sendNotification("User photo uploaded successfully");
+        //http://denyoappv2.stridecdev.com/api/uploads/users/1496340809342.jpg
         console.log('http:' + '//' + successData.baseURL + '/' + successData.target_dir + '/' + successData.fileName);
 
         //<img src="{{addedImgLists[i].imgSrc}}" width="75%" height="75%" />
         let imgSrc;
-       
-          imgSrc = 'http:' + '//' + successData.baseURL + '/' + successData.target_dir + '/' + successData.fileName;
-          this.addedImgLists= imgSrc;
-         
-       
+
+        imgSrc = 'http:' + '//' + successData.baseURL + '/' + successData.target_dir + '/' + successData.fileName;
+        this.addedImgLists = path;
+
+
         this.progress += 5;
         this.isProgress = false;
         this.isUploadedProcessing = false;

@@ -5,7 +5,7 @@ extract($_REQUEST);
 extract($_FILES);
 ini_set("upload_max_filesize","20M");
 $target_dir = "uploads/users/";
-$baseURL="strtheme.stridecdev.com";
+$baseURL="denyoappv2.stridecdev.com";
 $fullURL="";
 $data = array();
    //$filesize = (filesize($_FILES['file']['name']) * .0009765625) * .0009765625; // bytes to MB
@@ -28,7 +28,7 @@ if($userfile_extn[1]==''){
      $data['fileName'] = $filename;
      $data['baseURL'] = $baseURL;
      $data['ext'] = $ext;
-      $data['target_dir'] ="uploads"; 
+      $data['target_dir'] ="uploads/users/"; 
      //  $data['filesize'] = $filesize; 
       echo json_encode($data);
 ?>

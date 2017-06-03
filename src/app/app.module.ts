@@ -14,6 +14,7 @@ import { ViewcompanygroupPage } from '../pages/viewcompanygroup/viewcompanygroup
 import { UserPage } from '../pages/user/user';
 import { AdduserPage } from '../pages/adduser/adduser';
 import { UseraccountPage } from '../pages/useraccount/useraccount';
+import { UserorgchartPage } from '../pages/userorgchart/userorgchart';
 import { HttpModule } from '@angular/http';
 
 @NgModule({
@@ -28,7 +29,8 @@ import { HttpModule } from '@angular/http';
     ViewcompanygroupPage,
     UserPage,
     AdduserPage,
-    UseraccountPage
+    UseraccountPage,
+    UserorgchartPage
   ],
   imports: [
     BrowserModule,
@@ -47,7 +49,8 @@ import { HttpModule } from '@angular/http';
     ViewcompanygroupPage,
     UserPage,
     AdduserPage,
-    UseraccountPage
+    UseraccountPage,
+    UserorgchartPage
   ],
   providers: [
     StatusBar,

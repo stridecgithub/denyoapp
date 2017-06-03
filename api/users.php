@@ -30,7 +30,13 @@
 
         // Add a new record to the companygroups table
         case "create":
+print_r($_REQUEST);
+echo json_decode($_REQUEST['userdata']);
 
+ $var = get_object_vars($_REQUEST['userdata']);
+    foreach ($var as &$value) {
+        print_r($value);
+    }
         // Sanitise URL supplied values
         $companygroup_name       = filter_var($_REQUEST['companygroup_name'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
         $address   = filter_var($_REQUEST['address'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
@@ -105,9 +111,31 @@
         echo $e->getMessage();
         }
     break;
+
+    case "all": 
+       // echo "select u.username,ud.first_name,ud.last_name,ud.email,cg.companygroup_name from users as u,userdetails as ud,companygroups as cg where ".$wheredate." ".$orderby." ".$limit;      
+        try {
+        $stmt    = $pdo->query("select u.id,u.username,ud.first_name,ud.last_name,ud.email from users as u,userdetails as ud where u.id=ud.user_id");
+        while($row  = $stmt->fetch(PDO::FETCH_OBJ))
+        {
+        // Assign each row of data to associative array
+
+        $row->totalCount=$number_of_rows;
+        $data[] = $row;
+        }
+
+        // Return data as JSON
+        echo json_encode($data);
+        }
+        catch(PDOException $e)
+        {
+        echo $e->getMessage();
+        }
+    break;
+
       // Update an existing record in the companygroups table
       case "update":
-
+print_r($_REQUEST);
          // Sanitise URL supplied values
          $companygroup_name          = filter_var($_REQUEST['companygroup_name'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
          $address   = filter_var($_REQUEST['address'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);

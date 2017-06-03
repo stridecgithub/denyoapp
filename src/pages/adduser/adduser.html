@@ -5,7 +5,7 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-  <ion-navbar hideBackButton color="bluedark">
+  <ion-navbar color="bluedark">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
@@ -17,13 +17,16 @@
     <form [formGroup]="form" (ngSubmit)="saveEntry()">
       <ion-list>
         <div style="position: relative;left: 35%;">
-          <button (click)="doUploadPhoto()" style="background-color:#fff">
+          <button  [disabled]="progress" (click)="doUploadPhoto()" style="background-color:#fff" *ngIf="!addedImgLists">
             <ion-icon name="camera" style="font-size: 75pt;color:#009ACD"></ion-icon>           
         </button>
-        <img src="{{addedImgLists}}" width="175" height="75" />
+          <img src="{{addedImgLists}}" width="100" height="75" *ngIf="addedImgLists" />
         </div>
         <div style="position: relative;
     left: 38%;">Upload Photo
+        </div>
+        <div style="position: relative;
+    left: 28%;">
           <p>
             <progress value="{{progress}}" max="100" *ngIf="isProgress"> </progress>
             <span *ngIf="isProgress" style="padding:2px">{{progress}}%</span>

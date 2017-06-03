@@ -2,8 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { OtherPage } from '../pages/other/other';
-import { TabsPage } from '../pages/tabs/tabs';
+//import { OtherPage } from '../pages/other/other';
+//import { TabsPage } from '../pages/tabs/tabs';
 import { CompanygroupPage } from '../pages/companygroup/companygroup';
 import { UserPage } from '../pages/user/user';
 import { LoginPage } from '../pages/login/login';
@@ -25,8 +25,8 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Tabs Page', component: TabsPage  },
-      { title: 'Other Page', component: OtherPage },
+      /*{ title: 'Tabs Page', component: TabsPage  },
+      { title: 'Other Page', component: OtherPage },*/
       { title: 'Company Group', component: CompanygroupPage },
       { title: 'Users', component: UserPage }
     ];

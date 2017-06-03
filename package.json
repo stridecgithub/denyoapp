@@ -21,6 +21,7 @@
         "@angular/platform-browser": "4.1.2",
         "@angular/platform-browser-dynamic": "4.1.2",
         "@ionic-native/camera": "^3.10.3",
+        "@ionic-native/camera-preview": "^3.11.0",
         "@ionic-native/core": "3.10.2",
         "@ionic-native/file": "^3.10.3",
         "@ionic-native/file-chooser": "^3.10.3",
@@ -30,10 +31,12 @@
         "@ionic/storage": "2.0.1",
         "cordova-android": "^6.2.3",
         "cordova-plugin-camera": "^2.4.1",
+        "cordova-plugin-camera-preview": "^0.9.0",
         "cordova-plugin-compat": "^1.1.0",
         "cordova-plugin-console": "^1.0.5",
         "cordova-plugin-device": "^1.1.4",
         "cordova-plugin-file": "^4.3.3",
+        "cordova-plugin-file-transfer": "~1.6.3",
         "cordova-plugin-http": "^1.2.0",
         "cordova-plugin-splashscreen": "^4.0.3",
         "cordova-plugin-statusbar": "^2.2.2",
@@ -43,8 +46,7 @@
         "ionicons": "3.0.0",
         "rxjs": "5.1.1",
         "sw-toolbox": "3.6.0",
-        "zone.js": "0.8.11",
-        "cordova-plugin-file-transfer": "~1.6.3"
+        "zone.js": "0.8.11"
     },
     "devDependencies": {
         "@ionic/app-scripts": "1.3.7",
@@ -66,7 +68,8 @@
             "cordova-plugin-filechooser": {},
             "cordova-plugin-file-transfer": {},
             "cordova-plugin-file": {},
-            "cordova-plugin-compat": {}
+            "cordova-plugin-compat": {},
+            "cordova-plugin-camera-preview": {}
         },
         "platforms": [
             "android"

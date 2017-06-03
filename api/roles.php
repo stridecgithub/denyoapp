@@ -23,7 +23,7 @@ $wheredate="role_name!=''";
 
 // Attempt to query database table and retrieve data
 try {
-  $stmt    = $pdo->query("SELECT id,rolee_name FROM roles where ".$wheredate);
+  $stmt    = $pdo->query("SELECT id,role_name FROM roles where ".$wheredate);
   while($row  = $stmt->fetch(PDO::FETCH_OBJ))
   {
   // Assign each row of data to associative array
