@@ -44,7 +44,7 @@
         <ion-item>
           <ion-label stacked>Role <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
           <ion-select [disabled]="readOnly" [(ngModel)]="role" formControlName="role">
-            <ion-option *ngFor="let roleData of responseResultRole" value="{{roleData.role_name}}">{{roleData.role_name}}</ion-option>
+            <ion-option *ngFor="let roleData of responseResultRole" value="{{roleData.id}}">{{roleData.role_name}}</ion-option>
           </ion-select>
         </ion-item>
 

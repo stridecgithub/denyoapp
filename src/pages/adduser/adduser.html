@@ -57,7 +57,7 @@
         <ion-item>
           <ion-label stacked>Country <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
           <ion-select [disabled]="readOnly" [(ngModel)]="country" formControlName="country">
-            <ion-option *ngFor="let countryData of responseResultCountry" value="{{countryData.country_name}}">{{countryData.country_name}}</ion-option>
+            <ion-option *ngFor="let countryData of responseResultCountry" value="{{countryData.id}}">{{countryData.country_name}}</ion-option>
           </ion-select>
         </ion-item>
 

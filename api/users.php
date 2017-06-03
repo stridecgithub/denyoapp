@@ -42,26 +42,58 @@ print_r($_REQUEST);
        echo $var;
     }*/
         // Sanitise URL supplied values
-        $companygroup_name       = filter_var($_REQUEST['companygroup_name'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
-        $address   = filter_var($_REQUEST['address'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
-        $country   = filter_var($_REQUEST['country'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
-        $contact   = filter_var($_REQUEST['contact'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
+        $username       = filter_var($_REQUEST['username'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
+        $password   = filter_var($_REQUEST['password'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
+        $role   = filter_var($_REQUEST['role'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
+        $hashtag   = filter_var($_REQUEST['hashtag'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
 
 
 
         // Attempt to run PDO prepared statement
         try {
-                $sql  = "INSERT INTO companygroups(companygroup_name, address,country,contact,createdby,createdon) VALUES(:companygroup_name, :address, :country, :contact,:createdby,:createdon)";
+
+                // Insert into user table
+                $sql  = "INSERT INTO users(username, password,role,hashtag,createdby,createdon) VALUES(:username, :password, :role, :hashtag,:createdby,:createdon)";
                 $stmt    = $pdo->prepare($sql);
                 $stmt->execute(
                 array(
-                ":companygroup_name" => $companygroup_name,
-                ":address" => $address,
-                ":country" => $country,
-                ":contact" => $contact,
+                ":username" => $username,
+                ":password" => $password,
+                ":role" => $role,
+                ":hashtag" => $hashtag,
                 ":createdby" => $createdby_updatedby,
                 ":createdon" =>$createdon_updatedon
+                )
+                );
 
+               // $insertId = $stmt->fetch(PDO::FETCH_ASSOC);
+                $user_id=$pdo->lastInsertId();
+               
+
+                $first_name       = filter_var($_REQUEST['first_name'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
+                $last_name   = filter_var($_REQUEST['last_name'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
+                $email   = filter_var($_REQUEST['email'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
+                $country   = filter_var($_REQUEST['country'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
+                $contact   = filter_var($_REQUEST['contact'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
+                $photo   = filter_var($_REQUEST['photo'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
+                $job_position   = filter_var($_REQUEST['job_position'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
+                $report_to   = filter_var($_REQUEST['report_to'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
+                $company_group   = filter_var($_REQUEST['company_group'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
+                // Insert into userdetails table
+                $sql  = "INSERT INTO userdetails(user_id, first_name,last_name,email,country,contact,photo,job_position,report_to,company_group) VALUES(:user_id, :first_name, :last_name, :email,:country,:contact,:photo,:job_position,:report_to,:company_group)";
+                $stmt    = $pdo->prepare($sql);
+                $stmt->execute(
+                array(
+                    ":user_id" => $user_id,
+                    ":first_name" => $first_name,
+                    ":last_name" => $last_name,
+                    ":email" => $email,
+                    ":country" => $country,
+                    ":contact" =>$contact,
+                    ":photo" =>$photo,
+                    ":job_position" =>$job_position,
+                    ":report_to" =>$report_to,
+                    ":company_group" =>$company_group
                 )
                 );
                 echo json_encode(array('message' => 'Congratulations the record ' . $companygroup_name . ' was added to the database'));

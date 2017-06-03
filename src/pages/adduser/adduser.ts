@@ -97,7 +97,7 @@ export class AdduserPage {
     this.first_name = "Kannan";
     this.last_name = "Nagarathinam";
     this.email = "kannanrathvalli@gmail.com";
-    this.country = "India";
+    this.country = "238";
     this.contact = "9443976954";
   }
 

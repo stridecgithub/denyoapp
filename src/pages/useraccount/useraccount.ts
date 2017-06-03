@@ -113,7 +113,7 @@ export class UseraccountPage {
     this.password = "webkannan";
     this.re_password = "webkannan";
     this.hashtag = "@India";
-    this.role = "Admin";
+    this.role = "3";
   }
 
   // Handle data submitted from the page's HTML form
