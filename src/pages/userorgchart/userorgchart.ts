@@ -100,21 +100,21 @@ export class UserorgchartPage {
       console.log("Length:" + info.length);
 
 
-     // [{ "photo": "1496409230606.jpg", "first_name": "Kannan", "last_name": "Nagarathinam", "email": "kannanrathvalli@gmail.com", "country": "India", "contact": "9443976954", "createdby": "6", "username": "webkannan", "password": "webkannan", "hashtag": "@India", "role": "Admin" }]
-console.log("info.first_name"+info.first_name);
-console.log("info.first_name array"+info['first_name']);
-console.log("info.first_name array 0"+info[0]['first_name']);
+      // [{ "photo": "1496409230606.jpg", "first_name": "Kannan", "last_name": "Nagarathinam", "email": "kannanrathvalli@gmail.com", "country": "India", "contact": "9443976954", "createdby": "6", "username": "webkannan", "password": "webkannan", "hashtag": "@India", "role": "Admin" }]
+      console.log("info.first_name" + info.first_name);
+      console.log("info.first_name array" + info['first_name']);
+      console.log("info.first_name array 0" + info[0]['first_name']);
       this.first_name = info[0]['first_name'];
       this.last_name = info[0]['last_name'];
-      this.email = info.email;
-      this.country = info.country;
-      this.contact = info.contact;
-      this.photo = info.photo;
-      this.createdby = info.createdby;
-      this.username = info.username;
-      this.password = info.password;
-      this.hashtag = info.hashtag;
-      this.role = info.role;
+      this.email = info[0]['email'];
+      this.country = info[0]['country'];
+      this.contact = info[0]['contact'];
+      this.photo = info[0]['photo'];
+      this.createdby = info[0]['createdby'];
+      this.username = info[0]['username'];
+      this.password = info[0]['password'];
+      this.hashtag = info[0]['hashtag'];
+      this.role = info[0]['role'];
 
     }
 
