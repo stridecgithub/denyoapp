@@ -82,13 +82,16 @@ export class AdduserPage {
   ionViewWillEnter() {
     this.resetFields();
     this.getJsonCountryListData();
-    if (this.NP.get("editId")) {
+    if (this.NP.get("record")) {
       console.log(this.NP.get("act"));
       this.isEdited = true;
       this.selectEntry(this.NP.get("record"));
       this.pageTitle = 'Edit User';
       this.readOnly = false;
       this.hideActionButton = true;
+      if (this.NP.get("record").photo) {
+        this.addedImgLists = this.apiServiceURL + "api/uploads/users/" + this.NP.get("record").photo;
+      }
     }
     else {
       this.isEdited = false;
