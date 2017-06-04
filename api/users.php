@@ -130,7 +130,7 @@ print_r($_REQUEST);
         $number_of_rows = $result->fetchColumn(); 
 
 
-        $stmt    = $pdo->query("select u.username,ud.first_name,ud.last_name,ud.email,cg.companygroup_name from users as u,userdetails as ud,companygroups as cg where ".$wheredate." ".$orderby." ".$limit);
+        $stmt    = $pdo->query("select u.id as userid,ud.id as userdetailsid,u.username,u.password,u.role,u.hashtag,ud.first_name,ud.last_name,ud.email,ud.contact,ud.country,ud.photo,ud.job_position,ud.report_to,ud.company_group,cg.companygroup_name from users as u,userdetails as ud,companygroups as cg where ".$wheredate." ".$orderby." ".$limit);
         while($row  = $stmt->fetch(PDO::FETCH_OBJ))
         {
         // Assign each row of data to associative array
@@ -173,26 +173,25 @@ print_r($_REQUEST);
       case "update":
 print_r($_REQUEST);
          // Sanitise URL supplied values
-         $companygroup_name          = filter_var($_REQUEST['companygroup_name'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
-         $address   = filter_var($_REQUEST['address'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
-          $country   = filter_var($_REQUEST['country'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
-           $contact   = filter_var($_REQUEST['contact'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
-         $recordID      = filter_var($_REQUEST['recordID'], FILTER_SANITIZE_NUMBER_INT);
+            $username       = filter_var($_REQUEST['username'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
+            $password   = filter_var($_REQUEST['password'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
+            $role   = filter_var($_REQUEST['role'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
+            $hashtag   = filter_var($_REQUEST['hashtag'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
 
          // Attempt to run PDO prepared statement
          try {             
-            $sql  = "UPDATE companygroups SET companygroup_name = :companygroup_name, address = :address, contact = :contact, country = :country, updatedby = :updatedby, updatedon = :updatedon WHERE companygroup_id = :recordID";
+            $sql  = "UPDATE users SET username = :username, password = :password, role = :role, hashtag = :hashtag, updatedby = :updatedby, updatedon = :updatedon WHERE id = :recordID";
             //exit;
-                $stmt =  $pdo->prepare($sql);
-                $stmt->bindParam(':companygroup_name', $companygroup_name, PDO::PARAM_STR);
-                $stmt->bindParam(':address', $address, PDO::PARAM_STR);
-                $stmt->bindParam(':contact', $contact, PDO::PARAM_STR);
-                $stmt->bindParam(':country', $country, PDO::PARAM_STR);
-                $stmt->bindParam(':recordID', $recordID, PDO::PARAM_INT);
-                 $stmt->bindParam(':updatedby', $createdby_updatedby, PDO::PARAM_INT);
-                 $stmt->bindParam(':updatedon', $createdon_updatedon, PDO::PARAM_INT);
-                $stmt->execute();
-            print_r($stmt);
+            $stmt =  $pdo->prepare($sql);
+            $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+            $stmt->bindParam(':password', $password, PDO::PARAM_STR);
+            $stmt->bindParam(':role', $role, PDO::PARAM_STR);
+            $stmt->bindParam(':hashtag', $hashtag, PDO::PARAM_STR);
+            $stmt->bindParam(':recordID', $recordID, PDO::PARAM_INT);
+            $stmt->bindParam(':updatedby', $createdby_updatedby, PDO::PARAM_INT);
+            $stmt->bindParam(':updatedon', $createdon_updatedon, PDO::PARAM_INT);
+            $stmt->execute();
+            //print_r($stmt);
 
             echo json_encode('Congratulations the record ' . $companygroup_name . ' was updated');
          }
