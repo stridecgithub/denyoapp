@@ -62,22 +62,28 @@ export class UseraccountPage {
   // Assign the navigation retrieved data to properties
   // used as models on the page's HTML form
   selectEntry(item) {
-    this.first_name = item.first_name;
-    this.last_name = item.last_name;
-    this.email = item.email;
-    this.country = item.country;
-    this.contact = item.contact;
-    this.recordID = item.companygroup_id;
+    this.username = item.username;
+    this.password = item.password;
+    this.re_password = item.password;
+    this.hashtag = item.hashtag;
+    this.role = item.role;
+    this.recordID = item.userid;
   }
   ionViewWillEnter() {
     this.getRoleListData();
-    if (this.NP.get("editId")) {
-      console.log(this.NP.get("act"));
+    if (this.NP.get("record")) {
+      console.log("User Account:" + JSON.stringify(this.NP.get("record")));
       this.isEdited = true;
       this.selectEntry(this.NP.get("record"));
       this.pageTitle = 'Edit User-Account';
       this.readOnly = false;
       this.hideActionButton = true;
+      let editItem = this.NP.get("record");
+      this.username = editItem.username;
+      this.password = editItem.password;
+      this.re_password = editItem.password;
+      this.hashtag = editItem.hashtag;
+      this.role = editItem.role;
     }
     else {
       this.isEdited = false;
@@ -90,8 +96,18 @@ export class UseraccountPage {
       //var objects = JSON.parse(info);
       console.log("JSON.stringify:" + JSON.stringify(info));
       console.log("Length:" + info.length);
+      console.log('A');
       for (var key in info) {
-        if (key == '1') {
+        console.log('B');
+        let keyindex;
+        if (this.NP.get("record")) {
+          keyindex = 0;
+        } else {
+          keyindex = 1;
+        }
+
+        if (key == keyindex) {
+          console.log('C');
           this.first_name = info[key].first_name;
           this.last_name = info[key].last_name;
           this.email = info[key].email;
@@ -109,11 +125,7 @@ export class UseraccountPage {
       }
     }
 
-    this.username = "webkannan";
-    this.password = "webkannan";
-    this.re_password = "webkannan";
-    this.hashtag = "@India";
-    this.role = "3";
+
   }
 
   // Handle data submitted from the page's HTML form
@@ -183,7 +195,8 @@ export class UseraccountPage {
       role: role
     });
     this.navCtrl.push(UserorgchartPage, {
-      accountInfo: this.userInfo
+      accountInfo: this.userInfo,
+      record: this.NP.get("record")
     });
   }
 

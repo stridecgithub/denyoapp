@@ -171,12 +171,14 @@ print_r($_REQUEST);
 
       // Update an existing record in the companygroups table
       case "update":
-print_r($_REQUEST);
+//print_r($_REQUEST);
          // Sanitise URL supplied values
             $username       = filter_var($_REQUEST['username'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
             $password   = filter_var($_REQUEST['password'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
             $role   = filter_var($_REQUEST['role'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
             $hashtag   = filter_var($_REQUEST['hashtag'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
+
+           echo $_REQUEST['recordID'];
 
          // Attempt to run PDO prepared statement
          try {             
@@ -191,6 +193,33 @@ print_r($_REQUEST);
             $stmt->bindParam(':updatedby', $createdby_updatedby, PDO::PARAM_INT);
             $stmt->bindParam(':updatedon', $createdon_updatedon, PDO::PARAM_INT);
             $stmt->execute();
+ //print_r($stmt);
+
+            $first_name       = filter_var($_REQUEST['first_name'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
+            $last_name   = filter_var($_REQUEST['last_name'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
+            $email   = filter_var($_REQUEST['email'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
+            $country   = filter_var($_REQUEST['country'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
+            $contact   = filter_var($_REQUEST['contact'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
+            $photo   = filter_var($_REQUEST['photo'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
+            $job_position   = filter_var($_REQUEST['job_position'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
+            $report_to   = filter_var($_REQUEST['report_to'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
+            $company_group   = filter_var($_REQUEST['company_group'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
+
+            $sql  = "UPDATE userdetails SET first_name = :first_name, last_name = :last_name, email = :email, country = :country, contact = :contact, photo = :photo,job_position=:job_position,report_to=:report_to,company_group=:company_group WHERE user_id = :recordID";
+            //exit;
+            $stmt =  $pdo->prepare($sql);
+            $stmt->bindParam(':first_name', $first_name, PDO::PARAM_STR);
+            $stmt->bindParam(':last_name', $last_name, PDO::PARAM_STR);
+            $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+            $stmt->bindParam(':country', $country, PDO::PARAM_STR);
+            $stmt->bindParam(':recordID', $recordID, PDO::PARAM_INT);
+            $stmt->bindParam(':contact', $contact, PDO::PARAM_INT);
+            $stmt->bindParam(':photo', $photo, PDO::PARAM_INT);
+            $stmt->bindParam(':job_position', $job_position, PDO::PARAM_INT);
+            $stmt->bindParam(':report_to', $report_to, PDO::PARAM_INT);
+            $stmt->bindParam(':company_group', $company_group, PDO::PARAM_INT);
+            $stmt->execute();
+
             //print_r($stmt);
 
             echo json_encode('Congratulations the record ' . $companygroup_name . ' was updated');

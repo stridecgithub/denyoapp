@@ -79,13 +79,17 @@ export class UserorgchartPage {
     this.resetFields();
     this.getCompanyGroupListData();
     this.getUserListData();
-    if (this.NP.get("editID")) {
-      console.log(this.NP.get("accountInfo"));
+    if (this.NP.get("record")) {
+     console.log("User Org Chart:" + JSON.stringify(this.NP.get("record")));
       this.isEdited = true;
-      this.selectEntry(this.NP.get("accountInfo"));
+      this.selectEntry(this.NP.get("record"));
       this.pageTitle = 'Edit User';
       this.readOnly = false;
       this.hideActionButton = true;
+      let editItem = this.NP.get("record");
+      this.job_position = editItem.job_position;
+      this.company_group = editItem.company_group;
+      this.report_to = editItem.report_to;
     }
     else {
       this.isEdited = false;
@@ -115,13 +119,7 @@ export class UserorgchartPage {
       this.password = info[0]['password'];
       this.hashtag = info[0]['hashtag'];
       this.role = info[0]['role'];
-
     }
-
-    this.job_position = "Software Engineer";
-    this.company_group = "23";
-    this.report_to = "6";
-
   }
 
 
@@ -129,11 +127,10 @@ export class UserorgchartPage {
   // Assign the navigation retrieved data to properties
   // used as models on the page's HTML form
   selectEntry(item) {
-    this.companygroup_name = item.companygroup_name;
-    this.address = item.address;
-    this.country = item.country;
-    this.contact = item.contact;
-    this.recordID = item.companygroup_id;
+    this.job_position = item.job_position;
+    this.company_group = item.company_group;
+    this.report_to = item.report_to;
+    this.recordID = item.userid;
   }
 
 
@@ -172,7 +169,7 @@ export class UserorgchartPage {
         if (data.status === 200) {
           this.hideForm = true;
           this.sendNotification(`User created was successfully added`);
-          // this.navCtrl.push(UserPage);
+          this.navCtrl.push(UserPage);
         }
         // Otherwise let 'em know anyway
         else {
@@ -220,7 +217,7 @@ export class UserorgchartPage {
         if (data.status === 200) {
           this.hideForm = true;
           this.sendNotification(`User created was successfully updated`);
-          // this.navCtrl.push(UserPage);
+           this.navCtrl.push(UserPage);
         }
         // Otherwise let 'em know anyway
         else {

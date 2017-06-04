@@ -83,7 +83,7 @@ export class AdduserPage {
     this.resetFields();
     this.getJsonCountryListData();
     if (this.NP.get("record")) {
-      console.log(this.NP.get("act"));
+      console.log("Add User:"+JSON.stringify(this.NP.get("record")));
       this.isEdited = true;
       this.selectEntry(this.NP.get("record"));
       this.pageTitle = 'Edit User';
@@ -92,16 +92,22 @@ export class AdduserPage {
       if (this.NP.get("record").photo) {
         this.addedImgLists = this.apiServiceURL + "api/uploads/users/" + this.NP.get("record").photo;
       }
+      let editItem = this.NP.get("record");
+      this.first_name = editItem.first_name;
+      this.last_name = editItem.last_name;
+      this.email = editItem.email;
+      this.country = editItem.country;
+      this.contact = editItem.contact;
     }
     else {
       this.isEdited = false;
       this.pageTitle = 'New User';
     }
-    this.first_name = "Kannan";
+    /*this.first_name = "Kannan";
     this.last_name = "Nagarathinam";
     this.email = "kannanrathvalli@gmail.com";
     this.country = "238";
-    this.contact = "9443976954";
+    this.contact = "9443976954";*/
   }
 
 
@@ -114,7 +120,8 @@ export class AdduserPage {
     this.email = item.email;
     this.country = item.country;
     this.contact = item.contact;
-    this.recordID = item.companygroup_id;
+    this.photo = item.photo;
+    this.recordID = item.userid;
   }
 
 
@@ -148,7 +155,20 @@ export class AdduserPage {
   // supplies a variable of key with a value of update followed by the key/value pairs
   // for the record data
   updateEntry(first_name, last_name, email, country, contact, createdby) {
-    this.navCtrl.push(UseraccountPage);
+    this.userInfo.push({
+      photo: this.photo,
+      first_name: first_name,
+      last_name: last_name,
+      email: email,
+      country: country,
+      contact: contact,
+      createdby: createdby,
+
+    });
+    this.navCtrl.push(UseraccountPage, {
+      accountInfo: this.userInfo,
+      record:this.NP.get("record")
+    });
   }
 
 
