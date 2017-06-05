@@ -4,6 +4,7 @@ import 'rxjs/add/operator/map';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { AddcompanygroupPage } from '../addcompanygroup/addcompanygroup';
 import { ViewcompanygroupPage } from '../viewcompanygroup/viewcompanygroup';
+import { LoadingController } from 'ionic-angular';
 /**
  * Generated class for the CompanygroupPage page.
  *
@@ -33,7 +34,7 @@ export class CompanygroupPage {
   }
   public reportAllLists = [];
   constructor(public http: Http, public nav: NavController,
-    public toastCtrl: ToastController, public alertCtrl: AlertController, public navParams: NavParams) {
+    public toastCtrl: ToastController, public alertCtrl: AlertController, public navParams: NavParams, public loadingCtrl: LoadingController) {
     this.pageTitle = 'Company Group';
   }
 
@@ -59,6 +60,7 @@ export class CompanygroupPage {
   /*@doReport calling on report */
   /****************************/
   doReport() {
+    this.presentLoading(1);
     if (this.reportData.status == '') {
       this.reportData.status = "DRAFT";
     }
@@ -74,12 +76,15 @@ export class CompanygroupPage {
     let res;
     this.http.post(url, body, options)
       .subscribe((data) => {
+
         res = data.json();
         this.reportAllLists = res;
         this.totalCount = res[0].totalCount;
         console.log("Total Count:" + this.totalCount);
         this.reportData.startindex += this.reportData.results;
+
       });
+    this.presentLoading(0);
   }
 
   /**********************/
@@ -215,6 +220,19 @@ export class CompanygroupPage {
     this.reportData.sort = val;
     this.doReport();
     console.log('6');
+  }
+
+  presentLoading(parm) {
+    let loader;
+    loader = this.loadingCtrl.create({
+      content: "Please wait...",
+      duration: 3000
+    });
+    if (parm > 0) {
+      loader.present();
+    } else {
+      loader.dismiss();
+    }
   }
 
 }

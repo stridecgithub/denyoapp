@@ -1,3 +1,31 @@
 page-home {
-
+    
 }
+
+ion-header{
+    .backtoprevious-navbar{
+        background-color:#cccccc;
+    }    
+    .backtoprevious-icon{
+        color:black;
+    }
+    .backtoprevious-start{
+       position: absolute;
+    left: 3px;
+    top: 13px;
+    }
+    .backtoprevious-button{
+        text-transform: none;
+    }
+    
+}
+
+    ion-navbar{
+    .menu-toggle{
+        color:greenyellow;
+    }
+    .page-title{
+        color:#cccccc;
+    }
+    }
+
