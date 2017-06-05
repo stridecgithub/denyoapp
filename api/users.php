@@ -178,18 +178,19 @@ print_r($_REQUEST);
             $role   = filter_var($_REQUEST['role'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
             $hashtag   = filter_var($_REQUEST['hashtag'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
 
-           echo $_REQUEST['recordID'];
+           $id=$_REQUEST['recordID'];
+           $user_id=$_REQUEST['recordID'];
 
          // Attempt to run PDO prepared statement
          try {             
-            $sql  = "UPDATE users SET username = :username, password = :password, role = :role, hashtag = :hashtag, updatedby = :updatedby, updatedon = :updatedon WHERE id = :recordID";
+            $sql  = "UPDATE users SET username = :username, password = :password, role = :role, hashtag = :hashtag, updatedby = :updatedby, updatedon = :updatedon WHERE id = :id";
             //exit;
             $stmt =  $pdo->prepare($sql);
             $stmt->bindParam(':username', $username, PDO::PARAM_STR);
             $stmt->bindParam(':password', $password, PDO::PARAM_STR);
             $stmt->bindParam(':role', $role, PDO::PARAM_STR);
             $stmt->bindParam(':hashtag', $hashtag, PDO::PARAM_STR);
-            $stmt->bindParam(':recordID', $recordID, PDO::PARAM_INT);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->bindParam(':updatedby', $createdby_updatedby, PDO::PARAM_INT);
             $stmt->bindParam(':updatedon', $createdon_updatedon, PDO::PARAM_INT);
             $stmt->execute();
@@ -205,14 +206,14 @@ print_r($_REQUEST);
             $report_to   = filter_var($_REQUEST['report_to'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
             $company_group   = filter_var($_REQUEST['company_group'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
 
-            $sql  = "UPDATE userdetails SET first_name = :first_name, last_name = :last_name, email = :email, country = :country, contact = :contact, photo = :photo,job_position=:job_position,report_to=:report_to,company_group=:company_group WHERE user_id = :recordID";
+            $sql  = "UPDATE userdetails SET first_name = :first_name, last_name = :last_name, email = :email, country = :country, contact = :contact, photo = :photo,job_position=:job_position,report_to=:report_to,company_group=:company_group WHERE user_id = :user_id";
             //exit;
             $stmt =  $pdo->prepare($sql);
             $stmt->bindParam(':first_name', $first_name, PDO::PARAM_STR);
             $stmt->bindParam(':last_name', $last_name, PDO::PARAM_STR);
             $stmt->bindParam(':email', $email, PDO::PARAM_STR);
             $stmt->bindParam(':country', $country, PDO::PARAM_STR);
-            $stmt->bindParam(':recordID', $recordID, PDO::PARAM_INT);
+            $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
             $stmt->bindParam(':contact', $contact, PDO::PARAM_INT);
             $stmt->bindParam(':photo', $photo, PDO::PARAM_INT);
             $stmt->bindParam(':job_position', $job_position, PDO::PARAM_INT);
