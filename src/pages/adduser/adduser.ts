@@ -142,7 +142,7 @@ export class AdduserPage {
       createdby: createdby,
 
     });
-    this.navCtrl.push(UseraccountPage, {
+    this.navCtrl.setRoot(UseraccountPage, {
       accountInfo: this.userInfo
     });
   }
@@ -165,7 +165,7 @@ export class AdduserPage {
       createdby: createdby,
 
     });
-    this.navCtrl.push(UseraccountPage, {
+    this.navCtrl.setRoot(UseraccountPage, {
       accountInfo: this.userInfo,
       record:this.NP.get("record")
     });

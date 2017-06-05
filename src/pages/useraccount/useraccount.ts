@@ -168,7 +168,7 @@ export class UseraccountPage {
       hashtag: hashtag,
       role: role
     });
-    this.navCtrl.push(UserorgchartPage, {
+    this.navCtrl.setRoot(UserorgchartPage, {
       accountInfo: this.userInfo
     });
   }
@@ -194,7 +194,7 @@ export class UseraccountPage {
       hashtag: hashtag,
       role: role
     });
-    this.navCtrl.push(UserorgchartPage, {
+    this.navCtrl.setRoot(UserorgchartPage, {
       accountInfo: this.userInfo,
       record: this.NP.get("record")
     });

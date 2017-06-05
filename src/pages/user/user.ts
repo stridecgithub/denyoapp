@@ -108,16 +108,16 @@ export class UserPage {
   }
 
   doAdd() {
-    this.nav.push(AdduserPage);
+    this.nav.setRoot(AdduserPage);
   }
   doEdit(item, act) {
     if (act == 'edit') {
-      this.nav.push(AdduserPage, {
+      this.nav.setRoot(AdduserPage, {
         record: item,
         act: act
       });
     } else {
-      this.nav.push(ViewcompanygroupPage, {
+      this.nav.setRoot(ViewcompanygroupPage, {
         record: item,
         act: act
       });
