@@ -17,6 +17,7 @@ import 'rxjs/add/operator/map';
 })
 export class AddcompanygroupPage {
   // Define FormBuilder /model properties
+  public loginas: any;
   public form: FormGroup;
   public companygroup_name: any;
   public address: any;
@@ -42,7 +43,7 @@ export class AddcompanygroupPage {
     public NP: NavParams,
     public fb: FormBuilder,
     public toastCtrl: ToastController) {
-
+    this.loginas = localStorage.getItem("userInfoName");
     // Create form builder validation rules
     this.form = fb.group({
       "companygroup_name": ["", Validators.required],
@@ -105,11 +106,17 @@ export class AddcompanygroupPage {
 
     this.http.post(url, body, options)
       .subscribe((data) => {
+        console.log(JSON.stringify(data.json()));
         // If the request was successful notify the user
         if (data.status === 200) {
           this.hideForm = true;
-          this.sendNotification(`Congratulations the company group: ${companygroup_name} was successfully added`);
-          this.navCtrl.push(CompanygroupPage);
+          console.log(data.json().Error);
+          if (data.json().Error > 0) {
+            this.sendNotification(data.json().message);
+          } else {
+            this.sendNotification(data.json().message);
+            this.navCtrl.setRoot(CompanygroupPage);
+          }
         }
         // Otherwise let 'em know anyway
         else {
@@ -138,8 +145,12 @@ export class AddcompanygroupPage {
         // If the request was successful notify the user
         if (data.status === 200) {
           this.hideForm = true;
-          this.sendNotification(`Congratulations the company group: ${companygroup_name} was successfully updated`);
-          this.navCtrl.push(CompanygroupPage);
+          if (data.json().Error > 0) {
+            this.sendNotification(data.json().message);
+          } else {
+            this.sendNotification(data.json().message);
+            this.navCtrl.setRoot(CompanygroupPage);
+          }
         }
         // Otherwise let 'em know anyway
         else {

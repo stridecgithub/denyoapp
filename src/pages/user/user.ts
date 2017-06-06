@@ -17,6 +17,7 @@ import { LoadingController } from 'ionic-angular';
   templateUrl: 'user.html',
 })
 export class UserPage {
+  public loginas: any;
   public pageTitle: string;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com/";
   public totalCount;
@@ -36,6 +37,7 @@ export class UserPage {
   constructor(public http: Http, public nav: NavController,
     public toastCtrl: ToastController, public alertCtrl: AlertController, public navParams: NavParams, public loadingCtrl: LoadingController) {
     this.pageTitle = 'Users';
+    this.loginas = localStorage.getItem("userInfoName");
   }
 
   ionViewDidLoad() {
@@ -49,7 +51,7 @@ export class UserPage {
     console.log('doRefresh function calling...');
     this.reportData.startindex = 0;
     this.reportAllLists = [];
-    this.doReport();
+    this.doUser();
     setTimeout(() => {
       refresher.complete();
     }, 2000);
@@ -57,9 +59,9 @@ export class UserPage {
 
 
   /****************************/
-  /*@doReport calling on report */
+  /*@doUser calling on report */
   /****************************/
-  doReport() {
+  doUser() {
     this.presentLoading(1);
     if (this.reportData.status == '') {
       this.reportData.status = "DRAFT";
@@ -77,11 +79,14 @@ export class UserPage {
     this.http.post(url, body, options)
       .subscribe((data) => {
         res = data.json();
-        this.reportAllLists = res;
-        this.totalCount = res[0].totalCount;
-        console.log("Total Count:" + this.totalCount);
-        this.reportData.startindex += this.reportData.results;
-
+        if (res.length > 0) {
+          this.reportAllLists = res;
+          this.totalCount = res[0].totalCount;
+          this.reportData.startindex += this.reportData.results;
+        } else {
+          this.totalCount = 0;
+        }
+        console.log("Total Record:" + this.totalCount);
       });
     this.presentLoading(0);
   }
@@ -95,7 +100,7 @@ export class UserPage {
     console.log("Total Count:" + this.totalCount)
     if (this.reportData.startindex < this.totalCount && this.reportData.startindex > 0) {
       console.log('B');
-      this.doReport();
+      this.doUser();
     }
     console.log('C');
     setTimeout(() => {
@@ -107,7 +112,7 @@ export class UserPage {
   ionViewWillEnter() {
     this.reportData.startindex = 0;
     this.reportData.sort = "createdon";
-    this.doReport();
+    this.doUser();
   }
 
   doAdd() {
@@ -136,7 +141,7 @@ export class UserPage {
   doConfirm(id, item) {
     console.log("Deleted Id" + id);
     let confirm = this.alertCtrl.create({
-      message: 'Are you sure you want to delete this company group?',
+      message: 'Are you sure you want to delete this user?',
       buttons: [{
         text: 'Yes',
         handler: () => {
@@ -167,14 +172,14 @@ export class UserPage {
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "api/companygroup.php";
+      url: any = this.apiServiceURL + "api/users.php";
 
     this.http.post(url, body, options)
       .subscribe(data => {
         // If the request was successful notify the user
         if (data.status === 200) {
 
-          this.sendNotification(`Congratulations the company group name was successfully deleted`);
+          this.sendNotification(`Congratulations the user was successfully deleted`);
         }
         // Otherwise let 'em know anyway
         else {
@@ -217,7 +222,7 @@ export class UserPage {
     }
     console.log('5');
     this.reportData.sort = val;
-    this.doReport();
+    this.doUser();
     console.log('6');
   }
   presentLoading(parm) {

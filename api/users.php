@@ -240,14 +240,21 @@ print_r($_REQUEST);
 
          // Sanitise supplied record ID for matching to table record
          $recordID   =  filter_var($_REQUEST['recordID'], FILTER_SANITIZE_NUMBER_INT);
-
+        $id=$_REQUEST['recordID'];
+        $user_id=$_REQUEST['recordID'];
          // Attempt to run PDO prepared statement
          try {
             $pdo  = new PDO($dsn, $un, $pwd);
-            $sql  = "DELETE FROM companygroups WHERE companygroup_id = :recordID";
+            $sql  = "DELETE FROM users WHERE id = :id";
             $stmt = $pdo->prepare($sql);
-            $stmt->bindParam(':recordID', $recordID, PDO::PARAM_INT);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->execute();
+
+            $sql  = "DELETE FROM userdetails WHERE user_id = :user_id";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+            $stmt->execute();
+
 
             echo json_encode('Congratulations the record ' . $companygroup_name . ' was removed');
          }
@@ -258,6 +265,55 @@ print_r($_REQUEST);
          }
 
       break;
+      // EmailId already  users table
+        case "emailexist":
+        // Sanitise URL supplied values       
+        $email   = filter_var($_REQUEST['email'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
+        // Attempt to run PDO prepared statement
+        try {
+                $sql = "select count(*) from userdetails where email='$email'"; 
+                $result = $pdo->prepare($sql); 
+                $result->execute(); 
+                $number_of_rows = $result->fetchColumn(); 
+                if($number_of_rows>0){                   
+                      echo json_encode(array('Error'=>1,'message' => 'Emailid already exists'));  
+                }else{
+                     echo json_encode(array('Error'=>0,'message' => 'Emailid is veryfied ok')); 
+                }
+               
+        }
+        // Catch any errors in running the prepared statement
+        catch(PDOException $e)
+        {
+            echo json_encode(array('message' => $e->getMessage()));
+        //echo $e->getMessage();
+        }
+        break;
+
+case "usernameexist":
+        // Sanitise URL supplied values       
+        $username   = filter_var($_REQUEST['username'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
+        // Attempt to run PDO prepared statement
+        try {
+                $sql = "select count(*) from users where username='$username'"; 
+                $result = $pdo->prepare($sql); 
+                $result->execute(); 
+                $number_of_rows = $result->fetchColumn(); 
+                if($number_of_rows>0){                   
+                      echo json_encode(array('Error'=>1,'message' => 'Username already exists'));  
+                }else{
+                     echo json_encode(array('Error'=>0,'message' => 'Username is veryfied ok')); 
+                }
+               
+        }
+        // Catch any errors in running the prepared statement
+        catch(PDOException $e)
+        {
+            echo json_encode(array('message' => $e->getMessage()));
+        //echo $e->getMessage();
+        }
+        break;
+        
    }
 
 ?>

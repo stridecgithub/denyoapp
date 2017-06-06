@@ -8,7 +8,6 @@ import { FileChooser } from '@ionic-native/file-chooser';
 import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
 import 'rxjs/add/operator/map';
-import { PasswordValidator } from '../../validators/password';
 /**
  * Generated class for the AddcompanygroupPage page.
  *
@@ -23,6 +22,7 @@ import { PasswordValidator } from '../../validators/password';
 })
 export class AdduserPage {
   // Define FormBuilder /model properties
+  public loginas: any;
   public form: FormGroup;
   public first_name: any;
   public last_name: any;
@@ -58,16 +58,17 @@ export class AdduserPage {
     private filechooser: FileChooser,
     private transfer: Transfer,
     private file: File, private ngZone: NgZone) {
-
+    this.loginas = localStorage.getItem("userInfoName");
     // Create form builder validation rules
     this.form = fb.group({
-      "first_name": ["", Validators.required],
-      "last_name": ["", Validators.required],
+      //"first_name": ["", Validators.required],
+      //"last_name": ["", Validators.required],
+      "first_name": ["", Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
+      "last_name": ["", Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
       "country": ["", Validators.required],
       "contact": ["", Validators.required],
       /// "email": ["", Validators.required]
       'email': ['', Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(50), Validators.pattern(/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i)])],
-      'validator': PasswordValidator.isMatching
     });
     this.userId = localStorage.getItem("userInfoId");
   }
@@ -83,7 +84,7 @@ export class AdduserPage {
     this.resetFields();
     this.getJsonCountryListData();
     if (this.NP.get("record")) {
-      console.log("Add User:"+JSON.stringify(this.NP.get("record")));
+      console.log("Add User:" + JSON.stringify(this.NP.get("record")));
       this.isEdited = true;
       this.selectEntry(this.NP.get("record"));
       this.pageTitle = 'Edit User';
@@ -142,9 +143,38 @@ export class AdduserPage {
       createdby: createdby,
 
     });
-    this.navCtrl.setRoot(UseraccountPage, {
-      accountInfo: this.userInfo
-    });
+
+
+    let body: string = "key=emailexist&email=" + email,
+      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "api/users.php";
+
+    this.http.post(url, body, options)
+      .subscribe((data) => {
+        console.log(JSON.stringify(data.json()));
+        // If the request was successful notify the user
+        if (data.status === 200) {
+          this.hideForm = true;
+          console.log(data.json().Error);
+          if (data.json().Error > 0) {
+            this.userInfo = []; // need this one
+            this.sendNotification(data.json().message);
+          } else {
+            //this.sendNotification(data.json().message);
+            this.navCtrl.setRoot(UseraccountPage, {
+              accountInfo: this.userInfo
+            });
+          }
+        }
+        // Otherwise let 'em know anyway
+        else {
+          this.sendNotification('Something went wrong!');
+        }
+      });
+
+
   }
 
 
@@ -167,7 +197,7 @@ export class AdduserPage {
     });
     this.navCtrl.setRoot(UseraccountPage, {
       accountInfo: this.userInfo,
-      record:this.NP.get("record")
+      record: this.NP.get("record")
     });
   }
 
@@ -276,7 +306,7 @@ export class AdduserPage {
   doUploadPhoto() {
     this.isUploadedProcessing = true;
     const options: CameraOptions = {
-      quality: 100,
+      quality: 25,
       destinationType: this.camera.DestinationType.FILE_URI
     }
     this.camera.getPicture(options).then((imageData) => {

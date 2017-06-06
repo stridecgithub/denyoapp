@@ -8,6 +8,7 @@ $target_dir = "uploads/users/";
 $baseURL="denyoappv2.stridecdev.com";
 $fullURL="";
 $data = array();
+ try {
    //$filesize = (filesize($_FILES['file']['name']) * .0009765625) * .0009765625; // bytes to MB
 $userfile_extn = explode(".", strtolower($_FILES['file']['name']));
 if($userfile_extn[1]==''){
@@ -31,4 +32,10 @@ if($userfile_extn[1]==''){
       $data['target_dir'] ="uploads/users/"; 
      //  $data['filesize'] = $filesize; 
       echo json_encode($data);
+       // Catch any errors in running the prepared statement
+ }
+        catch(PDOException $e)
+        {
+        echo $e->getMessage();
+        }
 ?>

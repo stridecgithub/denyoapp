@@ -30,7 +30,7 @@
         </ion-item>
 
         <ion-item>
-          <ion-label stacked>Report To <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
+          <ion-label stacked>Report To</ion-label>
           <ion-select [disabled]="readOnly" [(ngModel)]="report_to" formControlName="report_to">
             <ion-option *ngFor="let userData of responseResultReportTo" value="{{userData.id}}">{{userData.username}}</ion-option>
           </ion-select>

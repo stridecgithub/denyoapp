@@ -22,10 +22,16 @@ ion-header{
 
     ion-navbar{
     .menu-toggle{
-        color:greenyellow;
+        right:450%
     }
     .page-title{
         color:#cccccc;
+        position: relative;
+    margin-left: 45%;
     }
+    }
+    .error{
+        color:red;
+        text-align: center;
     }
 

@@ -18,6 +18,7 @@ import { LoadingController } from 'ionic-angular';
 })
 export class CompanygroupPage {
   public pageTitle: string;
+  public loginas: any;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com/";
   public totalCount;
   pet: string = "ALL";
@@ -36,6 +37,7 @@ export class CompanygroupPage {
   constructor(public http: Http, public nav: NavController,
     public toastCtrl: ToastController, public alertCtrl: AlertController, public navParams: NavParams, public loadingCtrl: LoadingController) {
     this.pageTitle = 'Company Group';
+    this.loginas = localStorage.getItem("userInfoName");
   }
 
   ionViewDidLoad() {
@@ -49,7 +51,7 @@ export class CompanygroupPage {
     console.log('doRefresh function calling...');
     this.reportData.startindex = 0;
     this.reportAllLists = [];
-    this.doReport();
+    this.doCompanyGroup();
     setTimeout(() => {
       refresher.complete();
     }, 2000);
@@ -57,9 +59,9 @@ export class CompanygroupPage {
 
 
   /****************************/
-  /*@doReport calling on report */
+  /*@doCompanyGroup calling on report */
   /****************************/
-  doReport() {
+  doCompanyGroup() {
     this.presentLoading(1);
     if (this.reportData.status == '') {
       this.reportData.status = "DRAFT";
@@ -76,12 +78,15 @@ export class CompanygroupPage {
     let res;
     this.http.post(url, body, options)
       .subscribe((data) => {
-
         res = data.json();
-        this.reportAllLists = res;
-        this.totalCount = res[0].totalCount;
-        console.log("Total Count:" + this.totalCount);
-        this.reportData.startindex += this.reportData.results;
+        if (res.length > 0) {
+          this.reportAllLists = res;
+          this.totalCount = res[0].totalCount;
+          this.reportData.startindex += this.reportData.results;
+        } else {
+          this.totalCount = 0;
+        }
+        console.log("Total Record:" + this.totalCount);
 
       });
     this.presentLoading(0);
@@ -96,7 +101,7 @@ export class CompanygroupPage {
     console.log("Total Count:" + this.totalCount)
     if (this.reportData.startindex < this.totalCount && this.reportData.startindex > 0) {
       console.log('B');
-      this.doReport();
+      this.doCompanyGroup();
     }
     console.log('C');
     setTimeout(() => {
@@ -108,20 +113,20 @@ export class CompanygroupPage {
   ionViewWillEnter() {
     this.reportData.startindex = 0;
     this.reportData.sort = "createdon";
-    this.doReport();
+    this.doCompanyGroup();
   }
 
   doAdd() {
-    this.nav.push(AddcompanygroupPage);
+    this.nav.setRoot(AddcompanygroupPage);
   }
   doEdit(item, act) {
     if (act == 'edit') {
-      this.nav.push(AddcompanygroupPage, {
+      this.nav.setRoot(AddcompanygroupPage, {
         record: item,
         act: act
       });
     } else {
-      this.nav.push(ViewcompanygroupPage, {
+      this.nav.setRoot(ViewcompanygroupPage, {
         record: item,
         act: act
       });
@@ -218,7 +223,7 @@ export class CompanygroupPage {
     }
     console.log('5');
     this.reportData.sort = val;
-    this.doReport();
+    this.doCompanyGroup();
     console.log('6');
   }
 

@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { PasswordValidator } from '../../validators/password';
+//import { PasswordValidator } from '../../validators/password';
 import { UserorgchartPage } from '../userorgchart/userorgchart';
 import { Http, Headers, RequestOptions } from '@angular/http';
+
 /**
  * Generated class for the UseraccountPage page.
  *
@@ -39,9 +40,10 @@ export class UseraccountPage {
   public responseResultRole;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com/";
 
-  constructor(public http: Http, public navCtrl: NavController, public NP: NavParams, public fb: FormBuilder) {
+  constructor(public http: Http, public navCtrl: NavController, public NP: NavParams, public fb: FormBuilder, public toastCtrl: ToastController) {
     this.form = fb.group({
-      "username": ["", Validators.required],
+      // "username": ["", Validators.required],
+      "username": ["", Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
       "password": ["", Validators.required],
       "re_password": ["", Validators.required],
       "hashtag": ["", Validators.required],
@@ -49,10 +51,19 @@ export class UseraccountPage {
 
       /// "email": ["", Validators.required]
 
-      'validator': PasswordValidator.isMatching
-    });
+      //'validator': this.isMatching
+    }, { validator: this.matchingPasswords('password', 're_password') });
   }
 
+  matchingPasswords(passwordKey: string, passwordConfirmationKey: string) {
+    return (group: FormGroup) => {
+      let passwordInput = group.controls[passwordKey];
+      let passwordConfirmationInput = group.controls[passwordConfirmationKey];
+      if (passwordInput.value !== passwordConfirmationInput.value) {
+        return passwordConfirmationInput.setErrors({ notEquivalent: true })
+      }
+    }
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad UseraccountPage');
   }
@@ -105,9 +116,10 @@ export class UseraccountPage {
         } else {
           keyindex = 1;
         }
-
+        console.log("Key:" + key);
+        console.log("Key Index:" + keyindex);
         if (key == keyindex) {
-          console.log('C');
+          console.log('Key' + key);
           this.first_name = info[key].first_name;
           this.last_name = info[key].last_name;
           this.email = info[key].email;
@@ -115,7 +127,18 @@ export class UseraccountPage {
           this.contact = info[key].contact;
           this.photo = info[key].photo;
           this.createdby = info[key].createdby;
+          console.log("First Name for User Account:" + this.first_name);
           //console.log(JSON.stringify(this));
+        } else {
+          console.log('Key' + key);
+          this.first_name = info[0].first_name;
+          this.last_name = info[0].last_name;
+          this.email = info[0].email;
+          this.country = info[0].country;
+          this.contact = info[0].contact;
+          this.photo = info[0].photo;
+          this.createdby = info[0].createdby;
+          console.log("First Name for User Account:" + this.first_name);
         }
         /* this.userInfo.push({
            info
@@ -168,9 +191,36 @@ export class UseraccountPage {
       hashtag: hashtag,
       role: role
     });
-    this.navCtrl.setRoot(UserorgchartPage, {
-      accountInfo: this.userInfo
-    });
+
+    let body: string = "key=usernameexist&username=" + username,
+      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "api/users.php";
+
+    this.http.post(url, body, options)
+      .subscribe((data) => {
+        console.log(JSON.stringify(data.json()));
+        // If the request was successful notify the user
+        if (data.status === 200) {
+          console.log(data.json().Error);
+          if (data.json().Error > 0) {
+            //this.userInfo=[];
+            this.sendNotification(data.json().message);
+          } else {
+            //this.sendNotification(data.json().message);
+            this.navCtrl.setRoot(UserorgchartPage, {
+              accountInfo: this.userInfo
+            });
+          }
+        }
+        // Otherwise let 'em know anyway
+        else {
+          this.sendNotification('Something went wrong!');
+        }
+      });
+
+
   }
 
 
@@ -212,6 +262,16 @@ export class UseraccountPage {
         this.responseResultRole = res;
       });
 
+  }
+
+  // Manage notifying the user of the outcome
+  // of remote operations
+  sendNotification(message): void {
+    let notification = this.toastCtrl.create({
+      message: message,
+      duration: 3000
+    });
+    notification.present();
   }
 
 }

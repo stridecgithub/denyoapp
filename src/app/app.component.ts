@@ -8,7 +8,7 @@ import { CompanygroupPage } from '../pages/companygroup/companygroup';
 import { UserPage } from '../pages/user/user';
 import { LoginPage } from '../pages/login/login';
 import { LogoutPage } from '../pages/logout/logout';
-//import { HomePage } from '../pages/home/home';
+import { HomePage } from '../pages/home/home';
 @Component({
   templateUrl: 'app.html'
 })
@@ -28,6 +28,7 @@ export class MyApp {
     this.pages = [
       /*{ title: 'Tabs Page', component: TabsPage  },
       { title: 'Other Page', component: OtherPage },*/
+      { title: 'Dashboard', component: HomePage },
       { title: 'Company Group', component: CompanygroupPage },
       { title: 'Users', component: UserPage },
       { title: 'Logout', component: LogoutPage }

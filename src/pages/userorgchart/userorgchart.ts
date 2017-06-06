@@ -63,7 +63,7 @@ export class UserorgchartPage {
     this.form = fb.group({
       "job_position": ["", Validators.required],
       "company_group": ["", Validators.required],
-      "report_to": ["", Validators.required]
+      "report_to": [""]
     });
 
     this.userId = localStorage.getItem("userInfoId");
@@ -80,7 +80,7 @@ export class UserorgchartPage {
     this.getCompanyGroupListData();
     this.getUserListData();
     if (this.NP.get("record")) {
-     console.log("User Org Chart:" + JSON.stringify(this.NP.get("record")));
+      console.log("User Org Chart:" + JSON.stringify(this.NP.get("record")));
       this.isEdited = true;
       this.selectEntry(this.NP.get("record"));
       this.pageTitle = 'Edit User';
@@ -101,24 +101,21 @@ export class UserorgchartPage {
 
       //var objects = JSON.parse(info);
       console.log("JSON.stringify:" + JSON.stringify(info));
-      console.log("Length:" + info.length);
-
-
-      // [{ "photo": "1496409230606.jpg", "first_name": "Kannan", "last_name": "Nagarathinam", "email": "kannanrathvalli@gmail.com", "country": "India", "contact": "9443976954", "createdby": "6", "username": "webkannan", "password": "webkannan", "hashtag": "@India", "role": "Admin" }]
-      console.log("info.first_name" + info.first_name);
+      console.log("Length:" + info.length); console.log("info.first_name" + info.first_name);
       console.log("info.first_name array" + info['first_name']);
       console.log("info.first_name array 0" + info[0]['first_name']);
-      this.first_name = info[0]['first_name'];
-      this.last_name = info[0]['last_name'];
-      this.email = info[0]['email'];
-      this.country = info[0]['country'];
-      this.contact = info[0]['contact'];
-      this.photo = info[0]['photo'];
-      this.createdby = info[0]['createdby'];
-      this.username = info[0]['username'];
-      this.password = info[0]['password'];
-      this.hashtag = info[0]['hashtag'];
-      this.role = info[0]['role'];
+      let keyindex = info.length - 1;
+      this.first_name = info[keyindex]['first_name'];
+      this.last_name = info[keyindex]['last_name'];
+      this.email = info[keyindex]['email'];
+      this.country = info[keyindex]['country'];
+      this.contact = info[keyindex]['contact'];
+      this.photo = info[keyindex]['photo'];
+      this.createdby = info[keyindex]['createdby'];
+      this.username = info[keyindex]['username'];
+      this.password = info[keyindex]['password'];
+      this.hashtag = info[keyindex]['hashtag'];
+      this.role = info[keyindex]['role'];
     }
   }
 
@@ -169,7 +166,7 @@ export class UserorgchartPage {
         if (data.status === 200) {
           this.hideForm = true;
           this.sendNotification(`User created was successfully added`);
-          this.navCtrl.push(UserPage);
+          this.navCtrl.setRoot(UserPage);
         }
         // Otherwise let 'em know anyway
         else {
@@ -186,8 +183,6 @@ export class UserorgchartPage {
   // supplies a variable of key with a value of update followed by the key/value pairs
   // for the record data
   updateEntry(userdata, userid) {
-    //[userdata] => [{"job_position":"Software Engineer","company_group":"4","report_to":"1","first_name":"Kannan","last_name":"Nagarathinam","photo":"1496426577824.jpg","email":"kannanrathvalli@gmail.com","country":"India","contact":"9443976954","createdby":"6","username":"webkannan","password":"webkannan","hashtag":"@India","role":"Admin"},{"job_position":"Software Engineer","company_group":"4","report_to":"1","first_name":"Kannan","last_name":"Nagarathinam","photo":"1496426577824.jpg","email":"kannanrathvalli@gmail.com","country":"India","contact":"9443976954","createdby":"6","username":"webkannan","password":"webkannan","hashtag":"@India","role":"Admin"},{"job_position":"Software Engineer","company_group":"4","report_to":"1","first_name":"Kannan","last_name":"Nagarathinam","photo":"1496426577824.jpg","email":"kannanrathvalli@gmail.com","country":"India","contact":"9443976954","createdby":"6","username":"webkannan","password":"webkannan","hashtag":"@India","role":"Admin"},{"job_position":"Software Engineer","company_group":"4","report_to":"1","first_name":"Kannan","last_name":"Nagarathinam","photo":"1496426577824.jpg","email":"kannanrathvalli@gmail.com","country":"India","contact":"9443976954","createdby":"6","username":"webkannan","password":"webkannan","hashtag":"@India","role":"Admin"},{"job_position":"Software Engineer","company_group":"4","report_to":"1","first_name":"Kannan","last_name":"Nagarathinam","photo":"1496426577824.jpg","email":"kannanrathvalli@gmail.com","country":"India","contact":"9443976954","createdby":"6","username":"webkannan","password":"webkannan","hashtag":"@India","role":"Admin"},{"job_position":"Software Engineer","company_group":"4","report_to":"1","first_name":"Kannan","last_name":"Nagarathinam","photo":"1496426577824.jpg","email":"kannanrathvalli@gmail.com","country":"India","contact":"9443976954","createdby":"6","username":"webkannan","password":"webkannan","hashtag":"@India","role":"Admin"},{"job_position":"Software Engineer","company_group":"4","report_to":"1","first_name":"Kannan","last_name":"Nagarathinam","photo":"1496426577824.jpg","email":"kannanrathvalli@gmail.com","country":"India","contact":"9443976954","createdby":"6","username":"webkannan","password":"webkannan","hashtag":"@India","role":"Admin"},{"job_position":"Software Engineer","company_group":"4","report_to":"1","first_name":"Kannan","last_name":"Nagarathinam","photo":"1496426577824.jpg","email":"kannanrathvalli@gmail.com","country":"India","contact":"9443976954","createdby":"6","username":"webkannan","password":"webkannan","hashtag":"@India","role":"Admin"},{"job_position":"Software Engineer","company_group":"4","report_to":"1","first_name":"Kannan","last_name":"Nagarathinam","photo":"1496426577824.jpg","email":"kannanrathvalli@gmail.com","country":"India","contact":"9443976954","createdby":"6","username":"webkannan","password":"webkannan","hashtag":"@India","role":"Admin"},{"job_position":"Software Engineer","company_group":"4","report_to":"1","first_name":"Kannan","last_name":"Nagarathinam","photo":"1496426577824.jpg","email":"kannanrathvalli@gmail.com","country":"India","contact":"9443976954","createdby":"6","username":"webkannan","password":"webkannan","hashtag":"@India","role":"Admin"},{"job_position":"Software Engineer","company_group":"4","report_to":"1","first_name":"Kannan","last_name":"Nagarathinam","photo":"1496426577824.jpg","email":"kannanrathvalli@gmail.com","country":"India","contact":"9443976954","createdby":"6","username":"webkannan","password":"webkannan","hashtag":"@India","role":"Admin"},{"job_position":"Software Engineer","company_group":"4","report_to":"1","first_name":"Kannan","last_name":"Nagarathinam","photo":"1496426577824.jpg","email":"kannanrathvalli@gmail.com","country":"India","contact":"9443976954","createdby":"6","username":"webkannan","password":"webkannan","hashtag":"@India","role":"Admin"}]
-
     let body: string = "key=update&userdata=" +
       JSON.stringify(userdata) +
       "&recordID=" + this.recordID +
@@ -217,7 +212,7 @@ export class UserorgchartPage {
         if (data.status === 200) {
           this.hideForm = true;
           this.sendNotification(`User created was successfully updated`);
-           this.navCtrl.push(UserPage);
+          this.navCtrl.setRoot(UserPage);
         }
         // Otherwise let 'em know anyway
         else {

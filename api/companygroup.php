@@ -41,25 +41,38 @@
 
         // Attempt to run PDO prepared statement
         try {
-                $sql  = "INSERT INTO companygroups(companygroup_name, address,country,contact,createdby,createdon) VALUES(:companygroup_name, :address, :country, :contact,:createdby,:createdon)";
-                $stmt    = $pdo->prepare($sql);
-                $stmt->execute(
-                array(
-                ":companygroup_name" => $companygroup_name,
-                ":address" => $address,
-                ":country" => $country,
-                ":contact" => $contact,
-                ":createdby" => $createdby_updatedby,
-                ":createdon" =>$createdon_updatedon
 
-                )
-                );
-                echo json_encode(array('message' => 'Congratulations the record ' . $companygroup_name . ' was added to the database'));
+
+
+                $sql = "select count(*) from companygroups where companygroup_name='$companygroup_name'"; 
+                $result = $pdo->prepare($sql); 
+                $result->execute(); 
+                $number_of_rows = $result->fetchColumn(); 
+                if($number_of_rows==0){
+                    $sql  = "INSERT INTO companygroups(companygroup_name, address,country,contact,createdby,createdon) VALUES(:companygroup_name, :address, :country, :contact,:createdby,:createdon)";
+                    $stmt    = $pdo->prepare($sql);
+                    $stmt->execute(
+                    array(
+                    ":companygroup_name" => $companygroup_name,
+                    ":address" => $address,
+                    ":country" => $country,
+                    ":contact" => $contact,
+                    ":createdby" => $createdby_updatedby,
+                    ":createdon" =>$createdon_updatedon
+
+                    )
+                    );
+                     echo json_encode(array('Error'=>0,'message' => 'Congratulations the record ' . $companygroup_name . ' was added to the database'));
+                }else{
+                   echo json_encode(array('Error'=>1,'message' => 'Company group name already exists'));  
+                }
+               
         }
         // Catch any errors in running the prepared statement
         catch(PDOException $e)
         {
-        echo $e->getMessage();
+            echo json_encode(array('message' => $e->getMessage()));
+        //echo $e->getMessage();
         }
 
         break;
@@ -131,7 +144,14 @@
          $recordID      = filter_var($_REQUEST['recordID'], FILTER_SANITIZE_NUMBER_INT);
 
          // Attempt to run PDO prepared statement
-         try {             
+         try {    
+
+
+              $sql = "select count(*) from companygroups where companygroup_name='$companygroup_name' and companygroup_id!='$recordID'"; 
+                $result = $pdo->prepare($sql); 
+                $result->execute(); 
+                $number_of_rows = $result->fetchColumn(); 
+                if($number_of_rows==0){         
             $sql  = "UPDATE companygroups SET companygroup_name = :companygroup_name, address = :address, contact = :contact, country = :country, updatedby = :updatedby, updatedon = :updatedon WHERE companygroup_id = :recordID";
             //exit;
                 $stmt =  $pdo->prepare($sql);
@@ -143,9 +163,12 @@
                  $stmt->bindParam(':updatedby', $createdby_updatedby, PDO::PARAM_INT);
                  $stmt->bindParam(':updatedon', $createdon_updatedon, PDO::PARAM_INT);
                 $stmt->execute();
-            print_r($stmt);
+            echo json_encode(array('Error'=>0,'message' => 'Congratulations the record ' . $companygroup_name . ' was updated to the database'));
+                }else{
+                   echo json_encode(array('Error'=>1,'message' => 'Company group name already exists'));  
+                }
 
-            echo json_encode('Congratulations the record ' . $companygroup_name . ' was updated');
+            //echo json_encode('Congratulations the record ' . $companygroup_name . ' was updated');
          }
          // Catch any errors in running the prepared statement
          catch(PDOException $e)
