@@ -13,12 +13,13 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'myaccount.html',
 })
 export class MyaccountPage {
-
+  public pageTitle: string;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+      this.pageTitle = 'My Account';
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad MyaccountPage');
+    //console.log('ionViewDidLoad MyaccountPage');
   }
 
 }

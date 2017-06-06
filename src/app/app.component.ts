@@ -9,6 +9,8 @@ import { UserPage } from '../pages/user/user';
 import { LoginPage } from '../pages/login/login';
 import { LogoutPage } from '../pages/logout/logout';
 import { HomePage } from '../pages/home/home';
+import { MyaccountPage } from '../pages/myaccount/myaccount';
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -31,6 +33,7 @@ export class MyApp {
       { title: 'Dashboard', component: HomePage },
       { title: 'Company Group', component: CompanygroupPage },
       { title: 'Users', component: UserPage },
+       { title: 'My Account', component: MyaccountPage },
       { title: 'Logout', component: LogoutPage }
     ];
    
