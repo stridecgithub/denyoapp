@@ -313,7 +313,25 @@ case "usernameexist":
         //echo $e->getMessage();
         }
         break;
+
+         case "myaccount":
+            $userId=$_REQUEST['userId'];       
+            $wheredate="u.id=ud.user_id and ud.company_group=cg.companygroup_id and u.id='$userId'";  
+        try {
+            //echo "select u.id as userid,ud.id as userdetailsid,u.username,u.password,u.role,u.hashtag,ud.first_name,ud.last_name,ud.email,ud.contact,ud.country,ud.photo,ud.job_position,ud.report_to,ud.company_group,cg.companygroup_name from users as u,userdetails as ud,companygroups as cg where ".$wheredate;exit;
+            $stmt    = $pdo->query("select u.id as userid,ud.id as userdetailsid,u.username,u.password,u.role,u.hashtag,ud.first_name,ud.last_name,ud.email,ud.contact,ud.country,ud.photo,ud.job_position,ud.report_to,ud.company_group,cg.companygroup_name from users as u,userdetails as ud,companygroups as cg where ".$wheredate);
+            $row  = $stmt->fetch(PDO::FETCH_OBJ);
+            $data[] = $row;
+            echo json_encode($data);
+        }
+        catch(PDOException $e)
+        {
+            echo $e->getMessage();
+        }
+        break;
         
    }
+
+       
 
 ?>
