@@ -32,10 +32,7 @@ export class LoginPage {
     this.form = fb.group({
       "userid": ["", Validators.required],
       "password": ["", Validators.required]
-    });
-
-    this.userId = 'webneo';
-    this.passWrd = 'webneo';
+    });   
   }
 
   ionViewDidLoad() {
