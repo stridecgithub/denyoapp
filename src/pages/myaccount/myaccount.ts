@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Http, Headers, RequestOptions } from '@angular/http';
+import { EditprofilesteponePage } from '../editprofilestepone/editprofilestepone';
 /**
  * Generated class for the MyaccountPage page.
  *
@@ -15,10 +16,19 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 export class MyaccountPage {
   public pageTitle: string;
   public photo: any;
+  public name: any;
+  public userid: any;
+  public password: any;
+  public hashtag: any;
   public loginas: any;
+  public role: any;
+  public email: any;
+  public country: any;
+  public job_position: any;
+  public accountcreatedby: any;
   public userId: any;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com/";
-  constructor(public http: Http, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public http: Http, public navCtrl: NavController, public navParams: NavParams, public nav: NavController) {
     this.pageTitle = 'My Account';
     this.loginas = localStorage.getItem("userInfoName");
     this.userId = localStorage.getItem("userInfoId");
@@ -37,12 +47,23 @@ export class MyaccountPage {
     this.http.post(url, body, options)
       .subscribe((data) => {
         res = data.json();
-        console.log("Photo:" + res.photo);
-        if (res.photo) {
-          this.photo = this.apiServiceURL + "api/uploads/users/" + res.photo;
-          console.log(this.photo);
+        this.userid = res[0].username;
+        this.password = res[0].password;
+        this.hashtag = res[0].hashtag;
+        this.role = res[0].role;
+        this.email = res[0].email;
+        this.country = res[0].country;
+        this.job_position = res[0].job_position;
+        this.accountcreatedby = res[0].report_to;
+        if (res[0].photo) {
+          this.photo = this.apiServiceURL + "api/uploads/users/" + res[0].photo;
         }
       });
+  }
+  doEdit(id){
+    this.nav.setRoot(EditprofilesteponePage, {       
+        user_id: id
+      }); 
   }
 
 }

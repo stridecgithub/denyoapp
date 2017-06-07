@@ -321,6 +321,25 @@ case "usernameexist":
             //echo "select u.id as userid,ud.id as userdetailsid,u.username,u.password,u.role,u.hashtag,ud.first_name,ud.last_name,ud.email,ud.contact,ud.country,ud.photo,ud.job_position,ud.report_to,ud.company_group,cg.companygroup_name from users as u,userdetails as ud,companygroups as cg where ".$wheredate;exit;
             $stmt    = $pdo->query("select u.id as userid,ud.id as userdetailsid,u.username,u.password,u.role,u.hashtag,ud.first_name,ud.last_name,ud.email,ud.contact,ud.country,ud.photo,ud.job_position,ud.report_to,ud.company_group,cg.companygroup_name from users as u,userdetails as ud,companygroups as cg where ".$wheredate);
             $row  = $stmt->fetch(PDO::FETCH_OBJ);
+
+            $sql = "select country_name from countries where id=". $row->country; 
+            $result = $pdo->prepare($sql); 
+            $result->execute(); 
+            $country_name = $result->fetchColumn(); 
+            $row->country=$country_name;
+
+            $sql = "select role_name from roles where id=". $row->role; 
+            $result = $pdo->prepare($sql); 
+            $result->execute(); 
+            $role_name = $result->fetchColumn(); 
+            $row->role=$role_name;
+
+            $sql = "select username from users where id=". $row->report_to; 
+            $result = $pdo->prepare($sql); 
+            $result->execute(); 
+            $account_name = $result->fetchColumn(); 
+            $row->report_to=$account_name;
+
             $data[] = $row;
             echo json_encode($data);
         }

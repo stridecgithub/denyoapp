@@ -1,5 +1,5 @@
 <!--
-  Generated template for the CompanygroupPage page.
+  Generated template for the RolePage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
@@ -31,15 +31,15 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-   <div class="error"  *ngIf="totalCount==0">No company group entries found</div>
+   <div class="error"  *ngIf="totalCount==0">No role entries found</div>
   <ion-item id="sortbar"  *ngIf="totalCount!=0">
-    <button *ngIf="sortby==1"clear (click)="doSort('companygroup_name')"  style="color:black;background-color:white">
-      <div class="company-name">Company Name</div>
+    <button *ngIf="sortby==1"clear (click)="doSort('role_name')"  style="color:black;background-color:white">
+      <div class="Role-name">Role Name</div>
         <ion-icon *ngIf="ascending==false" ios="md-arrow-dropdown" md="md-arrow-dropdown" style="color:black;background-color:white"></ion-icon>
         <ion-icon *ngIf="ascending==true" ios="md-arrow-dropup" md="md-arrow-dropup" style="color:black;background-color:white"></ion-icon>
     </button>
-    <button *ngIf="sortby!=1" clear (click)="doSort('companygroup_name')"style="color:black;background-color:white">
-       <div class="company-name">Company Name</div>
+    <button *ngIf="sortby!=1" clear (click)="doSort('role_name')"style="color:black;background-color:white">
+       <div class="Role-name">Role Name</div>
         <ion-icon *ngIf="ascending==false" ios="md-arrow-dropdown" md="md-arrow-dropdown" style="color:black;background-color:white"></ion-icon>
         <ion-icon *ngIf="ascending==true" ios="md-arrow-dropup" md="md-arrow-dropup" style="color:black;background-color:white"></ion-icon>
     </button>
@@ -52,9 +52,7 @@
   <ion-list  *ngIf="totalCount!=0">    
     <ion-item-sliding  *ngFor="let item of reportAllLists;">
       <ion-item>
-        <h2><b>Company:</b>{{item.companygroup_name}}</h2>
-        <h2><b>Total User:</b>{{item.totaluser}}</h2>
-        <h2><b>Total Unit:</b>{{item.totalunit}}</h2>
+        <h2>{{item.role_name}}</h2>        
       </ion-item>
       <ion-item-options>
         <!--button class="viewcolor" (click)="doEdit(item,'view')">
@@ -63,7 +61,7 @@
         <button class="editcolor" (click)="doEdit(item,'edit')">                      
                         <ion-icon name="create" class="icon-size"></ion-icon>
                     </button>
-        <button class="trashcolor" (click)="doConfirm(item.companygroup_id,item)">                        
+        <button class="trashcolor" (click)="doConfirm(item.role_id,item)">                        
                          <ion-icon name="trash" class="icon-size"></ion-icon>
                     </button>
       </ion-item-options>     
