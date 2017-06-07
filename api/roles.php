@@ -53,36 +53,31 @@ echo $e->getMessage();
         case "create":
 
         // Sanitise URL supplied values
-        $companygroup_name       = filter_var($_REQUEST['companygroup_name'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
-        $address   = filter_var($_REQUEST['address'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
-        $country   = filter_var($_REQUEST['country'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
-        $contact   = filter_var($_REQUEST['contact'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
+        $role_name       = filter_var($_REQUEST['role_name'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
+       
 
 
 
         // Attempt to run PDO prepared statement
         try {
-                $sql = "select count(*) from companygroups where companygroup_name='$companygroup_name'"; 
+                $sql = "select count(*) from roles where role_name='$role_name'"; 
                 $result = $pdo->prepare($sql); 
                 $result->execute(); 
                 $number_of_rows = $result->fetchColumn(); 
                 if($number_of_rows==0){
-                    $sql  = "INSERT INTO companygroups(companygroup_name, address,country,contact,createdby,createdon) VALUES(:companygroup_name, :address, :country, :contact,:createdby,:createdon)";
+                    $sql  = "INSERT INTO roles(role_name, createdby,createdon) VALUES(:role_name, :createdby,:createdon)";
                     $stmt    = $pdo->prepare($sql);
                     $stmt->execute(
                     array(
-                    ":companygroup_name" => $companygroup_name,
-                    ":address" => $address,
-                    ":country" => $country,
-                    ":contact" => $contact,
+                    ":role_name" => $role_name,                    
                     ":createdby" => $createdby_updatedby,
                     ":createdon" =>$createdon_updatedon
 
                     )
                     );
-                     echo json_encode(array('Error'=>0,'message' => 'Congratulations the record ' . $companygroup_name . ' was added to the database'));
+                     echo json_encode(array('Error'=>0,'message' => 'Congratulations the record ' . $role_name . ' was added to the database'));
                 }else{
-                   echo json_encode(array('Error'=>1,'message' => 'Company group name already exists'));  
+                   echo json_encode(array('Error'=>1,'message' => 'Role name already exists'));  
                 }
                
         }
@@ -155,35 +150,30 @@ echo $e->getMessage();
       case "update":
 
          // Sanitise URL supplied values
-         $companygroup_name          = filter_var($_REQUEST['companygroup_name'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
-         $address   = filter_var($_REQUEST['address'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
-          $country   = filter_var($_REQUEST['country'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
-           $contact   = filter_var($_REQUEST['contact'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
+         $role_name          = filter_var($_REQUEST['role_name'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);        
          $recordID      = filter_var($_REQUEST['recordID'], FILTER_SANITIZE_NUMBER_INT);
+         $id      = filter_var($_REQUEST['recordID'], FILTER_SANITIZE_NUMBER_INT);
 
          // Attempt to run PDO prepared statement
          try {    
 
 
-              $sql = "select count(*) from companygroups where companygroup_name='$companygroup_name' and companygroup_id!='$recordID'"; 
+              $sql = "select count(*) from roles where role_name='$role_name' and id!='$recordID'"; 
                 $result = $pdo->prepare($sql); 
                 $result->execute(); 
                 $number_of_rows = $result->fetchColumn(); 
                 if($number_of_rows==0){         
-            $sql  = "UPDATE companygroups SET companygroup_name = :companygroup_name, address = :address, contact = :contact, country = :country, updatedby = :updatedby, updatedon = :updatedon WHERE companygroup_id = :recordID";
+            $sql  = "UPDATE roles SET role_name = :role_name, updatedby = :updatedby, updatedon = :updatedon WHERE id = :id";
             //exit;
                 $stmt =  $pdo->prepare($sql);
-                $stmt->bindParam(':companygroup_name', $companygroup_name, PDO::PARAM_STR);
-                $stmt->bindParam(':address', $address, PDO::PARAM_STR);
-                $stmt->bindParam(':contact', $contact, PDO::PARAM_STR);
-                $stmt->bindParam(':country', $country, PDO::PARAM_STR);
-                $stmt->bindParam(':recordID', $recordID, PDO::PARAM_INT);
+                $stmt->bindParam(':role_name', $role_name, PDO::PARAM_STR);               
+                $stmt->bindParam(':id', $id, PDO::PARAM_INT);
                  $stmt->bindParam(':updatedby', $createdby_updatedby, PDO::PARAM_INT);
                  $stmt->bindParam(':updatedon', $createdon_updatedon, PDO::PARAM_INT);
                 $stmt->execute();
-            echo json_encode(array('Error'=>0,'message' => 'Congratulations the record ' . $companygroup_name . ' was updated to the database'));
+            echo json_encode(array('Error'=>0,'message' => 'Congratulations the record ' . $role_name . ' was updated to the database'));
                 }else{
-                   echo json_encode(array('Error'=>1,'message' => 'Company group name already exists'));  
+                   echo json_encode(array('Error'=>1,'message' => 'Role name already exists'));  
                 }
 
             //echo json_encode('Congratulations the record ' . $companygroup_name . ' was updated');
@@ -203,16 +193,17 @@ echo $e->getMessage();
 
          // Sanitise supplied record ID for matching to table record
          $recordID   =  filter_var($_REQUEST['recordID'], FILTER_SANITIZE_NUMBER_INT);
+         $id   =  filter_var($_REQUEST['recordID'], FILTER_SANITIZE_NUMBER_INT);
 
          // Attempt to run PDO prepared statement
          try {
             $pdo  = new PDO($dsn, $un, $pwd);
-            $sql  = "DELETE FROM companygroups WHERE companygroup_id = :recordID";
+            $sql  = "DELETE FROM roles WHERE id = :id";
             $stmt = $pdo->prepare($sql);
-            $stmt->bindParam(':recordID', $recordID, PDO::PARAM_INT);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->execute();
 
-            echo json_encode('Congratulations the record ' . $companygroup_name . ' was removed');
+            echo json_encode('Congratulations the record ' . $role_name . ' was removed');
          }
          // Catch any errors in running the prepared statement
          catch(PDOException $e)

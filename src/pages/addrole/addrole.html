@@ -5,29 +5,44 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>addrole</ion-title>
+  <ion-navbar color="bluedark">
+    <ion-title class="page-title">{{pageTitle}}</ion-title>
+    <ion-buttons start>
+      <button ion-button menuToggle class="menu-toggle">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button>
+ <ion-icon name="notifications-outline"></ion-icon>
+</button>
+    </ion-buttons>
   </ion-navbar>
-
+  <ion-navbar class="backtoprevious-navbar">
+    <ion-buttons start class="backtoprevious-start">
+      <button ion-button icon-left class="backtoprevious-button">
+ <ion-icon name="arrow-back" class="backtoprevious-icon"></ion-icon>
+ Back to previous
+</button>
+    </ion-buttons>
+    <ion-buttons end>
+      Login As:{{loginas}}
+    </ion-buttons>
+  </ion-navbar>
 </ion-header>
 
-
 <ion-content padding>
-<ion-grid>
-  <ion-row>
-    <ion-col col-12 col-sm>
-      1 of 4
-    </ion-col>
-    <ion-col col-12 col-sm>
-      2 of 4
-    </ion-col>
-    <ion-col col-12 col-sm>
-      3 of 4
-    </ion-col>
-    <ion-col col-12 col-sm>
-      4 of 4
-    </ion-col>
-  </ion-row>
-</ion-grid>
+  <div>
+    <form [formGroup]="form" (ngSubmit)="saveEntry()">
+      <ion-list>
+        <ion-item>
+          <ion-label stacked>Role Name <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
+          <ion-input type="text" [disabled]="readOnly" formControlName="role_name" [(ngModel)]="role_name"></ion-input>
+        </ion-item>        
+        <ion-item *ngIf="hideActionButton">
+          <button ion-button color="primary" text-center block [disabled]="!form.valid">Save</button>
+        </ion-item>
+      </ion-list>
+    </form>
+  </div>
 </ion-content>

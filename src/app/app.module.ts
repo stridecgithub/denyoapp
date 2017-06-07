@@ -19,6 +19,7 @@ import { MyaccountPage } from '../pages/myaccount/myaccount';
 import { LogoutPage } from '../pages/logout/logout';
 import { EditprofilesteponePage } from '../pages/editprofilestepone/editprofilestepone';
 import { RolePage } from '../pages/role/role';
+import { AddrolePage } from '../pages/addrole/addrole';
 import { HttpModule } from '@angular/http';
 
 @NgModule({
@@ -38,7 +39,8 @@ import { HttpModule } from '@angular/http';
     LogoutPage,
     MyaccountPage,
     EditprofilesteponePage,
-    RolePage
+    RolePage,
+    AddrolePage
   ],
   imports: [
     BrowserModule,
@@ -62,7 +64,8 @@ import { HttpModule } from '@angular/http';
     LogoutPage,
     MyaccountPage,
     EditprofilesteponePage,
-    RolePage
+    RolePage,
+    AddrolePage
   ],
   providers: [
     StatusBar,
