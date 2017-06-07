@@ -43,7 +43,12 @@ export class AddrolePage {
     this.loginas = localStorage.getItem("userInfoName");
     // Create form builder validation rules
     this.form = fb.group({
-      "role_name": ["", Validators.required]    
+      "role_name": ["", Validators.required],
+       "view": ["", Validators.required],
+        "create": ["", Validators.required],
+         "edit": ["", Validators.required]  ,
+         "delete": ["", Validators.required]    ,
+         "hide": ["", Validators.required]     
     });
 
     this.userId = localStorage.getItem("userInfoId");
