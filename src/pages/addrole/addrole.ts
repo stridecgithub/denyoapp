@@ -318,7 +318,7 @@ export class AddrolePage {
             this.sendNotification(data.json().message);
           } else {
             this.sendNotification(data.json().message);
-            // this.navCtrl.setRoot(RolePage);
+            this.navCtrl.setRoot(RolePage);
           }
         }
         // Otherwise let 'em know anyway
@@ -398,6 +398,7 @@ export class AddrolePage {
   // existing record
   saveEntry() {
     // console.log("Controll Form is:"+JSON.stringify(this.form.controls));
+    this.roleperMissionData=[];
     let role_name: string = this.form.controls["role_name"].value;
 
 
