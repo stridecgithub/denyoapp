@@ -1,3 +1,59 @@
 page-addrole {
 
+     .label-md[stacked]{
+        font-size: 14px;
+        color:black;
+        font-weight:bold;
+
+    }
+     .item-button{
+       background-color:#009ACD;
+       text-transform:capitalize;
+   }
+
+.item-md .toggle-md {
+    cursor: pointer;
+    margin: 0;
+    padding-left: 0px;
+    padding-right: 4px;
+    padding-top: 12px;
+    padding-bottom: 12px;
 }
+   
+    .action-block{
+        margin-left: 25%;
+    }
+    .action-block-hide{
+        margin-left: 25%;
+    }
+
+    ion-input, ion-textarea,ion-select {    
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+.list-md .item-block .item-inner {
+    border-bottom: 1px solid #fff;
+}
+
+
+.list-md .item-input.ng-valid.input-has-value:not(.input-has-focus):last-child {
+    border-bottom-color: #fff;
+    box-shadow: inset 0 -1px 0 0 #fff;
+}
+
+.item-md.item-input.ng-valid.input-has-value:not(.input-has-focus) .item-inner {
+    border-bottom-color: #fff;
+    box-shadow: #fff 0px -1px 0px 0px inset;
+}
+
+.item-md.item-input.ng-valid.input-has-value:not(.input-has-focus) .item-inner {
+    border-bottom-color: #fff;
+    box-shadow: inset 0 -1px 0 0 #fff;
+}
+
+.item-md.item-input.input-has-focus .item-inner {
+    border-bottom-color: #fff;
+    box-shadow: inset 0 -1px 0 0 #fff;
+}
+}
+ 
