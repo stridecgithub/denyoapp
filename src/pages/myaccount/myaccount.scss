@@ -1,3 +1,45 @@
 page-myaccount {
+   
+}
+.item-md ion-avatar img {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    overflow: hidden;
+}
 
+.navbar-background{
+//color:red;
+//background-color:greenyellow;
+background: url("../img/sprite.png");
+}
+
+.ion-popover-class{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    left: 10%;
+    position: absolute;
+    right: 0;
+    z-index: 1000;
+    top: 5%;
+    width: 80%;
+}
+
+.popover-heading{
+    color:#294457;
+    font-weight: bolder;
+    font-size:14px;
+}
+.popover_header{
+    background-color:#C7C6CB;    
+    color:#294457;    
+    line-height: 1.2;
+    font-size:15px;  
+}
+
+.popover_image{
+    background-color:#fff;    
+    color:#fff;
+    border:1px solid #C7C6CB;
 }

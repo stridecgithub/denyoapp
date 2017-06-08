@@ -10,7 +10,11 @@ import { LoginPage } from '../pages/login/login';
 import { LogoutPage } from '../pages/logout/logout';
 import { HomePage } from '../pages/home/home';
 import { MyaccountPage } from '../pages/myaccount/myaccount';
+
 import { AddUnitPage } from '../pages/add-unit/add-unit';
+
+import { RolePage } from '../pages/role/role';
+
 
 @Component({
   templateUrl: 'app.html'
@@ -34,6 +38,7 @@ export class MyApp {
       { title: 'Dashboard', component: HomePage },
       { title: 'Company Group', component: CompanygroupPage },
       { title: 'Users', component: UserPage },
+      { title: 'Role', component: RolePage },
        { title: 'My Account', component: MyaccountPage },
       { title: 'Logout', component: LogoutPage },
 		  { title: 'Add Unit', component: AddUnitPage }
