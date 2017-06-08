@@ -351,7 +351,7 @@ echo $e->getMessage();
     $page_name='Reports';
     $view_action=$permissiondata_array[0]['Reports']['Reports']['viewreports'];
     $create_action=$permissiondata_array[0]['Reports']['Reports']['createreports'];
-    $edit_action=$permissiondata_array[0]['Reports']['Reports']['unieeditreportsditgmm'];
+    $edit_action=$permissiondata_array[0]['Reports']['Reports']['editreports'];
     $delete_action=$permissiondata_array[0]['Reports']['Reports']['deletereports'];
     $hide_action=0;
     $sql  = "INSERT INTO role_permissions(role_id, 	module_name,page_name,view_action,create_action,edit_action,delete_action,hide_action) VALUES(:role_id,:module_name,:page_name,:view_action,:create_action,:edit_action,:delete_action,:hide_action)";

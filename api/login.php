@@ -25,7 +25,7 @@ $wherecond="username='$username' and password='$password'";
 //echo "SELECT id,eventitle, eventdate,description FROM events where ".$wheredate;//exit;
 // Attempt to query database table and retrieve data
 try {
-$stmt    = $pdo->query("SELECT id,username, password FROM users where ".$wherecond);
+$stmt    = $pdo->query("SELECT user_id,username, password FROM users where ".$wherecond);
 while($row  = $stmt->fetch(PDO::FETCH_OBJ))
 {
 // Assign each row of data to associative array
