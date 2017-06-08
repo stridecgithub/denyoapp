@@ -509,115 +509,156 @@ export class AddrolePage {
       ;
     this.roleperMissionData.push({
       "Dashboard": {
-        "dashboardviewmap": dashboardviewmap,
-        "dashboardcreatemap": dashboardcreatemap,
-        "dashboardeditmap": dashboardeditmap,
-        "dashboarddeletemap": dashboarddeletemap,
-        "dashboardhidemap": dashboardhidemap,
-        "dashboardviewunits": dashboardviewunits,
-        "dashboardcreateunits": dashboardcreateunits,
-        "dashboardeditunits": dashboardeditunits,
-        "dashboarddeleteunits": dashboarddeleteunits,
-        "dashboardhideunits": dashboardhideunits
+        "Map": {
+          "dashboardviewmap": dashboardviewmap,
+          "dashboardcreatemap": dashboardcreatemap,
+          "dashboardeditmap": dashboardeditmap,
+          "dashboarddeletemap": dashboarddeletemap,
+          "dashboardhidemap": dashboardhidemap
+        },
+        "Units": {
+          "dashboardviewunits": dashboardviewunits,
+          "dashboardcreateunits": dashboardcreateunits,
+          "dashboardeditunits": dashboardeditunits,
+          "dashboarddeleteunits": dashboarddeleteunits,
+          "dashboardhideunits": dashboardhideunits
+        }
       },
       "Calendar": {
         // Calendar Events
-        "calviewevents": calviewevents,
-        "calcreateevents": calcreateevents,
-        "caleditevents": caleditevents,
-        "caldeleteevents": caldeleteevents,
+        "Events": {
+          "calviewevents": calviewevents,
+          "calcreateevents": calcreateevents,
+          "caleditevents": caleditevents,
+          "caldeleteevents": caldeleteevents
+        },
+
         // Calendar Services
-        "calviewservices": calviewservices,
-        "calcreateservices": calcreateservices,
-        "caleditservices": caleditservices,
-        "caldeleteservices": caldeleteservices,
+        "Services": {
+          "calviewservices": calviewservices,
+          "calcreateservices": calcreateservices,
+          "caleditservices": caleditservices,
+          "caldeleteservices": caldeleteservices
+        },
         // Calendar Alarm
-        "calviewalarm": calviewalarm,
-        "calcreatealarm": calcreatealarm,
-        "caleditalarm": caleditalarm,
-        "caldeletealarm": caldeletealarm,
+        "Alarm": {
+          "calviewalarm": calviewalarm,
+          "calcreatealarm": calcreatealarm,
+          "caleditalarm": caleditalarm,
+          "caldeletealarm": caldeletealarm
+        }
       },
       "Units": {
         // Units Unit List
-        "univiewlist": univiewlist,
-        "unicreatelist": unicreatelist,
-        "unieditlist": unieditlist,
-        "unideletelist": unideletelist,
+        "Units Listing": {
+          "univiewlist": univiewlist,
+          "unicreatelist": unicreatelist,
+          "unieditlist": unieditlist,
+          "unideletelist": unideletelist
+        },
         // Units Alaram
-        "univiewalarm": univiewalarm,
-        "unicreatealarm": unicreatealarm,
-        "unieditalarm": unieditalarm,
-        "unideletealarm": unideletealarm,
+        "Alarm": {
+          "univiewalarm": univiewalarm,
+          "unicreatealarm": unicreatealarm,
+          "unieditalarm": unieditalarm,
+          "unideletealarm": unideletealarm
+        },
         // Units Services Info
-        "univiewservices": univiewservices,
-        "unicreateservices": unicreateservices,
-        "unieditservices": unieditservices,
-        "unideleteservices": unideleteservices,
+        "Servicing Info": {
+          "univiewservices": univiewservices,
+          "unicreateservices": unicreateservices,
+          "unieditservices": unieditservices,
+          "unideleteservices": unideleteservices
+        },
         // Units Comments
-        "univiewcomm": univiewcomm,
-        "unicreatecomm": unicreatecomm,
-        "unieditcomm": unieditcomm,
-        "unideletecomm": unideletecomm,
+        "Comments": {
+          "univiewcomm": univiewcomm,
+          "unicreatecomm": unicreatecomm,
+          "unieditcomm": unieditcomm,
+          "unideletecomm": unideletecomm
+        },
         // Units Unit Group
-        "univiewgroup": univiewgroup,
-        "unicreategroup": unicreategroup,
-        "unieditgroup": unieditgroup,
-        "unideletegroup": unideletegroup,
+        "Unit Group": {
+          "univiewgroup": univiewgroup,
+          "unicreategroup": unicreategroup,
+          "unieditgroup": unieditgroup,
+          "unideletegroup": unideletegroup
+        },
         // Units Generator Model Managment
-        "univiewgmm": univiewgmm,
-        "unicreategmm": unicreategmm,
-        "unieditgmm": unieditgmm,
-        "unideletegmm": unideletegmm,
+        "Generator Model Management": {
+          "univiewgmm": univiewgmm,
+          "unicreategmm": unicreategmm,
+          "unieditgmm": unieditgmm,
+          "unideletegmm": unideletegmm
+        }
       },
       "Reports": {
-        "viewreports": viewreports,
-        "createreports": createreports,
-        "editreports": editreports,
-        "deletereports": deletereports
+        "Reports": {
+          "viewreports": viewreports,
+          "createreports": createreports,
+          "editreports": editreports,
+          "deletereports": deletereports
+        }
       },
-      "Message": {
+      "Messages": {
         // Message Inbox
-        "msgviewinbox": msgviewinbox,
-        "msgcreateinbox": msgcreateinbox,
-        "msgeditinbox": msgeditinbox,
-        "msgdeleteinbox": msgdeleteinbox,
+        "Inbox": {
+          "msgviewinbox": msgviewinbox,
+          "msgcreateinbox": msgcreateinbox,
+          "msgeditinbox": msgeditinbox,
+          "msgdeleteinbox": msgdeleteinbox
+        },
         // Message Sent
-        "msgviewsent": msgviewsent,
-        "msgcreatesent": msgcreatesent,
-        "msgeditsent": msgeditsent,
-        "msgdeletesent": msgdeletesent
+        "Sent": {
+          "msgviewsent": msgviewsent,
+          "msgcreatesent": msgcreatesent,
+          "msgeditsent": msgeditsent,
+          "msgdeletesent": msgdeletesent
+        }
       },
       "Settings": {
         // Settings My Account
-        "setviewmyacc": setviewmyacc,
-        "setcreatemyacc": setcreatemyacc,
-        "seteditmyacc": seteditmyacc,
-        "setdeletemyacc": setdeletemyacc,
+        "My Account": {
+          "setviewmyacc": setviewmyacc,
+          "setcreatemyacc": setcreatemyacc,
+          "seteditmyacc": seteditmyacc,
+          "setdeletemyacc": setdeletemyacc
+        },
         // Settings User List
-        "setviewuselst": setviewuselst,
-        "setcreateuselst": setcreateuselst,
-        "setedituselst": setedituselst,
-        "setdeleteuselst": setdeleteuselst,
+        "User List": {
+          "setviewuselst": setviewuselst,
+          "setcreateuselst": setcreateuselst,
+          "setedituselst": setedituselst,
+          "setdeleteuselst": setdeleteuselst
+        },
         // Settings User Group
-        "setviewusegru": setviewusegru,
-        "setcreateusegru": setcreateusegru,
-        "seteditusegru": seteditusegru,
-        "setdeleteusegru": setdeleteusegru,
+        "User Group": {
+          "setviewusegru": setviewusegru,
+          "setcreateusegru": setcreateusegru,
+          "seteditusegru": seteditusegru,
+          "setdeleteusegru": setdeleteusegru
+        },
         // Settings User Role
-        "setviewuserle": setviewuserle,
-        "setcreateuserle": setcreateuserle,
-        "setedituserle": setedituserle,
-        "setdeleteuserle": setdeleteuserle,
+        "User Role": {
+          "setviewuserle": setviewuserle,
+          "setcreateuserle": setcreateuserle,
+          "setedituserle": setedituserle,
+          "setdeleteuserle": setdeleteuserle
+        },
         // Settings Report Template
-        "setviewtmp": setviewtmp,
-        "setcreatetmp": setcreatetmp,
-        "setedittmp": setedittmp,
-        "setdeletetmp": setdeletetmp,
+        "Report Template": {
+          "setviewtmp": setviewtmp,
+          "setcreatetmp": setcreatetmp,
+          "setedittmp": setedittmp,
+          "setdeletetmp": setdeletetmp
+        },
         // Settings Org Chart
-        "setvieworg": setvieworg,
-        "setcreateorg": setcreateorg,
-        "seteditorg": seteditorg,
-        "setdeleteorg": setdeleteorg
+        "Org Chart": {
+          "setvieworg": setvieworg,
+          "setcreateorg": setcreateorg,
+          "seteditorg": seteditorg,
+          "setdeleteorg": setdeleteorg
+        }
       }
     });
 
