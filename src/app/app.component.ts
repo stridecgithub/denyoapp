@@ -10,6 +10,7 @@ import { LoginPage } from '../pages/login/login';
 import { LogoutPage } from '../pages/logout/logout';
 import { HomePage } from '../pages/home/home';
 import { MyaccountPage } from '../pages/myaccount/myaccount';
+import { AddUnitPage } from '../pages/add-unit/add-unit';
 
 @Component({
   templateUrl: 'app.html'
@@ -34,7 +35,8 @@ export class MyApp {
       { title: 'Company Group', component: CompanygroupPage },
       { title: 'Users', component: UserPage },
        { title: 'My Account', component: MyaccountPage },
-      { title: 'Logout', component: LogoutPage }
+      { title: 'Logout', component: LogoutPage },
+		  { title: 'Add Unit', component: AddUnitPage }
     ];
    
   }

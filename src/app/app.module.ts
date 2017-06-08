@@ -17,6 +17,7 @@ import { UseraccountPage } from '../pages/useraccount/useraccount';
 import { UserorgchartPage } from '../pages/userorgchart/userorgchart';
 import { MyaccountPage } from '../pages/myaccount/myaccount';
 import { LogoutPage } from '../pages/logout/logout';
+import { AddUnitPage } from '../pages/add-unit/add-unit';
 
 import { HttpModule } from '@angular/http';
 
@@ -35,7 +36,8 @@ import { HttpModule } from '@angular/http';
     UseraccountPage,
     UserorgchartPage,
     LogoutPage,
-    MyaccountPage
+    MyaccountPage,
+	AddUnitPage
   ],
   imports: [
     BrowserModule,
@@ -57,7 +59,8 @@ import { HttpModule } from '@angular/http';
     UseraccountPage,
     UserorgchartPage,
     LogoutPage,
-    MyaccountPage
+    MyaccountPage,
+	AddUnitPage
   ],
   providers: [
     StatusBar,
