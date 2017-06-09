@@ -290,6 +290,150 @@ export class AddrolePage {
   selectEntry(item) {
     this.role_name = item.role_name;
     this.recordID = item.id;
+    let body: string = "key=permissiondata&role_id=" + this.recordID,
+      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "api/roles.php";
+    let res;
+    this.http.post(url, body, options)
+      .subscribe((data) => {
+
+        res = data.json();
+
+        // Dashboard Map
+        this.rolepermissionData.dashboardviewmap = res[0].dashboardviewmap;
+        this.rolepermissionData.dashboardcreatemap = res[0].dashboardcreatemap;
+        this.rolepermissionData.dashboardeditmap = res[0].dashboardeditmap;
+        this.rolepermissionData.dashboarddeletemap = res[0].dashboarddeletemap;
+        this.rolepermissionData.dashboardhidemap = res[0].dashboardhidemap;
+
+        // Dashboard Units
+        this.rolepermissionData.dashboardviewunits = res[1].dashboardviewunits;
+        this.rolepermissionData.dashboardcreateunits = res[1].dashboardcreateunits;
+        this.rolepermissionData.dashboardeditunits = res[1].dashboardeditunits;
+        this.rolepermissionData.dashboarddeleteunits = res[1].dashboarddeleteunits;
+        this.rolepermissionData.dashboardhideunits = res[1].dashboardhideunits;
+
+
+        // Calendar Events     
+        this.rolepermissionData.calviewevents = res[2].calviewevents;
+        this.rolepermissionData.calcreateevents = res[2].calcreateevents;
+        this.rolepermissionData.caleditevents = res[2].caleditevents;
+        this.rolepermissionData.caldeleteevents = res[2].caldeleteevents;
+
+
+        // Calendar Services
+        this.rolepermissionData.calviewservices = res[3].calviewservices;
+        this.rolepermissionData.calcreateservices = res[3].calcreateservices;
+        this.rolepermissionData.caleditservices = res[3].caleditservices;
+        this.rolepermissionData.caldeleteservices = res[3].caldeleteservices;
+
+        // Calendar Alarm      
+        this.rolepermissionData.calviewalarm = res[4].calviewalarm;
+        this.rolepermissionData.calcreatealarm = res[4].calcreatealarm;
+        this.rolepermissionData.caleditalarm = res[4].caleditalarm;
+        this.rolepermissionData.caldeletealarm = res[4].caldeletealarm;
+
+
+        // Units Unit List
+
+        this.rolepermissionData.univiewlist = res[5].univiewlist;
+        this.rolepermissionData.unicreatelist = res[5].unicreatelist;
+        this.rolepermissionData.unieditlist = res[5].unieditlist;
+        this.rolepermissionData.unideletelist = res[5].unideletelist;
+        // Units Alaram
+
+        this.rolepermissionData.univiewalarm = res[6].univiewalarm;
+        this.rolepermissionData.unicreatealarm = res[6].unicreatealarm;
+        this.rolepermissionData.unieditalarm = res[6].unieditalarm;
+        this.rolepermissionData.unideletealarm = res[6].unideletealarm;
+        // Units Services Info
+
+        this.rolepermissionData.univiewservices = res[7].univiewservices;
+        this.rolepermissionData.unicreateservices = res[7].unicreateservices;
+        this.rolepermissionData.unieditservices = res[7].unieditservices;
+        this.rolepermissionData.unideleteservices = res[7].unideleteservices;
+        // Units Comments
+
+        this.rolepermissionData.univiewcomm = res[8].univiewcomm;
+        this.rolepermissionData.unicreatecomm = res[8].unicreatecomm;
+        this.rolepermissionData.unieditcomm = res[8].unieditcomm;
+        this.rolepermissionData.unideletecomm = res[8].unideletecomm;
+        // Units Unit Group
+
+        this.rolepermissionData.univiewgroup = res[9].univiewgroup;
+        this.rolepermissionData.unicreategroup = res[9].unicreategroup;
+        this.rolepermissionData.unieditgroup = res[9].unieditgroup;
+        this.rolepermissionData.unideletegroup = res[9].unideletegroup;
+
+        // Units Generator Model Managment
+
+        this.rolepermissionData.univiewgmm = res[10].univiewgmm;
+        this.rolepermissionData.unicreategmm = res[10].unicreategmm;
+        this.rolepermissionData.unieditgmm = res[10].unieditgmm;
+        this.rolepermissionData.unideletegmm = res[10].unideletegmm;
+        // Reports
+
+        this.rolepermissionData.viewreports = res[11].viewreports;
+        this.rolepermissionData.createreports = res[11].createreports;
+        this.rolepermissionData.editreports = res[11].editreports;
+        this.rolepermissionData.deletereports = res[11].deletereports;
+
+        // Message Inbox
+
+        this.rolepermissionData.msgviewinbox = res[12].msgviewinbox;
+        this.rolepermissionData.msgcreateinbox = res[12].msgcreateinbox;
+        this.rolepermissionData.msgeditinbox = res[12].msgeditinbox;
+        this.rolepermissionData.msgdeleteinbox = res[12].msgdeleteinbox;
+        // Message Sent
+        this.rolepermissionData.msgviewsent = res[13].msgviewsent;
+        this.rolepermissionData.msgcreatesent = res[13].msgcreatesent;
+        this.rolepermissionData.msgeditsent = res[13].msgeditsent;
+        this.rolepermissionData.msgdeletesent = res[13].msgdeletesent;
+
+        // Settings My Account      
+        this.rolepermissionData.setviewmyacc = res[14].setviewmyacc;
+        this.rolepermissionData.setcreatemyacc = res[14].setcreatemyacc;
+        this.rolepermissionData.seteditmyacc = res[14].seteditmyacc;
+        this.rolepermissionData.setdeletemyacc = res[14].setdeletemyacc;
+        // Settings User List
+
+
+        this.rolepermissionData.setviewuselst = res[15].setviewuselst;
+        this.rolepermissionData.setcreateuselst = res[15].setcreateuselst;
+        this.rolepermissionData.setedituselst = res[15].setedituselst;
+        this.rolepermissionData.setdeleteuselst = res[15].setdeleteuselst;
+        // Settings User Group
+
+        this.rolepermissionData.setviewusegru = res[16].setviewusegru;
+        this.rolepermissionData.setcreateusegru = res[16].setcreateusegru;
+        this.rolepermissionData.seteditusegru = res[16].seteditusegru;
+        this.rolepermissionData.setdeleteusegru = res[16].setdeleteusegru;
+        // Settings User Role
+
+        this.rolepermissionData.setviewuserle = res[17].setviewuserle;
+        this.rolepermissionData.setcreateuserle = res[17].setcreateuserle;
+        this.rolepermissionData.setedituserle = res[17].setedituserle;
+        this.rolepermissionData.setdeleteuserle = res[17].setdeleteuserle;
+        // Settings Report Template
+
+        this.rolepermissionData.setviewtmp = res[18].setviewtmp;
+        this.rolepermissionData.setcreatetmp = res[18].setcreatetmp;
+        this.rolepermissionData.setedittmp = res[18].setedittmp;
+        this.rolepermissionData.setdeletetmp = res[18].setdeletetmp;
+        // Settings Org Chart
+        this.rolepermissionData.setvieworg = res[19].setvieworg;
+        this.rolepermissionData.setcreateorg = res[19].setcreateorg;
+        this.rolepermissionData.seteditorg = res[19].seteditorg;
+        this.rolepermissionData.setdeleteorg = res[19].setdeleteorg;
+        
+
+        console.log("dashboardviewmap:" + res[1].dashboardviewunits);
+
+        console.log("Role Permission Data Response:" + JSON.stringify(data.json()));
+
+      });
   }
 
 
@@ -398,7 +542,7 @@ export class AddrolePage {
   // existing record
   saveEntry() {
     // console.log("Controll Form is:"+JSON.stringify(this.form.controls));
-    this.roleperMissionData=[];
+    this.roleperMissionData = [];
     let role_name: string = this.form.controls["role_name"].value;
 
 

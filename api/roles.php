@@ -700,5 +700,434 @@ echo $e->getMessage();
          }
 
       break;
+
+       case "permissiondata":
+         // Sanitise supplied record ID for matching to table record        
+         $role_id   =  filter_var($_REQUEST['role_id'], FILTER_SANITIZE_NUMBER_INT); 
+          try {
+        $stmt    = $pdo->query("SELECT module_name,page_name,view_action,create_action,edit_action,delete_action,hide_action FROM role_permissions where role_id=' $role_id'");
+        while($row  = $stmt->fetch(PDO::FETCH_OBJ))
+        {  
+            $module_name=$row->module_name;
+            $page_name=$row->page_name;
+            // Dashboard Map
+            if($module_name=='Dashboard' && $page_name=='Map'){
+                 $row->dashboardviewmap=false; 
+                if($row->view_action==1){
+                        $row->dashboardviewmap=true; 
+                }
+                 $row->dashboardcreatemap=false; 
+                if($row->create_action==1){
+                        $row->dashboardcreatemap=true; 
+                } 
+                 $row->dashboardeditmap=false; 
+                if($row->edit_action==1){
+                        $row->dashboardeditmap=true; 
+                } 
+                 $row->dashboarddeletemap=false; 
+                if($row->delete_action==1){
+                        $row->dashboarddeletemap=true; 
+                } 
+
+                 $row->dashboardhidemap=false; 
+                if($row->hide_action==1){
+                        $row->dashboardhidemap=true; 
+                }
+            }
+// Dashboard Units
+
+            if($module_name=='Dashboard' && $page_name=='Units'){
+                 $row->dashboardviewunits=false; 
+                if($row->view_action==1){
+                        $row->dashboardviewunits=true; 
+                }
+                 $row->dashboardcreateunits=false; 
+                if($row->create_action==1){
+                        $row->dashboardcreateunits=true; 
+                } 
+                 $row->dashboardeditunits=false; 
+                if($row->edit_action==1){
+                        $row->dashboardeditunits=true; 
+                } 
+                 $row->dashboarddeleteunits=false; 
+                if($row->delete_action==1){
+                        $row->dashboarddeleteunits=true; 
+                } 
+
+                 $row->dashboardhideunits=false; 
+                if($row->hide_action==1){
+                        $row->dashboardhideunits=true; 
+                }
+            }
+
+
+      // Calendar Events
+
+            if($module_name=='Calendar' && $page_name=='Events'){
+                 $row->calviewevents=false; 
+                if($row->view_action==1){
+                        $row->calviewevents=true; 
+                }
+                 $row->calcreateevents=false; 
+                if($row->create_action==1){
+                        $row->calcreateevents=true; 
+                } 
+                 $row->caleditevents=false; 
+                if($row->edit_action==1){
+                        $row->caleditevents=true; 
+                } 
+                 $row->caldeleteevents=false; 
+                if($row->delete_action==1){
+                        $row->caldeleteevents=true; 
+                }                 
+            }
+
+      // Calendar Services
+            if($module_name=='Calendar' && $page_name=='Services'){
+                 $row->calviewservices=false; 
+                if($row->view_action==1){
+                        $row->calviewservices=true; 
+                }
+                 $row->calcreateservices=false; 
+                if($row->create_action==1){
+                        $row->calcreateservices=true; 
+                } 
+                 $row->caleditservices=false; 
+                if($row->edit_action==1){
+                        $row->caleditservices=true; 
+                } 
+                 $row->caldeleteservices=false; 
+                if($row->delete_action==1){
+                        $row->caldeleteservices=true; 
+                }                 
+            }
+      // Calendar Alarm
+            if($module_name=='Calendar' && $page_name=='Alarm'){
+                 $row->calviewalarm=false; 
+                if($row->view_action==1){
+                        $row->calviewalarm=true; 
+                }
+                 $row->calcreatealarm=false; 
+                if($row->create_action==1){
+                        $row->calcreatealarm=true; 
+                } 
+                 $row->caleditalarm=false; 
+                if($row->edit_action==1){
+                        $row->caleditalarm=true; 
+                } 
+                 $row->caldeletealarm=false; 
+                if($row->delete_action==1){
+                        $row->caldeletealarm=true; 
+                }                 
+            }
+
+ // Units Units Listing
+            if($module_name=='Units' && $page_name=='Units Listing'){
+                 $row->univiewlist=false; 
+                if($row->view_action==1){
+                        $row->univiewlist=true; 
+                }
+                 $row->unicreatelist=false; 
+                if($row->create_action==1){
+                        $row->unicreatelist=true; 
+                } 
+                 $row->unieditlist=false; 
+                if($row->edit_action==1){
+                        $row->unieditlist=true; 
+                } 
+                 $row->unideletelist=false; 
+                if($row->delete_action==1){
+                        $row->unideletelist=true; 
+                }                 
+            }
+
+// Units Alarm
+            if($module_name=='Units' && $page_name=='Alarm'){
+                 $row->univiewalarm=false; 
+                if($row->view_action==1){
+                        $row->univiewalarm=true; 
+                }
+                 $row->unicreatealarm=false; 
+                if($row->create_action==1){
+                        $row->unicreatealarm=true; 
+                } 
+                 $row->unieditalarm=false; 
+                if($row->edit_action==1){
+                        $row->unieditalarm=true; 
+                } 
+                 $row->unideletealarm=false; 
+                if($row->delete_action==1){
+                        $row->unideletealarm=true; 
+                }                 
+            }
+// Units Servicing Info
+            if($module_name=='Units' && $page_name=='Servicing Info'){
+                 $row->univiewservices=false; 
+                if($row->view_action==1){
+                        $row->univiewservices=true; 
+                }
+                 $row->unicreateservices=false; 
+                if($row->create_action==1){
+                        $row->unicreateservices=true; 
+                } 
+                 $row->unieditservices=false; 
+                if($row->edit_action==1){
+                        $row->unieditservices=true; 
+                } 
+                 $row->unideleteservices=false; 
+                if($row->delete_action==1){
+                        $row->unideleteservices=true; 
+                }                 
+            }
+
+// Units Comments
+            if($module_name=='Units' && $page_name=='Comments'){
+                 $row->univiewcomm=false; 
+                if($row->view_action==1){
+                        $row->univiewcomm=true; 
+                }
+                 $row->unicreatecomm=false; 
+                if($row->create_action==1){
+                        $row->unicreatecomm=true; 
+                } 
+                 $row->unieditcomm=false; 
+                if($row->edit_action==1){
+                        $row->unieditcomm=true; 
+                } 
+                 $row->unideletecomm=false; 
+                if($row->delete_action==1){
+                        $row->unideletecomm=true; 
+                }                 
+            }
+
+// Units Unit Group
+            if($module_name=='Units' && $page_name=='Unit Group'){
+                 $row->univiewgroup=false; 
+                if($row->view_action==1){
+                        $row->univiewgroup=true; 
+                }
+                 $row->unicreategroup=false; 
+                if($row->create_action==1){
+                        $row->unicreategroup=true; 
+                } 
+                 $row->unieditgroup=false; 
+                if($row->edit_action==1){
+                        $row->unieditgroup=true; 
+                } 
+                 $row->unideletegroup=false; 
+                if($row->delete_action==1){
+                        $row->unideletegroup=true; 
+                }                 
+            }
+
+// Units Generator Model Management
+            if($module_name=='Units' && $page_name=='Generator Model Management'){
+                 $row->univiewgmm=false; 
+                if($row->view_action==1){
+                        $row->univiewgmm=true; 
+                }
+                 $row->unicreategmm=false; 
+                if($row->create_action==1){
+                        $row->unicreategmm=true; 
+                } 
+                 $row->unieditgmm=false; 
+                if($row->edit_action==1){
+                        $row->unieditgmm=true; 
+                } 
+                 $row->unideletegmm=false; 
+                if($row->delete_action==1){
+                        $row->unideletegmm=true; 
+                }                 
+            }
+// Reports Reports
+            if($module_name=='Reports' && $page_name=='Reports'){
+                 $row->viewreports=false; 
+                if($row->view_action==1){
+                        $row->viewreports=true; 
+                }
+                 $row->createreports=false; 
+                if($row->create_action==1){
+                        $row->createreports=true; 
+                } 
+                 $row->editreports=false; 
+                if($row->edit_action==1){
+                        $row->editreports=true; 
+                } 
+                 $row->deletereports=false; 
+                if($row->delete_action==1){
+                        $row->deletereports=true; 
+                }                 
+            }
+
+// Messages Inbox
+            if($module_name=='Messages' && $page_name=='Inbox'){
+                 $row->msgviewinbox=false; 
+                if($row->view_action==1){
+                        $row->msgviewinbox=true; 
+                }
+                 $row->msgcreateinbox=false; 
+                if($row->create_action==1){
+                        $row->msgcreateinbox=true; 
+                } 
+                 $row->msgeditinbox=false; 
+                if($row->edit_action==1){
+                        $row->msgeditinbox=true; 
+                } 
+                 $row->msgdeleteinbox=false; 
+                if($row->delete_action==1){
+                        $row->msgdeleteinbox=true; 
+                }                 
+            }
+// Messages Sent
+            if($module_name=='Messages' && $page_name=='Sent'){
+                 $row->msgviewsent=false; 
+                if($row->view_action==1){
+                        $row->msgviewsent=true; 
+                }
+                 $row->msgcreatesent=false; 
+                if($row->create_action==1){
+                        $row->msgcreatesent=true; 
+                } 
+                 $row->msgeditsent=false; 
+                if($row->edit_action==1){
+                        $row->msgeditsent=true; 
+                } 
+                 $row->msgdeletesent=false; 
+                if($row->delete_action==1){
+                        $row->msgdeletesent=true; 
+                }                 
+            }
+// Settings My Account
+            if($module_name=='Settings' && $page_name=='My Account'){
+                 $row->setviewmyacc=false; 
+                if($row->view_action==1){
+                        $row->setviewmyacc=true; 
+                }
+                 $row->setcreatemyacc=false; 
+                if($row->create_action==1){
+                        $row->setcreatemyacc=true; 
+                } 
+                 $row->seteditmyacc=false; 
+                if($row->edit_action==1){
+                        $row->seteditmyacc=true; 
+                } 
+                 $row->setdeletemyacc=false; 
+                if($row->delete_action==1){
+                        $row->setdeletemyacc=true; 
+                }                 
+            }
+
+// Settings User List
+            if($module_name=='Settings' && $page_name=='User List'){
+                 $row->setviewuselst=false; 
+                if($row->view_action==1){
+                        $row->setviewuselst=true; 
+                }
+                 $row->setcreateuselst=false; 
+                if($row->create_action==1){
+                        $row->setcreateuselst=true; 
+                } 
+                 $row->setedituselst=false; 
+                if($row->edit_action==1){
+                        $row->setedituselst=true; 
+                } 
+                 $row->setdeleteuselst=false; 
+                if($row->delete_action==1){
+                        $row->setdeleteuselst=true; 
+                }                 
+            }
+
+// Settings User List
+            if($module_name=='Settings' && $page_name=='User Group'){
+                 $row->setviewusegru=false; 
+                if($row->view_action==1){
+                        $row->setviewusegru=true; 
+                }
+                 $row->setcreateusegru=false; 
+                if($row->create_action==1){
+                        $row->setcreateusegru=true; 
+                } 
+                 $row->seteditusegru=false; 
+                if($row->edit_action==1){
+                        $row->seteditusegru=true; 
+                } 
+                 $row->setdeleteusegru=false; 
+                if($row->delete_action==1){
+                        $row->setdeleteusegru=true; 
+                }                 
+            }
+// Settings User Role
+            if($module_name=='Settings' && $page_name=='User Role'){
+                 $row->setviewuserle=false; 
+                if($row->view_action==1){
+                        $row->setviewuserle=true; 
+                }
+                 $row->setcreateuserle=false; 
+                if($row->create_action==1){
+                        $row->setcreateuserle=true; 
+                } 
+                 $row->setedituserle=false; 
+                if($row->edit_action==1){
+                        $row->setedituserle=true; 
+                } 
+                 $row->setdeleteuserle=false; 
+                if($row->delete_action==1){
+                        $row->setdeleteuserle=true; 
+                }                 
+            }
+// Settings Report Template
+            if($module_name=='Settings' && $page_name=='Report Template'){
+                 $row->setviewtmp=false; 
+                if($row->view_action==1){
+                        $row->setviewtmp=true; 
+                }
+                 $row->setcreatetmp=false; 
+                if($row->create_action==1){
+                        $row->setcreatetmp=true; 
+                } 
+                 $row->setedittmp=false; 
+                if($row->edit_action==1){
+                        $row->setedittmp=true; 
+                } 
+                 $row->setdeletetmp=false; 
+                if($row->delete_action==1){
+                        $row->setdeletetmp=true; 
+                }                 
+            }
+// Settings Org Chart
+            if($module_name=='Settings' && $page_name=='Org Chart'){
+                 $row->setvieworg=false; 
+                if($row->view_action==1){
+                        $row->setvieworg=true; 
+                }
+                 $row->setcreateorg=false; 
+                if($row->create_action==1){
+                        $row->setcreateorg=true; 
+                } 
+                 $row->seteditorg=false; 
+                if($row->edit_action==1){
+                        $row->seteditorg=true; 
+                } 
+                 $row->setdeleteorg=false; 
+                if($row->delete_action==1){
+                        $row->setdeleteorg=true; 
+                }                 
+            }
+        $data[] = $row;
+        }
+
+        // Return data as JSON
+        echo json_encode($data);
+        }
+        catch(PDOException $e)
+        {
+        echo $e->getMessage();
+        }
+
+
+      break;
+
+      
+
    }
 ?>
