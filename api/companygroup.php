@@ -95,7 +95,7 @@
         $number_of_rows = $result->fetchColumn(); 
 
 
-        $stmt    = $pdo->query("SELECT companygroup_id,companygroup_name,country,address,contact,totaluser,totalunit FROM companygroups where ".$wheredate." ".$orderby." ".$limit);
+        $stmt    = $pdo->query("SELECT companygroup_id,companygroup_name,country,address,contact FROM companygroups where ".$wheredate." ".$orderby." ".$limit);
         while($row  = $stmt->fetch(PDO::FETCH_OBJ))
         {
         // Assign each row of data to associative array
