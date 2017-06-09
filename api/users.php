@@ -53,25 +53,10 @@ print_r($_REQUEST);
         try {
 
                 // Insert into user table
-                $sql  = "INSERT INTO users(username, password,role,hashtag,createdby,createdon) VALUES(:username, :password, :role, :hashtag,:createdby,:createdon)";
-                $stmt    = $pdo->prepare($sql);
-                $stmt->execute(
-                array(
-                ":username" => $username,
-                ":password" => $password,
-                ":role" => $role,
-                ":hashtag" => $hashtag,
-                ":createdby" => $createdby_updatedby,
-                ":createdon" =>$createdon_updatedon
-                )
-                );
-
-               // $insertId = $stmt->fetch(PDO::FETCH_ASSOC);
-                $user_id=$pdo->lastInsertId();
                
 
-                $first_name       = filter_var($_REQUEST['first_name'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
-                $last_name   = filter_var($_REQUEST['last_name'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
+                 $firstname       = filter_var($_REQUEST['firstname'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
+                $lastname   = filter_var($_REQUEST['lastname'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
                 $email   = filter_var($_REQUEST['email'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
                 $country   = filter_var($_REQUEST['country'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
                 $contact   = filter_var($_REQUEST['contact'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
@@ -80,13 +65,13 @@ print_r($_REQUEST);
                 $report_to   = filter_var($_REQUEST['report_to'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
                 $company_group   = filter_var($_REQUEST['company_group'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
                 // Insert into userdetails table
-                $sql  = "INSERT INTO userdetails(user_id, first_name,last_name,email,country,contact,photo,job_position,report_to,company_group) VALUES(:user_id, :first_name, :last_name, :email,:country,:contact,:photo,:job_position,:report_to,:company_group)";
+                $sql  = "INSERT INTO staffs(firstname,lastname,email,coucountry_idntry,contact_number,photo,job_position,report_to,company_id) VALUES(:user_id, :firstname, :lastname, :email,:country,:contact,:photo,:job_position,:report_to,:company_group)";
                 $stmt    = $pdo->prepare($sql);
                 $stmt->execute(
                 array(
                     ":user_id" => $user_id,
-                    ":first_name" => $first_name,
-                    ":last_name" => $last_name,
+                    ":firstname" => $firstname,
+                    ":lastname" => $lastname,
                     ":email" => $email,
                     ":country" => $country,
                     ":contact" =>$contact,
@@ -96,6 +81,20 @@ print_r($_REQUEST);
                     ":company_group" =>$company_group
                 )
                 );
+
+               // $insertId = $stmt->fetch(PDO::FETCH_ASSOC);
+                $staff_id=$pdo->lastInsertId();
+               
+ $sql  = "INSERT INTO users(username, password,staff_id) VALUES(:username, :password,:staff_id)";
+                $stmt    = $pdo->prepare($sql);
+                $stmt->execute(
+                array(
+                ":username" => $username,
+                ":password" => $password,
+                ":staff_id" => $staff_id
+                )
+                );
+               
                 echo json_encode(array('message' => 'Congratulations the record ' . $companygroup_name . ' was added to the database'));
         }
         // Catch any errors in running the prepared statement
@@ -120,23 +119,19 @@ print_r($_REQUEST);
         }
         
         $limit="limit ".$startIndex.",".$results;
-        $wheredate="u.user_id=ud.user_id and ud.company_group=cg.companygroup_id";  
-       // echo "select u.username,ud.first_name,ud.last_name,ud.email,cg.companygroup_name from users as u,userdetails as ud,companygroups as cg where ".$wheredate." ".$orderby." ".$limit;      
+        $wheredate="";  
+       // echo "select u.username,ud.firstname,ud.lastname,ud.email,cg.companygroup_name from users as u,userdetails as ud,companygroups as cg where ".$wheredate." ".$orderby." ".$limit;      
         try {
 
-        //$sql = "SELECT count(*) as totalCount FROM companygroups"; 
-        $sql = "select count(*) from users as u,userdetails as ud,companygroups as cg where ".$wheredate; 
-        $result = $pdo->prepare($sql); 
-        $result->execute(); 
-        $number_of_rows = $result->fetchColumn(); 
+       
+//echo "select u.user_id as userid,u.username,u.password,cg.companygroup_name from users as u,companygroups as cg ".$wheredate." ".$orderby." ".$limit;exit;
 
-
-        $stmt    = $pdo->query("select u.user_id as userid,ud.id as userdetailsid,u.username,u.password,ud.first_name,ud.last_name,ud.email,ud.contact,ud.country,ud.photo,ud.job_position,ud.report_to,ud.company_group,cg.companygroup_name from users as u,userdetails as ud,companygroups as cg where ".$wheredate." ".$orderby." ".$limit);
+        $stmt    = $pdo->query("select u.user_id as userid,u.username,u.password,cg.companygroup_name from users as u,companygroups as cg ".$wheredate." ".$orderby." ".$limit);
         while($row  = $stmt->fetch(PDO::FETCH_OBJ))
         {
         // Assign each row of data to associative array
 
-        $row->totalCount=$number_of_rows;
+       
         $data[] = $row;
         }
 
@@ -150,9 +145,9 @@ print_r($_REQUEST);
     break;
 
     case "all": 
-       // echo "select u.username,ud.first_name,ud.last_name,ud.email,cg.companygroup_name from users as u,userdetails as ud,companygroups as cg where ".$wheredate." ".$orderby." ".$limit;      
+       // echo "select u.username,ud.firstname,ud.lastname,ud.email,cg.companygroup_name from users as u,userdetails as ud,companygroups as cg where ".$wheredate." ".$orderby." ".$limit;      
         try {
-        $stmt    = $pdo->query("select u.user_id,u.username,ud.first_name,ud.last_name,ud.email from users as u,userdetails as ud where u.user_id=ud.user_id");
+        $stmt    = $pdo->query("select u.user_id,u.username,ud.firstname,ud.lastname,ud.email from users as u,staffs as ud where u.user_id=ud.staff_id");
         while($row  = $stmt->fetch(PDO::FETCH_OBJ))
         {
         // Assign each row of data to associative array
@@ -197,8 +192,8 @@ print_r($_REQUEST);
             $stmt->execute();
  //print_r($stmt);
 
-            $first_name       = filter_var($_REQUEST['first_name'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
-            $last_name   = filter_var($_REQUEST['last_name'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
+            $firstname       = filter_var($_REQUEST['firstname'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
+            $lastname   = filter_var($_REQUEST['lastname'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
             $email   = filter_var($_REQUEST['email'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
             $country   = filter_var($_REQUEST['country'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
             $contact   = filter_var($_REQUEST['contact'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
@@ -207,11 +202,11 @@ print_r($_REQUEST);
             $report_to   = filter_var($_REQUEST['report_to'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
             $company_group   = filter_var($_REQUEST['company_group'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
 
-            $sql  = "UPDATE userdetails SET first_name = :first_name, last_name = :last_name, email = :email, country = :country, contact = :contact, photo = :photo,job_position=:job_position,report_to=:report_to,company_group=:company_group WHERE user_id = :user_id";
+            $sql  = "UPDATE staffs SET firstname = :firstname, lastname = :lastname, email = :email, country = :country, contact = :contact, photo = :photo,job_position=:job_position,report_to=:report_to,company_group=:company_group WHERE user_id = :user_id";
             //exit;
             $stmt =  $pdo->prepare($sql);
-            $stmt->bindParam(':first_name', $first_name, PDO::PARAM_STR);
-            $stmt->bindParam(':last_name', $last_name, PDO::PARAM_STR);
+            $stmt->bindParam(':firstname', $firstname, PDO::PARAM_STR);
+            $stmt->bindParam(':lastname', $lastname, PDO::PARAM_STR);
             $stmt->bindParam(':email', $email, PDO::PARAM_STR);
             $stmt->bindParam(':country', $country, PDO::PARAM_STR);
             $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
@@ -251,7 +246,7 @@ print_r($_REQUEST);
             $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
             $stmt->execute();
 
-            $sql  = "DELETE FROM userdetails WHERE user_id = :user_id";
+            $sql  = "DELETE FROM staffs WHERE user_id = :user_id";
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
             $stmt->execute();
@@ -272,7 +267,7 @@ print_r($_REQUEST);
         $email   = filter_var($_REQUEST['email'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
         // Attempt to run PDO prepared statement
         try {
-                $sql = "select count(*) from userdetails where email='$email'"; 
+                $sql = "select count(*) from staffs where email='$email'"; 
                 $result = $pdo->prepare($sql); 
                 $result->execute(); 
                 $number_of_rows = $result->fetchColumn(); 
@@ -317,12 +312,12 @@ case "usernameexist":
 
          case "myaccount":
             $userId=$_REQUEST['userId'];       
-            $wheredate="u.user_id=ud.user_id and ud.company_group=cg.companygroup_id and u.user_id='$userId'";  
+            $wheredate="u.user_id=ud.staff_id and ud.company_id=cg.companygroup_id and u.user_id='$userId'";  
         try {
-            $stmt    = $pdo->query("select u.user_id as userid,ud.id as userdetailsid,u.username,u.password,ud.first_name,ud.last_name,ud.email,ud.contact,ud.country,ud.photo,ud.job_position,ud.report_to,ud.company_group,cg.companygroup_name from users as u,userdetails as ud,companygroups as cg where ".$wheredate);
+            $stmt    = $pdo->query("select u.user_id as userid,ud.staff_id as userdetailsid,u.username,u.password,ud.firstname,ud.lastname,ud.email,ud.contact_number,ud.country_id,ud.photo,ud.job_position,ud.report_to,ud.company_id,cg.companygroup_name from users as u,staffs as ud,companygroups as cg where ".$wheredate);
             $row  = $stmt->fetch(PDO::FETCH_OBJ);
 
-            $sql = "select country_name from countries where id=". $row->country; 
+           /* $sql = "select country_name from countries where id=". $row->country; 
             $result = $pdo->prepare($sql); 
             $result->execute(); 
             $country_name = $result->fetchColumn(); 
@@ -339,6 +334,7 @@ case "usernameexist":
             $result->execute(); 
             $account_name = $result->fetchColumn(); 
             $row->report_to=$account_name;
+            */
 
             $data[] = $row;
             echo json_encode($data);

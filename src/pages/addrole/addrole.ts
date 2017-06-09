@@ -289,7 +289,7 @@ export class AddrolePage {
   // used as models on the page's HTML form
   selectEntry(item) {
     this.role_name = item.role_name;
-    this.recordID = item.id;
+    this.recordID = item.role_id;
     let body: string = "key=permissiondata&role_id=" + this.recordID,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),

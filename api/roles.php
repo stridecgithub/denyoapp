@@ -596,7 +596,7 @@ echo $e->getMessage();
         $number_of_rows = $result->fetchColumn(); 
 
 
-        $stmt    = $pdo->query("SELECT id,role_name FROM roles where ".$wheredate." ".$orderby." ".$limit);
+        $stmt    = $pdo->query("SELECT role_id,role_name FROM roles where ".$wheredate." ".$orderby." ".$limit);
         while($row  = $stmt->fetch(PDO::FETCH_OBJ))
         {
         // Assign each row of data to associative array
@@ -619,7 +619,7 @@ echo $e->getMessage();
         try {      
 
 
-        $stmt    = $pdo->query("SELECT id,role_name FROM roles");
+        $stmt    = $pdo->query("SELECT role_id,role_name FROM roles");
         while($row  = $stmt->fetch(PDO::FETCH_OBJ))
         {        
         $data[] = $row;
@@ -647,12 +647,12 @@ echo $e->getMessage();
          try {    
 
 
-              $sql = "select count(*) from roles where role_name='$role_name' and id!='$recordID'"; 
+              $sql = "select count(*) from roles where role_name='$role_name' and role_id!='$recordID'"; 
                 $result = $pdo->prepare($sql); 
                 $result->execute(); 
                 $number_of_rows = $result->fetchColumn(); 
                 if($number_of_rows==0){         
-            $sql  = "UPDATE roles SET role_name = :role_name, updatedby = :updatedby, updatedon = :updatedon WHERE id = :id";
+            $sql  = "UPDATE roles SET role_name = :role_name, updatedby = :updatedby, updatedon = :updatedon WHERE role_id = :id";
             //exit;
                 $stmt =  $pdo->prepare($sql);
                 $stmt->bindParam(':role_name', $role_name, PDO::PARAM_STR);               
@@ -1184,7 +1184,7 @@ $stmt->execute();
          // Attempt to run PDO prepared statement
          try {
             $pdo  = new PDO($dsn, $un, $pwd);
-            $sql  = "DELETE FROM roles WHERE id = :id";
+            $sql  = "DELETE FROM roles WHERE role_id = :id";
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->execute();

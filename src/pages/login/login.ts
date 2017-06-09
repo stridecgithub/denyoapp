@@ -1,10 +1,11 @@
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 //import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { TabsPage } from '../tabs/tabs';
 import { LoadingController } from 'ionic-angular';
 import { Http, Headers, RequestOptions } from '@angular/http';
+import { Md5 } from 'ts-md5/dist/md5';
 /**
  * Generated class for the LoginPage page.
  *f
@@ -21,7 +22,7 @@ export class LoginPage {
   public userId: any;
   public passWrd: any;
   public userInf: any;
-  private apiServiceURL: string = "http://denyoappv2.stridecdev.com/";
+  private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   constructor(public fb: FormBuilder, private http: Http, public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController, public loadingCtrl: LoadingController) {
     this.userInf = localStorage.getItem("userInfoId");
     console.log("UserId Localtorage" + this.userInf);
@@ -32,44 +33,62 @@ export class LoginPage {
     this.form = fb.group({
       "userid": ["", Validators.required],
       "password": ["", Validators.required]
-    });   
+    });
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
+    console.log(Md5.hashStr('kannan'));
   }
 
 
 
   loginEntry(username, password) {
     this.presentLoading(1);
-    let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+    /* let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+       headers: any = new Headers({ 'Content-Type': type }),
+       options: any = new RequestOptions({ headers: headers }),
+       url: any = this.apiServiceURL + "/checklogin?username=" + username + "&password=" + password+ "&isapp=1";*/
+    let res;
+
+    let body: string = "username=" + username + "&password=" + password + "&isapp=1",
+      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "api/login.php?username=" + username + "&password=" + password;
-    let res;
-    this.http.get(url, options)
+      url: any = this.apiServiceURL + "/checklogin";
+
+    this.http.post(url, body, options)
       .subscribe(data => {
+        console.log(data.json());
+        console.log(JSON.stringify(data.json()));
         res = data.json();
-        if (res[0].err == 'Invalid') {
+        //console.log("1" + res[0].msg[0]['result']);
+        //console.log("2" + res.msg['result']);
+       // console.log("3" + res[0].msg['result']);
+        console.log("4" + res.msg[0]['result']);
+
+        if  (res.msg[0]['result'] == 'failed') {
           this.sendNotification('Username or password are invalid try again');
           this.presentLoading(0);
           return false;
         } else {
           res = data.json();
-          console.log(res[0].id);
-          console.log(res[0].username);
-          console.log(res[0].email);
+          console.log(res['staffdetails'][0].user_id);
+          console.log(res['staffdetails'][0].firstname);
+          console.log(res['staffdetails'][0].email);
           console.log("1" + data);
           console.log("2" + JSON.stringify(data.json()));
-          localStorage.setItem("userInfoId", res[0].id);
-          localStorage.setItem("userInfoName", res[0].username);
-          localStorage.setItem("userInfoEmail", res[0].email);
+          localStorage.setItem("userInfo", res['staffdetails'][0]);
+          localStorage.setItem("userInfoId", res['staffdetails'][0].user_id);
+          localStorage.setItem("userInfoName", res['staffdetails'][0].firstname);
+          localStorage.setItem("userInfoEmail", res['staffdetails'][0].email);
           this.presentLoading(0);
           this.navCtrl.push(TabsPage);
         }
 
       });
+    console.log('3');
+    this.presentLoading(0);
   }
 
 
