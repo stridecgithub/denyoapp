@@ -85,7 +85,7 @@ print_r($_REQUEST);
                // $insertId = $stmt->fetch(PDO::FETCH_ASSOC);
                 $staff_id=$pdo->lastInsertId();
                
- $sql  = "INSERT INTO users(username, password,staff_id) VALUES(:username, :password,:staff_id)";
+ $sql  = "INSERT INTO userstmp(username, password,staff_id) VALUES(:username, :password,:staff_id)";
                 $stmt    = $pdo->prepare($sql);
                 $stmt->execute(
                 array(
@@ -120,13 +120,13 @@ print_r($_REQUEST);
         
         $limit="limit ".$startIndex.",".$results;
         $wheredate="";  
-       // echo "select u.username,ud.firstname,ud.lastname,ud.email,cg.companygroup_name from users as u,userdetails as ud,companygroups as cg where ".$wheredate." ".$orderby." ".$limit;      
+       // echo "select u.username,ud.firstname,ud.lastname,ud.email,cg.companygroup_name from userstmp as u,userdetails as ud,companygroups as cg where ".$wheredate." ".$orderby." ".$limit;      
         try {
 
        
-//echo "select u.user_id as userid,u.username,u.password,cg.companygroup_name from users as u,companygroups as cg ".$wheredate." ".$orderby." ".$limit;exit;
+//echo "select u.user_id as userid,u.username,u.password,cg.companygroup_name from userstmp as u,companygroups as cg ".$wheredate." ".$orderby." ".$limit;exit;
 
-        $stmt    = $pdo->query("select u.user_id as userid,u.username,u.password,cg.companygroup_name from users as u,companygroups as cg ".$wheredate." ".$orderby." ".$limit);
+        $stmt    = $pdo->query("select u.user_id as userid,u.username,u.password,cg.companygroup_name from userstmp as u,companygroups as cg ".$wheredate." ".$orderby." ".$limit);
         while($row  = $stmt->fetch(PDO::FETCH_OBJ))
         {
         // Assign each row of data to associative array
@@ -145,9 +145,9 @@ print_r($_REQUEST);
     break;
 
     case "all": 
-       // echo "select u.username,ud.firstname,ud.lastname,ud.email,cg.companygroup_name from users as u,userdetails as ud,companygroups as cg where ".$wheredate." ".$orderby." ".$limit;      
+       // echo "select u.username,ud.firstname,ud.lastname,ud.email,cg.companygroup_name from userstmp as u,userdetails as ud,companygroups as cg where ".$wheredate." ".$orderby." ".$limit;      
         try {
-        $stmt    = $pdo->query("select u.user_id,u.username,ud.firstname,ud.lastname,ud.email from users as u,staffs as ud where u.user_id=ud.staff_id");
+        $stmt    = $pdo->query("select u.user_id,u.username,ud.firstname,ud.lastname,ud.email from userstmp as u,staffs as ud where u.user_id=ud.staff_id");
         while($row  = $stmt->fetch(PDO::FETCH_OBJ))
         {
         // Assign each row of data to associative array
@@ -179,7 +179,7 @@ print_r($_REQUEST);
 
          // Attempt to run PDO prepared statement
          try {             
-            $sql  = "UPDATE users SET username = :username, password = :password, role = :role, hashtag = :hashtag, updatedby = :updatedby, updatedon = :updatedon WHERE user_id = :user_id";
+            $sql  = "UPDATE userstmp SET username = :username, password = :password, role = :role, hashtag = :hashtag, updatedby = :updatedby, updatedon = :updatedon WHERE user_id = :user_id";
             //exit;
             $stmt =  $pdo->prepare($sql);
             $stmt->bindParam(':username', $username, PDO::PARAM_STR);
@@ -241,7 +241,7 @@ print_r($_REQUEST);
          // Attempt to run PDO prepared statement
          try {
             $pdo  = new PDO($dsn, $un, $pwd);
-            $sql  = "DELETE FROM users WHERE user_id = :user_id";
+            $sql  = "DELETE FROM userstmp WHERE user_id = :user_id";
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
             $stmt->execute();
@@ -261,7 +261,7 @@ print_r($_REQUEST);
          }
 
       break;
-      // EmailId already  users table
+      // EmailId already  userstmp table
         case "emailexist":
         // Sanitise URL supplied values       
         $email   = filter_var($_REQUEST['email'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
@@ -291,7 +291,7 @@ case "usernameexist":
         $username   = filter_var($_REQUEST['username'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
         // Attempt to run PDO prepared statement
         try {
-                $sql = "select count(*) from users where username='$username'"; 
+                $sql = "select count(*) from userstmp where username='$username'"; 
                 $result = $pdo->prepare($sql); 
                 $result->execute(); 
                 $number_of_rows = $result->fetchColumn(); 
@@ -314,22 +314,22 @@ case "usernameexist":
             $userId=$_REQUEST['userId'];       
             $wheredate="u.user_id=ud.staff_id and ud.company_id=cg.companygroup_id and u.user_id='$userId'";  
         try {
-            $stmt    = $pdo->query("select u.user_id as userid,ud.staff_id as userdetailsid,u.username,u.password,ud.firstname,ud.lastname,ud.email,ud.contact_number,ud.country_id,ud.photo,ud.job_position,ud.report_to,ud.company_id,cg.companygroup_name from users as u,staffs as ud,companygroups as cg where ".$wheredate);
+            $stmt    = $pdo->query("select u.user_id as userid,ud.staff_id as userdetailsid,u.username,u.password,ud.firstname,ud.lastname,ud.email,ud.contact_number,ud.country_id,ud.photo,ud.job_position,ud.report_to,ud.company_id,ud.role_id,cg.companygroup_name from userstmp as u,staffs as ud,companygroups as cg where ".$wheredate);
             $row  = $stmt->fetch(PDO::FETCH_OBJ);
 
-           /* $sql = "select country_name from countries where id=". $row->country; 
+            $sql = "select country_name from countries where id=". $row->country_id; 
             $result = $pdo->prepare($sql); 
             $result->execute(); 
             $country_name = $result->fetchColumn(); 
             $row->country=$country_name;
 
-            $sql = "select role_name from roles where id=". $row->role; 
+           $sql = "select role_name from roles where role_id=". $row->role_id; 
             $result = $pdo->prepare($sql); 
             $result->execute(); 
             $role_name = $result->fetchColumn(); 
             $row->role=$role_name;
-
-            $sql = "select username from users where user_id=". $row->report_to; 
+/*
+            $sql = "select username from userstmp where user_id=". $row->report_to; 
             $result = $pdo->prepare($sql); 
             $result->execute(); 
             $account_name = $result->fetchColumn(); 

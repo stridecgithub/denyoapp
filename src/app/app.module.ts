@@ -47,7 +47,15 @@ import { HttpModule } from '@angular/http';
   imports: [
     BrowserModule,
     HttpModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp, {
+      backButtonText: 'Go Back',
+      iconMode: 'ios',
+      modalEnter: 'modal-slide-in',
+      modalLeave: 'modal-slide-out',
+      tabsPlacement: 'bottom',
+      pageTransition: 'ios-transition',
+      tabSubPages:false//tabsHideOnSubPagestabsHideOnSubPages
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [

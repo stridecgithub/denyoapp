@@ -84,6 +84,8 @@
     <plugin name="cordova-plugin-compat" spec="^1.0.0" />
     <plugin name="cordova-plugin-console" spec="^1.0.5" />
     <plugin name="cordova-plugin-device" spec="^1.1.4" />
+    <plugin name="cordova-plugin-device-motion" spec="^1.2.5" />
+    <plugin name="cordova-plugin-device-orientation" spec="^1.0.7" />
     <plugin name="cordova-plugin-file" spec="^4.3.3" />
     <plugin name="cordova-plugin-file-transfer" spec="^1.6.3" />
     <plugin name="cordova-plugin-filechooser" spec="^1.0.1" />

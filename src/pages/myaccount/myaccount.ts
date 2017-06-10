@@ -27,6 +27,7 @@ export class MyaccountPage {
   public job_position: any;
   public accountcreatedby: any;
   public userId: any;
+  public item: any;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com/";
   constructor(public http: Http, public navCtrl: NavController, public navParams: NavParams, public nav: NavController) {
     this.pageTitle = 'My Account';
@@ -55,15 +56,20 @@ export class MyaccountPage {
         this.country = res[0].country;
         this.job_position = res[0].job_position;
         this.accountcreatedby = res[0].report_to;
+
+        // [{ "userid": "1", "userdetailsid": "1", "username": "denyov2", "password": "e3b81d385ca4c26109dfbda28c563e2b", "firstname": "Super Admin", "lastname": "Denyo", "email": "balamurugan@webneo.in", "contact_number": "9597645985", "country_id": "99", "photo": "1496647262537.jpg", "job_position": "Country Manager", "report_to": "0", "company_id": "1", "companygroup_name": "Denyo" }]
         if (res[0].photo) {
           this.photo = this.apiServiceURL + "api/uploads/users/" + res[0].photo;
         }
       });
+    
   }
-  doEdit(id){
-    this.nav.setRoot(EditprofilesteponePage, {       
-        user_id: id
-      }); 
+  doEdit(id) {
+    let act = 'myaccount'
+    this.nav.setRoot(EditprofilesteponePage, {
+      record: this.item,
+      act: act
+    });
   }
 
 }

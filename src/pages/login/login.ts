@@ -45,6 +45,8 @@ export class LoginPage {
 
   loginEntry(username, password) {
     this.presentLoading(1);
+     this.navCtrl.push(TabsPage);
+      this.presentLoading(0);
     /* let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
        headers: any = new Headers({ 'Content-Type': type }),
        options: any = new RequestOptions({ headers: headers }),

@@ -14,22 +14,23 @@ import { MyaccountPage } from '../pages/myaccount/myaccount';
 import { AddUnitPage } from '../pages/add-unit/add-unit';
 
 import { RolePage } from '../pages/role/role';
-
+import { App } from 'ionic-angular';
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-  
+
   rootPage: any = LoginPage;
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{ title: string, component: any }>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
+    public appCtrl: App) {
 
 
-     this.initializeApp();
+    this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
@@ -39,11 +40,11 @@ export class MyApp {
       { title: 'Company Group', component: CompanygroupPage },
       { title: 'Users', component: UserPage },
       { title: 'Role', component: RolePage },
-       { title: 'My Account', component: MyaccountPage },
+      { title: 'My Account', component: MyaccountPage },
       { title: 'Logout', component: LogoutPage },
-		  { title: 'Add Unit', component: AddUnitPage }
+      { title: 'Add Unit', component: AddUnitPage }
     ];
-   
+
   }
 
 
@@ -59,7 +60,15 @@ export class MyApp {
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
+    //this.nav.push(page.component);
+
+    //this.nav.getRootNav().push
+    //this.nav.getRootNav().push(page.component);
+
+    //this.viewCtrl.dismiss();
+     //this.nav.push(page.component);
+     this.nav.setRoot(page.component);
+   //this.appCtrl.getRootNav().setRoot(page.component);
   }
 }
 

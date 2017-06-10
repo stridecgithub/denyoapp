@@ -75,7 +75,8 @@ export class EditprofilesteponePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad EditprofilesteponePage');
-
+    let userInf = localStorage.getItem("userInfo");
+    console.log("User Information Storage:"+JSON.stringify(userInf));
   }
 
   // Determine whether we adding or editing a record

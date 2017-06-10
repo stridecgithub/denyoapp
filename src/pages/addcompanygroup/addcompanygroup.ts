@@ -103,7 +103,7 @@ export class AddcompanygroupPage {
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
       url: any = this.apiServiceURL + "api/companygroup.php";
-
+    console.log(url);
     this.http.post(url, body, options)
       .subscribe((data) => {
         console.log(JSON.stringify(data.json()));
@@ -138,7 +138,7 @@ export class AddcompanygroupPage {
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
       url: any = this.apiServiceURL + "api/companygroup.php";
-
+    console.log(url);
     this.http.post(url, body, options)
       .subscribe(data => {
         console.log(data);
@@ -173,7 +173,7 @@ export class AddcompanygroupPage {
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
       url: any = this.apiServiceURL + "api/companygroup.php";
-
+    console.log(url);
     this.http.post(url, body, options)
       .subscribe(data => {
         // If the request was successful notify the user
