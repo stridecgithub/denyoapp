@@ -1,0 +1,59 @@
+<!--
+  Generated template for the AddcompanygroupPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="bluedark">
+    <ion-title class="page-title">{{pageTitle}}</ion-title>
+    <ion-buttons start>
+      <button ion-button menuToggle class="menu-toggle">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button>
+ <ion-icon name="notifications-outline"></ion-icon>
+</button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-navbar class="backtoprevious-navbar">
+    <ion-buttons start class="backtoprevious-start">
+      <button ion-button icon-left class="backtoprevious-button">
+ <ion-icon name="arrow-back" class="backtoprevious-icon"></ion-icon>
+ Back to previous
+</button>
+    </ion-buttons>
+    <ion-buttons end>
+      Login As:{{loginas}}
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+
+
+
+  <div>
+    <form [formGroup]="form" (ngSubmit)="saveEntry()">
+
+      <ion-list>
+        Address 1:
+        <textarea id="example1" class="form-control" rows="8" [disabled]="readOnly" formControlName="address" rows="6" [(ngModel)]="address"></textarea>        Address 2:
+        <textarea id="example2" class="form-control" rows="8" [disabled]="readOnly" formControlName="address1" rows="6" [(ngModel)]="address1"></textarea>        Address 3:
+        <textarea id="example3" class="form-control" rows="8" [disabled]="readOnly" formControlName="address2" rows="6" [(ngModel)]="address2"></textarea>        Address 4:
+        <ion-item *ngIf="hideActionButton">
+          <button ion-button color="primary" text-center block [disabled]="!form.valid">Complete and Save</button>
+        </ion-item>
+      </ion-list>
+    </form>
+  </div>
+
+  <div class="myCarousel">
+    <div>Item 1</div>
+    <div>Item 2</div>
+    <div>Item 3</div>
+  </div>
+</ion-content>

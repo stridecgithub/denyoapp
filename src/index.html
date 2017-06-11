@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
 <head>
   <meta charset="UTF-8">
   <title>Ionic App</title>
@@ -10,7 +11,7 @@
   <link rel="icon" type="image/x-icon" href="assets/icon/favicon.ico">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#4e8ef7">
- 
+
   <!-- cordova.js required for cordova apps -->
   <script src="cordova.js"></script>
 
@@ -26,7 +27,9 @@
   <link href="build/main.css" rel="stylesheet">
 
 </head>
+
 <body>
+
 
   <!-- Ionic's root component and where the app will load -->
   <ion-app></ion-app>
@@ -36,6 +39,71 @@
 
   <!-- The bundle js is generated during the build process -->
   <script src="build/main.js"></script>
+  <!--link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+  <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="http://strtheme.stridecdev.com/bootstrap-suggest.js"></script-->
 
+  <link href="ext/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="ext/css/bootstrap.min.css">
+  <script src="ext/js/jquery-2.1.1.min.js"></script>
+  <script src="ext/js/bootstrap-suggest.js"></script>
+
+  <script>
+    console.log('Enter');
+    var users = [
+      { username: 'lodev09', fullname: 'Jovanni Lo' },
+      { username: 'foo', fullname: 'Foo User' },
+      { username: 'bar', fullname: 'Bar User' },
+      { username: 'twbs', fullname: 'Twitter Bootstrap' },
+      { username: 'john', fullname: 'John Doe' },
+      { username: 'jane', fullname: 'Jane Doe' },
+    ];
+    $('#example1').suggest('@', {
+      data: users,
+      map: function (user) {
+        return {
+          value: user.username,
+          text: '<strong>' + user.username + '</strong> <small>' + user.fullname + '</small>'
+        }
+      }
+    })
+    $('#example2').suggest('@', {
+      data: users,
+      map: function (user) {
+        return {
+          value: user.username,
+          text: '<strong>' + user.username + '</strong> <small>' + user.fullname + '</small>'
+        }
+      }
+    })
+    $('#example3').suggest('#', {
+      data: users,
+      filter: {
+        casesensitive: true,
+        limit: 10
+      },
+      map: function (user) {
+        return {
+          value: user.username,
+          text: '<strong>' + user.username + '</strong> <small>' + user.fullname + '</small>'
+        }
+      }
+    })
+    $('#example4').suggest('#', {
+      data: users,
+      filter: {
+        casesensitive: true,
+        limit: 10
+      },
+      map: function (user) {
+        return {
+          value: user.username,
+          text: '<strong>' + user.username + '</strong> <small>' + user.fullname + '</small>'
+        }
+      }
+    })
+  </script>
 </body>
+
 </html>

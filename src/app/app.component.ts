@@ -6,7 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 //import { TabsPage } from '../pages/tabs/tabs';
 import { CompanygroupPage } from '../pages/companygroup/companygroup';
 import { UserPage } from '../pages/user/user';
-import { LoginPage } from '../pages/login/login';
+//import { LoginPage } from '../pages/login/login';
 import { LogoutPage } from '../pages/logout/logout';
 import { HomePage } from '../pages/home/home';
 import { MyaccountPage } from '../pages/myaccount/myaccount';
@@ -15,6 +15,7 @@ import { AddUnitPage } from '../pages/add-unit/add-unit';
 
 import { RolePage } from '../pages/role/role';
 import { App } from 'ionic-angular';
+import { AtmentionedPage } from '../pages/atmentioned/atmentioned';
 
 @Component({
   templateUrl: 'app.html'
@@ -22,7 +23,7 @@ import { App } from 'ionic-angular';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = LoginPage;
+  rootPage: any = AtmentionedPage;
 
   pages: Array<{ title: string, component: any }>;
 
@@ -42,7 +43,9 @@ export class MyApp {
       { title: 'Role', component: RolePage },
       { title: 'My Account', component: MyaccountPage },
       { title: 'Logout', component: LogoutPage },
-      { title: 'Add Unit', component: AddUnitPage }
+      { title: 'Add Unit', component: AddUnitPage },
+      { title: 'At mentioned Page', component: AtmentionedPage }
+      
     ];
 
   }
