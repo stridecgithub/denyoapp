@@ -51,7 +51,7 @@ export class AtmentionedPage {
   // Property to store the recordID for when an existing entry is being edited
   public recordID: any = null;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com/";
-
+  public address1: string;
   private items: string[];
   constructor(public navCtrl: NavController,
     public http: Http,
@@ -251,16 +251,19 @@ export class AtmentionedPage {
       });
   }
 
-
+  address1get(address1) {
+    console.log(address1);
+    this.address = address1;
+  }
 
   // Handle data submitted from the page's HTML form
   // Determine whether we are adding a new record or amending an
   // existing record
   saveEntry() {
-    let address: string = this.form.controls["address"].value,
+    let 
       address1: string = this.form.controls["address1"].value,
       address2: string = this.form.controls["address2"].value;
-    console.log("Address 1" + address);
+    console.log("Address 1" + this.address);
     console.log("Address 2" + address1);
     console.log("Address 3" + address2);
     this.sendNotification(`Congratulations the company group was successfully deleted`);

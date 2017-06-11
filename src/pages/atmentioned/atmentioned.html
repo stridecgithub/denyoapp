@@ -36,7 +36,7 @@
     <form [formGroup]="form" (ngSubmit)="saveEntry()">
       <ion-list>
         Address 1:
-        <textarea id="example1" class="form-control" rows="8" [disabled]="readOnly" formControlName="address" rows="6" [(ngModel)]="address"></textarea>        Address 2:
+        <textarea  (keyup)=address1get($event.target.value); id="example1" class="form-control" rows="8" [disabled]="readOnly" formControlName="address" rows="6" [(ngModel)]="address"></textarea>        Address 2:
         <textarea id="example2" class="form-control" rows="8" [disabled]="readOnly" formControlName="address1" rows="6" [(ngModel)]="address1"></textarea>        Address 3:
         <textarea id="example3" class="form-control" rows="8" [disabled]="readOnly" formControlName="address2" rows="6" [(ngModel)]="address2"></textarea>  
         <ion-item *ngIf="hideActionButton">
