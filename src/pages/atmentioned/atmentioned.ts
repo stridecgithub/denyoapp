@@ -72,7 +72,7 @@ export class AtmentionedPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AtmentionedPage');
-    $(".myCarousel").slick();
+    //$(".myCarousel").slick();
   }
 
   // Determine whether we adding or editing a record
@@ -92,40 +92,56 @@ export class AtmentionedPage {
       this.pageTitle = '@Mentioned R&D';
     }
 
-    /*
-        var users = [
-          { username: 'lodev09', fullname: 'Jovanni Lo' },
-          { username: 'foo', fullname: 'Foo User' },
-          { username: 'bar', fullname: 'Bar User' },
-          { username: 'twbs', fullname: 'Twitter Bootstrap' },
-          { username: 'john', fullname: 'John Doe' },
-          { username: 'jane', fullname: 'Jane Doe' },
-          { username: 'Kannan', fullname: 'Nagarathinam' },
-        ];
-        
-        $('#example-1').suggest('@', {
-          data: users,
-          map: function (user) {
-            return {
-              value: user.username,
-              text: '<strong>' + user.username + '</strong> <small>' + user.fullname + '</small>'
-            }
-          }
-        })
-        $('#example-2').suggest('#', {
-          data: users,
-          filter: {
-            casesensitive: true,
-            limit: 10
-          },
-          map: function (user) {
-            return {
-              value: user.username,
-              text: '<strong>' + user.username + '</strong> <small>' + user.fullname + '</small>'
-            }
-          }
-        })
-    */
+
+    var users = [
+      { username: 'Krishanth', fullname: 'Kannan' },
+      { username: 'Thibishanth', fullname: 'Kannan' },
+      { username: 'Gohila', fullname: 'Kannan' },
+      { username: 'lodev09', fullname: 'Jovanni Lo' },
+      { username: 'foo', fullname: 'Foo User' },
+      { username: 'bar', fullname: 'Bar User' },
+      { username: 'twbs', fullname: 'Twitter Bootstrap' },
+      { username: 'john', fullname: 'John Doe' },
+      { username: 'jane', fullname: 'Jane Doe' },
+      { username: 'Kannan', fullname: 'Nagarathinam' },
+    ];
+
+    $('#example1').suggest('@', {
+      data: users,
+      map: function (user) {
+        return {
+          value: user.username,
+          text: '<strong>' + user.username + '</strong> <small>' + user.fullname + '</small>'
+        }
+      }
+    })
+
+    $('#example2').suggest('@', {
+      data: users,
+      map: function (user) {
+        return {
+          value: user.username,
+          text: '<strong>' + user.username + '</strong> <small>' + user.fullname + '</small>'
+        }
+      }
+    })
+
+
+
+    $('#example3').suggest('#', {
+      data: users,
+      filter: {
+        casesensitive: true,
+        limit: 10
+      },
+      map: function (user) {
+        return {
+          value: user.username,
+          text: '<strong>' + user.username + '</strong> <small>' + user.fullname + '</small>'
+        }
+      }
+    })
+
   }
 
 
@@ -144,8 +160,8 @@ export class AtmentionedPage {
   // to our remote PHP script (note the body variable we have created which
   // supplies a variable of key with a value of create followed by the key/value pairs
   // for the record data
-  createEntry(companygroup_name, address, country, contact) {
-    let body: string = "key=create&companygroup_name=" + companygroup_name + "&address=" + address + "&country=" + country + "&contact=" + contact,
+  createEntry(companygroup_name, address, country) {
+    let body: string = "key=create&companygroup_name=" + companygroup_name + "&address=" + address + "&country=" + country,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
@@ -179,8 +195,8 @@ export class AtmentionedPage {
   // to our remote PHP script (note the body variable we have created which
   // supplies a variable of key with a value of update followed by the key/value pairs
   // for the record data
-  updateEntry(companygroup_name, address, country, contact) {
-    let body: string = "key=update&companygroup_name=" + companygroup_name + "&address=" + address + "&country=" + country + "&contact=" + contact + "&recordID=" + this.recordID,
+  updateEntry(companygroup_name, address, country) {
+    let body: string = "key=update&companygroup_name=" + companygroup_name + "&address=" + address + "&country=" + country + "&recordID=" + this.recordID,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
@@ -241,17 +257,13 @@ export class AtmentionedPage {
   // Determine whether we are adding a new record or amending an
   // existing record
   saveEntry() {
-    let companygroup_name: string = this.form.controls["companygroup_name"].value,
-      address: string = this.form.controls["address"].value,
-      country: string = this.form.controls["country"].value,
-      contact: string = this.form.controls["contact"].value;
-
-    if (this.isEdited) {
-      this.updateEntry(companygroup_name, address, country, contact);
-    }
-    else {
-      this.createEntry(companygroup_name, address, country, contact);
-    }
+    let address: string = this.form.controls["address"].value,
+      address1: string = this.form.controls["address1"].value,
+      address2: string = this.form.controls["address2"].value;
+    console.log("Address 1" + address);
+    console.log("Address 2" + address1);
+    console.log("Address 3" + address2);
+    this.sendNotification(`Congratulations the company group was successfully deleted`);
   }
 
 
