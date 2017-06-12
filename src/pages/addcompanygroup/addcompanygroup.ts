@@ -110,14 +110,13 @@ export class AddcompanygroupPage {
         console.log(JSON.stringify(data.json()));
         // If the request was successful notify the user
         if (data.status === 200) {
-          console.log("Msg Results:-" + res.msg.result);
+          console.log("Msg Results:-" + res.msg[0].result);
           this.hideForm = true;
-          console.log(data.json().Error);
-          if (res.msg.result == 'success') {
-            this.sendNotification("Company group successfully created");
-            this.navCtrl.setRoot(CompanygroupPage);
+          if (res.msg[0].result > 0) {
+            this.sendNotification(res.msg[0].result);
           } else {
-            this.sendNotification(res.msg.result);
+            this.sendNotification(res.msg[0].result);
+            this.navCtrl.setRoot(CompanygroupPage);
           }
         }
         // Otherwise let 'em know anyway
@@ -148,13 +147,13 @@ export class AddcompanygroupPage {
         console.log(data.json());
         // If the request was successful notify the user
         if (data.status === 200) {
-          console.log("Msg Results:-" + res.msg.result);
+          console.log("Msg Results:-" + res.msg[0].result);
           this.hideForm = true;
-          if (res.msg.result == 'success') {
-            this.sendNotification("Company group successfully updated");
-            this.navCtrl.setRoot(CompanygroupPage);
+          if (res.msg[0].result > 0) {
+            this.sendNotification(res.msg[0].result);
           } else {
-            this.sendNotification(res.msg.result);
+            this.sendNotification(res.msg[0].result);
+            this.navCtrl.setRoot(CompanygroupPage);
           }
         }
         // Otherwise let 'em know anyway
