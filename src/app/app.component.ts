@@ -6,7 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 //import { TabsPage } from '../pages/tabs/tabs';
 import { CompanygroupPage } from '../pages/companygroup/companygroup';
 import { UserPage } from '../pages/user/user';
-//import { LoginPage } from '../pages/login/login';
+import { LoginPage } from '../pages/login/login';
 import { LogoutPage } from '../pages/logout/logout';
 import { HomePage } from '../pages/home/home';
 import { MyaccountPage } from '../pages/myaccount/myaccount';
@@ -23,7 +23,7 @@ import { AtmentionedPage } from '../pages/atmentioned/atmentioned';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = AtmentionedPage;
+  rootPage: any = LoginPage;
 
   pages: Array<{ title: string, component: any }>;
 

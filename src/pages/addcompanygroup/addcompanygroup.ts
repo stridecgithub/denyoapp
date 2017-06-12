@@ -37,7 +37,7 @@ export class AddcompanygroupPage {
   public pageTitle: string;
   // Property to store the recordID for when an existing entry is being edited
   public recordID: any = null;
-  private apiServiceURL: string = "http://denyoappv2.stridecdev.com/";
+  private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   constructor(public navCtrl: NavController,
     public http: Http,
     public NP: NavParams,
@@ -98,12 +98,15 @@ export class AddcompanygroupPage {
   // supplies a variable of key with a value of create followed by the key/value pairs
   // for the record data
   createEntry(companygroup_name, address, country, contact, createdby) {
-    let body: string = "key=create&companygroup_name=" + companygroup_name + "&address=" + address + "&country=" + country + "&contact=" + contact + "&createdby=" + createdby,
+    let updatedby = createdby;
+    let body: string = "is_mobile=1&companygroup_name=" + companygroup_name + "&address=" + address + "&country=" + country + "&contact=" + contact + "&createdby=" + createdby + "&updatedby=" + updatedby,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "api/companygroup.php";
-    console.log(url);
+      url: any = this.apiServiceURL + "/companygroup/store";
+    console.log("url:" + url);
+    console.log("body:" + body);
+    console.log("options:" + options);
     this.http.post(url, body, options)
       .subscribe((data) => {
         console.log(JSON.stringify(data.json()));
@@ -133,11 +136,12 @@ export class AddcompanygroupPage {
   // supplies a variable of key with a value of update followed by the key/value pairs
   // for the record data
   updateEntry(companygroup_name, address, country, contact, createdby) {
-    let body: string = "key=update&companygroup_name=" + companygroup_name + "&address=" + address + "&country=" + country + "&contact=" + contact + "&recordID=" + this.recordID + "&createdby=" + createdby,
+    let updatedby = createdby;
+    let body: string = "is_mobile=1&companygroup_name=" + companygroup_name + "&address=" + address + "&country=" + country + "&contact=" + contact + "&companygroup_id=" + this.recordID + "&createdby=" + createdby + "&updatedby=" + updatedby,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "api/companygroup.php";
+      url: any = this.apiServiceURL + "/companygroup/update";
     console.log(url);
     this.http.post(url, body, options)
       .subscribe(data => {
@@ -167,14 +171,16 @@ export class AddcompanygroupPage {
   // supplies a variable of key with a value of delete followed by the key/value pairs
   // for the record ID we want to remove from the remote database
   deleteEntry() {
+
+    //http://denyoappv2.stridecdev.com/companygroup/8/1/delete
     let companygroup_name: string = this.form.controls["companygroup_name"].value,
-      body: string = "key=delete&recordID=" + this.recordID,
+      //body: string = "key=delete&recordID=" + this.recordID,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "api/companygroup.php";
+      url: any = this.apiServiceURL + "/companygroup/" + this.recordID + "/1/delete";
     console.log(url);
-    this.http.post(url, body, options)
+    this.http.get(url, options)
       .subscribe(data => {
         // If the request was successful notify the user
         if (data.status === 200) {
@@ -233,7 +239,7 @@ export class AddcompanygroupPage {
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "api/countries.php";
+      url: any = this.apiServiceURL + "/api/countries.php";
     let res;
     this.http.get(url, options)
       .subscribe(data => {
@@ -242,5 +248,7 @@ export class AddcompanygroupPage {
       });
 
   }
-
+  previous() {
+    this.navCtrl.setRoot(CompanygroupPage);
+  }
 }

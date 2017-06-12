@@ -5,6 +5,7 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { AddcompanygroupPage } from '../addcompanygroup/addcompanygroup';
 import { ViewcompanygroupPage } from '../viewcompanygroup/viewcompanygroup';
 import { LoadingController } from 'ionic-angular';
+import { TabsPage } from '../tabs/tabs';
 /**
  * Generated class for the CompanygroupPage page.
  *
@@ -19,7 +20,7 @@ import { LoadingController } from 'ionic-angular';
 export class CompanygroupPage {
   public pageTitle: string;
   public loginas: any;
-  private apiServiceURL: string = "http://denyoappv2.stridecdev.com/";
+  private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   public totalCount;
   pet: string = "ALL";
   public sortby = 2;
@@ -69,19 +70,24 @@ export class CompanygroupPage {
     if (this.reportData.sort == '') {
       this.reportData.sort = "vendor";
     }
+    //http://denyoappv2.stridecdev.com/companygroup?is_mobile=1
     console.log("key=run&startIndex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc + "&statusName=" + this.reportData.status + "&pagination=true");
-    let body: string = "key=run&startIndex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc + "&statusName=" + this.reportData.status + "&pagination=true",
-      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+    // let body: string = "key=run&startIndex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc + "&statusName=" + this.reportData.status + "&pagination=true",
+    let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "api/companygroup.php";
+      url: any = this.apiServiceURL + "/companygroup?is_mobile=1";
     let res;
-    this.http.post(url, body, options)
+    this.http.get(url, options)
       .subscribe((data) => {
         res = data.json();
-        if (res.length > 0) {
-          this.reportAllLists = res;
-          this.totalCount = res[0].totalCount;
+        console.log(JSON.stringify(res));
+        console.log("Msg Results:-" + res.msg.result);
+        console.log("Total Count:-" + res.totalCount);
+        console.log("companygroups Company Group Id:" + res.companygroups[0].companygroup_id);
+        if (res.companygroups.length > 0) {
+          this.reportAllLists = res.companygroups;
+          this.totalCount = res.totalCount;
           this.reportData.startindex += this.reportData.results;
         } else {
           this.totalCount = 0;
@@ -169,13 +175,13 @@ export class CompanygroupPage {
   // for the record ID we want to remove from the remote database
   deleteEntry(recordID) {
     let
-      body: string = "key=delete&recordID=" + recordID,
+      //body: string = "key=delete&recordID=" + recordID,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "api/companygroup.php";
-
-    this.http.post(url, body, options)
+      url: any = this.apiServiceURL + "/companygroup/"+recordID+"/1/delete";
+///http://denyoappv2.stridecdev.com/companygroup/8/1/delete
+    this.http.get(url,  options)
       .subscribe(data => {
         // If the request was successful notify the user
         if (data.status === 200) {
@@ -238,6 +244,10 @@ export class CompanygroupPage {
     } else {
       loader.dismiss();
     }
+  }
+
+  previous() {
+    this.nav.setRoot(TabsPage);
   }
 
 }

@@ -43,16 +43,8 @@ export class LoginPage {
 
 
 
-  loginEntry(username, password) {
-    this.presentLoading(1);
-     this.navCtrl.push(TabsPage);
-      this.presentLoading(0);
-    /* let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
-       headers: any = new Headers({ 'Content-Type': type }),
-       options: any = new RequestOptions({ headers: headers }),
-       url: any = this.apiServiceURL + "/checklogin?username=" + username + "&password=" + password+ "&isapp=1";*/
+  loginEntry(username, password) {   
     let res;
-
     let body: string = "username=" + username + "&password=" + password + "&isapp=1",
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
