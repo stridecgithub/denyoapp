@@ -1,34 +1,53 @@
 page-home {
-    
+.header-md::after,
+.tabs-md[tabsPlacement="top"] > .tabbar::after,
+.footer-md::before,
+.tabs-md[tabsPlacement="bottom"] > .tabbar::before{background-image:none;}
+.toolbar-background-md{background:none;}
+.content-md{background-color:transparent;}
+
+.dash{text-align:center;color:#fff;font-size:13px;}
+.title{margin:25px auto;font-size:22px;}
+.title strong{display:block;margin-top:10px;}
+.four-icons{text-align:center;color:#fff;display:table;margin:0 auto;text-transform:uppercase;font-weight:bold;min-width:32%;}
+.four-icons img{display:table;margin:0 auto 15px;}
+.icon-top{border-bottom:1px solid #fff;display:block;overflow:hidden;}
+.icon-bottom{display:block;overflow:hidden;}
+.icon-left{border-right:1px solid #fff;width:50%;float:left;padding:60px;}
+.icon-right{width:50%;float:left;padding:60px;}
+
 }
+.ion-page{background:url(../img/login_page_background_1280x1920px.jpg) no-repeat scroll 0 0 / cover;}
 
-ion-header{
-    .backtoprevious-navbar{
-        background-color:#cccccc;
-    }    
-    .backtoprevious-icon{
-        color:black;
-    }
-    .backtoprevious-start{
-       position: absolute;
-    left: 3px;
-    top: 13px;
-    }
-    .backtoprevious-button{
-        text-transform: none;
-    }
-    
-}
+.icon-md.ion-ios-map{background:url(../img/map_icon.png) no-repeat;width:32px;height: 32px;font-size:0;}
+a[aria-selected="true"] .ion-ios-map{background:url(../img/map_icon_active.png) no-repeat;width:32px;font-size:0;}
 
-    ion-navbar{    
-    .page-title{
-        color:#cccccc;
-        position: relative;
-    margin-left: 15%;
-    }
-    }
-    .error{
-        color:red;
-        text-align: center;
-    }
+.icon-md.ion-ios-card-outline{background:url(../img/units_icon.png) no-repeat;width:32px;height: 32px;font-size:0;}
+a[aria-selected="true"] .ion-ios-card-outline{background:url(../img/units_icon_active.png) no-repeat;width:32px;font-size:0;}
 
+.icon-md.ion-ios-contacts-outline{background:url(../img/msg_icon.png) no-repeat;width:32px;height: 32px;font-size:0;}
+a[aria-selected="true"] .ion-ios-contacts-outline{background:url(../img/msg_icon_active.png) no-repeat;width:32px;font-size:0;}
+
+.icon-md.ion-ios-calendar-outline{background:url(../img/calendar_icon.png) no-repeat;width:32px;height: 32px;font-size:0;}
+a[aria-selected="true"] .ion-ios-calendar-outline{background:url(../img/calendar_icon_active.png) no-repeat;width:32px;font-size:0;}
+
+.icon-md.ion-ios-settings-outline{background:url(../img/setting_icon.png) no-repeat;width:32px;height: 32px;font-size:0;}
+a[aria-selected="true"] .ion-ios-settings-outline{background:url(../img/setting_icon_active.png) no-repeat;width:32px;font-size:0;}
+
+.tabs-md .tabbar{background:#fff;}
+.tabs-md .tab-button[aria-selected="true"]{color:#5267c6;}
+.bar-button-menutoggle-md ion-icon{font-size:3.4rem;}
+.bar-button-default-md, .bar-button-clear-md-default, .bar-button-md-default, .bar-button-default-md:hover:not(.disable-hover), .bar-button-clear-md-default:hover:not(.disable-hover), .bar-button-md-default:hover:not(.disable-hover){color:#fff;}
+.md .menu-inner{background:url(../img/menu_bg.png) no-repeat scroll 0 0 / cover;}
+.content-md{background-color:transparent;}
+.toolbar-background-md{background:none;border:none;}
+.item-md{background-color:transparent;color:#fff;}
+.header-md::after, .tabs-md[tabsPlacement="top"] > .tabbar::after, .footer-md::before, .tabs-md[tabsPlacement="bottom"] > .tabbar::before{background-image:none;}
+.toolbar-title-md{color:#fff;}
+.list-md .item-block .item-inner{border-bottom:0 solid #dedede;}
+.tabs-md .tab-button{min-height:7.6rem;}
+.icon-left span, .icon-right span{margin-top:100px;display:inline-block;}
+.maps{background:url(../img/maps_72.png) no-repeat center center;text-align:center;height:100px;width:72px;margin: 0 auto;}
+.units{background:url(../img/units_72.png) no-repeat center center;text-align:center;height:100px;width:72px;margin: 0 auto;}
+.reports{background:url(../img/reports_72.png) no-repeat center center;text-align:center;height:100px;width:72px;margin: 0 auto;}
+.calendar{background:url(../img/calendar_72.png) no-repeat center center;text-align:center;height:100px;width:72px;margin: 0 auto;}

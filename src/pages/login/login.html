@@ -5,7 +5,7 @@
   Ionic pages and navigation.
 -->
 <ion-content padding class="login-content">
-  <div><img src="img/denyo_logo.png" class="logo"></div>
+  <div class="t-center"><img src="img/denyo_logo.png" class="logo"></div>
   <form [formGroup]="form" (ngSubmit)="login()">
     <ion-list>
 
@@ -16,16 +16,11 @@
       <ion-item>
         <ion-input type="password" placeholder="Password" formControlName="password" [(ngModel)]="passWrd"></ion-input>
       </ion-item>
-      <ion-item>
-        <ion-label>Keep me signed in</ion-label>
-        <ion-checkbox disabled="true"></ion-checkbox>
-      </ion-item>
-      <ion-item>
+      
+      <ion-item class="forgot">
         <div>Forgot?</div>
       </ion-item>
-      <ion-item>
-        <button ion-button color="primary" text-center block [disabled]="!form.valid">Sign In</button>
-      </ion-item>
+        <button ion-button color="primary" text-center block [disabled]="!form.valid">Login</button>
 
 
 
