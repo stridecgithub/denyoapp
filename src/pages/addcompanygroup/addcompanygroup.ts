@@ -104,9 +104,6 @@ export class AddcompanygroupPage {
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
       url: any = this.apiServiceURL + "/companygroup/store";
-    console.log("url:" + url);
-    console.log("body:" + body);
-    console.log("options:" + options);
     this.http.post(url, body, options)
       .subscribe((data) => {
         let res = data.json();
@@ -116,11 +113,11 @@ export class AddcompanygroupPage {
           console.log("Msg Results:-" + res.msg.result);
           this.hideForm = true;
           console.log(data.json().Error);
-          if (data.json().Error > 0) {
-            this.sendNotification(res.msg.result);
+          if (res.msg.result == 'success') {
+            this.sendNotification("Company group successfully created");
+            this.navCtrl.setRoot(CompanygroupPage);
           } else {
             this.sendNotification(res.msg.result);
-            this.navCtrl.setRoot(CompanygroupPage);
           }
         }
         // Otherwise let 'em know anyway
@@ -148,17 +145,16 @@ export class AddcompanygroupPage {
     this.http.post(url, body, options)
       .subscribe(data => {
         let res = data.json();
-        console.log(data);
+        console.log(data.json());
         // If the request was successful notify the user
         if (data.status === 200) {
           console.log("Msg Results:-" + res.msg.result);
           this.hideForm = true;
-          console.log(data.json().Error);
-          if (data.json().Error > 0) {
-            this.sendNotification(res.msg.result);
+          if (res.msg.result == 'success') {
+            this.sendNotification("Company group successfully updated");
+            this.navCtrl.setRoot(CompanygroupPage);
           } else {
             this.sendNotification(res.msg.result);
-            this.navCtrl.setRoot(CompanygroupPage);
           }
         }
         // Otherwise let 'em know anyway
