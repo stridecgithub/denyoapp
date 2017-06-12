@@ -23,7 +23,6 @@ import { RolePage } from '../pages/role/role';
 import { AddrolePage } from '../pages/addrole/addrole';
 import { HttpModule } from '@angular/http';
 import { AtmentionedPage } from '../pages/atmentioned/atmentioned';
-import { MentionModule } from 'angular2-mentions/mention';
 @NgModule({
   declarations: [
     MyApp,
@@ -49,7 +48,7 @@ import { MentionModule } from 'angular2-mentions/mention';
   imports: [
     BrowserModule,
     HttpModule,
-    MentionModule ,
+   
     IonicModule.forRoot(MyApp, {
       backButtonText: 'Go Back',
       iconMode: 'ios',
