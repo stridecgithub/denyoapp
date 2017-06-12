@@ -20,5 +20,7 @@ export class AddunitgroupPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddunitgroupPage');
   }
-
+  getColor(colorCodeValue) {
+    console.log(colorCodeValue);
+  }
 }
