@@ -88,7 +88,6 @@
         $limit="limit ".$startIndex.",".$results;
         $wheredate="deletestatus='0'";
         try {
-
         $sql = "SELECT count(*) as totalCount FROM companygroups"; 
         $result = $pdo->prepare($sql); 
         $result->execute(); 

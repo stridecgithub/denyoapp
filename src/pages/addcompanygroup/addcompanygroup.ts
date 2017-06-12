@@ -104,21 +104,20 @@ export class AddcompanygroupPage {
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
       url: any = this.apiServiceURL + "/companygroup/store";
-    console.log("url:" + url);
-    console.log("body:" + body);
-    console.log("options:" + options);
     this.http.post(url, body, options)
       .subscribe((data) => {
+        let res = data.json();
         console.log(JSON.stringify(data.json()));
         // If the request was successful notify the user
         if (data.status === 200) {
+          console.log("Msg Results:-" + res.msg.result);
           this.hideForm = true;
           console.log(data.json().Error);
-          if (data.json().Error > 0) {
-            this.sendNotification(data.json().message);
-          } else {
-            this.sendNotification(data.json().message);
+          if (res.msg.result == 'success') {
+            this.sendNotification("Company group successfully created");
             this.navCtrl.setRoot(CompanygroupPage);
+          } else {
+            this.sendNotification(res.msg.result);
           }
         }
         // Otherwise let 'em know anyway
@@ -145,15 +144,17 @@ export class AddcompanygroupPage {
     console.log(url);
     this.http.post(url, body, options)
       .subscribe(data => {
-        console.log(data);
+        let res = data.json();
+        console.log(data.json());
         // If the request was successful notify the user
         if (data.status === 200) {
+          console.log("Msg Results:-" + res.msg.result);
           this.hideForm = true;
-          if (data.json().Error > 0) {
-            this.sendNotification(data.json().message);
-          } else {
-            this.sendNotification(data.json().message);
+          if (res.msg.result == 'success') {
+            this.sendNotification("Company group successfully updated");
             this.navCtrl.setRoot(CompanygroupPage);
+          } else {
+            this.sendNotification(res.msg.result);
           }
         }
         // Otherwise let 'em know anyway
@@ -239,12 +240,12 @@ export class AddcompanygroupPage {
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/api/countries.php";
+      url: any = this.apiServiceURL + "/getCountries";
     let res;
     this.http.get(url, options)
       .subscribe(data => {
         res = data.json();
-        this.responseResultCountry = res;
+        this.responseResultCountry = res.countries;
       });
 
   }

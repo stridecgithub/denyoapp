@@ -21,9 +21,9 @@ import { AddUnitPage } from '../pages/add-unit/add-unit';
 import { EditprofilesteponePage } from '../pages/editprofilestepone/editprofilestepone';
 import { RolePage } from '../pages/role/role';
 import { AddrolePage } from '../pages/addrole/addrole';
+import { AddunitgroupPage } from '../pages/addunitgroup/addunitgroup';
 import { HttpModule } from '@angular/http';
 import { AtmentionedPage } from '../pages/atmentioned/atmentioned';
-import { MentionModule } from 'angular2-mentions/mention';
 @NgModule({
   declarations: [
     MyApp,
@@ -44,12 +44,13 @@ import { MentionModule } from 'angular2-mentions/mention';
     EditprofilesteponePage,
     RolePage,
     AddrolePage,
+    AddunitgroupPage,
     AtmentionedPage
   ],
   imports: [
     BrowserModule,
     HttpModule,
-    MentionModule ,
+   
     IonicModule.forRoot(MyApp, {
       backButtonText: 'Go Back',
       iconMode: 'ios',
@@ -80,6 +81,7 @@ import { MentionModule } from 'angular2-mentions/mention';
     EditprofilesteponePage,
     RolePage,
     AddrolePage,
+    AddunitgroupPage,
     AtmentionedPage
   ],
   providers: [

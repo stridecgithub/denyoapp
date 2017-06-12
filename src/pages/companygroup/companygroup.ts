@@ -29,8 +29,8 @@ export class CompanygroupPage {
   public reportData: any =
   {
     status: '',
-    sort: '',
-    sortascdesc: '',
+    sort: 'companygroup_id',
+    sortascdesc: 'asc',
     startindex: 0,
     results: 8
   }
@@ -68,16 +68,15 @@ export class CompanygroupPage {
       this.reportData.status = "DRAFT";
     }
     if (this.reportData.sort == '') {
-      this.reportData.sort = "vendor";
+      this.reportData.sort = "comapny";
     }
     //http://denyoappv2.stridecdev.com/companygroup?is_mobile=1
-    console.log("key=run&startIndex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc + "&statusName=" + this.reportData.status + "&pagination=true");
-    // let body: string = "key=run&startIndex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc + "&statusName=" + this.reportData.status + "&pagination=true",
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/companygroup?is_mobile=1";
+      url: any = this.apiServiceURL + "/companygroup?is_mobile=1&startIndex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc;
     let res;
+    console.log(url);
     this.http.get(url, options)
       .subscribe((data) => {
         res = data.json();
@@ -118,7 +117,7 @@ export class CompanygroupPage {
   }
   ionViewWillEnter() {
     this.reportData.startindex = 0;
-    this.reportData.sort = "createdon";
+    this.reportData.sort = "companygroup_id";
     this.doCompanyGroup();
   }
 
@@ -179,9 +178,8 @@ export class CompanygroupPage {
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/companygroup/"+recordID+"/1/delete";
-///http://denyoappv2.stridecdev.com/companygroup/8/1/delete
-    this.http.get(url,  options)
+      url: any = this.apiServiceURL + "/companygroup/" + recordID + "/1/delete";
+    this.http.get(url, options)
       .subscribe(data => {
         // If the request was successful notify the user
         if (data.status === 200) {
