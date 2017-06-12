@@ -14,6 +14,7 @@ import { MyaccountPage } from '../pages/myaccount/myaccount';
 import { AddUnitPage } from '../pages/add-unit/add-unit';
 
 import { RolePage } from '../pages/role/role';
+import { AddunitgroupPage } from '../pages/addunitgroup/addunitgroup';
 import { App } from 'ionic-angular';
 import { AtmentionedPage } from '../pages/atmentioned/atmentioned';
 
@@ -44,7 +45,8 @@ export class MyApp {
       { title: 'My Account', component: MyaccountPage },
       { title: 'Logout', component: LogoutPage },
       { title: 'Add Unit', component: AddUnitPage },
-      { title: 'At mentioned Page', component: AtmentionedPage }
+      { title: 'At mentioned Page', component: AtmentionedPage },
+       { title: 'Add Unit Group', component: AddunitgroupPage }
       
     ];
 
