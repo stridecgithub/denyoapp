@@ -17,6 +17,11 @@
             <ion-icon name="ios-add-circle-outline"></ion-icon>           
         </button>
     </ion-buttons>
+    <ion-buttons end>
+      <button ion-button>
+  <ion-icon ios="ios-notifications-outline" md="md-notifications-outline"></ion-icon>
+</button>
+    </ion-buttons>
   </ion-navbar>
   <ion-navbar class="backtoprevious-navbar">
     <ion-buttons start class="backtoprevious-start">
@@ -29,22 +34,27 @@
       Login As:{{loginas}}
     </ion-buttons>
   </ion-navbar>
+  <button class="add-new-btn">
+  	<div class="algn-cent">
+    	<ion-icon name="ios-add-circle-outline"></ion-icon>
+        <span>Add New Company Group</span>
+    </div>
+  </button>
 </ion-header>
 <ion-content padding>
    <div class="error"  *ngIf="totalCount==0">No company group entries found</div>
   <ion-item id="sortbar"  *ngIf="totalCount!=0">
-    <button *ngIf="sortby==1"clear (click)="doSort('companygroup_name')"  style="color:black;background-color:white">
+    <button *ngIf="sortby==1"clear (click)="doSort('companygroup_name')"  style="color:black;">
       <div class="company-name">Company Name</div>
-        <ion-icon *ngIf="ascending==false" ios="md-arrow-dropdown" md="md-arrow-dropdown" style="color:black;background-color:white"></ion-icon>
-        <ion-icon *ngIf="ascending==true" ios="md-arrow-dropup" md="md-arrow-dropup" style="color:black;background-color:white"></ion-icon>
+        <ion-icon *ngIf="ascending==false" ios="md-arrow-dropdown" md="md-arrow-dropdown" style="color:black;"></ion-icon>
+        <ion-icon *ngIf="ascending==true" ios="md-arrow-dropup" md="md-arrow-dropup" style="color:black;"></ion-icon>
     </button>
-    <button *ngIf="sortby!=1" clear (click)="doSort('companygroup_name')"style="color:black;background-color:white">
+    <button *ngIf="sortby!=1" clear (click)="doSort('companygroup_name')"style="color:black;">
        <div class="company-name">Company Name</div>
-        <ion-icon *ngIf="ascending==false" ios="md-arrow-dropdown" md="md-arrow-dropdown" style="color:black;background-color:white"></ion-icon>
-        <ion-icon *ngIf="ascending==true" ios="md-arrow-dropup" md="md-arrow-dropup" style="color:black;background-color:white"></ion-icon>
+        <ion-icon *ngIf="ascending==false" ios="md-arrow-dropdown" md="md-arrow-dropdown" style="color:black;"></ion-icon>
+        <ion-icon *ngIf="ascending==true" ios="md-arrow-dropup" md="md-arrow-dropup" style="color:black;"></ion-icon>
     </button>
   </ion-item>
-  <div class="separator-line"  *ngIf="totalCount!=0">&nbsp;</div>
   <ion-refresher (ionRefresh)="doRefresh($event)"  *ngIf="totalCount!=0">
     <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
     </ion-refresher-content>
