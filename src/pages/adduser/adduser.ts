@@ -8,6 +8,7 @@ import { FileChooser } from '@ionic-native/file-chooser';
 import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
 import 'rxjs/add/operator/map';
+import { UserPage } from '../user/user';
 /**
  * Generated class for the AddcompanygroupPage page.
  *
@@ -385,5 +386,7 @@ export class AdduserPage {
       }
     });
   }
-
+ previous() {
+    this.navCtrl.setRoot(UserPage);
+  }
 }
