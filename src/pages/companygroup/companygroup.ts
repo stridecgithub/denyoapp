@@ -79,11 +79,7 @@ export class CompanygroupPage {
     console.log(url);
     this.http.get(url, options)
       .subscribe((data) => {
-        res = data.json();
-        console.log(JSON.stringify(res));
-        console.log("Msg Results:-" + res.msg.result);
-        console.log("Total Count:-" + res.totalCount);
-        console.log("companygroups Company Group Id:" + res.companygroups[0].companygroup_id);
+        res = data.json();       
         if (res.companygroups.length > 0) {
           this.reportAllLists = res.companygroups;
           this.totalCount = res.totalCount;
