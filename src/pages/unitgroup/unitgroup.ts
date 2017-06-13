@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, ToastController, AlertController, NavParams } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 import { Http, Headers, RequestOptions } from '@angular/http';
-//import { AddunitgroupPage } from '../addunitgroup/addunitgroup';
+import { AddunitgroupPage } from '../addunitgroup/addunitgroup';
 import { LoadingController } from 'ionic-angular';
+import { TabsPage } from '../tabs/tabs';
 /**
  * Generated class for the UnitgroupPage page.
  *
@@ -40,7 +41,7 @@ export class UnitgroupPage {
     console.log('ionViewDidLoad UnitgroupPage');
   }
 
-  doRefreshs(refresher) {
+  doRefresh(refresher) {
     console.log('doRefresh function calling...');
     this.reportData.startindex = 0;
     this.reportAllLists = [];
@@ -125,5 +126,12 @@ export class UnitgroupPage {
       loader.dismiss();
     }
   }
+   doAdd() {
+    this.nav.setRoot(AddunitgroupPage);
+  }
+   previous() {
+    this.nav.setRoot(TabsPage);
+  }
+
 
 }
