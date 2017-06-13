@@ -10,7 +10,7 @@ import { LoginPage } from '../pages/login/login';
 import { LogoutPage } from '../pages/logout/logout';
 import { HomePage } from '../pages/home/home';
 import { MyaccountPage } from '../pages/myaccount/myaccount';
-
+import { UnitgroupPage } from '../pages/unitgroup/unitgroup';
 import { AddUnitPage } from '../pages/add-unit/add-unit';
 
 import { RolePage } from '../pages/role/role';
@@ -46,7 +46,8 @@ export class MyApp {
       { title: 'Logout', component: LogoutPage },
       { title: 'Add Unit', component: AddUnitPage },
       { title: 'At mentioned Page', component: AtmentionedPage },
-       { title: 'Add Unit Group', component: AddunitgroupPage }
+       { title: 'Add Unit Group', component: AddunitgroupPage },
+       { title: 'Unit Group', component: UnitgroupPage }
       
     ];
 

@@ -22,6 +22,7 @@ import { EditprofilesteponePage } from '../pages/editprofilestepone/editprofiles
 import { RolePage } from '../pages/role/role';
 import { AddrolePage } from '../pages/addrole/addrole';
 import { AddunitgroupPage } from '../pages/addunitgroup/addunitgroup';
+import { UnitgroupPage } from '../pages/unitgroup/unitgroup';
 import { HttpModule } from '@angular/http';
 import { AtmentionedPage } from '../pages/atmentioned/atmentioned';
 @NgModule({
@@ -45,6 +46,7 @@ import { AtmentionedPage } from '../pages/atmentioned/atmentioned';
     RolePage,
     AddrolePage,
     AddunitgroupPage,
+    UnitgroupPage,
     AtmentionedPage
   ],
   imports: [
@@ -82,6 +84,7 @@ import { AtmentionedPage } from '../pages/atmentioned/atmentioned';
     RolePage,
     AddrolePage,
     AddunitgroupPage,
+    UnitgroupPage,
     AtmentionedPage
   ],
   providers: [

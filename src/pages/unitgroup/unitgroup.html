@@ -1,0 +1,53 @@
+<!--
+  Generated template for the UnitgroupPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header >
+  <ion-navbar color="header"  >
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Unit Group</ion-title>
+  </ion-navbar>
+   <ion-navbar >
+   <p><label class="sheader1"><Back to Previous</label>
+    
+     <label class="sheader2">Login as:{{loginas}}</label>
+
+     
+</p>
+
+  </ion-navbar>
+  <div >
+  <select class = "spinner">
+      <option selected>Select</option>
+      <option >Unit Name Ascending</option>
+      <option>Unit Name Descending</option>
+      <option>Favorite</option>
+   </select>
+   </div>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-refresher (ionRefresh)="doRefresh($event)"  *ngIf="totalCount!=0">
+   <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-list  *ngIf="totalCount!=0">    
+    <ion-item-sliding  *ngFor="let item of reportAllLists;">
+      <ion-item>
+        <h2><b></b>{{item.unitgroup_name}}</h2>
+        <h2><b>Total Unit:</b>{{item.totalCount}}</h2>
+      </ion-item>
+  
+        
+    </ion-item-sliding>
+  </ion-list>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)"  *ngIf="totalCount!=0">
+    <ion-infinite-scroll-content loadingText="Loading More Data"></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>
