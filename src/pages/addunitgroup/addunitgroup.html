@@ -50,10 +50,12 @@
 					<ion-textarea  rows="6" type="text" [disabled]="readOnly" formControlName="remark" [(ngModel)]="remark"></ion-textarea>
 		  
          </div>
+				 <ion-item *ngIf="hideActionButton">
 		 <div>
           <button ion-button color="primary" text-center block [disabled]="!form.valid">Complete and Save</button>
         
 		 </div>
+		 </ion-item>
    
        
 </form>

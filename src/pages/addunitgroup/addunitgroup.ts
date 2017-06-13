@@ -87,6 +87,7 @@ if (this.isUploadedProcessing == false) {
   createEntry(cname, ccode, remark, createdby) {
     this.isUploadedProcessing = true;
     let updatedby = createdby;
+    console.log(cname,ccode,remark);
     let body: string = "is_mobile=1&unitgroup_name=" + cname + "&colorcode=" + ccode + "&remark=" + remark + "&createdby=" + createdby + "&updatedby=" + updatedby,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
