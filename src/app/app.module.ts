@@ -17,7 +17,6 @@ import { UseraccountPage } from '../pages/useraccount/useraccount';
 import { UserorgchartPage } from '../pages/userorgchart/userorgchart';
 import { MyaccountPage } from '../pages/myaccount/myaccount';
 import { LogoutPage } from '../pages/logout/logout';
-//import { AddUnitPage } from '../pages/add-unit/add-unit';
 import { EditprofilesteponePage } from '../pages/editprofilestepone/editprofilestepone';
 import { RolePage } from '../pages/role/role';
 import { AddrolePage } from '../pages/addrole/addrole';
@@ -25,6 +24,11 @@ import { AddunitgroupPage } from '../pages/addunitgroup/addunitgroup';
 import { UnitgroupPage } from '../pages/unitgroup/unitgroup';
 import { HttpModule } from '@angular/http';
 import { AtmentionedPage } from '../pages/atmentioned/atmentioned';
+import { UnitsPage } from '../pages/units/units';
+import { AddunitsonePage } from '../pages/addunitsone/addunitsone';
+import { AddunitstwoPage } from '../pages/addunitstwo/addunitstwo';
+import { AddunitsthreePage } from '../pages/addunitsthree/addunitsthree';
+import { AddunitsfourPage } from '../pages/addunitsfour/addunitsfour';
 @NgModule({
   declarations: [
     MyApp,
@@ -41,7 +45,11 @@ import { AtmentionedPage } from '../pages/atmentioned/atmentioned';
     UserorgchartPage,
     LogoutPage,
     MyaccountPage,
-   // AddUnitPage,
+    UnitsPage,
+    AddunitsonePage,
+    AddunitstwoPage,
+    AddunitsthreePage,
+    AddunitsfourPage,
     EditprofilesteponePage,
     RolePage,
     AddrolePage,
@@ -52,7 +60,7 @@ import { AtmentionedPage } from '../pages/atmentioned/atmentioned';
   imports: [
     BrowserModule,
     HttpModule,
-   
+
     IonicModule.forRoot(MyApp, {
       backButtonText: 'Go Back',
       iconMode: 'ios',
@@ -60,7 +68,7 @@ import { AtmentionedPage } from '../pages/atmentioned/atmentioned';
       modalLeave: 'modal-slide-out',
       tabsPlacement: 'bottom',
       pageTransition: 'ios-transition',
-      tabSubPages:false//tabsHideOnSubPagestabsHideOnSubPages
+      tabSubPages: false//tabsHideOnSubPagestabsHideOnSubPages
     })
   ],
   bootstrap: [IonicApp],
@@ -79,7 +87,12 @@ import { AtmentionedPage } from '../pages/atmentioned/atmentioned';
     UserorgchartPage,
     LogoutPage,
     MyaccountPage,
-    //AddUnitPage,
+    UnitsPage,
+    AddunitsonePage,
+    AddunitstwoPage,
+    AddunitsthreePage,
+    AddunitsfourPage,
+    AddunitsonePage,
     EditprofilesteponePage,
     RolePage,
     AddrolePage,

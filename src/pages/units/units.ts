@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, ToastController, AlertController, NavParams } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 import { Http, Headers, RequestOptions } from '@angular/http';
-import { AdduserPage } from '../adduser/adduser';
+import { AddunitsonePage } from '../addunitsone/addunitsone';
 import { ViewcompanygroupPage } from '../viewcompanygroup/viewcompanygroup';
 import { LoadingController } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
@@ -120,11 +120,11 @@ export class UnitsPage {
   }
 
   doAdd() {
-    this.nav.setRoot(AdduserPage);
+    this.nav.setRoot(AddunitsonePage);
   }
   doEdit(item, act) {
     if (act == 'edit') {
-      this.nav.setRoot(AdduserPage, {
+      this.nav.setRoot(AddunitsonePage, {
         record: item,
         act: act
       });
