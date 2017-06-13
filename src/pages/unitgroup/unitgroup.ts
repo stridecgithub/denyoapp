@@ -49,6 +49,8 @@ export class UnitgroupPage {
       refresher.complete();
     }, 2000);
   }
+
+  
   ionViewWillEnter() {
     this.pageTitle = "Unit Groups";
     this.reportData.startindex = 0;

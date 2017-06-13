@@ -11,7 +11,7 @@
       <button ion-button menuToggle class="menu-toggle">
       <ion-icon name="menu"></ion-icon>
     </button>
-    </ion-buttons>    
+    </ion-buttons>
     <!--ion-buttons end>
       <button (click)="doAdd()" style="background-color:transparent">
             <ion-icon name="ios-add-circle-outline"></ion-icon>           
@@ -33,14 +33,6 @@
     <ion-buttons end>
       Login As:{{loginas}}
     </ion-buttons>
-    <div >
-  <select class = "spinner">
-      <option selected>Select</option>
-      <option >Unit Name Ascending</option>
-      <option>Unit Name Descending</option>
-      <option>Favorite</option>
-   </select>
-   </div>
   </ion-navbar>
   <button class="add-new-btn" (click)="doAdd()">
   	<div class="algn-cent">
@@ -48,19 +40,27 @@
         <span>Add New Unit Group</span>
     </div>
   </button>
+  <div>
+    <select class="spinner">
+      <option selected>Select</option>
+      <option >Unit Name Ascending</option>
+      <option>Unit Name Descending</option>
+      <option>Favorite</option>
+   </select>
+  </div>
 </ion-header>
 <ion-content padding>
-   <div class="error"  *ngIf="totalCount==0">No unit group entries found</div>
-  
-  <ion-refresher (ionRefresh)="doRefresh($event)"  *ngIf="totalCount!=0">
+  <div class="error" *ngIf="totalCount==0">No unit group entries found</div>
+
+  <ion-refresher (ionRefresh)="doRefresh($event)" *ngIf="totalCount!=0">
     <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
     </ion-refresher-content>
   </ion-refresher>
-  <ion-list  *ngIf="totalCount!=0">    
-    <ion-item-sliding  *ngFor="let item of reportAllLists;">
+  <ion-list *ngIf="totalCount!=0">
+    <ion-item-sliding *ngFor="let item of reportAllLists;">
       <ion-item>
         <h2><b>Company:</b>{{item.unitgroup_name}}</h2>
-       
+
       </ion-item>
       <ion-item-options>
         <!--button class="viewcolor" (click)="doEdit(item,'view')">
@@ -72,10 +72,10 @@
         <button class="trashcolor" (click)="doConfirm(item.unitgroup_id,item)">                        
                          <ion-icon name="trash" class="icon-size"></ion-icon>
                     </button>
-      </ion-item-options>     
+      </ion-item-options>
     </ion-item-sliding>
   </ion-list>
-  <ion-infinite-scroll (ionInfinite)="doInfinite($event)"  *ngIf="totalCount!=0">
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="totalCount!=0">
     <ion-infinite-scroll-content loadingText="Loading More Data"></ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>
