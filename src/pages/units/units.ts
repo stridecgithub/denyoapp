@@ -37,7 +37,7 @@ export class UnitsPage {
   public reportAllLists = [];
   constructor(public http: Http, public nav: NavController,
     public toastCtrl: ToastController, public alertCtrl: AlertController, public navParams: NavParams, public loadingCtrl: LoadingController) {
-    this.pageTitle = 'Users';
+    this.pageTitle = 'Units';
     this.loginas = localStorage.getItem("userInfoName");
   }
 
