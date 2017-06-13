@@ -5,6 +5,7 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { AdduserPage } from '../adduser/adduser';
 import { ViewcompanygroupPage } from '../viewcompanygroup/viewcompanygroup';
 import { LoadingController } from 'ionic-angular';
+import { TabsPage } from '../tabs/tabs';
 /**
  * Generated class for the UserPage page.
  *
@@ -70,7 +71,7 @@ export class UserPage {
       this.reportData.sort = "vendor";
     }
     console.log("key=run&startIndex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc + "&statusName=" + this.reportData.status + "&pagination=true");
-    let body: string = "key=run&startIndex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc + "&statusName=" + this.reportData.status + "&pagination=true",
+    let body: string = "key=run&startindex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc + "&statusName=" + this.reportData.status + "&pagination=true",
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
@@ -236,5 +237,9 @@ export class UserPage {
     } else {
       loader.dismiss();
     }
+  }
+
+  previous() {
+    this.nav.setRoot(TabsPage);
   }
 }

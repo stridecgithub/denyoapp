@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angu
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { UserPage } from '../user/user';
+import { UseraccountPage } from '../useraccount/useraccount';
 import 'rxjs/add/operator/map';
 /**
  * Generated class for the AddcompanygroupPage page.
@@ -332,6 +333,10 @@ export class UserorgchartPage {
         this.responseResultReportTo = res;
       });
 
+  }
+
+  previous() {
+    this.navCtrl.setRoot(UseraccountPage);
   }
 
 

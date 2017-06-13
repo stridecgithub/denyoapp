@@ -8,6 +8,7 @@ import { FileChooser } from '@ionic-native/file-chooser';
 import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
 import 'rxjs/add/operator/map';
+import { UserPage } from '../user/user';
 /**
  * Generated class for the AddcompanygroupPage page.
  *
@@ -143,8 +144,10 @@ export class AdduserPage {
       createdby: createdby,
 
     });
-
-
+  this.navCtrl.setRoot(UseraccountPage, {
+              accountInfo: this.userInfo
+            });
+/*
     let body: string = "key=emailexist&email=" + email,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
@@ -173,7 +176,7 @@ export class AdduserPage {
           this.sendNotification('Something went wrong!');
         }
       });
-
+*/
 
   }
 
@@ -385,5 +388,7 @@ export class AdduserPage {
       }
     });
   }
-
+ previous() {
+    this.navCtrl.setRoot(UserPage);
+  }
 }

@@ -11,16 +11,16 @@
       <button ion-button menuToggle class="menu-toggle">
       <ion-icon name="menu"></ion-icon>
     </button>
-    </ion-buttons>    
+    </ion-buttons>
     <ion-buttons end>
       <button ion-button>
-<ion-icon name="notifications-outline"></ion-icon>
+ <ion-icon name="notifications-outline"></ion-icon>
 </button>
     </ion-buttons>
   </ion-navbar>
   <ion-navbar class="backtoprevious-navbar">
     <ion-buttons start class="backtoprevious-start">
-      <button ion-button icon-left class="backtoprevious-button">
+      <button ion-button icon-left class="backtoprevious-button" (click)="previous()">
  <ion-icon name="arrow-back" class="backtoprevious-icon"></ion-icon>
  Back to previous
 </button>

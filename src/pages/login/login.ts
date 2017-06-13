@@ -76,6 +76,7 @@ export class LoginPage {
           localStorage.setItem("userInfoId", res['staffdetails'][0].user_id);
           localStorage.setItem("userInfoName", res['staffdetails'][0].firstname);
           localStorage.setItem("userInfoEmail", res['staffdetails'][0].email);
+          localStorage.setItem("userInfoCompanyId", res['staffdetails'][0].company_id);
           this.presentLoading(0);
           this.navCtrl.push(TabsPage);
         }

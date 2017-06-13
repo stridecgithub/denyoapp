@@ -4,7 +4,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 //import { PasswordValidator } from '../../validators/password';
 import { UserorgchartPage } from '../userorgchart/userorgchart';
 import { Http, Headers, RequestOptions } from '@angular/http';
-
+import { AdduserPage } from '../adduser/adduser';
 /**
  * Generated class for the UseraccountPage page.
  *
@@ -192,6 +192,10 @@ export class UseraccountPage {
       role: role
     });
 
+    this.navCtrl.setRoot(UserorgchartPage, {
+              accountInfo: this.userInfo
+            });
+/*
     let body: string = "key=usernameexist&username=" + username,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
@@ -219,7 +223,7 @@ export class UseraccountPage {
           this.sendNotification('Something went wrong!');
         }
       });
-
+*/
 
   }
 
@@ -274,5 +278,7 @@ export class UseraccountPage {
     });
     notification.present();
   }
-
+previous() {
+    this.navCtrl.setRoot(AdduserPage);
+  }
 }
