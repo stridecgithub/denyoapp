@@ -144,8 +144,10 @@ export class AdduserPage {
       createdby: createdby,
 
     });
-
-
+  this.navCtrl.setRoot(UseraccountPage, {
+              accountInfo: this.userInfo
+            });
+/*
     let body: string = "key=emailexist&email=" + email,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
@@ -174,7 +176,7 @@ export class AdduserPage {
           this.sendNotification('Something went wrong!');
         }
       });
-
+*/
 
   }
 
