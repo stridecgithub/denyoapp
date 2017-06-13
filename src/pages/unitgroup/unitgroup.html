@@ -32,7 +32,7 @@
 
 
 <ion-content padding>
-  <ion-refresher (ionRefresh)="doRefresh($event)"  *ngIf="totalCount!=0">
+  <ion-refresher (ionRefresh)="doRefreshs($event)"  *ngIf="totalCount!=0">
    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
     </ion-refresher-content>
   </ion-refresher>

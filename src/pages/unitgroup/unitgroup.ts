@@ -41,7 +41,7 @@ export class UnitgroupPage {
     console.log('ionViewDidLoad UnitgroupPage');
   }
 
-   doRefresh(refresher) {
+   doRefreshs(refresher) {
     console.log('doRefresh function calling...');
     this.reportData.startindex = 0;
     this.reportAllLists = [];
