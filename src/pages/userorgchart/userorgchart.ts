@@ -18,10 +18,12 @@ import { File } from '@ionic-native/file';
 @Component({
   selector: 'page-userorgchart',
   templateUrl: 'userorgchart.html',
+  providers: [FileChooser, Transfer, File]
 })
 export class UserorgchartPage {
   // Define FormBuilder /model properties
   public userInfo = [];
+  public loginas: any;
   public userdata = [];
   public first_name: any;
   public last_name: any;
@@ -68,7 +70,7 @@ export class UserorgchartPage {
     private filechooser: FileChooser,
     private transfer: Transfer,
     private file: File, private ngZone: NgZone) {
-
+    this.loginas = localStorage.getItem("userInfoName");
     // Create form builder validation rules
     this.form = fb.group({
       "job_position": ["", Validators.required],
@@ -174,7 +176,7 @@ export class UserorgchartPage {
     this.fileTrans(userPhotoFile);
     this.http.post(url, body, options)
       .subscribe((data) => {
-        console.log("Response Success:" + JSON.stringify(data.json()));
+        //console.log("Response Success:" + JSON.stringify(data.json()));
         // If the request was successful notify the user
         if (data.status === 200) {
           this.hideForm = true;
@@ -383,11 +385,11 @@ export class UserorgchartPage {
         this.userInfo.push({
           photo: successData
         });
-        this.sendNotification("User photo uploaded successfully");
+        //this.sendNotification("User photo uploaded successfully");
         this.progress += 5;
         this.isProgress = false;
-        this.isUploadedProcessing = false;
-        return false;
+       // this.isUploadedProcessing = false;
+       // return false;
 
 
 
@@ -410,6 +412,8 @@ export class UserorgchartPage {
     });
   }
 
-
+//http://denyoappv2.stridecdev.com/staff/store
+//main.js:61474 firstname=Kannan&lastname=Naga&photo=undefined&email=kn@gmail.com&country_id=4&contact_number=123456789&createdby=1&updatedby=1&username=nk&password=nk&role_id=1&personalhashtag=@nk&report_to=3&company_id=13&job_position=At prg
+//main.js:61622 File Name is:1497379310688.jpg
 }
 

@@ -17,7 +17,7 @@ import { UseraccountPage } from '../pages/useraccount/useraccount';
 import { UserorgchartPage } from '../pages/userorgchart/userorgchart';
 import { MyaccountPage } from '../pages/myaccount/myaccount';
 import { LogoutPage } from '../pages/logout/logout';
-import { AddUnitPage } from '../pages/add-unit/add-unit';
+//import { AddUnitPage } from '../pages/add-unit/add-unit';
 import { EditprofilesteponePage } from '../pages/editprofilestepone/editprofilestepone';
 import { RolePage } from '../pages/role/role';
 import { AddrolePage } from '../pages/addrole/addrole';
@@ -41,7 +41,7 @@ import { AtmentionedPage } from '../pages/atmentioned/atmentioned';
     UserorgchartPage,
     LogoutPage,
     MyaccountPage,
-    AddUnitPage,
+   // AddUnitPage,
     EditprofilesteponePage,
     RolePage,
     AddrolePage,
@@ -79,7 +79,7 @@ import { AtmentionedPage } from '../pages/atmentioned/atmentioned';
     UserorgchartPage,
     LogoutPage,
     MyaccountPage,
-    AddUnitPage,
+    //AddUnitPage,
     EditprofilesteponePage,
     RolePage,
     AddrolePage,

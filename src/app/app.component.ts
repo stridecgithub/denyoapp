@@ -11,7 +11,7 @@ import { LogoutPage } from '../pages/logout/logout';
 import { HomePage } from '../pages/home/home';
 import { MyaccountPage } from '../pages/myaccount/myaccount';
 import { UnitgroupPage } from '../pages/unitgroup/unitgroup';
-import { AddUnitPage } from '../pages/add-unit/add-unit';
+//import { AddUnitPage } from '../pages/add-unit/add-unit';
 
 import { RolePage } from '../pages/role/role';
 import { AddunitgroupPage } from '../pages/addunitgroup/addunitgroup';
@@ -44,11 +44,10 @@ export class MyApp {
       { title: 'Role', component: RolePage },
       { title: 'My Account', component: MyaccountPage },
       { title: 'Logout', component: LogoutPage },
-      { title: 'Add Unit', component: AddUnitPage },
       { title: 'At mentioned Page', component: AtmentionedPage },
-       { title: 'Add Unit Group', component: AddunitgroupPage },
-       { title: 'Unit Group', component: UnitgroupPage }
-      
+      { title: 'Add Unit Group', component: AddunitgroupPage },
+      { title: 'Unit Group', component: UnitgroupPage }
+
     ];
 
   }
@@ -72,9 +71,9 @@ export class MyApp {
     //this.nav.getRootNav().push(page.component);
 
     //this.viewCtrl.dismiss();
-     //this.nav.push(page.component);
-     this.nav.setRoot(page.component);
-   //this.appCtrl.getRootNav().setRoot(page.component);
+    //this.nav.push(page.component);
+    this.nav.setRoot(page.component);
+    //this.appCtrl.getRootNav().setRoot(page.component);
   }
 }
 

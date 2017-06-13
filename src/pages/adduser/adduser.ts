@@ -50,7 +50,7 @@ export class AdduserPage {
   public recordID: any = null;
   public isUploadedProcessing: boolean = false;
   public uploadResultBase64Data;
-  private apiServiceURL: string = "http://denyoappv2.stridecdev.com/";
+  private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   constructor(public navCtrl: NavController,
     public http: Http,
     public NP: NavParams,
@@ -84,6 +84,7 @@ export class AdduserPage {
   ionViewWillEnter() {
     this.resetFields();
     this.getJsonCountryListData();
+    console.log(JSON.stringify(this.NP.get("record")));
     if (this.NP.get("record")) {
       console.log("Add User:" + JSON.stringify(this.NP.get("record")));
       this.isEdited = true;
@@ -92,14 +93,15 @@ export class AdduserPage {
       this.readOnly = false;
       this.hideActionButton = true;
       if (this.NP.get("record").photo) {
-        this.addedImgLists = this.apiServiceURL + "api/uploads/users/" + this.NP.get("record").photo;
+        this.addedImgLists = this.apiServiceURL + "/public/staffphotos/" + this.NP.get("record").photo;
+        console.log(this.addedImgLists);
       }
       let editItem = this.NP.get("record");
-      this.first_name = editItem.first_name;
-      this.last_name = editItem.last_name;
+      this.first_name = editItem.firstname;
+      this.last_name = editItem.lastname;
       this.email = editItem.email;
-      this.country = editItem.country;
-      this.contact = editItem.contact;
+      this.country = editItem.country_id;
+      this.contact = editItem.contact_number;
     }
     else {
       this.isEdited = false;
@@ -245,14 +247,17 @@ export class AdduserPage {
       country: string = this.form.controls["country"].value,
       contact: string = this.form.controls["contact"].value;
     console.log(this.form.controls);
-    //if (this.isUploadedProcessing == false) {
+    /*if (this.addedImgLists) {
+      this.isUploadedProcessing = true;
+    }*/
+    if (this.isUploadedProcessing == false) {
       if (this.isEdited) {
         this.updateEntry(first_name, last_name, email, country, contact, this.userId);
       }
       else {
         this.createEntry(first_name, last_name, email, country, contact, this.userId);
       }
-    //}
+    }
   }
 
 
@@ -283,11 +288,11 @@ export class AdduserPage {
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
       url: any = this.apiServiceURL + "/getCountries";
-    let res;  
+    let res;
     this.http.get(url, options)
       .subscribe(data => {
         res = data.json();
-        this.responseResultCountry = res.countries;       
+        this.responseResultCountry = res.countries;
       });
 
   }
@@ -304,22 +309,28 @@ export class AdduserPage {
     }
   }
   doUploadPhoto() {
-    this.isUploadedProcessing = true;
+
     const options: CameraOptions = {
-      quality: 25,
+      quality: 75,
       destinationType: this.camera.DestinationType.FILE_URI,
-      allowEdit:true
+      targetWidth: 200,
+      targetHeight: 200,
+      sourceType: 1
     }
     this.camera.getPicture(options).then((imageData) => {
       console.log(imageData);
-       localStorage.setItem("userPhotoFile", imageData);
+      localStorage.setItem("userPhotoFile", imageData);
       //this.fileTrans(imageData);
-        this.addedImgLists = imageData;
+
       this.uploadResultBase64Data = imageData;
+      this.addedImgLists = imageData;
+      this.isUploadedProcessing = false;
+      return false;
     }, (err) => {
       // Handle error
       this.sendNotification(err);
     });
+
   }
 
   fileTrans(path) {
