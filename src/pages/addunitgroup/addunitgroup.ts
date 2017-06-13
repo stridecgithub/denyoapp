@@ -32,7 +32,7 @@ export class AddunitgroupPage {
   // Flag to hide the form upon successful completion of remote operation
   public hideForm: boolean = false;
   public hideActionButton = true;
-  public isUploadedProcessing: boolean = false;
+ // public isUploadedProcessing: boolean = false;
   // Property to help ste the page title
   public pageTitle: string;
   // Property to store the recordID for when an existing entry is being edited
@@ -74,18 +74,18 @@ export class AddunitgroupPage {
   saveEntry() {
     let cname: string = this.form.controls["cname"].value,
       remark: string = this.form.controls["remark"].value;
-      
-if (this.isUploadedProcessing == false) {
+       console.log(cname,remark);
+
     if (this.isEdited) {
     //  this.updateEntry(companygroup_name, address, country, contact, this.userId);
     }
     else {
       this.createEntry(cname, this.ccode, remark, this.userId);
     }
-}
+
   }
   createEntry(cname, ccode, remark, createdby) {
-    this.isUploadedProcessing = true;
+   // this.isUploadedProcessing = true;
     let updatedby = createdby;
     console.log(cname,ccode,remark);
     let body: string = "is_mobile=1&unitgroup_name=" + cname + "&colorcode=" + ccode + "&remark=" + remark + "&createdby=" + createdby + "&updatedby=" + updatedby,
@@ -124,7 +124,7 @@ if (this.isUploadedProcessing == false) {
   
   }
     sendNotification(message): void {
-      this.isUploadedProcessing = false;
+     // this.isUploadedProcessing = false;
     let notification = this.toastCtrl.create({
       message: message,
       duration: 3000
