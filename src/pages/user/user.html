@@ -86,32 +86,32 @@
 <ion-content padding>
   <div class="error"  *ngIf="totalCount==0">No users entries found</div>
   <ion-item id="sortbar"  *ngIf="totalCount!=0">
-    <button *ngIf="sortby==1" clear (click)="doSort('username')" >
+    <button *ngIf="sortby==1" clear (click)="doSort('firstname')" >
       <div class="user-name">User Name</div>
         <ion-icon *ngIf="ascending==false" ios="md-arrow-dropdown" md="md-arrow-dropdown"></ion-icon>
         <ion-icon *ngIf="ascending==true" ios="md-arrow-dropup" md="md-arrow-dropup" ></ion-icon>
     </button>
-    <button *ngIf="sortby!=1" clear (click)="doSort('username')" >
+    <button *ngIf="sortby!=1" clear (click)="doSort('firstname')" >
        <div class="user-name">User Name</div>
         <ion-icon *ngIf="ascending==false" ios="md-arrow-dropdown" md="md-arrow-dropdown" ></ion-icon>
         <ion-icon *ngIf="ascending==true" ios="md-arrow-dropup" md="md-arrow-dropup" ></ion-icon>
     </button>
    
-    <button *ngIf="sortby==2" clear (click)="doSort('companygroup_name')" style="position: absolute;
+    <button *ngIf="sortby==2" clear (click)="doSort('firstname')" style="position: absolute;
     color: black;
     background-color: white;
     padding: 1px 15px 2px 2px;
     margin-left: 130px;">
-      <div class="company-name">Company Name</div>
+      <div class="company-name">User Name</div>
         <ion-icon *ngIf="ascending==false" ios="md-arrow-dropdown" md="md-arrow-dropdown" ></ion-icon>
         <ion-icon *ngIf="ascending==true" ios="md-arrow-dropup" md="md-arrow-dropup" ></ion-icon>
     </button>
-    <button *ngIf="sortby!=2" clear (click)="doSort('companygroup_name')" style="position: absolute;
+    <button *ngIf="sortby!=2" clear (click)="doSort('firstname')" style="position: absolute;
     color: black;
     background-color: white;
     padding: 1px 15px 2px 2px;
     margin-left: 130px;">
-       <div class="company-name">Company Name</div>
+       <div class="company-name">User Name</div>
         <ion-icon *ngIf="ascending==false" ios="md-arrow-dropdown" md="md-arrow-dropdown" ></ion-icon>
         <ion-icon *ngIf="ascending==true" ios="md-arrow-dropup" md="md-arrow-dropup" ></ion-icon>
     </button>
