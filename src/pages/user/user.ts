@@ -20,7 +20,7 @@ import { TabsPage } from '../tabs/tabs';
 export class UserPage {
   public loginas: any;
   public pageTitle: string;
-  private apiServiceURL: string = "http://denyoappv2.stridecdev.com/";
+  private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   public totalCount;
   pet: string = "ALL";
   public sortby = 2;
@@ -70,24 +70,24 @@ export class UserPage {
     if (this.reportData.sort == '') {
       this.reportData.sort = "vendor";
     }
-    console.log("key=run&startIndex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc + "&statusName=" + this.reportData.status + "&pagination=true");
-    let body: string = "key=run&startindex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc + "&statusName=" + this.reportData.status + "&pagination=true",
-      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+    let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "api/users.php";
+      url: any = this.apiServiceURL + "/staff?is_mobile=1&startindex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc;
     let res;
-    this.http.post(url, body, options)
+    console.log(url);
+    this.http.get(url, options)
       .subscribe((data) => {
         res = data.json();
-        if (res.length > 0) {
-          this.reportAllLists = res;
-          this.totalCount = res[0].totalCount;
+        if (res.staff.length > 0) {
+          this.reportAllLists = res.staff;
+          this.totalCount = res.totalCount;
           this.reportData.startindex += this.reportData.results;
         } else {
           this.totalCount = 0;
         }
         console.log("Total Record:" + this.totalCount);
+
       });
     this.presentLoading(0);
   }
