@@ -86,15 +86,15 @@
 <ion-content padding>
   <div class="error"  *ngIf="totalCount==0">No users entries found</div>
   <ion-item id="sortbar"  *ngIf="totalCount!=0">
-    <button *ngIf="sortby==1" clear (click)="doSort('username')" style="position: absolute;color:black;background-color:white;padding:0px 120px 0px 0px;">
+    <button *ngIf="sortby==1" clear (click)="doSort('username')" >
       <div class="user-name">User Name</div>
-        <ion-icon *ngIf="ascending==false" ios="md-arrow-dropdown" md="md-arrow-dropdown" style="color:black;background-color:white"></ion-icon>
-        <ion-icon *ngIf="ascending==true" ios="md-arrow-dropup" md="md-arrow-dropup" style="color:black;background-color:white"></ion-icon>
+        <ion-icon *ngIf="ascending==false" ios="md-arrow-dropdown" md="md-arrow-dropdown"></ion-icon>
+        <ion-icon *ngIf="ascending==true" ios="md-arrow-dropup" md="md-arrow-dropup" ></ion-icon>
     </button>
-    <button *ngIf="sortby!=1" clear (click)="doSort('username')" style="position: absolute;color:black;background-color:white;padding:0px 120px 0px 0px;">
+    <button *ngIf="sortby!=1" clear (click)="doSort('username')" >
        <div class="user-name">User Name</div>
-        <ion-icon *ngIf="ascending==false" ios="md-arrow-dropdown" md="md-arrow-dropdown" style="color:black;background-color:white"></ion-icon>
-        <ion-icon *ngIf="ascending==true" ios="md-arrow-dropup" md="md-arrow-dropup" style="color:black;background-color:white"></ion-icon>
+        <ion-icon *ngIf="ascending==false" ios="md-arrow-dropdown" md="md-arrow-dropdown" ></ion-icon>
+        <ion-icon *ngIf="ascending==true" ios="md-arrow-dropup" md="md-arrow-dropup" ></ion-icon>
     </button>
    
     <button *ngIf="sortby==2" clear (click)="doSort('companygroup_name')" style="position: absolute;
@@ -103,8 +103,8 @@
     padding: 1px 15px 2px 2px;
     margin-left: 130px;">
       <div class="company-name">Company Name</div>
-        <ion-icon *ngIf="ascending==false" ios="md-arrow-dropdown" md="md-arrow-dropdown" style="color:black;background-color:white"></ion-icon>
-        <ion-icon *ngIf="ascending==true" ios="md-arrow-dropup" md="md-arrow-dropup" style="color:black;background-color:white"></ion-icon>
+        <ion-icon *ngIf="ascending==false" ios="md-arrow-dropdown" md="md-arrow-dropdown" ></ion-icon>
+        <ion-icon *ngIf="ascending==true" ios="md-arrow-dropup" md="md-arrow-dropup" ></ion-icon>
     </button>
     <button *ngIf="sortby!=2" clear (click)="doSort('companygroup_name')" style="position: absolute;
     color: black;
@@ -112,8 +112,8 @@
     padding: 1px 15px 2px 2px;
     margin-left: 130px;">
        <div class="company-name">Company Name</div>
-        <ion-icon *ngIf="ascending==false" ios="md-arrow-dropdown" md="md-arrow-dropdown" style="color:black;background-color:white"></ion-icon>
-        <ion-icon *ngIf="ascending==true" ios="md-arrow-dropup" md="md-arrow-dropup" style="color:black;background-color:white"></ion-icon>
+        <ion-icon *ngIf="ascending==false" ios="md-arrow-dropdown" md="md-arrow-dropdown" ></ion-icon>
+        <ion-icon *ngIf="ascending==true" ios="md-arrow-dropup" md="md-arrow-dropup" ></ion-icon>
     </button>
   </ion-item>
   <div class="separator-line"  *ngIf="totalCount!=0">&nbsp;</div>

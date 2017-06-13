@@ -112,7 +112,7 @@ export class UserPage {
   }
   ionViewWillEnter() {
     this.reportData.startindex = 0;
-    this.reportData.sort = "createdon";
+    this.reportData.sort = "staff_id";
     this.doUser();
   }
 

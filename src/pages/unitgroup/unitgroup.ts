@@ -3,9 +3,7 @@ import { IonicPage, NavController, ToastController, AlertController, NavParams }
 import 'rxjs/add/operator/map';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { AddunitgroupPage } from '../addunitgroup/addunitgroup';
-import { LoadingController } from 'ionic-angular';
-import { TabsPage } from '../tabs/tabs';
-/**
+import { LoadingController } from 'ionic-angular';/**
  * Generated class for the UnitgroupPage page.
  *
  * See http://ionicframework.com/docs/components/#navigation for more info
@@ -17,13 +15,13 @@ import { TabsPage } from '../tabs/tabs';
   templateUrl: 'unitgroup.html',
 })
 export class UnitgroupPage {
-  
- public pageTitle: string;
+
+  public pageTitle: string;
   public loginas: any;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   public totalCount;
-  pet: string = "ALL";  
-   public reportData: any =
+  pet: string = "ALL";
+  public reportData: any =
   {
     status: '',
     sort: 'unitgroup_id',
@@ -31,7 +29,7 @@ export class UnitgroupPage {
     startindex: 0,
     results: 8
   }
-   public reportAllLists = [];
+  public reportAllLists = [];
 
   constructor(public http: Http, public nav: NavController,
     public toastCtrl: ToastController, public alertCtrl: AlertController, public navParams: NavParams, public loadingCtrl: LoadingController) {
@@ -41,7 +39,7 @@ export class UnitgroupPage {
     console.log('ionViewDidLoad UnitgroupPage');
   }
 
-   doRefreshs(refresher) {
+  doRefreshs(refresher) {
     console.log('doRefresh function calling...');
     this.reportData.startindex = 0;
     this.reportAllLists = [];
@@ -50,16 +48,21 @@ export class UnitgroupPage {
       refresher.complete();
     }, 2000);
   }
-   dounitGroup() {
+  ionViewWillEnter() {
+    this.reportData.startindex = 0;
+    this.reportData.sort = "unitgroup_id";
+    this.dounitGroup();
+  }
+  dounitGroup() {
     this.presentLoading(1);
     if (this.reportData.status == '') {
       this.reportData.status = "DRAFT";
     }
     if (this.reportData.sort == '') {
-      this.reportData.sort = "unitgroup";
+      this.reportData.sort = "unitgroup_id";
     }
     //http://denyoappv2.stridecdev.com/companygroup?is_mobile=1
-    let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+    /*let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
       url: any = this.apiServiceURL + "/unitgroup?is_mobile=1&startindex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc;
@@ -79,9 +82,34 @@ export class UnitgroupPage {
         console.log("Total Record:" + this.totalCount);
 
       });
+      */
+
+    let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/unitgroup?is_mobile=1&startindex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc;
+    let res;
+    console.log(url);
+    this.http.get(url, options)
+      .subscribe((data) => {
+        res = data.json();
+        console.log(JSON.stringify(res));
+        console.log("1" + res.unitgroups.length);
+        console.log("2" + res.res.unitgroups);
+
+        if (res.unitgroups.length > 0) {
+          this.reportAllLists = res.unitgroups;
+          this.totalCount = res.totalCount;
+          this.reportData.startindex += this.reportData.results;
+        } else {
+          this.totalCount = 0;
+        }
+        //console.log("Total Record:" + this.totalCount);
+
+      });
     this.presentLoading(0);
   }
-    presentLoading(parm) {
+  presentLoading(parm) {
     let loader;
     loader = this.loadingCtrl.create({
       content: "Please wait...",
