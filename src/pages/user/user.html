@@ -18,7 +18,7 @@
   </ion-navbar>
 </ion-header-->
 
-<ion-header>
+<!--ion-header>
   <ion-navbar color="bluedark">
     <ion-title class="page-title">{{pageTitle}}</ion-title>
     <ion-buttons start>
@@ -43,7 +43,46 @@
       Login As:{{loginas}}
     </ion-buttons>
   </ion-navbar>
+</ion-header-->
+
+<ion-header>
+  <ion-navbar color="bluedark">
+    <ion-title class="page-title">{{pageTitle}}</ion-title>
+    <ion-buttons start>
+      <button ion-button menuToggle class="menu-toggle">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    </ion-buttons>    
+    <!--ion-buttons end>
+      <button (click)="doAdd()" style="background-color:transparent">
+            <ion-icon name="ios-add-circle-outline"></ion-icon>           
+        </button>
+    </ion-buttons-->
+    <ion-buttons end>
+      <button ion-button>
+  <ion-icon ios="ios-notifications-outline" md="md-notifications-outline"></ion-icon>
+</button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-navbar class="backtoprevious-navbar">
+    <ion-buttons start class="backtoprevious-start">
+      <button ion-button icon-left class="backtoprevious-button" (click)="previous()">
+ <ion-icon name="arrow-back" class="backtoprevious-icon"></ion-icon>
+ Back to previous
+</button>
+    </ion-buttons>
+    <ion-buttons end>
+      Login As:{{loginas}}
+    </ion-buttons>
+  </ion-navbar>
+  <button class="add-new-btn" (click)="doAdd()">
+  	<div class="algn-cent">
+    	<ion-icon name="ios-add-circle-outline"></ion-icon>
+        <span>Add New User</span>
+    </div>
+  </button>
 </ion-header>
+
 <ion-content padding>
   <div class="error"  *ngIf="totalCount==0">No users entries found</div>
   <ion-item id="sortbar"  *ngIf="totalCount!=0">

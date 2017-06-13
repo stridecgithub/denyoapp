@@ -5,6 +5,7 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { AdduserPage } from '../adduser/adduser';
 import { ViewcompanygroupPage } from '../viewcompanygroup/viewcompanygroup';
 import { LoadingController } from 'ionic-angular';
+import { TabsPage } from '../tabs/tabs';
 /**
  * Generated class for the UserPage page.
  *
@@ -236,5 +237,9 @@ export class UserPage {
     } else {
       loader.dismiss();
     }
+  }
+
+  previous() {
+    this.nav.setRoot(TabsPage);
   }
 }
