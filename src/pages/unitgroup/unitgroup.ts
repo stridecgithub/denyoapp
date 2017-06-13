@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, ToastController, AlertController, NavParams } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 import { Http, Headers, RequestOptions } from '@angular/http';
-import { AddunitgroupPage } from '../addunitgroup/addunitgroup';
-import { LoadingController } from 'ionic-angular';/**
+//import { AddunitgroupPage } from '../addunitgroup/addunitgroup';
+import { LoadingController } from 'ionic-angular';
+/**
  * Generated class for the UnitgroupPage page.
  *
  * See http://ionicframework.com/docs/components/#navigation for more info
@@ -49,6 +50,7 @@ export class UnitgroupPage {
     }, 2000);
   }
   ionViewWillEnter() {
+    this.pageTitle = "Unit Groups";
     this.reportData.startindex = 0;
     this.reportData.sort = "unitgroup_id";
     this.dounitGroup();
@@ -80,7 +82,7 @@ export class UnitgroupPage {
           this.totalCount = 0;
         }
         console.log("Total Record:" + this.totalCount);
-
+  
       });
       */
 
@@ -95,20 +97,42 @@ export class UnitgroupPage {
         res = data.json();
         console.log(JSON.stringify(res));
         console.log("1" + res.unitgroups.length);
-        console.log("2" + res.res.unitgroups);
-
+        console.log("2" + res.unitgroups);
         if (res.unitgroups.length > 0) {
           this.reportAllLists = res.unitgroups;
           this.totalCount = res.totalCount;
+          console.log("Total Record:`" + this.totalCount);
+          console.log(JSON.stringify(this.reportAllLists));
           this.reportData.startindex += this.reportData.results;
         } else {
           this.totalCount = 0;
         }
-        //console.log("Total Record:" + this.totalCount);
+        console.log("Total Record:2" + this.totalCount);
 
       });
     this.presentLoading(0);
   }
+
+  
+  /**********************/
+  /* Infinite scrolling */
+  /**********************/
+  doInfinite(infiniteScroll) {
+    console.log('InfinitScroll function calling...');
+    console.log('A');
+    console.log("Total Count:" + this.totalCount)
+    if (this.reportData.startindex < this.totalCount && this.reportData.startindex > 0) {
+      console.log('B');
+      this.dounitGroup();
+    }
+    console.log('C');
+    setTimeout(() => {
+      console.log('D');
+      infiniteScroll.complete();
+    }, 500);
+    console.log('E');
+  }
+
   presentLoading(parm) {
     let loader;
     loader = this.loadingCtrl.create({

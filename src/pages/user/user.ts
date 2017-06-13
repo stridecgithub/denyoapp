@@ -79,6 +79,9 @@ export class UserPage {
     this.http.get(url, options)
       .subscribe((data) => {
         res = data.json();
+        console.log(JSON.stringify(res));
+        console.log("1" + res.staff.length);
+        console.log("2" + res.staff);
         if (res.staff.length > 0) {
           this.reportAllLists = res.staff;
           this.totalCount = res.totalCount;
