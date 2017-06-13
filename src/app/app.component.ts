@@ -17,7 +17,7 @@ import { RolePage } from '../pages/role/role';
 import { AddunitgroupPage } from '../pages/addunitgroup/addunitgroup';
 import { App } from 'ionic-angular';
 import { AtmentionedPage } from '../pages/atmentioned/atmentioned';
-
+import { UnitsPage } from '../pages/units/units';
 @Component({
   templateUrl: 'app.html'
 })
@@ -41,12 +41,13 @@ export class MyApp {
       { title: 'Dashboard', component: HomePage },
       { title: 'Company Group', component: CompanygroupPage },
       { title: 'Users', component: UserPage },
-      { title: 'Role', component: RolePage },
-      { title: 'My Account', component: MyaccountPage },
-      { title: 'Logout', component: LogoutPage },
-      { title: 'At mentioned Page', component: AtmentionedPage },
       { title: 'Add Unit Group', component: AddunitgroupPage },
-      { title: 'Unit Group', component: UnitgroupPage }
+      { title: 'Unit Group', component: UnitgroupPage },
+      { title: 'Units', component: UnitsPage },
+      { title: 'Role', component: RolePage },
+      { title: 'My Account', component: MyaccountPage },    
+       { title: 'At mentioned Page', component: AtmentionedPage },
+      { title: 'Logout', component: LogoutPage },
 
     ];
 
