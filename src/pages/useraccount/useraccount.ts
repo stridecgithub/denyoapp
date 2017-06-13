@@ -4,7 +4,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 //import { PasswordValidator } from '../../validators/password';
 import { UserorgchartPage } from '../userorgchart/userorgchart';
 import { Http, Headers, RequestOptions } from '@angular/http';
-
+import { AdduserPage } from '../adduser/adduser';
 /**
  * Generated class for the UseraccountPage page.
  *
@@ -278,5 +278,7 @@ export class UseraccountPage {
     });
     notification.present();
   }
-
+previous() {
+    this.navCtrl.setRoot(AdduserPage);
+  }
 }
