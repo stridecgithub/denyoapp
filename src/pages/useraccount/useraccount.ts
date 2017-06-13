@@ -38,7 +38,7 @@ export class UseraccountPage {
   public readOnly: boolean = false;
   public recordID: any = null;
   public responseResultRole;
-  private apiServiceURL: string = "http://denyoappv2.stridecdev.com/";
+  private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
 
   constructor(public http: Http, public navCtrl: NavController, public NP: NavParams, public fb: FormBuilder, public toastCtrl: ToastController) {
     this.form = fb.group({
@@ -46,13 +46,14 @@ export class UseraccountPage {
       "username": ["", Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
       "password": ["", Validators.required],
       "re_password": ["", Validators.required],
-      "hashtag": ["", Validators.required],
+      "hashtag": [""],
       "role": ["", Validators.required],
 
       /// "email": ["", Validators.required]
 
       //'validator': this.isMatching
     }, { validator: this.matchingPasswords('password', 're_password') });
+    //this.hashtag = this.username;
   }
 
   matchingPasswords(passwordKey: string, passwordConfirmationKey: string) {
@@ -192,23 +193,27 @@ export class UseraccountPage {
       role: role
     });
 
-    this.navCtrl.setRoot(UserorgchartPage, {
-              accountInfo: this.userInfo
-            });
-/*
-    let body: string = "key=usernameexist&username=" + username,
+
+    let body: string = "username=" + username,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "api/users.php";
-
+      url: any = this.apiServiceURL + "/checkusername";
+    /*{
+        "msg": [
+            {
+                "Error": "0",
+                "result": "Username Available!"
+            }
+        ]
+    }*/
     this.http.post(url, body, options)
       .subscribe((data) => {
         console.log(JSON.stringify(data.json()));
         // If the request was successful notify the user
         if (data.status === 200) {
-          console.log(data.json().Error);
-          if (data.json().Error > 0) {
+          console.log(data.json().msg.Error);
+          if (data.json().msg.Error > 0) {
             //this.userInfo=[];
             this.sendNotification(data.json().message);
           } else {
@@ -223,7 +228,7 @@ export class UseraccountPage {
           this.sendNotification('Something went wrong!');
         }
       });
-*/
+
 
   }
 
@@ -255,16 +260,16 @@ export class UseraccountPage {
   }
 
   getRoleListData() {
-       let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+    let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "api/roles.php?key=all";
+      url: any = this.apiServiceURL + "/getroles";
 
     let res;
     this.http.get(url, options)
       .subscribe(data => {
         res = data.json();
-        this.responseResultRole = res;
+        this.responseResultRole = res.roles;
       });
 
   }
@@ -278,7 +283,11 @@ export class UseraccountPage {
     });
     notification.present();
   }
-previous() {
+  previous() {
     this.navCtrl.setRoot(AdduserPage);
+  }
+
+  addhashtag(val) {
+    this.hashtag = "@" + val;
   }
 }

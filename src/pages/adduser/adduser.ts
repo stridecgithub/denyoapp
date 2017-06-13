@@ -144,39 +144,39 @@ export class AdduserPage {
       createdby: createdby,
 
     });
-  this.navCtrl.setRoot(UseraccountPage, {
-              accountInfo: this.userInfo
-            });
-/*
-    let body: string = "key=emailexist&email=" + email,
-      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
-      headers: any = new Headers({ 'Content-Type': type }),
-      options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "api/users.php";
-
-    this.http.post(url, body, options)
-      .subscribe((data) => {
-        console.log(JSON.stringify(data.json()));
-        // If the request was successful notify the user
-        if (data.status === 200) {
-          this.hideForm = true;
-          console.log(data.json().Error);
-          if (data.json().Error > 0) {
-            this.userInfo = []; // need this one
-            this.sendNotification(data.json().message);
-          } else {
-            //this.sendNotification(data.json().message);
-            this.navCtrl.setRoot(UseraccountPage, {
-              accountInfo: this.userInfo
-            });
-          }
-        }
-        // Otherwise let 'em know anyway
-        else {
-          this.sendNotification('Something went wrong!');
-        }
-      });
-*/
+    this.navCtrl.setRoot(UseraccountPage, {
+      accountInfo: this.userInfo
+    });
+    /*
+        let body: string = "key=emailexist&email=" + email,
+          type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+          headers: any = new Headers({ 'Content-Type': type }),
+          options: any = new RequestOptions({ headers: headers }),
+          url: any = this.apiServiceURL + "api/users.php";
+    
+        this.http.post(url, body, options)
+          .subscribe((data) => {
+            console.log(JSON.stringify(data.json()));
+            // If the request was successful notify the user
+            if (data.status === 200) {
+              this.hideForm = true;
+              console.log(data.json().Error);
+              if (data.json().Error > 0) {
+                this.userInfo = []; // need this one
+                this.sendNotification(data.json().message);
+              } else {
+                //this.sendNotification(data.json().message);
+                this.navCtrl.setRoot(UseraccountPage, {
+                  accountInfo: this.userInfo
+                });
+              }
+            }
+            // Otherwise let 'em know anyway
+            else {
+              this.sendNotification('Something went wrong!');
+            }
+          });
+    */
 
   }
 
@@ -245,14 +245,14 @@ export class AdduserPage {
       country: string = this.form.controls["country"].value,
       contact: string = this.form.controls["contact"].value;
     console.log(this.form.controls);
-    if (this.isUploadedProcessing == false) {
+    //if (this.isUploadedProcessing == false) {
       if (this.isEdited) {
         this.updateEntry(first_name, last_name, email, country, contact, this.userId);
       }
       else {
         this.createEntry(first_name, last_name, email, country, contact, this.userId);
       }
-    }
+    //}
   }
 
 
@@ -279,18 +279,15 @@ export class AdduserPage {
   }
 
   getJsonCountryListData() {
-
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "api/countries.php";
-    let res;
-    this.presentLoading(1);
+      url: any = this.apiServiceURL + "/getCountries";
+    let res;  
     this.http.get(url, options)
       .subscribe(data => {
         res = data.json();
-        this.responseResultCountry = res;
-        this.presentLoading(0);
+        this.responseResultCountry = res.countries;       
       });
 
   }
@@ -310,11 +307,14 @@ export class AdduserPage {
     this.isUploadedProcessing = true;
     const options: CameraOptions = {
       quality: 25,
-      destinationType: this.camera.DestinationType.FILE_URI
+      destinationType: this.camera.DestinationType.FILE_URI,
+      allowEdit:true
     }
     this.camera.getPicture(options).then((imageData) => {
       console.log(imageData);
-      this.fileTrans(imageData);
+       localStorage.setItem("userPhotoFile", imageData);
+      //this.fileTrans(imageData);
+        this.addedImgLists = imageData;
       this.uploadResultBase64Data = imageData;
     }, (err) => {
       // Handle error
@@ -345,24 +345,15 @@ export class AdduserPage {
     //  http://127.0.0.1/ionic/upload_attach.php
     //http://amahr.stridecdev.com/getgpsvalue.php?key=create&lat=34&long=45
     fileTransfer.onProgress(this.onProgress);
-    fileTransfer.upload(path, this.apiServiceURL + 'api/upload_user_photo.php', options)
+    fileTransfer.upload(path, this.apiServiceURL + '/upload.php', options)
       .then((data) => {
+        console.log(JSON.stringify(data));
         console.log("UPLOAD SUCCESS:" + data.response);
         let successData = JSON.parse(data.response);
         this.userInfo.push({
           photo: successData
         });
         this.sendNotification("User photo uploaded successfully");
-        //http://denyoappv2.stridecdev.com/api/uploads/users/1496340809342.jpg
-        console.log('http:' + '//' + successData.baseURL + '/' + successData.target_dir + '/' + successData.fileName);
-
-        //<img src="{{addedImgLists[i].imgSrc}}" width="75%" height="75%" />
-        let imgSrc;
-
-        imgSrc = 'http:' + '//' + successData.baseURL + '/' + successData.target_dir + '/' + successData.fileName;
-        this.addedImgLists = path;
-
-
         this.progress += 5;
         this.isProgress = false;
         this.isUploadedProcessing = false;
@@ -388,7 +379,7 @@ export class AdduserPage {
       }
     });
   }
- previous() {
+  previous() {
     this.navCtrl.setRoot(UserPage);
   }
 }

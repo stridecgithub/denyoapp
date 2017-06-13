@@ -172,13 +172,13 @@ export class UserPage {
   // for the record ID we want to remove from the remote database
   deleteEntry(recordID) {
     let
-      body: string = "key=delete&recordID=" + recordID,
+      //body: string = "key=delete&recordID=" + recordID,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "api/users.php";
+      url: any = this.apiServiceURL + "/staff/" + recordID + "/1/delete";
 
-    this.http.post(url, body, options)
+    this.http.get(url, options)
       .subscribe(data => {
         // If the request was successful notify the user
         if (data.status === 200) {

@@ -1,10 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { UserPage } from '../user/user';
 import { UseraccountPage } from '../useraccount/useraccount';
 import 'rxjs/add/operator/map';
+import { FileChooser } from '@ionic-native/file-chooser';
+import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
+import { File } from '@ionic-native/file';
 /**
  * Generated class for the AddcompanygroupPage page.
  *
@@ -41,7 +44,10 @@ export class UserorgchartPage {
   public address: any;
   public responseResultCompanyGroup: any;
   public responseResultReportTo: any;
-
+  progress: number;
+  public isUploadedProcessing: boolean = false;
+  public isProgress = false;
+  public isUploaded: boolean = true;
   // Flag to be used for checking whether we are adding/editing an entry
   public isEdited: boolean = false;
   public readOnly: boolean = false;
@@ -53,12 +59,15 @@ export class UserorgchartPage {
   public pageTitle: string;
   // Property to store the recordID for when an existing entry is being edited
   public recordID: any = null;
-  private apiServiceURL: string = "http://denyoappv2.stridecdev.com/";
+  private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   constructor(public navCtrl: NavController,
     public http: Http,
     public NP: NavParams,
     public fb: FormBuilder,
-    public toastCtrl: ToastController) {
+    public toastCtrl: ToastController,
+    private filechooser: FileChooser,
+    private transfer: Transfer,
+    private file: File, private ngZone: NgZone) {
 
     // Create form builder validation rules
     this.form = fb.group({
@@ -139,34 +148,38 @@ export class UserorgchartPage {
   // supplies a variable of key with a value of create followed by the key/value pairs
   // for the record data
   createEntry(userdata, userid) {
-    let body: string = "key=create&userdata=" +
-      JSON.stringify(userdata) +
-      "&recordID=" + this.recordID +
-      "&first_name=" + this.first_name +
-      "&last_name=" + this.last_name +
+    let body: string = "firstname=" + this.first_name +
+      "&lastname=" + this.last_name +
       "&photo=" + this.photo +
       "&email=" + this.email +
-      "&country=" + this.country +
-      "&contact=" + this.contact +
+      "&country_id=" + this.country +
+      "&contact_number=" + this.contact +
       "&createdby=" + this.createdby +
+      "&updatedby=" + this.createdby +
       "&username=" + this.username +
       "&password=" + this.password +
-      "&role=" + this.role +
-      "&hashtag=" + this.hashtag +
+      "&role_id=" + this.role +
+      "&personalhashtag=" + this.hashtag +
       "&report_to=" + this.report_to +
-      "&company_group=" + this.company_group +
+      "&company_id=" + this.company_group +
       "&job_position=" + this.job_position,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "api/users.php";
+      url: any = this.apiServiceURL + "/staff/store";
+    console.log(url);
+    console.log(body);
 
+    let userPhotoFile = localStorage.getItem("userPhotoFile");
+    this.fileTrans(userPhotoFile);
     this.http.post(url, body, options)
       .subscribe((data) => {
+        console.log("Response Success:" + JSON.stringify(data.json()));
         // If the request was successful notify the user
         if (data.status === 200) {
           this.hideForm = true;
           this.sendNotification(`User created was successfully added`);
+          localStorage.setItem("userPhotoFile", "");
           this.navCtrl.setRoot(UserPage);
         }
         // Otherwise let 'em know anyway
@@ -184,27 +197,28 @@ export class UserorgchartPage {
   // supplies a variable of key with a value of update followed by the key/value pairs
   // for the record data
   updateEntry(userdata, userid) {
-    let body: string = "key=update&userdata=" +
-      JSON.stringify(userdata) +
-      "&recordID=" + this.recordID +
-      "&first_name=" + this.first_name +
-      "&last_name=" + this.last_name +
+
+    let body: string = "staff_id=" + this.recordID +
+      "&firstname=" + this.first_name +
+      "&lastname=" + this.last_name +
       "&photo=" + this.photo +
       "&email=" + this.email +
-      "&country=" + this.country +
-      "&contact=" + this.contact +
+      "&country_id=" + this.country +
+      "&contact_number=" + this.contact +
       "&createdby=" + this.createdby +
+      "&updatedby=" + this.createdby +
       "&username=" + this.username +
       "&password=" + this.password +
-      "&role=" + this.role +
-      "&hashtag=" + this.hashtag +
+      "&role_id=" + this.role +
+      "&personalhashtag=" + this.hashtag +
       "&report_to=" + this.report_to +
-      "&company_group=" + this.company_group +
+      "&company_id=" + this.company_group +
       "&job_position=" + this.job_position,
+
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "api/users.php";
+      url: any = this.apiServiceURL + "/api/users.php";
 
     this.http.post(url, body, options)
       .subscribe(data => {
@@ -235,7 +249,7 @@ export class UserorgchartPage {
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "api/users.php";
+      url: any = this.apiServiceURL + "/api/users.php";
 
     this.http.post(url, body, options)
       .subscribe(data => {
@@ -311,12 +325,12 @@ export class UserorgchartPage {
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "api/companygroup.php?key=all";
+      url: any = this.apiServiceURL + "/getcompanies";
     let res;
     this.http.get(url, options)
       .subscribe(data => {
         res = data.json();
-        this.responseResultCompanyGroup = res;
+        this.responseResultCompanyGroup = res.companies;
       });
 
   }
@@ -325,12 +339,12 @@ export class UserorgchartPage {
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "api/users.php?key=all";
+      url: any = this.apiServiceURL + "/getstaffs";
     let res;
     this.http.get(url, options)
       .subscribe(data => {
         res = data.json();
-        this.responseResultReportTo = res;
+        this.responseResultReportTo = res.staffslist;
       });
 
   }
@@ -338,7 +352,63 @@ export class UserorgchartPage {
   previous() {
     this.navCtrl.setRoot(UseraccountPage);
   }
+  fileTrans(path) {
+    let fileName = path.substr(path.lastIndexOf('/') + 1);
+    const fileTransfer: TransferObject = this.transfer.create();
+    let currentName = path.replace(/^.*[\\\/]/, '');
+    this.photo = currentName;
+    console.log("File Name is:" + currentName);
 
+
+    /*var d = new Date(),
+        n = d.getTime(),
+        newFileName = n + ".jpg";*/
+
+    let options: FileUploadOptions = {
+      fileKey: 'file',
+      fileName: fileName,
+      headers: {},
+      chunkedMode: false,
+      mimeType: "text/plain",
+    }
+
+    //  http://127.0.0.1/ionic/upload_attach.php
+    //http://amahr.stridecdev.com/getgpsvalue.php?key=create&lat=34&long=45
+    fileTransfer.onProgress(this.onProgress);
+    fileTransfer.upload(path, this.apiServiceURL + '/upload.php', options)
+      .then((data) => {
+        console.log(JSON.stringify(data));
+        console.log("UPLOAD SUCCESS:" + data.response);
+        let successData = JSON.parse(data.response);
+        this.userInfo.push({
+          photo: successData
+        });
+        this.sendNotification("User photo uploaded successfully");
+        this.progress += 5;
+        this.isProgress = false;
+        this.isUploadedProcessing = false;
+        return false;
+
+
+
+        // Save in Backend and MysQL
+        //this.uploadToServer(data.response);
+        // Save in Backend and MysQL
+      }, (err) => {
+        //loading.dismiss();
+        console.log("Upload Error:");
+        this.sendNotification("Upload Error:" + JSON.stringify(err));
+      })
+  }
+  onProgress = (progressEvent: ProgressEvent): void => {
+    this.ngZone.run(() => {
+      if (progressEvent.lengthComputable) {
+        let progress = Math.round((progressEvent.loaded / progressEvent.total) * 95);
+        this.isProgress = true;
+        this.progress = progress;
+      }
+    });
+  }
 
 
 }
