@@ -192,6 +192,10 @@ export class UseraccountPage {
       role: role
     });
 
+    this.navCtrl.setRoot(UserorgchartPage, {
+              accountInfo: this.userInfo
+            });
+/*
     let body: string = "key=usernameexist&username=" + username,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
@@ -219,7 +223,7 @@ export class UseraccountPage {
           this.sendNotification('Something went wrong!');
         }
       });
-
+*/
 
   }
 
