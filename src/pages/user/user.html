@@ -11,7 +11,7 @@
       <button ion-button menuToggle class="menu-toggle">
       <ion-icon name="menu"></ion-icon>
     </button>
-    </ion-buttons>    
+    </ion-buttons>
     <!--ion-buttons end>
       <button (click)="doAdd()" style="background-color:transparent">
             <ion-icon name="ios-add-circle-outline"></ion-icon>           
@@ -43,8 +43,8 @@
 </ion-header>
 
 <ion-content padding>
-  <div class="error"  *ngIf="totalCount==0">No users entries found</div>
-  <ion-item id="sortbar"  *ngIf="totalCount!=0">
+  <div class="error" *ngIf="totalCount==0">No users entries found</div>
+  <!--ion-item id="sortbar"  *ngIf="totalCount!=0">
     <button *ngIf="sortby==1" clear (click)="doSort('firstname')" >
       <div class="user-name">User Name</div>
         <ion-icon *ngIf="ascending==false" ios="md-arrow-dropdown" md="md-arrow-dropdown"></ion-icon>
@@ -70,13 +70,22 @@
         <ion-icon *ngIf="ascending==false" ios="md-arrow-dropdown" md="md-arrow-dropdown" ></ion-icon>
         <ion-icon *ngIf="ascending==true" ios="md-arrow-dropup" md="md-arrow-dropup" ></ion-icon>
     </button>
+  </ion-item-->
+  <ion-item style="width: 100%; margin: 0; padding-left: 10px;">
+    <ion-label>Sort By</ion-label>
+    <ion-select  style="padding: 1px 1px 6px 1px;" [(ngModel)]="pet" (ionChange)="onSegmentChanged(pet)">
+      <ion-option value="firstname,asc" selected="true">Name Asc</ion-option>
+      <ion-option value="firstname,desc">Name Desc</ion-option>
+      <ion-option value="companygroup_name,asc">Group Asc</ion-option>
+      <ion-option value="companygroup_name,desc">Group Desc</ion-option>
+    </ion-select>
   </ion-item>
-  <div class="separator-line"  *ngIf="totalCount!=0">&nbsp;</div>
-  <ion-refresher (ionRefresh)="doRefresh($event)"  *ngIf="totalCount!=0">
+  <div class="separator-line" *ngIf="totalCount!=0">&nbsp;</div>
+  <ion-refresher (ionRefresh)="doRefresh($event)" *ngIf="totalCount!=0">
     <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
     </ion-refresher-content>
   </ion-refresher>
-  <ion-list  *ngIf="totalCount!=0">   
+  <ion-list *ngIf="totalCount!=0">
     <ion-item-sliding *ngFor="let item of reportAllLists;">
       <ion-item>
         <h2><b>User ID:</b>{{item.username}}</h2>
@@ -97,7 +106,7 @@
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
-  <ion-infinite-scroll (ionInfinite)="doInfinite($event)"  *ngIf="totalCount!=0">
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="totalCount!=0">
     <ion-infinite-scroll-content loadingText="Loading More Data"></ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>

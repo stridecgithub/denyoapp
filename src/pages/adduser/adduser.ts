@@ -93,7 +93,7 @@ export class AdduserPage {
       this.readOnly = false;
       this.hideActionButton = true;
       if (this.NP.get("record").photo) {
-        this.addedImgLists = this.apiServiceURL + "/public/staffphotos/" + this.NP.get("record").photo;
+        this.addedImgLists = this.apiServiceURL + "/staffphotos/" + this.NP.get("record").photo;
         console.log(this.addedImgLists);
       }
       let editItem = this.NP.get("record");

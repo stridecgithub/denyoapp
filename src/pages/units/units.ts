@@ -13,10 +13,12 @@ import { TabsPage } from '../tabs/tabs';
  * on Ionic pages and navigation.
  */
 @IonicPage()
+
 @Component({
   selector: 'page-units',
   templateUrl: 'units.html',
 })
+
 export class UnitsPage {
   public loginas: any;
   public pageTitle: string;
@@ -29,8 +31,8 @@ export class UnitsPage {
   public reportData: any =
   {
     status: '',
-    sort: '',
-    sortascdesc: '',
+    sort: 'staff_id',
+    sortascdesc: 'asc',
     startindex: 0,
     results: 8
   }
@@ -42,7 +44,7 @@ export class UnitsPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad UnitsPage');
+    console.log('ionViewDidLoad Units Page');
   }
 
   /*******************/
@@ -82,8 +84,8 @@ export class UnitsPage {
         console.log(JSON.stringify(res));
         console.log("1" + res.staff.length);
         console.log("2" + res.staff);
-        if (res.staff.length > 0) {
-          this.reportAllLists = res.staff;
+        if (res.units.length > 0) {
+          this.reportAllLists = res.units;
           this.totalCount = res.totalCount;
           this.reportData.startindex += this.reportData.results;
         } else {
@@ -203,6 +205,17 @@ export class UnitsPage {
   }
 
 
+
+  onSegmentChanged(val) {
+    let splitdata = val.split(",");
+    this.reportData.sort = splitdata[0];
+    this.reportData.sortascdesc = splitdata[1];
+    //this.reportData.status = "ALL";
+    this.reportData.startindex = 0;
+    this.reportAllLists = [];
+    this.doUser();
+  }
+
   /********************/
   /* Sorting function */
   /********************/
@@ -246,4 +259,3 @@ export class UnitsPage {
     this.nav.setRoot(TabsPage);
   }
 }
-

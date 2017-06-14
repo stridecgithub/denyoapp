@@ -11,7 +11,7 @@
       <button ion-button menuToggle class="menu-toggle">
       <ion-icon name="menu"></ion-icon>
     </button>
-    </ion-buttons>    
+    </ion-buttons>
     <!--ion-buttons end>
       <button (click)="doAdd()" style="background-color:transparent">
             <ion-icon name="ios-add-circle-outline"></ion-icon>           
@@ -42,8 +42,8 @@
   </button>
 </ion-header>
 <ion-content padding>
-   <div class="error"  *ngIf="totalCount==0">No company group entries found</div>
-  <ion-item id="sortbar"  *ngIf="totalCount!=0">
+  <div class="error" *ngIf="totalCount==0">No company group entries found</div>
+  <!--ion-item id="sortbar"  *ngIf="totalCount!=0">
     <button *ngIf="sortby==1"clear (click)="doSort('companygroup_name')"  style="color:black;">
       <div class="company-name">Company Name</div>
         <ion-icon *ngIf="ascending==false" ios="md-arrow-dropdown" md="md-arrow-dropdown" style="color:black;"></ion-icon>
@@ -54,13 +54,21 @@
         <ion-icon *ngIf="ascending==false" ios="md-arrow-dropdown" md="md-arrow-dropdown" style="color:black;"></ion-icon>
         <ion-icon *ngIf="ascending==true" ios="md-arrow-dropup" md="md-arrow-dropup" style="color:black;"></ion-icon>
     </button>
+  </ion-item-->
+
+  <ion-item style="width: 100%; margin: 0; padding-left: 10px;">
+    <ion-label>Sort By</ion-label>
+    <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="pet" (ionChange)="onSegmentChanged(pet)">     
+      <ion-option value="companygroup_name,asc"  selected="true">Group Name Asc</ion-option>
+      <ion-option value="companygroup_name,desc">Group Name Desc</ion-option>
+    </ion-select>
   </ion-item>
-  <ion-refresher (ionRefresh)="doRefresh($event)"  *ngIf="totalCount!=0">
+  <ion-refresher (ionRefresh)="doRefresh($event)" *ngIf="totalCount!=0">
     <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
     </ion-refresher-content>
   </ion-refresher>
-  <ion-list  *ngIf="totalCount!=0">    
-    <ion-item-sliding  *ngFor="let item of reportAllLists;">
+  <ion-list *ngIf="totalCount!=0">
+    <ion-item-sliding *ngFor="let item of reportAllLists;">
       <ion-item>
         <h2><b>Company:</b>{{item.companygroup_name}}</h2>
         <h2><b>Total User:</b>{{item.totaluser}}</h2>
@@ -76,10 +84,10 @@
         <button class="trashcolor" (click)="doConfirm(item.companygroup_id,item)">                        
                          <ion-icon name="trash" class="icon-size"></ion-icon>
                     </button>
-      </ion-item-options>     
+      </ion-item-options>
     </ion-item-sliding>
   </ion-list>
-  <ion-infinite-scroll (ionInfinite)="doInfinite($event)"  *ngIf="totalCount!=0">
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="totalCount!=0">
     <ion-infinite-scroll-content loadingText="Loading More Data"></ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>

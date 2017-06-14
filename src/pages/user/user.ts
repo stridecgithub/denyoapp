@@ -13,10 +13,12 @@ import { TabsPage } from '../tabs/tabs';
  * on Ionic pages and navigation.
  */
 @IonicPage()
+
 @Component({
   selector: 'page-user',
   templateUrl: 'user.html',
 })
+
 export class UserPage {
   public loginas: any;
   public pageTitle: string;
@@ -29,8 +31,8 @@ export class UserPage {
   public reportData: any =
   {
     status: '',
-    sort: '',
-    sortascdesc: '',
+    sort: 'staff_id',
+    sortascdesc: 'asc',
     startindex: 0,
     results: 8
   }
@@ -202,6 +204,17 @@ export class UserPage {
     notification.present();
   }
 
+
+
+  onSegmentChanged(val) {
+    let splitdata = val.split(",");
+    this.reportData.sort = splitdata[0];
+    this.reportData.sortascdesc = splitdata[1];
+    //this.reportData.status = "ALL";
+    this.reportData.startindex = 0;
+    this.reportAllLists = [];
+    this.doUser();
+  }
 
   /********************/
   /* Sorting function */

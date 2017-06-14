@@ -100,7 +100,7 @@ export class UserorgchartPage {
       this.hideActionButton = true;
       let editItem = this.NP.get("record");
       this.job_position = editItem.job_position;
-      this.company_group = editItem.company_group;
+      this.company_group = editItem.company_id;
       this.report_to = editItem.report_to;
     }
     else {
@@ -137,9 +137,9 @@ export class UserorgchartPage {
   // used as models on the page's HTML form
   selectEntry(item) {
     this.job_position = item.job_position;
-    this.company_group = item.company_group;
+    this.company_group = item.company_id;
     this.report_to = item.report_to;
-    this.recordID = item.userid;
+    this.recordID = item.staff_id;
   }
 
 
@@ -150,6 +150,12 @@ export class UserorgchartPage {
   // supplies a variable of key with a value of create followed by the key/value pairs
   // for the record data
   createEntry(userdata, userid) {
+
+    let userPhotoFile = localStorage.getItem("userPhotoFile");
+    if (userPhotoFile) {
+      console.log("Upload Device Image File:" + userPhotoFile);
+      this.fileTrans(userPhotoFile);
+    }
     let body: string = "firstname=" + this.first_name +
       "&lastname=" + this.last_name +
       "&photo=" + this.photo +
@@ -171,9 +177,7 @@ export class UserorgchartPage {
       url: any = this.apiServiceURL + "/staff/store";
     console.log(url);
     console.log(body);
-
-    let userPhotoFile = localStorage.getItem("userPhotoFile");
-    this.fileTrans(userPhotoFile);
+    
     this.http.post(url, body, options)
       .subscribe((data) => {
         //console.log("Response Success:" + JSON.stringify(data.json()));
@@ -200,6 +204,11 @@ export class UserorgchartPage {
   // for the record data
   updateEntry(userdata, userid) {
 
+    let userPhotoFile = localStorage.getItem("userPhotoFile");
+    if (userPhotoFile) {
+      console.log("Upload Device Image File:" + userPhotoFile);
+      this.fileTrans(userPhotoFile);
+    }
     let body: string = "staff_id=" + this.recordID +
       "&firstname=" + this.first_name +
       "&lastname=" + this.last_name +
@@ -220,8 +229,9 @@ export class UserorgchartPage {
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/api/users.php";
-
+      url: any = this.apiServiceURL + "/staff/store";
+    console.log(url);
+    console.log(body);
     this.http.post(url, body, options)
       .subscribe(data => {
         console.log(data);
@@ -229,7 +239,7 @@ export class UserorgchartPage {
         if (data.status === 200) {
           this.hideForm = true;
           this.sendNotification(`User created was successfully updated`);
-          this.navCtrl.setRoot(UserPage);
+          // this.navCtrl.setRoot(UserPage);
         }
         // Otherwise let 'em know anyway
         else {
@@ -388,8 +398,8 @@ export class UserorgchartPage {
         //this.sendNotification("User photo uploaded successfully");
         this.progress += 5;
         this.isProgress = false;
-       // this.isUploadedProcessing = false;
-       // return false;
+        // this.isUploadedProcessing = false;
+        // return false;
 
 
 
@@ -412,8 +422,8 @@ export class UserorgchartPage {
     });
   }
 
-//http://denyoappv2.stridecdev.com/staff/store
-//main.js:61474 firstname=Kannan&lastname=Naga&photo=undefined&email=kn@gmail.com&country_id=4&contact_number=123456789&createdby=1&updatedby=1&username=nk&password=nk&role_id=1&personalhashtag=@nk&report_to=3&company_id=13&job_position=At prg
-//main.js:61622 File Name is:1497379310688.jpg
+  //http://denyoappv2.stridecdev.com/staff/store
+  //main.js:61474 firstname=Kannan&lastname=Naga&photo=undefined&email=kn@gmail.com&country_id=4&contact_number=123456789&createdby=1&updatedby=1&username=nk&password=nk&role_id=1&personalhashtag=@nk&report_to=3&company_id=13&job_position=At prg
+  //main.js:61622 File Name is:1497379310688.jpg
 }
 

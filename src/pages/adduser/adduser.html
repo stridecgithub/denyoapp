@@ -41,7 +41,9 @@
           <a (click)="doUploadPhoto()" href="#" *ngIf="!addedImgLists">
             <ion-icon name="camera" style="font-size: 75pt;color:#009ACD"></ion-icon>
           </a>
+          <a (click)="doUploadPhoto()" href="#" *ngIf="addedImgLists">
           <img src="{{addedImgLists}}" width="100" height="75" *ngIf="addedImgLists" />
+           </a>
         </div>
         <div style="position: relative;
     left: 38%;">Upload Photo

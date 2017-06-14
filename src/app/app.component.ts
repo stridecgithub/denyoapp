@@ -45,8 +45,8 @@ export class MyApp {
       { title: 'Unit Group', component: UnitgroupPage },
       { title: 'Units', component: UnitsPage },
       { title: 'Role', component: RolePage },
-      { title: 'My Account', component: MyaccountPage },    
-       { title: 'At mentioned Page', component: AtmentionedPage },
+      { title: 'My Account', component: MyaccountPage },
+      { title: 'At mentioned Page', component: AtmentionedPage },
       { title: 'Logout', component: LogoutPage },
 
     ];
@@ -59,7 +59,11 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
-      this.splashScreen.hide();
+
+      //setTimeout(function () {
+        this.splashScreen.hide();
+     // }, 3000);
+
     });
   }
 
