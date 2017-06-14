@@ -132,6 +132,13 @@ export class UnitgroupPage {
    previous() {
     this.nav.setRoot(TabsPage);
   }
-
+ doEdit(item, act) {
+    if (act == 'edit') {
+      this.nav.setRoot(AddunitgroupPage, {
+        record: item,
+        act: act
+      });
+    }
+  }
 
 }
