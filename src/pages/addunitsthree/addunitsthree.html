@@ -32,58 +32,32 @@
 </ion-header>
 <ion-content padding>
   <div>
-    <img src="img/add_unit_step_1.png">
+    <img src="img/add_unit_step_3.png">
   </div>
- 
+
   <div>
     <form [formGroup]="form" (ngSubmit)="saveEntry()">
       <ion-list>
-        <div style="position: relative;left: 35%;">
-          <!--button  [disabled]="progress" (click)="doUploadPhoto()" style="background-color:#fff" *ngIf="!addedImgLists">
-            <ion-icon name="camera" style="font-size: 75pt;color:#009ACD"></ion-icon>           
-        </button-->
-          <a (click)="doUploadPhoto()" href="#" *ngIf="!addedImgLists">
-            <ion-icon name="camera" style="font-size: 75pt;color:#009ACD"></ion-icon>
-          </a>
-          <img src="{{addedImgLists}}" width="100" height="75" *ngIf="addedImgLists" />
-        </div>
-        <div style="position: relative;
-    left: 38%;">Upload Photo
-        </div>
-        <div style="position: relative;
-    left: 28%;">
-          <p>
-            <progress value="{{progress}}" max="100" *ngIf="isProgress"> </progress>
-            <span *ngIf="isProgress" style="padding:2px">{{progress}}%</span>
-          </p>
-        </div>
-        <div style="position: relative;
-    left: 6%;"><b>User Information*</b></div>
+
         <ion-item>
-          <ion-label stacked>First Name <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
-          <ion-input type="text" [disabled]="readOnly" formControlName="first_name" [(ngModel)]="first_name"></ion-input>
+          <ion-label stacked>Select Notification List<span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
+          <ion-input type="text" [disabled]="readOnly" formControlName="alarmhashtags" [(ngModel)]="alarmhashtags"></ion-input>
         </ion-item>
 
         <ion-item>
-          <ion-label stacked>Last Name <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
-          <ion-input type="text" [disabled]="readOnly" formControlName="last_name" [(ngModel)]="last_name"></ion-input>
+          <ion-label stacked>Contact Person <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
+          <ion-input type="text" [disabled]="readOnly" formControlName="contact_name" [(ngModel)]="contact_name"></ion-input>
         </ion-item>
 
         <ion-item>
-          <ion-label stacked>Email<span class="mandatory" *ngIf="hideActionButton"> *</span></ion-label>
-          <ion-input type="text" [disabled]="readOnly" formControlName="email" [(ngModel)]="email"></ion-input>
+          <ion-label stacked>Contact Number<span class="mandatory" *ngIf="hideActionButton"> *</span></ion-label>
+          <ion-input type="text" [disabled]="readOnly" formControlName="contact_number" [(ngModel)]="contact_number"></ion-input>
         </ion-item>
 
-        <ion-item>
-          <ion-label stacked>Contact Number <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
-          <ion-input [disabled]="readOnly" type="text" formControlName="contact" [(ngModel)]="contact"></ion-input>
-        </ion-item>
+
 
         <ion-item>
-          <ion-label stacked>Country <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
-          <ion-select [disabled]="readOnly" [(ngModel)]="country" formControlName="country">
-            <ion-option *ngFor="let countryData of responseResultCountry" value="{{countryData.id}}">{{countryData.country_name}}</ion-option>
-          </ion-select>
+          <a href="#" (click)="addmore()">Add More</a>
         </ion-item>
 
 

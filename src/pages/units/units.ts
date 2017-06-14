@@ -178,14 +178,14 @@ export class UnitsPage {
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/staff/" + recordID + "/1/delete";
+      url: any = this.apiServiceURL + "/units/" + recordID + "/1/delete";
 
     this.http.get(url, options)
       .subscribe(data => {
         // If the request was successful notify the user
         if (data.status === 200) {
 
-          this.sendNotification(`Congratulations the user was successfully deleted`);
+          this.sendNotification(`Congratulations the units was successfully deleted`);
         }
         // Otherwise let 'em know anyway
         else {

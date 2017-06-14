@@ -25,12 +25,9 @@ export class AddunitsthreePage {
   // Define FormBuilder /model properties
   public loginas: any;
   public form: FormGroup;
-  public first_name: any;
-  public last_name: any;
-  public email: any;
-  public photo: any;
-  public country: any;
-  public contact: any;
+  public alarmhashtags: any;
+  public contact_name: any;
+  public contact_number: any;
   public userId: any;
   public responseResultCountry: any;
   progress: number;
@@ -62,14 +59,12 @@ export class AddunitsthreePage {
     this.loginas = localStorage.getItem("userInfoName");
     // Create form builder validation rules
     this.form = fb.group({
-      //"first_name": ["", Validators.required],
-      //"last_name": ["", Validators.required],
-      "first_name": ["", Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
-      "last_name": ["", Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
-      "country": ["", Validators.required],
-      "contact": ["", Validators.required],
-      /// "email": ["", Validators.required]
-      'email': ['', Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(50), Validators.pattern(/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i)])],
+      //"alarmhashtags": ["", Validators.required],
+      //"contact_name": ["", Validators.required],
+      "alarmhashtags": ["", Validators.required],
+      "contact_name": ["", Validators.required],     
+      /// "contact_number": ["", Validators.required]
+      'contact_number': ["", Validators.required],
     });
     this.userId = localStorage.getItem("userInfoId");
   }
@@ -97,19 +92,17 @@ export class AddunitsthreePage {
         console.log(this.addedImgLists);
       }
       let editItem = this.NP.get("record");
-      this.first_name = editItem.firstname;
-      this.last_name = editItem.lastname;
-      this.email = editItem.email;
-      this.country = editItem.country_id;
-      this.contact = editItem.contact_number;
+      this.alarmhashtags = editItem.alarmhashtags;
+      this.contact_name = editItem.contact_name;
+      this.contact_number = editItem.contact_number;
     }
     else {
       this.isEdited = false;
       this.pageTitle = 'New  Units - 3';
     }
-    /*this.first_name = "Kannan";
-    this.last_name = "Nagarathinam";
-    this.email = "kannanrathvalli@gmail.com";
+    /*this.alarmhashtags = "Kannan";
+    this.contact_name = "Nagarathinam";
+    this.contact_number = "kannanrathvalli@gmail.com";
     this.country = "238";
     this.contact = "9443976954";*/
   }
@@ -119,12 +112,9 @@ export class AddunitsthreePage {
   // Assign the navigation retrieved data to properties
   // used as models on the page's HTML form
   selectEntry(item) {
-    this.first_name = item.first_name;
-    this.last_name = item.last_name;
-    this.email = item.email;
-    this.country = item.country;
-    this.contact = item.contact;
-    this.photo = item.photo;
+    this.alarmhashtags = item.alarmhashtags;
+    this.contact_name = item.contact_name;
+    this.contact_number = item.contact_number;
     this.recordID = item.userid;
   }
 
@@ -135,14 +125,11 @@ export class AddunitsthreePage {
   // to our remote PHP script (note the body variable we have created which
   // supplies a variable of key with a value of create followed by the key/value pairs
   // for the record data
-  createEntry(first_name, last_name, email, country, contact, createdby) {
+  createEntry(alarmhashtags, contact_name, contact_number, createdby) {
     this.userInfo.push({
-      photo: this.photo,
-      first_name: first_name,
-      last_name: last_name,
-      email: email,
-      country: country,
-      contact: contact,
+      alarmhashtags: alarmhashtags,
+      contact_name: contact_name,
+      contact_number: contact_number,
       createdby: createdby,
 
     });
@@ -150,7 +137,7 @@ export class AddunitsthreePage {
       accountInfo: this.userInfo
     });
     /*
-        let body: string = "key=emailexist&email=" + email,
+        let body: string = "key=contact_numberexist&contact_number=" + contact_number,
           type: string = "application/x-www-form-urlencoded; charset=UTF-8",
           headers: any = new Headers({ 'Content-Type': type }),
           options: any = new RequestOptions({ headers: headers }),
@@ -189,14 +176,13 @@ export class AddunitsthreePage {
   // to our remote PHP script (note the body variable we have created which
   // supplies a variable of key with a value of update followed by the key/value pairs
   // for the record data
-  updateEntry(first_name, last_name, email, country, contact, createdby) {
+  updateEntry(alarmhashtags, contact_name, contact_number, createdby) {
     this.userInfo.push({
-      photo: this.photo,
-      first_name: first_name,
-      last_name: last_name,
-      email: email,
-      country: country,
-      contact: contact,
+
+      alarmhashtags: alarmhashtags,
+      contact_name: contact_name,
+      contact_number: contact_number,
+
       createdby: createdby,
 
     });
@@ -214,7 +200,7 @@ export class AddunitsthreePage {
   // supplies a variable of key with a value of delete followed by the key/value pairs
   // for the record ID we want to remove from the remote database
   deleteEntry() {
-    let first_name: string = this.form.controls["first_name"].value,
+    let alarmhashtags: string = this.form.controls["alarmhashtags"].value,
       body: string = "key=delete&recordID=" + this.recordID,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
@@ -226,7 +212,7 @@ export class AddunitsthreePage {
         // If the request was successful notify the user
         if (data.status === 200) {
           this.hideForm = true;
-          this.sendNotification(`Congratulations the company group: ${first_name} was successfully deleted`);
+          this.sendNotification(`Congratulations the company group: ${alarmhashtags} was successfully deleted`);
         }
         // Otherwise let 'em know anyway
         else {
@@ -241,9 +227,9 @@ export class AddunitsthreePage {
   // Determine whether we are adding a new record or amending an
   // existing record
   saveEntry() {
-    let first_name: string = this.form.controls["first_name"].value,
-      last_name: string = this.form.controls["last_name"].value,
-      email: string = this.form.controls["email"].value,
+    let alarmhashtags: string = this.form.controls["alarmhashtags"].value,
+      contact_name: string = this.form.controls["contact_name"].value,
+      contact_number: string = this.form.controls["contact_number"].value,
       country: string = this.form.controls["country"].value,
       contact: string = this.form.controls["contact"].value;
     console.log(this.form.controls);
@@ -252,10 +238,10 @@ export class AddunitsthreePage {
     }*/
     if (this.isUploadedProcessing == false) {
       if (this.isEdited) {
-        this.updateEntry(first_name, last_name, email, country, contact, this.userId);
+        this.updateEntry(alarmhashtags, contact_name, contact_number, this.userId);
       }
       else {
-        this.createEntry(first_name, last_name, email, country, contact, this.userId);
+        this.createEntry(alarmhashtags, contact_name, contact_number, this.userId);
       }
     }
   }
@@ -264,11 +250,10 @@ export class AddunitsthreePage {
 
   // Clear values in the page's HTML form fields
   resetFields(): void {
-    this.first_name = "";
-    this.last_name = "";
-    this.email = "";
-    this.country = "";
-    this.contact = "";
+    this.alarmhashtags = "";
+    this.contact_name = "";
+    this.contact_number = "";
+
   }
 
 
@@ -307,88 +292,6 @@ export class AddunitsthreePage {
     } else {
       loader.dismiss();
     }
-  }
-  doUploadPhoto() {
-
-    const options: CameraOptions = {
-      quality: 75,
-      destinationType: this.camera.DestinationType.FILE_URI,
-      targetWidth: 200,
-      targetHeight: 200,
-      sourceType: 1
-    }
-    this.camera.getPicture(options).then((imageData) => {
-      console.log(imageData);
-      localStorage.setItem("userPhotoFile", imageData);
-      //this.fileTrans(imageData);
-
-      this.uploadResultBase64Data = imageData;
-      this.addedImgLists = imageData;
-      this.isUploadedProcessing = false;
-      return false;
-    }, (err) => {
-      // Handle error
-      this.sendNotification(err);
-    });
-
-  }
-
-  fileTrans(path) {
-    let fileName = path.substr(path.lastIndexOf('/') + 1);
-    const fileTransfer: TransferObject = this.transfer.create();
-    let currentName = path.replace(/^.*[\\\/]/, '');
-    this.photo = currentName;
-    console.log("File Name is:" + currentName);
-
-
-    /*var d = new Date(),
-        n = d.getTime(),
-        newFileName = n + ".jpg";*/
-
-    let options: FileUploadOptions = {
-      fileKey: 'file',
-      fileName: fileName,
-      headers: {},
-      chunkedMode: false,
-      mimeType: "text/plain",
-    }
-
-    //  http://127.0.0.1/ionic/upload_attach.php
-    //http://amahr.stridecdev.com/getgpsvalue.php?key=create&lat=34&long=45
-    fileTransfer.onProgress(this.onProgress);
-    fileTransfer.upload(path, this.apiServiceURL + '/upload.php', options)
-      .then((data) => {
-        console.log(JSON.stringify(data));
-        console.log("UPLOAD SUCCESS:" + data.response);
-        let successData = JSON.parse(data.response);
-        this.userInfo.push({
-          photo: successData
-        });
-        this.sendNotification("User photo uploaded successfully");
-        this.progress += 5;
-        this.isProgress = false;
-        this.isUploadedProcessing = false;
-        return false;
-
-
-
-        // Save in Backend and MysQL
-        //this.uploadToServer(data.response);
-        // Save in Backend and MysQL
-      }, (err) => {
-        //loading.dismiss();
-        console.log("Upload Error:");
-        this.sendNotification("Upload Error:" + JSON.stringify(err));
-      })
-  }
-  onProgress = (progressEvent: ProgressEvent): void => {
-    this.ngZone.run(() => {
-      if (progressEvent.lengthComputable) {
-        let progress = Math.round((progressEvent.loaded / progressEvent.total) * 95);
-        this.isProgress = true;
-        this.progress = progress;
-      }
-    });
   }
   previous() {
     this.navCtrl.setRoot(UserPage);

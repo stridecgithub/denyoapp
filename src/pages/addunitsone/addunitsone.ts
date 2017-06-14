@@ -110,7 +110,7 @@ export class AddunitsonePage {
   // for the record data
   createEntry(location, createdby) {
     this.userInfo.push({    
-      first_name: location,
+      location: location,
       createdby: createdby
     });
     this.navCtrl.setRoot(AddunitstwoPage, {

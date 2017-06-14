@@ -201,23 +201,16 @@ export class UseraccountPage {
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
       url: any = this.apiServiceURL + "/checkusername";
-    /*{
-        "msg": [
-            {
-                "Error": "0",
-                "result": "Username Available!"
-            }
-        ]
-    }*/
+
     this.http.post(url, body, options)
       .subscribe((data) => {
         console.log(JSON.stringify(data.json()));
         // If the request was successful notify the user
         if (data.status === 200) {
-          console.log(data.json().msg.Error);
-          if (data.json().msg.Error > 0) {
+          console.log("create" + data.json().msg[0].Error);
+          if (data.json().msg[0].Error > 0) {
             //this.userInfo=[];
-            this.sendNotification(data.json().message);
+            this.sendNotification(data.json().msg[0].result);
           } else {
             //this.sendNotification(data.json().message);
             this.navCtrl.setRoot(UserorgchartPage, {
@@ -255,34 +248,21 @@ export class UseraccountPage {
       hashtag: hashtag,
       role: role
     });
-    /* this.navCtrl.setRoot(UserorgchartPage, {
-       accountInfo: this.userInfo,
-       record: this.NP.get("record")
-     });
-     */
 
-    let body: string = "username=" + username + "&id="+this.NP.get("record").staff_id,
+    let body: string = "username=" + username + "&id=" + this.NP.get("record").staff_id,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
       url: any = this.apiServiceURL + "/checkusername";
-    /*{
-        "msg": [
-            {
-                "Error": "0",
-                "result": "Username Available!"
-            }
-        ]
-    }*/
     this.http.post(url, body, options)
       .subscribe((data) => {
         console.log(JSON.stringify(data.json()));
         // If the request was successful notify the user
         if (data.status === 200) {
-          console.log(data.json().msg.Error);
-          if (data.json().msg.Error > 0) {
+          console.log("update" + data.json().msg[0].Error);
+          if (data.json().msg[0].Error > 0) {
             //this.userInfo=[];
-            this.sendNotification(data.json().message);
+            this.sendNotification(data.json().msg[0].result);
           } else {
             //this.sendNotification(data.json().message);
             this.navCtrl.setRoot(UserorgchartPage, {
@@ -291,6 +271,7 @@ export class UseraccountPage {
             });
           }
         }
+
         // Otherwise let 'em know anyway
         else {
           this.sendNotification('Something went wrong!');

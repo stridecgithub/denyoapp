@@ -146,39 +146,36 @@ export class AddunitstwoPage {
       createdby: createdby,
 
     });
-    this.navCtrl.setRoot(AddunitsthreePage, {
-      accountInfo: this.userInfo
-    });
-    /*
-        let body: string = "key=controlleridexist&controllerid=" + controllerid,
-          type: string = "application/x-www-form-urlencoded; charset=UTF-8",
-          headers: any = new Headers({ 'Content-Type': type }),
-          options: any = new RequestOptions({ headers: headers }),
-          url: any = this.apiServiceURL + "api/users.php";
-    
-        this.http.post(url, body, options)
-          .subscribe((data) => {
-            console.log(JSON.stringify(data.json()));
-            // If the request was successful notify the user
-            if (data.status === 200) {
-              this.hideForm = true;
-              console.log(data.json().Error);
-              if (data.json().Error > 0) {
-                this.userInfo = []; // need this one
-                this.sendNotification(data.json().message);
-              } else {
-                //this.sendNotification(data.json().message);
-                this.navCtrl.setRoot(AddunitstwoPage, {
-                  accountInfo: this.userInfo
-                });
-              }
-            }
-            // Otherwise let 'em know anyway
-            else {
-              this.sendNotification('Something went wrong!');
-            }
-          });
-    */
+
+
+    let body: string = "controllerid=" + controllerid + "&unit_id=0",
+      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/checkcontrollerid";
+
+    this.http.post(url, body, options)
+      .subscribe((data) => {
+        console.log(JSON.stringify(data.json()));
+        // If the request was successful notify the user
+        if (data.status === 200) {
+          console.log("create" + data.json().msg[0].Error);
+          if (data.json().msg[0].Error > 0) {
+            //this.userInfo=[];
+            this.sendNotification(data.json().msg[0].result);
+          } else {
+            //this.sendNotification(data.json().message);
+            this.navCtrl.setRoot(AddunitsthreePage, {
+              accountInfo: this.userInfo
+            });
+          }
+        }
+        // Otherwise let 'em know anyway
+        else {
+          this.sendNotification('Something went wrong!');
+        }
+      });
+
 
   }
 
@@ -200,13 +197,37 @@ export class AddunitstwoPage {
       createdby: createdby,
 
     });
-    this.navCtrl.setRoot(AddunitsthreePage, {
-      accountInfo: this.userInfo,
-      record: this.NP.get("record")
-    });
+
+    let body: string = "controllerid=" + controllerid + "&id=" + this.NP.get("record").unit_id,
+      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/checkcontrollerid";
+    this.http.post(url, body, options)
+      .subscribe((data) => {
+        console.log(JSON.stringify(data.json()));
+        // If the request was successful notify the user
+        if (data.status === 200) {
+          console.log("update" + data.json().msg[0].Error);
+          if (data.json().msg[0].Error > 0) {
+            //this.userInfo=[];
+            this.sendNotification(data.json().msg[0].result);
+          } else {
+            //this.sendNotification(data.json().message);
+            this.navCtrl.setRoot(AddunitsthreePage, {
+              accountInfo: this.userInfo,
+              record: this.NP.get("record")
+            });
+          }
+        }
+
+        // Otherwise let 'em know anyway
+        else {
+          this.sendNotification('Something went wrong!');
+        }
+      });
+
   }
-
-
 
   // Remove an existing record that has been selected in the page's HTML form
   // Use angular's http post method to submit the record data
@@ -307,89 +328,7 @@ export class AddunitstwoPage {
     } else {
       loader.dismiss();
     }
-  }
-  doUploadPhoto() {
-
-    const options: CameraOptions = {
-      quality: 75,
-      destinationType: this.camera.DestinationType.FILE_URI,
-      targetWidth: 200,
-      targetHeight: 200,
-      sourceType: 1
-    }
-    this.camera.getPicture(options).then((imageData) => {
-      console.log(imageData);
-      localStorage.setItem("userPhotoFile", imageData);
-      //this.fileTrans(imageData);
-
-      this.uploadResultBase64Data = imageData;
-      this.addedImgLists = imageData;
-      this.isUploadedProcessing = false;
-      return false;
-    }, (err) => {
-      // Handle error
-      this.sendNotification(err);
-    });
-
-  }
-
-  fileTrans(path) {
-    let fileName = path.substr(path.lastIndexOf('/') + 1);
-    const fileTransfer: TransferObject = this.transfer.create();
-    let currentName = path.replace(/^.*[\\\/]/, '');
-    this.photo = currentName;
-    console.log("File Name is:" + currentName);
-
-
-    /*var d = new Date(),
-        n = d.getTime(),
-        newFileName = n + ".jpg";*/
-
-    let options: FileUploadOptions = {
-      fileKey: 'file',
-      fileName: fileName,
-      headers: {},
-      chunkedMode: false,
-      mimeType: "text/plain",
-    }
-
-    //  http://127.0.0.1/ionic/upload_attach.php
-    //http://amahr.stridecdev.com/getgpsvalue.php?key=create&lat=34&long=45
-    fileTransfer.onProgress(this.onProgress);
-    fileTransfer.upload(path, this.apiServiceURL + '/upload.php', options)
-      .then((data) => {
-        console.log(JSON.stringify(data));
-        console.log("UPLOAD SUCCESS:" + data.response);
-        let successData = JSON.parse(data.response);
-        this.userInfo.push({
-          photo: successData
-        });
-        this.sendNotification("User photo uploaded successfully");
-        this.progress += 5;
-        this.isProgress = false;
-        this.isUploadedProcessing = false;
-        return false;
-
-
-
-        // Save in Backend and MysQL
-        //this.uploadToServer(data.response);
-        // Save in Backend and MysQL
-      }, (err) => {
-        //loading.dismiss();
-        console.log("Upload Error:");
-        this.sendNotification("Upload Error:" + JSON.stringify(err));
-      })
-  }
-  onProgress = (progressEvent: ProgressEvent): void => {
-    this.ngZone.run(() => {
-      if (progressEvent.lengthComputable) {
-        let progress = Math.round((progressEvent.loaded / progressEvent.total) * 95);
-        this.isProgress = true;
-        this.progress = progress;
-      }
-    });
-  }
+  }  
   previous() {
     this.navCtrl.setRoot(UserPage);
   }

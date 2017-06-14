@@ -32,7 +32,7 @@ export class AddunitsfourPage {
   public country: any;
   public contact: any;
   public userId: any;
-  public responseResultCountry: any;
+  public responseResultCompany: any;
   progress: number;
   public isProgress = false;
   public isUploaded: boolean = true;
@@ -64,8 +64,6 @@ export class AddunitsfourPage {
     this.form = fb.group({
       //"first_name": ["", Validators.required],
       //"last_name": ["", Validators.required],
-      "first_name": ["", Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
-      "last_name": ["", Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
       "country": ["", Validators.required],
       "contact": ["", Validators.required],
       /// "email": ["", Validators.required]
@@ -83,7 +81,7 @@ export class AddunitsfourPage {
   // based on any supplied navigation parameters
   ionViewWillEnter() {
     this.resetFields();
-    this.getJsonCountryListData();
+    this.getJsonCompanyListData();
     console.log(JSON.stringify(this.NP.get("record")));
     if (this.NP.get("record")) {
       console.log("Add User:" + JSON.stringify(this.NP.get("record")));
@@ -149,36 +147,7 @@ export class AddunitsfourPage {
     this.navCtrl.setRoot(UnitsPage, {
       accountInfo: this.userInfo
     });
-    /*
-        let body: string = "key=emailexist&email=" + email,
-          type: string = "application/x-www-form-urlencoded; charset=UTF-8",
-          headers: any = new Headers({ 'Content-Type': type }),
-          options: any = new RequestOptions({ headers: headers }),
-          url: any = this.apiServiceURL + "api/users.php";
     
-        this.http.post(url, body, options)
-          .subscribe((data) => {
-            console.log(JSON.stringify(data.json()));
-            // If the request was successful notify the user
-            if (data.status === 200) {
-              this.hideForm = true;
-              console.log(data.json().Error);
-              if (data.json().Error > 0) {
-                this.userInfo = []; // need this one
-                this.sendNotification(data.json().message);
-              } else {
-                //this.sendNotification(data.json().message);
-                this.navCtrl.setRoot(AddunitstwoPage, {
-                  accountInfo: this.userInfo
-                });
-              }
-            }
-            // Otherwise let 'em know anyway
-            else {
-              this.sendNotification('Something went wrong!');
-            }
-          });
-    */
 
   }
 
@@ -247,9 +216,7 @@ export class AddunitsfourPage {
       country: string = this.form.controls["country"].value,
       contact: string = this.form.controls["contact"].value;
     console.log(this.form.controls);
-    /*if (this.addedImgLists) {
-      this.isUploadedProcessing = true;
-    }*/
+   
     if (this.isUploadedProcessing == false) {
       if (this.isEdited) {
         this.updateEntry(first_name, last_name, email, country, contact, this.userId);
@@ -283,7 +250,7 @@ export class AddunitsfourPage {
     notification.present();
   }
 
-  getJsonCountryListData() {
+  getJsonCompanyListData() {
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
@@ -292,7 +259,7 @@ export class AddunitsfourPage {
     this.http.get(url, options)
       .subscribe(data => {
         res = data.json();
-        this.responseResultCountry = res.countries;
+        this.responseResultCompany = res.companies;
       });
 
   }
@@ -307,89 +274,7 @@ export class AddunitsfourPage {
     } else {
       loader.dismiss();
     }
-  }
-  doUploadPhoto() {
-
-    const options: CameraOptions = {
-      quality: 75,
-      destinationType: this.camera.DestinationType.FILE_URI,
-      targetWidth: 200,
-      targetHeight: 200,
-      sourceType: 1
-    }
-    this.camera.getPicture(options).then((imageData) => {
-      console.log(imageData);
-      localStorage.setItem("userPhotoFile", imageData);
-      //this.fileTrans(imageData);
-
-      this.uploadResultBase64Data = imageData;
-      this.addedImgLists = imageData;
-      this.isUploadedProcessing = false;
-      return false;
-    }, (err) => {
-      // Handle error
-      this.sendNotification(err);
-    });
-
-  }
-
-  fileTrans(path) {
-    let fileName = path.substr(path.lastIndexOf('/') + 1);
-    const fileTransfer: TransferObject = this.transfer.create();
-    let currentName = path.replace(/^.*[\\\/]/, '');
-    this.photo = currentName;
-    console.log("File Name is:" + currentName);
-
-
-    /*var d = new Date(),
-        n = d.getTime(),
-        newFileName = n + ".jpg";*/
-
-    let options: FileUploadOptions = {
-      fileKey: 'file',
-      fileName: fileName,
-      headers: {},
-      chunkedMode: false,
-      mimeType: "text/plain",
-    }
-
-    //  http://127.0.0.1/ionic/upload_attach.php
-    //http://amahr.stridecdev.com/getgpsvalue.php?key=create&lat=34&long=45
-    fileTransfer.onProgress(this.onProgress);
-    fileTransfer.upload(path, this.apiServiceURL + '/upload.php', options)
-      .then((data) => {
-        console.log(JSON.stringify(data));
-        console.log("UPLOAD SUCCESS:" + data.response);
-        let successData = JSON.parse(data.response);
-        this.userInfo.push({
-          photo: successData
-        });
-        this.sendNotification("User photo uploaded successfully");
-        this.progress += 5;
-        this.isProgress = false;
-        this.isUploadedProcessing = false;
-        return false;
-
-
-
-        // Save in Backend and MysQL
-        //this.uploadToServer(data.response);
-        // Save in Backend and MysQL
-      }, (err) => {
-        //loading.dismiss();
-        console.log("Upload Error:");
-        this.sendNotification("Upload Error:" + JSON.stringify(err));
-      })
-  }
-  onProgress = (progressEvent: ProgressEvent): void => {
-    this.ngZone.run(() => {
-      if (progressEvent.lengthComputable) {
-        let progress = Math.round((progressEvent.loaded / progressEvent.total) * 95);
-        this.isProgress = true;
-        this.progress = progress;
-      }
-    });
-  }
+  } 
   previous() {
     this.navCtrl.setRoot(UserPage);
   }
