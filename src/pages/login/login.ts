@@ -43,7 +43,7 @@ export class LoginPage {
 
 
 
-  loginEntry(username, password) {   
+  loginEntry(username, password) {
     let res;
     let body: string = "username=" + username + "&password=" + password + "&isapp=1",
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
@@ -56,12 +56,8 @@ export class LoginPage {
         console.log(data.json());
         console.log(JSON.stringify(data.json()));
         res = data.json();
-        //console.log("1" + res[0].msg[0]['result']);
-        //console.log("2" + res.msg['result']);
-       // console.log("3" + res[0].msg['result']);
         console.log("4" + res.msg[0]['result']);
-
-        if  (res.msg[0]['result'] == 'failed') {
+        if (res.msg[0]['result'] == 'failed') {
           this.sendNotification('Username or password are invalid try again');
           this.presentLoading(0);
           return false;

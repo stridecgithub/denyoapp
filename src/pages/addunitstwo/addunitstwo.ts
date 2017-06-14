@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams, ToastController, LoadingController
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { UserPage } from '../user/user';
 import { AddunitsthreePage } from '../addunitsthree/addunitsthree';
 import { AddunitsonePage } from '../addunitsone/addunitsone';
 /**

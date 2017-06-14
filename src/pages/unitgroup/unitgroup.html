@@ -57,8 +57,11 @@
     </ion-refresher-content>
   </ion-refresher>
   <ion-list *ngIf="totalCount!=0">
-    <ion-item-sliding  *ngFor="let item of reportAllLists;">
-      <ion-item>
+    <ion-item-sliding *ngFor="let item of reportAllLists;">
+
+      <ion-item class="{{item.colorcodeindication}}">
+        <button class="{{item.colorcodeindication}}">
+        </button>
         <h2><b>{{item.unitgroup_name}}</b>
         </h2>
         <h2><b>Total Units:{{item.totalunits}}</b></h2>

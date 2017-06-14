@@ -32,7 +32,7 @@ export class UnitgroupPage {
     results: 8
   }
   public reportAllLists = [];
-
+  public colorListArr: any;
   constructor(public http: Http, public nav: NavController,
     public toastCtrl: ToastController, public alertCtrl: AlertController, public navParams: NavParams, public loadingCtrl: LoadingController) {
     this.loginas = localStorage.getItem("userInfoName");
@@ -51,7 +51,7 @@ export class UnitgroupPage {
     }, 2000);
   }
 
-  
+
   ionViewWillEnter() {
     this.pageTitle = "Unit Groups";
     this.reportData.startindex = 0;
@@ -59,13 +59,28 @@ export class UnitgroupPage {
     this.dounitGroup();
   }
   dounitGroup() {
+    this.colorListArr = [
+      "FBE983",
+      "5584EE",
+      "A4BDFD",
+      "47D6DC",
+      "7AE7BE",
+      "51B749",
+      "FBD75C",
+      "FFB878",
+      "FF877C",
+      "DC2128",
+      "DAADFE",
+      "E1E1E1"
+    ];
+
     this.presentLoading(1);
     if (this.reportData.status == '') {
       this.reportData.status = "DRAFT";
     }
     if (this.reportData.sort == '') {
       this.reportData.sort = "unitgroup_id";
-    }   
+    }
 
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
@@ -81,10 +96,30 @@ export class UnitgroupPage {
         console.log("2" + res.unitgroups);
         console.log("3" + res.colorcode);
         if (res.unitgroups.length > 0) {
-          this.reportAllLists = res.unitgroups;
-          this.totalCount = res.totalCount;
+
+          for (let unitgroup in res.unitgroups) {
+            let colorcode;
+            let index = this.colorListArr.indexOf(res.unitgroups[unitgroup].colorcode); // 1
+            console.log("Color Index:" + index);
+            let colorvalincrmentone = index + 1;
+            colorcode = "button" + colorvalincrmentone;
+            console.log("Color is" + colorcode);
+            this.reportAllLists.push({
+              unitgroup_id: res.unitgroups[unitgroup].unitgroup_id,
+              unitgroup_name: res.unitgroups[unitgroup].unitgroup_name,
+              remark: res.unitgroups[unitgroup].remark,
+              favorite: res.unitgroups[unitgroup].favorite,
+              totalunits: res.unitgroups[unitgroup].totalunits,
+              colorcode: res.unitgroups[unitgroup].colorcode,
+              colorcodeindication: colorcode
+            });
+          }
+          //"unitgroup_id":1,"unitgroup_name":"demo unit","colorcode":"FBD75C","remark":"nice","favorite":1,"totalunits":5
+          /*this.reportAllLists = res.unitgroups;
+         
           console.log("Total Record:`" + this.totalCount);
-          console.log(JSON.stringify(this.reportAllLists));
+          console.log(JSON.stringify(this.reportAllLists));*/
+          this.totalCount = res.totalCount;
           this.reportData.startindex += this.reportData.results;
         } else {
           this.totalCount = 0;
@@ -95,7 +130,7 @@ export class UnitgroupPage {
     this.presentLoading(0);
   }
 
-  
+
   /**********************/
   /* Infinite scrolling */
   /**********************/
@@ -127,13 +162,13 @@ export class UnitgroupPage {
       loader.dismiss();
     }
   }
-   doAdd() {
+  doAdd() {
     this.nav.setRoot(AddunitgroupPage);
   }
-   previous() {
+  previous() {
     this.nav.setRoot(TabsPage);
   }
- doEdit(item, act) {
+  doEdit(item, act) {
     if (act == 'edit') {
       this.nav.setRoot(AddunitgroupPage, {
         record: item,
@@ -141,7 +176,7 @@ export class UnitgroupPage {
       });
     }
   }
-   doConfirm(id, item) {
+  doConfirm(id, item) {
     console.log("Deleted Id" + id);
     let confirm = this.alertCtrl.create({
       message: 'Are you sure you want to delete this unit group?',
@@ -163,7 +198,7 @@ export class UnitgroupPage {
     });
     confirm.present();
   }
-   deleteEntry(recordID) {
+  deleteEntry(recordID) {
     let
       //body: string = "key=delete&recordID=" + recordID,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
@@ -183,14 +218,14 @@ export class UnitgroupPage {
         }
       });
   }
-   sendNotification(message): void {
+  sendNotification(message): void {
     let notification = this.toastCtrl.create({
       message: message,
       duration: 3000
     });
     notification.present();
   }
-   onSegmentChanged(val) {
+  onSegmentChanged(val) {
     let splitdata = val.split(",");
     this.reportData.sort = splitdata[0];
     this.reportData.sortascdesc = splitdata[1];
