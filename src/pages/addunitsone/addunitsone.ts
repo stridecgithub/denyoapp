@@ -78,11 +78,7 @@ export class AddunitsonePage {
       this.selectEntry(this.NP.get("record"));
       this.pageTitle = 'Edit Units - 1';
       this.readOnly = false;
-      this.hideActionButton = true;
-      if (this.NP.get("record").photo) {
-        this.addedImgLists = this.apiServiceURL + "/public/staffphotos/" + this.NP.get("record").photo;
-        console.log(this.addedImgLists);
-      }
+      this.hideActionButton = true;     
       let editItem = this.NP.get("record");
       this.location = editItem.location;
     }
