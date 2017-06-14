@@ -79,6 +79,7 @@ export class UnitgroupPage {
         console.log(JSON.stringify(res));
         console.log("1" + res.unitgroups.length);
         console.log("2" + res.unitgroups);
+        console.log("3" + res.colorcode);
         if (res.unitgroups.length > 0) {
           this.reportAllLists = res.unitgroups;
           this.totalCount = res.totalCount;
@@ -188,6 +189,15 @@ export class UnitgroupPage {
       duration: 3000
     });
     notification.present();
+  }
+   onSegmentChanged(val) {
+    let splitdata = val.split(",");
+    this.reportData.sort = splitdata[0];
+    this.reportData.sortascdesc = splitdata[1];
+    //this.reportData.status = "ALL";
+    this.reportData.startindex = 0;
+    this.reportAllLists = [];
+    this.dounitGroup();
   }
 
 }
