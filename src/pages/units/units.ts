@@ -31,7 +31,7 @@ export class UnitsPage {
   public reportData: any =
   {
     status: '',
-    sort: 'staff_id',
+    sort: 'unit_id',
     sortascdesc: 'asc',
     startindex: 0,
     results: 8
@@ -75,15 +75,15 @@ export class UnitsPage {
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/staff?is_mobile=1&startindex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc;
+      url: any = this.apiServiceURL + "/units?is_mobile=1&startindex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc;
     let res;
     console.log(url);
     this.http.get(url, options)
       .subscribe((data) => {
         res = data.json();
         console.log(JSON.stringify(res));
-        console.log("1" + res.staff.length);
-        console.log("2" + res.staff);
+        console.log("1" + res.units.length);
+        console.log("2" + res.units);
         if (res.units.length > 0) {
           this.reportAllLists = res.units;
           this.totalCount = res.totalCount;
@@ -117,7 +117,7 @@ export class UnitsPage {
   }
   ionViewWillEnter() {
     this.reportData.startindex = 0;
-    this.reportData.sort = "staff_id";
+    this.reportData.sort = "unit_id";
     this.doUser();
   }
 
