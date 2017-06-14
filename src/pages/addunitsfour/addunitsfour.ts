@@ -193,10 +193,9 @@ export class AddunitsfourPage {
       "&location=" + this.location +
       "&createdby=" + this.createdby +
       "&updatedby=" + this.createdby +
-      "&contact_name=" + this.contact_name +
+      //"&contact_name=" + this.contact_name +
       "&alarmhashtags=" + this.alarmhashtags +
-      "&contact_number=" + this.contact_number +
-      "&unitgroups_id=" + this.unitgroups_id +
+      //"&contact_number=" + this.contact_number +      
       "&companys_id=" + this.companys_id +
       "&unitgroups_id=" + this.unitgroups_id,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
@@ -252,10 +251,10 @@ export class AddunitsfourPage {
       "&location=" + this.location +
       "&createdby=" + this.createdby +
       "&updatedby=" + this.createdby +
-      "&contact_name=" + this.contact_name +
+      //"&contact_name=" + this.contact_name +
       "&alarmhashtags=" + this.alarmhashtags +
-      "&contact_number=" + this.contact_number +
-      "&unitgroups_id=" + this.unitgroups_id +
+      //"&contact_number=" + this.contact_number +
+      //"&unitgroups_id=" + this.unitgroups_id +
       "&companys_id=" + this.companys_id +
       "&unitgroups_id=" + this.unitgroups_id,
 
