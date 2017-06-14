@@ -156,7 +156,7 @@ export class UserorgchartPage {
       console.log("Upload Device Image File:" + userPhotoFile);
       this.fileTrans(userPhotoFile);
     }
-    let body: string = "firstname=" + this.first_name +
+    let body: string = "is_mobile=1&firstname=" + this.first_name +
       "&lastname=" + this.last_name +
       "&photo=" + this.photo +
       "&email=" + this.email +
@@ -177,7 +177,7 @@ export class UserorgchartPage {
       url: any = this.apiServiceURL + "/staff/store";
     console.log(url);
     console.log(body);
-    
+
     this.http.post(url, body, options)
       .subscribe((data) => {
         //console.log("Response Success:" + JSON.stringify(data.json()));
@@ -209,7 +209,7 @@ export class UserorgchartPage {
       console.log("Upload Device Image File:" + userPhotoFile);
       this.fileTrans(userPhotoFile);
     }
-    let body: string = "staff_id=" + this.recordID +
+    let body: string = "is_mobile=1&staff_id=" + this.recordID +
       "&firstname=" + this.first_name +
       "&lastname=" + this.last_name +
       "&photo=" + this.photo +
@@ -229,7 +229,7 @@ export class UserorgchartPage {
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/staff/store";
+      url: any = this.apiServiceURL + "/staff/update";
     console.log(url);
     console.log(body);
     this.http.post(url, body, options)
@@ -239,7 +239,7 @@ export class UserorgchartPage {
         if (data.status === 200) {
           this.hideForm = true;
           this.sendNotification(`User created was successfully updated`);
-          // this.navCtrl.setRoot(UserPage);
+          this.navCtrl.setRoot(UserPage);
         }
         // Otherwise let 'em know anyway
         else {

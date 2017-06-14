@@ -25,14 +25,14 @@ export class AddunitstwoPage {
   // Define FormBuilder /model properties
   public loginas: any;
   public form: FormGroup;
-  public first_name: any;
-  public last_name: any;
-  public email: any;
+  public unitname: any;
+  public projectname: any;
+  public controllerid: any;
   public photo: any;
-  public country: any;
-  public contact: any;
+  public models_id: any;
+  public neaplateno: any;
   public userId: any;
-  public responseResultCountry: any;
+  public responseResultModel: any;
   progress: number;
   public isProgress = false;
   public isUploaded: boolean = true;
@@ -62,14 +62,14 @@ export class AddunitstwoPage {
     this.loginas = localStorage.getItem("userInfoName");
     // Create form builder validation rules
     this.form = fb.group({
-      //"first_name": ["", Validators.required],
-      //"last_name": ["", Validators.required],
-      "first_name": ["", Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
-      "last_name": ["", Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
-      "country": ["", Validators.required],
-      "contact": ["", Validators.required],
-      /// "email": ["", Validators.required]
-      'email': ['', Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(50), Validators.pattern(/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i)])],
+      //"unitname": ["", Validators.required],
+      //"projectname": ["", Validators.required],
+      "unitname": ["", Validators.compose([Validators.maxLength(30), Validators.required])],
+      "projectname": ["", Validators.compose([Validators.maxLength(30), Validators.required])],
+      "models_id": ["", Validators.required],
+      "neaplateno": ["", Validators.required],
+      /// "controllerid": ["", Validators.required]
+      'controllerid': ['', Validators.required],
     });
     this.userId = localStorage.getItem("userInfoId");
   }
@@ -83,7 +83,7 @@ export class AddunitstwoPage {
   // based on any supplied navigation parameters
   ionViewWillEnter() {
     this.resetFields();
-    this.getJsonCountryListData();
+    this.getJsonModelListData();
     console.log(JSON.stringify(this.NP.get("record")));
     if (this.NP.get("record")) {
       console.log("Add User:" + JSON.stringify(this.NP.get("record")));
@@ -97,21 +97,21 @@ export class AddunitstwoPage {
         console.log(this.addedImgLists);
       }
       let editItem = this.NP.get("record");
-      this.first_name = editItem.firstname;
-      this.last_name = editItem.lastname;
-      this.email = editItem.email;
-      this.country = editItem.country_id;
-      this.contact = editItem.contact_number;
+      this.unitname = editItem.firstname;
+      this.projectname = editItem.lastname;
+      this.controllerid = editItem.controllerid;
+      this.models_id = editItem.models_id_id;
+      this.neaplateno = editItem.neaplateno_number;
     }
     else {
       this.isEdited = false;
       this.pageTitle = 'New  Units - 2';
     }
-    /*this.first_name = "Kannan";
-    this.last_name = "Nagarathinam";
-    this.email = "kannanrathvalli@gmail.com";
-    this.country = "238";
-    this.contact = "9443976954";*/
+    /*this.unitname = "Kannan";
+    this.projectname = "Nagarathinam";
+    this.controllerid = "kannanrathvalli@gmail.com";
+    this.models_id = "238";
+    this.neaplateno = "9443976954";*/
   }
 
 
@@ -119,11 +119,11 @@ export class AddunitstwoPage {
   // Assign the navigation retrieved data to properties
   // used as models on the page's HTML form
   selectEntry(item) {
-    this.first_name = item.first_name;
-    this.last_name = item.last_name;
-    this.email = item.email;
-    this.country = item.country;
-    this.contact = item.contact;
+    this.unitname = item.unitname;
+    this.projectname = item.projectname;
+    this.controllerid = item.controllerid;
+    this.models_id = item.models_id;
+    this.neaplateno = item.neaplateno;
     this.photo = item.photo;
     this.recordID = item.userid;
   }
@@ -135,14 +135,14 @@ export class AddunitstwoPage {
   // to our remote PHP script (note the body variable we have created which
   // supplies a variable of key with a value of create followed by the key/value pairs
   // for the record data
-  createEntry(first_name, last_name, email, country, contact, createdby) {
+  createEntry(unitname, projectname, controllerid, models_id, neaplateno, createdby) {
     this.userInfo.push({
       photo: this.photo,
-      first_name: first_name,
-      last_name: last_name,
-      email: email,
-      country: country,
-      contact: contact,
+      unitname: unitname,
+      projectname: projectname,
+      controllerid: controllerid,
+      models_id: models_id,
+      neaplateno: neaplateno,
       createdby: createdby,
 
     });
@@ -150,7 +150,7 @@ export class AddunitstwoPage {
       accountInfo: this.userInfo
     });
     /*
-        let body: string = "key=emailexist&email=" + email,
+        let body: string = "key=controlleridexist&controllerid=" + controllerid,
           type: string = "application/x-www-form-urlencoded; charset=UTF-8",
           headers: any = new Headers({ 'Content-Type': type }),
           options: any = new RequestOptions({ headers: headers }),
@@ -189,14 +189,14 @@ export class AddunitstwoPage {
   // to our remote PHP script (note the body variable we have created which
   // supplies a variable of key with a value of update followed by the key/value pairs
   // for the record data
-  updateEntry(first_name, last_name, email, country, contact, createdby) {
+  updateEntry(unitname, projectname, controllerid, models_id, neaplateno, createdby) {
     this.userInfo.push({
       photo: this.photo,
-      first_name: first_name,
-      last_name: last_name,
-      email: email,
-      country: country,
-      contact: contact,
+      unitname: unitname,
+      projectname: projectname,
+      controllerid: controllerid,
+      models_id: models_id,
+      neaplateno: neaplateno,
       createdby: createdby,
 
     });
@@ -214,7 +214,7 @@ export class AddunitstwoPage {
   // supplies a variable of key with a value of delete followed by the key/value pairs
   // for the record ID we want to remove from the remote database
   deleteEntry() {
-    let first_name: string = this.form.controls["first_name"].value,
+    let unitname: string = this.form.controls["unitname"].value,
       body: string = "key=delete&recordID=" + this.recordID,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
@@ -226,7 +226,7 @@ export class AddunitstwoPage {
         // If the request was successful notify the user
         if (data.status === 200) {
           this.hideForm = true;
-          this.sendNotification(`Congratulations the company group: ${first_name} was successfully deleted`);
+          this.sendNotification(`Congratulations the company group: ${unitname} was successfully deleted`);
         }
         // Otherwise let 'em know anyway
         else {
@@ -241,21 +241,21 @@ export class AddunitstwoPage {
   // Determine whether we are adding a new record or amending an
   // existing record
   saveEntry() {
-    let first_name: string = this.form.controls["first_name"].value,
-      last_name: string = this.form.controls["last_name"].value,
-      email: string = this.form.controls["email"].value,
-      country: string = this.form.controls["country"].value,
-      contact: string = this.form.controls["contact"].value;
+    let unitname: string = this.form.controls["unitname"].value,
+      projectname: string = this.form.controls["projectname"].value,
+      controllerid: string = this.form.controls["controllerid"].value,
+      models_id: string = this.form.controls["models_id"].value,
+      neaplateno: string = this.form.controls["neaplateno"].value;
     console.log(this.form.controls);
     /*if (this.addedImgLists) {
       this.isUploadedProcessing = true;
     }*/
     if (this.isUploadedProcessing == false) {
       if (this.isEdited) {
-        this.updateEntry(first_name, last_name, email, country, contact, this.userId);
+        this.updateEntry(unitname, projectname, controllerid, models_id, neaplateno, this.userId);
       }
       else {
-        this.createEntry(first_name, last_name, email, country, contact, this.userId);
+        this.createEntry(unitname, projectname, controllerid, models_id, neaplateno, this.userId);
       }
     }
   }
@@ -264,11 +264,11 @@ export class AddunitstwoPage {
 
   // Clear values in the page's HTML form fields
   resetFields(): void {
-    this.first_name = "";
-    this.last_name = "";
-    this.email = "";
-    this.country = "";
-    this.contact = "";
+    this.unitname = "";
+    this.projectname = "";
+    this.controllerid = "";
+    this.models_id = "";
+    this.neaplateno = "";
   }
 
 
@@ -283,16 +283,16 @@ export class AddunitstwoPage {
     notification.present();
   }
 
-  getJsonCountryListData() {
+  getJsonModelListData() {
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/getCountries";
+      url: any = this.apiServiceURL + "/getmodels";
     let res;
     this.http.get(url, options)
       .subscribe(data => {
         res = data.json();
-        this.responseResultCountry = res.countries;
+        this.responseResultModel = res.countries;
       });
 
   }

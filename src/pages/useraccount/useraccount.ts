@@ -45,7 +45,7 @@ export class UseraccountPage {
     this.loginas = localStorage.getItem("userInfoName");
     this.form = fb.group({
       // "username": ["", Validators.required],
-      "username": ["", Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
+      "username": ["", Validators.compose([Validators.maxLength(30), Validators.required])],
       "password": ["", Validators.required],
       "re_password": ["", Validators.required],
       "hashtag": [""],
