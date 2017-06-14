@@ -1,13 +1,8 @@
 import { Component, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { Http, Headers, RequestOptions } from '@angular/http';
-import { Camera, CameraOptions } from '@ionic-native/camera';
-import { FileChooser } from '@ionic-native/file-chooser';
-import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
-import { File } from '@ionic-native/file';
 import 'rxjs/add/operator/map';
-import { UserPage } from '../user/user';
+import { UnitsPage } from '../units/units';
 import { AddunitstwoPage } from '../addunitstwo/addunitstwo';
 /**
  * Generated class for the AddcompanygroupPage page.
@@ -18,8 +13,7 @@ import { AddunitstwoPage } from '../addunitstwo/addunitstwo';
 @IonicPage()
 @Component({
   selector: 'page-addunitsone',
-  templateUrl: 'addunitsone.html',
-  providers: [Camera, FileChooser, Transfer, File]
+  templateUrl: 'addunitsone.html'
 })
 export class AddunitsonePage {
   // Define FormBuilder /model properties
@@ -45,15 +39,11 @@ export class AddunitsonePage {
   public recordID: any = null;
   public isUploadedProcessing: boolean = false;
   public uploadResultBase64Data;
-  private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
-  constructor(public navCtrl: NavController,
-    public http: Http,
+  constructor(public navCtrl: NavController,   
     public NP: NavParams,
     public fb: FormBuilder,
-    public toastCtrl: ToastController, public loadingCtrl: LoadingController, private camera: Camera,
-    private filechooser: FileChooser,
-    private transfer: Transfer,
-    private file: File, private ngZone: NgZone) {
+    public toastCtrl: ToastController, public loadingCtrl: LoadingController,
+    private ngZone: NgZone) {
     this.loginas = localStorage.getItem("userInfoName");
     // Create form builder validation rules
     this.form = fb.group({
@@ -185,7 +175,7 @@ export class AddunitsonePage {
     }
   }  
   previous() {
-    this.navCtrl.setRoot(UserPage);
+    this.navCtrl.setRoot(UnitsPage);
   }
 }
 

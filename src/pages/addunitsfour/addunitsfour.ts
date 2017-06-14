@@ -2,12 +2,8 @@ import { Component, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
-import { Camera, CameraOptions } from '@ionic-native/camera';
-import { FileChooser } from '@ionic-native/file-chooser';
-import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
-import { File } from '@ionic-native/file';
 import 'rxjs/add/operator/map';
-import { UserPage } from '../user/user';
+import { AddunitsthreePage } from '../addunitsthree/addunitsthree';
 import { UnitsPage } from '../units/units';
 /**
  * Generated class for the AddcompanygroupPage page.
@@ -18,22 +14,27 @@ import { UnitsPage } from '../units/units';
 @IonicPage()
 @Component({
   selector: 'page-addunitsfour',
-  templateUrl: 'addunitsfour.html',
-  providers: [Camera, FileChooser, Transfer, File]
+  templateUrl: 'addunitsfour.html'
 })
 export class AddunitsfourPage {
   // Define FormBuilder /model properties
   public loginas: any;
   public form: FormGroup;
-  public first_name: any;
-  public last_name: any;
-  public email: any;
-  public photo: any;
-  public country: any;
-  public contact: any;
+  public unitgroups_id: any;
+  public companys_id: any;
   public userId: any;
+  public unitname: any;
+  public projectname: any;
+  public createdby: any;
   public responseResultCompany: any;
   progress: number;
+  public controllerid: any;
+  public neaplateno: any;
+  public models_id: any;
+  public location: any;
+  public contact_name: any;
+  public alarmhashtags: any;
+  public contact_number: any;
   public isProgress = false;
   public isUploaded: boolean = true;
   // Flag to be used for checking whether we are adding/editing an entry
@@ -55,19 +56,14 @@ export class AddunitsfourPage {
     public http: Http,
     public NP: NavParams,
     public fb: FormBuilder,
-    public toastCtrl: ToastController, public loadingCtrl: LoadingController, private camera: Camera,
-    private filechooser: FileChooser,
-    private transfer: Transfer,
-    private file: File, private ngZone: NgZone) {
+    public toastCtrl: ToastController, public loadingCtrl: LoadingController, private ngZone: NgZone) {
     this.loginas = localStorage.getItem("userInfoName");
     // Create form builder validation rules
     this.form = fb.group({
-      //"first_name": ["", Validators.required],
-      //"last_name": ["", Validators.required],
-      "country": ["", Validators.required],
-      "contact": ["", Validators.required],
-      /// "email": ["", Validators.required]
-      'email': ['', Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(50), Validators.pattern(/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i)])],
+      //"unitgroups_id": ["", Validators.required],
+      //"companys_id": ["", Validators.required],
+      "unitgroups_id": ["", Validators.required],
+      "companys_id": ["", Validators.required]
     });
     this.userId = localStorage.getItem("userInfoId");
   }
@@ -95,21 +91,68 @@ export class AddunitsfourPage {
         console.log(this.addedImgLists);
       }
       let editItem = this.NP.get("record");
-      this.first_name = editItem.firstname;
-      this.last_name = editItem.lastname;
-      this.email = editItem.email;
-      this.country = editItem.country_id;
-      this.contact = editItem.contact_number;
+      this.unitgroups_id = editItem.firstname;
+      this.companys_id = editItem.lastname;
     }
     else {
       this.isEdited = false;
       this.pageTitle = 'New  Units - 4';
     }
-    /*this.first_name = "Kannan";
-    this.last_name = "Nagarathinam";
-    this.email = "kannanrathvalli@gmail.com";
-    this.country = "238";
-    this.contact = "9443976954";*/
+
+    if (this.NP.get("accountInfo")) {
+      let info = this.NP.get("accountInfo");
+
+      //var objects = JSON.parse(info);
+      console.log("JSON.stringify:" + JSON.stringify(info));
+      console.log("Length:" + info.length);
+      console.log('A');
+      for (var key in info) {
+        console.log('B');
+        let keyindex;
+        if (this.NP.get("record")) {
+          keyindex = 0;
+        } else {
+          keyindex = 1;
+        }
+        console.log("Key:" + key);
+        console.log("Key Index:" + keyindex);
+        if (key == keyindex) {
+          console.log('Key' + key);
+          this.unitname = info[key].unitname;
+          this.createdby = info[key].createdby;
+          this.projectname = info[key].projectname;
+          this.controllerid = info[key].controllerid;
+          this.neaplateno = info[key].neaplateno;
+          this.models_id = info[key].models_id;
+          this.location = info[key].location;
+          this.contact_name = info[key].contact_name;
+          this.alarmhashtags = info[key].alarmhashtags;
+          this.contact_number = info[key].contact_number;
+          console.log("Unit Name:" + this.unitname);
+          //console.log(JSON.stringify(this));
+        } else {
+          console.log('Key' + key);
+          this.unitname = info[0].unitname;
+          this.createdby = info[0].createdby;
+          this.unitname = info[0].unitname;
+          this.createdby = info[0].createdby;
+          this.projectname = info[0].projectname;
+          this.controllerid = info[0].controllerid;
+          this.neaplateno = info[0].neaplateno;
+          this.models_id = info[0].models_id;
+          this.location = info[0].location;
+          this.contact_name = info[0].contact_name;
+          this.alarmhashtags = info[0].alarmhashtags;
+          this.contact_number = info[0].contact_number;
+          console.log("Unit Name:" + this.unitname);
+        }
+        /* this.userInfo.push({
+           info
+         });
+         console.log("User Information:" + JSON.stringify(this.userInfo));
+         */
+      }
+    }
   }
 
 
@@ -117,13 +160,9 @@ export class AddunitsfourPage {
   // Assign the navigation retrieved data to properties
   // used as models on the page's HTML form
   selectEntry(item) {
-    this.first_name = item.first_name;
-    this.last_name = item.last_name;
-    this.email = item.email;
-    this.country = item.country;
-    this.contact = item.contact;
-    this.photo = item.photo;
-    this.recordID = item.userid;
+    this.unitgroups_id = item.unitgroups_id;
+    this.companys_id = item.companys_id;
+    this.recordID = item.unit_id;
   }
 
 
@@ -133,21 +172,58 @@ export class AddunitsfourPage {
   // to our remote PHP script (note the body variable we have created which
   // supplies a variable of key with a value of create followed by the key/value pairs
   // for the record data
-  createEntry(first_name, last_name, email, country, contact, createdby) {
-    this.userInfo.push({
-      photo: this.photo,
-      first_name: first_name,
-      last_name: last_name,
-      email: email,
-      country: country,
-      contact: contact,
-      createdby: createdby,
+  createEntry(unitgroups_id, companys_id, createdby) {
 
-    });
-    this.navCtrl.setRoot(UnitsPage, {
-      accountInfo: this.userInfo
-    });
-    
+
+
+
+
+
+
+
+    console.log("Final User Info 1:" + this.userInfo);
+    console.log("Final User Info 2:" + JSON.stringify(this.userInfo));
+
+
+    let body: string = "is_mobile=1&unitname=" + this.unitname +
+      "&projectname=" + this.projectname +
+      "&controllerid=" + this.controllerid +
+      "&neaplateno=" + this.neaplateno +
+      "&models_id=" + this.models_id +
+      "&location=" + this.location +
+      "&createdby=" + this.createdby +
+      "&updatedby=" + this.createdby +
+      "&contact_name=" + this.contact_name +
+      "&alarmhashtags=" + this.alarmhashtags +
+      "&contact_number=" + this.contact_number +
+      "&unitgroups_id=" + this.unitgroups_id +
+      "&companys_id=" + this.companys_id +
+      "&unitgroups_id=" + this.unitgroups_id,
+      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/units/store";
+    console.log(url);
+    console.log(body);
+
+    this.http.post(url, body, options)
+      .subscribe((data) => {
+        //console.log("Response Success:" + JSON.stringify(data.json()));
+        // If the request was successful notify the user
+        if (data.status === 200) {
+          this.hideForm = true;
+          this.sendNotification(`Units created was successfully added`);
+          this.navCtrl.setRoot(UnitsPage);
+        }
+        // Otherwise let 'em know anyway
+        else {
+          this.sendNotification('Something went wrong!');
+        }
+      });
+    /* this.navCtrl.setRoot(UnitsPage, {
+       accountInfo: this.userInfo
+     });*/
+
 
   }
 
@@ -158,21 +234,52 @@ export class AddunitsfourPage {
   // to our remote PHP script (note the body variable we have created which
   // supplies a variable of key with a value of update followed by the key/value pairs
   // for the record data
-  updateEntry(first_name, last_name, email, country, contact, createdby) {
+  updateEntry(unitgroups_id, companys_id, createdby) {
     this.userInfo.push({
-      photo: this.photo,
-      first_name: first_name,
-      last_name: last_name,
-      email: email,
-      country: country,
-      contact: contact,
+      unitgroups_id: unitgroups_id,
+      companys_id: companys_id,
       createdby: createdby,
 
     });
-    this.navCtrl.setRoot(UnitsPage, {
-      accountInfo: this.userInfo,
-      record: this.NP.get("record")
-    });
+
+
+    let body: string = "is_mobile=1&staff_id=" + this.recordID +
+      "&unitname=" + this.unitname +
+      "&projectname=" + this.projectname +
+      "&controllerid=" + this.controllerid +
+      "&neaplateno=" + this.neaplateno +
+      "&models_id=" + this.models_id +
+      "&location=" + this.location +
+      "&createdby=" + this.createdby +
+      "&updatedby=" + this.createdby +
+      "&contact_name=" + this.contact_name +
+      "&alarmhashtags=" + this.alarmhashtags +
+      "&contact_number=" + this.contact_number +
+      "&unitgroups_id=" + this.unitgroups_id +
+      "&companys_id=" + this.companys_id +
+      "&unitgroups_id=" + this.unitgroups_id,
+
+      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/units/update";
+    console.log(url);
+    console.log(body);
+    this.http.post(url, body, options)
+      .subscribe(data => {
+        console.log(data);
+        // If the request was successful notify the user
+        if (data.status === 200) {
+          this.hideForm = true;
+          this.sendNotification(`User created was successfully updated`);
+          this.navCtrl.setRoot(UnitsPage);
+        }
+        // Otherwise let 'em know anyway
+        else {
+          this.sendNotification('Something went wrong!');
+        }
+      });
+
   }
 
 
@@ -183,7 +290,7 @@ export class AddunitsfourPage {
   // supplies a variable of key with a value of delete followed by the key/value pairs
   // for the record ID we want to remove from the remote database
   deleteEntry() {
-    let first_name: string = this.form.controls["first_name"].value,
+    let unitgroups_id: string = this.form.controls["unitgroups_id"].value,
       body: string = "key=delete&recordID=" + this.recordID,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
@@ -192,10 +299,10 @@ export class AddunitsfourPage {
 
     this.http.post(url, body, options)
       .subscribe(data => {
-        // If the request was successful notify the user
+        // If the request was successful notify the user       
         if (data.status === 200) {
           this.hideForm = true;
-          this.sendNotification(`Congratulations the company group: ${first_name} was successfully deleted`);
+          this.sendNotification(`Congratulations the unit: ${unitgroups_id} was successfully deleted`);
         }
         // Otherwise let 'em know anyway
         else {
@@ -210,19 +317,16 @@ export class AddunitsfourPage {
   // Determine whether we are adding a new record or amending an
   // existing record
   saveEntry() {
-    let first_name: string = this.form.controls["first_name"].value,
-      last_name: string = this.form.controls["last_name"].value,
-      email: string = this.form.controls["email"].value,
-      country: string = this.form.controls["country"].value,
-      contact: string = this.form.controls["contact"].value;
+    let unitgroups_id: string = this.form.controls["unitgroups_id"].value,
+      companys_id: string = this.form.controls["companys_id"].value
     console.log(this.form.controls);
-   
+
     if (this.isUploadedProcessing == false) {
       if (this.isEdited) {
-        this.updateEntry(first_name, last_name, email, country, contact, this.userId);
+        this.updateEntry(unitgroups_id, companys_id, this.userId);
       }
       else {
-        this.createEntry(first_name, last_name, email, country, contact, this.userId);
+        this.createEntry(unitgroups_id, companys_id, this.userId);
       }
     }
   }
@@ -231,11 +335,8 @@ export class AddunitsfourPage {
 
   // Clear values in the page's HTML form fields
   resetFields(): void {
-    this.first_name = "";
-    this.last_name = "";
-    this.email = "";
-    this.country = "";
-    this.contact = "";
+    this.unitgroups_id = "";
+    this.companys_id = "";
   }
 
 
@@ -254,11 +355,13 @@ export class AddunitsfourPage {
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/getCountries";
+      url: any = this.apiServiceURL + "/getcompanies";
     let res;
+    console.log("URL" + url);
     this.http.get(url, options)
       .subscribe(data => {
         res = data.json();
+        console.log(JSON.stringify(res));
         this.responseResultCompany = res.companies;
       });
 
@@ -274,9 +377,9 @@ export class AddunitsfourPage {
     } else {
       loader.dismiss();
     }
-  } 
+  }
   previous() {
-    this.navCtrl.setRoot(UserPage);
+    this.navCtrl.setRoot(AddunitsthreePage);
   }
 }
 

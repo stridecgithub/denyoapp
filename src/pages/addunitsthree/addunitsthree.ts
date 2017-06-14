@@ -2,13 +2,11 @@ import { Component, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
-import { Camera, CameraOptions } from '@ionic-native/camera';
-import { FileChooser } from '@ionic-native/file-chooser';
-import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
-import { File } from '@ionic-native/file';
 import 'rxjs/add/operator/map';
-import { UserPage } from '../user/user';
 import { AddunitsfourPage } from '../addunitsfour/addunitsfour';
+import { AddunitstwoPage } from '../addunitstwo/addunitstwo';
+import * as $ from 'jquery'
+import "slick-carousel";
 /**
  * Generated class for the AddcompanygroupPage page.
  *
@@ -18,8 +16,7 @@ import { AddunitsfourPage } from '../addunitsfour/addunitsfour';
 @IonicPage()
 @Component({
   selector: 'page-addunitsthree',
-  templateUrl: 'addunitsthree.html',
-  providers: [Camera, FileChooser, Transfer, File]
+  templateUrl: 'addunitsthree.html'
 })
 export class AddunitsthreePage {
   // Define FormBuilder /model properties
@@ -28,7 +25,15 @@ export class AddunitsthreePage {
   public alarmhashtags: any;
   public contact_name: any;
   public contact_number: any;
+  public gethashtag: any;
   public userId: any;
+  public unitname: any;
+  public createdby: any;
+  public location: any;
+  public projectname: any;
+  public controllerid: any;
+  public neaplateno: any;
+  public models_id: any;
   public responseResultCountry: any;
   progress: number;
   public isProgress = false;
@@ -52,17 +57,14 @@ export class AddunitsthreePage {
     public http: Http,
     public NP: NavParams,
     public fb: FormBuilder,
-    public toastCtrl: ToastController, public loadingCtrl: LoadingController, private camera: Camera,
-    private filechooser: FileChooser,
-    private transfer: Transfer,
-    private file: File, private ngZone: NgZone) {
+    public toastCtrl: ToastController, public loadingCtrl: LoadingController, private ngZone: NgZone) {
     this.loginas = localStorage.getItem("userInfoName");
     // Create form builder validation rules
     this.form = fb.group({
       //"alarmhashtags": ["", Validators.required],
       //"contact_name": ["", Validators.required],
       "alarmhashtags": ["", Validators.required],
-      "contact_name": ["", Validators.required],     
+      "contact_name": ["", Validators.required],
       /// "contact_number": ["", Validators.required]
       'contact_number': ["", Validators.required],
     });
@@ -100,11 +102,80 @@ export class AddunitsthreePage {
       this.isEdited = false;
       this.pageTitle = 'New  Units - 3';
     }
-    /*this.alarmhashtags = "Kannan";
-    this.contact_name = "Nagarathinam";
-    this.contact_number = "kannanrathvalli@gmail.com";
-    this.country = "238";
-    this.contact = "9443976954";*/
+
+
+    if (this.NP.get("accountInfo")) {
+      let info = this.NP.get("accountInfo");
+
+      //var objects = JSON.parse(info);
+      console.log("JSON.stringify:" + JSON.stringify(info));
+      console.log("Length:" + info.length);
+      console.log('A');
+      for (var key in info) {
+        console.log('B');
+        let keyindex;
+        if (this.NP.get("record")) {
+          keyindex = 0;
+        } else {
+          keyindex = 1;
+        }
+        console.log("Key:" + key);
+        console.log("Key Index:" + keyindex);
+        if (key == keyindex) {
+          console.log('Key' + key);
+          this.unitname = info[key].unitname;
+          this.createdby = info[key].createdby;
+          this.projectname = info[key].projectname;
+          this.controllerid = info[key].controllerid;
+          this.neaplateno = info[key].neaplateno;
+          this.models_id = info[key].models_id;
+          this.location = info[key].location;
+          console.log("Unit Name:" + this.unitname);
+          //console.log(JSON.stringify(this));
+        } else {
+          console.log('Key' + key);
+          this.unitname = info[0].unitname;
+          this.createdby = info[0].createdby;
+
+          this.unitname = info[0].unitname;
+          this.createdby = info[0].createdby;
+          this.projectname = info[0].projectname;
+          this.controllerid = info[0].controllerid;
+          this.neaplateno = info[0].neaplateno;
+          this.models_id = info[0].models_id;
+          this.location = info[0].location;
+          console.log("Unit Name:" + this.unitname);
+        }
+        /* this.userInfo.push({
+           info
+         });
+         console.log("User Information:" + JSON.stringify(this.userInfo));
+         */
+      }
+    }
+
+    var users = [
+      { username: 'Krishanth', fullname: 'Kannan' },
+      { username: 'Thibishanth', fullname: 'Kannan' },
+      { username: 'Gohila', fullname: 'Kannan' },
+      { username: 'lodev09', fullname: 'Jovanni Lo' },
+      { username: 'foo', fullname: 'Foo User' },
+      { username: 'bar', fullname: 'Bar User' },
+      { username: 'twbs', fullname: 'Twitter Bootstrap' },
+      { username: 'john', fullname: 'John Doe' },
+      { username: 'jane', fullname: 'Jane Doe' },
+      { username: 'Kannan', fullname: 'Nagarathinam' },
+    ];
+
+    $('#example1').suggest('@', {
+      data: users,
+      map: function (user) {
+        return {
+          value: user.username,
+          text: '<strong>' + user.username + '</strong> <small>' + user.fullname + '</small>'
+        }
+      }
+    })
   }
 
 
@@ -130,42 +201,17 @@ export class AddunitsthreePage {
       alarmhashtags: alarmhashtags,
       contact_name: contact_name,
       contact_number: contact_number,
-      createdby: createdby,
-
+      unitname: this.unitname,
+      createdby: this.createdby,
+      projectname: this.projectname,
+      controllerid: this.controllerid,
+      neaplateno: this.neaplateno,
+      models_id: this.models_id,
+      location: this.location
     });
     this.navCtrl.setRoot(AddunitsfourPage, {
       accountInfo: this.userInfo
     });
-    /*
-        let body: string = "key=contact_numberexist&contact_number=" + contact_number,
-          type: string = "application/x-www-form-urlencoded; charset=UTF-8",
-          headers: any = new Headers({ 'Content-Type': type }),
-          options: any = new RequestOptions({ headers: headers }),
-          url: any = this.apiServiceURL + "api/users.php";
-    
-        this.http.post(url, body, options)
-          .subscribe((data) => {
-            console.log(JSON.stringify(data.json()));
-            // If the request was successful notify the user
-            if (data.status === 200) {
-              this.hideForm = true;
-              console.log(data.json().Error);
-              if (data.json().Error > 0) {
-                this.userInfo = []; // need this one
-                this.sendNotification(data.json().message);
-              } else {
-                //this.sendNotification(data.json().message);
-                this.navCtrl.setRoot(AddunitstwoPage, {
-                  accountInfo: this.userInfo
-                });
-              }
-            }
-            // Otherwise let 'em know anyway
-            else {
-              this.sendNotification('Something went wrong!');
-            }
-          });
-    */
 
   }
 
@@ -178,12 +224,16 @@ export class AddunitsthreePage {
   // for the record data
   updateEntry(alarmhashtags, contact_name, contact_number, createdby) {
     this.userInfo.push({
-
       alarmhashtags: alarmhashtags,
       contact_name: contact_name,
       contact_number: contact_number,
-
-      createdby: createdby,
+      unitname: this.unitname,
+      createdby: this.createdby,
+      projectname: this.projectname,
+      controllerid: this.controllerid,
+      neaplateno: this.neaplateno,
+      models_id: this.models_id,
+      location: this.location
 
     });
     this.navCtrl.setRoot(AddunitsfourPage, {
@@ -229,9 +279,8 @@ export class AddunitsthreePage {
   saveEntry() {
     let alarmhashtags: string = this.form.controls["alarmhashtags"].value,
       contact_name: string = this.form.controls["contact_name"].value,
-      contact_number: string = this.form.controls["contact_number"].value,
-      country: string = this.form.controls["country"].value,
-      contact: string = this.form.controls["contact"].value;
+      contact_number: string = this.form.controls["contact_number"].value;
+
     console.log(this.form.controls);
     /*if (this.addedImgLists) {
       this.isUploadedProcessing = true;
@@ -294,7 +343,12 @@ export class AddunitsthreePage {
     }
   }
   previous() {
-    this.navCtrl.setRoot(UserPage);
+    this.navCtrl.setRoot(AddunitstwoPage);
+  }
+
+  address1get(hashtag) {
+    console.log(hashtag);
+    this.gethashtag = hashtag;
   }
 }
 

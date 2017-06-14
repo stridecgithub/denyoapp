@@ -2,13 +2,10 @@ import { Component, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
-import { Camera, CameraOptions } from '@ionic-native/camera';
-import { FileChooser } from '@ionic-native/file-chooser';
-import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
-import { File } from '@ionic-native/file';
 import 'rxjs/add/operator/map';
 import { UserPage } from '../user/user';
 import { AddunitsthreePage } from '../addunitsthree/addunitsthree';
+import { AddunitsonePage } from '../addunitsone/addunitsone';
 /**
  * Generated class for the AddcompanygroupPage page.
  *
@@ -18,8 +15,7 @@ import { AddunitsthreePage } from '../addunitsthree/addunitsthree';
 @IonicPage()
 @Component({
   selector: 'page-addunitstwo',
-  templateUrl: 'addunitstwo.html',
-  providers: [Camera, FileChooser, Transfer, File]
+  templateUrl: 'addunitstwo.html'
 })
 export class AddunitstwoPage {
   // Define FormBuilder /model properties
@@ -28,10 +24,11 @@ export class AddunitstwoPage {
   public unitname: any;
   public projectname: any;
   public controllerid: any;
-  public photo: any;
   public models_id: any;
   public neaplateno: any;
   public userId: any;
+  public createdby: any;
+  public location: any;
   public responseResultModel: any;
   progress: number;
   public isProgress = false;
@@ -55,10 +52,7 @@ export class AddunitstwoPage {
     public http: Http,
     public NP: NavParams,
     public fb: FormBuilder,
-    public toastCtrl: ToastController, public loadingCtrl: LoadingController, private camera: Camera,
-    private filechooser: FileChooser,
-    private transfer: Transfer,
-    private file: File, private ngZone: NgZone) {
+    public toastCtrl: ToastController, public loadingCtrl: LoadingController, private ngZone: NgZone) {
     this.loginas = localStorage.getItem("userInfoName");
     // Create form builder validation rules
     this.form = fb.group({
@@ -107,11 +101,44 @@ export class AddunitstwoPage {
       this.isEdited = false;
       this.pageTitle = 'New  Units - 2';
     }
-    /*this.unitname = "Kannan";
-    this.projectname = "Nagarathinam";
-    this.controllerid = "kannanrathvalli@gmail.com";
-    this.models_id = "238";
-    this.neaplateno = "9443976954";*/
+
+
+    if (this.NP.get("accountInfo")) {
+      let info = this.NP.get("accountInfo");
+
+      //var objects = JSON.parse(info);
+      console.log("JSON.stringify:" + JSON.stringify(info));
+      console.log("Length:" + info.length);
+      console.log('A');
+      for (var key in info) {
+        console.log('B');
+        let keyindex;
+        if (this.NP.get("record")) {
+          keyindex = 0;
+        } else {
+          keyindex = 1;
+        }
+        console.log("Key:" + key);
+        console.log("Key Index:" + keyindex);
+        if (key == keyindex) {
+          console.log('Key' + key);
+          this.location = info[key].location;
+          this.createdby = info[key].createdby;
+          console.log("Location for User Account:" + this.location);
+          //console.log(JSON.stringify(this));
+        } else {
+          console.log('Key' + key);
+          this.location = info[0].location;
+          this.createdby = info[0].createdby;
+          console.log("Location for User Account:" + this.location);
+        }
+        /* this.userInfo.push({
+           info
+         });
+         console.log("User Information:" + JSON.stringify(this.userInfo));
+         */
+      }
+    }
   }
 
 
@@ -124,8 +151,7 @@ export class AddunitstwoPage {
     this.controllerid = item.controllerid;
     this.models_id = item.models_id;
     this.neaplateno = item.neaplateno;
-    this.photo = item.photo;
-    this.recordID = item.userid;
+    this.recordID = item.unit_id;
   }
 
 
@@ -137,46 +163,17 @@ export class AddunitstwoPage {
   // for the record data
   createEntry(unitname, projectname, controllerid, models_id, neaplateno, createdby) {
     this.userInfo.push({
-      photo: this.photo,
       unitname: unitname,
       projectname: projectname,
       controllerid: controllerid,
       models_id: models_id,
       neaplateno: neaplateno,
       createdby: createdby,
-
+      location: this.location
     });
-
-
-    let body: string = "controllerid=" + controllerid + "&unit_id=0",
-      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
-      headers: any = new Headers({ 'Content-Type': type }),
-      options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/checkcontrollerid";
-
-    this.http.post(url, body, options)
-      .subscribe((data) => {
-        console.log(JSON.stringify(data.json()));
-        // If the request was successful notify the user
-        if (data.status === 200) {
-          console.log("create" + data.json().msg[0].Error);
-          if (data.json().msg[0].Error > 0) {
-            //this.userInfo=[];
-            this.sendNotification(data.json().msg[0].result);
-          } else {
-            //this.sendNotification(data.json().message);
-            this.navCtrl.setRoot(AddunitsthreePage, {
-              accountInfo: this.userInfo
-            });
-          }
-        }
-        // Otherwise let 'em know anyway
-        else {
-          this.sendNotification('Something went wrong!');
-        }
-      });
-
-
+    this.navCtrl.setRoot(AddunitsthreePage, {
+      accountInfo: this.userInfo
+    });
   }
 
 
@@ -188,45 +185,18 @@ export class AddunitstwoPage {
   // for the record data
   updateEntry(unitname, projectname, controllerid, models_id, neaplateno, createdby) {
     this.userInfo.push({
-      photo: this.photo,
       unitname: unitname,
       projectname: projectname,
       controllerid: controllerid,
       models_id: models_id,
       neaplateno: neaplateno,
       createdby: createdby,
-
+      location: this.location
     });
-
-    let body: string = "controllerid=" + controllerid + "&id=" + this.NP.get("record").unit_id,
-      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
-      headers: any = new Headers({ 'Content-Type': type }),
-      options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/checkcontrollerid";
-    this.http.post(url, body, options)
-      .subscribe((data) => {
-        console.log(JSON.stringify(data.json()));
-        // If the request was successful notify the user
-        if (data.status === 200) {
-          console.log("update" + data.json().msg[0].Error);
-          if (data.json().msg[0].Error > 0) {
-            //this.userInfo=[];
-            this.sendNotification(data.json().msg[0].result);
-          } else {
-            //this.sendNotification(data.json().message);
-            this.navCtrl.setRoot(AddunitsthreePage, {
-              accountInfo: this.userInfo,
-              record: this.NP.get("record")
-            });
-          }
-        }
-
-        // Otherwise let 'em know anyway
-        else {
-          this.sendNotification('Something went wrong!');
-        }
-      });
-
+    this.navCtrl.setRoot(AddunitsthreePage, {
+      accountInfo: this.userInfo,
+      record: this.NP.get("record")
+    });
   }
 
   // Remove an existing record that has been selected in the page's HTML form
@@ -328,9 +298,9 @@ export class AddunitstwoPage {
     } else {
       loader.dismiss();
     }
-  }  
+  }
   previous() {
-    this.navCtrl.setRoot(UserPage);
+    this.navCtrl.setRoot(AddunitsonePage);
   }
 }
 

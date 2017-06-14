@@ -33,24 +33,24 @@
 <ion-content padding>
   <div>
     <img src="img/add_unit_step_4.png">
-  </div>  
+  </div>
   <div>
     <form [formGroup]="form" (ngSubmit)="saveEntry()">
-      <ion-list>     
-        
+      <ion-list>
+
 
         <ion-item>
           <ion-label stacked>Unit Group Assign <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
-          <ion-select [disabled]="readOnly" [(ngModel)]="country" formControlName="country">
-            <ion-option *ngFor="let countryData of responseResultCompany" value="{{companyData.id}}">{{companyData.country_name}}</ion-option>
+          <ion-select [disabled]="readOnly" [(ngModel)]="unitgroups_id" formControlName="unitgroups_id">
+            <ion-option *ngFor="let companyData of responseResultCompany" value="{{companyData.companygroup_id}}">{{companyData.companygroup_name}}</ion-option>
           </ion-select>
         </ion-item>
 
 
-         <ion-item>
+        <ion-item>
           <ion-label stacked>Company Group <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
-          <ion-select [disabled]="readOnly" [(ngModel)]="country" formControlName="country">
-            <ion-option *ngFor="let companyData of responseResultCompany" value="{{companyData.id}}">{{companyData.country_name}}</ion-option>
+          <ion-select [disabled]="readOnly" [(ngModel)]="companys_id" formControlName="companys_id">
+            <ion-option *ngFor="let companyData of responseResultCompany" value="{{companyData.companygroup_id}}">{{companyData.companygroup_name}}</ion-option>
           </ion-select>
         </ion-item>
 

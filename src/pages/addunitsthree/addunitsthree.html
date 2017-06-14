@@ -39,10 +39,18 @@
     <form [formGroup]="form" (ngSubmit)="saveEntry()">
       <ion-list>
 
-        <ion-item>
+        <!--ion-item>
           <ion-label stacked>Select Notification List<span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
           <ion-input type="text" [disabled]="readOnly" formControlName="alarmhashtags" [(ngModel)]="alarmhashtags"></ion-input>
-        </ion-item>
+        </ion-item-->
+<div>
+  <p class="error">
+    <b><i>Attention</i></b>
+  </p>
+  <i>When that's error on the unit, Alarm notification will be sent to this following Email and Contact Number.</i>
+  </div>
+         Select Notification List *
+        <textarea  (keyup)=address1get($event.target.value); id="example1" class="form-control" rows="8" [disabled]="readOnly" formControlName="alarmhashtags" rows="6" [(ngModel)]="alarmhashtags"></textarea>  
 
         <ion-item>
           <ion-label stacked>Contact Person <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>

@@ -9,12 +9,12 @@ import { UserPage } from '../pages/user/user';
 import { LoginPage } from '../pages/login/login';
 import { LogoutPage } from '../pages/logout/logout';
 import { HomePage } from '../pages/home/home';
-import { MyaccountPage } from '../pages/myaccount/myaccount';
+//import { MyaccountPage } from '../pages/myaccount/myaccount';
 import { UnitgroupPage } from '../pages/unitgroup/unitgroup';
 //import { AddUnitPage } from '../pages/add-unit/add-unit';
 
-import { RolePage } from '../pages/role/role';
-import { AddunitgroupPage } from '../pages/addunitgroup/addunitgroup';
+//import { RolePage } from '../pages/role/role';
+//import { AddunitgroupPage } from '../pages/addunitgroup/addunitgroup';
 import { App } from 'ionic-angular';
 import { AtmentionedPage } from '../pages/atmentioned/atmentioned';
 import { UnitsPage } from '../pages/units/units';
@@ -28,7 +28,7 @@ export class MyApp {
 
   pages: Array<{ title: string, component: any }>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
+  constructor(public platform: Platform, public statusBar: StatusBar, private splashScreen: SplashScreen,
     public appCtrl: App) {
 
 
@@ -41,11 +41,11 @@ export class MyApp {
       { title: 'Dashboard', component: HomePage },
       { title: 'Company Group', component: CompanygroupPage },
       { title: 'Users', component: UserPage },
-      { title: 'Add Unit Group', component: AddunitgroupPage },
+      //{ title: 'Add Unit Group', component: AddunitgroupPage },
       { title: 'Unit Group', component: UnitgroupPage },
       { title: 'Units', component: UnitsPage },
-      { title: 'Role', component: RolePage },
-      { title: 'My Account', component: MyaccountPage },
+      //{ title: 'Role', component: RolePage },
+      //{ title: 'My Account', component: MyaccountPage },
       { title: 'At mentioned Page', component: AtmentionedPage },
       { title: 'Logout', component: LogoutPage },
 
@@ -62,7 +62,7 @@ export class MyApp {
 
       //setTimeout(function () {
         this.splashScreen.hide();
-     // }, 3000);
+      //}, 3000);
 
     });
   }
