@@ -18,7 +18,8 @@ import 'rxjs/add/operator/map';
 })
 export class AddunitgroupPage {
    public loginas: any;
-  public form: FormGroup;
+   public companyid: any;
+     public form: FormGroup;
   public cname: any;
   public remark: any;
   public ccode: any;
@@ -52,6 +53,7 @@ export class AddunitgroupPage {
     });
 
     this.userId = localStorage.getItem("userInfoId");
+    this.companyid = localStorage.getItem("userInfoCompanyId");
   }
 
   ionViewDidLoad() {
@@ -77,18 +79,18 @@ export class AddunitgroupPage {
        console.log(cname,remark);
 
     if (this.isEdited) {
-    //  this.updateEntry(companygroup_name, address, country, contact, this.userId);
+    //  this.updateEntry(companygroup_name, address, country, contact, this.userId,this.companyid);
     }
     else {
-      this.createEntry(cname, this.ccode, remark, this.userId);
+      this.createEntry(cname, this.ccode, remark, this.userId,this.companyid);
     }
 
   }
-  createEntry(cname, ccode, remark, createdby) {
+  createEntry(cname, ccode, remark, createdby,companyid) {
    // this.isUploadedProcessing = true;
     let updatedby = createdby;
-    console.log(cname,ccode,remark);
-    let body: string = "is_mobile=1&unitgroup_name=" + cname + "&colorcode=" + ccode + "&remark=" + remark + "&createdby=" + createdby + "&updatedby=" + updatedby,
+    console.log(cname,ccode,remark,companyid);
+    let body: string = "is_mobile=1&unitgroup_name=" + cname + "&colorcode=" + ccode + "&remark=" + remark + "&createdby=" + createdby + "&updatedby=" + updatedby +"&company_id="+companyid,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),

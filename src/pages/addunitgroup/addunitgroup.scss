@@ -56,8 +56,11 @@ background-color: #FBE983;
  width: 40px;
  height: 40px;
  }
- buttoncolorgroup button:active,buttoncolorgroup button:focus,buttoncolorgroup button:hover{border: 2px solid #000;}
-  .button9{
+ .buttoncolorgroup button:focus {
+border: 1px solid #000;
+}
+ /*.buttoncolorgroup button:active,.buttoncolorgroup button:focus,.buttoncolorgroup button:hover{border: 2px solid #000;}
+ */.button9{
  background-color: #FF877C;
  width: 40px;
  height: 40px;
