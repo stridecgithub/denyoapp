@@ -29,6 +29,7 @@ import { AddunitsonePage } from '../pages/addunitsone/addunitsone';
 import { AddunitstwoPage } from '../pages/addunitstwo/addunitstwo';
 import { AddunitsthreePage } from '../pages/addunitsthree/addunitsthree';
 import { AddunitsfourPage } from '../pages/addunitsfour/addunitsfour';
+import { ReporttemplatePage } from '../pages/reporttemplate/reporttemplate';
 @NgModule({
   declarations: [
     MyApp,
@@ -55,6 +56,7 @@ import { AddunitsfourPage } from '../pages/addunitsfour/addunitsfour';
     AddrolePage,
     AddunitgroupPage,
     UnitgroupPage,
+    ReporttemplatePage,
     AtmentionedPage
   ],
   imports: [
@@ -98,6 +100,7 @@ import { AddunitsfourPage } from '../pages/addunitsfour/addunitsfour';
     AddrolePage,
     AddunitgroupPage,
     UnitgroupPage,
+    ReporttemplatePage,
     AtmentionedPage
   ],
   providers: [

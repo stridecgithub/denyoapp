@@ -9,11 +9,12 @@ import { UserPage } from '../pages/user/user';
 import { LoginPage } from '../pages/login/login';
 import { LogoutPage } from '../pages/logout/logout';
 import { HomePage } from '../pages/home/home';
-//import { MyaccountPage } from '../pages/myaccount/myaccount';
+import { MyaccountPage } from '../pages/myaccount/myaccount';
 import { UnitgroupPage } from '../pages/unitgroup/unitgroup';
 //import { AddUnitPage } from '../pages/add-unit/add-unit';
 
 import { RolePage } from '../pages/role/role';
+import { ReporttemplatePage } from '../pages/reporttemplate/reporttemplate';
 //import { AddunitgroupPage } from '../pages/addunitgroup/addunitgroup';
 import { App } from 'ionic-angular';
 import { AtmentionedPage } from '../pages/atmentioned/atmentioned';
@@ -45,9 +46,10 @@ export class MyApp {
       { title: 'Unit Group', component: UnitgroupPage },
       { title: 'Units', component: UnitsPage },
       { title: 'Role', component: RolePage },
-      //{ title: 'My Account', component: MyaccountPage },
+      { title: 'My Account', component: MyaccountPage },
       { title: 'At mentioned Page', component: AtmentionedPage },
       { title: 'Logout', component: LogoutPage },
+      { title: 'Report Template', component:ReporttemplatePage}
 
     ];
 
