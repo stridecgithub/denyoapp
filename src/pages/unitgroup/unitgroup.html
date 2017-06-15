@@ -60,11 +60,17 @@
     <ion-item-sliding *ngFor="let item of reportAllLists;">
 
       <ion-item>
-        <button class="{{item.colorcodeindication}}">
+        <button class="{{item.colorcodeindication}}" style="float: left ;width:8px">
+         
         </button>
-        <h2><b>{{item.unitgroup_name}}</b>
-        </h2>
-        <h2><b>Total Units:{{item.totalunits}}</b></h2>
+        <button style="float: right ;width:50px;height:50px"></button>
+        <div style="overflow: hidden; padding-left: .5em;">
+          <h2><b>{{item.unitgroup_name}}</b>
+          </h2>
+          <h2><b>Total Units:{{item.totalunits}}</b></h2>
+
+        </div>
+
 
       </ion-item>
       <ion-item-options>

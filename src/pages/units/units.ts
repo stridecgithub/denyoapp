@@ -28,6 +28,7 @@ export class UnitsPage {
   public sortby = 2;
   public vendorsort = "asc";
   public ascending = true;
+  public colorListArr: any; 
   public reportData: any =
   {
     status: '',
@@ -65,6 +66,20 @@ export class UnitsPage {
   /*@doUser calling on report */
   /****************************/
   doUser() {
+      this.colorListArr = [
+      "FBE983",
+      "5584EE",
+      "A4BDFD",
+      "47D6DC",
+      "7AE7BE",
+      "51B749",
+      "FBD75C",
+      "FFB878",
+      "FF877C",
+      "DC2128",
+      "DAADFE",
+      "E1E1E1"
+    ];
     this.presentLoading(1);
     if (this.reportData.status == '') {
       this.reportData.status = "DRAFT";
@@ -85,7 +100,24 @@ export class UnitsPage {
         console.log("1" + res.units.length);
         console.log("2" + res.units);
         if (res.units.length > 0) {
-          this.reportAllLists = res.units;
+          for(let unit in res.units)
+          {
+             let colorcode;
+            let index = this.colorListArr.indexOf(res.units[unit].colorcode); // 1
+            console.log("Color Index:" + index);
+            let colorvalincrmentone = index + 1;
+            colorcode = "button" + colorvalincrmentone;
+            console.log("Color is" + colorcode);
+            this.reportAllLists.push({
+                unit_id:res.units[unit].unit_id,
+                unitname:res.units[unit].unitname,
+                projectname:res.units[unit].projectname,
+                colorcode:res.units[unit].colorcode,
+                colorcodeindications: colorcode
+                
+            });
+          }
+          //this.reportAllLists = res.units;
           this.totalCount = res.totalCount;
           this.reportData.startindex += this.reportData.results;
         } else {
