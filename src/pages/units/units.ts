@@ -113,6 +113,7 @@ export class UnitsPage {
                 unitname:res.units[unit].unitname,
                 projectname:res.units[unit].projectname,
                 colorcode:res.units[unit].colorcode,
+                nextservicedate:res.units[unit].nextservicedate,
                 colorcodeindications: colorcode
                 
             });
