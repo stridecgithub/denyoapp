@@ -95,15 +95,29 @@ export class UnitgroupPage {
         console.log("1" + res.unitgroups.length);
         console.log("2" + res.unitgroups);
         console.log("3" + res.colorcode);
+        if(res.favorite == 0)
+        {
+
+        }
         if (res.unitgroups.length > 0) {
 
           for (let unitgroup in res.unitgroups) {
             let colorcode;
+            let favorite;
             let index = this.colorListArr.indexOf(res.unitgroups[unitgroup].colorcode); // 1
             console.log("Color Index:" + index);
             let colorvalincrmentone = index + 1;
             colorcode = "button" + colorvalincrmentone;
             console.log("Color is" + colorcode);
+            if(res.unitgroups[unitgroup].favorite==1)
+            {
+                favorite="fav1";
+            }
+            else{
+              favorite="fav0";
+
+            }
+            console.log(favorite);
             this.reportAllLists.push({
               unitgroup_id: res.unitgroups[unitgroup].unitgroup_id,
               unitgroup_name: res.unitgroups[unitgroup].unitgroup_name,
@@ -111,7 +125,8 @@ export class UnitgroupPage {
               favorite: res.unitgroups[unitgroup].favorite,
               totalunits: res.unitgroups[unitgroup].totalunits,
               colorcode: res.unitgroups[unitgroup].colorcode,
-              colorcodeindication: colorcode
+              colorcodeindication: colorcode,
+              favoriteindication:favorite
             });
           }
           //"unitgroup_id":1,"unitgroup_name":"demo unit","colorcode":"FBD75C","remark":"nice","favorite":1,"totalunits":5

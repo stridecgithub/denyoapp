@@ -101,5 +101,13 @@ background-color: #FBE983;
  width: 40px;
  height: 40px;
  }
- .favorite{background:url(../img/maps_72.png) no-repeat center center;margin: 0 auto;}
+ .c1{background:url(../img/maps_72.png) no-repeat center center;margin: 0 auto;}
+ .fav0
+ {
+     background-image:url('../img/unfav.png');background-size:cover;
+ }
+ .fav1
+ {
+     background-image:url('../img/fr.png');background-size:cover;
+ }
 }
