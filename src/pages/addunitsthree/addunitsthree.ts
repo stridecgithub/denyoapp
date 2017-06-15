@@ -95,7 +95,7 @@ export class AddunitsthreePage {
         console.log(this.addedImgLists);
       }
       let editItem = this.NP.get("record");
-      this.alarmhashtags = editItem.alarmhashtags;
+      this.alarmhashtags = editItem.alarmnotificationto;
       this.contact_name = editItem.contact_name;
       this.contact_number = editItem.contact_number;
     }
@@ -155,37 +155,26 @@ export class AddunitsthreePage {
       }
     }
 
-    /* var users = [
-       { username: 'Krishanth', fullname: 'Kannan' },
-       { username: 'Thibishanth', fullname: 'Kannan' },
-       { username: 'Gohila', fullname: 'Kannan' },
-       { username: 'lodev09', fullname: 'Jovanni Lo' },
-       { username: 'foo', fullname: 'Foo User' },
-       { username: 'bar', fullname: 'Bar User' },
-       { username: 'twbs', fullname: 'Twitter Bootstrap' },
-       { username: 'john', fullname: 'John Doe' },
-       { username: 'jane', fullname: 'Jane Doe' },
-       { username: 'Kannan', fullname: 'Nagarathinam' },
-     ];*/
+    /*let users = [
+      { username: 'Krishanth', fullname: 'Kannan' },
+      { username: 'Thibishanth', fullname: 'Kannan' },
+      { username: 'Gohila', fullname: 'Kannan' },
+      { username: 'lodev09', fullname: 'Jovanni Lo' },
+      { username: 'foo', fullname: 'Foo User' },
+      { username: 'bar', fullname: 'Bar User' },
+      { username: 'twbs', fullname: 'Twitter Bootstrap' },
+      { username: 'john', fullname: 'John Doe' },
+      { username: 'jane', fullname: 'Jane Doe' },
+      { username: 'Kannan', fullname: 'Nagarathinam' },
+    ];*/
 
-    let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
-      headers: any = new Headers({ 'Content-Type': type }),
-      options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/getstaffs";
-    let res;
-    this.http.get(url, options)
-      .subscribe(data => {
-        res = data.json();
-        this.responseResultStaff = res.staffslist;
-      });
+    let users = localStorage.getItem("atMentionedStorage");
 
-
-    //let users = this.responseResultStaff;
-    console.log("@Mentioned Data 1" + this.responseResultStaff);
-    console.log("@Mentioned Data 2" + console.log(this.responseResultStaff));
-
+    console.log("A:" + JSON.parse(users));
+    console.log("B:" + users);
+    console.log("C:" + JSON.stringify(users));
     $('#example1').suggest('@', {
-      data: this.responseResultStaff,
+      data: JSON.parse(users),
       map: function (user) {
         return {
           value: user.username,
