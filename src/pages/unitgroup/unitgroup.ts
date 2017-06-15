@@ -235,4 +235,8 @@ export class UnitgroupPage {
     this.dounitGroup();
   }
 
+  favorite(unit_id) {
+    console.log(unit_id);
+  }
+
 }
