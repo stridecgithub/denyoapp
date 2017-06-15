@@ -28,7 +28,7 @@ export class UnitsPage {
   public sortby = 2;
   public vendorsort = "asc";
   public ascending = true;
-  public colorListArr: any; 
+  public colorListArr: any;
   public reportData: any =
   {
     status: '',
@@ -66,7 +66,7 @@ export class UnitsPage {
   /*@doUser calling on report */
   /****************************/
   doUser() {
-      this.colorListArr = [
+    this.colorListArr = [
       "FBE983",
       "5584EE",
       "A4BDFD",
@@ -100,22 +100,27 @@ export class UnitsPage {
         console.log("1" + res.units.length);
         console.log("2" + res.units);
         if (res.units.length > 0) {
-          for(let unit in res.units)
-          {
-             let colorcode;
+          for (let unit in res.units) {
+            let colorcode;
             let index = this.colorListArr.indexOf(res.units[unit].colorcode); // 1
             console.log("Color Index:" + index);
             let colorvalincrmentone = index + 1;
             colorcode = "button" + colorvalincrmentone;
             console.log("Color is" + colorcode);
             this.reportAllLists.push({
-                unit_id:res.units[unit].unit_id,
-                unitname:res.units[unit].unitname,
-                projectname:res.units[unit].projectname,
-                colorcode:res.units[unit].colorcode,
-                nextservicedate:res.units[unit].nextservicedate,
-                colorcodeindications: colorcode
-                
+              unit_id: res.units[unit].unit_id,
+              unitname: res.units[unit].unitname,
+              location: res.units[unit].location,
+              projectname: res.units[unit].projectname,
+              colorcode: res.units[unit].colorcode,
+              nextservicedate: res.units[unit].nextservicedate,
+              colorcodeindications: colorcode,
+              controllerid: res.units[unit].controllerid,
+              neaplateno: res.units[unit].neaplateno,
+              companys_id: res.units[unit].companys_id,
+              unitgroups_id: res.units[unit].unitgroups_id,
+              models_id: res.units[unit].models_id,
+              alarmnotificationto: res.units[unit].alarmnotificationto
             });
           }
           //this.reportAllLists = res.units;

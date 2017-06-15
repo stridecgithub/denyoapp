@@ -55,17 +55,30 @@
         <textarea (keyup)=address1get($event.target.value); id="example1" class="form-control" rows="8" [disabled]="readOnly" formControlName="alarmhashtags"
           rows="6" [(ngModel)]="alarmhashtags"></textarea>
 
+        <b>Contact Person</b> <span class="mandatory" *ngIf="hideActionButton">*</span>
         <ion-item>
-          <ion-label stacked>Contact Person <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
-          <ion-input type="text" [disabled]="readOnly" formControlName="contact_name" [(ngModel)]="contact_name"></ion-input>
+          <ion-label stacked>Name<span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
+          <ion-input type="text" (keyup)=address1get(alarmhashtags); [disabled]="readOnly" formControlName="contact_name_1" [(ngModel)]="contact_name_1"></ion-input>
         </ion-item>
+
+
+        <ion-item *ngFor="let contactnameData of contactnameArray;let i = index;">
+          <!--ion-label stacked>Name</ion-label-->
+          <ion-input type="text" placeholder="{{contactnameData.placeholder}}" [disabled]="readOnly" formControlName="{{contactnameData.name}}"
+            [(ngModel)]="contactnameData.name"></ion-input>
+        </ion-item>
+
 
         <ion-item>
           <ion-label stacked>Contact Number<span class="mandatory" *ngIf="hideActionButton"> *</span></ion-label>
-          <ion-input type="text" [disabled]="readOnly" formControlName="contact_number" [(ngModel)]="contact_number"></ion-input>
+          <ion-input type="text" [disabled]="readOnly" formControlName="contact_number_1" [(ngModel)]="contact_number_1"></ion-input>
         </ion-item>
 
-
+        <ion-item *ngFor="let contactnumberData of contactnumberArray;let i = index;">
+          <!--ion-label stacked>Number</ion-label-->
+          <ion-input type="text" placeholder="{{contactnumberData.placeholder}}" [disabled]="readOnly" formControlName="{{contactnumberData.name}}"
+            [(ngModel)]="contactnumberData.name"></ion-input>
+        </ion-item>
 
         <ion-item>
           <a href="#" (click)="addmore()">Add More</a>

@@ -23,8 +23,16 @@ export class AddunitsthreePage {
   public loginas: any;
   public form: FormGroup;
   public alarmhashtags: any;
-  public contact_name: any;
-  public contact_number: any;
+  public contact_name_1: any;
+  public contact_number_1: any;
+  public contact_name_2: any;
+  public contact_number_2: any;
+  public contact_name_3: any;
+  public contact_number_3: any;
+  public contact_name_4: any;
+  public contact_number_4: any;
+  public contact_name_5: any;
+  public contact_number_5: any;
   public gethashtag: any;
   public userId: any;
   public unitname: any;
@@ -44,6 +52,9 @@ export class AddunitsthreePage {
   public readOnly: boolean = false;
   public addedImgLists: any;
   public userInfo = [];
+  public contactInfo = [];
+  public contactnameArray = [];
+  public contactnumberArray = [];
   // Flag to hide the form upon successful completion of remote operation
   public hideForm: boolean = false;
   public hideActionButton = true;
@@ -62,12 +73,18 @@ export class AddunitsthreePage {
     this.loginas = localStorage.getItem("userInfoName");
     // Create form builder validation rules
     this.form = fb.group({
-      //"alarmhashtags": ["", Validators.required],
-      //"contact_name": ["", Validators.required],
       "alarmhashtags": ["", Validators.required],
-      "contact_name": ["", Validators.required],
-      /// "contact_number": ["", Validators.required]
-      'contact_number': ["", Validators.required],
+      "contact_name_1": ["", Validators.required],
+      'contact_number_1': ["", Validators.required],
+      "contact_name_2": [""],
+      'contact_number_2': [""],
+      "contact_name_3": [""],
+      'contact_number_3': [""],
+      "contact_name_4": [""],
+      'contact_number_4': [""],
+      "contact_name_5": [""],
+      'contact_number_5': [""],
+
     });
     this.userId = localStorage.getItem("userInfoId");
   }
@@ -96,8 +113,7 @@ export class AddunitsthreePage {
       }
       let editItem = this.NP.get("record");
       this.alarmhashtags = editItem.alarmnotificationto;
-      this.contact_name = editItem.contact_name;
-      this.contact_number = editItem.contact_number;
+
     }
     else {
       this.isEdited = false;
@@ -182,6 +198,7 @@ export class AddunitsthreePage {
         }
       }
     })
+
   }
 
 
@@ -190,8 +207,6 @@ export class AddunitsthreePage {
   // used as models on the page's HTML form
   selectEntry(item) {
     this.alarmhashtags = item.alarmnotificationto;
-    this.contact_name = item.contact_name;
-    this.contact_number = item.contact_number;
     this.recordID = item.unit_id;
   }
 
@@ -202,11 +217,10 @@ export class AddunitsthreePage {
   // to our remote PHP script (note the body variable we have created which
   // supplies a variable of key with a value of create followed by the key/value pairs
   // for the record data
-  createEntry(alarmhashtags, contact_name, contact_number, createdby) {
+  createEntry(alarmhashtags, contactInfo, createdby) {
     this.userInfo.push({
       alarmhashtags: alarmhashtags,
-      contact_name: contact_name,
-      contact_number: contact_number,
+      contactInfo: contactInfo,
       unitname: this.unitname,
       createdby: this.createdby,
       projectname: this.projectname,
@@ -228,11 +242,10 @@ export class AddunitsthreePage {
   // to our remote PHP script (note the body variable we have created which
   // supplies a variable of key with a value of update followed by the key/value pairs
   // for the record data
-  updateEntry(alarmhashtags, contact_name, contact_number, createdby) {
+  updateEntry(alarmhashtags, contactInfo, createdby) {
     this.userInfo.push({
       alarmhashtags: alarmhashtags,
-      contact_name: contact_name,
-      contact_number: contact_number,
+      contactInfo: contactInfo,
       unitname: this.unitname,
       createdby: this.createdby,
       projectname: this.projectname,
@@ -283,20 +296,29 @@ export class AddunitsthreePage {
   // Determine whether we are adding a new record or amending an
   // existing record
   saveEntry() {
-    let alarmhashtags: string = this.form.controls["alarmhashtags"].value,
-      contact_name: string = this.form.controls["contact_name"].value,
-      contact_number: string = this.form.controls["contact_number"].value;
+    let alarmhashtags: string = this.form.controls["alarmhashtags"].value;
+    //let incr = 0;
+    //let unitgroup;
+    //console.log("Incr 1:" + incr);
+    console.log("Length:" + this.contactnameArray.length);
+    for (let i = 1; i <= this.contactnameArray.length; i++) {
+      //incr++;
+      console.log("Incr i:" + i);
+      this.contactInfo.push({
+        contact_name: this.form.controls["contact_name_" + i].value,
+        contact_number: this.form.controls["contact_number_" + i].value
+      });
 
-    console.log(this.form.controls);
+    }
     /*if (this.addedImgLists) {
       this.isUploadedProcessing = true;
     }*/
     if (this.isUploadedProcessing == false) {
       if (this.isEdited) {
-        this.updateEntry(alarmhashtags, contact_name, contact_number, this.userId);
+        this.updateEntry(alarmhashtags, this.contactInfo, this.userId);
       }
       else {
-        this.createEntry(alarmhashtags, contact_name, contact_number, this.userId);
+        this.createEntry(alarmhashtags, this.contactInfo, this.userId);
       }
     }
   }
@@ -306,9 +328,6 @@ export class AddunitsthreePage {
   // Clear values in the page's HTML form fields
   resetFields(): void {
     this.alarmhashtags = "";
-    this.contact_name = "";
-    this.contact_number = "";
-
   }
 
 
@@ -358,6 +377,53 @@ export class AddunitsthreePage {
   address1get(hashtag) {
     console.log(hashtag);
     this.gethashtag = hashtag;
+  }
+
+  addmore() {
+    let len = this.contactnameArray.length;
+    let incr;
+    console.log("1" + len);
+    if (len == 0) {
+      len = 1;
+    } else {
+      console.log("2" + len);
+      len = len + 1;
+      //len = parseInt(incr) + parseInt(len);
+    }
+    if (len > 4) {
+      console.log("3" + len);
+      console.log('Contact details only five item')
+    } else {
+      console.log("4" + len);
+      console.log("5" + len);
+      incr = len + 1;
+      console.log("6incr" + incr);
+      this.contactnameArray.push({
+        name: 'contact_name_' + incr,
+        placeholder: "Name"
+      });
+
+      this.contactnumberArray.push({
+        name: 'contact_number_' + incr,
+        placeholder: "Number"
+      });
+    }
+    console.log("7" + len);
+
+    /* if(this.form.controls["contact_name_" + len].value!=''){
+ 
+     }*/
+
+    this.contact_name_1 = '';
+    this.contact_number_1 = '';
+    this.contact_name_2 = '';
+    this.contact_number_2 = '';
+    this.contact_name_3 = '';
+    this.contact_number_3 = '';
+    this.contact_name_4 = '';
+    this.contact_number_4 = '';
+    this.contact_name_5 = '';
+    this.contact_number_5 = '';
   }
 }
 

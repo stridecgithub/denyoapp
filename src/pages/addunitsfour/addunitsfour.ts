@@ -44,6 +44,7 @@ export class AddunitsfourPage {
   public readOnly: boolean = false;
   public addedImgLists: any;
   public userInfo = [];
+  public contactInfo = [];
   // Flag to hide the form upon successful completion of remote operation
   public hideForm: boolean = false;
   public hideActionButton = true;
@@ -132,7 +133,10 @@ export class AddunitsfourPage {
           this.alarmhashtags = info[key].alarmhashtags;
           this.contact_number = info[key].contact_number;
           console.log("Unit Name:" + this.unitname);
+          console.log("Contact Details1" + info[key].contactInfo);
+          console.log("Contact Details2" + JSON.stringify(info[key].contactInfo));
           //console.log(JSON.stringify(this));
+          this.contactInfo = info[key].contactInfo;
         } else {
           console.log('Key' + key);
           this.unitname = info[0].unitname;
@@ -147,7 +151,10 @@ export class AddunitsfourPage {
           this.contact_name = info[0].contact_name;
           this.alarmhashtags = info[0].alarmhashtags;
           this.contact_number = info[0].contact_number;
+          this.contactInfo = info[0].contactInfo;
           console.log("Unit Name:" + this.unitname);
+          console.log("Contact Details1" + info[0].contactInfo);
+          console.log("Contact Details2" + JSON.stringify(info[0].contactInfo));
         }
         /* this.userInfo.push({
            info
@@ -156,6 +163,7 @@ export class AddunitsfourPage {
          */
       }
     }
+
   }
 
 
@@ -196,6 +204,7 @@ export class AddunitsfourPage {
       "&location=" + this.location +
       "&createdby=" + this.createdby +
       "&updatedby=" + this.createdby +
+      "&contactInfo=" + JSON.stringify(this.contactInfo) +
       //"&contact_number=" + this.contact_number +
       //"&contact_name=" + this.contact_name +
       "&alarmnotificationto=" + this.alarmhashtags +
@@ -216,7 +225,7 @@ export class AddunitsfourPage {
         if (data.status === 200) {
           this.hideForm = true;
           this.sendNotification(`Units created was successfully added`);
-          this.navCtrl.setRoot(UnitsPage);
+          //this.navCtrl.setRoot(UnitsPage);
         }
         // Otherwise let 'em know anyway
         else {
@@ -255,6 +264,7 @@ export class AddunitsfourPage {
       "&location=" + this.location +
       "&createdby=" + this.createdby +
       "&updatedby=" + this.createdby +
+      "&contactInfo=" + JSON.stringify(this.contactInfo) +
       //"&contact_number=" + this.contact_number +
       // "&contact_name=" + this.contact_name +
       "&alarmnotificationto=" + this.alarmhashtags +
@@ -276,7 +286,7 @@ export class AddunitsfourPage {
         if (data.status === 200) {
           this.hideForm = true;
           this.sendNotification(`User created was successfully updated`);
-          this.navCtrl.setRoot(UnitsPage);
+          //this.navCtrl.setRoot(UnitsPage);
         }
         // Otherwise let 'em know anyway
         else {

@@ -146,17 +146,20 @@ export class AddunitstwoPage {
       options: any = new RequestOptions({ headers: headers }),
       url: any = this.apiServiceURL + "/getstaffs";
     let res;
+    localStorage.setItem("atMentionedStorage", JSON.stringify(this.atMentionedInfo));
     this.http.get(url, options)
       .subscribe(data => {
         res = data.json();
         res.staffslist;
-
         if (res.staffslist.length > 0) {
-
           for (let userdata in res.staffslist) {
+            let len = res.staffslist[userdata].personalhashtag.length;
+            let perstag = res.staffslist[userdata].personalhashtag.substring(1, len);
 
+            console.log("Length:" + len);
+            console.log("perstag:" + perstag);
             this.atMentionedInfo.push({
-              username: res.staffslist[userdata].personalhashtag,
+              username: perstag,
               fullname: res.staffslist[userdata].firstname + " " + res.staffslist[userdata].lastname
             });
           }

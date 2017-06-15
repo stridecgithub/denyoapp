@@ -33,9 +33,11 @@ export class UnitgroupPage {
   }
   public reportAllLists = [];
   public colorListArr: any;
+  public userId: any;
   constructor(public http: Http, public nav: NavController,
     public toastCtrl: ToastController, public alertCtrl: AlertController, public navParams: NavParams, public loadingCtrl: LoadingController) {
     this.loginas = localStorage.getItem("userInfoName");
+    this.userId = localStorage.getItem("userInfoId");
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad UnitgroupPage');
@@ -95,8 +97,7 @@ export class UnitgroupPage {
         console.log("1" + res.unitgroups.length);
         console.log("2" + res.unitgroups);
         console.log("3" + res.colorcode);
-        if(res.favorite == 0)
-        {
+        if (res.favorite == 0) {
 
         }
         if (res.unitgroups.length > 0) {
@@ -109,12 +110,11 @@ export class UnitgroupPage {
             let colorvalincrmentone = index + 1;
             colorcode = "button" + colorvalincrmentone;
             console.log("Color is" + colorcode);
-            if(res.unitgroups[unitgroup].favorite==1)
-            {
-                favorite="fav1";
+            if (res.unitgroups[unitgroup].favorite == 1) {
+              favorite = "favorite";
             }
-            else{
-              favorite="fav0";
+            else {
+              favorite = "unfavorite";
 
             }
             console.log(favorite);
@@ -126,7 +126,7 @@ export class UnitgroupPage {
               totalunits: res.unitgroups[unitgroup].totalunits,
               colorcode: res.unitgroups[unitgroup].colorcode,
               colorcodeindication: colorcode,
-              favoriteindication:favorite
+              favoriteindication: favorite
             });
           }
           //"unitgroup_id":1,"unitgroup_name":"demo unit","colorcode":"FBD75C","remark":"nice","favorite":1,"totalunits":5
@@ -251,7 +251,79 @@ export class UnitgroupPage {
   }
 
   favorite(unit_id) {
-    console.log(unit_id);
+    this.reportData.startindex = 0;
+    this.reportAllLists = [];
+    let body: string = "unitgroupid=" + unit_id +
+      "&staffs_id=" + this.userId +
+      "&is_mobile=1",
+      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/setunitgroupfavorite";
+    console.log(url);
+    console.log(body);
+    this.http.post(url, body, options)
+      .subscribe(data => {
+        console.log(data);
+        let res = data.json();
+        console.log(res.msg[0].Error);
+        console.log(res.msg[0].result);
+        if (res.msg[0] == 0) {
+          console.log("Favorite");
+        } else {
+          console.log("Un Favorite");
+        }
+
+        if (res.unitgroups.length > 0) {
+
+          for (let unitgroup in res.unitgroups) {
+            let colorcode;
+            let favorite;
+            let index = this.colorListArr.indexOf(res.unitgroups[unitgroup].colorcode); // 1
+            console.log("Color Index:" + index);
+            let colorvalincrmentone = index + 1;
+            colorcode = "button" + colorvalincrmentone;
+            console.log("Color is" + colorcode);
+            if (res.unitgroups[unitgroup].favorite == 1) {
+              favorite = "favorite";
+            }
+            else {
+              favorite = "unfavorite";
+
+            }
+            console.log(favorite);
+            this.reportAllLists.push({
+              unitgroup_id: res.unitgroups[unitgroup].unitgroup_id,
+              unitgroup_name: res.unitgroups[unitgroup].unitgroup_name,
+              remark: res.unitgroups[unitgroup].remark,
+              favorite: res.unitgroups[unitgroup].favorite,
+              totalunits: res.unitgroups[unitgroup].totalunits,
+              colorcode: res.unitgroups[unitgroup].colorcode,
+              colorcodeindication: colorcode,
+              favoriteindication: favorite
+            });
+          }
+          //"unitgroup_id":1,"unitgroup_name":"demo unit","colorcode":"FBD75C","remark":"nice","favorite":1,"totalunits":5
+          /*this.reportAllLists = res.unitgroups;
+         
+          console.log("Total Record:`" + this.totalCount);
+          console.log(JSON.stringify(this.reportAllLists));*/
+          this.totalCount = res.totalCount;
+          this.reportData.startindex += this.reportData.results;
+        } else {
+          this.totalCount = 0;
+        }
+
+        // If the request was successful notify the user
+        if (data.status === 200) {
+          this.sendNotification(res.msg[0].result);
+        }
+        // Otherwise let 'em know anyway
+        else {
+          this.sendNotification('Something went wrong!');
+        }
+      });
+    this.dounitGroup();
   }
 
 }
