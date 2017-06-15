@@ -82,7 +82,7 @@ export class AddunitstwoPage {
       console.log("Add User:" + JSON.stringify(this.NP.get("record")));
       this.isEdited = true;
       this.selectEntry(this.NP.get("record"));
-      this.pageTitle = 'Edit  Units - 2';
+      this.pageTitle = 'Edit  Units';
       this.readOnly = false;
       this.hideActionButton = true;
       if (this.NP.get("record").photo) {
@@ -90,15 +90,15 @@ export class AddunitstwoPage {
         console.log(this.addedImgLists);
       }
       let editItem = this.NP.get("record");
-      this.unitname = editItem.firstname;
-      this.projectname = editItem.lastname;
+      this.unitname = editItem.unitname;
+      this.projectname = editItem.projectname;
       this.controllerid = editItem.controllerid;
-      this.models_id = editItem.models_id_id;
-      this.neaplateno = editItem.neaplateno_number;
+      this.models_id = editItem.models_id;
+      this.neaplateno = editItem.neaplateno;
     }
     else {
       this.isEdited = false;
-      this.pageTitle = 'New  Units - 2';
+      this.pageTitle = 'New  Units';
     }
 
 

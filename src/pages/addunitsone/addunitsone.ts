@@ -47,7 +47,7 @@ export class AddunitsonePage {
     this.loginas = localStorage.getItem("userInfoName");
     // Create form builder validation rules
     this.form = fb.group({
-      "location": ["", Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])]
+      "location": ["",  Validators.required]
     });
     this.userId = localStorage.getItem("userInfoId");
   }
@@ -66,7 +66,7 @@ export class AddunitsonePage {
       console.log("Add User:" + JSON.stringify(this.NP.get("record")));
       this.isEdited = true;
       this.selectEntry(this.NP.get("record"));
-      this.pageTitle = 'Edit Units - 1';
+      this.pageTitle = 'Edit Units';
       this.readOnly = false;
       this.hideActionButton = true;     
       let editItem = this.NP.get("record");
@@ -74,7 +74,7 @@ export class AddunitsonePage {
     }
     else {
       this.isEdited = false;
-      this.pageTitle = 'New  Units - 1';
+      this.pageTitle = 'New  Units';
     }
   }
 

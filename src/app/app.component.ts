@@ -13,7 +13,7 @@ import { HomePage } from '../pages/home/home';
 import { UnitgroupPage } from '../pages/unitgroup/unitgroup';
 //import { AddUnitPage } from '../pages/add-unit/add-unit';
 
-//import { RolePage } from '../pages/role/role';
+import { RolePage } from '../pages/role/role';
 //import { AddunitgroupPage } from '../pages/addunitgroup/addunitgroup';
 import { App } from 'ionic-angular';
 import { AtmentionedPage } from '../pages/atmentioned/atmentioned';
@@ -44,7 +44,7 @@ export class MyApp {
       //{ title: 'Add Unit Group', component: AddunitgroupPage },
       { title: 'Unit Group', component: UnitgroupPage },
       { title: 'Units', component: UnitsPage },
-      //{ title: 'Role', component: RolePage },
+      { title: 'Role', component: RolePage },
       //{ title: 'My Account', component: MyaccountPage },
       { title: 'At mentioned Page', component: AtmentionedPage },
       { title: 'Logout', component: LogoutPage },

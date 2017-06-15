@@ -27,6 +27,8 @@ export class AddunitsfourPage {
   public projectname: any;
   public createdby: any;
   public responseResultCompany: any;
+  public responseResultUnitGroup: any;
+  public timezone;
   progress: number;
   public controllerid: any;
   public neaplateno: any;
@@ -77,13 +79,14 @@ export class AddunitsfourPage {
   // based on any supplied navigation parameters
   ionViewWillEnter() {
     this.resetFields();
-    this.getJsonCompanyListData();
+    this.getCompanyListData();
+    this.getUnitGroupListData();
     console.log(JSON.stringify(this.NP.get("record")));
     if (this.NP.get("record")) {
       console.log("Add User:" + JSON.stringify(this.NP.get("record")));
       this.isEdited = true;
       this.selectEntry(this.NP.get("record"));
-      this.pageTitle = 'Edit  Units - 4';
+      this.pageTitle = 'Edit  Units';
       this.readOnly = false;
       this.hideActionButton = true;
       if (this.NP.get("record").photo) {
@@ -91,12 +94,12 @@ export class AddunitsfourPage {
         console.log(this.addedImgLists);
       }
       let editItem = this.NP.get("record");
-      this.unitgroups_id = editItem.firstname;
-      this.companys_id = editItem.lastname;
+      this.unitgroups_id = editItem.unitgroups_id;
+      this.companys_id = editItem.companys_id;
     }
     else {
       this.isEdited = false;
-      this.pageTitle = 'New  Units - 4';
+      this.pageTitle = 'New  Units';
     }
 
     if (this.NP.get("accountInfo")) {
@@ -177,7 +180,7 @@ export class AddunitsfourPage {
 
 
 
-
+    this.timezone = '2017-06-15 00:00:00';
 
 
 
@@ -193,9 +196,10 @@ export class AddunitsfourPage {
       "&location=" + this.location +
       "&createdby=" + this.createdby +
       "&updatedby=" + this.createdby +
+      //"&contact_number=" + this.contact_number +
       //"&contact_name=" + this.contact_name +
-      "&alarmhashtags=" + this.alarmhashtags +
-      //"&contact_number=" + this.contact_number +      
+      "&alarmnotificationto=" + this.alarmhashtags +
+      "&timezone=" + this.timezone +
       "&companys_id=" + this.companys_id +
       "&unitgroups_id=" + this.unitgroups_id,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
@@ -241,8 +245,8 @@ export class AddunitsfourPage {
 
     });
 
-
-    let body: string = "is_mobile=1&staff_id=" + this.recordID +
+    this.timezone = '2017-06-15 00:00:00';
+    let body: string = "is_mobile=1&unit_id=" + this.recordID +
       "&unitname=" + this.unitname +
       "&projectname=" + this.projectname +
       "&controllerid=" + this.controllerid +
@@ -251,10 +255,11 @@ export class AddunitsfourPage {
       "&location=" + this.location +
       "&createdby=" + this.createdby +
       "&updatedby=" + this.createdby +
-      //"&contact_name=" + this.contact_name +
-      "&alarmhashtags=" + this.alarmhashtags +
       //"&contact_number=" + this.contact_number +
+      // "&contact_name=" + this.contact_name +
+      "&alarmnotificationto=" + this.alarmhashtags +
       //"&unitgroups_id=" + this.unitgroups_id +
+      "&timezone=" + this.timezone +
       "&companys_id=" + this.companys_id +
       "&unitgroups_id=" + this.unitgroups_id,
 
@@ -350,7 +355,7 @@ export class AddunitsfourPage {
     notification.present();
   }
 
-  getJsonCompanyListData() {
+  getCompanyListData() {
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
@@ -362,6 +367,22 @@ export class AddunitsfourPage {
         res = data.json();
         console.log(JSON.stringify(res));
         this.responseResultCompany = res.companies;
+      });
+
+  }
+
+  getUnitGroupListData() {
+    let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/getunitgroups";
+    let res;
+    console.log("URL" + url);
+    this.http.get(url, options)
+      .subscribe(data => {
+        res = data.json();
+        console.log(JSON.stringify(res));
+        this.responseResultUnitGroup = res.unitgroups;
       });
 
   }

@@ -35,6 +35,7 @@ export class AddunitsthreePage {
   public neaplateno: any;
   public models_id: any;
   public responseResultCountry: any;
+  public responseResultStaff: any;
   progress: number;
   public isProgress = false;
   public isUploaded: boolean = true;
@@ -86,7 +87,7 @@ export class AddunitsthreePage {
       console.log("Add User:" + JSON.stringify(this.NP.get("record")));
       this.isEdited = true;
       this.selectEntry(this.NP.get("record"));
-      this.pageTitle = 'Edit  Units - 3';
+      this.pageTitle = 'Edit  Units';
       this.readOnly = false;
       this.hideActionButton = true;
       if (this.NP.get("record").photo) {
@@ -100,7 +101,7 @@ export class AddunitsthreePage {
     }
     else {
       this.isEdited = false;
-      this.pageTitle = 'New  Units - 3';
+      this.pageTitle = 'New  Units';
     }
 
 
@@ -154,21 +155,37 @@ export class AddunitsthreePage {
       }
     }
 
-    var users = [
-      { username: 'Krishanth', fullname: 'Kannan' },
-      { username: 'Thibishanth', fullname: 'Kannan' },
-      { username: 'Gohila', fullname: 'Kannan' },
-      { username: 'lodev09', fullname: 'Jovanni Lo' },
-      { username: 'foo', fullname: 'Foo User' },
-      { username: 'bar', fullname: 'Bar User' },
-      { username: 'twbs', fullname: 'Twitter Bootstrap' },
-      { username: 'john', fullname: 'John Doe' },
-      { username: 'jane', fullname: 'Jane Doe' },
-      { username: 'Kannan', fullname: 'Nagarathinam' },
-    ];
+    /* var users = [
+       { username: 'Krishanth', fullname: 'Kannan' },
+       { username: 'Thibishanth', fullname: 'Kannan' },
+       { username: 'Gohila', fullname: 'Kannan' },
+       { username: 'lodev09', fullname: 'Jovanni Lo' },
+       { username: 'foo', fullname: 'Foo User' },
+       { username: 'bar', fullname: 'Bar User' },
+       { username: 'twbs', fullname: 'Twitter Bootstrap' },
+       { username: 'john', fullname: 'John Doe' },
+       { username: 'jane', fullname: 'Jane Doe' },
+       { username: 'Kannan', fullname: 'Nagarathinam' },
+     ];*/
+
+    let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/getstaffs";
+    let res;
+    this.http.get(url, options)
+      .subscribe(data => {
+        res = data.json();
+        this.responseResultStaff = res.staffslist;
+      });
+
+
+    //let users = this.responseResultStaff;
+    console.log("@Mentioned Data 1" + this.responseResultStaff);
+    console.log("@Mentioned Data 2" + console.log(this.responseResultStaff));
 
     $('#example1').suggest('@', {
-      data: users,
+      data: this.responseResultStaff,
       map: function (user) {
         return {
           value: user.username,
@@ -183,10 +200,10 @@ export class AddunitsthreePage {
   // Assign the navigation retrieved data to properties
   // used as models on the page's HTML form
   selectEntry(item) {
-    this.alarmhashtags = item.alarmhashtags;
+    this.alarmhashtags = item.alarmnotificationto;
     this.contact_name = item.contact_name;
     this.contact_number = item.contact_number;
-    this.recordID = item.userid;
+    this.recordID = item.unit_id;
   }
 
 
@@ -330,6 +347,9 @@ export class AddunitsthreePage {
       });
 
   }
+
+
+
   presentLoading(parm) {
     let loader;
     loader = this.loadingCtrl.create({

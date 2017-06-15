@@ -57,8 +57,8 @@ export class LoginPage {
         console.log(JSON.stringify(data.json()));
         res = data.json();
         console.log("4" + res.msg[0]['result']);
-        if (res.msg[0]['result'] == 'failed') {
-          this.sendNotification('Username or password are invalid try again');
+        if (res.msg[0]['Error'] > 0) {
+          this.sendNotification(res.msg[0]['result']);
           this.presentLoading(0);
           return false;
         } else {

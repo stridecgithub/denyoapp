@@ -42,7 +42,7 @@
         <ion-item>
           <ion-label stacked>Unit Group Assign <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
           <ion-select [disabled]="readOnly" [(ngModel)]="unitgroups_id" formControlName="unitgroups_id">
-            <ion-option *ngFor="let companyData of responseResultCompany" value="{{companyData.companygroup_id}}">{{companyData.companygroup_name}}</ion-option>
+            <ion-option *ngFor="let unitData of responseResultUnitGroup" value="{{unitData.unitgroup_id}}">{{unitData.unitgroup_name}}</ion-option>
           </ion-select>
         </ion-item>
 
