@@ -4,6 +4,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { EditprofilesteptwoPage } from '../editprofilesteptwo/editprofilesteptwo';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { MyaccountPage } from '../myaccount/myaccount';
 import 'rxjs/add/operator/map';
 /**
  * Generated class for the AddcompanygroupPage page.
@@ -73,7 +74,7 @@ export class EditprofilesteponePage {
     });
     this.userId = localStorage.getItem("userInfoId");
   }
-  
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad EditprofilesteponePage');
   }
@@ -120,52 +121,20 @@ export class EditprofilesteponePage {
 
   // Assign the navigation retrieved data to properties
   // used as models on the page's HTML form
-
-
-
-
-  // Save a new record that has been added to the page's HTML form
-  // Use angular's http post method to submit the record data
-  // to our remote PHP script (note the body variable we have created which
-  // supplies a variable of key with a value of create followed by the key/value pairs
-  // for the record data
-  createEntry(first_name, last_name, email, country, contact, createdby) {
-    this.userInfo.push({
-      photo: this.photo,
-      first_name: first_name,
-      last_name: last_name,
-      email: email,
-      country: country,
-      contact: contact,
-      createdby: createdby,
-
-    });
-
-
-   
-            //this.sendNotification(data.json().message);
-            this.navCtrl.setRoot(EditprofilesteptwoPage, {
-              accountInfo: this.userInfo
-            });
-    
-
-
-  }
-
-
-
   // Update an existing record that has been edited in the page's HTML form
   // Use angular's http post method to submit the record data
   // to our remote PHP script (note the body variable we have created which
   // supplies a variable of key with a value of update followed by the key/value pairs
   // for the record data
-  updateEntry(first_name, last_name, email, country, contact, createdby) {
+  //first_name, last_name, email, username,password, contact, this.userId
+  updateEntry(first_name, last_name, email, username, password, contact, createdby) {
     this.userInfo.push({
       photo: this.photo,
       first_name: first_name,
       last_name: last_name,
       email: email,
-      country: country,
+      username: username,
+      password: password,
       contact: contact,
       createdby: createdby,
 
@@ -213,17 +182,13 @@ export class EditprofilesteponePage {
   saveEntry() {
     let first_name: string = this.form.controls["first_name"].value,
       last_name: string = this.form.controls["last_name"].value,
+      username: string = this.form.controls["username"].value,
+      password: string = this.form.controls["password"].value,
       email: string = this.form.controls["email"].value,
-      country: string = this.form.controls["country"].value,
       contact: string = this.form.controls["contact"].value;
     console.log(this.form.controls);
-    if (this.isUploadedProcessing == false) {
-      if (this.isEdited) {
-        this.updateEntry(first_name, last_name, email, country, contact, this.userId);
-      }
-      else {
-        this.createEntry(first_name, last_name, email, country, contact, this.userId);
-      }
+    if (this.isUploadedProcessing == false) {     
+        this.updateEntry(first_name, last_name, email, username, password, contact, this.userId);      
     }
   }
 
@@ -295,6 +260,8 @@ export class EditprofilesteponePage {
 
 
 
-
+  previous() {
+    this.navCtrl.setRoot(MyaccountPage);
+  }
 }
 

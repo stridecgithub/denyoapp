@@ -47,15 +47,13 @@
         <div style="position: relative;
     left: 38%;">Upload Photo
         </div>
-        <div style="position: relative;
+        <!--div style="position: relative;
     left: 28%;">
           <p>
             <progress value="{{progress}}" max="100" *ngIf="isProgress"> </progress>
             <span *ngIf="isProgress" style="padding:2px">{{progress}}%</span>
           </p>
-        </div>
-        <div style="position: relative;
-    left: 6%;"><b>User Information*</b></div>
+        </div-->
         <ion-item>
           <ion-label stacked>First Name <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
           <ion-input type="text" [disabled]="readOnly" formControlName="first_name" [(ngModel)]="first_name"></ion-input>

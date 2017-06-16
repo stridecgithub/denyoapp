@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { EditprofilesteponePage } from '../editprofilestepone/editprofilestepone';
+import { TabsPage } from '../tabs/tabs';
 /**
  * Generated class for the MyaccountPage page.
  *
@@ -73,6 +74,10 @@ export class MyaccountPage {
     this.nav.setRoot(EditprofilesteponePage, {
       userId: userid
     });
+  }
+
+  previous() {
+    this.nav.setRoot(TabsPage);
   }
 
 }

@@ -3,7 +3,8 @@ import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angu
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { UserPage } from '../user/user';
-import { UseraccountPage } from '../useraccount/useraccount';
+import { MyaccountPage } from '../myaccount/myaccount';
+import { EditprofilesteponePage } from '../editprofilestepone/editprofilestepone';
 import 'rxjs/add/operator/map';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
@@ -143,7 +144,7 @@ export class EditprofilesteptwoPage {
 
 
 
-  
+
 
 
 
@@ -155,14 +156,14 @@ export class EditprofilesteptwoPage {
   updateEntry(userdata, userid) {
 
 
-//http://denyoappv2.stridecdev.com/settings/profileupdate?is_mobile=1&username=newtestmdv&loggedin_id=14
+    //http://denyoappv2.stridecdev.com/settings/profileupdate?is_mobile=1&username=newtestmdv&loggedin_id=14
 
     let userPhotoFile = localStorage.getItem("userPhotoFile");
     if (userPhotoFile) {
       console.log("Upload Device Image File:" + userPhotoFile);
       this.fileTrans(userPhotoFile);
     }
-    let body: string = "is_mobile=1&loggedin_id=" +userid +
+    let body: string = "is_mobile=1&loggedin_id=" + userid +
       "&firstname=" + this.first_name +
       "&lastname=" + this.last_name +
       "&photo=" + this.photo +
@@ -192,7 +193,7 @@ export class EditprofilesteptwoPage {
         if (data.status === 200) {
           this.hideForm = true;
           this.sendNotification(`User Profile Updated was successfully updated`);
-          this.navCtrl.setRoot(UserPage);
+          this.navCtrl.setRoot(MyaccountPage);
         }
         // Otherwise let 'em know anyway
         else {
@@ -256,9 +257,9 @@ export class EditprofilesteptwoPage {
       'role': this.role
 
     });
-   
-      this.updateEntry(this.userInfo, this.userId);
-   
+
+    this.updateEntry(this.userInfo, this.userId);
+
   }
 
 
@@ -311,9 +312,7 @@ export class EditprofilesteptwoPage {
 
   }
 
-  previous() {
-    this.navCtrl.setRoot(UseraccountPage);
-  }
+
   fileTrans(path) {
     let fileName = path.substr(path.lastIndexOf('/') + 1);
     const fileTransfer: TransferObject = this.transfer.create();
@@ -372,8 +371,13 @@ export class EditprofilesteptwoPage {
     });
   }
 
+
   //http://denyoappv2.stridecdev.com/staff/store
   //main.js:61474 firstname=Kannan&lastname=Naga&photo=undefined&email=kn@gmail.com&country_id=4&contact_number=123456789&createdby=1&updatedby=1&username=nk&password=nk&role_id=1&personalhashtag=@nk&report_to=3&company_id=13&job_position=At prg
   //main.js:61622 File Name is:1497379310688.jpg
+
+  previous() {
+    this.navCtrl.setRoot(EditprofilesteponePage);
+  }
 }
 
