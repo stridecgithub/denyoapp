@@ -30,6 +30,10 @@ import { AddunitstwoPage } from '../pages/addunitstwo/addunitstwo';
 import { AddunitsthreePage } from '../pages/addunitsthree/addunitsthree';
 import { AddunitsfourPage } from '../pages/addunitsfour/addunitsfour';
 import { ReporttemplatePage } from '../pages/reporttemplate/reporttemplate';
+import { AddorgchartonePage } from '../pages/addorgchartone/addorgchartone';
+import { AddorgcharttwoPage } from '../pages/addorgcharttwo/addorgcharttwo';
+import { OrgchartPage } from '../pages/orgchart/orgchart';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -57,7 +61,10 @@ import { ReporttemplatePage } from '../pages/reporttemplate/reporttemplate';
     AddunitgroupPage,
     UnitgroupPage,
     ReporttemplatePage,
-    AtmentionedPage
+    AtmentionedPage,
+    AddorgchartonePage,
+    AddorgcharttwoPage,
+    OrgchartPage
   ],
   imports: [
     BrowserModule,
@@ -101,7 +108,10 @@ import { ReporttemplatePage } from '../pages/reporttemplate/reporttemplate';
     AddunitgroupPage,
     UnitgroupPage,
     ReporttemplatePage,
-    AtmentionedPage
+    AtmentionedPage,
+    AddorgchartonePage,
+    AddorgcharttwoPage,
+    OrgchartPage
   ],
   providers: [
     StatusBar,

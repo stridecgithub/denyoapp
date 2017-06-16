@@ -74,8 +74,8 @@ export class AddunitsthreePage {
     // Create form builder validation rules
     this.form = fb.group({
       "alarmhashtags": ["", Validators.required],
-      "contact_name_1": ["", Validators.required],
-      'contact_number_1': ["", Validators.required],
+      "contact_name_1": [""],
+      'contact_number_1': [""],
       "contact_name_2": [""],
       'contact_number_2': [""],
       "contact_name_3": [""],
@@ -84,6 +84,8 @@ export class AddunitsthreePage {
       'contact_number_4': [""],
       "contact_name_5": [""],
       'contact_number_5': [""],
+      "contact_name": [""],
+      'contact_number': [""]
 
     });
     this.userId = localStorage.getItem("userInfoId");
@@ -301,6 +303,15 @@ export class AddunitsthreePage {
     //let unitgroup;
     //console.log("Incr 1:" + incr);
     console.log("Length:" + this.contactnameArray.length);
+
+    /*this.contactInfo.push({
+      contact_name: this.form.controls["contact_name"].value,
+      contact_number: this.form.controls["contact_number"].value
+    });
+*/
+
+    let ContactLength = this.contactnameArray.length;
+    console.log("Contact Length:" + ContactLength);
     for (let i = 1; i <= this.contactnameArray.length; i++) {
       //incr++;
       console.log("Incr i:" + i);
@@ -413,7 +424,7 @@ export class AddunitsthreePage {
     if (this.form.controls["contact_name_" + len].value == 'contact_name_2') {
       console.log("8");
       this.contact_name_2 = '';
-     
+
     }
     if (this.form.controls["contact_name_" + len].value == 'contact_name_3') {
       this.contact_name_3 = '';

@@ -19,6 +19,8 @@ import { ReporttemplatePage } from '../pages/reporttemplate/reporttemplate';
 import { App } from 'ionic-angular';
 import { AtmentionedPage } from '../pages/atmentioned/atmentioned';
 import { UnitsPage } from '../pages/units/units';
+import { OrgchartPage } from '../pages/orgchart/orgchart';
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -47,9 +49,11 @@ export class MyApp {
       { title: 'Units', component: UnitsPage },
       { title: 'Role', component: RolePage },
       { title: 'My Account', component: MyaccountPage },
-      { title: 'At mentioned Page', component: AtmentionedPage },
-      { title: 'Logout', component: LogoutPage },
-      { title: 'Report Template', component:ReporttemplatePage}
+      // { title: 'At mentioned Page', component: AtmentionedPage },
+
+      { title: 'Org Chart', component: ReporttemplatePage },
+      { title: 'Report Template', component: OrgchartPage },
+      { title: 'Logout', component: LogoutPage }
 
     ];
 
@@ -63,7 +67,7 @@ export class MyApp {
       this.statusBar.styleDefault();
 
       //setTimeout(function () {
-        this.splashScreen.hide();
+      this.splashScreen.hide();
       //}, 3000);
 
     });

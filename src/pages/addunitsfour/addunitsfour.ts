@@ -225,7 +225,7 @@ export class AddunitsfourPage {
         if (data.status === 200) {
           this.hideForm = true;
           this.sendNotification(`Units created was successfully added`);
-          //this.navCtrl.setRoot(UnitsPage);
+          this.navCtrl.setRoot(UnitsPage);
         }
         // Otherwise let 'em know anyway
         else {
