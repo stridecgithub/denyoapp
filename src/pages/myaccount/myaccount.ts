@@ -40,11 +40,11 @@ export class MyaccountPage {
 
   ionViewDidLoad() {
     // body: string = "key=myaccount&userId=" + this.userId,
-     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+    let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "settings/profile?is_mobile=1&loggedin_id="+this.userId;
-      console.log(url);
+      url: any = this.apiServiceURL + "settings/profile?is_mobile=1&loggedin_id=" + this.userId;
+    console.log(url);
     let res;
     this.http.get(url, options)
       .subscribe((data) => {
@@ -53,26 +53,26 @@ export class MyaccountPage {
         console.log("1" + res.settings.length);
         console.log("2" + res.settings);
         this.userid = res.settings[0].username;
-       this.password = res.settings[0].password;
-       this.hashtag = "@"+this.userid;
-       this.role = res.settings[0].role_name;
+        this.password = res.settings[0].password;
+        this.hashtag = "@" + this.userid;
+        this.role = res.settings[0].role_name;
         this.email = res.settings[0].email;
         this.country = res.settings[0].country_name;
         this.job_position = res.settings[0].job_position;
         this.accountcreatedby = res.settings[0].report_to;
-        this.photo = this.apiServiceURL +  "/staffphotos/" + res.settings[0].photo_filename;
+        this.photo = this.apiServiceURL + "/staffphotos/" + res.settings[0].photo_filename;
 
         // [{ "userid": "1", "userdetailsid": "1", "username": "denyov2", "password": "e3b81d385ca4c26109dfbda28c563e2b", "firstname": "Super Admin", "lastname": "Denyo", "email": "balamurugan@webneo.in", "contact_number": "9597645985", "country_id": "99", "photo": "1496647262537.jpg", "job_position": "Country Manager", "report_to": "0", "company_id": "1", "companygroup_name": "Denyo" }]
-        
-          
-        
+
+
+
       });
-    
+
   }
-  doEdit() {
-  
-    this.nav.setRoot(EditprofilesteponePage);
-    
+  doEdit(userid) {
+    this.nav.setRoot(EditprofilesteponePage, {
+      userId: userid
+    });
   }
 
 }

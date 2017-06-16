@@ -27,7 +27,7 @@ export class EditprofilesteponePage {
   public first_name: any;
   public last_name: any;
   public email: any;
-  public username:any;
+  public username: any;
   public photo: any;
   public country: any;
   public contact: any;
@@ -42,7 +42,7 @@ export class EditprofilesteponePage {
   public isEdited: boolean = false;
   public readOnly: boolean = false;
   public addedImgLists: any;
-  public job_position:any;
+  public job_position: any;
   public userInfo = [];
   // Flag to hide the form upon successful completion of remote operation
   public hideForm: boolean = false;
@@ -72,7 +72,7 @@ export class EditprofilesteponePage {
       "username": ["", Validators.required],
       "password": ["", Validators.required],
       "contact": ["", Validators.required],
-      "country": ["", Validators.required],  
+      "country": ["", Validators.required],
       "confirm_password": ["", Validators.required],
       "hashtag": ["", Validators.required],
       'email': ['', Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(50), Validators.pattern(/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i)])]
@@ -81,16 +81,36 @@ export class EditprofilesteponePage {
   }
 
   ionViewDidLoad() {
-   // this.getJsonCountryListData();
-   this.getJsonCountryListData();
+    // this.getJsonCountryListData();
+
     console.log('ionViewDidLoad EditprofilesteponePage');
+
+    //   this.country = res.settings[0].country_name;
+    //   this.job_position = res.settings[0].job_position;
+    //  // this.accountcreatedby = res.settings[0].report_to;
+    //   this.photo = this.apiServiceURL +  "/staffphotos/" + res.settings[0].photo_filename;
+
+    // [{ "userid": "1", "userdetailsid": "1", "username": "denyov2", "password": "e3b81d385ca4c26109dfbda28c563e2b", "firstname": "Super Admin", "lastname": "Denyo", "email": "balamurugan@webneo.in", "contact_number": "9597645985", "country_id": "99", "photo": "1496647262537.jpg", "job_position": "Country Manager", "report_to": "0", "company_id": "1", "companygroup_name": "Denyo" }]
+
+
+
+
+  }
+
+  // Determine whether we adding or editing a record
+  // based on any supplied navigation parameters
+  ionViewWillEnter() {
+    this.getJsonCountryListData();
+    this.resetFields();
+    this.pageTitle = 'Edit Profile';
+
     let userInf = localStorage.getItem("userInfo");
-    console.log("User Information Storage:"+JSON.stringify(userInf));
-         let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+    console.log("User Information Storage:" + JSON.stringify(userInf));
+    let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "settings/profile?is_mobile=1&loggedin_id="+this.userId;
-      console.log(url);
+      url: any = this.apiServiceURL + "settings/profile?is_mobile=1&loggedin_id=" + this.userId;
+    console.log(url);
     let res;
     this.http.get(url, options)
       .subscribe((data) => {
@@ -99,76 +119,24 @@ export class EditprofilesteponePage {
         console.log("1" + res.settings.length);
         console.log("2" + res.settings);
         this.first_name = res.settings[0].firstname;
-       this.last_name = res.settings[0].lastname;
-       console.log(res.settings[0].firstname);
-       this.username = res.settings[0].username;
+        this.last_name = res.settings[0].lastname;
+        console.log(res.settings[0].firstname);
+        this.username = res.settings[0].username;
         this.contact = res.settings[0].contact_number;
         this.email = res.settings[0].email;
-        this.hashtag="@"+this.username;
-        this.country=res.settings[0].country_id;
+        this.hashtag = "@" + this.username;
+        this.country = res.settings[0].country_id;
         console.log(res.settings[0].country_name);
-        
-        this.photo = this.apiServiceURL +  "/staffphotos/" + res.settings[0].photo_filename;
-      //   this.country = res.settings[0].country_name;
-      //   this.job_position = res.settings[0].job_position;
-      //  // this.accountcreatedby = res.settings[0].report_to;
-      //   this.photo = this.apiServiceURL +  "/staffphotos/" + res.settings[0].photo_filename;
 
-        // [{ "userid": "1", "userdetailsid": "1", "username": "denyov2", "password": "e3b81d385ca4c26109dfbda28c563e2b", "firstname": "Super Admin", "lastname": "Denyo", "email": "balamurugan@webneo.in", "contact_number": "9597645985", "country_id": "99", "photo": "1496647262537.jpg", "job_position": "Country Manager", "report_to": "0", "company_id": "1", "companygroup_name": "Denyo" }]
-        
-          
-        
+        this.photo = this.apiServiceURL + "/staffphotos/" + res.settings[0].photo_filename;
       });
-  }
-
-  // Determine whether we adding or editing a record
-  // based on any supplied navigation parameters
-  ionViewWillEnter() {
-    this.resetFields();
-     
-    
-    // if (this.NP.get("record")) {
-    //   console.log("Add User:" + JSON.stringify(this.NP.get("record")));
-    //   this.isEdited = true;
-    //   this.selectEntry(this.NP.get("record"));
-    //   this.pageTitle = 'Edit Profile';
-    //   this.readOnly = false;
-    //   this.hideActionButton = true;
-    //   if (this.NP.get("record").photo) {
-    //     this.addedImgLists = this.apiServiceURL + "api/uploads/users/" + this.NP.get("record").photo;
-    //   }
-    //   let editItem = this.NP.get("record");
-    //   this.first_name = editItem.first_name;
-    //   this.last_name = editItem.last_name;
-    //   this.email = editItem.email;
-    //   this.country = editItem.country;
-    //   this.contact = editItem.contact;
-    // }
-    // else {
-    //   console.log("Not");
-    //   this.isEdited = false;
-    //   this.pageTitle = 'Edit Profile';
-    // }
-    // /*this.first_name = "Kannan";
-    // this.last_name = "Nagarathinam";
-    // this.email = "kannanrathvalli@gmail.com";
-    // this.country = "238";
-    // this.contact = "9443976954";*/
   }
 
 
 
   // Assign the navigation retrieved data to properties
   // used as models on the page's HTML form
-  selectEntry(item) {
-    this.first_name = item.first_name;
-    this.last_name = item.last_name;
-    this.email = item.email;
-    this.country = item.country;
-    this.contact = item.contact;
-    this.photo = item.photo;
-    this.recordID = item.userid;
-  }
+
 
 
 
@@ -430,7 +398,7 @@ export class EditprofilesteponePage {
       }
     });
   }
-   
+
 
 }
 
