@@ -1,12 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-//import { PasswordValidator } from '../../validators/password';
-import { UserorgchartPage } from '../userorgchart/userorgchart';
 import { Http, Headers, RequestOptions } from '@angular/http';
-
+import { UserPage } from '../user/user';
+import { UseraccountPage } from '../useraccount/useraccount';
+import 'rxjs/add/operator/map';
+import { FileChooser } from '@ionic-native/file-chooser';
+import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
+import { File } from '@ionic-native/file';
 /**
- * Generated class for the UseraccountPage page.
+ * Generated class for the AddcompanygroupPage page.
  *
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
@@ -15,9 +18,13 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 @Component({
   selector: 'page-editprofilesteptwo',
   templateUrl: 'editprofilesteptwo.html',
+  providers: [FileChooser, Transfer, File]
 })
 export class EditprofilesteptwoPage {
+  // Define FormBuilder /model properties
   public userInfo = [];
+  public loginas: any;
+  public userdata = [];
   public first_name: any;
   public last_name: any;
   public email: any;
@@ -29,44 +36,98 @@ export class EditprofilesteptwoPage {
   public username: any;
   public password: any;
   public re_password: any;
+  public job_position: any;
+  public company_group: any;
+  public report_to: any;
   public hashtag: any;
   public role: any;
   public form: FormGroup;
-  public hideActionButton = true;
-  public pageTitle: string;
+  public companygroup_name: any;
+  public address: any;
+  public responseResultCompanyGroup: any;
+  public responseResultReportTo: any;
+  progress: number;
+  public isUploadedProcessing: boolean = false;
+  public isProgress = false;
+  public isUploaded: boolean = true;
+  // Flag to be used for checking whether we are adding/editing an entry
   public isEdited: boolean = false;
   public readOnly: boolean = false;
+
+  // Flag to hide the form upon successful completion of remote operation
+  public hideForm: boolean = false;
+  public hideActionButton = true;
+  // Property to help ste the page title
+  public pageTitle: string;
+  // Property to store the recordID for when an existing entry is being edited
   public recordID: any = null;
-  public responseResultRole;
-  private apiServiceURL: string = "http://denyoappv2.stridecdev.com/";
-
-  constructor(public http: Http, public navCtrl: NavController, public NP: NavParams, public fb: FormBuilder, public toastCtrl: ToastController) {
+  private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
+  constructor(public navCtrl: NavController,
+    public http: Http,
+    public NP: NavParams,
+    public fb: FormBuilder,
+    public toastCtrl: ToastController,
+    private filechooser: FileChooser,
+    private transfer: Transfer,
+    private file: File, private ngZone: NgZone) {
+    this.loginas = localStorage.getItem("userInfoName");
+    // Create form builder validation rules
     this.form = fb.group({
-      // "username": ["", Validators.required],
-      "username": ["", Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
-      "password": ["", Validators.required],
-      "re_password": ["", Validators.required],
       "hashtag": ["", Validators.required],
-      
-      "role": ["", Validators.required],
+      "country": ["", Validators.required]
+    });
 
-      /// "email": ["", Validators.required]
-
-      //'validator': this.isMatching
-    }, { validator: this.matchingPasswords('password', 're_password') });
+    this.userId = localStorage.getItem("userInfoId");
   }
 
-  matchingPasswords(passwordKey: string, passwordConfirmationKey: string) {
-    return (group: FormGroup) => {
-      let passwordInput = group.controls[passwordKey];
-      let passwordConfirmationInput = group.controls[passwordConfirmationKey];
-      if (passwordInput.value !== passwordConfirmationInput.value) {
-        return passwordConfirmationInput.setErrors({ notEquivalent: true })
-      }
-    }
-  }
   ionViewDidLoad() {
-    console.log('ionViewDidLoad UseraccountPage');
+    console.log('ionViewDidLoad AddcompanygroupPage');
+  }
+
+  // Determine whether we adding or editing a record
+  // based on any supplied navigation parameters
+  ionViewWillEnter() {
+    this.resetFields();
+    this.getCompanyGroupListData();
+    this.getUserListData();
+    if (this.NP.get("record")) {
+      console.log("User Org Chart:" + JSON.stringify(this.NP.get("record")));
+      this.isEdited = true;
+      this.selectEntry(this.NP.get("record"));
+      this.pageTitle = 'Edit User';
+      this.readOnly = false;
+      this.hideActionButton = true;
+      let editItem = this.NP.get("record");
+      this.job_position = editItem.job_position;
+      this.company_group = editItem.company_id;
+      this.report_to = editItem.report_to;
+    }
+    else {
+      this.isEdited = false;
+      this.pageTitle = 'New User';
+    }
+
+    if (this.NP.get("accountInfo")) {
+      let info = this.NP.get("accountInfo");
+
+      //var objects = JSON.parse(info);
+      console.log("JSON.stringify:" + JSON.stringify(info));
+      console.log("Length:" + info.length); console.log("info.first_name" + info.first_name);
+      console.log("info.first_name array" + info['first_name']);
+      console.log("info.first_name array 0" + info[0]['first_name']);
+      let keyindex = info.length - 1;
+      this.first_name = info[keyindex]['first_name'];
+      this.last_name = info[keyindex]['last_name'];
+      this.email = info[keyindex]['email'];
+      this.country = info[keyindex]['country'];
+      this.contact = info[keyindex]['contact'];
+      this.photo = info[keyindex]['photo'];
+      this.createdby = info[keyindex]['createdby'];
+      this.username = info[keyindex]['username'];
+      this.password = info[keyindex]['password'];
+      this.hashtag = info[keyindex]['hashtag'];
+      this.role = info[keyindex]['role'];
+    }
   }
 
 
@@ -74,155 +135,15 @@ export class EditprofilesteptwoPage {
   // Assign the navigation retrieved data to properties
   // used as models on the page's HTML form
   selectEntry(item) {
-    this.username = item.username;
-    this.password = item.password;
-    this.re_password = item.password;
-    this.hashtag = item.hashtag;
-    this.role = item.role;
-    this.recordID = item.userid;
-  }
-  ionViewWillEnter() {
-    this.getRoleListData();
-    if (this.NP.get("record")) {
-      console.log("User Account:" + JSON.stringify(this.NP.get("record")));
-      this.isEdited = true;
-      this.selectEntry(this.NP.get("record"));
-      this.pageTitle = 'Edit User-Account';
-      this.readOnly = false;
-      this.hideActionButton = true;
-      let editItem = this.NP.get("record");
-      this.username = editItem.username;
-      this.password = editItem.password;
-      this.re_password = editItem.password;
-      this.hashtag = editItem.hashtag;
-      this.role = editItem.role;
-    }
-    else {
-      this.isEdited = false;
-      this.pageTitle = 'New User-Account';
-    }
-    //[{"info":[{"photo":{"fileName":"1496384705815.jpg","baseURL":"denyoappv2.stridecdev.com","ext":"jpg","target_dir":"uploads/users/"}},{"first_name":"Kennan. N","last_name":"Nagarathina. K","email":"kannann@gmail.com","country":"Australia","contact":"9443976954","createdby":"6"}]}]
-    if (this.NP.get("accountInfo")) {
-      let info = this.NP.get("accountInfo");
-
-      //var objects = JSON.parse(info);
-      console.log("JSON.stringify:" + JSON.stringify(info));
-      console.log("Length:" + info.length);
-      console.log('A');
-      for (var key in info) {
-        console.log('B');
-        let keyindex;
-        if (this.NP.get("record")) {
-          keyindex = 0;
-        } else {
-          keyindex = 1;
-        }
-        console.log("Key:" + key);
-        console.log("Key Index:" + keyindex);
-        if (key == keyindex) {
-          console.log('Key' + key);
-          this.first_name = info[key].first_name;
-          this.last_name = info[key].last_name;
-          this.email = info[key].email;
-          this.country = info[key].country;
-          this.contact = info[key].contact;
-          this.photo = info[key].photo;
-          this.createdby = info[key].createdby;
-          console.log("First Name for User Account:" + this.first_name);
-          //console.log(JSON.stringify(this));
-        } else {
-          console.log('Key' + key);
-          this.first_name = info[0].first_name;
-          this.last_name = info[0].last_name;
-          this.email = info[0].email;
-          this.country = info[0].country;
-          this.contact = info[0].contact;
-          this.photo = info[0].photo;
-          this.createdby = info[0].createdby;
-          console.log("First Name for User Account:" + this.first_name);
-        }
-        /* this.userInfo.push({
-           info
-         });
-         console.log("User Information:" + JSON.stringify(this.userInfo));
-         */
-      }
-    }
-
-
+    this.job_position = item.job_position;
+    this.company_group = item.company_id;
+    this.report_to = item.report_to;
+    this.recordID = item.staff_id;
   }
 
-  // Handle data submitted from the page's HTML form
-  // Determine whether we are adding a new record or amending an
-  // existing record
-  saveEntry() {
-    let username: string = this.form.controls["username"].value,
-      password: string = this.form.controls["password"].value,
-      hashtag: string = this.form.controls["hashtag"].value,
-      role: string = this.form.controls["role"].value;
-
-    console.log(this.form.controls);
-
-    if (this.isEdited) {
-      this.updateEntry(username, password, hashtag, role);
-    }
-    else {
-      this.createEntry(username, password, hashtag, role);
-    }
-
-  }
-
-  // Save a new record that has been added to the page's HTML form
-  // Use angular's http post method to submit the record data
-  // to our remote PHP script (note the body variable we have created which
-  // supplies a variable of key with a value of create followed by the key/value pairs
-  // for the record data
-
-  createEntry(username, password, hashtag, role) {
-    this.userInfo.push({
-      photo: this.photo,
-      first_name: this.first_name,
-      last_name: this.last_name,
-      email: this.email,
-      country: this.country,
-      contact: this.contact,
-      createdby: this.createdby,
-      username: username,
-      password: password,
-      hashtag: hashtag,
-      role: role
-    });
-
-    let body: string = "key=usernameexist&username=" + username,
-      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
-      headers: any = new Headers({ 'Content-Type': type }),
-      options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "api/users.php";
-
-    this.http.post(url, body, options)
-      .subscribe((data) => {
-        console.log(JSON.stringify(data.json()));
-        // If the request was successful notify the user
-        if (data.status === 200) {
-          console.log(data.json().Error);
-          if (data.json().Error > 0) {
-            //this.userInfo=[];
-            this.sendNotification(data.json().message);
-          } else {
-            //this.sendNotification(data.json().message);
-            this.navCtrl.setRoot(UserorgchartPage, {
-              accountInfo: this.userInfo
-            });
-          }
-        }
-        // Otherwise let 'em know anyway
-        else {
-          this.sendNotification('Something went wrong!');
-        }
-      });
 
 
-  }
+  
 
 
 
@@ -231,40 +152,126 @@ export class EditprofilesteptwoPage {
   // to our remote PHP script (note the body variable we have created which
   // supplies a variable of key with a value of update followed by the key/value pairs
   // for the record data
-  updateEntry(username, password, hashtag, role) {
-    this.userInfo.push({
-      photo: this.photo,
-      first_name: this.first_name,
-      last_name: this.last_name,
-      email: this.email,
-      country: this.country,
-      contact: this.contact,
-      createdby: this.createdby,
-      username: username,
-      password: password,
-      hashtag: hashtag,
-      role: role
-    });
-    this.navCtrl.setRoot(UserorgchartPage, {
-      accountInfo: this.userInfo,
-      record: this.NP.get("record")
-    });
-  }
+  updateEntry(userdata, userid) {
 
-  getRoleListData() {
-       let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+
+//http://denyoappv2.stridecdev.com/settings/profileupdate?is_mobile=1&username=newtestmdv&loggedin_id=14
+
+    let userPhotoFile = localStorage.getItem("userPhotoFile");
+    if (userPhotoFile) {
+      console.log("Upload Device Image File:" + userPhotoFile);
+      this.fileTrans(userPhotoFile);
+    }
+    let body: string = "is_mobile=1&loggedin_id=" +userid +
+      "&firstname=" + this.first_name +
+      "&lastname=" + this.last_name +
+      "&photo=" + this.photo +
+      "&email=" + this.email +
+      "&country_id=" + this.country +
+      "&contact_number=" + this.contact +
+      "&createdby=" + this.createdby +
+      "&updatedby=" + this.createdby +
+      "&username=" + this.username +
+      "&password=" + this.password +
+      "&role_id=" + this.role +
+      "&personalhashtag=" + this.hashtag +
+      "&report_to=" + this.report_to +
+      "&company_id=" + this.company_group +
+      "&job_position=" + this.job_position,
+
+      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "api/roles.php?key=all";
-
-    let res;
-    this.http.get(url, options)
+      url: any = this.apiServiceURL + "/settings/profileupdate";
+    console.log(url);
+    console.log(body);
+    this.http.post(url, body, options)
       .subscribe(data => {
-        res = data.json();
-        this.responseResultRole = res;
+        console.log(data);
+        // If the request was successful notify the user
+        if (data.status === 200) {
+          this.hideForm = true;
+          this.sendNotification(`User Profile Updated was successfully updated`);
+          this.navCtrl.setRoot(UserPage);
+        }
+        // Otherwise let 'em know anyway
+        else {
+          this.sendNotification('Something went wrong!');
+        }
       });
-
   }
+
+
+
+  // Remove an existing record that has been selected in the page's HTML form
+  // Use angular's http post method to submit the record data
+  // to our remote PHP script (note the body variable we have created which
+  // supplies a variable of key with a value of delete followed by the key/value pairs
+  // for the record ID we want to remove from the remote database
+  deleteEntry() {
+    let companygroup_name: string = this.form.controls["companygroup_name"].value,
+      body: string = "key=delete&recordID=" + this.recordID,
+      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/api/users.php";
+
+    this.http.post(url, body, options)
+      .subscribe(data => {
+        // If the request was successful notify the user
+        if (data.status === 200) {
+          this.hideForm = true;
+          this.sendNotification(`Congratulations the company group: ${companygroup_name} was successfully deleted`);
+        }
+        // Otherwise let 'em know anyway
+        else {
+          this.sendNotification('Something went wrong!');
+        }
+      });
+  }
+
+
+
+  // Handle data submitted from the page's HTML form
+  // Determine whether we are adding a new record or amending an
+  // existing record
+  saveEntry() {
+    let job_position: string = this.form.controls["job_position"].value,
+      company_group: string = this.form.controls["company_group"].value,
+      report_to: string = this.form.controls["report_to"].value;
+    this.userInfo.push({
+      'job_position': job_position,
+      'company_group': company_group,
+      'report_to': report_to,
+      'first_name': this.first_name,
+      'last_name': this.last_name,
+      'photo': this.photo,
+      'email': this.email,
+      'country': this.country,
+      'contact': this.contact,
+      'createdby': this.createdby,
+      'username': this.username,
+      'password': this.password,
+      'hashtag': this.hashtag,
+      'role': this.role
+
+    });
+   
+      this.updateEntry(this.userInfo, this.userId);
+   
+  }
+
+
+
+  // Clear values in the page's HTML form fields
+  resetFields(): void {
+    this.companygroup_name = "";
+    this.address = "";
+    this.country = "";
+    this.contact = "";
+  }
+
+
 
   // Manage notifying the user of the outcome
   // of remote operations
@@ -276,5 +283,97 @@ export class EditprofilesteptwoPage {
     notification.present();
   }
 
+  getCompanyGroupListData() {
+    let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/getcompanies";
+    let res;
+    this.http.get(url, options)
+      .subscribe(data => {
+        res = data.json();
+        this.responseResultCompanyGroup = res.companies;
+      });
+
+  }
+
+  getUserListData() {
+    let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/getstaffs";
+    let res;
+    this.http.get(url, options)
+      .subscribe(data => {
+        res = data.json();
+        this.responseResultReportTo = res.staffslist;
+      });
+
+  }
+
+  previous() {
+    this.navCtrl.setRoot(UseraccountPage);
+  }
+  fileTrans(path) {
+    let fileName = path.substr(path.lastIndexOf('/') + 1);
+    const fileTransfer: TransferObject = this.transfer.create();
+    let currentName = path.replace(/^.*[\\\/]/, '');
+    this.photo = currentName;
+    console.log("File Name is:" + currentName);
+
+
+    /*var d = new Date(),
+        n = d.getTime(),
+        newFileName = n + ".jpg";*/
+
+    let options: FileUploadOptions = {
+      fileKey: 'file',
+      fileName: fileName,
+      headers: {},
+      chunkedMode: false,
+      mimeType: "text/plain",
+    }
+
+    //  http://127.0.0.1/ionic/upload_attach.php
+    //http://amahr.stridecdev.com/getgpsvalue.php?key=create&lat=34&long=45
+    fileTransfer.onProgress(this.onProgress);
+    fileTransfer.upload(path, this.apiServiceURL + '/upload.php', options)
+      .then((data) => {
+        console.log(JSON.stringify(data));
+        console.log("UPLOAD SUCCESS:" + data.response);
+        let successData = JSON.parse(data.response);
+        this.userInfo.push({
+          photo: successData
+        });
+        //this.sendNotification("User photo uploaded successfully");
+        this.progress += 5;
+        this.isProgress = false;
+        // this.isUploadedProcessing = false;
+        // return false;
+
+
+
+        // Save in Backend and MysQL
+        //this.uploadToServer(data.response);
+        // Save in Backend and MysQL
+      }, (err) => {
+        //loading.dismiss();
+        console.log("Upload Error:");
+        this.sendNotification("Upload Error:" + JSON.stringify(err));
+      })
+  }
+  onProgress = (progressEvent: ProgressEvent): void => {
+    this.ngZone.run(() => {
+      if (progressEvent.lengthComputable) {
+        let progress = Math.round((progressEvent.loaded / progressEvent.total) * 95);
+        this.isProgress = true;
+        this.progress = progress;
+      }
+    });
+  }
+
+  //http://denyoappv2.stridecdev.com/staff/store
+  //main.js:61474 firstname=Kannan&lastname=Naga&photo=undefined&email=kn@gmail.com&country_id=4&contact_number=123456789&createdby=1&updatedby=1&username=nk&password=nk&role_id=1&personalhashtag=@nk&report_to=3&company_id=13&job_position=At prg
+  //main.js:61622 File Name is:1497379310688.jpg
 }
 

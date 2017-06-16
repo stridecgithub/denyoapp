@@ -2,11 +2,8 @@ import { Component, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
-import { UseraccountPage } from '../useraccount/useraccount';
+import { EditprofilesteptwoPage } from '../editprofilesteptwo/editprofilesteptwo';
 import { Camera, CameraOptions } from '@ionic-native/camera';
-import { FileChooser } from '@ionic-native/file-chooser';
-import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
-import { File } from '@ionic-native/file';
 import 'rxjs/add/operator/map';
 /**
  * Generated class for the AddcompanygroupPage page.
@@ -18,7 +15,7 @@ import 'rxjs/add/operator/map';
 @Component({
   selector: 'page-editprofilestepone',
   templateUrl: 'editprofilestepone.html',
-  providers: [Camera, FileChooser, Transfer, File]
+  providers: [Camera]
 })
 export class EditprofilesteponePage {
   // Define FormBuilder /model properties
@@ -28,6 +25,8 @@ export class EditprofilesteponePage {
   public last_name: any;
   public email: any;
   public username: any;
+  public password: any;
+  public re_password: any;
   public photo: any;
   public country: any;
   public contact: any;
@@ -53,15 +52,13 @@ export class EditprofilesteponePage {
   public recordID: any = null;
   public isUploadedProcessing: boolean = false;
   public uploadResultBase64Data;
-  private apiServiceURL: string = "http://denyoappv2.stridecdev.com/";
+  private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   constructor(public navCtrl: NavController,
     public http: Http,
     public NP: NavParams,
     public fb: FormBuilder,
     public toastCtrl: ToastController, public loadingCtrl: LoadingController, private camera: Camera,
-    private filechooser: FileChooser,
-    private transfer: Transfer,
-    private file: File, private ngZone: NgZone) {
+    private ngZone: NgZone) {
     this.loginas = localStorage.getItem("userInfoName");
     // Create form builder validation rules
     this.form = fb.group({
@@ -72,29 +69,13 @@ export class EditprofilesteponePage {
       "username": ["", Validators.required],
       "password": ["", Validators.required],
       "contact": ["", Validators.required],
-      "country": ["", Validators.required],
-      "confirm_password": ["", Validators.required],
-      "hashtag": ["", Validators.required],
       'email': ['', Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(50), Validators.pattern(/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i)])]
     });
     this.userId = localStorage.getItem("userInfoId");
   }
-
+  
   ionViewDidLoad() {
-    // this.getJsonCountryListData();
-
     console.log('ionViewDidLoad EditprofilesteponePage');
-
-    //   this.country = res.settings[0].country_name;
-    //   this.job_position = res.settings[0].job_position;
-    //  // this.accountcreatedby = res.settings[0].report_to;
-    //   this.photo = this.apiServiceURL +  "/staffphotos/" + res.settings[0].photo_filename;
-
-    // [{ "userid": "1", "userdetailsid": "1", "username": "denyov2", "password": "e3b81d385ca4c26109dfbda28c563e2b", "firstname": "Super Admin", "lastname": "Denyo", "email": "balamurugan@webneo.in", "contact_number": "9597645985", "country_id": "99", "photo": "1496647262537.jpg", "job_position": "Country Manager", "report_to": "0", "company_id": "1", "companygroup_name": "Denyo" }]
-
-
-
-
   }
 
   // Determine whether we adding or editing a record
@@ -109,7 +90,7 @@ export class EditprofilesteponePage {
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "settings/profile?is_mobile=1&loggedin_id=" + this.userId;
+      url: any = this.apiServiceURL + "/settings/profile?is_mobile=1&loggedin_id=" + this.userId;
     console.log(url);
     let res;
     this.http.get(url, options)
@@ -124,11 +105,14 @@ export class EditprofilesteponePage {
         this.username = res.settings[0].username;
         this.contact = res.settings[0].contact_number;
         this.email = res.settings[0].email;
+        this.email = res.settings[0].email;
+        this.password = res.settings[0].password;
+        this.re_password = res.settings[0].password;
         this.hashtag = "@" + this.username;
         this.country = res.settings[0].country_id;
         console.log(res.settings[0].country_name);
 
-        this.photo = this.apiServiceURL + "/staffphotos/" + res.settings[0].photo_filename;
+        this.addedImgLists = this.apiServiceURL + "/staffphotos/" + res.settings[0].photo_filename;
       });
   }
 
@@ -158,34 +142,12 @@ export class EditprofilesteponePage {
     });
 
 
-    let body: string = "key=emailexist&email=" + email,
-      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
-      headers: any = new Headers({ 'Content-Type': type }),
-      options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "api/users.php";
-
-    this.http.post(url, body, options)
-      .subscribe((data) => {
-        console.log(JSON.stringify(data.json()));
-        // If the request was successful notify the user
-        if (data.status === 200) {
-          this.hideForm = true;
-          console.log(data.json().Error);
-          if (data.json().Error > 0) {
-            this.userInfo = []; // need this one
-            this.sendNotification(data.json().message);
-          } else {
+   
             //this.sendNotification(data.json().message);
-            this.navCtrl.setRoot(UseraccountPage, {
+            this.navCtrl.setRoot(EditprofilesteptwoPage, {
               accountInfo: this.userInfo
             });
-          }
-        }
-        // Otherwise let 'em know anyway
-        else {
-          this.sendNotification('Something went wrong!');
-        }
-      });
+    
 
 
   }
@@ -208,7 +170,7 @@ export class EditprofilesteponePage {
       createdby: createdby,
 
     });
-    this.navCtrl.setRoot(UseraccountPage, {
+    this.navCtrl.setRoot(EditprofilesteptwoPage, {
       accountInfo: this.userInfo,
       record: this.NP.get("record")
     });
@@ -227,7 +189,7 @@ export class EditprofilesteponePage {
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "api/companygroup.php";
+      url: any = this.apiServiceURL + "/api/companygroup.php";
 
     this.http.post(url, body, options)
       .subscribe(data => {
@@ -293,7 +255,7 @@ export class EditprofilesteponePage {
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "api/countries.php";
+      url: any = this.apiServiceURL + "/api/countries.php";
     let res;
     this.presentLoading(1);
     this.http.get(url, options)
@@ -323,8 +285,7 @@ export class EditprofilesteponePage {
       destinationType: this.camera.DestinationType.FILE_URI
     }
     this.camera.getPicture(options).then((imageData) => {
-      console.log(imageData);
-      this.fileTrans(imageData);
+      localStorage.setItem("userPhotoFile", imageData);
       this.uploadResultBase64Data = imageData;
     }, (err) => {
       // Handle error
@@ -332,72 +293,7 @@ export class EditprofilesteponePage {
     });
   }
 
-  fileTrans(path) {
-    let fileName = path.substr(path.lastIndexOf('/') + 1);
-    const fileTransfer: TransferObject = this.transfer.create();
-    let currentName = path.replace(/^.*[\\\/]/, '');
-    this.photo = currentName;
-    console.log("File Name is:" + currentName);
 
-
-    /*var d = new Date(),
-        n = d.getTime(),
-        newFileName = n + ".jpg";*/
-
-    let options: FileUploadOptions = {
-      fileKey: 'file',
-      fileName: fileName,
-      headers: {},
-      chunkedMode: false,
-      mimeType: "text/plain",
-    }
-
-    //  http://127.0.0.1/ionic/upload_attach.php
-    //http://amahr.stridecdev.com/getgpsvalue.php?key=create&lat=34&long=45
-    fileTransfer.onProgress(this.onProgress);
-    fileTransfer.upload(path, this.apiServiceURL + 'api/upload_user_photo.php', options)
-      .then((data) => {
-        console.log("UPLOAD SUCCESS:" + data.response);
-        let successData = JSON.parse(data.response);
-        this.userInfo.push({
-          photo: successData
-        });
-        this.sendNotification("User photo uploaded successfully");
-        //http://denyoappv2.stridecdev.com/api/uploads/users/1496340809342.jpg
-        console.log('http:' + '//' + successData.baseURL + '/' + successData.target_dir + '/' + successData.fileName);
-
-        //<img src="{{addedImgLists[i].imgSrc}}" width="75%" height="75%" />
-        let imgSrc;
-
-        imgSrc = 'http:' + '//' + successData.baseURL + '/' + successData.target_dir + '/' + successData.fileName;
-        this.addedImgLists = path;
-
-
-        this.progress += 5;
-        this.isProgress = false;
-        this.isUploadedProcessing = false;
-        return false;
-
-
-
-        // Save in Backend and MysQL
-        //this.uploadToServer(data.response);
-        // Save in Backend and MysQL
-      }, (err) => {
-        //loading.dismiss();
-        console.log("Upload Error:");
-        this.sendNotification("Upload Error:" + JSON.stringify(err));
-      })
-  }
-  onProgress = (progressEvent: ProgressEvent): void => {
-    this.ngZone.run(() => {
-      if (progressEvent.lengthComputable) {
-        let progress = Math.round((progressEvent.loaded / progressEvent.total) * 95);
-        this.isProgress = true;
-        this.progress = progress;
-      }
-    });
-  }
 
 
 }

@@ -15,27 +15,9 @@
 
 
 <ion-content padding>
-<div>
+  <div>
     <form [formGroup]="form" (ngSubmit)="saveEntry()">
       <ion-list>
-        <div style="position: relative;
-    left: 6%;"><b>User Information*</b></div>
-        <ion-item>
-          <ion-label stacked>User Id <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
-          <ion-input type="text" [disabled]="readOnly" formControlName="username" [(ngModel)]="username"></ion-input>
-        </ion-item>
-
-        <ion-item>
-          <ion-label stacked>Password <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
-          <ion-input type="password" [disabled]="readOnly" formControlName="password" [(ngModel)]="password"></ion-input>
-        </ion-item>
-
-
-        <ion-item>
-          <ion-label stacked>Confirm Password <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
-          <ion-input type="password" [disabled]="readOnly" formControlName="re_password" [(ngModel)]="re_password"></ion-input>
-        </ion-item>
-
 
 
         <ion-item>
@@ -44,12 +26,11 @@
         </ion-item>
 
         <ion-item>
-          <ion-label stacked>Role <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
-          <ion-select [disabled]="readOnly" [(ngModel)]="role" formControlName="role">
-            <ion-option *ngFor="let roleData of responseResultRole" value="{{roleData.role_id}}">{{roleData.role_name}}</ion-option>
+          <ion-label stacked>Country <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
+          <ion-select [disabled]="readOnly" [(ngModel)]="country" formControlName="country">
+            <ion-option *ngFor="let countryData of responseResultCountry" value="{{countryData.id}}">{{countryData.country_name}}</ion-option>
           </ion-select>
         </ion-item>
-
 
         <ion-item *ngIf="hideActionButton">
           <button ion-button color="primary" text-center block [disabled]="!form.valid">Continue</button>
