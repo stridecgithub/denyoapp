@@ -16,11 +16,11 @@ import { File } from '@ionic-native/file';
  */
 @IonicPage()
 @Component({
-  selector: 'page-addorgcharttwo',
-  templateUrl: 'addorgcharttwo.html',
+  selector: 'page-addreporttemplate',
+  templateUrl: 'addreporttemplate.html',
   providers: [FileChooser, Transfer, File]
 })
-export class AddorgcharttwoPage {
+export class AddreporttemplatePage {
   // Define FormBuilder /model properties
   public userInfo = [];
   public loginas: any;
@@ -82,7 +82,7 @@ export class AddorgcharttwoPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AddorgcharttwoPage');
+    console.log('ionViewDidLoad AddreporttemplatePage');
   }
 
   // Determine whether we adding or editing a record
@@ -95,7 +95,7 @@ export class AddorgcharttwoPage {
       console.log("User Org Chart:" + JSON.stringify(this.NP.get("record")));
       this.isEdited = true;
       this.selectEntry(this.NP.get("record"));
-      this.pageTitle = 'Edit Org Chart';
+      this.pageTitle = 'Edit Report Template';
       this.readOnly = false;
       this.hideActionButton = true;
       let editItem = this.NP.get("record");
@@ -105,7 +105,7 @@ export class AddorgcharttwoPage {
     }
     else {
       this.isEdited = false;
-      this.pageTitle = 'New  Org Chart';
+      this.pageTitle = 'New  Report Template';
     }
 
     if (this.NP.get("accountInfo")) {
@@ -426,6 +426,5 @@ export class AddorgcharttwoPage {
   //main.js:61474 firstname=Kannan&lastname=Naga&photo=undefined&email=kn@gmail.com&country_id=4&contact_number=123456789&createdby=1&updatedby=1&username=nk&password=nk&role_id=1&personalhashtag=@nk&report_to=3&company_id=13&job_position=At prg
   //main.js:61622 File Name is:1497379310688.jpg
 }
-
 
 

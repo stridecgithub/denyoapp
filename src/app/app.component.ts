@@ -17,7 +17,7 @@ import { RolePage } from '../pages/role/role';
 import { ReporttemplatePage } from '../pages/reporttemplate/reporttemplate';
 //import { AddunitgroupPage } from '../pages/addunitgroup/addunitgroup';
 import { App } from 'ionic-angular';
-import { AtmentionedPage } from '../pages/atmentioned/atmentioned';
+//import { AtmentionedPage } from '../pages/atmentioned/atmentioned';
 import { UnitsPage } from '../pages/units/units';
 import { OrgchartPage } from '../pages/orgchart/orgchart';
 
