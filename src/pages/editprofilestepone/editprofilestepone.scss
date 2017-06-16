@@ -1,5 +1,26 @@
 page-editprofilestepone {
+.text-input-md, .text-input{border:1px solid #f2f2f2;margin: 10px 0 20px;min-height: 35px;padding: 0 10px; width: 100%;}
+.label-md[stacked] {
+    font-size: 14px;
+}
+ion-navbar.toolbar {
+    background: #f0f0f0;
+}
+ion-navbar ion-buttons {
+    margin-right: 15px;
+}
+.button-md-primary{width:100%;padding: 14px 1.1em;height:inherit;font-size: 16px;}
 
+    .header{
+ color : #071C89;
+ }
+  .sheader1{
+ color : #000000;
+ }
+  .sheader2{
+ color : #000000;
+ float: right;
+ }
  .label-md[stacked]{
         font-size: 14px;
         color:black;

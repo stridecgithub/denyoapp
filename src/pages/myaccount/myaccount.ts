@@ -43,7 +43,7 @@ export class MyaccountPage {
      let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "settings?is_mobile=1&loggedin_id="+this.userId;
+      url: any = this.apiServiceURL + "settings/profile?is_mobile=1&loggedin_id="+this.userId;
       console.log(url);
     let res;
     this.http.get(url, options)
@@ -69,12 +69,10 @@ export class MyaccountPage {
       });
     
   }
-  doEdit(id) {
-    let act = 'myaccount'
-    this.nav.setRoot(EditprofilesteponePage, {
-      record: this.item,
-      act: act
-    });
+  doEdit() {
+  
+    this.nav.setRoot(EditprofilesteponePage);
+    
   }
 
 }

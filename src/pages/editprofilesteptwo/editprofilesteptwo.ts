@@ -47,6 +47,7 @@ export class EditprofilesteptwoPage {
       "password": ["", Validators.required],
       "re_password": ["", Validators.required],
       "hashtag": ["", Validators.required],
+      
       "role": ["", Validators.required],
 
       /// "email": ["", Validators.required]
