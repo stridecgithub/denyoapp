@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, ToastController, AlertController, NavParams } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 import { Http, Headers, RequestOptions } from '@angular/http';
-import { AddunitgroupPage } from '../addunitgroup/addunitgroup';
+import { AddreporttemplatePage } from '../addreporttemplate/addreporttemplate';
 import { LoadingController } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
 /**
@@ -178,14 +178,14 @@ export class ReporttemplatePage {
     }
   }
   doAdd() {
-    this.nav.setRoot(AddunitgroupPage);
+    this.nav.setRoot(AddreporttemplatePage);
   }
   previous() {
     this.nav.setRoot(TabsPage);
   }
   doEdit(item, act) {
     if (act == 'edit') {
-      this.nav.setRoot(AddunitgroupPage, {
+      this.nav.setRoot(AddreporttemplatePage, {
         record: item,
         act: act
       });

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, ToastController, AlertController, NavParams } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 import { Http, Headers, RequestOptions } from '@angular/http';
-import { AddunitgroupPage } from '../addunitgroup/addunitgroup';
+import { AddorgchartonePage } from '../addorgchartone/addorgchartone';
 import { LoadingController } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
 /**
@@ -178,14 +178,14 @@ export class OrgchartPage {
     }
   }
   doAdd() {
-    this.nav.setRoot(AddunitgroupPage);
+    this.nav.setRoot(AddorgchartonePage);
   }
   previous() {
     this.nav.setRoot(TabsPage);
   }
   doEdit(item, act) {
     if (act == 'edit') {
-      this.nav.setRoot(AddunitgroupPage, {
+      this.nav.setRoot(AddorgchartonePage, {
         record: item,
         act: act
       });
