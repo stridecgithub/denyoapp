@@ -409,21 +409,27 @@ export class AddunitsthreePage {
       });
     }
     console.log("7" + len);
+    console.log("len:" + this.form.controls["contact_name_" + len].value);
+    if (this.form.controls["contact_name_" + len].value == 'contact_name_2') {
+      console.log("8");
+      this.contact_name_2 = '';
+     
+    }
+    if (this.form.controls["contact_name_" + len].value == 'contact_name_3') {
+      this.contact_name_3 = '';
+      console.log("9");
+    }
+    if (this.form.controls["contact_name_" + len].value == 'contact_name_4') {
+      this.contact_name_4 = '';
+      console.log("10");
+    }
+    if (this.form.controls["contact_name_" + len].value == 'contact_name_5') {
+      this.contact_name_5 = '';
+      console.log("11");
+    }
 
-    /* if(this.form.controls["contact_name_" + len].value!=''){
- 
-     }*/
 
-    this.contact_name_1 = '';
-    this.contact_number_1 = '';
-    this.contact_name_2 = '';
-    this.contact_number_2 = '';
-    this.contact_name_3 = '';
-    this.contact_number_3 = '';
-    this.contact_name_4 = '';
-    this.contact_number_4 = '';
-    this.contact_name_5 = '';
-    this.contact_number_5 = '';
+
   }
 }
 
