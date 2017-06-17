@@ -2,7 +2,7 @@ import { Component, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
-import { UserPage } from '../user/user';
+//import { UserPage } from '../user/user';
 import { MyaccountPage } from '../myaccount/myaccount';
 import { EditprofilesteponePage } from '../editprofilestepone/editprofilestepone';
 import 'rxjs/add/operator/map';
@@ -31,6 +31,7 @@ export class EditprofilesteptwoPage {
   public email: any;
   public userId: any;
   public country: any;
+  public responseResultCountry: any;
   public contact: any;
   public createdby: any;
   public photo: any;
@@ -82,15 +83,14 @@ export class EditprofilesteptwoPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AddcompanygroupPage');
+    console.log('ionViewDidLoad EditprofilesteptwoPage');
   }
 
   // Determine whether we adding or editing a record
   // based on any supplied navigation parameters
   ionViewWillEnter() {
     this.resetFields();
-    this.getCompanyGroupListData();
-    this.getUserListData();
+    this.getJsonCountryListData();
     if (this.NP.get("record")) {
       console.log("User Org Chart:" + JSON.stringify(this.NP.get("record")));
       this.isEdited = true;
@@ -105,7 +105,7 @@ export class EditprofilesteptwoPage {
     }
     else {
       this.isEdited = false;
-      this.pageTitle = 'New User';
+      this.pageTitle = 'Edit User';
     }
 
     if (this.NP.get("accountInfo")) {
@@ -136,10 +136,11 @@ export class EditprofilesteptwoPage {
   // Assign the navigation retrieved data to properties
   // used as models on the page's HTML form
   selectEntry(item) {
-    this.job_position = item.job_position;
+    /*this.job_position = item.job_position;
     this.company_group = item.company_id;
     this.report_to = item.report_to;
-    this.recordID = item.staff_id;
+    this.recordID = item.staff_id;*/
+    console.log("Select Entty" + JSON.stringify(item));
   }
 
 
@@ -153,7 +154,8 @@ export class EditprofilesteptwoPage {
   // to our remote PHP script (note the body variable we have created which
   // supplies a variable of key with a value of update followed by the key/value pairs
   // for the record data
-  updateEntry(userdata, userid) {
+
+  updateEntry(country, hashtag, userid) {
 
 
     //http://denyoappv2.stridecdev.com/settings/profileupdate?is_mobile=1&username=newtestmdv&loggedin_id=14
@@ -168,17 +170,13 @@ export class EditprofilesteptwoPage {
       "&lastname=" + this.last_name +
       "&photo=" + this.photo +
       "&email=" + this.email +
-      "&country_id=" + this.country +
+      "&country_id=" + country +
       "&contact_number=" + this.contact +
       "&createdby=" + this.createdby +
       "&updatedby=" + this.createdby +
       "&username=" + this.username +
       "&password=" + this.password +
-      "&role_id=" + this.role +
-      "&personalhashtag=" + this.hashtag +
-      "&report_to=" + this.report_to +
-      "&company_id=" + this.company_group +
-      "&job_position=" + this.job_position,
+      "&personalhashtag=" + hashtag,
 
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
@@ -192,7 +190,7 @@ export class EditprofilesteptwoPage {
         // If the request was successful notify the user
         if (data.status === 200) {
           this.hideForm = true;
-          this.sendNotification(`User Profile Updated was successfully updated`);
+          this.sendNotification(`User profile successfully updated`);
           this.navCtrl.setRoot(MyaccountPage);
         }
         // Otherwise let 'em know anyway
@@ -204,32 +202,7 @@ export class EditprofilesteptwoPage {
 
 
 
-  // Remove an existing record that has been selected in the page's HTML form
-  // Use angular's http post method to submit the record data
-  // to our remote PHP script (note the body variable we have created which
-  // supplies a variable of key with a value of delete followed by the key/value pairs
-  // for the record ID we want to remove from the remote database
-  deleteEntry() {
-    let companygroup_name: string = this.form.controls["companygroup_name"].value,
-      body: string = "key=delete&recordID=" + this.recordID,
-      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
-      headers: any = new Headers({ 'Content-Type': type }),
-      options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/api/users.php";
 
-    this.http.post(url, body, options)
-      .subscribe(data => {
-        // If the request was successful notify the user
-        if (data.status === 200) {
-          this.hideForm = true;
-          this.sendNotification(`Congratulations the company group: ${companygroup_name} was successfully deleted`);
-        }
-        // Otherwise let 'em know anyway
-        else {
-          this.sendNotification('Something went wrong!');
-        }
-      });
-  }
 
 
 
@@ -237,28 +210,11 @@ export class EditprofilesteptwoPage {
   // Determine whether we are adding a new record or amending an
   // existing record
   saveEntry() {
-    let job_position: string = this.form.controls["job_position"].value,
-      company_group: string = this.form.controls["company_group"].value,
-      report_to: string = this.form.controls["report_to"].value;
-    this.userInfo.push({
-      'job_position': job_position,
-      'company_group': company_group,
-      'report_to': report_to,
-      'first_name': this.first_name,
-      'last_name': this.last_name,
-      'photo': this.photo,
-      'email': this.email,
-      'country': this.country,
-      'contact': this.contact,
-      'createdby': this.createdby,
-      'username': this.username,
-      'password': this.password,
-      'hashtag': this.hashtag,
-      'role': this.role
+    let country: string = this.form.controls["country"].value,
+      hashtag: string = this.form.controls["hashtag"].value;
 
-    });
 
-    this.updateEntry(this.userInfo, this.userId);
+    this.updateEntry(country, hashtag, this.userId);
 
   }
 
@@ -284,33 +240,6 @@ export class EditprofilesteptwoPage {
     notification.present();
   }
 
-  getCompanyGroupListData() {
-    let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
-      headers: any = new Headers({ 'Content-Type': type }),
-      options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/getcompanies";
-    let res;
-    this.http.get(url, options)
-      .subscribe(data => {
-        res = data.json();
-        this.responseResultCompanyGroup = res.companies;
-      });
-
-  }
-
-  getUserListData() {
-    let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
-      headers: any = new Headers({ 'Content-Type': type }),
-      options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/getstaffs";
-    let res;
-    this.http.get(url, options)
-      .subscribe(data => {
-        res = data.json();
-        this.responseResultReportTo = res.staffslist;
-      });
-
-  }
 
 
   fileTrans(path) {
@@ -371,7 +300,22 @@ export class EditprofilesteptwoPage {
     });
   }
 
+  getJsonCountryListData() {
 
+    let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/api/countries.php";
+    let res;
+
+    this.http.get(url, options)
+      .subscribe(data => {
+        res = data.json();
+        this.responseResultCountry = res;
+
+      });
+
+  }
   //http://denyoappv2.stridecdev.com/staff/store
   //main.js:61474 firstname=Kannan&lastname=Naga&photo=undefined&email=kn@gmail.com&country_id=4&contact_number=123456789&createdby=1&updatedby=1&username=nk&password=nk&role_id=1&personalhashtag=@nk&report_to=3&company_id=13&job_position=At prg
   //main.js:61622 File Name is:1497379310688.jpg

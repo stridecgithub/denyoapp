@@ -18,6 +18,7 @@ import { UserorgchartPage } from '../pages/userorgchart/userorgchart';
 import { MyaccountPage } from '../pages/myaccount/myaccount';
 import { LogoutPage } from '../pages/logout/logout';
 import { EditprofilesteponePage } from '../pages/editprofilestepone/editprofilestepone';
+import { EditprofilesteptwoPage } from '../pages/editprofilesteptwo/editprofilesteptwo';
 import { RolePage } from '../pages/role/role';
 import { AddrolePage } from '../pages/addrole/addrole';
 import { AddunitgroupPage } from '../pages/addunitgroup/addunitgroup';
@@ -56,6 +57,7 @@ import { OrgchartPage } from '../pages/orgchart/orgchart';
     AddunitsthreePage,
     AddunitsfourPage,
     EditprofilesteponePage,
+    EditprofilesteptwoPage,
     RolePage,
     AddrolePage,
     AddunitgroupPage,
@@ -103,6 +105,7 @@ import { OrgchartPage } from '../pages/orgchart/orgchart';
     AddunitsfourPage,
     AddunitsonePage,
     EditprofilesteponePage,
+    EditprofilesteptwoPage,
     RolePage,
     AddrolePage,
     AddunitgroupPage,

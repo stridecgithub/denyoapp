@@ -34,7 +34,7 @@ export class EditprofilesteponePage {
   public userId: any;
   public userid: any;
   public hashtag: any;
-  public responseResultCountry: any;
+
   progress: number;
   public isProgress = false;
   public isUploaded: boolean = true;
@@ -82,7 +82,7 @@ export class EditprofilesteponePage {
   // Determine whether we adding or editing a record
   // based on any supplied navigation parameters
   ionViewWillEnter() {
-    this.getJsonCountryListData();
+
     this.resetFields();
     this.pageTitle = 'Edit Profile';
 
@@ -112,8 +112,9 @@ export class EditprofilesteponePage {
         this.hashtag = "@" + this.username;
         this.country = res.settings[0].country_id;
         console.log(res.settings[0].country_name);
-
-        this.addedImgLists = this.apiServiceURL + "/staffphotos/" + res.settings[0].photo_filename;
+        if (res.settings[0].photo_filename != '' && res.settings[0].photo_filename != 'undefined' && res.settings[0].photo_filename != undefined) {
+          this.addedImgLists = this.apiServiceURL + "/staffphotos/" + res.settings[0].photo_filename;
+        }
       });
   }
 
@@ -137,7 +138,8 @@ export class EditprofilesteponePage {
       password: password,
       contact: contact,
       createdby: createdby,
-
+      hashtag: this.hashtag,
+      country: this.country
     });
     this.navCtrl.setRoot(EditprofilesteptwoPage, {
       accountInfo: this.userInfo,
@@ -187,8 +189,8 @@ export class EditprofilesteponePage {
       email: string = this.form.controls["email"].value,
       contact: string = this.form.controls["contact"].value;
     console.log(this.form.controls);
-    if (this.isUploadedProcessing == false) {     
-        this.updateEntry(first_name, last_name, email, username, password, contact, this.userId);      
+    if (this.isUploadedProcessing == false) {
+      this.updateEntry(first_name, last_name, email, username, password, contact, this.userId);
     }
   }
 
@@ -215,22 +217,7 @@ export class EditprofilesteponePage {
     notification.present();
   }
 
-  getJsonCountryListData() {
 
-    let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
-      headers: any = new Headers({ 'Content-Type': type }),
-      options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/api/countries.php";
-    let res;
-    this.presentLoading(1);
-    this.http.get(url, options)
-      .subscribe(data => {
-        res = data.json();
-        this.responseResultCountry = res;
-        this.presentLoading(0);
-      });
-
-  }
   presentLoading(parm) {
     let loader;
     loader = this.loadingCtrl.create({
@@ -252,6 +239,9 @@ export class EditprofilesteponePage {
     this.camera.getPicture(options).then((imageData) => {
       localStorage.setItem("userPhotoFile", imageData);
       this.uploadResultBase64Data = imageData;
+      this.addedImgLists = imageData;
+      this.isUploadedProcessing = false;
+      return false;
     }, (err) => {
       // Handle error
       this.sendNotification(err);
