@@ -31,7 +31,7 @@ export class MyApp {
 
   pages: Array<{ title: string, component: any }>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, private splashScreen: SplashScreen,
+  constructor(public _platform: Platform, public statusBar: StatusBar,public _SplashScreen: SplashScreen,
     public appCtrl: App) {
 
 
@@ -60,17 +60,14 @@ export class MyApp {
   }
 
 
-  initializeApp() {
-    this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
+  initializeApp() {   
       this.statusBar.styleDefault();
-
-      //setTimeout(function () {
-      this.splashScreen.hide();
-      //}, 3000);
-
-    });
+    this._platform.ready().then(() => {
+          // do whatever you need to do here.
+          setTimeout(() => {
+            this._SplashScreen.hide();
+          }, 300);
+        });
   }
 
   openPage(page) {
