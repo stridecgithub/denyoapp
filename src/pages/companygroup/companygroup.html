@@ -58,8 +58,8 @@
 
   <ion-item style="width: 100%; margin: 0; padding-left: 10px;">
     <ion-label>Sort By</ion-label>
-    <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="pet" (ionChange)="onSegmentChanged(pet)">     
-      <ion-option value="companygroup_name,asc"  selected="true">Group Name Asc</ion-option>
+    <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="pet" (ionChange)="onSegmentChanged(pet)">
+      <ion-option value="companygroup_name,asc" selected="true">Group Name Asc</ion-option>
       <ion-option value="companygroup_name,desc">Group Name Desc</ion-option>
     </ion-select>
   </ion-item>
@@ -91,3 +91,34 @@
     <ion-infinite-scroll-content loadingText="Loading More Data"></ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>
+
+<ion-footer color="bluedark">
+  <ion-toolbar color="bluedark">
+   
+        <a (click)="doUploadPhoto()" href="#">
+          <ion-icon name="camera" style="font-size: 35pt;color:#ffffff"></ion-icon>
+        </a>
+     
+        <a (click)="doUploadPhoto()" href="#">
+          <ion-icon name="map" style="font-size: 35pt;color:#ffffff"></ion-icon>
+        </a>
+      
+        <a (click)="doUploadPhoto()" href="#">
+          <ion-icon name="card" style="font-size: 35pt;color:#ffffff"></ion-icon>
+        </a>
+     
+        <a (click)="doUploadPhoto()" href="#">
+          <ion-icon name="contacts" style="font-size: 35pt;color:#ffffff"></ion-icon>
+        </a>
+     
+        <a (click)="doUploadPhoto()" href="#">
+          <ion-icon name="calendar" style="font-size: 35pt;color:#ffffff"></ion-icon>
+        </a>
+    
+        <a (click)="doUploadPhoto()" href="#">
+          <ion-icon name="settings" style="font-size: 35pt;color:#ffffff"></ion-icon>
+        </a>
+   
+  </ion-toolbar>
+
+</ion-footer>
