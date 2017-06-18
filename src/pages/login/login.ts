@@ -5,7 +5,6 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { TabsPage } from '../tabs/tabs';
 import { LoadingController } from 'ionic-angular';
 import { Http, Headers, RequestOptions } from '@angular/http';
-import { Md5 } from 'ts-md5/dist/md5';
 /**
  * Generated class for the LoginPage page.
  *f
@@ -37,8 +36,7 @@ export class LoginPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
-    console.log(Md5.hashStr('kannan'));
+    console.log('ionViewDidLoad LoginPage');   
   }
 
 
