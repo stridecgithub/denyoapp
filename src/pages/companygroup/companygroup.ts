@@ -25,6 +25,7 @@ import { RolePage } from '../role/role';
 export class CompanygroupPage {
   public pageTitle: string;
   public loginas: any;
+  public loadingMoreDataContent:string;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   public totalCount;
   pet: string = "ALL";
@@ -43,6 +44,7 @@ export class CompanygroupPage {
   constructor(public http: Http, public nav: NavController,
     public toastCtrl: ToastController, public alertCtrl: AlertController, public navParams: NavParams, public loadingCtrl: LoadingController) {
     this.pageTitle = 'Company Group';
+    this.loadingMoreDataContent='Loading More Data';
     this.loginas = localStorage.getItem("userInfoName");
   }
 
@@ -92,8 +94,10 @@ export class CompanygroupPage {
           this.reportAllLists = res.companygroups;
           this.totalCount = res.totalCount;
           this.reportData.startindex += this.reportData.results;
+          this.loadingMoreDataContent='Loading More Data';
         } else {
           this.totalCount = 0;
+          this.loadingMoreDataContent='No More Data';
         }
         console.log("Total Record:" + this.totalCount);
 
