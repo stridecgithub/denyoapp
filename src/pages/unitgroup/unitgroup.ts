@@ -351,5 +351,5 @@ export class UnitgroupPage {
 
   redirectToRole() {
     this.nav.setRoot(RolePage);
-  }
+  } 
 }

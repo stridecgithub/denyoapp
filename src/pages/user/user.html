@@ -42,7 +42,7 @@
   </button>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding  class="ion-content">
   <div class="error" *ngIf="totalCount==0">No users entries found</div>
   <!--ion-item id="sortbar"  *ngIf="totalCount!=0">
     <button *ngIf="sortby==1" clear (click)="doSort('firstname')" >
@@ -112,37 +112,23 @@
 </ion-content>
 <ion-footer color="bluedark">
   <ion-toolbar color="bluedark">
-
-    <a href="#" style="border:1px solid #aeaeae" (click)="redirectToCompanyGroup()">
-      <ion-icon name="camera" style="font-size: 35pt;color:#ffffff "></ion-icon>
-
-    </a>
-
-    <a (click)="redirectToUser()" href="# " style="border:1px solid #aeaeae">
-      <ion-icon name="map" style="font-size: 35pt;color:#ffffff "></ion-icon>
-
-    </a>
-
-    <a (click)="redirectToUnitGroup() " href="# ">
-      <ion-icon name="card" style="font-size: 35pt;color:#ffffff "></ion-icon>
-
-    </a>
-
-    <a (click)="redirectToUnits()" href="# ">
-      <ion-icon name="contacts" style="font-size: 35pt;color:#ffffff "></ion-icon>
-
-    </a>
-
-    <a (click)="redirectToMyAccount()" href="# ">
-      <ion-icon name="calendar" style="font-size: 35pt;color:#ffffff "></ion-icon>
-
-    </a>
-
-    <a (click)="redirectToRole()" href="# ">
-      <ion-icon name="settings" style="font-size: 35pt;color:#ffffff "></ion-icon>
-
-    </a>
-
+    <button ion-button icon-only clear>
+<ion-icon name="home" class="footer-icon"></ion-icon>
+</button>
+    <button ion-button icon-only (click)="redirectToUser()" clear>
+<ion-icon name="contacts" class="footer-icon"></ion-icon>
+</button>
+    <button ion-button icon-only (click)="redirectToUnitGroup()" clear>
+<ion-icon name="chatboxes" class="footer-icon"></ion-icon>
+</button>
+    <button ion-button icon-only (click)="redirectToUnits()" clear>
+<ion-icon name="camera" class="footer-icon"></ion-icon>
+</button>
+    <!--button ion-button icon-only (click)="redirectToMyAccount()" clear>
+<ion-icon name="calendar" ></ion-icon>
+</button-->
+    <button ion-button icon-only (click)="redirectToRole()" clear>
+<ion-icon name="settings" class="footer-icon"></ion-icon>
+</button>
   </ion-toolbar>
-
 </ion-footer>

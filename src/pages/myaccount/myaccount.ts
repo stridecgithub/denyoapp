@@ -3,6 +3,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { EditprofilesteponePage } from '../editprofilestepone/editprofilestepone';
 import { TabsPage } from '../tabs/tabs';
+import { UserPage } from '../user/user';
+import { UnitgroupPage } from '../unitgroup/unitgroup';
+import { UnitsPage } from '../units/units';
+import { RolePage } from '../role/role';
 /**
  * Generated class for the MyaccountPage page.
  *
@@ -78,6 +82,22 @@ export class MyaccountPage {
 
   previous() {
     this.nav.setRoot(TabsPage);
+  }
+
+  redirectToUser() {
+    this.nav.setRoot(UserPage);
+  }
+  redirectToUnitGroup() {
+    this.nav.setRoot(UnitgroupPage);
+  }
+  redirectToUnits() {
+    this.nav.setRoot(UnitsPage);
+  }
+  redirectToMyAccount() {
+    this.nav.setRoot(MyaccountPage);
+  }
+  redirectToRole() {
+    this.nav.setRoot(RolePage);
   }
 
 }

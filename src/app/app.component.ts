@@ -66,7 +66,7 @@ export class MyApp {
       // do whatever you need to do here.
       setTimeout(() => {
         this._SplashScreen.hide();
-      }, 100);
+      }, 300);
     });
   }
 

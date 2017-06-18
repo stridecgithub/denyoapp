@@ -264,18 +264,15 @@ export class CompanygroupPage {
   redirectToUser() {
     this.nav.setRoot(UserPage);
   }
-
   redirectToUnitGroup() {
     this.nav.setRoot(UnitgroupPage);
   }
-
   redirectToUnits() {
     this.nav.setRoot(UnitsPage);
   }
   redirectToMyAccount() {
     this.nav.setRoot(MyaccountPage);
   }
-
   redirectToRole() {
     this.nav.setRoot(RolePage);
   }
