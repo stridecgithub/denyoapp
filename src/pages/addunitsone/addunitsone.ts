@@ -2,8 +2,12 @@ import { Component, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import 'rxjs/add/operator/map';
-import { UnitsPage } from '../units/units';
 import { AddunitstwoPage } from '../addunitstwo/addunitstwo';
+import { UserPage } from '../user/user';
+import { MyaccountPage } from '../myaccount/myaccount';
+import { UnitgroupPage } from '../unitgroup/unitgroup';
+import { UnitsPage } from '../units/units';
+import { RolePage } from '../role/role'; 
 /**
  * Generated class for the AddcompanygroupPage page.
  *
@@ -39,7 +43,7 @@ export class AddunitsonePage {
   public recordID: any = null;
   public isUploadedProcessing: boolean = false;
   public uploadResultBase64Data;
-  constructor(public navCtrl: NavController,   
+  constructor(public nav: NavController,   
     public NP: NavParams,
     public fb: FormBuilder,
     public toastCtrl: ToastController, public loadingCtrl: LoadingController,
@@ -99,7 +103,7 @@ export class AddunitsonePage {
       location: location,
       createdby: createdby
     });
-    this.navCtrl.setRoot(AddunitstwoPage, {
+    this.nav.setRoot(AddunitstwoPage, {
       accountInfo: this.userInfo
     });   
 
@@ -117,7 +121,7 @@ export class AddunitsonePage {
       location: location,
       createdby: createdby
     });
-    this.navCtrl.setRoot(AddunitstwoPage, {
+    this.nav.setRoot(AddunitstwoPage, {
       accountInfo: this.userInfo,
       record: this.NP.get("record")
     });
@@ -175,7 +179,23 @@ export class AddunitsonePage {
     }
   }  
   previous() {
-    this.navCtrl.setRoot(UnitsPage);
+    this.nav.setRoot(UnitsPage);
+  }
+  
+redirectToUser() {
+    this.nav.setRoot(UserPage);
+  }
+  redirectToUnitGroup() {
+    this.nav.setRoot(UnitgroupPage);
+  }
+  redirectToUnits() {
+    this.nav.setRoot(UnitsPage);
+  }
+  redirectToMyAccount() {
+    this.nav.setRoot(MyaccountPage);
+  }
+  redirectToRole() {
+    this.nav.setRoot(RolePage);
   }
 }
 

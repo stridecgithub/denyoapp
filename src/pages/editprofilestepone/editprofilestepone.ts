@@ -4,7 +4,11 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { EditprofilesteptwoPage } from '../editprofilesteptwo/editprofilesteptwo';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { UserPage } from '../user/user';
 import { MyaccountPage } from '../myaccount/myaccount';
+import { UnitgroupPage } from '../unitgroup/unitgroup';
+import { UnitsPage } from '../units/units';
+import { RolePage } from '../role/role';
 import 'rxjs/add/operator/map';
 /**
  * Generated class for the AddcompanygroupPage page.
@@ -54,7 +58,7 @@ export class EditprofilesteponePage {
   public isUploadedProcessing: boolean = false;
   public uploadResultBase64Data;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
-  constructor(public navCtrl: NavController,
+  constructor(public nav: NavController,
     public http: Http,
     public NP: NavParams,
     public fb: FormBuilder,
@@ -141,7 +145,7 @@ export class EditprofilesteponePage {
       hashtag: this.hashtag,
       country: this.country
     });
-    this.navCtrl.setRoot(EditprofilesteptwoPage, {
+    this.nav.setRoot(EditprofilesteptwoPage, {
       accountInfo: this.userInfo,
       record: this.NP.get("record")
     });
@@ -251,7 +255,23 @@ export class EditprofilesteponePage {
 
 
   previous() {
-    this.navCtrl.setRoot(MyaccountPage);
+    this.nav.setRoot(MyaccountPage);
+  }
+  
+redirectToUser() {
+    this.nav.setRoot(UserPage);
+  }
+  redirectToUnitGroup() {
+    this.nav.setRoot(UnitgroupPage);
+  }
+  redirectToUnits() {
+    this.nav.setRoot(UnitsPage);
+  }
+  redirectToMyAccount() {
+    this.nav.setRoot(MyaccountPage);
+  }
+  redirectToRole() {
+    this.nav.setRoot(RolePage);
   }
 }
 

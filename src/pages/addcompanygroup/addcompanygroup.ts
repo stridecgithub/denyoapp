@@ -4,6 +4,11 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { CompanygroupPage } from '../companygroup/companygroup';
 import 'rxjs/add/operator/map';
+import { UserPage } from '../user/user';
+import { MyaccountPage } from '../myaccount/myaccount';
+import { UnitgroupPage } from '../unitgroup/unitgroup';
+import { UnitsPage } from '../units/units';
+import { RolePage } from '../role/role'; 
 /**
  * Generated class for the AddcompanygroupPage page.
  *
@@ -38,7 +43,7 @@ export class AddcompanygroupPage {
   // Property to store the recordID for when an existing entry is being edited
   public recordID: any = null;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
-  constructor(public navCtrl: NavController,
+  constructor(public nav: NavController,
     public http: Http,
     public NP: NavParams,
     public fb: FormBuilder,
@@ -116,7 +121,7 @@ export class AddcompanygroupPage {
             this.sendNotification(res.msg[0].result);
           } else {
             this.sendNotification(res.msg[0].result);
-            this.navCtrl.setRoot(CompanygroupPage);
+            this.nav.setRoot(CompanygroupPage);
           }
         }
         // Otherwise let 'em know anyway
@@ -153,7 +158,7 @@ export class AddcompanygroupPage {
             this.sendNotification(res.msg[0].result);
           } else {
             this.sendNotification(res.msg[0].result);
-            this.navCtrl.setRoot(CompanygroupPage);
+            this.nav.setRoot(CompanygroupPage);
           }
         }
         // Otherwise let 'em know anyway
@@ -249,6 +254,21 @@ export class AddcompanygroupPage {
 
   }
   previous() {
-    this.navCtrl.setRoot(CompanygroupPage);
+    this.nav.setRoot(CompanygroupPage);
+  }
+  redirectToUser() {
+    this.nav.setRoot(UserPage);
+  }
+  redirectToUnitGroup() {
+    this.nav.setRoot(UnitgroupPage);
+  }
+  redirectToUnits() {
+    this.nav.setRoot(UnitsPage);
+  }
+  redirectToMyAccount() {
+    this.nav.setRoot(MyaccountPage);
+  }
+  redirectToRole() {
+    this.nav.setRoot(RolePage);
   }
 }

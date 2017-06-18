@@ -9,6 +9,10 @@ import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/trans
 import { File } from '@ionic-native/file';
 import 'rxjs/add/operator/map';
 import { UserPage } from '../user/user';
+import { MyaccountPage } from '../myaccount/myaccount';
+import { UnitgroupPage } from '../unitgroup/unitgroup';
+import { UnitsPage } from '../units/units';
+import { RolePage } from '../role/role'; 
 /**
  * Generated class for the AddcompanygroupPage page.
  *
@@ -51,7 +55,7 @@ export class AdduserPage {
   public isUploadedProcessing: boolean = false;
   public uploadResultBase64Data;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
-  constructor(public navCtrl: NavController,
+  constructor(public nav: NavController,
     public http: Http,
     public NP: NavParams,
     public fb: FormBuilder,
@@ -146,7 +150,7 @@ export class AdduserPage {
       createdby: createdby,
 
     });
-    this.navCtrl.setRoot(UseraccountPage, {
+    this.nav.setRoot(UseraccountPage, {
       accountInfo: this.userInfo
     });
     /*
@@ -168,7 +172,7 @@ export class AdduserPage {
                 this.sendNotification(data.json().message);
               } else {
                 //this.sendNotification(data.json().message);
-                this.navCtrl.setRoot(UseraccountPage, {
+                this.nav.setRoot(UseraccountPage, {
                   accountInfo: this.userInfo
                 });
               }
@@ -200,7 +204,7 @@ export class AdduserPage {
       createdby: createdby,
 
     });
-    this.navCtrl.setRoot(UseraccountPage, {
+    this.nav.setRoot(UseraccountPage, {
       accountInfo: this.userInfo,
       record: this.NP.get("record")
     });
@@ -392,6 +396,22 @@ export class AdduserPage {
     });
   }
   previous() {
-    this.navCtrl.setRoot(UserPage);
+    this.nav.setRoot(UserPage);
   }
+  redirectToUser() {
+    this.nav.setRoot(UserPage);
+  }
+  redirectToUnitGroup() {
+    this.nav.setRoot(UnitgroupPage);
+  }
+  redirectToUnits() {
+    this.nav.setRoot(UnitsPage);
+  }
+  redirectToMyAccount() {
+    this.nav.setRoot(MyaccountPage);
+  }
+  redirectToRole() {
+    this.nav.setRoot(RolePage);
+  }
+
 }

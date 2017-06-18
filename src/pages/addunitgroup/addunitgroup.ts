@@ -2,8 +2,13 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
+import { UserPage } from '../user/user';
+import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
+import { UnitsPage } from '../units/units';
+import { RolePage } from '../role/role'; 
 import 'rxjs/add/operator/map';
+
 
 /**
  * Generated class for the AddunitgroupPage page.
@@ -41,7 +46,7 @@ export class AddunitgroupPage {
   public recordID: any = null;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
 
-    constructor(public navCtrl: NavController,
+    constructor(public nav: NavController,
     public http: Http,
     public NP: NavParams,
     public fb: FormBuilder,
@@ -191,7 +196,7 @@ export class AddunitgroupPage {
             this.sendNotification(res.msg[0].result);
           } else {
             this.sendNotification(res.msg[0].result);
-            this.navCtrl.setRoot(UnitgroupPage);
+            this.nav.setRoot(UnitgroupPage);
           }
         }
         // Otherwise let 'em know anyway
@@ -221,7 +226,7 @@ export class AddunitgroupPage {
             this.sendNotification(res.msg[0].result);
           } else {
             this.sendNotification(res.msg[0].result);
-            this.navCtrl.setRoot(UnitgroupPage);
+            this.nav.setRoot(UnitgroupPage);
           }
         }
         // Otherwise let 'em know anyway
@@ -259,6 +264,21 @@ export class AddunitgroupPage {
    // document.getElementById("colorcode").classList.remove("border-need");
   }
    previous() {
-    this.navCtrl.setRoot(UnitgroupPage);
+    this.nav.setRoot(UnitgroupPage);
+  }
+  redirectToUser() {
+    this.nav.setRoot(UserPage);
+  }
+  redirectToUnitGroup() {
+    this.nav.setRoot(UnitgroupPage);
+  }
+  redirectToUnits() {
+    this.nav.setRoot(UnitsPage);
+  }
+  redirectToMyAccount() {
+    this.nav.setRoot(MyaccountPage);
+  }
+  redirectToRole() {
+    this.nav.setRoot(RolePage);
   }
 }

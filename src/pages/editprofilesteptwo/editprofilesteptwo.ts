@@ -3,7 +3,11 @@ import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angu
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
 //import { UserPage } from '../user/user';
+import { UserPage } from '../user/user';
 import { MyaccountPage } from '../myaccount/myaccount';
+import { UnitgroupPage } from '../unitgroup/unitgroup';
+import { UnitsPage } from '../units/units';
+import { RolePage } from '../role/role';
 import { EditprofilesteponePage } from '../editprofilestepone/editprofilestepone';
 import 'rxjs/add/operator/map';
 import { FileChooser } from '@ionic-native/file-chooser';
@@ -64,7 +68,7 @@ export class EditprofilesteptwoPage {
   // Property to store the recordID for when an existing entry is being edited
   public recordID: any = null;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
-  constructor(public navCtrl: NavController,
+  constructor(public nav: NavController,
     public http: Http,
     public NP: NavParams,
     public fb: FormBuilder,
@@ -191,7 +195,7 @@ export class EditprofilesteptwoPage {
         if (data.status === 200) {
           this.hideForm = true;
           this.sendNotification(`User profile successfully updated`);
-          this.navCtrl.setRoot(MyaccountPage);
+          this.nav.setRoot(MyaccountPage);
         }
         // Otherwise let 'em know anyway
         else {
@@ -321,7 +325,23 @@ export class EditprofilesteptwoPage {
   //main.js:61622 File Name is:1497379310688.jpg
 
   previous() {
-    this.navCtrl.setRoot(EditprofilesteponePage);
+    this.nav.setRoot(EditprofilesteponePage);
+  }
+  
+redirectToUser() {
+    this.nav.setRoot(UserPage);
+  }
+  redirectToUnitGroup() {
+    this.nav.setRoot(UnitgroupPage);
+  }
+  redirectToUnits() {
+    this.nav.setRoot(UnitsPage);
+  }
+  redirectToMyAccount() {
+    this.nav.setRoot(MyaccountPage);
+  }
+  redirectToRole() {
+    this.nav.setRoot(RolePage);
   }
 }
 

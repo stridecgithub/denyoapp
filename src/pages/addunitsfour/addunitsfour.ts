@@ -4,7 +4,12 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { AddunitsthreePage } from '../addunitsthree/addunitsthree';
+import { UserPage } from '../user/user';
+import { MyaccountPage } from '../myaccount/myaccount';
+import { UnitgroupPage } from '../unitgroup/unitgroup';
 import { UnitsPage } from '../units/units';
+import { RolePage } from '../role/role'; 
+
 /**
  * Generated class for the AddcompanygroupPage page.
  *
@@ -55,7 +60,7 @@ export class AddunitsfourPage {
   public isUploadedProcessing: boolean = false;
   public uploadResultBase64Data;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
-  constructor(public navCtrl: NavController,
+  constructor(public nav: NavController,
     public http: Http,
     public NP: NavParams,
     public fb: FormBuilder,
@@ -225,14 +230,14 @@ export class AddunitsfourPage {
         if (data.status === 200) {
           this.hideForm = true;
           this.sendNotification(`Units created was successfully added`);
-          this.navCtrl.setRoot(UnitsPage);
+          this.nav.setRoot(UnitsPage);
         }
         // Otherwise let 'em know anyway
         else {
           this.sendNotification('Something went wrong!');
         }
       });
-    /* this.navCtrl.setRoot(UnitsPage, {
+    /* this.nav.setRoot(UnitsPage, {
        accountInfo: this.userInfo
      });*/
 
@@ -286,7 +291,7 @@ export class AddunitsfourPage {
         if (data.status === 200) {
           this.hideForm = true;
           this.sendNotification(`User created was successfully updated`);
-          //this.navCtrl.setRoot(UnitsPage);
+          //this.nav.setRoot(UnitsPage);
         }
         // Otherwise let 'em know anyway
         else {
@@ -409,7 +414,22 @@ export class AddunitsfourPage {
     }
   }
   previous() {
-    this.navCtrl.setRoot(AddunitsthreePage);
+    this.nav.setRoot(AddunitsthreePage);
+  }
+  redirectToUser() {
+    this.nav.setRoot(UserPage);
+  }
+  redirectToUnitGroup() {
+    this.nav.setRoot(UnitgroupPage);
+  }
+  redirectToUnits() {
+    this.nav.setRoot(UnitsPage);
+  }
+  redirectToMyAccount() {
+    this.nav.setRoot(MyaccountPage);
+  }
+  redirectToRole() {
+    this.nav.setRoot(RolePage);
   }
 }
 

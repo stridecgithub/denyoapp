@@ -5,6 +5,11 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { AddunitsfourPage } from '../addunitsfour/addunitsfour';
 import { AddunitstwoPage } from '../addunitstwo/addunitstwo';
+import { UserPage } from '../user/user';
+import { MyaccountPage } from '../myaccount/myaccount';
+import { UnitgroupPage } from '../unitgroup/unitgroup';
+import { UnitsPage } from '../units/units';
+import { RolePage } from '../role/role'; 
 import * as $ from 'jquery'
 import "slick-carousel";
 /**
@@ -65,7 +70,7 @@ export class AddunitsthreePage {
   public isUploadedProcessing: boolean = false;
   public uploadResultBase64Data;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
-  constructor(public navCtrl: NavController,
+  constructor(public nav: NavController,
     public http: Http,
     public NP: NavParams,
     public fb: FormBuilder,
@@ -231,7 +236,7 @@ export class AddunitsthreePage {
       models_id: this.models_id,
       location: this.location
     });
-    this.navCtrl.setRoot(AddunitsfourPage, {
+    this.nav.setRoot(AddunitsfourPage, {
       accountInfo: this.userInfo
     });
 
@@ -257,7 +262,7 @@ export class AddunitsthreePage {
       location: this.location
 
     });
-    this.navCtrl.setRoot(AddunitsfourPage, {
+    this.nav.setRoot(AddunitsfourPage, {
       accountInfo: this.userInfo,
       record: this.NP.get("record")
     });
@@ -382,7 +387,7 @@ export class AddunitsthreePage {
     }
   }
   previous() {
-    this.navCtrl.setRoot(AddunitstwoPage);
+    this.nav.setRoot(AddunitstwoPage);
   }
 
   address1get(hashtag) {
@@ -441,6 +446,23 @@ export class AddunitsthreePage {
 
 
 
+  }
+
+  
+redirectToUser() {
+    this.nav.setRoot(UserPage);
+  }
+  redirectToUnitGroup() {
+    this.nav.setRoot(UnitgroupPage);
+  }
+  redirectToUnits() {
+    this.nav.setRoot(UnitsPage);
+  }
+  redirectToMyAccount() {
+    this.nav.setRoot(MyaccountPage);
+  }
+  redirectToRole() {
+    this.nav.setRoot(RolePage);
   }
 }
 

@@ -5,6 +5,12 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { AddunitsthreePage } from '../addunitsthree/addunitsthree';
 import { AddunitsonePage } from '../addunitsone/addunitsone';
+import { UserPage } from '../user/user';
+import { MyaccountPage } from '../myaccount/myaccount';
+import { UnitgroupPage } from '../unitgroup/unitgroup';
+import { UnitsPage } from '../units/units';
+import { RolePage } from '../role/role'; 
+
 /**
  * Generated class for the AddcompanygroupPage page.
  *
@@ -48,7 +54,7 @@ export class AddunitstwoPage {
   public isUploadedProcessing: boolean = false;
   public uploadResultBase64Data;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
-  constructor(public navCtrl: NavController,
+  constructor(public nav: NavController,
     public http: Http,
     public NP: NavParams,
     public fb: FormBuilder,
@@ -239,7 +245,7 @@ export class AddunitstwoPage {
       createdby: createdby,
       location: this.location
     });
-    this.navCtrl.setRoot(AddunitsthreePage, {
+    this.nav.setRoot(AddunitsthreePage, {
       accountInfo: this.userInfo
     });
   }
@@ -261,7 +267,7 @@ export class AddunitstwoPage {
       createdby: createdby,
       location: this.location
     });
-    this.navCtrl.setRoot(AddunitsthreePage, {
+    this.nav.setRoot(AddunitsthreePage, {
       accountInfo: this.userInfo,
       record: this.NP.get("record")
     });
@@ -368,7 +374,23 @@ export class AddunitstwoPage {
     }
   }
   previous() {
-    this.navCtrl.setRoot(AddunitsonePage);
+    this.nav.setRoot(AddunitsonePage);
+  }
+  
+redirectToUser() {
+    this.nav.setRoot(UserPage);
+  }
+  redirectToUnitGroup() {
+    this.nav.setRoot(UnitgroupPage);
+  }
+  redirectToUnits() {
+    this.nav.setRoot(UnitsPage);
+  }
+  redirectToMyAccount() {
+    this.nav.setRoot(MyaccountPage);
+  }
+  redirectToRole() {
+    this.nav.setRoot(RolePage);
   }
 }
 
