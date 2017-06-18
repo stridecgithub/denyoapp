@@ -41,7 +41,7 @@
     </div>
   </button>
 </ion-header>
-<ion-content padding>
+<ion-content padding class="ion-content">
   <div class="error" *ngIf="totalCount==0">No company group entries found</div>
   <!--ion-item id="sortbar"  *ngIf="totalCount!=0">
     <button *ngIf="sortby==1"clear (click)="doSort('companygroup_name')"  style="color:black;">
@@ -94,23 +94,23 @@
 
 <ion-footer color="toolbarwhite">
   <ion-toolbar color="toolbarwhite">
-    <button ion-button icon-only   clear>
-<ion-icon name="home" style="color:#ffffff"></ion-icon>
+    <button ion-button icon-only clear>
+<ion-icon name="home" style="color:#000000"></ion-icon>
 </button>
     <button ion-button icon-only (click)="redirectToUser()" clear>
-<ion-icon name="contacts" style="color:#ffffff"></ion-icon>
+<ion-icon name="contacts"  style="color:#000000"></ion-icon>
 </button>
     <button ion-button icon-only (click)="redirectToUnitGroup()" clear>
-<ion-icon name="chatboxes" style="color:#ffffff"></ion-icon>
+<ion-icon name="chatboxes" style="color:#000000"></ion-icon>
 </button>
     <button ion-button icon-only (click)="redirectToUnits()" clear>
-<ion-icon name="camera"  style="color:#ffffff"></ion-icon>
+<ion-icon name="camera" style="color:#000000"></ion-icon>
 </button>
     <button ion-button icon-only (click)="redirectToMyAccount()" clear>
-<ion-icon name="calendar"></ion-icon>
+<ion-icon name="calendar" style="color:#000000"></ion-icon>
 </button>
     <button ion-button icon-only (click)="redirectToRole()" clear>
-<ion-icon name="settings"></ion-icon>
+<ion-icon name="settings" style="color:#000000"></ion-icon>
 </button>
   </ion-toolbar>
 </ion-footer>
