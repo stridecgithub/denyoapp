@@ -88,7 +88,7 @@
     </ion-item-sliding>
   </ion-list>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="totalCount!=0">
-    <ion-infinite-scroll-content loadingText="{{loadMoreDataContent}}"></ion-infinite-scroll-content>
+    <ion-infinite-scroll-content loadingText="{{loadingMoreDataContent}}"></ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>
 
@@ -98,19 +98,19 @@
 <ion-icon name="home" class="footer-icon"></ion-icon>
 </button>
     <button ion-button icon-only (click)="redirectToUser()" clear>
-<ion-icon name="contacts-outline" class="footer-icon"></ion-icon>
+<ion-icon name="contacts" class="footer-icon"></ion-icon>
 </button>
     <button ion-button icon-only (click)="redirectToUnitGroup()" clear>
-<ion-icon name="chatboxes-outline" class="footer-icon"></ion-icon>
+<ion-icon name="chatboxes" class="footer-icon"></ion-icon>
 </button>
     <button ion-button icon-only (click)="redirectToUnits()" clear>
-<ion-icon name="camera-outline" class="footer-icon"></ion-icon>
+<ion-icon name="camera" class="footer-icon"></ion-icon>
 </button>
     <!--button ion-button icon-only (click)="redirectToMyAccount()" clear>
 <ion-icon name="calendar" ></ion-icon>
 </button-->
     <button ion-button icon-only (click)="redirectToRole()" clear>
-<ion-icon name="settings-outline" class="footer-icon"></ion-icon>
+<ion-icon name="settings" class="footer-icon"></ion-icon>
 </button>
   </ion-toolbar>
 </ion-footer>
