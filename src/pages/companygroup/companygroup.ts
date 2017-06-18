@@ -6,6 +6,11 @@ import { AddcompanygroupPage } from '../addcompanygroup/addcompanygroup';
 import { ViewcompanygroupPage } from '../viewcompanygroup/viewcompanygroup';
 import { LoadingController } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
+import { UserPage } from '../user/user';
+import { MyaccountPage } from '../myaccount/myaccount';
+import { UnitgroupPage } from '../unitgroup/unitgroup';
+import { UnitsPage } from '../units/units';
+import { RolePage } from '../role/role';
 /**
  * Generated class for the CompanygroupPage page.
  *
@@ -256,5 +261,22 @@ export class CompanygroupPage {
   previous() {
     this.nav.setRoot(TabsPage);
   }
+  redirectToUser() {
+    this.nav.setRoot(UserPage);
+  }
 
+  redirectToUnitGroup() {
+    this.nav.setRoot(UnitgroupPage);
+  }
+
+  redirectToUnits() {
+    this.nav.setRoot(UnitsPage);
+  }
+  redirectToMyAccount() {
+    this.nav.setRoot(MyaccountPage);
+  }
+
+  redirectToRole() {
+    this.nav.setRoot(RolePage);
+  }
 }

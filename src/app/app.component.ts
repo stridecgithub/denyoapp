@@ -31,7 +31,7 @@ export class MyApp {
 
   pages: Array<{ title: string, component: any }>;
 
-  constructor(public _platform: Platform, public statusBar: StatusBar,public _SplashScreen: SplashScreen,
+  constructor(public _platform: Platform, public statusBar: StatusBar, public _SplashScreen: SplashScreen,
     public appCtrl: App) {
 
 
@@ -60,14 +60,14 @@ export class MyApp {
   }
 
 
-  initializeApp() {   
-      this.statusBar.styleDefault();
+  initializeApp() {
+    this.statusBar.styleDefault();
     this._platform.ready().then(() => {
-          // do whatever you need to do here.
-          setTimeout(() => {
-            this._SplashScreen.hide();
-          }, 300);
-        });
+      // do whatever you need to do here.
+      setTimeout(() => {
+        this._SplashScreen.hide();
+      }, 300);
+    });
   }
 
   openPage(page) {

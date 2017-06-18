@@ -4,6 +4,11 @@ import 'rxjs/add/operator/map';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { AddrolePage } from '../addrole/addrole';
 import { LoadingController } from 'ionic-angular';
+import { UserPage } from '../user/user';
+import { MyaccountPage } from '../myaccount/myaccount';
+import { UnitgroupPage } from '../unitgroup/unitgroup';
+import { UnitsPage } from '../units/units';
+import { CompanygroupPage } from '../companygroup/companygroup';
 /**
  * Generated class for the AddrolePage page.
  *
@@ -232,6 +237,28 @@ export class RolePage {
     } else {
       loader.dismiss();
     }
+  }
+
+  redirectToUser() {
+    this.nav.setRoot(UserPage);
+  }
+
+  redirectToUnitGroup() {
+    this.nav.setRoot(UnitgroupPage);
+  }
+   redirectToCompanyGroup() {
+    this.nav.setRoot(CompanygroupPage);
+  }
+
+  redirectToUnits() {
+    this.nav.setRoot(UnitsPage);
+  }
+  redirectToMyAccount() {
+    this.nav.setRoot(MyaccountPage);
+  }
+
+  redirectToRole() {
+    this.nav.setRoot(RolePage);
   }
 
 }

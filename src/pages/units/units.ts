@@ -6,6 +6,11 @@ import { AddunitsonePage } from '../addunitsone/addunitsone';
 import { ViewcompanygroupPage } from '../viewcompanygroup/viewcompanygroup';
 import { LoadingController } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
+import { UserPage } from '../user/user';
+import { MyaccountPage } from '../myaccount/myaccount';
+import { UnitgroupPage } from '../unitgroup/unitgroup';
+import { CompanygroupPage } from '../companygroup/companygroup';
+import { RolePage } from '../role/role';
 /**
  * Generated class for the UserPage page.
  *
@@ -129,7 +134,7 @@ export class UnitsPage {
               unitgroups_id: res.units[unit].unitgroups_id,
               models_id: res.units[unit].models_id,
               alarmnotificationto: res.units[unit].alarmnotificationto,
-               favoriteindication: favorite
+              favoriteindication: favorite
             });
           }
           //this.reportAllLists = res.units;
@@ -305,10 +310,10 @@ export class UnitsPage {
   previous() {
     this.nav.setRoot(TabsPage);
   }
-   favorite(unit_id) {
+  favorite(unit_id) {
     this.reportData.startindex = 0;
     this.reportAllLists = [];
-    let body: string = "unitid=" + unit_id +"&is_mobile=1",
+    let body: string = "unitid=" + unit_id + "&is_mobile=1",
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
@@ -327,7 +332,7 @@ export class UnitsPage {
           console.log("Un Favorite");
         }
 
-       if (res.units.length > 0) {
+        if (res.units.length > 0) {
           for (let unit in res.units) {
             let colorcode;
             let favorite;
@@ -357,7 +362,7 @@ export class UnitsPage {
               unitgroups_id: res.units[unit].unitgroups_id,
               models_id: res.units[unit].models_id,
               alarmnotificationto: res.units[unit].alarmnotificationto,
-               favoriteindication: favorite
+              favoriteindication: favorite
             });
           }
           //this.reportAllLists = res.units;
@@ -377,5 +382,26 @@ export class UnitsPage {
         }
       });
     this.doUser();
+  }
+
+  redirectToUser() {
+    this.nav.setRoot(UserPage);
+  }
+
+  redirectToUnitGroup() {
+    this.nav.setRoot(UnitgroupPage);
+  }
+
+  redirectToUnits() {
+    this.nav.setRoot(UnitsPage);
+  }
+  redirectToMyAccount() {
+    this.nav.setRoot(MyaccountPage);
+  }
+  redirectToCompanyGroup() {
+    this.nav.setRoot(CompanygroupPage);
+  }
+  redirectToRole() {
+    this.nav.setRoot(RolePage);
   }
 }
