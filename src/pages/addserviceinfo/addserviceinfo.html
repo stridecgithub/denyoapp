@@ -33,23 +33,25 @@
 
 
 <ion-content padding>
-<form *ngIf="form" [formGroup]="form" (ngSubmit)="createItem()">
+  <form *ngIf="form" [formGroup]="form" (ngSubmit)="createItem()">
     <input type="file" #fileInput style="visibility: hidden; height: 0px" name="files[]" (change)="processWebImage($event)" />
     <div class="profile-image-wrapper" (click)="getPicture()">
       <div class="profile-image-placeholder" *ngIf="!this.form.controls.profilePic.value">
         <ion-icon name="add"></ion-icon>
         <div>
-        Choose Upload Image
+          Choose Upload Image
         </div>
       </div>
       <div class="profile-image" [style.backgroundImage]="getProfileImageStyle()" *ngIf="this.form.controls.profilePic.value"></div>
     </div>
     <ion-list>
       <ion-item>
-        <ion-input type="text" placeholder="Name" formControlName="name"></ion-input>
+        <ion-label stacked>Servicing Date <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
+        <ion-input type="text" [disabled]="readOnly" formControlName="serviced_datetime" [(ngModel)]="serviced_datetime"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-input type="text" placeholder="About" formControlName="about"></ion-input>
+        <ion-label stacked>Serviced By <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
+        <ion-input type="text" [disabled]="readOnly" formControlName="serviced_by" [(ngModel)]="serviced_by"></ion-input>
       </ion-item>
     </ion-list>
   </form>
