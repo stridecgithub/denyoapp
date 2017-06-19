@@ -2,6 +2,9 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Camera } from '@ionic-native/camera';
+import { FileChooser } from '@ionic-native/file-chooser';
+import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
+import { File } from '@ionic-native/file';
 /**
  * Generated class for the AddserviceinfoPage page.
  *
@@ -12,6 +15,7 @@ import { Camera } from '@ionic-native/camera';
 @Component({
   selector: 'page-addserviceinfo',
   templateUrl: 'addserviceinfo.html',
+  providers: [Camera, FileChooser, Transfer, File]
 })
 export class AddserviceinfoPage {
   @ViewChild('fileInput') fileInput;
@@ -30,6 +34,16 @@ export class AddserviceinfoPage {
     this.unitDetailData.loginas = localStorage.getItem("userInfoName");
     this.unitDetailData.userId = localStorage.getItem("userInfoId");
     this.unitDetailData.pageTitle = 'Servicing Act';
+    this.form = formBuilder.group({
+      profilePic: [''],
+      name: ['', Validators.required],
+      about: ['']
+    });
+
+    // Watch the form for changes, and
+    this.form.valueChanges.subscribe((v) => {
+      this.isReadyToSave = this.form.valid;
+    });
   }
 
   ionViewDidLoad() {
@@ -48,6 +62,7 @@ export class AddserviceinfoPage {
         alert('Unable to take photo');
       })
     } else {
+      alert(console.log(Error));
       this.fileInput.nativeElement.click();
     }
   }
@@ -58,7 +73,7 @@ export class AddserviceinfoPage {
       let imageData = (readerEvent.target as any).result;
       this.form.patchValue({ 'profilePic': imageData });
     };
-
+    console.log(JSON.stringify(event.target.files));
     reader.readAsDataURL(event.target.files[0]);
   }
 
