@@ -6,15 +6,20 @@
 -->
 <ion-header>
   <ion-navbar color="bluedark">
-    <ion-title class="page-title">{{pageTitle}}</ion-title>
+    <ion-title class="page-title">Add Org</ion-title>
     <ion-buttons start>
       <button ion-button menuToggle class="menu-toggle">
       <ion-icon name="menu"></ion-icon>
     </button>
     </ion-buttons>
+    <!--ion-buttons end>
+      <button (click)="doAdd()" style="background-color:transparent">
+            <ion-icon name="ios-add-circle-outline"></ion-icon>           
+        </button>
+    </ion-buttons-->
     <ion-buttons end>
       <button ion-button>
- <ion-icon name="notifications-outline"></ion-icon>
+  <ion-icon ios="ios-notifications-outline" md="md-notifications-outline"></ion-icon>
 </button>
     </ion-buttons>
   </ion-navbar>
@@ -29,12 +34,13 @@
       Login As:{{loginas}}
     </ion-buttons>
   </ion-navbar>
+ 
+ 
 </ion-header>
 <ion-content padding>
   <div>
-    <form [formGroup]="form" (ngSubmit)="saveEntry()">
-      <ion-list>
-        <div style="position: relative;left: 35%;">
+    <form [formGroup]="form" >
+     <div style="position: relative;left: 35%;">
           <!--button  [disabled]="progress" (click)="doUploadPhoto()" style="background-color:#fff" *ngIf="!addedImgLists">
             <ion-icon name="camera" style="font-size: 75pt;color:#009ACD"></ion-icon>           
         </button-->
@@ -55,14 +61,13 @@
             <span *ngIf="isProgress" style="padding:2px">{{progress}}%</span>
           </p>
         </div>
-        <div style="position: relative;
+          <div style="position: relative;
     left: 6%;"><b>User Information*</b></div>
         <ion-item>
           <ion-label stacked>First Name <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
-          <ion-input type="text" [disabled]="readOnly" formControlName="first_name" [(ngModel)]="first_name"></ion-input>
+          <ion-input type="text" ></ion-input>
         </ion-item>
-
-        <ion-item>
+         <ion-item>
           <ion-label stacked>Last Name <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
           <ion-input type="text" [disabled]="readOnly" formControlName="last_name" [(ngModel)]="last_name"></ion-input>
         </ion-item>
@@ -86,9 +91,9 @@
 
 
         <ion-item *ngIf="hideActionButton">
-          <button ion-button color="primary" text-center block [disabled]="!form.valid">Continue</button>
+          <button ion-button color="bluedark" text-center block [disabled]="!form.valid" (click)="saveEntry()">Continue</button>
         </ion-item>
-      </ion-list>
     </form>
-  </div>
+    </div>
+
 </ion-content>

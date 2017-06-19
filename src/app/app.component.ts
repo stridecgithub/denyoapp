@@ -20,7 +20,8 @@ import { App } from 'ionic-angular';
 //import { AtmentionedPage } from '../pages/atmentioned/atmentioned';
 import { UnitsPage } from '../pages/units/units';
 import { OrgchartPage } from '../pages/orgchart/orgchart';
-
+import { AddorgchartonePage } from '../pages/addorgchartone/addorgchartone';
+import { AddorgcharttwoPage } from '../pages/addorgcharttwo/addorgcharttwo';
 @Component({
   templateUrl: 'app.html'
 })
@@ -53,7 +54,9 @@ export class MyApp {
 
       { title: 'Org Chart', component: ReporttemplatePage },
       { title: 'Report Template', component: OrgchartPage },
-      { title: 'Logout', component: LogoutPage }
+      { title: 'Logout', component: LogoutPage },
+      { title: 'Add Org-1', component: AddorgchartonePage },
+      { title: 'Add Org-2', component: AddorgcharttwoPage }
 
     ];
 
