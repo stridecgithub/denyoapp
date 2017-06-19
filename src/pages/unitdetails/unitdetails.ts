@@ -1,6 +1,12 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ServicinginfoPage } from '../servicinginfo/servicinginfo';
+import { UserPage } from '../user/user';
+import { CompanygroupPage } from '../companygroup/companygroup';
+import { MyaccountPage } from '../myaccount/myaccount';
+import { UnitsPage } from '../units/units';
+import { RolePage } from '../role/role';
+import { UnitgroupPage } from '../unitgroup/unitgroup';
 /**
  * Generated class for the UnitdetailsPage page.
  *
@@ -25,9 +31,13 @@ export class UnitdetailsPage {
     gen_status: '',
     nextservicedate: '',
     alarmnotificationto: '',
-    favoriteindication: ''
+    favoriteindication: '',
+    userId: '',
+    loginas: ''
   }
   constructor(public NP: NavParams, public navCtrl: NavController, public navParams: NavParams, public nav: NavController) {
+    this.unitDetailData.loginas = localStorage.getItem("userInfoName");
+    this.unitDetailData.userId = localStorage.getItem("userInfoId");
   }
 
   ionViewDidLoad() {
@@ -60,7 +70,7 @@ export class UnitdetailsPage {
     colorcode = "button" + colorvalincrmentone;
     console.log("Color is" + colorcode);
 
-    if (this.NP.get("record").favorite == 'favorite') {
+    if (this.NP.get("record").favoriteindication == 'favorite') {
       favorite = "favorite";
     }
     else {
@@ -91,5 +101,27 @@ export class UnitdetailsPage {
       record: this.NP.get("record")
     });
   }
+  previous() {
+    this.nav.setRoot(UnitsPage);
+  }
+redirectToUser() {
+    this.nav.setRoot(UserPage);
+  }
 
+  redirectToUnitGroup() {
+    this.nav.setRoot(UnitgroupPage);
+  }
+  redirectToCompanyGroup() {
+    this.nav.setRoot(CompanygroupPage);
+  }
+  redirectToUnits() {
+    this.nav.setRoot(UnitsPage);
+  }
+  redirectToMyAccount() {
+    this.nav.setRoot(MyaccountPage);
+  }
+
+  redirectToRole() {
+    this.nav.setRoot(RolePage);
+  } 
 }

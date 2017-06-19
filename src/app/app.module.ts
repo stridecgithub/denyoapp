@@ -36,6 +36,7 @@ import { AddorgcharttwoPage } from '../pages/addorgcharttwo/addorgcharttwo';
 import { OrgchartPage } from '../pages/orgchart/orgchart';
 import { UnitdetailsPage } from '../pages/unitdetails/unitdetails';
 import { ServicinginfoPage } from '../pages/servicinginfo/servicinginfo';
+import { AddserviceinfoPage } from '../pages/addserviceinfo/addserviceinfo';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { ServicinginfoPage } from '../pages/servicinginfo/servicinginfo';
     AddorgcharttwoPage,
     OrgchartPage,
     UnitdetailsPage,
-    ServicinginfoPage
+    ServicinginfoPage,
+    AddserviceinfoPage
   ],
   imports: [
     BrowserModule,
@@ -120,7 +122,8 @@ import { ServicinginfoPage } from '../pages/servicinginfo/servicinginfo';
     AddorgcharttwoPage,
     OrgchartPage,
     UnitdetailsPage,
-    ServicinginfoPage
+    ServicinginfoPage,
+    AddserviceinfoPage
   ],
   providers: [
     StatusBar,
