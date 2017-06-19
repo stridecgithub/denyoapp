@@ -145,5 +145,51 @@ export class ReporttemplatePage {
     });
     notification.present();
   }
+  doAdd()
+  {
+     this.nav.setRoot(AddreporttemplatePage);
+  }
+  doConfirm(id, item) {
+    console.log("Deleted Id" + id);
+    let confirm = this.alertCtrl.create({
+      message: 'Are you sure you want to delete this unit group?',
+      buttons: [{
+        text: 'Yes',
+        handler: () => {
+          this.deleteEntry(id);
+          for (let q: number = 0; q < this.reportAllLists.length; q++) {
+            if (this.reportAllLists[q] == item) {
+              this.reportAllLists.splice(q, 1);
+            }
+          }
+        }
+      },
+      {
+        text: 'No',
+        handler: () => { }
+      }]
+    });
+    confirm.present();
+  }
+   deleteEntry(recordID) {
+    let
+      //body: string = "key=delete&recordID=" + recordID,
+      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/reporttemplate/" + recordID + "/1/delete";
+    this.http.get(url, options)
+      .subscribe(data => {
+        // If the request was successful notify the user
+        if (data.status === 200) {
+
+          this.sendNotification(`Report Template was successfully deleted`);
+        }
+        // Otherwise let 'em know anyway
+        else {
+          this.sendNotification('Something went wrong!');
+        }
+      });
+  }
 }
 

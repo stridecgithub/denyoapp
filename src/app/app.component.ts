@@ -22,6 +22,7 @@ import { UnitsPage } from '../pages/units/units';
 import { OrgchartPage } from '../pages/orgchart/orgchart';
 import { AddorgchartonePage } from '../pages/addorgchartone/addorgchartone';
 import { AddorgcharttwoPage } from '../pages/addorgcharttwo/addorgcharttwo';
+import { AddreporttemplatePage } from '../pages/addreporttemplate/addreporttemplate';
 @Component({
   templateUrl: 'app.html'
 })
@@ -56,7 +57,8 @@ export class MyApp {
       //{ title: 'Report Template', component: OrgchartPage },
       { title: 'Logout', component: LogoutPage },
       { title: 'Add Org-1', component: AddorgchartonePage },
-      { title: 'Add Org-2', component: AddorgcharttwoPage }
+      { title: 'Add Org-2', component: AddorgcharttwoPage },
+     // { title: 'Add Report Template', component: AddreporttemplatePage}
 
     ];
 
