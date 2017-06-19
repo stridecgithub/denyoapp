@@ -52,8 +52,8 @@ export class MyApp {
       { title: 'My Account', component: MyaccountPage },
       // { title: 'At mentioned Page', component: AtmentionedPage },
 
-      { title: 'Org Chart', component: ReporttemplatePage },
-      { title: 'Report Template', component: OrgchartPage },
+      { title: 'Report Template', component: ReporttemplatePage },
+      //{ title: 'Report Template', component: OrgchartPage },
       { title: 'Logout', component: LogoutPage },
       { title: 'Add Org-1', component: AddorgchartonePage },
       { title: 'Add Org-2', component: AddorgcharttwoPage }

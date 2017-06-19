@@ -37,20 +37,20 @@
   <button class="add-new-btn" (click)="doAdd()">
   	<div class="algn-cent">
     	<ion-icon name="ios-add-circle-outline"></ion-icon>
-        <span>Add New Report</span>
+        <span>Add Report Template</span>
     </div>
   </button>
   <ion-item style="width: 100%; margin: 0; padding-left: 10px; background-color:#ffffff">
     <ion-label>Sort By</ion-label>
     <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="pet" (ionChange)="onSegmentChanged(pet)">
-      <ion-option value="unitgroup_id,asc" selected="true">Unit Group Ascending</ion-option>
-      <ion-option value="unitgroup_id,desc">Unit Group Descending</ion-option>
-      <ion-option value="favorite">Favorite</ion-option>
+      <ion-option value="unitgroup_id,asc" selected="true">Name Ascending</ion-option>
+      <ion-option value="unitgroup_id,desc">Name Descending</ion-option>
+      
     </ion-select>
   </ion-item>
 </ion-header>
 <ion-content padding>
-  <div class="error" *ngIf="totalCount==0">No unit group entries found</div>
+    <div class="error" *ngIf="totalCount==0">No entries found</div>
 
   <ion-refresher (ionRefresh)="doRefresh($event)" *ngIf="totalCount!=0">
     <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
@@ -60,20 +60,20 @@
     <ion-item-sliding *ngFor="let item of reportAllLists;">
 
       <ion-item>
-        <button class="{{item.colorcodeindication}}" style="float: left ;width:8px">
-         
-        </button>
-        <button (click)="favorite(item.unitgroup_id)" class="{{item.favoriteindication}}" style="float: right ;width:50px;height:50px;background-color:#ffffff"></button>
+      
         <div style="overflow: hidden; padding-left: .5em;">
-          <h2><b>{{item.unitgroup_name}}</b>
+          <h2><b>{{item.templatename}}</b>
           </h2>
-          <h2><b>Total Units:{{item.totalunits}}</b></h2>
+          <h2><b>{{item.availableheading}}</b></h2>
 
         </div>
 
 
       </ion-item>
       <ion-item-options>
+        <!--button class="viewcolor" (click)="doEdit(item,'view')">
+                       <ion-icon name="eye" class="icon-size"></ion-icon>
+                    </button-->
         <button class="editcolor" (click)="doEdit(item,'edit')">                      
                         <ion-icon name="create" class="icon-size"></ion-icon>
                     </button>
@@ -86,4 +86,5 @@
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="totalCount!=0">
     <ion-infinite-scroll-content loadingText="Loading More Data"></ion-infinite-scroll-content>
   </ion-infinite-scroll>
+ 
 </ion-content>
