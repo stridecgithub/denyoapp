@@ -39,17 +39,16 @@ export class UnitdetailsPage {
       "E1E1E1"
     ];
     this.pageTitle = 'Unit Details';
-    console.log(JSON.stringify(this.NP.get("record")));
-    let res = this.NP.get("record");
+    console.log(JSON.stringify(this.NP.get("record")));    
     let colorcode;
     let favorite;
-    let index = this.colorListArr.indexOf(res.colorcode); // 1
+    let index = this.colorListArr.indexOf(this.NP.get("record").colorcode); // 1
     console.log("Color Index:" + index);
     let colorvalincrmentone = index + 1;
     colorcode = "button" + colorvalincrmentone;
     console.log("Color is" + colorcode);
 
-    if (res.favorite == 1) {
+    if (this.NP.get("record").favorite == 1) {
       favorite = "favorite";
     }
     else {
@@ -57,22 +56,22 @@ export class UnitdetailsPage {
 
     }
     this.item.push({
-      unit_id: res.unit_id,
-      unitname: res.unitname,
-      location: res.location,
-      projectname: res.projectname,
-      colorcode: res.colorcode,
-      nextservicedate: res.nextservicedate,
+      unit_id: this.NP.get("record").unit_id,
+      unitname: this.NP.get("record").unitname,
+      location: this.NP.get("record").location,
+      projectname: this.NP.get("record").projectname,
+      colorcode: this.NP.get("record").colorcode,
+      nextservicedate: this.NP.get("record").nextservicedate,
       colorcodeindications: colorcode,
-      controllerid: res.controllerid,
-      neaplateno: res.neaplateno,
-      companys_id: res.companys_id,
-      unitgroups_id: res.unitgroups_id,
-      models_id: res.models_id,
-      alarmnotificationto: res.alarmnotificationto,
+      controllerid: this.NP.get("record").controllerid,
+      neaplateno: this.NP.get("record").neaplateno,
+      companys_id: this.NP.get("record").companys_id,
+      unitgroups_id: this.NP.get("record").unitgroups_id,
+      models_id: this.NP.get("record").models_id,
+      alarmnotificationto: this.NP.get("record").alarmnotificationto,
       favoriteindication: favorite
     });
-    console.log("Item Pushed:" + console.log(this.item));
+    console.log("Item Pushed:" + console.log(this.NP.get("record").unit_id));
 
     //console.log("Pushed Item Unit Name:" + console.log(this.item.unitname));
   }
