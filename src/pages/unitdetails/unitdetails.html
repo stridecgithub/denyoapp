@@ -33,34 +33,22 @@
     <ion-buttons end>
       Login As:{{loginas}}
     </ion-buttons>
-  </ion-navbar>
-  <button class="add-new-btn" (click)="doAdd()">
-  	<div class="algn-cent">
-    	<ion-icon name="ios-add-circle-outline"></ion-icon>
-        <span>Add New Unit Group</span>
-    </div>
-  </button>
+  </ion-navbar> 
 </ion-header>
-
-
 <ion-content padding>
   <ion-item>
-    <button class="{{item.colorcodeindications}}" style="float: left ;width:8px;height:100px">
-         
+    <button class="{{unitDetailData.colorcodeindications}}" style="float: left ;width:8px;height:100px">         
         </button>
-    <button (click)="favorite(item.unit_id)" class="{{item.favoriteindication}}" style="float: right ;width:50px;height:50px;background-color:#ffffff"></button>
+    <button class="{{unitDetailData.favoriteindication}}" style="float: right ;width:50px;height:50px;background-color:#ffffff"></button>
     <div style="overflow: hidden; padding-left: .5em;">
-      <h2><b>{{item.unitname}}</b></h2>
-      <h2><b>{{item.projectname}}</b></h2>
-
+      <h2><b>{{unitDetailData.unitname}}</b></h2>
+      <h2><b>{{unitDetailData.projectname}}</b></h2>
     </div>
   </ion-item>
-
-
   <ion-item>
     <div style="overflow: hidden; padding-left: .5em;">
-      <h2><b>Gen Status:</b>{{item.gen_status}}</h2>
-      <h2><b>Next Servicing:</b>{{item.nextservicedate}}</h2>
+      <h2><b>Gen Status:</b>{{unitDetailData.gen_status}}</h2>
+      <h2><b>Next Servicing:</b>{{unitDetailData.nextservicedate}}</h2>
     </div>
   </ion-item>
   <ion-item>
@@ -68,29 +56,18 @@
   <ion-icon name="battery-charging"></ion-icon>
   Engine Details
 </button>
-
     <button ion-button icon-left (click)="servicingInfo()">
-  <ion-icon name="home"></ion-icon>
+  <ion-icon name="information-circle"></ion-icon>
   Servicing Info
 </button>
-
   </ion-item>
-
-
-
-
-
   <ion-item>
-
-
     <button ion-button icon-left>
-  <ion-icon name="home"></ion-icon>
+  <ion-icon name="alarm"></ion-icon>
  Alarm Log
 </button>
-
-
     <button ion-button icon-left>
-  <ion-icon name="home"></ion-icon>
+  <ion-icon name="chatboxes"></ion-icon>
  Events / Comments
 </button>
   </ion-item>

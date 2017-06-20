@@ -16,6 +16,17 @@ export class UnitdetailsPage {
   public pageTitle: string;
   public item = [];
   public colorListArr = [];
+  public unitDetailData: any = {
+    unit_id: '',
+    unitname: '',
+    location: '',
+    projectname: '',
+    colorcode: '',
+    gen_status: '',
+    nextservicedate: '',
+    alarmnotificationto: '',
+    favoriteindication: ''
+  }
   constructor(public NP: NavParams, public navCtrl: NavController, public navParams: NavParams, public nav: NavController) {
   }
 
@@ -39,7 +50,8 @@ export class UnitdetailsPage {
       "E1E1E1"
     ];
     this.pageTitle = 'Unit Details';
-    console.log(JSON.stringify(this.NP.get("record")));    
+    console.log(JSON.stringify(this.NP.get("record")));
+    let editItem = this.NP.get("record");
     let colorcode;
     let favorite;
     let index = this.colorListArr.indexOf(this.NP.get("record").colorcode); // 1
@@ -48,30 +60,29 @@ export class UnitdetailsPage {
     colorcode = "button" + colorvalincrmentone;
     console.log("Color is" + colorcode);
 
-    if (this.NP.get("record").favorite == 1) {
+    if (this.NP.get("record").favorite == 'favorite') {
       favorite = "favorite";
     }
     else {
       favorite = "unfavorite";
 
     }
-    this.item.push({
-      unit_id: this.NP.get("record").unit_id,
-      unitname: this.NP.get("record").unitname,
-      location: this.NP.get("record").location,
-      projectname: this.NP.get("record").projectname,
-      colorcode: this.NP.get("record").colorcode,
-      nextservicedate: this.NP.get("record").nextservicedate,
-      colorcodeindications: colorcode,
-      controllerid: this.NP.get("record").controllerid,
-      neaplateno: this.NP.get("record").neaplateno,
-      companys_id: this.NP.get("record").companys_id,
-      unitgroups_id: this.NP.get("record").unitgroups_id,
-      models_id: this.NP.get("record").models_id,
-      alarmnotificationto: this.NP.get("record").alarmnotificationto,
-      favoriteindication: favorite
-    });
-    console.log("Item Pushed:" + console.log(this.NP.get("record").unit_id));
+
+
+    this.unitDetailData.unit_id = editItem.unit_id;
+    this.unitDetailData.unitname = editItem.unitname;
+    this.unitDetailData.location = editItem.location;
+    this.unitDetailData.projectname = editItem.projectname;
+    this.unitDetailData.colorcodeindications = colorcode;
+    this.unitDetailData.gen_status = editItem.gen_status;
+    this.unitDetailData.nextservicedate = editItem.nextservicedate;
+    this.unitDetailData.alarmnotificationto = editItem.nextservicedate;
+    this.unitDetailData.favoriteindication = favorite;
+
+
+
+    console.log("Color Indication:" + this.unitDetailData.colorcodeindications);
+    console.log("Favorite Indication:" + this.unitDetailData.favoriteindication);
 
     //console.log("Pushed Item Unit Name:" + console.log(this.item.unitname));
   }
