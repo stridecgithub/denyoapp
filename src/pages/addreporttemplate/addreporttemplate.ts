@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, ToastController, AlertController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, ToastController, NavParams } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 import { Http, Headers, RequestOptions } from '@angular/http';
-import { AddunitgroupPage } from '../addunitgroup/addunitgroup';
+//import { AddunitgroupPage } from '../addunitgroup/addunitgroup';
 import { ReporttemplatePage } from '../reporttemplate/reporttemplate';
-import { LoadingController } from 'ionic-angular';
+///import { LoadingController } from 'ionic-angular';
 
 /**
  * Generated class for the AddreporttemplatePage page.
  *
  * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
+ * on Io//nic pages and navigation.
  */
 @IonicPage()
 @Component({
@@ -25,7 +25,12 @@ public template_data=[];
 public getCheckboxData=[];
  public loginas: any;
  public userId: any;
+ public templatename:any;
+ public templatedata:any;
+ public templatedata1=[];
  public form: FormGroup;
+ public selectoption:any;
+  public isEdited: boolean = false;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
 constructor(public nav: NavController,
     public http: Http,
@@ -46,8 +51,15 @@ constructor(public nav: NavController,
     console.log('ionViewDidLoad AddreporttemplatePage');
   }
   ionViewWillEnter()
-  {
-     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+  {  
+    
+     
+      if (this.NP.get("record")) {
+       
+       console.log(this.NP.get("act"));
+      this.isEdited = true;
+      //this.selectoption=true;
+      let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
       url: any = this.apiServiceURL + "/getavailableheading";
@@ -56,32 +68,52 @@ constructor(public nav: NavController,
     this.http.get(url, options)
       .subscribe((data) => {
         res = data.json();
+       
+        console.log(JSON.stringify(res));
+        console.log("2" + res.comm_datas);
+       for (let comm_data in res.comm_datas) {
+        this.template_data = res.comm_datas[comm_data].dates.split(",");
+         for (var i = 0; i < this.template_data.length; i++) {
+                
+                this.items.push({ id: i, name:this.template_data[i]});
+            }
+             this.selectEntry(this.NP.get("record"));
+       }   
+      });
+    
+     // this.pageTitle = 'Edit Company Group';
+      //this.readOnly = false;
+      //this.hideActionButton = true;
+    }
+    else {
+       
+      this.isEdited = false;
+      let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/getavailableheading";
+    let res;
+    console.log(url);
+    this.http.get(url, options)
+      .subscribe((data) => {
+        res = data.json();
+       
         console.log(JSON.stringify(res));
         console.log("2" + res.comm_datas);
        for (let comm_data in res.comm_datas) {
         this.template_data = res.comm_datas[comm_data].dates.split(",");
          for (var i = 0; i < this.template_data.length; i++) {
                 this.items.push({ id: i, name:this.template_data[i]});
+               
             }
-       }
-       
-      
-       
-          
-          //"unitgroup_id":1,"unitgroup_name":"demo unit","colorcode":"FBD75C","remark":"nice","favorite":1,"totalunits":5
-          /*this.reportAllLists = res.unitgroups;
-         
-          console.log("Total Record:`" + this.totalCount);
-          console.log(JSON.stringify(this.reportAllLists));*/
-         
-        
-       
-
+       }   
       });
-      
+     //  this.selectoption=true;
+    }
            
         
   }
+
   getCheckBoxValue(name)
   {
     console.log(name);
@@ -93,6 +125,46 @@ constructor(public nav: NavController,
   }
   saveEntry()
   {
+     if (this.isEdited) {
+      
+    this.updateEntry();
+    }
+    else {
+      this.createEntry();
+    }
+
+  
+  }
+  updateEntry()
+  {
+      console.log("Edit");
+
+  }
+   selectEntry(item) {
+     this.templatedata1 = [this.template_data.length];
+     this.templatename =item.templatename;
+     this.templatedata1 =item.availableheading.split("#");
+     console.log(this.templatedata1[0]);
+     console.log(this.template_data[0]);
+     for(var i = 0 ;i<this.template_data.length;i++)
+     {
+      // console.log(this.template_data[i]);
+       if(this.template_data[i]==this.templatedata1[i])
+       {
+             this.selectoption = true;
+             console.log("true");
+       }
+       else
+       {
+         this.selectoption = false;
+         console.log("false");
+       }
+
+     }
+   }
+  createEntry()
+  {
+
     console.log(JSON.stringify(this.getCheckboxData));
      let templatename: string = this.form.controls["templatename"].value
       let body: string = "is_mobile=1&templatename="+templatename+"&availabledata="+JSON.stringify(this.getCheckboxData),
@@ -131,5 +203,8 @@ constructor(public nav: NavController,
       duration: 3000
     });
     notification.present();
+  }
+   previous() {
+    this.nav.setRoot(ReporttemplatePage);
   }
 }

@@ -4,7 +4,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
 
 import { AddorgcharttwoPage } from '../addorgcharttwo/addorgcharttwo';
-import { UseraccountPage } from '../useraccount/useraccount';
+//import { UseraccountPage } from '../useraccount/useraccount';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { FileChooser } from '@ionic-native/file-chooser';
 
