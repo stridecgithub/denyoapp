@@ -42,38 +42,11 @@
   </button>
 </ion-header>
 
-<ion-content padding  class="ion-content">
+<ion-content padding class="ion-content">
   <div class="error" *ngIf="totalCount==0">No users entries found</div>
-  <!--ion-item id="sortbar"  *ngIf="totalCount!=0">
-    <button *ngIf="sortby==1" clear (click)="doSort('firstname')" >
-      <div class="user-name">User Name</div>
-        <ion-icon *ngIf="ascending==false" ios="md-arrow-dropdown" md="md-arrow-dropdown"></ion-icon>
-        <ion-icon *ngIf="ascending==true" ios="md-arrow-dropup" md="md-arrow-dropup" ></ion-icon>
-    </button>
-    <button *ngIf="sortby!=1" clear (click)="doSort('firstname')" >
-       <div class="user-name">User Name</div>
-        <ion-icon *ngIf="ascending==false" ios="md-arrow-dropdown" md="md-arrow-dropdown" ></ion-icon>
-        <ion-icon *ngIf="ascending==true" ios="md-arrow-dropup" md="md-arrow-dropup" ></ion-icon>
-    </button>
-   
-    <button *ngIf="sortby==2" clear (click)="doSort('firstname')">
-      <div class="company-name">Group Name</div>
-        <ion-icon *ngIf="ascending==false" ios="md-arrow-dropdown" md="md-arrow-dropdown" ></ion-icon>
-        <ion-icon *ngIf="ascending==true" ios="md-arrow-dropup" md="md-arrow-dropup" ></ion-icon>
-    </button>
-    <button *ngIf="sortby!=2" clear (click)="doSort('firstname')" style="position: absolute;
-    color: black;
-    background-color: white;
-    padding: 1px 15px 2px 2px;
-    margin-left: 130px;">
-       <div class="company-name">User Name</div>
-        <ion-icon *ngIf="ascending==false" ios="md-arrow-dropdown" md="md-arrow-dropdown" ></ion-icon>
-        <ion-icon *ngIf="ascending==true" ios="md-arrow-dropup" md="md-arrow-dropup" ></ion-icon>
-    </button>
-  </ion-item-->
   <ion-item style="width: 100%; margin: 0; padding-left: 10px;">
     <ion-label>Sort By</ion-label>
-    <ion-select  style="padding: 1px 1px 6px 1px;" [(ngModel)]="pet" (ionChange)="onSegmentChanged(pet)">
+    <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="pet" (ionChange)="onSegmentChanged(pet)">
       <ion-option value="unitname,asc" selected="true">Unit Name Ascending</ion-option>
       <ion-option value="unitname,desc">Unit Name Descending</ion-option>
       <ion-option value="companygroup_name,asc">Group Asc</ion-option>
@@ -86,18 +59,18 @@
     </ion-refresher-content>
   </ion-refresher>
   <ion-list *ngIf="totalCount!=0">
-    <ion-item-sliding *ngFor="let item of reportAllLists;">
+    <ion-item-sliding *ngFor="let item of reportAllLists;" (click)="doDetails(item)">
       <ion-item>
-         <button class="{{item.colorcodeindications}}" style="float: left ;width:8px;height:100px">
+        <button class="{{item.colorcodeindications}}" style="float: left ;width:8px;height:100px">
          
         </button>
         <button (click)="favorite(item.unit_id)" class="{{item.favoriteindication}}" style="float: right ;width:50px;height:50px;background-color:#ffffff"></button>
-         <div style="overflow: hidden; padding-left: .5em;">
-        <h2><b>{{item.unitname}}</b></h2>
-        <h2><b>{{item.projectname}}</b></h2>
-        <h2><b>Gen Status:</b>{{item.gen_status}}</h2>
-        <h2><b>Next Servicing:</b>{{item.nextservicedate}}</h2>
-         </div>
+        <div style="overflow: hidden; padding-left: .5em;">
+          <h2><b>{{item.unitname}}</b></h2>
+          <h2><b>{{item.projectname}}</b></h2>
+          <h2><b>Gen Status:</b>{{item.gen_status}}</h2>
+          <h2><b>Next Servicing:</b>{{item.nextservicedate}}</h2>
+        </div>
       </ion-item>
       <ion-item-options>
         <!--button class="viewcolor" (click)="doEdit(item,'view')">
@@ -118,7 +91,7 @@
 </ion-content>
 <ion-footer color="bluedark">
   <ion-toolbar color="bluedark">
-    <button ion-button icon-only  (click)="redirectToCompanyGroup()" clear>
+    <button ion-button icon-only (click)="redirectToCompanyGroup()" clear>
 <ion-icon name="home" class="footer-icon"></ion-icon>
 </button>
     <button ion-button icon-only (click)="redirectToUser()" clear>

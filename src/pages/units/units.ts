@@ -11,6 +11,7 @@ import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
 import { CompanygroupPage } from '../companygroup/companygroup';
 import { RolePage } from '../role/role';
+import { UnitdetailsPage } from '../unitdetails/unitdetails';
 /**
  * Generated class for the UserPage page.
  *
@@ -188,6 +189,12 @@ export class UnitsPage {
         act: act
       });
     }
+  }
+
+  doDetails(item){
+     this.nav.setRoot(UnitdetailsPage, {
+        record: item
+      });
   }
 
 
