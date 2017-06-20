@@ -191,5 +191,13 @@ export class ReporttemplatePage {
         }
       });
   }
+   doEdit(item, act) {
+    if (act == 'edit') {
+      this.nav.setRoot(AddreporttemplatePage, {
+        record: item,
+        act: act
+      });
+    }
+  }
 }
 
