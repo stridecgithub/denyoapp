@@ -14,6 +14,7 @@ import { DatePicker } from '@ionic-native/date-picker';
 import * as $ from 'jquery'
 import "slick-carousel";
 import 'rxjs/add/operator/map';
+import { Http, Headers, RequestOptions } from '@angular/http';
 /**
  * Generated class for the AddserviceinfoPage page.
  *
@@ -32,14 +33,17 @@ export class AddserviceinfoPage {
   isReadyToSave: boolean;
   public photoInfo = [];
   public addedImgListsArray = [];
-
+  public addedImgLists = [];
   progress: number;
+  public recordID;
   public isUploadedProcessing: boolean = false;
   public isProgress = false;
   public isUploaded: boolean = true;
   item: any;
+  public isEdited: boolean = false;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   form: FormGroup;
+  public addedAttachList;
   public unitDetailData: any = {
     userId: '',
     loginas: '',
@@ -51,7 +55,7 @@ export class AddserviceinfoPage {
     addedImgLists2: ''
   }
   public hideActionButton = true;
-  constructor(private datePicker: DatePicker, public nav: NavController, public toastCtrl: ToastController, public navParams: NavParams, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera, private filechooser: FileChooser,
+  constructor(public http: Http, private datePicker: DatePicker, public nav: NavController, public toastCtrl: ToastController, public navParams: NavParams, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera, private filechooser: FileChooser,
     private transfer: Transfer,
     private file: File, private ngZone: NgZone) {
     this.unitDetailData.loginas = localStorage.getItem("userInfoName");
@@ -94,104 +98,44 @@ export class AddserviceinfoPage {
     })
   }
 
-  getPicture() {
-    if (Camera['installed']()) {
-      this.camera.getPicture({
-        quality: 25,
-        destinationType: this.camera.DestinationType.FILE_URI,
-        sourceType: this.camera.PictureSourceType.CAMERA,
-        allowEdit: true
-        /*quality: 25,
-         destinationType: this.camera.DestinationType.DATA_URL,
-         targetWidth: 96,
-         targetHeight: 96,
-         encodingType: this.camera.EncodingType.JPEG,
-         mediaType: this.camera.MediaType.PICTURE
-         , allowEdit: true*/
-
-        /*quality: 25,
-        destinationType: this.camera.DestinationType.FILE_URI,
-        sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-        allowEdit: true,
-        encodingType: this.camera.EncodingType.JPEG,
-        saveToPhotoAlbum: true*/
-        /*
-        quality: 25,
-        destinationType: this.camera.DestinationType.FILE_URI,
-        sourceType: this.camera.PictureSourceType.CAMERA,
-        allowEdit: true*/
-      }).then((data) => {
-        console.log("Image Data:" + data);
-        //this.unitDetailData.addedImgLists = data;
-        this.addedImgListsArray.push(
-          {
-            imgData: data,
-            imgSrc: "data:image/jpg;base64," + data
-          }
-        );
-
-        this.form.patchValue({ 'profilePic': 'data:image/jpg;base64,' + data });
-        this.uploadToServer(data);
-      }, (err) => {
-        console.log('Unable to take photo');
-      })
-    } else {
-      alert(console.log(Error));
-      this.fileInput.nativeElement.click();
-    }
-  }
-
-
-
-  doUploadPhoto(val) {
-    /*const options: CameraOptions = {
-      quality: 75,
-      destinationType: this.camera.DestinationType.FILE_URI,
-      targetWidth: 200,
-      targetHeight: 200,
-      sourceType: 1
-    }*/
+  takePictureURL() {
+    this.isUploadedProcessing = true;
     const options: CameraOptions = {
       quality: 100,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
-      allowEdit: true,
+      destinationType: this.camera.DestinationType.FILE_URI
     }
     this.camera.getPicture(options).then((imageData) => {
-
-      if (val == 1) {
-        this.unitDetailData.addedImgLists1 = imageData;
-      }
-      if (val == 2) {
-        this.unitDetailData.addedImgLists2 = imageData;
-      }
-
-      this.uploadToServer(imageData);
-      //this.unitDetailData.addedImgLists = imageData;
-
-      this.isUploadedProcessing = false;
+      console.log(imageData);
+      this.fileTrans(imageData);
+      this.addedAttachList = imageData;
     }, (err) => {
       // Handle error
       this.sendNotification(err);
     });
-
   }
-  uploadToServer(path) {
+
+  sendNotification(message): void {
+    let notification = this.toastCtrl.create({
+      message: message,
+      duration: 3000
+    });
+    notification.present();
+  }
+
+  fileTrans(path) {
+    /* let loading = this.loadingCtrl.create({
+         content: 'Uploading processing Please wait...'
+     });
+     loading.present();*/
+    let fileName = path.substr(path.lastIndexOf('/') + 1);
     const fileTransfer: TransferObject = this.transfer.create();
     let currentName = path.replace(/^.*[\\\/]/, '');
-    // this.photo = currentName;
+    console.log("File Name is:" + currentName);
+
 
     let d = new Date(),
       n = d.getTime(),
       newFileName = "stridecdev_" + n + ".jpg";
-
-
-
-
-    /*var d = new Date(),
-        n = d.getTime(),
-        newFileName = n + ".jpg";*/
 
     let options: FileUploadOptions = {
       fileKey: 'file',
@@ -206,25 +150,30 @@ export class AddserviceinfoPage {
     fileTransfer.onProgress(this.onProgress);
     fileTransfer.upload(path, this.apiServiceURL + '/upload.php', options)
       .then((data) => {
+
+        console.log("UPLOAD SUCCESS:" + data.response);
         let successData = JSON.parse(data.response);
-        this.photoInfo.push({
-          photo: successData
+        this.sendNotification("UPLOAD SUCCESS:");
+        console.log('http:' + '//' + successData.baseURL + '/' + successData.target_dir + '/' + successData.fileName);
+
+        //<img src="{{addedImgLists[i].imgSrc}}" width="75%" height="75%" />
+        let imgSrc;
+
+        imgSrc = this.apiServiceURL + "/staffphotos" + '/' + newFileName;
+        this.addedImgLists.push({
+          imgSrc: imgSrc,
+          imgDateTime: new Date(),
+          fileName: newFileName
         });
 
-
-        this.addedImgListsArray.push(
-          {
-            imgData: path,
-            imgDateTime: new Date(),
-            fileName: newFileName
-          }
-        );
-
-        //this.sendNotification("User photo uploaded successfully");
+        //loading.dismiss();
+        if (this.addedImgLists.length > 9) {
+          this.isUploaded = false;
+        }
         this.progress += 5;
         this.isProgress = false;
-        // this.isUploadedProcessing = false;
-        // return false;
+        this.isUploadedProcessing = false;
+        return false;
 
 
 
@@ -233,10 +182,11 @@ export class AddserviceinfoPage {
         // Save in Backend and MysQL
       }, (err) => {
         //loading.dismiss();
-        console.log("Upload Error:");
+        console.log("Upload Error:" + JSON.stringify(err));
         this.sendNotification("Upload Error:" + JSON.stringify(err));
       })
   }
+
   onProgress = (progressEvent: ProgressEvent): void => {
     this.ngZone.run(() => {
       if (progressEvent.lengthComputable) {
@@ -247,79 +197,92 @@ export class AddserviceinfoPage {
     });
   }
 
-  sendNotification(message): void {
-    let notification = this.toastCtrl.create({
-      message: message,
-      duration: 3000
-    });
-    notification.present();
+  saveEntry() {
+    console.log(this.form.controls);
+    if (this.isUploadedProcessing == false) {
+      /* let name: string = this.form.controls["lat"].value,
+         description: string = this.form.controls["long"].value,
+         photos: object = this.addedImgLists;*/
+
+
+      let serviced_datetime: string = this.form.controls["serviced_datetime"].value,
+        service_remark: string = this.form.controls["service_remark"].value,
+        next_service_date: string = this.form.controls["next_service_date"].value,
+        serviced_by: string = this.form.controls["serviced_by"].value,
+        is_request: string = this.form.controls["is_request"].value,
+        service_subject: string = this.form.controls["service_subject"].value;
+      console.log("serviced_datetime:" + serviced_datetime);
+      console.log("service_remark:" + service_remark);
+      console.log("serviced_by:" + serviced_by);
+      console.log("is_request:" + is_request);
+      console.log("service_subject:" + service_subject);
+      console.log("nextServiceDate:" + this.unitDetailData.nextServiceDate);
+      console.log("Image Data" + JSON.stringify(this.addedImgLists));
+
+      if (this.isEdited) {
+        this.updateEntry(name, serviced_datetime, service_remark);
+      }
+      else {
+        this.createEntry(name, serviced_datetime, service_remark);
+      }
+    }
   }
 
-  processWebImage(event) {
-    let reader = new FileReader();
-    reader.onload = (readerEvent) => {
-      let imageData = (readerEvent.target as any).result;
-      this.form.patchValue({ 'profilePic': imageData });
-    };
-    reader.readAsDataURL(event.target.files[0]);
+  // Save a new record that has been added to the page's HTML form
+  // Use angular's http post method to submit the record data
+  // to our remote PHP script (note the body variable we have created which
+  // supplies a variable of key with a value of create followed by the key/value pairs
+  // for the record data
+  createEntry(lat, long, photos) {
+    let body: string = "key=create&lat=" + lat + "&long=" + long + "&photos=" + photos,
+      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "upload_photo.php";
+
+    this.http.post(url, body, options)
+      .subscribe((data) => {
+        // If the request was successful notify the user
+        if (data.status === 200) {
+
+          this.sendNotification(`Congratulations the technology: ${name} was successfully added`);
+        }
+        // Otherwise let 'em know anyway
+        else {
+          this.sendNotification('Something went wrong!');
+        }
+      });
   }
 
-  getProfileImageStyle() {
-    //return 'url(' + this.form.controls['profilePic'].value + ')'
+
+
+  // Update an existing record that has been edited in the page's HTML form
+  // Use angular's http post method to submit the record data
+  // to our remote PHP script (note the body variable we have created which
+  // supplies a variable of key with a value of update followed by the key/value pairs
+  // for the record data
+  updateEntry(lat, long, photos) {
+    let body: string = "key=update&lat=" + name + "&long=" + long + "&photos=" + photos + "&recordID=" + this.recordID,
+      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "manage-location.php";
+
+    this.http.post(url, body, options)
+      .subscribe(data => {
+        console.log(data);
+        // If the request was successful notify the user
+        if (data.status === 200) {
+
+          this.sendNotification(`Congratulations the technology: ${name} was successfully updated`);
+        }
+        // Otherwise let 'em know anyway
+        else {
+          this.sendNotification('Something went wrong!');
+        }
+      });
   }
 
-  /**
-   * The user cancelled, so we dismiss without sending data back.
-   */
-  cancel() {
-    this.viewCtrl.dismiss();
-  }
-
-  /**
-   * The user is done and wants to create the item, so return it
-   * back to the presenter.
-   */
-  done() {
-    if (!this.form.valid) { return; }
-    this.viewCtrl.dismiss(this.form.value);
-  }
-
-  redirectToUser() {
-    this.nav.setRoot(UserPage);
-  }
-  redirectToUnitGroup() {
-    this.nav.setRoot(UnitgroupPage);
-  }
-  redirectToUnits() {
-    this.nav.setRoot(UnitsPage);
-  }
-  redirectToMyAccount() {
-    this.nav.setRoot(MyaccountPage);
-  }
-  redirectToRole() {
-    this.nav.setRoot(RolePage);
-  }
-
-  address1get(hashtag) {
-    console.log(hashtag);
-    this.unitDetailData.hashtag = hashtag;
-  }
-
-  createInfo() {
-    let serviced_datetime: string = this.form.controls["serviced_datetime"].value,
-      service_remark: string = this.form.controls["service_remark"].value,
-      next_service_date: string = this.form.controls["next_service_date"].value,
-      serviced_by: string = this.form.controls["serviced_by"].value,
-      is_request: string = this.form.controls["is_request"].value,
-      service_subject: string = this.form.controls["service_subject"].value;
-    console.log("serviced_datetime:" + serviced_datetime);
-    console.log("service_remark:" + service_remark);
-    console.log("serviced_by:" + serviced_by);
-    console.log("is_request:" + is_request);
-    console.log("service_subject:" + service_subject);
-    console.log("nextServiceDate:" + this.unitDetailData.nextServiceDate);
-    console.log("Image Data" + JSON.stringify(this.addedImgListsArray));
-  }
   getNextDate(val) {
     console.log('1' + val);
     let date;
@@ -349,6 +312,8 @@ export class AddserviceinfoPage {
       err => console.log('Error occurred while getting date: ', err)
       );
   }
-
-
+  address1get(hashtag) {
+    console.log(hashtag);
+    this.unitDetailData.hashtag = hashtag;
+  }
 }

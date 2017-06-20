@@ -30,51 +30,13 @@
     </ion-buttons>
   </ion-navbar>
 </ion-header>
-
-
 <ion-content padding>
-
-
-
-  <!--a style="color:white" href="#" (click)="doUploadPhoto(1)" *ngIf="!unitDetailData.addedImgLists1">
-    <ion-icon name="camera" style="color:white"></ion-icon>
-  </a>
-
-
-  <img src="data:image/jpg;base64,{{unitDetailData.addedImgLists1}}" *ngIf="unitDetailData.addedImgLists1" width="175" height="75"
-  />
-
-
-
-
-
-
-
-
-  <a style="color:white" href="#" (click)="doUploadPhoto(2)" *ngIf="!unitDetailData.addedImgLists2">
-    <ion-icon name="camera" style="color:white"></ion-icon>
-  </a>
-
-
-  <img src="data:image/jpg;base64,{{unitDetailData.addedImgLists2}}" width="175" height="75" /-->
-
-
-  <form *ngIf="form" [formGroup]="form" (ngSubmit)="createInfo()">
-
-
-    <!--div class="profile-image-wrapper" (click)="getPicture()">
-      <div class="profile-image-placeholder" *ngIf="!this.form.controls.profilePic.value">
-        <ion-icon name="add"></ion-icon>
-        <div>
-          Choose Upload Image
-        </div>
-      </div>
-      <div class="profile-image" [style.backgroundImage]="getProfileImageStyle()" *ngIf="this.form.controls.profilePic.value"></div>
-    </div-->
+  <form [formGroup]="form" (ngSubmit)="saveEntry()" enctype='application/x-www-form-urlencoded' method="post">
     <ion-list>
+
+
       <ion-item>
         <ion-label stacked>Servicing Date <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
-        <!--ion-input type="text" [disabled]="readOnly" formControlName="serviced_datetime" [(ngModel)]="serviced_datetime"></ion-input-->
         <ion-datetime pickerFormat="MMM DD YYYY h:mm A" displayFormat="MM/DD/YYYY h:mm A" formControlName="serviced_datetime" [(ngModel)]="serviced_datetime"></ion-datetime>
       </ion-item>
       <ion-item>
@@ -87,10 +49,6 @@
         <ion-input type="text" [disabled]="readOnly" formControlName="service_subject" [(ngModel)]="service_subject"></ion-input>
       </ion-item>
 
-      <!--ion-item>
-        <ion-label stacked>Remark <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
-        <ion-input type="text" [disabled]="readOnly" formControlName="service_remark" [(ngModel)]="service_remark"></ion-input>
-      </ion-item-->
       <b>Remark</b> <span class="mandatory" *ngIf="hideActionButton">*</span>
       <input type="text" (keyup)=address1get($event.target.value); id="example1" class="form-control" rows="8" [disabled]="readOnly"
         formControlName="service_remark" rows="6" [(ngModel)]="service_remark">
@@ -99,52 +57,17 @@
 
       <p><b>Upload Images</b></p>
       <p>Maximum Number of upload photos:10</p>
-      <!--input type="file" #fileInput style="visibility: hidden; height: 0px" name="files[]" (change)="processWebImage($event)" /-->
 
-      <!--div class="profile-image-placeholder" (click)="doUploadPhoto()">
-          <ion-icon name="add"></ion-icon>
-          <div>
-            Choose Upload Image
-          </div>
-        </div-->
+      <button (click)="takePictureURL()" *ngIf="isUploaded" ion-button color="primary" text-center block>Upload Photos</button>
+      <progress value="{{progress}}" max="100" *ngIf="isProgress"> </progress>
+      <span *ngIf="isProgress" style="padding:2px">{{progress}}%</span>
 
-
-
-
-      <!--p>
-          <progress value="{{progress}}" max="100" *ngIf="isProgress"> </progress>
-          <span *ngIf="isProgress" style="padding:2px">{{progress}}%</span>
-        </p-->
-
-
-
-
-      <!--div class="profile-image-wrapper" (click)="doUploadPhoto()">
-          <div class="profile-image-placeholder">
-            <ion-icon name="add"></ion-icon>
-          </div>
-        </div>
-
-        <div class="profile-image-wrapper" (click)="doUploadPhoto()">
-          <div class="profile-image-placeholder">
-            <ion-icon name="add"></ion-icon>
-          </div>
-        </div>
-
-        <ion-item *ngFor="let item of addedImgLists; let i = index" [attr.data-index]="i">
-          <ion-avatar item-start>
-            <img src="{{addedImgLists[i].imgSrc}}" />
-          </ion-avatar>
-        </ion-item-->
-
-
-
-
-
-
-
-
-
+      <div *ngIf="addedImgLists.length>0">Picture List:</div>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-3 *ngFor="let item of addedImgLists; let i = index" [attr.data-index]="i"><img src="{{addedImgLists[i].imgSrc}}" width="175" height="75" /></ion-col>
+        </ion-row>
+      </ion-grid>
 
 
       <div style="clear:both"><br></div>
@@ -186,7 +109,6 @@
     </ion-list>
   </form>
 </ion-content>
-
 <ion-footer color="bluedark">
   <ion-toolbar color="bluedark">
     <button ion-button icon-only clear>
