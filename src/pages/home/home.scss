@@ -1,4 +1,12 @@
 page-home {
+     .ion-content{
+    background-color:white;
+}
+
+.footer-icon{
+    color:#fff;
+    font-size:30px;    
+}   
 .header-md::after,
 .tabs-md[tabsPlacement="top"] > .tabbar::after,
 .footer-md::before,

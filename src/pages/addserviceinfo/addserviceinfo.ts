@@ -10,6 +10,7 @@ import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
 import { UnitsPage } from '../units/units';
 import { RolePage } from '../role/role';
+import { DatePicker } from '@ionic-native/date-picker';
 import * as $ from 'jquery'
 import "slick-carousel";
 import 'rxjs/add/operator/map';
@@ -43,10 +44,11 @@ export class AddserviceinfoPage {
     pageTitle: '',
     getremark: '',
     addedImgLists: '',
-    serviced_by: ''
+    serviced_by: '',
+    nextServiceDate: ''
   }
   public hideActionButton = true;
-  constructor(public nav: NavController, public toastCtrl: ToastController, public navParams: NavParams, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera, private filechooser: FileChooser,
+  constructor(private datePicker: DatePicker, public nav: NavController, public toastCtrl: ToastController, public navParams: NavParams, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera, private filechooser: FileChooser,
     private transfer: Transfer,
     private file: File, private ngZone: NgZone) {
     this.unitDetailData.loginas = localStorage.getItem("userInfoName");
@@ -55,7 +57,7 @@ export class AddserviceinfoPage {
     this.unitDetailData.pageTitle = 'Servicing Act';
     this.form = formBuilder.group({
       profilePic: [''],
-      serviced_datetime: [''],
+      serviced_datetime: ['', Validators.required],
       service_subject: [''],
       service_remark: [''],
       serviced_by: [''],
@@ -148,7 +150,6 @@ export class AddserviceinfoPage {
 
   }
   uploadToServer(path) {
-    let fileName = path.substr(path.lastIndexOf('/') + 1);
     const fileTransfer: TransferObject = this.transfer.create();
     let currentName = path.replace(/^.*[\\\/]/, '');
     // this.photo = currentName;
@@ -285,5 +286,34 @@ export class AddserviceinfoPage {
     console.log(is_request);
     console.log(service_subject);
   }
+  getNextDate(vl) {
+    let date
+    if (vl > 0) {
+      date = this.addDays(vl);
+    } else {
+      this.showDatePicker();
+    }
+    this.unitDetailData.nextServiceDate = date;
+  }
+
+  addDays(days) {
+    let result = new Date();
+    result.setDate(result.getDate() + days);
+    return result;
+  }
+  showDatePicker() {
+    this.datePicker.show({
+      date: new Date(),
+      mode: 'date',
+      androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
+    }).then(
+      date => {
+        this.unitDetailData.nextServiceDate = date;
+        console.log('Got date: ', date)
+      },
+      err => console.log('Error occurred while getting date: ', err)
+      );
+  }
+
 
 }

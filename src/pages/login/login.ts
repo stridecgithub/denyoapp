@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 //import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { TabsPage } from '../tabs/tabs';
+import { HomePage } from '../home/home';
 import { LoadingController } from 'ionic-angular';
 import { Http, Headers, RequestOptions } from '@angular/http';
 /**
@@ -26,7 +26,7 @@ export class LoginPage {
     this.userInf = localStorage.getItem("userInfoId");
     console.log("UserId Localtorage" + this.userInf);
     if (this.userInf != 'null' && this.userInf != null && this.userInf != '') {
-      this.navCtrl.push(TabsPage);
+      this.navCtrl.setRoot(HomePage);
     }
     // Create form builder validation rules
     this.form = fb.group({
@@ -72,7 +72,7 @@ export class LoginPage {
           localStorage.setItem("userInfoEmail", res['staffdetails'][0].email);
           localStorage.setItem("userInfoCompanyId", res['staffdetails'][0].company_id);
           this.presentLoading(0);
-          this.navCtrl.push(TabsPage);
+          this.navCtrl.setRoot(HomePage);
         }
 
       });

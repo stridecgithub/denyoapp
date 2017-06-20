@@ -33,7 +33,7 @@
     <ion-buttons end>
       Login As:{{loginas}}
     </ion-buttons>
-  </ion-navbar> 
+  </ion-navbar>
 </ion-header>
 <ion-content padding>
   <ion-item>
@@ -61,6 +61,10 @@
   Servicing Info
 </button>
   </ion-item>
+
+  <ion-item>
+    {{unitDetailData.htmlContent}}
+  </ion-item>
   <ion-item>
     <button ion-button icon-left>
   <ion-icon name="alarm"></ion-icon>
@@ -75,7 +79,7 @@
 
 <ion-footer color="bluedark">
   <ion-toolbar color="bluedark">
-    <button ion-button icon-only clear  (click)="redirectToCompanyGroup()">
+    <button ion-button icon-only clear (click)="redirectToCompanyGroup()">
 <ion-icon name="home" class="footer-icon"></ion-icon>
 </button>
     <button ion-button icon-only (click)="redirectToUser()" clear>

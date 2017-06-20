@@ -97,15 +97,7 @@
           <span *ngIf="isProgress" style="padding:2px">{{progress}}%</span>
         </p>
 
-        <!--a (click)="doUploadPhoto()" href="#" *ngIf="!addedImgLists">
-          <ion-icon name="camera" style="font-size: 75pt;color:#009ACD"></ion-icon>
-        </a-->
-
-        <!--div class="profile-image" [style.backgroundImage]="getProfileImageStyle()" *ngIf="unitDetailData.addedImgLists"></div-->
-
-
-
-
+        ]
 
         <ion-item>
           <ion-avatar item-start>
@@ -120,14 +112,28 @@
         <ion-label stacked>Next Service Date <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
         <!--ion-input type="text" [disabled]="readOnly" formControlName="next_service_date" [(ngModel)]="next_service_date"></ion-input-->
 
-        <div>
-          <ion-badge item-end>2 Weeks</ion-badge>
-          <ion-badge item-end>1 Months</ion-badge>
-          <ion-badge item-end>3 Months</ion-badge>
-          <ion-badge item-end>
-            <ion-icon name="calendar"></ion-icon>
-          </ion-badge>
-        </div>
+        
+          <!--div>
+            <a href="#" (click)="getNextDate(14)">
+             2 Weeks
+            </a>
+          </div>
+          <div>
+            <a href="#" (click)="getNextDate(30)">
+              1 Monthsv</div>
+          </a>
+          <div>
+            <a href="#" (click)="getNextDate(90)">
+              3 Months
+            </a>
+          </div>
+          <div>
+            <a href="#" (click)="getNextDate(0)">
+              <ion-icon name="calendar"></ion-icon>
+            </a>
+          </div-->
+        
+        <div>Next Service Date:{{nextServiceDate}}</div>
 
         <ion-item>
           <ion-label stacked>Request Denyo Service Support <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>

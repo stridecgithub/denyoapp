@@ -7,6 +7,7 @@ import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitsPage } from '../units/units';
 import { RolePage } from '../role/role';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
+import { Http, Headers, RequestOptions } from '@angular/http';
 /**
  * Generated class for the UnitdetailsPage page.
  *
@@ -20,8 +21,10 @@ import { UnitgroupPage } from '../unitgroup/unitgroup';
 })
 export class UnitdetailsPage {
   public pageTitle: string;
+  
   public item = [];
   public colorListArr = [];
+  private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   public unitDetailData: any = {
     unit_id: '',
     unitname: '',
@@ -33,9 +36,10 @@ export class UnitdetailsPage {
     alarmnotificationto: '',
     favoriteindication: '',
     userId: '',
-    loginas: ''
+    loginas: '',
+    htmlContent:''
   }
-  constructor(public NP: NavParams, public navCtrl: NavController, public navParams: NavParams, public nav: NavController) {
+  constructor(public http: Http,public NP: NavParams, public navCtrl: NavController, public navParams: NavParams, public nav: NavController) {
     this.unitDetailData.loginas = localStorage.getItem("userInfoName");
     this.unitDetailData.userId = localStorage.getItem("userInfoId");
   }
@@ -95,6 +99,18 @@ export class UnitdetailsPage {
     console.log("Favorite Indication:" + this.unitDetailData.favoriteindication);
 
     //console.log("Pushed Item Unit Name:" + console.log(this.item.unitname));
+
+
+    let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/2/1/unitdetails";
+   
+    console.log(url);
+    this.http.get(url, options)
+      .subscribe((data) => {
+        this.unitDetailData.htmlContent = data;
+      });
   }
   servicingInfo() {
     this.nav.setRoot(ServicinginfoPage, {
@@ -104,7 +120,7 @@ export class UnitdetailsPage {
   previous() {
     this.nav.setRoot(UnitsPage);
   }
-redirectToUser() {
+  redirectToUser() {
     this.nav.setRoot(UserPage);
   }
 
@@ -123,5 +139,5 @@ redirectToUser() {
 
   redirectToRole() {
     this.nav.setRoot(RolePage);
-  } 
+  }
 }
