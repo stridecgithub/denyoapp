@@ -56,8 +56,8 @@ export class MyApp {
       { title: 'Report Template', component: ReporttemplatePage },
       //{ title: 'Report Template', component: OrgchartPage },
       { title: 'Logout', component: LogoutPage },
-      { title: 'Add Org-1', component: AddorgchartonePage },
-      { title: 'Add Org-2', component: AddorgcharttwoPage },
+      { title: 'Add Org', component: AddorgchartonePage },
+    //  { title: 'Add Org-2', component: AddorgcharttwoPage },
      // { title: 'Add Report Template', component: AddreporttemplatePage}
 
     ];
