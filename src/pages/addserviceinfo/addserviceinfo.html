@@ -100,7 +100,7 @@
 
       <ion-item>
         <ion-label stacked>Request Denyo Service Support <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
-        <ion-checkbox [disabled]="readOnly" formControlName="is_request" [(ngModel)]="is_request" value="1"></ion-checkbox>
+        <ion-checkbox [disabled]="readOnly" formControlName="is_request" [(ngModel)]="is_request" checked="true"></ion-checkbox>
       </ion-item>
 
       <ion-item *ngIf="hideActionButton">

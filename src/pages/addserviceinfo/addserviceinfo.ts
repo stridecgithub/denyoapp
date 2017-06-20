@@ -220,10 +220,10 @@ export class AddserviceinfoPage {
       console.log("Image Data" + JSON.stringify(this.addedImgLists));
 
       if (this.isEdited) {
-        this.updateEntry(name, serviced_datetime, service_remark);
+        this.updateEntry(serviced_datetime, service_remark, next_service_date, serviced_by, is_request, service_subject, this.addedImgLists, this.unitDetailData.hashtag, nextServiceDate);
       }
       else {
-        this.createEntry(name, serviced_datetime, service_remark);
+        this.createEntry(serviced_datetime, service_remark, next_service_date, serviced_by, is_request, service_subject, this.addedImgLists, this.unitDetailData.hashtag, nextServiceDate);
       }
     }
   }
@@ -233,19 +233,34 @@ export class AddserviceinfoPage {
   // to our remote PHP script (note the body variable we have created which
   // supplies a variable of key with a value of create followed by the key/value pairs
   // for the record data
-  createEntry(lat, long, photos) {
-    let body: string = "key=create&lat=" + lat + "&long=" + long + "&photos=" + photos,
+  createEntry(serviced_datetime, service_remark, next_service_date, serviced_by, is_request, service_subject, addedImgLists, remarkget, nextServiceDate) {
+    let body: string = "is_mobile=1" +
+      "&serviced_datetime=" + serviced_datetime +
+      "&service_remark=" + service_remark +
+      "&next_service_date=" + next_service_date +
+      "&serviced_by=" + serviced_by +
+      "&is_request=" + is_request +
+      "&service_subject=" + service_subject +
+      "&remarkget=" + remarkget +
+      "&uploadInfo=" + JSON.stringify(this.addedImgLists) +
+      //"&contact_number=" + this.contact_number +
+      //"&contact_name=" + this.contact_name +
+      "&nextServiceDate=" + nextServiceDate,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "upload_photo.php";
+      url: any = this.apiServiceURL + "/service/store";
+    console.log(url);
+    console.log(body);
 
     this.http.post(url, body, options)
       .subscribe((data) => {
+        //console.log("Response Success:" + JSON.stringify(data.json()));
         // If the request was successful notify the user
         if (data.status === 200) {
 
-          this.sendNotification(`Congratulations the technology: ${name} was successfully added`);
+          this.sendNotification(`Units created was successfully added`);
+          this.nav.setRoot(UnitsPage);
         }
         // Otherwise let 'em know anyway
         else {
@@ -261,20 +276,34 @@ export class AddserviceinfoPage {
   // to our remote PHP script (note the body variable we have created which
   // supplies a variable of key with a value of update followed by the key/value pairs
   // for the record data
-  updateEntry(lat, long, photos) {
-    let body: string = "key=update&lat=" + name + "&long=" + long + "&photos=" + photos + "&recordID=" + this.recordID,
+  updateEntry(serviced_datetime, service_remark, next_service_date, serviced_by, is_request, service_subject, addedImgLists, remarkget, nextServiceDate) {
+    let body: string = "is_mobile=1&unit_id=" + this.recordID +
+      "&serviced_datetime=" + serviced_datetime +
+      "&service_remark=" + service_remark +
+      "&next_service_date=" + next_service_date +
+      "&serviced_by=" + serviced_by +
+      "&is_request=" + is_request +
+      "&service_subject=" + service_subject +
+      "&remarkget=" + remarkget +
+      "&uploadInfo=" + JSON.stringify(this.addedImgLists) +
+      //"&contact_number=" + this.contact_number +
+      //"&contact_name=" + this.contact_name +
+      "&nextServiceDate=" + nextServiceDate,
+
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "manage-location.php";
-
+      url: any = this.apiServiceURL + "/service/update";
+    console.log(url);
+    console.log(body);
     this.http.post(url, body, options)
       .subscribe(data => {
         console.log(data);
         // If the request was successful notify the user
         if (data.status === 200) {
 
-          this.sendNotification(`Congratulations the technology: ${name} was successfully updated`);
+          this.sendNotification(`User created was successfully updated`);
+          //this.nav.setRoot(UnitsPage);
         }
         // Otherwise let 'em know anyway
         else {
