@@ -213,18 +213,13 @@ export class AddorgcharttwoPage {
       "&contact_number=" + this.contact +
       "&createdby=" + this.createdby +
       "&updatedby=" + this.createdby +
-      "&username=" + this.username +
-      "&password=" + this.password +
-      "&role_id=" + this.role +
-      "&personalhashtag=" + this.hashtag +
-      "&report_to=" + this.report_to +
       "&company_id=" + this.company_group +
       "&job_position=" + this.job_position,
 
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/staff/update";
+      url: any = this.apiServiceURL + "/orgchart/update";
     console.log(url);
     console.log(body);
     this.http.post(url, body, options)
@@ -233,8 +228,8 @@ export class AddorgcharttwoPage {
         // If the request was successful notify the user
         if (data.status === 200) {
           this.hideForm = true;
-          this.sendNotification(`User created was successfully updated`);
-          this.navCtrl.setRoot(UserPage);
+          this.sendNotification(`successfully updated`);
+          this.navCtrl.setRoot(HomePage);
         }
         // Otherwise let 'em know anyway
         else {
