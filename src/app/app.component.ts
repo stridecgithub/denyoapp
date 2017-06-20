@@ -20,8 +20,8 @@ import { App } from 'ionic-angular';
 //import { AtmentionedPage } from '../pages/atmentioned/atmentioned';
 import { UnitsPage } from '../pages/units/units';
 //import { OrgchartPage } from '../pages/orgchart/orgchart';
-import { AddorgchartonePage } from '../pages/addorgchartone/addorgchartone';
-import { AddorgcharttwoPage } from '../pages/addorgcharttwo/addorgcharttwo';
+//import { AddorgchartonePage } from '../pages/addorgchartone/addorgchartone';
+//import { AddorgcharttwoPage } from '../pages/addorgcharttwo/addorgcharttwo';
 //import { AddreporttemplatePage } from '../pages/addreporttemplate/addreporttemplate';
 @Component({
   templateUrl: 'app.html'
@@ -49,14 +49,14 @@ export class MyApp {
       //{ title: 'Add Unit Group', component: AddunitgroupPage },
       { title: 'Unit Group', component: UnitgroupPage },
       { title: 'Units', component: UnitsPage },
-      { title: 'Role', component: RolePage },
+      //{ title: 'Role', component: RolePage },
       { title: 'My Account', component: MyaccountPage },
       // { title: 'At mentioned Page', component: AtmentionedPage },
 
       { title: 'Report Template', component: ReporttemplatePage },
       //{ title: 'Report Template', component: OrgchartPage },
       { title: 'Logout', component: LogoutPage },
-      { title: 'Add Org', component: AddorgchartonePage },
+     // { title: 'Add Org', component: AddorgchartonePage },
     //  { title: 'Add Org-2', component: AddorgcharttwoPage },
      // { title: 'Add Report Template', component: AddreporttemplatePage}
 

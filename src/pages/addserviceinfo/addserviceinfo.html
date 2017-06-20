@@ -33,6 +33,32 @@
 
 
 <ion-content padding>
+
+
+
+  <!--a style="color:white" href="#" (click)="doUploadPhoto(1)" *ngIf="!unitDetailData.addedImgLists1">
+    <ion-icon name="camera" style="color:white"></ion-icon>
+  </a>
+
+
+  <img src="data:image/jpg;base64,{{unitDetailData.addedImgLists1}}" *ngIf="unitDetailData.addedImgLists1" width="175" height="75"
+  />
+
+
+
+
+
+
+
+
+  <a style="color:white" href="#" (click)="doUploadPhoto(2)" *ngIf="!unitDetailData.addedImgLists2">
+    <ion-icon name="camera" style="color:white"></ion-icon>
+  </a>
+
+
+  <img src="data:image/jpg;base64,{{unitDetailData.addedImgLists2}}" width="175" height="75" /-->
+
+
   <form *ngIf="form" [formGroup]="form" (ngSubmit)="createInfo()">
 
 
@@ -72,10 +98,10 @@
 
 
       <p><b>Upload Images</b></p>
-      <p>Maximum Number of upload photos:10
-        <!--input type="file" #fileInput style="visibility: hidden; height: 0px" name="files[]" (change)="processWebImage($event)" /-->
+      <p>Maximum Number of upload photos:10</p>
+      <!--input type="file" #fileInput style="visibility: hidden; height: 0px" name="files[]" (change)="processWebImage($event)" /-->
 
-        <!--div class="profile-image-placeholder" (click)="doUploadPhoto()">
+      <!--div class="profile-image-placeholder" (click)="doUploadPhoto()">
           <ion-icon name="add"></ion-icon>
           <div>
             Choose Upload Image
@@ -85,7 +111,7 @@
 
 
 
-        <!--p>
+      <!--p>
           <progress value="{{progress}}" max="100" *ngIf="isProgress"> </progress>
           <span *ngIf="isProgress" style="padding:2px">{{progress}}%</span>
         </p-->
@@ -93,7 +119,7 @@
 
 
 
-        <div class="profile-image-wrapper" (click)="doUploadPhoto()">
+      <!--div class="profile-image-wrapper" (click)="doUploadPhoto()">
           <div class="profile-image-placeholder">
             <ion-icon name="add"></ion-icon>
           </div>
@@ -109,42 +135,54 @@
           <ion-avatar item-start>
             <img src="{{addedImgLists[i].imgSrc}}" />
           </ion-avatar>
-        </ion-item>
-
-
-        <div>
-          <ion-badge item-end><a href="#" (click)="getNextDate(14)" style="color:white;font-weight:bold">2 <br>Weeks</a></ion-badge>
-          <ion-badge item-end><a href="#" (click)="getNextDate(30)" style="color:white;font-weight:bold">1 <br> Months</a></ion-badge>
-          <ion-badge item-end><a href="#" (click)="getNextDate(90)" style="color:white;font-weight:bold">3 <br> Months</a></ion-badge>
-          <ion-badge item-end>
-            <a href="#" (click)="getNextDate(0)" style="color:white;font-weight:bold">
-              <ion-icon name="calendar"></ion-icon>
-            </a>
-          </ion-badge>
-        </div>
-
-
-        <div>Next Service Date:{{unitDetailData.nextServiceDate}}</div>
+        </ion-item-->
 
 
 
 
-        <ion-item>
-          <!--Basic: auto-select the icon based on the platform -->
-          <ion-icon name="calendar" (click)="getNextDate(0)"></ion-icon>
 
-          <!-- Advanced: explicity set the icon for each platform -->
-          <ion-icon ios="ios-calendar" md="md-calendar" (click)="getNextDate(0)"></ion-icon>
-        </ion-item>
 
-        <ion-item>
-          <ion-label stacked>Request Denyo Service Support <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
-          <ion-checkbox [disabled]="readOnly" formControlName="is_request" [(ngModel)]="is_request" value="1"></ion-checkbox>
-        </ion-item>
 
-        <ion-item *ngIf="hideActionButton">
-          <button ion-button color="primary" text-center block [disabled]="!form.valid">Complete and Save</button>
-        </ion-item>
+
+
+
+
+      <div style="clear:both"><br></div>
+
+
+      <div>
+        <ion-badge item-end><a href="#" (click)="getNextDate(14)" style="color:white;font-weight:bold">2 <br>Weeks</a></ion-badge>
+        <ion-badge item-end><a href="#" (click)="getNextDate(30)" style="color:white;font-weight:bold">1 <br> Months</a></ion-badge>
+        <ion-badge item-end><a href="#" (click)="getNextDate(90)" style="color:white;font-weight:bold">3 <br> Months</a></ion-badge>
+        <ion-badge item-end>
+          <a href="#" (click)="getNextDate(0)" style="color:white;font-weight:bold">
+            <ion-icon name="calendar"></ion-icon>
+          </a>
+        </ion-badge>
+      </div>
+      <div style="clear:both"><br></div>
+
+      <div>Next Service Date:{{unitDetailData.nextServiceDate}}</div>
+
+
+
+
+      <ion-item>
+        <!--Basic: auto-select the icon based on the platform -->
+        <ion-icon name="calendar" (click)="getNextDate(0)"></ion-icon>
+
+        <!-- Advanced: explicity set the icon for each platform -->
+        <ion-icon ios="ios-calendar" md="md-calendar" (click)="getNextDate(0)"></ion-icon>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>Request Denyo Service Support <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
+        <ion-checkbox [disabled]="readOnly" formControlName="is_request" [(ngModel)]="is_request" value="1"></ion-checkbox>
+      </ion-item>
+
+      <ion-item *ngIf="hideActionButton">
+        <button ion-button color="primary" text-center block [disabled]="!form.valid">Complete and Save</button>
+      </ion-item>
     </ion-list>
   </form>
 </ion-content>

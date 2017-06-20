@@ -40,7 +40,8 @@ export class UnitdetailsPage {
     favoriteindication: '',
     userId: '',
     loginas: '',
-    htmlContent: ''
+    htmlContent: '',
+    iframeURL: ''
   }
   constructor(private httpdata: HTTP, public http: Http, public NP: NavParams, public navCtrl: NavController, public navParams: NavParams, public nav: NavController) {
     this.unitDetailData.loginas = localStorage.getItem("userInfoName");
@@ -95,44 +96,32 @@ export class UnitdetailsPage {
     this.unitDetailData.nextservicedate = editItem.nextservicedate;
     this.unitDetailData.alarmnotificationto = editItem.nextservicedate;
     this.unitDetailData.favoriteindication = favorite;
+    console.log("Iframe URL:" + this.unitDetailData.iframeURL);
+    //this.unitDetailData.iframeURL = this.apiServiceURL + "/" + editItem.unit_id + "/1/unitdetails";
+    this.unitDetailData.iframeURL = "http://denyoappv2.stridecdev.com/";
 
 
-
-    console.log("Color Indication:" + this.unitDetailData.colorcodeindications);
-    console.log("Favorite Indication:" + this.unitDetailData.favoriteindication);
 
     //console.log("Pushed Item Unit Name:" + console.log(this.item.unitname));
 
-    /*
-        let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
-          headers: any = new Headers({ 'Content-Type': type }),
-          options: any = new RequestOptions({ headers: headers }),
-          url: any = this.apiServiceURL + "/2/1/unitdetails";
-    
-        console.log(url);
-        this.http.get(url, options)
-          .subscribe((data) => {
-            this.unitDetailData.htmlContent = JSON.stringify(data);
-           // this.unitDetailData.htmlContent = data;
-          });
-          */
 
 
-    this.httpdata.get(this.apiServiceURL + "/2/1/unitdetails", {}, {})
-      .then(data => {
-        this.unitDetailData.htmlContent = data.data;
-        console.log(data.status);
-        console.log(data.data); // data received by server
-        console.log(data.headers);
 
-      })
-      .catch(error => {
-
-        console.log(error.status);
-        console.log(error.error); // error message as string
-        console.log(error.headers);
-
-      });
+    /* this.httpdata.get(this.apiServiceURL + "/2/1/unitdetails", {}, {})
+       .then(data => {
+         this.unitDetailData.htmlContent = data.data;
+         console.log(data.status);
+         console.log(data.data); // data received by server
+         console.log(data.headers);
+ 
+       })
+       .catch(error => {
+ 
+         console.log(error.status);
+         console.log(error.error); // error message as string
+         console.log(error.headers);
+ 
+       });*/
     $(".serv-info").click(function () {
       alert('Serve info calling...');
     })

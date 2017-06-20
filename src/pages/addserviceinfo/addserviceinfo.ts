@@ -31,7 +31,8 @@ export class AddserviceinfoPage {
 
   isReadyToSave: boolean;
   public photoInfo = [];
-  public addedImgLists = [];
+  public addedImgListsArray = [];
+
   progress: number;
   public isUploadedProcessing: boolean = false;
   public isProgress = false;
@@ -45,7 +46,9 @@ export class AddserviceinfoPage {
     pageTitle: '',
     getremark: '',
     serviced_by: '',
-    nextServiceDate: ''
+    nextServiceDate: '',
+    addedImgLists1: '',
+    addedImgLists2: ''
   }
   public hideActionButton = true;
   constructor(private datePicker: DatePicker, public nav: NavController, public toastCtrl: ToastController, public navParams: NavParams, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera, private filechooser: FileChooser,
@@ -120,7 +123,7 @@ export class AddserviceinfoPage {
       }).then((data) => {
         console.log("Image Data:" + data);
         //this.unitDetailData.addedImgLists = data;
-        this.addedImgLists.push(
+        this.addedImgListsArray.push(
           {
             imgData: data,
             imgSrc: "data:image/jpg;base64," + data
@@ -140,7 +143,7 @@ export class AddserviceinfoPage {
 
 
 
-  doUploadPhoto() {
+  doUploadPhoto(val) {
     /*const options: CameraOptions = {
       quality: 75,
       destinationType: this.camera.DestinationType.FILE_URI,
@@ -156,13 +159,14 @@ export class AddserviceinfoPage {
       allowEdit: true,
     }
     this.camera.getPicture(options).then((imageData) => {
-      console.log(imageData);
-      this.addedImgLists.push(
-        {
-          imgData: imageData,
-          imgSrc: "data:image/jpg;base64," + imageData
-        }
-      );
+
+      if (val == 1) {
+        this.unitDetailData.addedImgLists1 = imageData;
+      }
+      if (val == 2) {
+        this.unitDetailData.addedImgLists2 = imageData;
+      }
+
       this.uploadToServer(imageData);
       //this.unitDetailData.addedImgLists = imageData;
 
@@ -180,10 +184,9 @@ export class AddserviceinfoPage {
 
     let d = new Date(),
       n = d.getTime(),
-      newFileName = n + ".jpg";
+      newFileName = "stridecdev_" + n + ".jpg";
 
-    console.log("File Name is:" + currentName);
-    console.log("File New Name is:" + newFileName);
+
 
 
     /*var d = new Date(),
@@ -203,12 +206,20 @@ export class AddserviceinfoPage {
     fileTransfer.onProgress(this.onProgress);
     fileTransfer.upload(path, this.apiServiceURL + '/upload.php', options)
       .then((data) => {
-        console.log(JSON.stringify(data));
-        console.log("UPLOAD SUCCESS:" + data.response);
         let successData = JSON.parse(data.response);
         this.photoInfo.push({
           photo: successData
         });
+
+
+        this.addedImgListsArray.push(
+          {
+            imgData: path,
+            imgDateTime: new Date(),
+            fileName: newFileName
+          }
+        );
+
         //this.sendNotification("User photo uploaded successfully");
         this.progress += 5;
         this.isProgress = false;
@@ -245,13 +256,11 @@ export class AddserviceinfoPage {
   }
 
   processWebImage(event) {
-    console.log("Image Event Result:" + JSON.stringify(event.target.files));
     let reader = new FileReader();
     reader.onload = (readerEvent) => {
       let imageData = (readerEvent.target as any).result;
       this.form.patchValue({ 'profilePic': imageData });
     };
-    console.log(JSON.stringify(event.target.files));
     reader.readAsDataURL(event.target.files[0]);
   }
 
@@ -303,12 +312,13 @@ export class AddserviceinfoPage {
       serviced_by: string = this.form.controls["serviced_by"].value,
       is_request: string = this.form.controls["is_request"].value,
       service_subject: string = this.form.controls["service_subject"].value;
-    console.log(serviced_datetime);
-    console.log(service_remark);
-    console.log(next_service_date);
-    console.log(serviced_by);
-    console.log(is_request);
-    console.log(service_subject);
+    console.log("serviced_datetime:" + serviced_datetime);
+    console.log("service_remark:" + service_remark);
+    console.log("serviced_by:" + serviced_by);
+    console.log("is_request:" + is_request);
+    console.log("service_subject:" + service_subject);
+    console.log("nextServiceDate:" + this.unitDetailData.nextServiceDate);
+    console.log("Image Data" + JSON.stringify(this.addedImgListsArray));
   }
   getNextDate(val) {
     console.log('1' + val);

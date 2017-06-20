@@ -51,6 +51,7 @@
       <h2><b>Next Servicing:</b>{{unitDetailData.nextservicedate}}</h2>
     </div>
   </ion-item>
+  <iframe src="http://denyoappv2.stridecdev.com/2/1/unitdetails" height="350" frameborder="0"></iframe>
   <ion-item>
     <button ion-button icon-left>
   <ion-icon name="battery-charging"></ion-icon>
@@ -73,11 +74,6 @@
  Events / Comments
 </button>
   </ion-item>
-
-  <ion-item>
-    <div [innerHTML]="unitDetailData.htmlContent"></div>
-  </ion-item>
-  <span class="large" ng-bind-html="unitDetailData.htmlContent"></span>
 </ion-content>
 
 
