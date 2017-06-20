@@ -86,7 +86,7 @@ constructor(public nav: NavController,
   {
     console.log(name);
     this.getCheckboxData.push({
-      name:name
+      availabledata:name
       
     })
     console.log(JSON.stringify(this.getCheckboxData));
@@ -112,6 +112,7 @@ constructor(public nav: NavController,
          // this.hideForm = true;
           if (res.msg[0].result > 0) {
             this.sendNotification(res.msg[0].result);
+            this.nav.setRoot(ReporttemplatePage);
           } else {
             this.sendNotification(res.msg[0].result);
             this.nav.setRoot(ReporttemplatePage);
