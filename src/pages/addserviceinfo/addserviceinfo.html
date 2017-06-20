@@ -6,7 +6,7 @@
 -->
 <ion-header>
   <ion-navbar color="bluedark">
-    <ion-title class="page-title">{{pageTitle}}</ion-title>
+    <ion-title class="page-title">{{unitDetailData.pageTitle}}</ion-title>
     <ion-buttons start>
       <button ion-button menuToggle class="menu-toggle">
       <ion-icon name="menu"></ion-icon>
@@ -26,16 +26,17 @@
 </button>
     </ion-buttons>
     <ion-buttons end>
-      Login As:{{loginas}}
+      Login As:{{unitDetailData.loginas}}
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
-  <form *ngIf="form" [formGroup]="form" (ngSubmit)="createItem()">
-    <input type="file" #fileInput style="visibility: hidden; height: 0px" name="files[]" (change)="processWebImage($event)" />
-    <div class="profile-image-wrapper" (click)="getPicture()">
+  <form *ngIf="form" [formGroup]="form" (ngSubmit)="createInfo()">
+
+
+    <!--div class="profile-image-wrapper" (click)="getPicture()">
       <div class="profile-image-placeholder" *ngIf="!this.form.controls.profilePic.value">
         <ion-icon name="add"></ion-icon>
         <div>
@@ -43,15 +44,119 @@
         </div>
       </div>
       <div class="profile-image" [style.backgroundImage]="getProfileImageStyle()" *ngIf="this.form.controls.profilePic.value"></div>
-    </div>
+    </div-->
     <ion-list>
       <ion-item>
         <ion-label stacked>Servicing Date <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
-        <ion-input type="text" [disabled]="readOnly" formControlName="serviced_datetime" [(ngModel)]="serviced_datetime"></ion-input>
+        <!--ion-input type="text" [disabled]="readOnly" formControlName="serviced_datetime" [(ngModel)]="serviced_datetime"></ion-input-->
+        <ion-datetime pickerFormat="MMM DD YYYY h:mm A" displayFormat="MM/DD/YYYY h:mm A" formControlName="serviced_datetime" [(ngModel)]="serviced_datetime"></ion-datetime>
       </ion-item>
       <ion-item>
         <ion-label stacked>Serviced By <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
-        <ion-input type="text" [disabled]="readOnly" formControlName="serviced_by" [(ngModel)]="serviced_by"></ion-input>
+        <ion-input type="text" [disabled]=true formControlName="serviced_by" [(ngModel)]="unitDetailData.serviced_by"></ion-input>
       </ion-item>
+
+      <ion-item>
+        <ion-label stacked>Subject <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
+        <ion-input type="text" [disabled]="readOnly" formControlName="service_subject" [(ngModel)]="service_subject"></ion-input>
+      </ion-item>
+
+      <!--ion-item>
+        <ion-label stacked>Remark <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
+        <ion-input type="text" [disabled]="readOnly" formControlName="service_remark" [(ngModel)]="service_remark"></ion-input>
+      </ion-item-->
+      <b>Remark</b> <span class="mandatory" *ngIf="hideActionButton">*</span>
+      <input type="text" (keyup)=address1get($event.target.value); id="example1" class="form-control" rows="8" [disabled]="readOnly"
+        formControlName="service_remark" rows="6" [(ngModel)]="service_remark">
+
+
+
+      <p><b>Upload Images</b></p>
+      <p>Maximum Number of upload photos:10
+        <!--input type="file" #fileInput style="visibility: hidden; height: 0px" name="files[]" (change)="processWebImage($event)" /-->
+
+        <!--div class="profile-image-placeholder" (click)="doUploadPhoto()">
+          <ion-icon name="add"></ion-icon>
+          <div>
+            Choose Upload Image
+          </div>
+        </div-->
+
+
+        <div class="profile-image-wrapper" (click)="doUploadPhoto()">
+          <div class="profile-image-placeholder">
+            <ion-icon name="add"></ion-icon>
+            <div>
+              Choose Upload Image
+            </div>
+          </div>
+        </div>
+
+        <p>
+          <progress value="{{progress}}" max="100" *ngIf="isProgress"> </progress>
+          <span *ngIf="isProgress" style="padding:2px">{{progress}}%</span>
+        </p>
+
+        <!--a (click)="doUploadPhoto()" href="#" *ngIf="!addedImgLists">
+          <ion-icon name="camera" style="font-size: 75pt;color:#009ACD"></ion-icon>
+        </a-->
+
+        <!--div class="profile-image" [style.backgroundImage]="getProfileImageStyle()" *ngIf="unitDetailData.addedImgLists"></div-->
+
+
+
+
+
+        <ion-item>
+          <ion-avatar item-start>
+            <a href="#" *ngIf="unitDetailData.addedImgLists">
+          <img class="profile-image" [style.backgroundImage]="getProfileImageStyle()" src="{{unitDetailData.addedImgLists}}" *ngIf="unitDetailData.addedImgLists" />
+           </a>
+          </ion-avatar>
+        </ion-item>
+
+
+
+        <ion-label stacked>Next Service Date <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
+        <!--ion-input type="text" [disabled]="readOnly" formControlName="next_service_date" [(ngModel)]="next_service_date"></ion-input-->
+
+        <div>
+          <ion-badge item-end>2 Weeks</ion-badge>
+          <ion-badge item-end>1 Months</ion-badge>
+          <ion-badge item-end>3 Months</ion-badge>
+          <ion-badge item-end>
+            <ion-icon name="calendar"></ion-icon>
+          </ion-badge>
+        </div>
+
+        <ion-item>
+          <ion-label stacked>Request Denyo Service Support <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
+          <ion-checkbox [disabled]="readOnly" formControlName="is_request" [(ngModel)]="is_request" value="1"></ion-checkbox>
+        </ion-item>
+
+        <ion-item *ngIf="hideActionButton">
+          <button ion-button color="primary" text-center block [disabled]="!form.valid">Complete and Save</button>
+        </ion-item>
     </ion-list>
   </form>
+</ion-content>
+
+<ion-footer color="bluedark">
+  <ion-toolbar color="bluedark">
+    <button ion-button icon-only clear>
+<ion-icon name="home" class="footer-icon"></ion-icon>
+</button>
+    <button ion-button icon-only (click)="redirectToUser()" clear>
+<ion-icon name="contacts" class="footer-icon"></ion-icon>
+</button>
+    <button ion-button icon-only (click)="redirectToUnitGroup()" clear>
+<ion-icon name="chatboxes" class="footer-icon"></ion-icon>
+</button>
+    <button ion-button icon-only (click)="redirectToUnits()" clear>
+<ion-icon name="camera" class="footer-icon"></ion-icon>
+</button>
+    <button ion-button icon-only (click)="redirectToRole()" clear>
+<ion-icon name="settings" class="footer-icon"></ion-icon>
+</button>
+  </ion-toolbar>
+</ion-footer>

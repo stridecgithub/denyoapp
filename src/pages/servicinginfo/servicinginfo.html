@@ -34,13 +34,13 @@
       Login As:{{loginas}}
     </ion-buttons>
   </ion-navbar>
-  <button class="add-new-btn"  small (click)="doAdd()">
+  <button class="add-new-btn" small (click)="doAdd()">
   	<div class="algn-cent">
     	<ion-icon name="ios-add-circle-outline"></ion-icon>
         <span>Servicing Action</span>
     </div>
  </button>
-  <button class="add-new-btn"  small (click)="doRequest()">
+  <button class="add-new-btn" small (click)="doRequest()">
   	<div class="algn-cent">
     	<ion-icon name="paper-plane"></ion-icon>
         <span>Request Support</span>
@@ -53,3 +53,23 @@
 <ion-content padding>
 
 </ion-content>
+
+<ion-footer color="bluedark">
+  <ion-toolbar color="bluedark">
+    <button ion-button icon-only clear>
+<ion-icon name="home" class="footer-icon"></ion-icon>
+</button>
+    <button ion-button icon-only (click)="redirectToUser()" clear>
+<ion-icon name="contacts" class="footer-icon"></ion-icon>
+</button>
+    <button ion-button icon-only (click)="redirectToUnitGroup()" clear>
+<ion-icon name="chatboxes" class="footer-icon"></ion-icon>
+</button>
+    <button ion-button icon-only (click)="redirectToUnits()" clear>
+<ion-icon name="camera" class="footer-icon"></ion-icon>
+</button>
+    <button ion-button icon-only (click)="redirectToRole()" clear>
+<ion-icon name="settings" class="footer-icon"></ion-icon>
+</button>
+  </ion-toolbar>
+</ion-footer>
