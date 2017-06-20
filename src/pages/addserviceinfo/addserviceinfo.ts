@@ -95,12 +95,17 @@ export class AddserviceinfoPage {
     if (Camera['installed']()) {
       this.camera.getPicture({
         quality: 25,
-        destinationType: this.camera.DestinationType.DATA_URL,
-        targetWidth: 96,
-        targetHeight: 96,
-        encodingType: this.camera.EncodingType.JPEG,
-        mediaType: this.camera.MediaType.PICTURE
-        , allowEdit: true
+        destinationType: this.camera.DestinationType.FILE_URI,
+        sourceType: this.camera.PictureSourceType.CAMERA,
+        allowEdit: true
+        /*quality: 25,
+         destinationType: this.camera.DestinationType.DATA_URL,
+         targetWidth: 96,
+         targetHeight: 96,
+         encodingType: this.camera.EncodingType.JPEG,
+         mediaType: this.camera.MediaType.PICTURE
+         , allowEdit: true*/
+
         /*quality: 25,
         destinationType: this.camera.DestinationType.FILE_URI,
         sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
