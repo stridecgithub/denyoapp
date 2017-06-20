@@ -91,57 +91,42 @@
         </p-->
 
 
-        <ion-item *ngFor="let item of addedImgLists; let i = index" [attr.data-index]="i">
-          <ion-avatar item-start>
-            <img class="profile-image" [style.backgroundImage]="getProfileImageStyle()" src="{{addedImgLists[i].imgSrc}}" />
-          </ion-avatar>
-        </ion-item>
+
 
         <div class="profile-image-wrapper" (click)="doUploadPhoto()">
           <div class="profile-image-placeholder">
             <ion-icon name="add"></ion-icon>
-            <div>
-              Choose Upload Image
-            </div>
           </div>
         </div>
 
-        <ion-label stacked>Next Service Date <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
-        <!--ion-input type="text" [disabled]="readOnly" formControlName="next_service_date" [(ngModel)]="next_service_date"></ion-input-->
-
-
-
-        <a href="#" (click)="getNextDate(14)">2 Weeks</a>
-        <a href="#" (click)="getNextDate(30)">1 Months</a>
-        <a href="#" (click)="getNextDate(90)">3 Months</a>
-        <!--ion-icon name="calendar"  (click)="getNextDate(0)"></ion-icon-->
-        <a href="#" (click)="getNextDate(0)">
-          <ion-icon name="calendar"></ion-icon>
-        </a>
-        <!--div>
-            <a href="#" (click)="getNextDate(14)">
-             2 Weeks
-            </a>
+        <div class="profile-image-wrapper" (click)="doUploadPhoto()">
+          <div class="profile-image-placeholder">
+            <ion-icon name="add"></ion-icon>
           </div>
-          <div>
-            <a href="#" (click)="getNextDate(30)">
-              1 Monthsv</div>
-          </a>
-          <div>
-            <a href="#" (click)="getNextDate(90)">
-              3 Months
-            </a>
-          </div>
-          <div>
-            <a href="#" (click)="getNextDate(0)">
+        </div>
+
+        <ion-item *ngFor="let item of addedImgLists; let i = index" [attr.data-index]="i">
+          <ion-avatar item-start>
+            <img src="{{addedImgLists[i].imgSrc}}" />
+          </ion-avatar>
+        </ion-item>
+
+
+        <div>
+          <ion-badge item-end><a href="#" (click)="getNextDate(14)" style="color:white;font-weight:bold">2 <br>Weeks</a></ion-badge>
+          <ion-badge item-end><a href="#" (click)="getNextDate(30)" style="color:white;font-weight:bold">1 <br> Months</a></ion-badge>
+          <ion-badge item-end><a href="#" (click)="getNextDate(90)" style="color:white;font-weight:bold">3 <br> Months</a></ion-badge>
+          <ion-badge item-end>
+            <a href="#" (click)="getNextDate(0)" style="color:white;font-weight:bold">
               <ion-icon name="calendar"></ion-icon>
             </a>
-          </div-->
-
-
+          </ion-badge>
+        </div>
 
 
         <div>Next Service Date:{{unitDetailData.nextServiceDate}}</div>
+
+
 
 
         <ion-item>
