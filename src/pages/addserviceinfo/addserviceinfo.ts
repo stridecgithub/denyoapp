@@ -24,13 +24,14 @@ import 'rxjs/add/operator/map';
 @Component({
   selector: 'page-addserviceinfo',
   templateUrl: 'addserviceinfo.html',
-  providers: [Camera, FileChooser, Transfer, File]
+  providers: [Camera, FileChooser, Transfer, File, DatePicker]
 })
 export class AddserviceinfoPage {
   @ViewChild('fileInput') fileInput;
 
   isReadyToSave: boolean;
   public photoInfo = [];
+  public addedImgLists = [];
   progress: number;
   public isUploadedProcessing: boolean = false;
   public isProgress = false;
@@ -43,7 +44,6 @@ export class AddserviceinfoPage {
     loginas: '',
     pageTitle: '',
     getremark: '',
-    addedImgLists: '',
     serviced_by: '',
     nextServiceDate: ''
   }
@@ -114,7 +114,14 @@ export class AddserviceinfoPage {
         allowEdit: true*/
       }).then((data) => {
         console.log("Image Data:" + data);
-        this.unitDetailData.addedImgLists = data;
+        //this.unitDetailData.addedImgLists = data;
+        this.addedImgLists.push(
+          {
+            imgData: data,
+            imgSrc: "data:image/jpg;base64," + data
+          }
+        );
+
         this.form.patchValue({ 'profilePic': 'data:image/jpg;base64,' + data });
         this.uploadToServer(data);
       }, (err) => {
@@ -130,18 +137,31 @@ export class AddserviceinfoPage {
 
   doUploadPhoto() {
 
-    const options: CameraOptions = {
+    /*const options: CameraOptions = {
       quality: 75,
       destinationType: this.camera.DestinationType.FILE_URI,
       targetWidth: 200,
       targetHeight: 200,
       sourceType: 1
+    }*/
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      allowEdit: true,
     }
     this.camera.getPicture(options).then((imageData) => {
       console.log(imageData);
-      localStorage.setItem("userPhotoFile", imageData);
+      this.addedImgLists.push(
+        {
+          imgData: imageData,
+          imgSrc: "data:image/jpg;base64," + imageData
+        }
+      );
       this.uploadToServer(imageData);
-      this.unitDetailData.addedImgLists = imageData;
+      //this.unitDetailData.addedImgLists = imageData;
+
       this.isUploadedProcessing = false;
     }, (err) => {
       // Handle error
@@ -286,10 +306,11 @@ export class AddserviceinfoPage {
     console.log(is_request);
     console.log(service_subject);
   }
-  getNextDate(vl) {
-    let date
-    if (vl > 0) {
-      date = this.addDays(vl);
+  getNextDate(val) {
+    console.log('1' + val);
+    let date;
+    if (val > 0) {
+      date = this.addDays(val);
     } else {
       this.showDatePicker();
     }

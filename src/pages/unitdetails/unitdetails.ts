@@ -21,7 +21,7 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 })
 export class UnitdetailsPage {
   public pageTitle: string;
-  
+
   public item = [];
   public colorListArr = [];
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
@@ -37,9 +37,9 @@ export class UnitdetailsPage {
     favoriteindication: '',
     userId: '',
     loginas: '',
-    htmlContent:''
+    htmlContent: ''
   }
-  constructor(public http: Http,public NP: NavParams, public navCtrl: NavController, public navParams: NavParams, public nav: NavController) {
+  constructor(public http: Http, public NP: NavParams, public navCtrl: NavController, public navParams: NavParams, public nav: NavController) {
     this.unitDetailData.loginas = localStorage.getItem("userInfoName");
     this.unitDetailData.userId = localStorage.getItem("userInfoId");
   }
@@ -105,11 +105,12 @@ export class UnitdetailsPage {
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
       url: any = this.apiServiceURL + "/2/1/unitdetails";
-   
+
     console.log(url);
     this.http.get(url, options)
       .subscribe((data) => {
-        this.unitDetailData.htmlContent = data;
+        //this.unitDetailData.htmlContent = JSON.stringify(data);
+        this.unitDetailData.htmlContent = data.json();
       });
   }
   servicingInfo() {
