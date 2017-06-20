@@ -62,9 +62,7 @@
 </button>
   </ion-item>
 
-  <ion-item>
-    {{unitDetailData.htmlContent}}
-  </ion-item>
+
   <ion-item>
     <button ion-button icon-left>
   <ion-icon name="alarm"></ion-icon>
@@ -75,8 +73,17 @@
  Events / Comments
 </button>
   </ion-item>
+
+  <ion-item>
+    <div [innerHTML]="unitDetailData.htmlContent"></div>
+  </ion-item>
+  <span class="large" ng-bind-html="unitDetailData.htmlContent"></span>
 </ion-content>
 
+
+<!--span class="large" [inner-html]="item.TextWithHtmlTags"></span>
+
+<span class="large" inner-html="{{item.TextWithHtmlTags}}"></span-->
 <ion-footer color="bluedark">
   <ion-toolbar color="bluedark">
     <button ion-button icon-only clear (click)="redirectToCompanyGroup()">

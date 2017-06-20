@@ -83,6 +83,20 @@
         </div-->
 
 
+
+
+        <!--p>
+          <progress value="{{progress}}" max="100" *ngIf="isProgress"> </progress>
+          <span *ngIf="isProgress" style="padding:2px">{{progress}}%</span>
+        </p-->
+
+
+        <ion-item *ngFor="let item of addedImgLists; let i = index" [attr.data-index]="i">
+          <ion-avatar item-start>
+            <img class="profile-image" [style.backgroundImage]="getProfileImageStyle()" src="{{addedImgLists[i].imgSrc}}" />
+          </ion-avatar>
+        </ion-item>
+
         <div class="profile-image-wrapper" (click)="doUploadPhoto()">
           <div class="profile-image-placeholder">
             <ion-icon name="add"></ion-icon>
@@ -92,41 +106,18 @@
           </div>
         </div>
 
-        <p>
-          <progress value="{{progress}}" max="100" *ngIf="isProgress"> </progress>
-          <span *ngIf="isProgress" style="padding:2px">{{progress}}%</span>
-        </p>
-
-
-        <ion-item  *ngFor="let item of addedImgLists; let i = index" [attr.data-index]="i">
-          <ion-avatar item-start>           
-          <img class="profile-image" [style.backgroundImage]="getProfileImageStyle()" src="{{addedImgLists[i].imgSrc}}"/>        
-          </ion-avatar>
-        </ion-item>
-
-
-
         <ion-label stacked>Next Service Date <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
         <!--ion-input type="text" [disabled]="readOnly" formControlName="next_service_date" [(ngModel)]="next_service_date"></ion-input-->
 
 
 
-        <a href="#" (click)="getNextDate(14)">
-             2 Weeks
-            </a>
-
-        <a href="#" (click)="getNextDate(30)">
-              1 Months
-          </a>
-
-        <a href="#" (click)="getNextDate(90)">
-              3 Months
-            </a>
-
-        
-          <ion-icon name="calendar"  (click)="getNextDate(0)"></ion-icon>
-       
-
+        <a href="#" (click)="getNextDate(14)">2 Weeks</a>
+        <a href="#" (click)="getNextDate(30)">1 Months</a>
+        <a href="#" (click)="getNextDate(90)">3 Months</a>
+        <!--ion-icon name="calendar"  (click)="getNextDate(0)"></ion-icon-->
+        <a href="#" (click)="getNextDate(0)">
+          <ion-icon name="calendar"></ion-icon>
+        </a>
         <!--div>
             <a href="#" (click)="getNextDate(14)">
              2 Weeks
@@ -147,7 +138,19 @@
             </a>
           </div-->
 
+
+
+
         <div>Next Service Date:{{unitDetailData.nextServiceDate}}</div>
+
+
+        <ion-item>
+          <!--Basic: auto-select the icon based on the platform -->
+          <ion-icon name="calendar" (click)="getNextDate(0)"></ion-icon>
+
+          <!-- Advanced: explicity set the icon for each platform -->
+          <ion-icon ios="ios-calendar" md="md-calendar" (click)="getNextDate(0)"></ion-icon>
+        </ion-item>
 
         <ion-item>
           <ion-label stacked>Request Denyo Service Support <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>

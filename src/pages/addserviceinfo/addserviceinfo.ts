@@ -136,7 +136,6 @@ export class AddserviceinfoPage {
 
 
   doUploadPhoto() {
-
     /*const options: CameraOptions = {
       quality: 75,
       destinationType: this.camera.DestinationType.FILE_URI,

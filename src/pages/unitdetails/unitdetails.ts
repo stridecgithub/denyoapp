@@ -8,6 +8,8 @@ import { UnitsPage } from '../units/units';
 import { RolePage } from '../role/role';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
 import { Http, Headers, RequestOptions } from '@angular/http';
+import { HTTP } from '@ionic-native/http';
+import * as $ from 'jquery'
 /**
  * Generated class for the UnitdetailsPage page.
  *
@@ -18,6 +20,7 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 @Component({
   selector: 'page-unitdetails',
   templateUrl: 'unitdetails.html',
+  providers: [HTTP]
 })
 export class UnitdetailsPage {
   public pageTitle: string;
@@ -39,7 +42,7 @@ export class UnitdetailsPage {
     loginas: '',
     htmlContent: ''
   }
-  constructor(public http: Http, public NP: NavParams, public navCtrl: NavController, public navParams: NavParams, public nav: NavController) {
+  constructor(private httpdata: HTTP, public http: Http, public NP: NavParams, public navCtrl: NavController, public navParams: NavParams, public nav: NavController) {
     this.unitDetailData.loginas = localStorage.getItem("userInfoName");
     this.unitDetailData.userId = localStorage.getItem("userInfoId");
   }
@@ -100,18 +103,39 @@ export class UnitdetailsPage {
 
     //console.log("Pushed Item Unit Name:" + console.log(this.item.unitname));
 
+    /*
+        let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+          headers: any = new Headers({ 'Content-Type': type }),
+          options: any = new RequestOptions({ headers: headers }),
+          url: any = this.apiServiceURL + "/2/1/unitdetails";
+    
+        console.log(url);
+        this.http.get(url, options)
+          .subscribe((data) => {
+            this.unitDetailData.htmlContent = JSON.stringify(data);
+           // this.unitDetailData.htmlContent = data;
+          });
+          */
 
-    let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
-      headers: any = new Headers({ 'Content-Type': type }),
-      options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/2/1/unitdetails";
 
-    console.log(url);
-    this.http.get(url, options)
-      .subscribe((data) => {
-        //this.unitDetailData.htmlContent = JSON.stringify(data);
-        this.unitDetailData.htmlContent = data.json();
+    this.httpdata.get(this.apiServiceURL + "/2/1/unitdetails", {}, {})
+      .then(data => {
+        this.unitDetailData.htmlContent = data.data;
+        console.log(data.status);
+        console.log(data.data); // data received by server
+        console.log(data.headers);
+
+      })
+      .catch(error => {
+
+        console.log(error.status);
+        console.log(error.error); // error message as string
+        console.log(error.headers);
+
       });
+    $(".serv-info").click(function () {
+      alert('Serve info calling...');
+    })
   }
   servicingInfo() {
     this.nav.setRoot(ServicinginfoPage, {
