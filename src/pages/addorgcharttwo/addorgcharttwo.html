@@ -40,5 +40,34 @@
 
 
 <ion-content padding>
+ <div>
+    <form [formGroup]="form" (ngSubmit)="saveEntry()">
+      <ion-list>
+        <div style="position: relative;
+    left: 6%;"><b>Org Chart*</b></div>
+        <ion-item>
+          <ion-label stacked>Job Position <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
+          <ion-input type="text" [disabled]="readOnly" formControlName="job_position" [(ngModel)]="job_position"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Company <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
+          <ion-select [disabled]="readOnly" [(ngModel)]="company_group" formControlName="company_group">
+            <ion-option *ngFor="let groupData of responseResultCompanyGroup" value="{{groupData.companygroup_id}}">{{groupData.companygroup_name}}</ion-option>
+          </ion-select>
+        </ion-item>
 
+        <ion-item>
+          <ion-label stacked>Report To</ion-label>
+          <ion-select [disabled]="readOnly" [(ngModel)]="report_to" formControlName="report_to">
+            <ion-option *ngFor="let userData of responseResultReportTo" value="{{userData.staff_id}}">{{userData.firstname}} {{userData.lastname}}</ion-option>
+          </ion-select>
+        </ion-item>
+
+
+        <ion-item *ngIf="hideActionButton">
+          <button ion-button color="primary" text-center block [disabled]="!form.valid">Save and Complete</button>
+        </ion-item>
+      </ion-list>
+    </form>
+  </div>
 </ion-content>

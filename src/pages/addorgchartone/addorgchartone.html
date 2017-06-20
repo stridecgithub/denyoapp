@@ -65,7 +65,7 @@
     left: 6%;"><b>User Information*</b></div>
         <ion-item>
           <ion-label stacked>First Name <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
-          <ion-input type="text" ></ion-input>
+          <ion-input type="text" [disabled]="readOnly" formControlName="first_name" [(ngModel)]="first_name" ></ion-input>
         </ion-item>
          <ion-item>
           <ion-label stacked>Last Name <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>

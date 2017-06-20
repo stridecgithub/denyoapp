@@ -4,7 +4,9 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { UserPage } from '../user/user';
 import { UseraccountPage } from '../useraccount/useraccount';
+import { AddorgchartonePage } from '../addorgchartone/addorgchartone';
 import 'rxjs/add/operator/map';
+import { HomePage } from '../home/home';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
@@ -124,10 +126,7 @@ export class AddorgcharttwoPage {
       this.contact = info[keyindex]['contact'];
       this.photo = info[keyindex]['photo'];
       this.createdby = info[keyindex]['createdby'];
-      this.username = info[keyindex]['username'];
-      this.password = info[keyindex]['password'];
-      this.hashtag = info[keyindex]['hashtag'];
-      this.role = info[keyindex]['role'];
+    
     }
   }
 
@@ -164,17 +163,13 @@ export class AddorgcharttwoPage {
       "&contact_number=" + this.contact +
       "&createdby=" + this.createdby +
       "&updatedby=" + this.createdby +
-      "&username=" + this.username +
-      "&password=" + this.password +
-      "&role_id=" + this.role +
-      "&personalhashtag=" + this.hashtag +
       "&report_to=" + this.report_to +
       "&company_id=" + this.company_group +
       "&job_position=" + this.job_position,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/staff/store";
+      url: any = this.apiServiceURL + "/orgchart/store";
     console.log(url);
     console.log(body);
 
@@ -186,7 +181,7 @@ export class AddorgcharttwoPage {
           this.hideForm = true;
           this.sendNotification(`User created was successfully added`);
           localStorage.setItem("userPhotoFile", "");
-          this.navCtrl.setRoot(UserPage);
+          this.navCtrl.setRoot(HomePage);
         }
         // Otherwise let 'em know anyway
         else {
@@ -362,7 +357,7 @@ export class AddorgcharttwoPage {
   }
 
   previous() {
-    this.navCtrl.setRoot(UseraccountPage);
+    this.navCtrl.setRoot(AddorgchartonePage);
   }
   fileTrans(path) {
     let fileName = path.substr(path.lastIndexOf('/') + 1);
