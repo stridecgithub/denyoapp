@@ -19,10 +19,10 @@ import { ReporttemplatePage } from '../pages/reporttemplate/reporttemplate';
 import { App } from 'ionic-angular';
 //import { AtmentionedPage } from '../pages/atmentioned/atmentioned';
 import { UnitsPage } from '../pages/units/units';
-import { OrgchartPage } from '../pages/orgchart/orgchart';
+//import { OrgchartPage } from '../pages/orgchart/orgchart';
 import { AddorgchartonePage } from '../pages/addorgchartone/addorgchartone';
 import { AddorgcharttwoPage } from '../pages/addorgcharttwo/addorgcharttwo';
-import { AddreporttemplatePage } from '../pages/addreporttemplate/addreporttemplate';
+//import { AddreporttemplatePage } from '../pages/addreporttemplate/addreporttemplate';
 @Component({
   templateUrl: 'app.html'
 })

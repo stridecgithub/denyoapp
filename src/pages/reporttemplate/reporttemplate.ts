@@ -4,7 +4,7 @@ import 'rxjs/add/operator/map';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { AddreporttemplatePage } from '../addreporttemplate/addreporttemplate';
 import { LoadingController } from 'ionic-angular';
-import { TabsPage } from '../tabs/tabs';
+//import { TabsPage } from '../tabs/tabs';
 /**
  * Generated class for the UnitgroupPage page.
  *
