@@ -14,7 +14,7 @@ import { ServicinginfoPage } from '../servicinginfo/servicinginfo';
 })
 export class UnitdetailsPage {
   public pageTitle: string;
-  public reportAllLists = [];
+  public item = [];
   public colorListArr = [];
   constructor(public NP: NavParams, public navCtrl: NavController, public navParams: NavParams, public nav: NavController) {
   }
@@ -49,14 +49,14 @@ export class UnitdetailsPage {
     colorcode = "button" + colorvalincrmentone;
     console.log("Color is" + colorcode);
 
-    if (res.units.favorite == 1) {
+    if (res.favorite == 1) {
       favorite = "favorite";
     }
     else {
       favorite = "unfavorite";
 
     }
-    this.reportAllLists.push({
+    this.item.push({
       unit_id: res.unit_id,
       unitname: res.unitname,
       location: res.location,
@@ -72,6 +72,9 @@ export class UnitdetailsPage {
       alarmnotificationto: res.alarmnotificationto,
       favoriteindication: favorite
     });
+    console.log("Item Pushed:" + console.log(this.item));
+
+    //console.log("Pushed Item Unit Name:" + console.log(this.item.unitname));
   }
   servicingInfo() {
     this.nav.setRoot(ServicinginfoPage, {

@@ -40,14 +40,6 @@
         <span>Add New Unit Group</span>
     </div>
   </button>
-  <ion-item style="width: 100%; margin: 0; padding-left: 10px; background-color:#ffffff">
-    <ion-label>Sort By</ion-label>
-    <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="pet" (ionChange)="onSegmentChanged(pet)">
-      <ion-option value="unitgroup_id,asc" selected="true">Unit Group Ascending</ion-option>
-      <ion-option value="unitgroup_id,desc">Unit Group Descending</ion-option>
-      <ion-option value="favorite">Favorite</ion-option>
-    </ion-select>
-  </ion-item>
 </ion-header>
 
 
@@ -73,7 +65,7 @@
   </ion-item>
   <ion-item>
     <button ion-button icon-left>
-  <ion-icon name="home"></ion-icon>
+  <ion-icon name="battery-charging"></ion-icon>
   Engine Details
 </button>
 
@@ -81,6 +73,15 @@
   <ion-icon name="home"></ion-icon>
   Servicing Info
 </button>
+
+  </ion-item>
+
+
+
+
+
+  <ion-item>
+
 
     <button ion-button icon-left>
   <ion-icon name="home"></ion-icon>
