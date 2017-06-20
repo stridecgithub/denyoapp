@@ -220,10 +220,10 @@ export class AddserviceinfoPage {
       console.log("Image Data" + JSON.stringify(this.addedImgLists));
 
       if (this.isEdited) {
-        this.updateEntry(serviced_datetime, service_remark, next_service_date, serviced_by, is_request, service_subject, this.addedImgLists, this.unitDetailData.hashtag, nextServiceDate);
+        this.updateEntry(serviced_datetime, service_remark, next_service_date, serviced_by, is_request, service_subject, this.addedImgLists, this.unitDetailData.hashtag, this.unitDetailData.nextServiceDate);
       }
       else {
-        this.createEntry(serviced_datetime, service_remark, next_service_date, serviced_by, is_request, service_subject, this.addedImgLists, this.unitDetailData.hashtag, nextServiceDate);
+        this.createEntry(serviced_datetime, service_remark, next_service_date, serviced_by, is_request, service_subject, this.addedImgLists, this.unitDetailData.hashtag, this.unitDetailData.nextServiceDate);
       }
     }
   }
