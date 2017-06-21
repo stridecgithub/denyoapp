@@ -837,7 +837,10 @@ export class AddrolePage {
     });
     notification.present();
   }
-
+previous()
+{
+   this.navCtrl.setRoot(RolePage);
+}
 
 }
 

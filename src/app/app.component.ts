@@ -14,7 +14,7 @@ import { UnitgroupPage } from '../pages/unitgroup/unitgroup';
 //import { AddUnitPage } from '../pages/add-unit/add-unit';
 
 import { RolePage } from '../pages/role/role';
-import { AddrolePage } from '../pages/addrole/addrole';
+//import { AddrolePage } from '../pages/addrole/addrole';
 import { ReporttemplatePage } from '../pages/reporttemplate/reporttemplate';
 //import { AddunitgroupPage } from '../pages/addunitgroup/addunitgroup';
 import { App } from 'ionic-angular';
@@ -53,7 +53,7 @@ export class MyApp {
       { title: 'Unit Group', component: UnitgroupPage },
       { title: 'Units', component: UnitsPage },
       { title: 'Role', component: RolePage },
-      { title: 'Add Role', component: AddrolePage },
+     // { title: 'Add Role', component: AddrolePage },
       { title: 'My Account', component: MyaccountPage },
       // { title: 'At mentioned Page', component: AtmentionedPage },
 
