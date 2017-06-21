@@ -62,10 +62,12 @@
       <progress value="{{progress}}" max="100" *ngIf="isProgress"> </progress>
       <span *ngIf="isProgress" style="padding:2px">{{progress}}%</span>
 
-      <div *ngIf="addedImgLists.length>0">Picture List:</div>
+      <div *ngIf="addedImgLists.length>0"></div>
       <ion-grid>
         <ion-row>
-          <ion-col col-3 *ngFor="let item of addedImgLists; let i = index" [attr.data-index]="i"><img src="{{addedImgLists[i].imgSrc}}" width="175" height="75" /></ion-col>
+          <ion-col col-3 *ngFor="let item of addedImgLists; let i = index" [attr.data-index]="i">
+            <img src="{{addedImgLists[i].imgSrc}}" width="175" height="75" />
+            </ion-col>
         </ion-row>
       </ion-grid>
 
@@ -84,20 +86,7 @@
         </ion-badge>
       </div>
       <div style="clear:both"><br></div>
-
       <div>Next Service Date:{{unitDetailData.nextServiceDate}}</div>
-
-
-
-
-      <ion-item>
-        <!--Basic: auto-select the icon based on the platform -->
-        <ion-icon name="calendar" (click)="getNextDate(0)"></ion-icon>
-
-        <!-- Advanced: explicity set the icon for each platform -->
-        <ion-icon ios="ios-calendar" md="md-calendar" (click)="getNextDate(0)"></ion-icon>
-      </ion-item>
-
       <ion-item>
         <ion-label stacked>Request Denyo Service Support <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
         <ion-checkbox [disabled]="readOnly" formControlName="is_request" [(ngModel)]="is_request" (ionChange)="updateIsRequest()"></ion-checkbox>

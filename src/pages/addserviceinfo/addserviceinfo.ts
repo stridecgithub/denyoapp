@@ -60,15 +60,15 @@ export class AddserviceinfoPage {
     private transfer: Transfer,
     private file: File, private ngZone: NgZone) {
     this.unitDetailData.loginas = localStorage.getItem("userInfoName");
-    this.unitDetailData.userId = localStorage.getItem("photoInfoId");
+    this.unitDetailData.userId = localStorage.getItem("userInfoId");
     this.unitDetailData.serviced_by = localStorage.getItem("userInfoName");
     this.unitDetailData.pageTitle = 'Servicing Act';
     this.form = formBuilder.group({
       profilePic: [''],
       serviced_datetime: ['', Validators.required],
-      service_subject: [''],
-      service_remark: [''],
-      serviced_by: [''],
+      service_subject: ['', Validators.required],
+      service_remark: ['', Validators.required],
+      serviced_by: ['', Validators.required],
       next_service_date: [''],
       is_request: ['']
     });
@@ -84,7 +84,7 @@ export class AddserviceinfoPage {
   }
   ionViewWillEnter() {
     let users = localStorage.getItem("atMentionedStorage");
-
+    this.is_request = false;
     console.log("A:" + JSON.parse(users));
     console.log("B:" + users);
     console.log("C:" + JSON.stringify(users));
@@ -133,10 +133,17 @@ export class AddserviceinfoPage {
     let currentName = path.replace(/^.*[\\\/]/, '');
     console.log("File Name is:" + currentName);
 
-
+    //YmdHis_123_filename
+    let dateStr = new Date();
+    let year = dateStr.getFullYear();
+    let month = dateStr.getMonth();
+    let date = dateStr.getDate();
+    let hr = dateStr.getHours();
+    let mn = dateStr.getMinutes();
+    let sec = dateStr.getSeconds();
     let d = new Date(),
       n = d.getTime(),
-      newFileName = "stridecdev_" + n + ".jpg";
+      newFileName = year + "" + month + "" + date + "" + hr + "" + mn + "" + sec + "_123_" + n + ".jpg";
 
     let options: FileUploadOptions = {
       fileKey: 'file',
@@ -151,13 +158,8 @@ export class AddserviceinfoPage {
     fileTransfer.onProgress(this.onProgress);
     fileTransfer.upload(path, this.apiServiceURL + '/upload.php', options)
       .then((data) => {
-
-        console.log("UPLOAD SUCCESS:" + data.response);
         let successData = JSON.parse(data.response);
-        this.sendNotification("UPLOAD SUCCESS:");
-        console.log('http:' + '//' + successData.baseURL + '/' + successData.target_dir + '/' + successData.fileName);
-
-        //<img src="{{addedImgLists[i].imgSrc}}" width="75%" height="75%" />
+        //this.sendNotification("UPLOAD SUCCESS:");        
         let imgSrc;
 
         imgSrc = this.apiServiceURL + "/staffphotos" + '/' + newFileName;
@@ -237,16 +239,15 @@ export class AddserviceinfoPage {
   createEntry(serviced_datetime, service_remark, next_service_date, serviced_by, is_request, service_subject, addedImgLists, remarkget, nextServiceDate) {
     let body: string = "is_mobile=1" +
       "&serviced_datetime=" + serviced_datetime +
-      "&service_remark=" + service_remark +
-      "&next_service_date=" + next_service_date +
-      "&serviced_by=" + serviced_by +
+      "&service_remark=" + remarkget +
+      "&next_service_date=" + nextServiceDate +
+      "&serviced_by=" + this.unitDetailData.userId +
       "&is_request=" + is_request +
       "&service_subject=" + service_subject +
-      "&remarkget=" + remarkget +
-      "&uploadInfo=" + JSON.stringify(this.addedImgLists) +
+      "&uploadInfo=" + JSON.stringify(this.addedImgLists),
       //"&contact_number=" + this.contact_number +
       //"&contact_name=" + this.contact_name +
-      "&nextServiceDate=" + nextServiceDate,
+      //"&nextServiceDate=" + nextServiceDate,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
@@ -282,7 +283,7 @@ export class AddserviceinfoPage {
       "&serviced_datetime=" + serviced_datetime +
       "&service_remark=" + service_remark +
       "&next_service_date=" + next_service_date +
-      "&serviced_by=" + serviced_by +
+      "&serviced_by=" + this.unitDetailData.userId +
       "&is_request=" + is_request +
       "&service_subject=" + service_subject +
       "&remarkget=" + remarkget +

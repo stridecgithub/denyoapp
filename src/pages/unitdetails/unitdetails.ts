@@ -27,7 +27,7 @@ export class UnitdetailsPage {
 
   public item = [];
   public colorListArr = [];
-  //private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
+  private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   public unitDetailData: any = {
     unit_id: '',
     unitname: '',
@@ -107,12 +107,12 @@ export class UnitdetailsPage {
 
 
 
-    /* this.httpdata.get(this.apiServiceURL + "/2/1/unitdetails", {}, {})
+    this.httpdata.get(this.apiServiceURL + "/orgchart?company_id=7&is_mobile=1", {}, {})
        .then(data => {
          this.unitDetailData.htmlContent = data.data;
-         console.log(data.status);
-         console.log(data.data); // data received by server
-         console.log(data.headers);
+         //console.log(data.status);
+         //console.log(data.data); // data received by server
+        // console.log(data.headers);
  
        })
        .catch(error => {
@@ -121,7 +121,7 @@ export class UnitdetailsPage {
          console.log(error.error); // error message as string
          console.log(error.headers);
  
-       });*/
+       });
     $(".serv-info").click(function () {
       alert('Serve info calling...');
     })
