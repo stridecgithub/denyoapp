@@ -51,7 +51,42 @@
 
 
 <ion-content padding>
-
+ <div class="error" *ngIf="totalCount==0">No entries found</div>
+  <ion-item style="width: 100%; margin: 0; padding-left: 10px;">
+    <ion-label>Sort By</ion-label>
+    <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="pet" (ionChange)="onSegmentChanged(pet)">
+      <ion-option value="companygroup_name,asc" selected="true">Name Asc</ion-option>
+      <ion-option value="companygroup_name,desc">Name Desc</ion-option>
+    </ion-select>
+  </ion-item>
+  
+  <ion-refresher (ionRefresh)="doRefresh($event)" *ngIf="totalCount!=0">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-list *ngIf="totalCount!=0">
+    <ion-item-sliding *ngFor="let item of reportAllLists;">
+      <ion-item>
+        <h2><b>{{item.service_subject}}</b></h2>
+        <h2><b>Serviced By:</b>{{item.serviced_by}}</h2>
+        <h2><b>Next Servicing:</b>{{item.next_service_date}}</h2>
+      </ion-item>
+      <ion-item-options>
+        <!--button class="viewcolor" (click)="doEdit(item,'view')">
+                       <ion-icon name="eye" class="icon-size"></ion-icon>
+                    </button-->
+        <button class="editcolor" (click)="doEdit(item,'edit')">                      
+                        <ion-icon name="create" class="icon-size"></ion-icon>
+                    </button>
+        <button class="trashcolor" (click)="doConfirm(item.companygroup_id,item)">                        
+                         <ion-icon name="trash" class="icon-size"></ion-icon>
+                    </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="totalCount!=0">
+    <ion-infinite-scroll-content loadingText="{{loadingMoreDataContent}}"></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
 
 <ion-footer color="bluedark">
