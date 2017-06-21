@@ -110,9 +110,9 @@ export class UnitdetailsPage {
     this.httpdata.get(this.apiServiceURL + "/orgchart?company_id=7&is_mobile=1", {}, {})
       .then(data => {
         this.unitDetailData.htmlContent = data.data;        
-       // console.log(data.data); // data received by server
-     
-       
+        // console.log(data.data); // data received by server
+        //this.unitDetailData.htmlContent = "My name is: <h1>Kannan <b>N</b></h1>";
+
 
       })
       .catch(error => {
