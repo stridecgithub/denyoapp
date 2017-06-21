@@ -2,7 +2,7 @@ import { Component, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
-import { UserPage } from '../user/user';
+//import { UserPage } from '../user/user';
 //import { UseraccountPage } from '../useraccount/useraccount';
 import { AddorgchartonePage } from '../addorgchartone/addorgchartone';
 import 'rxjs/add/operator/map';

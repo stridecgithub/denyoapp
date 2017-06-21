@@ -27,7 +27,7 @@ export class UnitdetailsPage {
 
   public item = [];
   public colorListArr = [];
-  private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
+  //private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   public unitDetailData: any = {
     unit_id: '',
     unitname: '',

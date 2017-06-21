@@ -13,7 +13,7 @@ import { MyaccountPage } from '../pages/myaccount/myaccount';
 import { UnitgroupPage } from '../pages/unitgroup/unitgroup';
 //import { AddUnitPage } from '../pages/add-unit/add-unit';
 
-import { RolePage } from '../pages/role/role';
+//import { RolePage } from '../pages/role/role';
 import { ReporttemplatePage } from '../pages/reporttemplate/reporttemplate';
 //import { AddunitgroupPage } from '../pages/addunitgroup/addunitgroup';
 import { App } from 'ionic-angular';

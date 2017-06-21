@@ -2,3 +2,6 @@ https://scotch.io/tutorials/token-based-authentication-for-angularjs-and-laravel
 
 
 https://devdactic.com/ionic-2-images/
+
+http://denyoappv2.stridecdev.com/service/store
+main.js:79667 is_mobile=1&serviced_datetime=2007-01-01T13:04:00Z&service_remark=@denyov4 dfvvvvvv&next_service_date=&serviced_by=Super Admin&is_request=undefined&service_subject=Test&remarkget=@denyov4 dfvvvvvv&uploadInfo=[{"imgSrc":"http://denyoappv2.stridecdev.com/staffphotos/stridecdev_1497981946636.jpg","imgDateTime":"2017-06-20T18:06:30.995Z","fileName":"stridecdev_1497981946636.jpg"},{"imgSrc":"http://denyoappv2.stridecdev.com/staffphotos/stridecdev_1497982000095.jpg","imgDateTime":"2017-06-20T18:07:26.545Z","fileName":"stridecdev_1497982000095.jpg"}]&nextServiceDate=Thu Jun 15 2017 00:00:00 GMT+0530 (IST)

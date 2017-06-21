@@ -35,6 +35,7 @@ export class AddserviceinfoPage {
   public addedImgListsArray = [];
   public addedImgLists = [];
   progress: number;
+  is_request: boolean
   public recordID;
   public isUploadedProcessing: boolean = false;
   public isProgress = false;
@@ -220,10 +221,10 @@ export class AddserviceinfoPage {
       console.log("Image Data" + JSON.stringify(this.addedImgLists));
 
       if (this.isEdited) {
-        this.updateEntry(serviced_datetime, service_remark, next_service_date, serviced_by, is_request, service_subject, this.addedImgLists, this.unitDetailData.hashtag, this.unitDetailData.nextServiceDate);
+        this.updateEntry(serviced_datetime, service_remark, next_service_date, serviced_by, this.is_request, service_subject, this.addedImgLists, this.unitDetailData.hashtag, this.unitDetailData.nextServiceDate);
       }
       else {
-        this.createEntry(serviced_datetime, service_remark, next_service_date, serviced_by, is_request, service_subject, this.addedImgLists, this.unitDetailData.hashtag, this.unitDetailData.nextServiceDate);
+        this.createEntry(serviced_datetime, service_remark, next_service_date, serviced_by, this.is_request, service_subject, this.addedImgLists, this.unitDetailData.hashtag, this.unitDetailData.nextServiceDate);
       }
     }
   }
@@ -344,5 +345,24 @@ export class AddserviceinfoPage {
   address1get(hashtag) {
     console.log(hashtag);
     this.unitDetailData.hashtag = hashtag;
+  }
+
+  updateIsRequest(val) {
+    console.log('Is Request:' + this.is_request);
+  }
+  redirectToUser() {
+    this.nav.setRoot(UserPage);
+  }
+  redirectToUnitGroup() {
+    this.nav.setRoot(UnitgroupPage);
+  }
+  redirectToUnits() {
+    this.nav.setRoot(UnitsPage);
+  }
+  redirectToMyAccount() {
+    this.nav.setRoot(MyaccountPage);
+  }
+  redirectToRole() {
+    this.nav.setRoot(RolePage);
   }
 }
