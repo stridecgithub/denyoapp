@@ -91,7 +91,7 @@ export class ReporttemplatePage {
            
             this.reportAllLists.push({
               templatename: res.availabletemp[availabletemps].templatename,
-              availableheading: res.availabletemp[availabletemps].availableheading
+              availableheading: res.availabletemp[availabletemps].availableheading.split("#")
              
             });
           }
