@@ -96,24 +96,9 @@ export class UnitdetailsPage {
     this.unitDetailData.nextservicedate = editItem.nextservicedate;
     this.unitDetailData.alarmnotificationto = editItem.nextservicedate;
     this.unitDetailData.favoriteindication = favorite;
-    console.log("Iframe URL:" + this.unitDetailData.iframeURL);
-    //this.unitDetailData.iframeURL = this.apiServiceURL + "/" + editItem.unit_id + "/1/unitdetails";
-    this.unitDetailData.iframeURL = "http://denyoappv2.stridecdev.com/";
-
-
-
-    //console.log("Pushed Item Unit Name:" + console.log(this.item.unitname));
-
-
-
-
     this.httpdata.get(this.apiServiceURL + "/orgchart?company_id=7&is_mobile=1", {}, {})
       .then(data => {
-        this.unitDetailData.htmlContent = data.data;        
-        // console.log(data.data); // data received by server
-        //this.unitDetailData.htmlContent = "My name is: <h1>Kannan <b>N</b></h1>";
-
-
+        this.unitDetailData.htmlContent = data.data; 
       })
       .catch(error => {
 
