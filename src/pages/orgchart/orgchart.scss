@@ -15,7 +15,23 @@ ion-navbar.toolbar {
     width:100%;
     height:50%;
 }
-
+ion-content div.scroll{
+  height: 90%; }
+body {
+    margin: 0;
+}
+iframe {
+    display: block;       /* iframes are inline by default */
+    background: #fff;
+    border: none;         /* Reset default border */
+    height: 100vh;        /* Viewport-relative units */
+    width: 100vw;
+}
+.webPage{
+  width: 100%;
+  height: 100%;
+  border: 2px solid #EAAB00;
+  padding: 1rem;}
 ion-navbar.toolbar{ background:#f0f0f0}
 	.bar-buttons-md {order: inherit;}
 	.bar-button-default-md, .bar-button-clear-md-default, .bar-button-md-default, .bar-button-default-md:hover:not(.disable-hover), .bar-button-clear-md-default:hover:not(.disable-hover), .bar-button-md-default:hover:not(.disable-hover), .backtoprevious-icon{color:#333;text-transform: capitalize;}
@@ -31,7 +47,7 @@ ion-item-sliding{border-bottom: 1px solid #ccc;}
 .item-md h2{margin:10px 0;}
 .label-md b{width:40%;display:inline-block;}
 ion-navbar ion-buttons{margin-right:15px;}
-.add-new-btn{background: #333;color: #fff;padding: 10px;text-align: center;width: 100%;}
+.add-new-btn{background: #2C9E67;color: #fff;padding: 10px 10px 10px 25px;float:right;}
 .algn-cent{margin:0 auto;display:table;}
 .algn-cent .ios-add-circle-outline{float:left;}
 .algn-cent span{float:right;font-size: 15px;margin: 6px 10px;}

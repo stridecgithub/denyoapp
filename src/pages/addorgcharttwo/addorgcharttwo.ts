@@ -5,8 +5,9 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 //import { UserPage } from '../user/user';
 //import { UseraccountPage } from '../useraccount/useraccount';
 import { AddorgchartonePage } from '../addorgchartone/addorgchartone';
+import { OrgchartPage } from '../orgchart/orgchart';
 import 'rxjs/add/operator/map';
-import { HomePage } from '../home/home';
+//import { HomePage } from '../home/home';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
@@ -181,7 +182,7 @@ export class AddorgcharttwoPage {
           this.hideForm = true;
           this.sendNotification(`User created was successfully added`);
           localStorage.setItem("userPhotoFile", "");
-          this.navCtrl.setRoot(HomePage);
+          this.navCtrl.setRoot(OrgchartPage);
         }
         // Otherwise let 'em know anyway
         else {
@@ -229,7 +230,7 @@ export class AddorgcharttwoPage {
         if (data.status === 200) {
           this.hideForm = true;
           this.sendNotification(`successfully updated`);
-          this.navCtrl.setRoot(HomePage);
+          this.navCtrl.setRoot(OrgchartPage);
         }
         // Otherwise let 'em know anyway
         else {

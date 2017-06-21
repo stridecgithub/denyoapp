@@ -4,7 +4,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
 
 import { AddorgcharttwoPage } from '../addorgcharttwo/addorgcharttwo';
-//import { UseraccountPage } from '../useraccount/useraccount';
+import { OrgchartPage } from '../orgchart/orgchart';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { FileChooser } from '@ionic-native/file-chooser';
 
@@ -280,5 +280,9 @@ export class AddorgchartonePage {
       duration: 3000
     });
     notification.present();
+  }
+  previous()
+  {
+      this.nav.setRoot(OrgchartPage);
   }
 }

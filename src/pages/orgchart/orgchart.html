@@ -34,21 +34,20 @@
       Login As:{{loginas}}
     </ion-buttons>
   </ion-navbar>
-  <button class="add-new-btn" (click)="doAdd()">
-  	<div class="algn-cent">
-    	<ion-icon name="ios-add-circle-outline"></ion-icon>
-        <span>Add New Org</span>
-    </div>
-  </button>
-  <ion-item style="width: 100%; margin: 0; padding-left: 10px; background-color:#ffffff">
-    <ion-label>Sort By</ion-label>
-    <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="pet" (ionChange)="onSegmentChanged(pet)">
-      <ion-option value="unitgroup_id,asc" selected="true">Unit Group Ascending</ion-option>
-      <ion-option value="unitgroup_id,desc">Unit Group Descending</ion-option>
-      <ion-option value="favorite">Favorite</ion-option>
-    </ion-select>
-  </ion-item>
+  
+ 
 </ion-header>
 <ion-content padding>
+  <div>
+    <button class="add-new-btn" (click)="doAdd()">
+  	<div class="algn-cent">
+    	<ion-icon name="ios-add-circle-outline"></ion-icon>
+        <span></span>
+    </div>
+  </button>
+    </div>
+    <div>
+   <iframe src="http://denyoappv2.stridecdev.com/orgchart?company_id=7&is_mobile=1"   ></iframe>
+    </div>
  
 </ion-content>
