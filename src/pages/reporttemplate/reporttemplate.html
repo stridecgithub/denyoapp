@@ -45,12 +45,12 @@
     <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="pet" (ionChange)="onSegmentChanged(pet)">
       <ion-option value="unitgroup_id,asc" selected="true">Name Ascending</ion-option>
       <ion-option value="unitgroup_id,desc">Name Descending</ion-option>
-      
+
     </ion-select>
   </ion-item>
 </ion-header>
 <ion-content padding>
-    <div class="error" *ngIf="totalCount==0">No entries found</div>
+  <div class="error" *ngIf="totalCount==0">No entries found</div>
 
   <ion-refresher (ionRefresh)="doRefresh($event)" *ngIf="totalCount!=0">
     <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
@@ -60,11 +60,13 @@
     <ion-item-sliding *ngFor="let item of reportAllLists;">
 
       <ion-item>
-      
+
         <div style="overflow: hidden; padding-left: .5em;">
           <h2><b>{{item.templatename}}</b>
           </h2>
-          <h2>{{item.availableheading}}</h2>
+          <h2>
+            <p *ngFor="let itemava of item.availableheading;">-{{itemava}}</p>
+          </h2>
 
         </div>
 
@@ -86,5 +88,5 @@
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="totalCount!=0">
     <ion-infinite-scroll-content loadingText="Loading More Data"></ion-infinite-scroll-content>
   </ion-infinite-scroll>
- 
+
 </ion-content>

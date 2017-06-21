@@ -80,25 +80,13 @@ export class ReporttemplatePage {
         console.log(JSON.stringify(res));
         console.log("1" + res.availabletemp.length);
         console.log("2" + res.availabletemp);
-
-
         if (res.availabletemp.length > 0) {
-
-          for (let availabletemps in res.availabletemp) {
-            let ava = res.availabletemp[availabletemps].availableheading;
-            //console.log("Ava" + ava);
-            //ava = ava.replace(",", "<br>");
+          for (let availabletemps in res.availabletemp) {           
             this.reportAllLists.push({
               templatename: res.availabletemp[availabletemps].templatename,
-              availableheading:ava.replace(",", "<br>")
-
+              availableheading: res.availabletemp[availabletemps].availableheading.split("#")
             });
-          }
-          //"unitgroup_id":1,"unitgroup_name":"demo unit","colorcode":"FBD75C","remark":"nice","favorite":1,"totalunits":5
-          /*this.reportAllLists = res.unitgroups;
-         
-          console.log("Total Record:`" + this.totalCount);
-          console.log(JSON.stringify(this.reportAllLists));*/
+          }         
           this.totalCount = res.totalCount;
           this.reportData.startindex += this.reportData.results;
         } else {

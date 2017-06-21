@@ -35,6 +35,32 @@
     <ion-list>
 
 
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <p><b>Project Name :</b> Dum</p>
+            <p><b>Location :</b> Boonlay, Singapor
+              <br>(1.31425556,103.7093099)
+            </p>
+            <p><b>Next Servicing Date :</b> 2017 05 June</p>
+            <p><b>Running Hours :</b> 0.743</p>
+          </ion-col>
+
+          <ion-col>
+            <a href="#" (click)="getPrority(1)">
+              <ion-icon name="download" style="color:aquamarine;font-size: 37px;"></ion-icon>
+            </a>
+          </ion-col>
+
+
+          <ion-col>
+            <a href="#" (click)="getPrority(2)">
+              <ion-icon name="alert" style="color: brown;font-size: 37px;"></ion-icon>
+            </a>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+     
       <ion-item>
         <ion-label stacked>Servicing Date <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
         <ion-datetime pickerFormat="MMM DD YYYY h:mm A" displayFormat="MM/DD/YYYY h:mm A" formControlName="serviced_datetime" [(ngModel)]="serviced_datetime"></ion-datetime>
@@ -67,7 +93,7 @@
         <ion-row>
           <ion-col col-3 *ngFor="let item of addedImgLists; let i = index" [attr.data-index]="i">
             <img src="{{addedImgLists[i].imgSrc}}" width="175" height="75" />
-            </ion-col>
+          </ion-col>
         </ion-row>
       </ion-grid>
 

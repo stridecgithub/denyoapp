@@ -9,7 +9,7 @@ import { UserPage } from '../user/user';
 import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
 import { UnitsPage } from '../units/units';
-import { RolePage } from '../role/role'; 
+import { RolePage } from '../role/role';
 import * as $ from 'jquery'
 import "slick-carousel";
 /**
@@ -104,11 +104,13 @@ export class AddunitsthreePage {
   // Determine whether we adding or editing a record
   // based on any supplied navigation parameters
   ionViewWillEnter() {
+    console.log("Kannan");
     this.resetFields();
     this.getJsonCountryListData();
-    console.log(JSON.stringify(this.NP.get("record")));
+    console.log("NP Params:"+JSON.stringify(this.NP.get));
+    console.log("A"+JSON.stringify(this.NP.get("record")));
     if (this.NP.get("record")) {
-      console.log("Add User:" + JSON.stringify(this.NP.get("record")));
+      console.log("Add Unit Three:" + JSON.stringify(this.NP.get("record")));
       this.isEdited = true;
       this.selectEntry(this.NP.get("record"));
       this.pageTitle = 'Edit  Units';
@@ -120,7 +122,8 @@ export class AddunitsthreePage {
       }
       let editItem = this.NP.get("record");
       this.alarmhashtags = editItem.alarmnotificationto;
-
+      let contactArr =editItem.contacts;
+      console.log("contactArr" + contactArr);
     }
     else {
       this.isEdited = false;
@@ -448,8 +451,8 @@ export class AddunitsthreePage {
 
   }
 
-  
-redirectToUser() {
+
+  redirectToUser() {
     this.nav.setRoot(UserPage);
   }
   redirectToUnitGroup() {

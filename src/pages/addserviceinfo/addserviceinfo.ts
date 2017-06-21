@@ -36,7 +36,9 @@ export class AddserviceinfoPage {
   public addedImgLists = [];
   progress: number;
   is_request: boolean
-  public recordID;
+  public recordID: any;
+  public unitId: any;
+  public service_priority: any;
   micro_timestamp: any;
   public isUploadedProcessing: boolean = false;
   public isProgress = false;
@@ -57,7 +59,7 @@ export class AddserviceinfoPage {
     addedImgLists2: ''
   }
   public hideActionButton = true;
-  constructor(public http: Http, private datePicker: DatePicker, public nav: NavController, public toastCtrl: ToastController, public navParams: NavParams, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera, private filechooser: FileChooser,
+  constructor(public http: Http, private datePicker: DatePicker, public NP: NavParams, public nav: NavController, public toastCtrl: ToastController, public navParams: NavParams, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera, private filechooser: FileChooser,
     private transfer: Transfer,
     private file: File, private ngZone: NgZone) {
     this.unitDetailData.loginas = localStorage.getItem("userInfoName");
@@ -73,7 +75,7 @@ export class AddserviceinfoPage {
       next_service_date: [''],
       is_request: ['']
     });
-
+    this.service_priority = 0;
     // Watch the form for changes, and
     this.form.valueChanges.subscribe((v) => {
       this.isReadyToSave = this.form.valid;
@@ -89,6 +91,8 @@ export class AddserviceinfoPage {
     console.log("A:" + JSON.parse(users));
     console.log("B:" + users);
     console.log("C:" + JSON.stringify(users));
+
+    this.unitId = this.NP.get("record").unit_id;
     $('#example1').suggest('@', {
       data: JSON.parse(users),
       map: function (user) {
@@ -242,6 +246,8 @@ export class AddserviceinfoPage {
   createEntry(serviced_datetime, service_remark, next_service_date, serviced_by, is_request, service_subject, addedImgLists, remarkget, nextServiceDate, micro_timestamp) {
 
     let body: string = "is_mobile=1" +
+      "&service_priority=" + this.service_priority +
+      "&service_unitid=" + this.unitId +
       "&serviced_datetime=" + serviced_datetime +
       "&service_remark=" + remarkget +
       "&next_service_date=" + nextServiceDate +
@@ -256,7 +262,7 @@ export class AddserviceinfoPage {
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/service/store";
+      url: any = this.apiServiceURL + "/services/store";
     console.log(url);
     console.log(body);
 
@@ -286,6 +292,8 @@ export class AddserviceinfoPage {
   updateEntry(serviced_datetime, service_remark, next_service_date, serviced_by, is_request, service_subject, addedImgLists, remarkget, nextServiceDate, micro_timestamp) {
     let body: string = "is_mobile=1&unit_id=" + this.recordID +
       "&serviced_datetime=" + serviced_datetime +
+      "&service_priority=" + this.service_priority +
+      "&service_unitid=" + this.unitId +
       "&service_remark=" + service_remark +
       "&next_service_date=" + next_service_date +
       "&serviced_by=" + this.unitDetailData.userId +
@@ -301,7 +309,7 @@ export class AddserviceinfoPage {
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/service/update";
+      url: any = this.apiServiceURL + "/services/update";
     console.log(url);
     console.log(body);
     this.http.post(url, body, options)
@@ -329,6 +337,10 @@ export class AddserviceinfoPage {
       this.showDatePicker();
     }
     this.unitDetailData.nextServiceDate = date;
+  }
+
+  getPrority(val) {
+    this.service_priority = val
   }
 
   addDays(days) {
