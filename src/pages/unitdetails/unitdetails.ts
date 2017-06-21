@@ -96,9 +96,12 @@ export class UnitdetailsPage {
     this.unitDetailData.nextservicedate = editItem.nextservicedate;
     this.unitDetailData.alarmnotificationto = editItem.nextservicedate;
     this.unitDetailData.favoriteindication = favorite;
-    this.httpdata.get(this.apiServiceURL + "/orgchart?company_id=7&is_mobile=1", {}, {})
+    let url;
+    url = this.apiServiceURL + "/orgchart?company_id=7&is_mobile=1";
+    //url = "http://strtheme.stridecdev.com/ioncalendar/calendar.html";
+    this.httpdata.get(url, {}, {})
       .then(data => {
-        this.unitDetailData.htmlContent = data.data; 
+        this.unitDetailData.htmlContent = data.data;
       })
       .catch(error => {
 
