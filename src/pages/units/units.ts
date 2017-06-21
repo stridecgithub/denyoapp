@@ -183,19 +183,21 @@ export class UnitsPage {
         record: item,
         act: act
       });
+      return false;
+    } else if (act == 'detail') {
+      this.nav.setRoot(UnitdetailsPage, {
+        record: item
+      });
+      return false;
     } else {
       this.nav.setRoot(ViewcompanygroupPage, {
         record: item,
         act: act
       });
+      return false;
     }
   }
 
-  doDetails(item){
-     this.nav.setRoot(UnitdetailsPage, {
-        record: item
-      });
-  }
 
 
 

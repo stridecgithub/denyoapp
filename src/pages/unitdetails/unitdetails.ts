@@ -113,6 +113,7 @@ export class UnitdetailsPage {
         //console.log(data.status);
         console.log(data.data); // data received by server
         // console.log(data.headers);
+         this.unitDetailData.htmlContent = data;
 
       })
       .catch(error => {
@@ -133,9 +134,8 @@ export class UnitdetailsPage {
       url: any = this.apiServiceURL + "/orgchart?company_id=7&is_mobile=1";
 
     this.http.get(url, options)
-      .subscribe(data => {
-        console.log(JSON.stringify(data.json()));
-        this.unitDetailData.htmlContent = data.json();
+      .subscribe(data => {       
+        this.unitDetailData.htmlContent = data;
       });
 
 

@@ -59,8 +59,8 @@
     </ion-refresher-content>
   </ion-refresher>
   <ion-list *ngIf="totalCount!=0">
-    <ion-item-sliding *ngFor="let item of reportAllLists;" (click)="doDetails(item)">
-      <ion-item>
+    <ion-item-sliding *ngFor="let item of reportAllLists;">
+      <ion-item  (click)="doEdit(item,'detail')">
         <button class="{{item.colorcodeindications}}" style="float: left ;width:8px;height:100px">
          
         </button>

@@ -17,7 +17,7 @@ import { LoadingController } from 'ionic-angular';
   templateUrl: 'reporttemplate.html',
 })
 export class ReporttemplatePage {
- public pageTitle: string;
+  public pageTitle: string;
   public loginas: any;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   public templatenamehash;
@@ -43,13 +43,13 @@ export class ReporttemplatePage {
     console.log('ionViewDidLoad ReporttemplatePage');
   }
 
- 
+
 
 
   ionViewWillEnter() {
-   this.doReport();
+    this.doReport();
   }
- 
+
   doRefresh(refresher) {
     console.log('doRefresh function calling...');
     this.reportData.startindex = 0;
@@ -59,9 +59,8 @@ export class ReporttemplatePage {
       refresher.complete();
     }, 2000);
   }
-  doReport()
-  {
-      this.presentLoading(1);
+  doReport() {
+    this.presentLoading(1);
     if (this.reportData.status == '') {
       this.reportData.status = "DRAFT";
     }
@@ -81,18 +80,18 @@ export class ReporttemplatePage {
         console.log(JSON.stringify(res));
         console.log("1" + res.availabletemp.length);
         console.log("2" + res.availabletemp);
-      
-       
+
+
         if (res.availabletemp.length > 0) {
 
           for (let availabletemps in res.availabletemp) {
-            
-         
-           
+            let ava = res.availabletemp[availabletemps].availableheading.split("#");
+            console.log("Ava" + ava);
+            ava = ava.replace(",", "<br>");
             this.reportAllLists.push({
               templatename: res.availabletemp[availabletemps].templatename,
-              availableheading: res.availabletemp[availabletemps].availableheading.split("#")
-             
+              availableheading: ava
+
             });
           }
           //"unitgroup_id":1,"unitgroup_name":"demo unit","colorcode":"FBD75C","remark":"nice","favorite":1,"totalunits":5
@@ -105,12 +104,12 @@ export class ReporttemplatePage {
         } else {
           //this.totalCount = 0;
         }
-       // console.log("Total Record:2" + this.totalCount);
+        // console.log("Total Record:2" + this.totalCount);
 
       });
     this.presentLoading(0);
   }
- doInfinite(infiniteScroll) {
+  doInfinite(infiniteScroll) {
     console.log('InfinitScroll function calling...');
     console.log('A');
     console.log("Total Count:" + this.totalCount)
@@ -138,16 +137,15 @@ export class ReporttemplatePage {
       loader.dismiss();
     }
   }
-    sendNotification(message): void {
+  sendNotification(message): void {
     let notification = this.toastCtrl.create({
       message: message,
       duration: 3000
     });
     notification.present();
   }
-  doAdd()
-  {
-     this.nav.setRoot(AddreporttemplatePage);
+  doAdd() {
+    this.nav.setRoot(AddreporttemplatePage);
   }
   doConfirm(id, item) {
     console.log("Deleted Id" + id);
@@ -171,7 +169,7 @@ export class ReporttemplatePage {
     });
     confirm.present();
   }
-   deleteEntry(recordID) {
+  deleteEntry(recordID) {
     let
       //body: string = "key=delete&recordID=" + recordID,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
@@ -191,7 +189,7 @@ export class ReporttemplatePage {
         }
       });
   }
-   doEdit(item, act) {
+  doEdit(item, act) {
     if (act == 'edit') {
       this.nav.setRoot(AddreporttemplatePage, {
         record: item,

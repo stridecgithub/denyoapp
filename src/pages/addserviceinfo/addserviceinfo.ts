@@ -37,6 +37,7 @@ export class AddserviceinfoPage {
   progress: number;
   is_request: boolean
   public recordID;
+  micro_timestamp: any;
   public isUploadedProcessing: boolean = false;
   public isProgress = false;
   public isUploaded: boolean = true;
@@ -124,11 +125,6 @@ export class AddserviceinfoPage {
   }
 
   fileTrans(path) {
-    /* let loading = this.loadingCtrl.create({
-         content: 'Uploading processing Please wait...'
-     });
-     loading.present();*/
-    let fileName = path.substr(path.lastIndexOf('/') + 1);
     const fileTransfer: TransferObject = this.transfer.create();
     let currentName = path.replace(/^.*[\\\/]/, '');
     console.log("File Name is:" + currentName);
@@ -153,16 +149,22 @@ export class AddserviceinfoPage {
       mimeType: "text/plain",
     }
 
+    let already = localStorage.getItem("microtime");
+    if (already != undefined && already != 'undefined' && already != '') {
+      this.micro_timestamp = already;
+    } else {
+      this.micro_timestamp = year + "" + month + "" + date + "" + hr + "" + mn + "" + sec;
+      localStorage.setItem("microtime", this.micro_timestamp);
+    }
+
+
     //  http://127.0.0.1/ionic/upload_attach.php
     //http://amahr.stridecdev.com/getgpsvalue.php?key=create&lat=34&long=45
     fileTransfer.onProgress(this.onProgress);
-    fileTransfer.upload(path, this.apiServiceURL + '/upload.php', options)
+    fileTransfer.upload(path, this.apiServiceURL + '/fileupload.php?micro_timestamp=' + this.micro_timestamp, options)
       .then((data) => {
-        let successData = JSON.parse(data.response);
-        //this.sendNotification("UPLOAD SUCCESS:");        
         let imgSrc;
-
-        imgSrc = this.apiServiceURL + "/staffphotos" + '/' + newFileName;
+        imgSrc = this.apiServiceURL + "/serviceimages" + '/' + newFileName;
         this.addedImgLists.push({
           imgSrc: imgSrc,
           imgDateTime: new Date(),
@@ -221,12 +223,13 @@ export class AddserviceinfoPage {
       console.log("service_subject:" + service_subject);
       console.log("nextServiceDate:" + this.unitDetailData.nextServiceDate);
       console.log("Image Data" + JSON.stringify(this.addedImgLists));
-
+      //let d = new Date();
+      //let micro_timestamp = d.getFullYear() + "" + d.getMonth() + "" + d.getDate() + "" + d.getHours() + "" + d.getMinutes() + "" + d.getSeconds();
       if (this.isEdited) {
-        this.updateEntry(serviced_datetime, service_remark, next_service_date, serviced_by, this.is_request, service_subject, this.addedImgLists, this.unitDetailData.hashtag, this.unitDetailData.nextServiceDate);
+        this.updateEntry(serviced_datetime, service_remark, next_service_date, serviced_by, this.is_request, service_subject, this.addedImgLists, this.unitDetailData.hashtag, this.unitDetailData.nextServiceDate, this.micro_timestamp);
       }
       else {
-        this.createEntry(serviced_datetime, service_remark, next_service_date, serviced_by, this.is_request, service_subject, this.addedImgLists, this.unitDetailData.hashtag, this.unitDetailData.nextServiceDate);
+        this.createEntry(serviced_datetime, service_remark, next_service_date, serviced_by, this.is_request, service_subject, this.addedImgLists, this.unitDetailData.hashtag, this.unitDetailData.nextServiceDate, this.micro_timestamp);
       }
     }
   }
@@ -236,7 +239,8 @@ export class AddserviceinfoPage {
   // to our remote PHP script (note the body variable we have created which
   // supplies a variable of key with a value of create followed by the key/value pairs
   // for the record data
-  createEntry(serviced_datetime, service_remark, next_service_date, serviced_by, is_request, service_subject, addedImgLists, remarkget, nextServiceDate) {
+  createEntry(serviced_datetime, service_remark, next_service_date, serviced_by, is_request, service_subject, addedImgLists, remarkget, nextServiceDate, micro_timestamp) {
+
     let body: string = "is_mobile=1" +
       "&serviced_datetime=" + serviced_datetime +
       "&service_remark=" + remarkget +
@@ -244,6 +248,7 @@ export class AddserviceinfoPage {
       "&serviced_by=" + this.unitDetailData.userId +
       "&is_request=" + is_request +
       "&service_subject=" + service_subject +
+      "&micro_timestamp=" + micro_timestamp +
       "&uploadInfo=" + JSON.stringify(this.addedImgLists),
       //"&contact_number=" + this.contact_number +
       //"&contact_name=" + this.contact_name +
@@ -260,7 +265,7 @@ export class AddserviceinfoPage {
         //console.log("Response Success:" + JSON.stringify(data.json()));
         // If the request was successful notify the user
         if (data.status === 200) {
-
+          localStorage.setItem("microtime", "");
           this.sendNotification(`Units created was successfully added`);
           this.nav.setRoot(UnitsPage);
         }
@@ -278,7 +283,7 @@ export class AddserviceinfoPage {
   // to our remote PHP script (note the body variable we have created which
   // supplies a variable of key with a value of update followed by the key/value pairs
   // for the record data
-  updateEntry(serviced_datetime, service_remark, next_service_date, serviced_by, is_request, service_subject, addedImgLists, remarkget, nextServiceDate) {
+  updateEntry(serviced_datetime, service_remark, next_service_date, serviced_by, is_request, service_subject, addedImgLists, remarkget, nextServiceDate, micro_timestamp) {
     let body: string = "is_mobile=1&unit_id=" + this.recordID +
       "&serviced_datetime=" + serviced_datetime +
       "&service_remark=" + service_remark +
@@ -287,6 +292,7 @@ export class AddserviceinfoPage {
       "&is_request=" + is_request +
       "&service_subject=" + service_subject +
       "&remarkget=" + remarkget +
+      "&micro_timestamp=" + micro_timestamp +
       "&uploadInfo=" + JSON.stringify(this.addedImgLists) +
       //"&contact_number=" + this.contact_number +
       //"&contact_name=" + this.contact_name +
@@ -303,7 +309,7 @@ export class AddserviceinfoPage {
         console.log(data);
         // If the request was successful notify the user
         if (data.status === 200) {
-
+          localStorage.setItem("microtime", "");
           this.sendNotification(`User created was successfully updated`);
           //this.nav.setRoot(UnitsPage);
         }

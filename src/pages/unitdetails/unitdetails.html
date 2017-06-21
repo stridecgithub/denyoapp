@@ -77,9 +77,9 @@
 </ion-content>
 
 
-<!--div class="large" [inner-html]="unitDetailData.htmlContent"></div-->
+<!--div class="large" [inner-html]="{{unitDetailData.htmlContent}}"></div>
 
-<!---span class="large" inner-html="{{item.TextWithHtmlTags}}"></span-->
+<span class="large" inner-html="{{unitDetailData.htmlContent}}"></span-->
 <ion-footer color="bluedark">
   <ion-toolbar color="bluedark">
     <button ion-button icon-only clear (click)="redirectToCompanyGroup()">

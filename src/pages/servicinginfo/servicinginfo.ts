@@ -25,7 +25,7 @@ export class ServicinginfoPage {
   public pageTitle: string;
   public atMentionedInfo = [];
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
-  constructor(public http: Http,public NP: NavParams, public navParams: NavParams, public nav: NavController) {
+  constructor(public http: Http, public NP: NavParams, public navParams: NavParams, public nav: NavController) {
     this.pageTitle = 'Servicing Info';
   }
 
@@ -59,7 +59,7 @@ export class ServicinginfoPage {
             });
           }
 
-          localStorage.setItem("atMentionedStorage", JSON.stringify(this.atMentionedInfo));        
+          localStorage.setItem("atMentionedStorage", JSON.stringify(this.atMentionedInfo));
 
         }
       });
@@ -91,6 +91,7 @@ export class ServicinginfoPage {
     this.nav.setRoot(RolePage);
   }
   doAdd() {
+    localStorage.setItem("microtime", "");
     this.nav.setRoot(AddserviceinfoPage, {
       record: this.NP.get("record")
     });
