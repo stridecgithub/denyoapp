@@ -9,7 +9,7 @@ import { UserPage } from '../user/user';
 import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
 import { UnitsPage } from '../units/units';
-import { RolePage } from '../role/role'; 
+import { RolePage } from '../role/role';
 
 /**
  * Generated class for the AddcompanygroupPage page.
@@ -246,7 +246,8 @@ export class AddunitstwoPage {
       location: this.location
     });
     this.nav.setRoot(AddunitsthreePage, {
-      accountInfo: this.userInfo
+      accountInfo: this.userInfo,
+      record: this.NP.get("record")
     });
   }
 
@@ -376,8 +377,8 @@ export class AddunitstwoPage {
   previous() {
     this.nav.setRoot(AddunitsonePage);
   }
-  
-redirectToUser() {
+
+  redirectToUser() {
     this.nav.setRoot(UserPage);
   }
   redirectToUnitGroup() {

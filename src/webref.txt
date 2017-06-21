@@ -1,6 +1,15 @@
 https://scotch.io/tutorials/token-based-authentication-for-angularjs-and-laravel-apps
 
 
+ 1 <span class="large" [inner-html]="unitDetailData.htmlContent"></span> -in Progress Not Working
+  2 <span class="large" inner-html="unitDetailData.htmlContent"></span> 
+
+  3 <span class="large" [inner-html]="{{unitDetailData.htmlContent}}"></span> - In Progress Not Working
+  4 <span class="large" inner-html="{{unitDetailData.htmlContent}}"></span> - In Progress Not Working
+
+
+
+
 https://devdactic.com/ionic-2-images/
 
 http://denyoappv2.stridecdev.com/service/store

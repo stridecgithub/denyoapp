@@ -109,11 +109,10 @@ export class UnitdetailsPage {
 
     this.httpdata.get(this.apiServiceURL + "/orgchart?company_id=7&is_mobile=1", {}, {})
       .then(data => {
-        this.unitDetailData.htmlContent = data.data;
-        //console.log(data.status);
-        console.log(data.data); // data received by server
-        // console.log(data.headers);
-         this.unitDetailData.htmlContent = data;
+        this.unitDetailData.htmlContent = data.data;        
+       // console.log(data.data); // data received by server
+     
+       
 
       })
       .catch(error => {
@@ -122,20 +121,6 @@ export class UnitdetailsPage {
         console.log(error.error); // error message as string
         console.log(error.headers);
 
-      });
-
-
-
-
-
-    let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
-      headers: any = new Headers({ 'Content-Type': type }),
-      options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/orgchart?company_id=7&is_mobile=1";
-
-    this.http.get(url, options)
-      .subscribe(data => {       
-        this.unitDetailData.htmlContent = data;
       });
 
 

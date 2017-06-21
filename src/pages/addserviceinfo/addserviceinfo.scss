@@ -33,11 +33,32 @@ page-addserviceinfo {
         }
 		
     } 
-	ion-input, ion-textarea,ion-select {    
+	ion-input, ion-textarea,ion-select,ion-datetime {    
     border: 1px solid #ccc;
     border-radius: 3px;
 }
 
+
+.button-md-primary{width:100%;padding: 14px 1.1em;height:inherit;font-size: 16px;}
+.scroll-content{background:#fff;}
+.bar-buttons-md{order:inherit}
+ion-navbar.toolbar{background:#f0f0f0;}
+   .label-md[stacked]{
+        font-size: 14px;
+        color:black;
+        font-weight:bold;
+
+    }
+
+   .item-button{
+       background-color:#009ACD;
+       text-transform:capitalize;
+   }
+
+   ion-input, ion-textarea,ion-select,ion-datetime {    
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
 .list-md .item-block .item-inner {
     border-bottom: 1px solid #fff;
 }

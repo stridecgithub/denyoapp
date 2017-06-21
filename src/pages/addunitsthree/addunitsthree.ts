@@ -107,7 +107,7 @@ export class AddunitsthreePage {
     console.log("Kannan");
     this.resetFields();
     this.getJsonCountryListData();
-    console.log("NP Params:"+JSON.stringify(this.NP.get));
+    console.log("NP Params:"+this.NP.get);
     console.log("A"+JSON.stringify(this.NP.get("record")));
     if (this.NP.get("record")) {
       console.log("Add Unit Three:" + JSON.stringify(this.NP.get("record")));
