@@ -48,19 +48,19 @@
 
           <ion-col>
             <a href="#" (click)="getPrority(1)">
-              <ion-icon name="download" style="color:aquamarine;font-size: 37px;"></ion-icon>
+              <ion-icon name="download" style="color:aquamarine;font-size: 37px;" class="{{service_priority_class}}"></ion-icon>
             </a>
           </ion-col>
 
 
           <ion-col>
             <a href="#" (click)="getPrority(2)">
-              <ion-icon name="alert" style="color: brown;font-size: 37px;"></ion-icon>
+              <ion-icon name="alert" style="color: brown;font-size: 37px;" class="{{service_priority_class}}"></ion-icon>
             </a>
           </ion-col>
         </ion-row>
       </ion-grid>
-     
+
       <ion-item>
         <ion-label stacked>Servicing Date <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
         <ion-datetime pickerFormat="MMM DD YYYY h:mm A" displayFormat="MM/DD/YYYY h:mm A" formControlName="serviced_datetime" [(ngModel)]="serviced_datetime"></ion-datetime>

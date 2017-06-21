@@ -35,10 +35,20 @@ export class AddserviceinfoPage {
   public addedImgListsArray = [];
   public addedImgLists = [];
   progress: number;
-  is_request: boolean
+
   public recordID: any;
-  public unitId: any;
+  public service_unitid: any;
+  public service_id: any;
+  public serviced_by: any;
+  public serviced_datetime: any;
+  public service_subject: any;
+  public service_remark: any;
+  public next_service_date: any;
   public service_priority: any;
+  is_request: boolean
+  public serviced_by_name: any;
+  public service_resources: any;
+  public service_priority_class: any;
   micro_timestamp: any;
   public isUploadedProcessing: boolean = false;
   public isProgress = false;
@@ -91,8 +101,11 @@ export class AddserviceinfoPage {
     console.log("A:" + JSON.parse(users));
     console.log("B:" + users);
     console.log("C:" + JSON.stringify(users));
-
-    this.unitId = this.NP.get("record").unit_id;
+    if (this.NP.get("record")) {
+      this.selectEntry(this.NP.get("record"));
+    }
+    this.service_unitid = this.NP.get("record").unit_id;
+    this.service_id = this.NP.get("record").service_id;
     $('#example1').suggest('@', {
       data: JSON.parse(users),
       map: function (user) {
@@ -247,7 +260,7 @@ export class AddserviceinfoPage {
 
     let body: string = "is_mobile=1" +
       "&service_priority=" + this.service_priority +
-      "&service_unitid=" + this.unitId +
+      "&service_unitid=" + this.service_unitid +
       "&serviced_datetime=" + serviced_datetime +
       "&service_remark=" + remarkget +
       "&next_service_date=" + nextServiceDate +
@@ -290,10 +303,10 @@ export class AddserviceinfoPage {
   // supplies a variable of key with a value of update followed by the key/value pairs
   // for the record data
   updateEntry(serviced_datetime, service_remark, next_service_date, serviced_by, is_request, service_subject, addedImgLists, remarkget, nextServiceDate, micro_timestamp) {
-    let body: string = "is_mobile=1&unit_id=" + this.recordID +
+    let body: string = "is_mobile=1&service_id=" + this.service_id +
       "&serviced_datetime=" + serviced_datetime +
       "&service_priority=" + this.service_priority +
-      "&service_unitid=" + this.unitId +
+      "&service_unitid=" + this.service_unitid +
       "&service_remark=" + service_remark +
       "&next_service_date=" + next_service_date +
       "&serviced_by=" + this.unitDetailData.userId +
@@ -383,5 +396,48 @@ export class AddserviceinfoPage {
   }
   redirectToRole() {
     this.nav.setRoot(RolePage);
+  }
+  selectEntry(item) {
+    this.service_id = item.service_id;
+    this.service_unitid = item.service_unitid;
+    this.serviced_by = item.serviced_by;
+    this.serviced_datetime = item.serviced_datetime;
+    this.service_subject = item.service_subject;
+    this.service_remark = item.service_remark;
+    //this.next_service_date = item.next_service_date;
+    this.service_priority = item.service_priority;
+    if (this.service_priority == 1) {
+      this.service_priority_class = 'priority-one-highlight';
+    } else if (this.service_priority == 2) {
+      this.service_priority_class = 'priority-two-highlight';
+    } else {
+      this.service_priority_class = 'priority-noborder-highlight';
+    }
+    if (item.is_request > 0) {
+      this.is_request = true;
+    }
+    this.serviced_by_name = item.serviced_by_name;
+    this.service_resources = item.service_resources;
+    this.unitDetailData.nextServiceDate = item.next_service_date;
+    this.service_resources = item.service_resources;
+    console.log("Image Sources:" + this.service_resources);
+    if (this.service_resources != '') {
+      //30|20170621124208_123_denyo.png#-#31|20170621124233_123_denyov222.png
+      let hashhypenhash = this.service_resources.split("#-#");
+      console.log("1");
+
+      //["18|2017521165131_123_1498044091668.jpg","20|201752116542_123_1498044242864.jpg","21|2017521165455_123_1498044295185.jpg","23|2017521165549_123_1498044349659.jpg","24|2017521165633_123_1498044393360.jpg","25|2017521165721_123_1498044441425.jpg","26|2017521165845_123_1498044525199.jpg","27|2017521165955_123_1498044595570.jpg","28|201752117044_123_1498044644612.jpg","29|201752117156_123_1498044716575.jpg"]
+      console.log(JSON.stringify(hashhypenhash));
+      for (let i = 0; i < hashhypenhash.length; i++) {
+        let pipe = hashhypenhash[i].split("|");
+        console.log("2");
+        //["18","2017521165131_123_1498044091668.jpg"]
+        console.log(JSON.stringify(pipe));
+        for (let j = 0; j < pipe.length; j++) {
+          console.log("3");
+          console.log(pipe[j][1]);
+        }
+      }
+    }
   }
 }

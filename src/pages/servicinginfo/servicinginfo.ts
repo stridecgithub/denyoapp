@@ -25,7 +25,7 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 export class ServicinginfoPage {
   public pageTitle: string;
   public atMentionedInfo = [];
-    public reportData: any =
+  public reportData: any =
   {
     status: '',
     sort: 'companygroup_id',
@@ -35,7 +35,7 @@ export class ServicinginfoPage {
   }
   public reportAllLists = [];
   public loginas: any;
-  public loadingMoreDataContent:string;
+  public loadingMoreDataContent: string;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   public totalCount;
   constructor(public http: Http, public NP: NavParams, public navParams: NavParams, public nav: NavController, public loadingCtrl: LoadingController) {
@@ -52,7 +52,7 @@ export class ServicinginfoPage {
 
     // Atmentioned Tag Storage
   }
-   presentLoading(parm) {
+  presentLoading(parm) {
     let loader;
     loader = this.loadingCtrl.create({
       content: "Please wait...",
@@ -64,7 +64,7 @@ export class ServicinginfoPage {
       loader.dismiss();
     }
   }
-    doRefresh(refresher) {
+  doRefresh(refresher) {
     console.log('doRefresh function calling...');
     this.reportData.startindex = 0;
     this.reportAllLists = [];
@@ -88,22 +88,20 @@ export class ServicinginfoPage {
     }, 500);
     console.log('E');
   }
-  doService()
-
-{
-  this.presentLoading(1);
+  doService() {
+    this.presentLoading(1);
     if (this.reportData.status == '') {
       this.reportData.status = "DRAFT";
     }
     if (this.reportData.sort == '') {
       this.reportData.sort = "comapny";
     }
-     let editItem = this.NP.get("record");
+    let editItem = this.NP.get("record");
     //http://denyoappv2.stridecdev.com/companygroup?is_mobile=1
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/services?is_mobile=1&startindex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc+"&unitid="+editItem.unit_id;
+      url: any = this.apiServiceURL + "/services?is_mobile=1&startindex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc + "&unitid=" + editItem.unit_id;
     let res;
     console.log(url);
     this.http.get(url, options)
@@ -116,16 +114,16 @@ export class ServicinginfoPage {
           this.reportAllLists = res.services;
           this.totalCount = res.totalCount;
           this.reportData.startindex += this.reportData.results;
-          this.loadingMoreDataContent='Loading More Data';
+          this.loadingMoreDataContent = 'Loading More Data';
         } else {
           this.totalCount = 0;
-          this.loadingMoreDataContent='No More Data';
+          this.loadingMoreDataContent = 'No More Data';
         }
         console.log("Total Record:" + this.totalCount);
 
       });
     this.presentLoading(0);
-}
+  }
   previous() {
     this.nav.setRoot(UnitdetailsPage);
   }
@@ -153,6 +151,15 @@ export class ServicinginfoPage {
     localStorage.setItem("microtime", "");
     this.nav.setRoot(AddserviceinfoPage, {
       record: this.NP.get("record")
+    });
+  }
+
+
+  doEdit(item, act) {
+    localStorage.setItem("microtime", "");
+    this.nav.setRoot(AddserviceinfoPage, {
+      record: item,
+      act: act
     });
   }
 
