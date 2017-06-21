@@ -85,12 +85,12 @@ export class ReporttemplatePage {
         if (res.availabletemp.length > 0) {
 
           for (let availabletemps in res.availabletemp) {
-            let ava = res.availabletemp[availabletemps].availableheading.split("#");
-            console.log("Ava" + ava);
-            ava = ava.replace(",", "<br>");
+            let ava = res.availabletemp[availabletemps].availableheading;
+            //console.log("Ava" + ava);
+            //ava = ava.replace(",", "<br>");
             this.reportAllLists.push({
               templatename: res.availabletemp[availabletemps].templatename,
-              availableheading: ava
+              availableheading:ava.replace(",", "<br>")
 
             });
           }
