@@ -141,18 +141,22 @@ export class AddunitsthreePage {
             this.contact_number_1 = contactNumber;
           }
           if (i == 1) {
+            this.cont2 = true;
             this.contact_name_2 = contactName;
             this.contact_number_2 = contactNumber;
           }
           if (i == 2) {
+            this.cont3 = true;
             this.contact_name_3 = contactName;
             this.contact_number_3 = contactNumber;
           }
           if (i == 3) {
+            this.cont4 = true;
             this.contact_name_4 = contactName;
             this.contact_number_4 = contactNumber;
           }
           if (i == 4) {
+            this.cont5 = true;
             this.contact_name_5 = contactName;
             this.contact_number_5 = contactNumber;
           }
@@ -321,18 +325,33 @@ export class AddunitsthreePage {
   saveEntry() {
     let alarmhashtags: string = this.form.controls["alarmhashtags"].value;
 
+    this.contactInfo.push({
+      contact_name: this.form.controls["contact_name_1"].value,
+      contact_number: this.form.controls["contact_number_1"].value
+    });
 
-    let ContactLength = this.contactnameArray.length;
-    console.log("Contact Length:" + ContactLength);
-    for (let i = 0; i <= this.contactnameArray.length; i++) {
-      //incr++;
-      console.log("Incr i:" + i);
-      this.contactInfo.push({
-        contact_name: this.form.controls["contact_name_" + i].value,
-        contact_number: this.form.controls["contact_number_" + i].value
-      });
+    this.contactInfo.push({
+      contact_name: this.form.controls["contact_name_2"].value,
+      contact_number: this.form.controls["contact_number_2"].value
+    });
 
-    }
+    this.contactInfo.push({
+      contact_name: this.form.controls["contact_name_3"].value,
+      contact_number: this.form.controls["contact_number_3"].value
+    });
+
+    this.contactInfo.push({
+      contact_name: this.form.controls["contact_name_4"].value,
+      contact_number: this.form.controls["contact_number_4"].value
+    });
+
+    this.contactInfo.push({
+      contact_name: this.form.controls["contact_name_5"].value,
+      contact_number: this.form.controls["contact_number_5"].value
+    });
+
+
+
     /*if (this.addedImgLists) {
       this.isUploadedProcessing = true;
     }*/
