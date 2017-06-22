@@ -62,23 +62,30 @@
         </ion-item>
 
 
-        <ion-item *ngFor="let contactnameData of contactnameArray;let i = index;">
-          <!--ion-label stacked>Name</ion-label-->
+        <!--ion-item *ngFor="let contactnameData of contactnameArray;let i = index;">         
           <ion-input type="text" placeholder="{{contactnameData.placeholder}}" [disabled]="readOnly" formControlName="{{contactnameData.name}}"
             [(ngModel)]="contactnameData.name"></ion-input>
-        </ion-item>
+        </ion-item-->
 
+
+        <ion-input type="text" placeholder="Name" [disabled]="readOnly" formControlName="contact_name_2" [(ngModel)]="contact_name_2"></ion-input>
+        <ion-input type="text" placeholder="Name" [disabled]="readOnly" formControlName="contact_name_3" [(ngModel)]="contact_name_3"></ion-input>
+        <ion-input type="text" placeholder="Name" [disabled]="readOnly" formControlName="contact_name_4" [(ngModel)]="contact_name_4"></ion-input>
+        <ion-input type="text" placeholder="Name" [disabled]="readOnly" formControlName="contact_name_5" [(ngModel)]="contact_name_5"></ion-input>
 
         <ion-item>
           <ion-label stacked>Contact Number<span class="mandatory" *ngIf="hideActionButton"> *</span></ion-label>
           <ion-input type="text" [disabled]="readOnly" formControlName="contact_number_1" [(ngModel)]="contact_number_1"></ion-input>
         </ion-item>
+        <ion-input type="text" placeholder="Name" [disabled]="readOnly" formControlName="contact_number_2" [(ngModel)]="contact_number_2"></ion-input>
+        <ion-input type="text" placeholder="Name" [disabled]="readOnly" formControlName="contact_number_3" [(ngModel)]="contact_number_3"></ion-input>
+        <ion-input type="text" placeholder="Name" [disabled]="readOnly" formControlName="contact_number_4" [(ngModel)]="contact_number_4"></ion-input>
+        <ion-input type="text" placeholder="Name" [disabled]="readOnly" formControlName="contact_number_5" [(ngModel)]="contact_number_5"></ion-input>
 
-        <ion-item *ngFor="let contactnumberData of contactnumberArray;let i = index;">
-          <!--ion-label stacked>Number</ion-label-->
+        <!--ion-item *ngFor="let contactnumberData of contactnumberArray;let i = index;">         
           <ion-input type="text" placeholder="{{contactnumberData.placeholder}}" [disabled]="readOnly" formControlName="{{contactnumberData.name}}"
             [(ngModel)]="contactnumberData.name"></ion-input>
-        </ion-item>
+        </ion-item-->
 
         <ion-item>
           <a href="#" (click)="addmore()">Add More</a>
@@ -105,7 +112,7 @@
 </button>
     <button ion-button icon-only (click)="redirectToUnits()" clear>
 <ion-icon name="camera" class="footer-icon"></ion-icon>
-</button>   
+</button>
     <button ion-button icon-only (click)="redirectToRole()" clear>
 <ion-icon name="settings" class="footer-icon"></ion-icon>
 </button>

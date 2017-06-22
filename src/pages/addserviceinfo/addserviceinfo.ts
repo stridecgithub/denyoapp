@@ -79,7 +79,7 @@ export class AddserviceinfoPage {
     this.unitDetailData.loginas = localStorage.getItem("userInfoName");
     this.unitDetailData.userId = localStorage.getItem("userInfoId");
     this.unitDetailData.serviced_by = localStorage.getItem("userInfoName");
-    this.unitDetailData.pageTitle = 'Servicing Act';
+
     this.form = formBuilder.group({
       profilePic: [''],
       serviced_datetime: ['', Validators.required],
@@ -104,11 +104,16 @@ export class AddserviceinfoPage {
     this.is_request = false;
     if (this.NP.get("record")) {
       this.selectEntry(this.NP.get("record"));
-      this.isEdited = true;
-
-
-      this.service_unitid = this.NP.get("record").service_unitid;
       this.service_id = this.NP.get("record").service_id;
+      if (this.NP.get("act") == 'Add') {
+        this.isEdited = false;
+        this.unitDetailData.pageTitle = 'Servicing Info Add';
+        this.service_unitid = this.NP.get("unit_id");
+      } else {
+        this.service_unitid = this.NP.get("record").service_unitid;
+        this.unitDetailData.pageTitle = 'Servicing Info Edit';
+        this.isEdited = true;
+      }
       console.log("Service Id:" + this.service_id);
       console.log("Service Unit Id:" + this.service_unitid);
     }

@@ -107,8 +107,8 @@ export class AddunitsthreePage {
     console.log("Kannan");
     this.resetFields();
     this.getJsonCountryListData();
-    console.log("NP Params:"+this.NP.get);
-    console.log("A"+JSON.stringify(this.NP.get("record")));
+    console.log("NP Params:" + this.NP.get);
+    console.log("A" + JSON.stringify(this.NP.get("record")));
     if (this.NP.get("record")) {
       console.log("Add Unit Three:" + JSON.stringify(this.NP.get("record")));
       this.isEdited = true;
@@ -122,8 +122,75 @@ export class AddunitsthreePage {
       }
       let editItem = this.NP.get("record");
       this.alarmhashtags = editItem.alarmnotificationto;
-      let contactArr =editItem.contacts;
-      console.log("contactArr" + contactArr);
+      let contactArr = editItem.contacts;
+      if (contactArr != undefined && contactArr != 'undefined' && contactArr != '') {
+        let hashhypenhash = contactArr.split("#");
+        for (let i = 0; i < hashhypenhash.length; i++) {
+
+          let contDataArr = hashhypenhash[i].split("|");
+          let contactName;
+          let contactNumber;
+          contactName = contDataArr[0];
+          contactNumber = contDataArr[1];
+          console.log("incr:" + i);
+          console.log("contactName:" + contactName);
+          console.log("contactNumber:" + contactNumber);
+          if (i == 0) {
+            this.contact_name_1 = contactName;
+            this.contact_number_1 = contactNumber;
+          }
+          if (i == 1) {
+            this.contactnameArray.push({
+              name: 'contact_name_2',
+              placeholder: "Name"
+            });
+
+            this.contactnumberArray.push({
+              name: 'contact_number_2',
+              placeholder: "Number"
+            });
+
+          }
+          if (i == 2) {
+            this.contactnameArray.push({
+              name: 'contact_name_3',
+              placeholder: "Name"
+            });
+            this.contactnumberArray.push({
+              name: 'contact_number_3',
+              placeholder: "Number"
+            });
+
+          }
+          if (i == 3) {
+            this.contactnameArray.push({
+              name: 'contact_name_4',
+              placeholder: "Name"
+            });
+            this.contact_name_4 = contactName;
+            this.contact_number_4 = contactNumber;
+          }
+          if (i == 4) {
+            this.contactnameArray.push({
+              name: 'contact_name_5',
+              placeholder: "Name"
+            });
+            this.contact_name_5 = contactName;
+            this.contact_number_5 = contactNumber;
+          }
+
+          if (i == 1) {
+            this.contact_name_2 = contactName;
+            this.contact_number_2 = contactNumber;
+          }
+          if (i == 2) {
+            this.contact_name_3 = contactName;
+            this.contact_number_3 = contactNumber;
+          }
+        }
+
+
+      }
     }
     else {
       this.isEdited = false;
@@ -135,21 +202,18 @@ export class AddunitsthreePage {
       let info = this.NP.get("accountInfo");
 
       //var objects = JSON.parse(info);
-      console.log("JSON.stringify:" + JSON.stringify(info));
-      console.log("Length:" + info.length);
-      console.log('A');
+
       for (var key in info) {
-        console.log('B');
+
         let keyindex;
         if (this.NP.get("record")) {
           keyindex = 0;
         } else {
           keyindex = 1;
         }
-        console.log("Key:" + key);
-        console.log("Key Index:" + keyindex);
+
         if (key == keyindex) {
-          console.log('Key' + key);
+
           this.unitname = info[key].unitname;
           this.createdby = info[key].createdby;
           this.projectname = info[key].projectname;
@@ -157,10 +221,9 @@ export class AddunitsthreePage {
           this.neaplateno = info[key].neaplateno;
           this.models_id = info[key].models_id;
           this.location = info[key].location;
-          console.log("Unit Name:" + this.unitname);
-          //console.log(JSON.stringify(this));
+
         } else {
-          console.log('Key' + key);
+
           this.unitname = info[0].unitname;
           this.createdby = info[0].createdby;
 
@@ -171,34 +234,15 @@ export class AddunitsthreePage {
           this.neaplateno = info[0].neaplateno;
           this.models_id = info[0].models_id;
           this.location = info[0].location;
-          console.log("Unit Name:" + this.unitname);
+
         }
-        /* this.userInfo.push({
-           info
-         });
-         console.log("User Information:" + JSON.stringify(this.userInfo));
-         */
+
       }
     }
 
-    /*let users = [
-      { username: 'Krishanth', fullname: 'Kannan' },
-      { username: 'Thibishanth', fullname: 'Kannan' },
-      { username: 'Gohila', fullname: 'Kannan' },
-      { username: 'lodev09', fullname: 'Jovanni Lo' },
-      { username: 'foo', fullname: 'Foo User' },
-      { username: 'bar', fullname: 'Bar User' },
-      { username: 'twbs', fullname: 'Twitter Bootstrap' },
-      { username: 'john', fullname: 'John Doe' },
-      { username: 'jane', fullname: 'Jane Doe' },
-      { username: 'Kannan', fullname: 'Nagarathinam' },
-    ];*/
+
 
     let users = localStorage.getItem("atMentionedStorage");
-
-    console.log("A:" + JSON.parse(users));
-    console.log("B:" + users);
-    console.log("C:" + JSON.stringify(users));
     $('#example1').suggest('@', {
       data: JSON.parse(users),
       map: function (user) {
@@ -307,16 +351,7 @@ export class AddunitsthreePage {
   // existing record
   saveEntry() {
     let alarmhashtags: string = this.form.controls["alarmhashtags"].value;
-    //let incr = 0;
-    //let unitgroup;
-    //console.log("Incr 1:" + incr);
-    console.log("Length:" + this.contactnameArray.length);
 
-    /*this.contactInfo.push({
-      contact_name: this.form.controls["contact_name"].value,
-      contact_number: this.form.controls["contact_number"].value
-    });
-*/
 
     let ContactLength = this.contactnameArray.length;
     console.log("Contact Length:" + ContactLength);

@@ -24,6 +24,7 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 })
 export class ServicinginfoPage {
   public pageTitle: string;
+  public unit_id: any;
   public atMentionedInfo = [];
   public reportData: any =
   {
@@ -105,18 +106,18 @@ export class ServicinginfoPage {
       this.reportData.sort = "comapny";
     }
     let editItem = this.NP.get("record");
-    let unitid;
-    if (this.NP.get("record").unit_id != undefined && this.NP.get("record").unit_id != 'undefined'){
-      unitid = editItem.unit_id;
+
+    if (this.NP.get("record").unit_id != undefined && this.NP.get("record").unit_id != 'undefined') {
+      this.unit_id = editItem.unit_id;
     } else {
-      unitid = editItem.service_unitid;
+      this.unit_id = editItem.service_unitid;
     }
 
     //http://denyoappv2.stridecdev.com/companygroup?is_mobile=1
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/services?is_mobile=1&startindex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc + "&unitid=" + unitid;
+      url: any = this.apiServiceURL + "/services?is_mobile=1&startindex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc + "&unitid=" + this.unit_id;
     let res;
     console.log(url);
     this.http.get(url, options)
@@ -167,7 +168,9 @@ export class ServicinginfoPage {
   doAdd() {
     localStorage.setItem("microtime", "");
     this.nav.setRoot(AddserviceinfoPage, {
-      record: this.NP.get("record")
+      record: this.NP.get("record"),
+      act: 'Add',
+      unit_id:this.unit_id
     });
   }
 
@@ -176,7 +179,7 @@ export class ServicinginfoPage {
     localStorage.setItem("microtime", "");
     this.nav.setRoot(AddserviceinfoPage, {
       record: item,
-      act: act
+      act: 'Edit'
     });
   }
 
