@@ -361,6 +361,7 @@ export class UnitsPage {
               unit_id: res.units[unit].unit_id,
               unitname: res.units[unit].unitname,
               location: res.units[unit].location,
+              contacts: res.units[unit].contacts,
               projectname: res.units[unit].projectname,
               colorcode: res.units[unit].colorcode,
               nextservicedate: res.units[unit].nextservicedate,
