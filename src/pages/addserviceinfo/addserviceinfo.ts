@@ -446,6 +446,10 @@ export class AddserviceinfoPage {
 
 
       }
+
+      if (this.addedImgLists.length > 9) {
+        this.isUploaded = false;
+      }
       /*for (let i = 0; i < hashhypenhash.length; i++) {
         let pipe = hashhypenhash[i].split("|");
         console.log("2");
