@@ -102,14 +102,17 @@ export class AddserviceinfoPage {
   ionViewWillEnter() {
     let users = localStorage.getItem("atMentionedStorage");
     this.is_request = false;
-    console.log("A:" + JSON.parse(users));
-    console.log("B:" + users);
-    console.log("C:" + JSON.stringify(users));
     if (this.NP.get("record")) {
       this.selectEntry(this.NP.get("record"));
+      this.isEdited = true;
+
+
+      this.service_unitid = this.NP.get("record").service_unitid;
+      this.service_id = this.NP.get("record").service_id;
+      console.log("Service Id:" + this.service_id);
+      console.log("Service Unit Id:" + this.service_unitid);
     }
-    this.service_unitid = this.NP.get("record").unit_id;
-    this.service_id = this.NP.get("record").service_id;
+
     $('#example1').suggest('@', {
       data: JSON.parse(users),
       map: function (user) {
@@ -119,9 +122,26 @@ export class AddserviceinfoPage {
         }
       }
     })
+
+    let already = localStorage.getItem("microtime");
+    if (already != undefined && already != 'undefined' && already != '') {
+      this.micro_timestamp = already;
+    } else {
+      let dateStr = new Date();
+      let yearstr = dateStr.getFullYear();
+      let monthstr = dateStr.getMonth();
+      let datestr = dateStr.getDate();
+      let hrstr = dateStr.getHours();
+      let mnstr = dateStr.getMinutes();
+      let secstr = dateStr.getSeconds();
+      this.micro_timestamp = yearstr + "" + monthstr + "" + datestr + "" + hrstr + "" + mnstr + "" + secstr;
+      localStorage.setItem("microtime", this.micro_timestamp);
+    }
   }
 
-  takePictureURL() {
+
+
+  takePictureURL(micro_timestamp) {
     this.isUploadedProcessing = true;
     const options: CameraOptions = {
       quality: 100,
@@ -129,7 +149,7 @@ export class AddserviceinfoPage {
     }
     this.camera.getPicture(options).then((imageData) => {
       console.log(imageData);
-      this.fileTrans(imageData);
+      this.fileTrans(imageData, micro_timestamp);
       this.addedAttachList = imageData;
     }, (err) => {
       // Handle error
@@ -145,7 +165,7 @@ export class AddserviceinfoPage {
     notification.present();
   }
 
-  fileTrans(path) {
+  fileTrans(path, micro_timestamp) {
     const fileTransfer: TransferObject = this.transfer.create();
     let currentName = path.replace(/^.*[\\\/]/, '');
     console.log("File Name is:" + currentName);
@@ -170,19 +190,13 @@ export class AddserviceinfoPage {
       mimeType: "text/plain",
     }
 
-    let already = localStorage.getItem("microtime");
-    if (already != undefined && already != 'undefined' && already != '') {
-      this.micro_timestamp = already;
-    } else {
-      this.micro_timestamp = year + "" + month + "" + date + "" + hr + "" + mn + "" + sec;
-      localStorage.setItem("microtime", this.micro_timestamp);
-    }
+
 
 
     //  http://127.0.0.1/ionic/upload_attach.php
     //http://amahr.stridecdev.com/getgpsvalue.php?key=create&lat=34&long=45
     fileTransfer.onProgress(this.onProgress);
-    fileTransfer.upload(path, this.apiServiceURL + '/fileupload.php?micro_timestamp=' + this.micro_timestamp, options)
+    fileTransfer.upload(path, this.apiServiceURL + '/fileupload.php?micro_timestamp=' + micro_timestamp, options)
       .then((data) => {
         let imgSrc;
         imgSrc = this.apiServiceURL + "/serviceimages" + '/' + newFileName;
@@ -289,8 +303,10 @@ export class AddserviceinfoPage {
         // If the request was successful notify the user
         if (data.status === 200) {
           localStorage.setItem("microtime", "");
-          this.sendNotification(`Units created was successfully added`);
-          this.nav.setRoot(UnitsPage);
+          this.sendNotification(`Servicing info was successfully added`);
+          this.nav.setRoot(ServicinginfoPage, {
+            record: this.NP.get("record")
+          });
         }
         // Otherwise let 'em know anyway
         else {
@@ -312,16 +328,12 @@ export class AddserviceinfoPage {
       "&service_priority=" + this.service_priority +
       "&service_unitid=" + this.service_unitid +
       "&service_remark=" + service_remark +
-      "&next_service_date=" + next_service_date +
+      "&next_service_date=" + nextServiceDate +
       "&serviced_by=" + this.unitDetailData.userId +
       "&is_request=" + is_request +
       "&service_subject=" + service_subject +
-      "&remarkget=" + remarkget +
       "&micro_timestamp=" + micro_timestamp +
-      "&uploadInfo=" + JSON.stringify(this.addedImgLists) +
-      //"&contact_number=" + this.contact_number +
-      //"&contact_name=" + this.contact_name +
-      "&nextServiceDate=" + nextServiceDate,
+      "&uploadInfo=" + JSON.stringify(this.addedImgLists),
 
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
@@ -335,8 +347,10 @@ export class AddserviceinfoPage {
         // If the request was successful notify the user
         if (data.status === 200) {
           localStorage.setItem("microtime", "");
-          this.sendNotification(`User created was successfully updated`);
-          //this.nav.setRoot(UnitsPage);
+          this.sendNotification(`Servicing info  was successfully updated`);
+          this.nav.setRoot(ServicinginfoPage, {
+            record: this.NP.get("record")
+          });
         }
         // Otherwise let 'em know anyway
         else {
@@ -345,7 +359,7 @@ export class AddserviceinfoPage {
       });
   }
 
-  getNextDate(val) {
+  getNextDate(val, field) {
     console.log('1' + val);
     let date;
     if (val > 0) {
@@ -353,7 +367,11 @@ export class AddserviceinfoPage {
     } else {
       this.showDatePicker();
     }
-    this.unitDetailData.nextServiceDate = date;
+    if (field == '1') {
+      this.serviced_datetime = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
+    } else {
+      this.unitDetailData.nextServiceDate = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
+    }
   }
 
   getPrority(val) {
@@ -372,7 +390,7 @@ export class AddserviceinfoPage {
       androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
     }).then(
       date => {
-        this.unitDetailData.nextServiceDate = date;
+        this.unitDetailData.nextServiceDate = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
         console.log('Got date: ', date)
       },
       err => console.log('Error occurred while getting date: ', err)
@@ -408,8 +426,6 @@ export class AddserviceinfoPage {
     this.nav.setRoot(RolePage);
   }
   selectEntry(item) {
-    this.service_id = item.service_id;
-    this.service_unitid = item.service_unitid;
     this.serviced_by = item.serviced_by;
     this.serviced_datetime = item.serviced_datetime;
     this.service_subject = item.service_subject;
@@ -433,14 +449,7 @@ export class AddserviceinfoPage {
     this.service_resources = item.service_resources;
 
     if (this.service_resources != undefined && this.service_resources != 'undefined' && this.service_resources != '') {
-      //30|20170621124208_123_denyo.png#-#31|20170621124233_123_denyov222.png
       let hashhypenhash = this.service_resources.split("#-#");
-
-
-      //["18|2017521165131_123_1498044091668.jpg","20|201752116542_123_1498044242864.jpg","21|2017521165455_123_1498044295185.jpg","23|2017521165549_123_1498044349659.jpg","24|2017521165633_123_1498044393360.jpg","25|2017521165721_123_1498044441425.jpg","26|2017521165845_123_1498044525199.jpg","27|2017521165955_123_1498044595570.jpg","28|201752117044_123_1498044644612.jpg","29|201752117156_123_1498044716575.jpg"]
-
-
-      //let pipe = hashhypenhash.split("|");
       for (let i = 0; i < hashhypenhash.length; i++) {
         let imgDataArr = hashhypenhash[i].split("|");
         let imgSrc;
@@ -450,28 +459,11 @@ export class AddserviceinfoPage {
           imgDateTime: new Date(),
           fileName: imgDataArr[1]
         });
-
-
       }
 
       if (this.addedImgLists.length > 9) {
         this.isUploaded = false;
       }
-      /*for (let i = 0; i < hashhypenhash.length; i++) {
-        let pipe = hashhypenhash[i].split("|");
-        console.log("2");
-        //["18","2017521165131_123_1498044091668.jpg"]
-        console.log(JSON.stringify(pipe));
-        console.log("Pipe Length:" + pipe.length);
-        for (let j = 0; j < pipe.length; j++) {
-          console.log("3");
-          console.log(pipe[j][i]);
-          console.log("4");
-          console.log(pipe[j]);
-          console.log("5");
-          console.log(pipe[j][0]);
-        }
-      }*/
     }
   }
 }

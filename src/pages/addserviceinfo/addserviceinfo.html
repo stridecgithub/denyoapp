@@ -63,7 +63,7 @@
 
       <ion-item>
         <ion-label stacked>Servicing Date <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
-        <ion-datetime pickerFormat="MMM DD YYYY h:mm A" displayFormat="MM/DD/YYYY h:mm A" formControlName="serviced_datetime" [(ngModel)]="serviced_datetime"></ion-datetime>
+        <ion-datetime pickerFormat="MMM DD YYYY" displayFormat="MM/DD/YYYY" formControlName="serviced_datetime" [(ngModel)]="serviced_datetime"></ion-datetime>
       </ion-item>
       <ion-item>
         <ion-label stacked>Serviced By <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
@@ -86,7 +86,7 @@
 
       <!--button (click)="takePictureURL()" *ngIf="isUploaded" ion-button color="primary" text-center block>Upload Photos</button-->
 
-      <div class="profile-image-wrapper" (click)="takePictureURL()" *ngIf="isUploaded">
+      <div class="profile-image-wrapper" (click)="takePictureURL(micro_timestamp)" *ngIf="isUploaded">
         <div class="profile-image-placeholder">
           <ion-icon name="add" style="color: blue;
     position: relative;

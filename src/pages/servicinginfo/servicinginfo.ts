@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,ToastController,AlertController} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
 import { CompanygroupPage } from '../companygroup/companygroup';
 import { UserPage } from '../user/user';
 import { LoadingController } from 'ionic-angular';
@@ -33,7 +33,7 @@ export class ServicinginfoPage {
     startindex: 0,
     results: 8
   }
-   public userId: any;
+  public userId: any;
   public reportAllLists = [];
   public loginas: any;
   public loadingMoreDataContent: string;
@@ -42,7 +42,7 @@ export class ServicinginfoPage {
   constructor(public http: Http,
     public toastCtrl: ToastController, public alertCtrl: AlertController, public NP: NavParams, public navParams: NavParams, public nav: NavController, public loadingCtrl: LoadingController) {
     this.pageTitle = 'Servicing Info';
-     this.loginas = localStorage.getItem("userInfoName");
+    this.loginas = localStorage.getItem("userInfoName");
     this.userId = localStorage.getItem("userInfoId");
   }
 
@@ -50,6 +50,10 @@ export class ServicinginfoPage {
     console.log('ionViewDidLoad ServicinginfoPage');
   }
   ionViewWillEnter() {
+
+    if (this.NP.get("record")) {
+      console.log("Service Info Record Param Value:" + JSON.stringify(this.NP.get("record")));
+    }
     this.reportData.startindex = 0;
     this.reportData.sort = "service_id";
     this.doService();
@@ -101,11 +105,18 @@ export class ServicinginfoPage {
       this.reportData.sort = "comapny";
     }
     let editItem = this.NP.get("record");
+    let unitid;
+    if (this.NP.get("record").unit_id != undefined && this.NP.get("record").unit_id != 'undefined'){
+      unitid = editItem.unit_id;
+    } else {
+      unitid = editItem.service_unitid;
+    }
+
     //http://denyoappv2.stridecdev.com/companygroup?is_mobile=1
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/services?is_mobile=1&startindex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc + "&unitid=" + editItem.unit_id;
+      url: any = this.apiServiceURL + "/services?is_mobile=1&startindex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc + "&unitid=" + unitid;
     let res;
     console.log(url);
     this.http.get(url, options)
