@@ -48,7 +48,8 @@ export class AddserviceinfoPage {
   is_request: boolean
   public serviced_by_name: any;
   public service_resources: any;
-  public service_priority_class: any;
+  public service_priority_class1: any;
+  public service_priority_class2: any;
   micro_timestamp: any;
   public isUploadedProcessing: boolean = false;
   public isProgress = false;
@@ -72,6 +73,8 @@ export class AddserviceinfoPage {
   constructor(public http: Http, private datePicker: DatePicker, public NP: NavParams, public nav: NavController, public toastCtrl: ToastController, public navParams: NavParams, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera, private filechooser: FileChooser,
     private transfer: Transfer,
     private file: File, private ngZone: NgZone) {
+    this.service_priority_class1 = "-outline";
+    this.service_priority_class2 = "-outline";
     this.unitDetailData.loginas = localStorage.getItem("userInfoName");
     this.unitDetailData.userId = localStorage.getItem("userInfoId");
     this.unitDetailData.serviced_by = localStorage.getItem("userInfoName");
@@ -406,12 +409,13 @@ export class AddserviceinfoPage {
     this.service_remark = item.service_remark;
     //this.next_service_date = item.next_service_date;
     this.service_priority = item.service_priority;
-    if (this.service_priority == 1) {
-      this.service_priority_class = 'priority-one-highlight';
-    } else if (this.service_priority == 2) {
-      this.service_priority_class = 'priority-two-highlight';
-    } else {
-      this.service_priority_class = 'priority-noborder-highlight';
+    console.log("X" + this.service_priority);
+    if (this.service_priority == "1") {
+      this.service_priority_class1 = '';
+      console.log("Y");
+    } else if (this.service_priority == "2") {
+      this.service_priority_class2 = '';
+      console.log("Z");
     }
     if (item.is_request > 0) {
       this.is_request = true;
@@ -420,24 +424,43 @@ export class AddserviceinfoPage {
     this.service_resources = item.service_resources;
     this.unitDetailData.nextServiceDate = item.next_service_date;
     this.service_resources = item.service_resources;
-    console.log("Image Sources:" + this.service_resources);
-    if (this.service_resources != '') {
+
+    if (this.service_resources != undefined && this.service_resources != 'undefined' && this.service_resources != '') {
       //30|20170621124208_123_denyo.png#-#31|20170621124233_123_denyov222.png
       let hashhypenhash = this.service_resources.split("#-#");
-      console.log("1");
+
 
       //["18|2017521165131_123_1498044091668.jpg","20|201752116542_123_1498044242864.jpg","21|2017521165455_123_1498044295185.jpg","23|2017521165549_123_1498044349659.jpg","24|2017521165633_123_1498044393360.jpg","25|2017521165721_123_1498044441425.jpg","26|2017521165845_123_1498044525199.jpg","27|2017521165955_123_1498044595570.jpg","28|201752117044_123_1498044644612.jpg","29|201752117156_123_1498044716575.jpg"]
-      console.log(JSON.stringify(hashhypenhash));
+
+
+      //let pipe = hashhypenhash.split("|");
       for (let i = 0; i < hashhypenhash.length; i++) {
+        let imgDataArr = hashhypenhash[i].split("|");
+        let imgSrc;
+        imgSrc = this.apiServiceURL + "/serviceimages" + '/' + imgDataArr[1];
+        this.addedImgLists.push({
+          imgSrc: imgSrc,
+          imgDateTime: new Date(),
+          fileName: imgDataArr[1]
+        });
+
+
+      }
+      /*for (let i = 0; i < hashhypenhash.length; i++) {
         let pipe = hashhypenhash[i].split("|");
         console.log("2");
         //["18","2017521165131_123_1498044091668.jpg"]
         console.log(JSON.stringify(pipe));
+        console.log("Pipe Length:" + pipe.length);
         for (let j = 0; j < pipe.length; j++) {
           console.log("3");
-          console.log(pipe[j][1]);
+          console.log(pipe[j][i]);
+          console.log("4");
+          console.log(pipe[j]);
+          console.log("5");
+          console.log(pipe[j][0]);
         }
-      }
+      }*/
     }
   }
 }

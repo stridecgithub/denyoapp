@@ -114,12 +114,12 @@ ion-navbar ion-buttons{margin-right:15px;}
 
 
   .profile-image-wrapper {
-    text-align: center;
-    margin: 20px 0;
+    //text-align: center;
+    //margin: 20px 0;
 
     .profile-image {
-      width: 96px;
-      height: 96px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
 
       display: inline-block;
@@ -130,11 +130,11 @@ ion-navbar ion-buttons{margin-right:15px;}
     }
 
     .profile-image-placeholder {
-      display: inline-block;
+      //display: inline-block;
 
       background-color: #eee;
-      width: 96px;
-      height: 96px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
 
       font-size: 12px;

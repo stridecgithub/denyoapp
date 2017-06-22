@@ -48,14 +48,14 @@
 
           <ion-col>
             <a href="#" (click)="getPrority(1)">
-              <ion-icon name="download" style="color:aquamarine;font-size: 37px;" class="{{service_priority_class}}"></ion-icon>
+              <ion-icon name="download{{service_priority_class1}}" style="color:aquamarine;font-size: 37px;"></ion-icon>
             </a>
           </ion-col>
 
 
           <ion-col>
             <a href="#" (click)="getPrority(2)">
-              <ion-icon name="alert" style="color: brown;font-size: 37px;" class="{{service_priority_class}}"></ion-icon>
+              <ion-icon name="alert{{service_priority_class2}}" style="color: brown;font-size: 37px;"></ion-icon>
             </a>
           </ion-col>
         </ion-row>
@@ -84,15 +84,28 @@
       <p><b>Upload Images</b></p>
       <p>Maximum Number of upload photos:10</p>
 
-      <button (click)="takePictureURL()" *ngIf="isUploaded" ion-button color="primary" text-center block>Upload Photos</button>
+      <!--button (click)="takePictureURL()" *ngIf="isUploaded" ion-button color="primary" text-center block>Upload Photos</button-->
+
+      <div class="profile-image-wrapper" (click)="takePictureURL()" *ngIf="isUploaded">
+        <div class="profile-image-placeholder">
+          <ion-icon name="add" style="color: blue;
+    position: relative;
+    top: -7px;
+    left: 14px;"></ion-icon>
+        </div>
+        <div class="profile-image"></div>
+      </div>
+
       <progress value="{{progress}}" max="100" *ngIf="isProgress"> </progress>
       <span *ngIf="isProgress" style="padding:2px">{{progress}}%</span>
 
       <div *ngIf="addedImgLists.length>0"></div>
       <ion-grid>
         <ion-row>
-          <ion-col col-3 *ngFor="let item of addedImgLists; let i = index" [attr.data-index]="i">
-            <img src="{{addedImgLists[i].imgSrc}}" width="175" height="75" />
+          <ion-col col-auto *ngFor="let item of addedImgLists; let i = index" [attr.data-index]="i">
+            <ion-item>
+              <ion-avatar item-start><img src="{{addedImgLists[i].imgSrc}}" width="100" height="50" /> </ion-avatar>
+            </ion-item>
           </ion-col>
         </ion-row>
       </ion-grid>
