@@ -127,6 +127,7 @@ export class UnitsPage {
               location: res.units[unit].location,
               projectname: res.units[unit].projectname,
               colorcode: res.units[unit].colorcode,
+              contacts: res.units[unit].contacts,
               nextservicedate: res.units[unit].nextservicedate,
               colorcodeindications: colorcode,
               controllerid: res.units[unit].controllerid,
