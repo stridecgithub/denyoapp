@@ -1,5 +1,5 @@
 import { Component, ViewChild, NgZone } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController, ToastController } from 'ionic-angular';
+import { IonicPage, AlertController, NavController, NavParams, ViewController, ToastController } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { FileChooser } from '@ionic-native/file-chooser';
@@ -71,7 +71,7 @@ export class AddserviceinfoPage {
     addedImgLists2: ''
   }
   public hideActionButton = true;
-  constructor(public http: Http, private datePicker: DatePicker, public NP: NavParams, public nav: NavController, public toastCtrl: ToastController, public navParams: NavParams, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera, private filechooser: FileChooser,
+  constructor(public http: Http, public alertCtrl: AlertController, private datePicker: DatePicker, public NP: NavParams, public nav: NavController, public toastCtrl: ToastController, public navParams: NavParams, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera, private filechooser: FileChooser,
     private transfer: Transfer,
     private file: File, private ngZone: NgZone) {
     this.service_priority_class1 = "-outline";
@@ -466,7 +466,8 @@ export class AddserviceinfoPage {
         this.addedImgLists.push({
           imgSrc: imgSrc,
           imgDateTime: new Date(),
-          fileName: imgDataArr[1]
+          fileName: imgDataArr[1],
+          resouce_id: imgDataArr[0]
         });
       }
 
@@ -475,4 +476,53 @@ export class AddserviceinfoPage {
       }
     }
   }
+  doRemoveResouce(id, item) {
+    console.log("Deleted Id" + id);
+    let confirm = this.alertCtrl.create({
+      message: 'Are you sure you want to delete this file?',
+      buttons: [{
+        text: 'Yes',
+        handler: () => {
+          this.deleteEntry(id);
+          for (let q: number = 0; q < this.addedImgLists.length; q++) {
+            if (this.addedImgLists[q] == item) {
+              this.addedImgLists.splice(q, 1);
+            }
+          }
+        }
+      },
+      {
+        text: 'No',
+        handler: () => { }
+      }]
+    });
+    confirm.present();
+  }
+
+
+  // Remove an existing record that has been selected in the page's HTML form
+  // Use angular's http post method to submit the record data
+  // to our remote PHP script (note the body variable we have created which
+  // supplies a variable of key with a value of delete followed by the key/value pairs
+  // for the record ID we want to remove from the remote database
+  deleteEntry(recordID) {
+    let
+      //body: string = "key=delete&recordID=" + recordID,
+      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/" + recordID + "/removeresource";
+    this.http.get(url, options)
+      .subscribe(data => {
+        // If the request was successful notify the user
+        if (data.status === 200) {
+          this.sendNotification(`Congratulations file was successfully deleted`);
+        }
+        // Otherwise let 'em know anyway
+        else {
+          this.sendNotification('Something went wrong!');
+        }
+      });
+  }
+
 }

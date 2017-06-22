@@ -106,12 +106,20 @@
             <ion-item>
               <ion-avatar item-start><img src="{{addedImgLists[i].imgSrc}}" width="100" height="50" /> </ion-avatar>
             </ion-item>
+            <a href="#" (click)="doRemoveResouce(addedImgLists[i].resouce_id,item)">
+              <ion-icon name="backspace" style="color: brown;
+    font-size: 20px;
+    position: relative;
+    bottom: 55px;
+    left: 24px;"></ion-icon>
+            </a>
           </ion-col>
+
         </ion-row>
       </ion-grid>
 
 
-      <div style="clear:both"><br></div>
+
 
 
       <div>
