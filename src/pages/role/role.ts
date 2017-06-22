@@ -78,13 +78,13 @@ export class RolePage {
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "api/roles.php";
+      url: any = this.apiServiceURL + "role?is_mobile=1";
     let res;
-    this.http.post(url, body, options)
+    this.http.get(url,options)
       .subscribe((data) => {
         res = data.json();
-        if (res.length > 0) {
-          this.reportAllLists = res;
+        if (res.roles.length > 0) {
+          this.reportAllLists = res.roles;
           this.totalCount = res[0].totalCount;
           this.reportData.startindex += this.reportData.results;
         } else {
