@@ -290,8 +290,8 @@ export class AddunitsfourPage {
         // If the request was successful notify the user
         if (data.status === 200) {
           this.hideForm = true;
-          this.sendNotification(`User created was successfully updated`);
-          //this.nav.setRoot(UnitsPage);
+          this.sendNotification(`Units was successfully updated`);
+          this.nav.setRoot(UnitsPage);
         }
         // Otherwise let 'em know anyway
         else {

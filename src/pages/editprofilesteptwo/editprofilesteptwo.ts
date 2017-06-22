@@ -194,8 +194,10 @@ export class EditprofilesteptwoPage {
         // If the request was successful notify the user
         if (data.status === 200) {
           this.hideForm = true;
-          this.sendNotification(`User profile successfully updated`);
-          this.nav.setRoot(MyaccountPage);
+          if (!userPhotoFile) {
+            this.sendNotification(`User profile successfully updated`);
+            this.nav.setRoot(MyaccountPage);
+          }
         }
         // Otherwise let 'em know anyway
         else {
@@ -268,6 +270,7 @@ export class EditprofilesteptwoPage {
 
     //  http://127.0.0.1/ionic/upload_attach.php
     //http://amahr.stridecdev.com/getgpsvalue.php?key=create&lat=34&long=45
+    this.sendNotification(`profile photo uploaded few minutes redirect to my account page. please wait`);
     fileTransfer.onProgress(this.onProgress);
     fileTransfer.upload(path, this.apiServiceURL + '/upload.php', options)
       .then((data) => {
@@ -288,6 +291,10 @@ export class EditprofilesteptwoPage {
         // Save in Backend and MysQL
         //this.uploadToServer(data.response);
         // Save in Backend and MysQL
+
+        this.sendNotification(`User profile successfully updated`);
+        this.nav.setRoot(MyaccountPage);
+
       }, (err) => {
         //loading.dismiss();
         console.log("Upload Error:");
@@ -327,8 +334,8 @@ export class EditprofilesteptwoPage {
   previous() {
     this.nav.setRoot(EditprofilesteponePage);
   }
-  
-redirectToUser() {
+
+  redirectToUser() {
     this.nav.setRoot(UserPage);
   }
   redirectToUnitGroup() {

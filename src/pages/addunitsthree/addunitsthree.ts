@@ -55,6 +55,11 @@ export class AddunitsthreePage {
   // Flag to be used for checking whether we are adding/editing an entry
   public isEdited: boolean = false;
   public readOnly: boolean = false;
+  public cont2: boolean = false;
+  public cont3: boolean = false;
+  public cont4: boolean = false;
+  public cont5: boolean = false;
+
   public addedImgLists: any;
   public userInfo = [];
   public contactInfo = [];
@@ -319,7 +324,7 @@ export class AddunitsthreePage {
 
     let ContactLength = this.contactnameArray.length;
     console.log("Contact Length:" + ContactLength);
-    for (let i = 1; i <= this.contactnameArray.length; i++) {
+    for (let i = 0; i <= this.contactnameArray.length; i++) {
       //incr++;
       console.log("Incr i:" + i);
       this.contactInfo.push({
@@ -427,23 +432,18 @@ export class AddunitsthreePage {
       });
     }
     console.log("7" + len);
-    console.log("len:" + this.form.controls["contact_name_" + len].value);
-    if (this.form.controls["contact_name_" + len].value == 'contact_name_2') {
-      console.log("8");
-      this.contact_name_2 = '';
 
+    if (len == 1) {
+      this.cont2 = true;
     }
-    if (this.form.controls["contact_name_" + len].value == 'contact_name_3') {
-      this.contact_name_3 = '';
-      console.log("9");
+    if (len == 2) {
+      this.cont3 = true;
     }
-    if (this.form.controls["contact_name_" + len].value == 'contact_name_4') {
-      this.contact_name_4 = '';
-      console.log("10");
+    if (len == 3) {
+      this.cont4 = true;
     }
-    if (this.form.controls["contact_name_" + len].value == 'contact_name_5') {
-      this.contact_name_5 = '';
-      console.log("11");
+    if (len == 4) {
+      this.cont5 = true;
     }
 
 
