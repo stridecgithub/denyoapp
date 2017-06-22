@@ -38,7 +38,6 @@ import { UnitdetailsPage } from '../pages/unitdetails/unitdetails';
 import { ServicinginfoPage } from '../pages/servicinginfo/servicinginfo';
 import { AddserviceinfoPage } from '../pages/addserviceinfo/addserviceinfo';
 import { AddreporttemplatePage } from '../pages/addreporttemplate/addreporttemplate';
-
 @NgModule({
   declarations: [
     MyApp,
@@ -129,7 +128,7 @@ import { AddreporttemplatePage } from '../pages/addreporttemplate/addreporttempl
     AddreporttemplatePage
   ],
   providers: [
-    StatusBar,
+    StatusBar,   
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]

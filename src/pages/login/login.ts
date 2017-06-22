@@ -5,6 +5,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { HomePage } from '../home/home';
 import { LoadingController } from 'ionic-angular';
 import { Http, Headers, RequestOptions } from '@angular/http';
+import { Device } from '@ionic-native/device';
 /**
  * Generated class for the LoginPage page.
  *f
@@ -15,6 +16,7 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
+  providers: [Device]
 })
 export class LoginPage {
   public form: FormGroup;
@@ -22,7 +24,7 @@ export class LoginPage {
   public passWrd: any;
   public userInf: any;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
-  constructor(public fb: FormBuilder, private http: Http, public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController, public loadingCtrl: LoadingController) {
+  constructor(public device: Device, public fb: FormBuilder, private http: Http, public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController, public loadingCtrl: LoadingController) {
     this.userInf = localStorage.getItem("userInfoId");
     console.log("UserId Localtorage" + this.userInf);
     if (this.userInf != 'null' && this.userInf != null && this.userInf != '') {
@@ -36,36 +38,30 @@ export class LoginPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');   
+    console.log('ionViewDidLoad LoginPage');
   }
 
 
 
-  loginEntry(username, password) {
+  loginEntry(username, password) {   
     let res;
-    let body: string = "username=" + username + "&password=" + password + "&isapp=1",
+    let body: string = "username=" + username +
+      "&password=" + password +
+      "&device_token=" + this.device.uuid +
+      "&isapp=1",
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
       url: any = this.apiServiceURL + "/checklogin";
-
     this.http.post(url, body, options)
       .subscribe(data => {
-        console.log(data.json());
-        console.log(JSON.stringify(data.json()));
         res = data.json();
-        console.log("4" + res.msg[0]['result']);
         if (res.msg[0]['Error'] > 0) {
           this.sendNotification(res.msg[0]['result']);
           this.presentLoading(0);
           return false;
         } else {
           res = data.json();
-          console.log(res['staffdetails'][0].user_id);
-          console.log(res['staffdetails'][0].firstname);
-          console.log(res['staffdetails'][0].email);
-          console.log("1" + data);
-          console.log("2" + JSON.stringify(data.json()));
           localStorage.setItem("userInfo", res['staffdetails'][0]);
           localStorage.setItem("userInfoId", res['staffdetails'][0].user_id);
           localStorage.setItem("userInfoName", res['staffdetails'][0].firstname);
@@ -76,7 +72,6 @@ export class LoginPage {
         }
 
       });
-    console.log('3');
     this.presentLoading(0);
   }
 
