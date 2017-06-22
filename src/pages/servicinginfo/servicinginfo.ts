@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,ToastController,AlertController} from 'ionic-angular';
 import { CompanygroupPage } from '../companygroup/companygroup';
 import { UserPage } from '../user/user';
 import { LoadingController } from 'ionic-angular';
@@ -33,13 +33,17 @@ export class ServicinginfoPage {
     startindex: 0,
     results: 8
   }
+   public userId: any;
   public reportAllLists = [];
   public loginas: any;
   public loadingMoreDataContent: string;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   public totalCount;
-  constructor(public http: Http, public NP: NavParams, public navParams: NavParams, public nav: NavController, public loadingCtrl: LoadingController) {
+  constructor(public http: Http,
+    public toastCtrl: ToastController, public alertCtrl: AlertController, public NP: NavParams, public navParams: NavParams, public nav: NavController, public loadingCtrl: LoadingController) {
     this.pageTitle = 'Servicing Info';
+     this.loginas = localStorage.getItem("userInfoName");
+    this.userId = localStorage.getItem("userInfoId");
   }
 
   ionViewDidLoad() {
@@ -125,7 +129,9 @@ export class ServicinginfoPage {
     this.presentLoading(0);
   }
   previous() {
-    this.nav.setRoot(UnitdetailsPage);
+    this.nav.setRoot(UnitdetailsPage, {
+      record: this.NP.get("record")
+    });
   }
   redirectToUser() {
     this.nav.setRoot(UserPage);
@@ -163,5 +169,54 @@ export class ServicinginfoPage {
     });
   }
 
+  doConfirm(id, item) {
+    console.log("Deleted Id" + id);
+    let confirm = this.alertCtrl.create({
+      message: 'Are you sure you want to delete this unit group?',
+      buttons: [{
+        text: 'Yes',
+        handler: () => {
+          this.deleteEntry(id);
+          for (let q: number = 0; q < this.reportAllLists.length; q++) {
+            if (this.reportAllLists[q] == item) {
+              this.reportAllLists.splice(q, 1);
+            }
+          }
+        }
+      },
+      {
+        text: 'No',
+        handler: () => { }
+      }]
+    });
+    confirm.present();
+  }
+  deleteEntry(recordID) {
+    let
+      //body: string = "key=delete&recordID=" + recordID,
+      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/services/" + recordID + "/1/delete";
+    this.http.get(url, options)
+      .subscribe(data => {
+        // If the request was successful notify the user
+        if (data.status === 200) {
 
+          this.sendNotification(`Services info was successfully deleted`);
+        }
+        // Otherwise let 'em know anyway
+        else {
+          this.sendNotification('Something went wrong!');
+        }
+      });
+  }
+
+  sendNotification(message): void {
+    let notification = this.toastCtrl.create({
+      message: message,
+      duration: 3000
+    });
+    notification.present();
+  }
 }

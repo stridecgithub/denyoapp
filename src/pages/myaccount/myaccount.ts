@@ -57,16 +57,17 @@ export class MyaccountPage {
         console.log(JSON.stringify(res));
         console.log("1" + res.settings.length);
         console.log("2" + res.settings);
-        this.userid = res.settings[0].username;
-        this.password = res.settings[0].password;
-        this.hashtag = "@" + this.userid;
-        this.role = res.settings[0].role_name;
-        this.email = res.settings[0].email;
-        this.country = res.settings[0].country_name;
-        this.job_position = res.settings[0].job_position;
-        this.accountcreatedby = res.settings[0].report_to;
-        this.photo = this.apiServiceURL + "/staffphotos/" + res.settings[0].photo_filename;
-
+        if (res.settings.length > 0) {
+          this.userid = res.settings[0].username;
+          this.password = res.settings[0].password;
+          this.hashtag = "@" + this.userid;
+          this.role = res.settings[0].role_name;
+          this.email = res.settings[0].email;
+          this.country = res.settings[0].country_name;
+          this.job_position = res.settings[0].job_position;
+          this.accountcreatedby = res.settings[0].report_to;
+          this.photo = this.apiServiceURL + "/staffphotos/" + res.settings[0].photo_filename;
+        }
         // [{ "userid": "1", "userdetailsid": "1", "username": "denyov2", "password": "e3b81d385ca4c26109dfbda28c563e2b", "firstname": "Super Admin", "lastname": "Denyo", "email": "balamurugan@webneo.in", "contact_number": "9597645985", "country_id": "99", "photo": "1496647262537.jpg", "job_position": "Country Manager", "report_to": "0", "company_id": "1", "companygroup_name": "Denyo" }]
 
 

@@ -6,6 +6,7 @@ import { FileChooser } from '@ionic-native/file-chooser';
 import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
 import { UserPage } from '../user/user';
+import { ServicinginfoPage } from '../servicinginfo/servicinginfo';
 import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
 import { UnitsPage } from '../units/units';
@@ -384,6 +385,12 @@ export class AddserviceinfoPage {
 
   updateIsRequest(val) {
     console.log('Is Request:' + this.is_request);
+  }
+
+  previous() {
+    this.nav.setRoot(ServicinginfoPage, {
+      record: this.NP.get("record")
+    });
   }
   redirectToUser() {
     this.nav.setRoot(UserPage);
