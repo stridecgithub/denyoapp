@@ -43,7 +43,7 @@ export class UnitdetailsPage {
     htmlContent: '',
     iframeURL: ''
   }
-  constructor(private httpdata: HTTP, public http: Http, public NP: NavParams, public navCtrl: NavController, public navParams: NavParams, public nav: NavController) {
+  constructor(private httpdata: HTTP, public NP: NavParams, public navCtrl: NavController, public navParams: NavParams, public nav: NavController) {
     this.unitDetailData.loginas = localStorage.getItem("userInfoName");
     this.unitDetailData.userId = localStorage.getItem("userInfoId");
   }
