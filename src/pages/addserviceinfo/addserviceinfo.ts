@@ -94,6 +94,23 @@ export class AddserviceinfoPage {
     this.form.valueChanges.subscribe((v) => {
       this.isReadyToSave = this.form.valid;
     });
+
+
+    let already = localStorage.getItem("microtime");
+    if (already != undefined && already != 'undefined' && already != '') {
+      this.micro_timestamp = already;
+    } else {
+      let dateStr = new Date();
+      let yearstr = dateStr.getFullYear();
+      let monthstr = dateStr.getMonth();
+      let datestr = dateStr.getDate();
+      let hrstr = dateStr.getHours();
+      let mnstr = dateStr.getMinutes();
+      let secstr = dateStr.getSeconds();
+      this.micro_timestamp = yearstr + "" + monthstr + "" + datestr + "" + hrstr + "" + mnstr + "" + secstr;
+
+    }
+    localStorage.setItem("microtime", this.micro_timestamp);
   }
 
   ionViewDidLoad() {
@@ -128,20 +145,7 @@ export class AddserviceinfoPage {
       }
     })
 
-    let already = localStorage.getItem("microtime");
-    if (already != undefined && already != 'undefined' && already != '') {
-      this.micro_timestamp = already;
-    } else {
-      let dateStr = new Date();
-      let yearstr = dateStr.getFullYear();
-      let monthstr = dateStr.getMonth();
-      let datestr = dateStr.getDate();
-      let hrstr = dateStr.getHours();
-      let mnstr = dateStr.getMinutes();
-      let secstr = dateStr.getSeconds();
-      this.micro_timestamp = yearstr + "" + monthstr + "" + datestr + "" + hrstr + "" + mnstr + "" + secstr;
-      localStorage.setItem("microtime", this.micro_timestamp);
-    }
+
   }
 
 

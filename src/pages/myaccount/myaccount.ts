@@ -33,7 +33,7 @@ export class MyaccountPage {
   public accountcreatedby: any;
   public userId: any;
   public item: any;
-  private apiServiceURL: string = "http://denyoappv2.stridecdev.com/";
+  private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   constructor(public http: Http, public navCtrl: NavController, public navParams: NavParams, public nav: NavController) {
     this.pageTitle = 'My Account';
     this.loginas = localStorage.getItem("userInfoName");
@@ -42,13 +42,13 @@ export class MyaccountPage {
 
 
   //[{"userid":"1","userdetailsid":"1","username":"webkannan","password":"webkannan","role":"1","hashtag":"@welcome","first_name":"Kannan","last_name":"Nagarathinam","email":"kannan@gmail.com","contact":"123456789","country":"2","photo":"1496647262537.jpg","job_position":"At prog","report_to":"0","company_group":"1","companygroup_name":"Denyo"}]
+  ionViewWillEnter() {
 
-  ionViewDidLoad() {
     // body: string = "key=myaccount&userId=" + this.userId,
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "settings/profile?is_mobile=1&loggedin_id=" + this.userId;
+      url: any = this.apiServiceURL + "/settings/profile?is_mobile=1&loggedin_id=" + this.userId;
     console.log(url);
     let res;
     this.http.get(url, options)
@@ -73,7 +73,9 @@ export class MyaccountPage {
 
 
       });
-
+  }
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad My Account Page');
   }
   doEdit(userid) {
     this.nav.setRoot(EditprofilesteponePage, {

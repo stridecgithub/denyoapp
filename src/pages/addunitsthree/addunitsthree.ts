@@ -104,13 +104,9 @@ export class AddunitsthreePage {
   // Determine whether we adding or editing a record
   // based on any supplied navigation parameters
   ionViewWillEnter() {
-    console.log("Kannan");
     this.resetFields();
     this.getJsonCountryListData();
-    console.log("NP Params:" + this.NP.get);
-    console.log("A" + JSON.stringify(this.NP.get("record")));
     if (this.NP.get("record")) {
-      console.log("Add Unit Three:" + JSON.stringify(this.NP.get("record")));
       this.isEdited = true;
       this.selectEntry(this.NP.get("record"));
       this.pageTitle = 'Edit  Units';
@@ -140,52 +136,20 @@ export class AddunitsthreePage {
             this.contact_number_1 = contactNumber;
           }
           if (i == 1) {
-            this.contactnameArray.push({
-              name: 'contact_name_2',
-              placeholder: "Name"
-            });
-
-            this.contactnumberArray.push({
-              name: 'contact_number_2',
-              placeholder: "Number"
-            });
-
-          }
-          if (i == 2) {
-            this.contactnameArray.push({
-              name: 'contact_name_3',
-              placeholder: "Name"
-            });
-            this.contactnumberArray.push({
-              name: 'contact_number_3',
-              placeholder: "Number"
-            });
-
-          }
-          if (i == 3) {
-            this.contactnameArray.push({
-              name: 'contact_name_4',
-              placeholder: "Name"
-            });
-            this.contact_name_4 = contactName;
-            this.contact_number_4 = contactNumber;
-          }
-          if (i == 4) {
-            this.contactnameArray.push({
-              name: 'contact_name_5',
-              placeholder: "Name"
-            });
-            this.contact_name_5 = contactName;
-            this.contact_number_5 = contactNumber;
-          }
-
-          if (i == 1) {
             this.contact_name_2 = contactName;
             this.contact_number_2 = contactNumber;
           }
           if (i == 2) {
             this.contact_name_3 = contactName;
             this.contact_number_3 = contactNumber;
+          }
+          if (i == 3) {
+            this.contact_name_4 = contactName;
+            this.contact_number_4 = contactNumber;
+          }
+          if (i == 4) {
+            this.contact_name_5 = contactName;
+            this.contact_number_5 = contactNumber;
           }
         }
 
