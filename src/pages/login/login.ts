@@ -63,8 +63,9 @@ export class LoginPage {
           return false;
         } else {
           res = data.json();
+          console.log("Logged in Response:"+JSON.stringify(res));
           localStorage.setItem("userInfo", res['staffdetails'][0]);
-          localStorage.setItem("userInfoId", res['staffdetails'][0].user_id);
+          localStorage.setItem("userInfoId", res['staffdetails'][0].staff_id);
           localStorage.setItem("userInfoName", res['staffdetails'][0].firstname);
           localStorage.setItem("userInfoEmail", res['staffdetails'][0].email);
           localStorage.setItem("userInfoCompanyId", res['staffdetails'][0].company_id);

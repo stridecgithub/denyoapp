@@ -253,7 +253,7 @@ export class AddcommentsinfoPage {
       //let d = new Date();
       //let micro_timestamp = d.getFullYear() + "" + d.getMonth() + "" + d.getDate() + "" + d.getHours() + "" + d.getMinutes() + "" + d.getSeconds();
       if (this.isEdited) {
-        this.updateEntry(comments, service_subject, this.addedImgLists, this.unitDetailData.hashtag,  this.micro_timestamp);
+        this.updateEntry(comments, service_subject, this.addedImgLists, this.unitDetailData.hashtag, this.micro_timestamp);
       }
       else {
         this.createEntry(comments, service_subject, this.addedImgLists, this.unitDetailData.hashtag, this.micro_timestamp);
@@ -268,8 +268,9 @@ export class AddcommentsinfoPage {
   // for the record data
   createEntry(comments, service_subject, addedImgLists, remarkget, micro_timestamp) {
 
-    let body: string = "is_mobile=1" +    
+    let body: string = "is_mobile=1" +
       "&service_unitid=" + this.service_unitid +
+      "&service_priority=" + this.service_priority +
       "&comments=" + comments +
       "&service_subject=" + service_subject +
       "&micro_timestamp=" + micro_timestamp +
@@ -311,8 +312,9 @@ export class AddcommentsinfoPage {
   // for the record data
   updateEntry(comments, service_subject, addedImgLists, remarkget, micro_timestamp) {
     let body: string = "is_mobile=1&service_id=" + this.service_id +
-      "&comments=" + comments +     
-      "&service_unitid=" + this.service_unitid +     
+      "&comments=" + comments +
+      "&service_priority=" + this.service_priority +
+      "&service_unitid=" + this.service_unitid +
       "&service_subject=" + service_subject +
       "&micro_timestamp=" + micro_timestamp +
       "&uploadInfo=" + JSON.stringify(this.addedImgLists),
@@ -383,7 +385,7 @@ export class AddcommentsinfoPage {
     this.unitDetailData.hashtag = hashtag;
   }
 
- 
+
 
   previous() {
     this.nav.setRoot(CommentsinfoPage, {
@@ -406,10 +408,10 @@ export class AddcommentsinfoPage {
     this.nav.setRoot(RolePage);
   }
   selectEntry(item) {
-   
+
     this.comments = item.comments;
     this.service_subject = item.service_subject;
-   
+
     //this.next_service_date = item.next_service_date;
     this.service_priority = item.service_priority;
     console.log("X" + this.service_priority);
@@ -420,7 +422,7 @@ export class AddcommentsinfoPage {
       this.service_priority_class2 = '';
       console.log("Z");
     }
-   
+
     this.service_resources = item.service_resources;
     this.unitDetailData.nextServiceDate = item.next_service_date;
     this.service_resources = item.service_resources;
