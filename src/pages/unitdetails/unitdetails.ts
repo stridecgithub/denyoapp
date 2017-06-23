@@ -121,7 +121,7 @@ export class UnitdetailsPage {
     })
    
 
-  
+  /*
 									
 			$('.collanttempbar').sparkline(['0:4:9.5:1:2'], {type: 'bar', height:'140px', barWidth:'10', barHeight:'140', stackedBarColor:['#00FF50','#ffca00','#00FF50','#ffca00','#df0000']} );
 								
@@ -342,7 +342,7 @@ export class UnitdetailsPage {
 		};
 		xmlhttp.open("POST", path, true);
 		xmlhttp.send();
-	});
+	});*/
   }
   servicingInfo() {
     this.nav.setRoot(ServicinginfoPage, {
