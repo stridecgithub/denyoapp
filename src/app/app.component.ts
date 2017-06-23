@@ -13,7 +13,7 @@ import { MyaccountPage } from '../pages/myaccount/myaccount';
 import { UnitgroupPage } from '../pages/unitgroup/unitgroup';
 //import { AddUnitPage } from '../pages/add-unit/add-unit';
 
-import { RolePage } from '../pages/role/role';
+//import { RolePage } from '../pages/role/role';
 //import { AddrolePage } from '../pages/addrole/addrole';
 import { ReporttemplatePage } from '../pages/reporttemplate/reporttemplate';
 //import { AddunitgroupPage } from '../pages/addunitgroup/addunitgroup';
@@ -52,7 +52,7 @@ export class MyApp {
       //{ title: 'Add Unit Group', component: AddunitgroupPage },
       { title: 'Unit Group', component: UnitgroupPage },
       { title: 'Units', component: UnitsPage },
-      { title: 'Role', component: RolePage },
+      //{ title: 'Role', component: RolePage },
      // { title: 'Add Role', component: AddrolePage },
       { title: 'My Account', component: MyaccountPage },
       // { title: 'At mentioned Page', component: AtmentionedPage },

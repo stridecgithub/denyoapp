@@ -9,7 +9,8 @@ import { RolePage } from '../role/role';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
 //import { Http, Headers, RequestOptions } from '@angular/http';
 import { HTTP } from '@ionic-native/http';
-import * as $ from 'jquery'
+import * as $ from 'jquery';
+import "slick-carousel";
 /**
  * Generated class for the UnitdetailsPage page.
  *
@@ -97,8 +98,11 @@ export class UnitdetailsPage {
     this.unitDetailData.alarmnotificationto = editItem.nextservicedate;
     this.unitDetailData.favoriteindication = favorite;
     let url;
-    url = this.apiServiceURL + "/orgchart?company_id=7&is_mobile=1";
+    // url = this.apiServiceURL + "/orgchart?company_id=7&is_mobile=1";
     //url = "http://strtheme.stridecdev.com/ioncalendar/calendar.html";
+    //url = this.apiServiceURL + "/2/1/unitdetails";
+    //http://denyoappv2.stridecdev.com/2/1/unitdetails
+    url=this.apiServiceURL + "/api/webview/unitedetails.html";
     this.httpdata.get(url, {}, {})
       .then(data => {
         this.unitDetailData.htmlContent = data.data;
@@ -115,6 +119,230 @@ export class UnitdetailsPage {
     $(".serv-info").click(function () {
       alert('Serve info calling...');
     })
+   
+
+  
+									
+			$('.collanttempbar').sparkline(['0:4:9.5:1:2'], {type: 'bar', height:'140px', barWidth:'10', barHeight:'140', stackedBarColor:['#00FF50','#ffca00','#00FF50','#ffca00','#df0000']} );
+								
+			$('.oilpressurebar').sparkline(['0:1:0.3:9'], {type: 'bar', height:'140px', barWidth:'10', barHeight:'140', stackedBarColor:['#00FF50','#df0000','#ffca00','#00FF50']} );
+								
+			$('.loadpowerfactorbar').sparkline(['0:10'], {type: 'bar', height:'140px', barWidth:'10', barHeight:'140', stackedBarColor:['#00FF50','#00FF50']} );
+								
+			$('.batteryvoltagebar').sparkline(['0:4:4:4'], {type: 'bar', height:'140px', barWidth:'10', barHeight:'140', stackedBarColor:['#00FF50','#ffca00','#00FF50','#ffca00']} );
+				//$('.batteryvoltagebar').sparkline(['0:4:4:4'], {type: 'bar', height:'140px', barWidth:'10', barHeight:'140', stackedBarColor:['#00FF50','#ffca00','#00FF50','#ffca00']} );
+
+	// fault reset - alarm status change - start
+	$("#FAULTBTN").click(function(){
+		var token = $('input[name=_token]').val();
+		var unitid = $("#unitid").val();
+		$.ajax({
+			headers: {'X-CSRF-TOKEN': token},
+			method: "POST",
+			url : "http://denyoappv2.stridecdev.com/resetfault",
+			data: {unitid:unitid },		
+			success : function(data){ 
+				alert("Fault successfully reset!");
+			}
+		});
+	});
+	// fault reset - alarm status change - end
+
+	
+	$('#STARTBTN').click(function(){			
+		$("#STARTBTN").removeClass("btnon");
+		$("#STARTBTN").addClass("btnoff");
+		$("#STARTBTN").css("color", "");
+		$("#STOPBTN").removeClass("btnoff");
+		$("#STOPBTN").addClass("btnon");
+		$("#STOPBTN").css({"background": "#b60016", "color": "#FFF", "box-shadow": "inset 0px 0px 2px #e8676c", "margin-top": "10px"});
+
+		var generatorid = "GEN0002";
+		var path = "http://denyoapi.stridecdev.com/api2/"+generatorid+"/on/"+generatorid;
+			
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.onreadystatechange = function() {
+			if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
+				if (xmlhttp.status == 200) {
+					$("#startstatus").css('display', '');
+				}
+				else if (xmlhttp.status == 400) {
+					alert('There was an error 400');
+				}
+				else {
+					alert('something else other than 200 was returned');
+				}
+			}
+		};
+		xmlhttp.open("POST", path, true);
+		xmlhttp.send();
+	});
+	$('#STOPBTN').click(function(){	
+		$("#STARTBTN").removeClass("btnoff");
+		$("#STARTBTN").addClass("btnon");
+		$("#STOPBTN").removeClass("btnon");
+		$("#STOPBTN").addClass("btnoff");		
+		var generatorid="GEN0002";
+		var path = "http://denyoapi.stridecdev.com/api2/"+generatorid+"/off/"+generatorid;
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.onreadystatechange = function() {
+			if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
+				if (xmlhttp.status == 200) {
+					$("#stopstatus").css('display', '');
+				}
+				else if (xmlhttp.status == 400) {
+					alert('There was an error 400');
+				}
+				else {
+					alert('something else other than 200 was returned');
+				}
+			}
+		};
+		xmlhttp.open("POST", path, true);
+		xmlhttp.send();
+	});
+	$('#OFFBTN').click(function(){
+		var generatorid="GEN0002";
+		var path = "http://denyoapi.stridecdev.com/api2/"+generatorid+"/off-mode/"+generatorid;
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.onreadystatechange = function() {
+			if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
+				if (xmlhttp.status == 200) {
+					$("#offmodestatus").css('display', '');
+				}
+				else if (xmlhttp.status == 400) {
+					alert('There was an error 400');
+				}
+				else {
+					alert('something else other than 200 was returned');
+				}
+			}
+		};
+		xmlhttp.open("POST", path, true);
+		xmlhttp.send();
+	});
+	$('#OFFBTNd').click(function(){
+		var generatorid="GEN0002";
+		var path = "http://denyoapi.stridecdev.com/api2/"+generatorid+"/off-mode/"+generatorid;
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.onreadystatechange = function() {
+			if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
+				if (xmlhttp.status == 200) {
+					$("#offmodestatus").css('display', '');
+				}
+				else if (xmlhttp.status == 400) {
+					alert('There was an error 400');
+				}
+				else {
+					alert('something else other than 200 was returned');
+				}
+			}
+		};
+		xmlhttp.open("POST", path, true);
+		xmlhttp.send();
+	});
+	$('#MANBTN').click(function(){
+		var generatorid="GEN0002";
+		var path = "http://denyoapi.stridecdev.com/api2/"+generatorid+"/man-mode/"+generatorid;
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.onreadystatechange = function() {
+			if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
+				if (xmlhttp.status == 200) {
+					$("#manmodestatus").css('display', '');
+				}
+				else if (xmlhttp.status == 400) {
+					alert('There was an error 400');
+				}
+				else {
+					alert('something else other than 200 was returned');
+				}
+			}
+		};
+		xmlhttp.open("POST", path, true);
+		xmlhttp.send();
+	});
+	$('#MANBTNd').click(function(){
+		var generatorid="GEN0002";
+		var path = "http://denyoapi.stridecdev.com/api2/"+generatorid+"/man-mode/"+generatorid;
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.onreadystatechange = function() {
+			if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
+				if (xmlhttp.status == 200) {
+					$("#manmodestatus").css('display', '');
+				}
+				else if (xmlhttp.status == 400) {
+					alert('There was an error 400');
+				}
+				else {
+					alert('something else other than 200 was returned');
+				}
+			}
+		};
+		xmlhttp.open("POST", path, true);
+		xmlhttp.send();
+	});
+	$('#AUTOBTN').click(function(){
+		var generatorid="GEN0002";
+		var path = "http://denyoapi.stridecdev.com/api2/"+generatorid+"/auto-mode/"+generatorid;
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.onreadystatechange = function() {
+			if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
+				if (xmlhttp.status == 200) {
+					$(".automodestatus").css('display', '');
+				}
+				else if (xmlhttp.status == 400) {
+					alert('There was an error 400');
+				}
+				else {
+					alert('something else other than 200 was returned');
+				}
+			}
+		};
+		xmlhttp.open("POST", path, true);
+		xmlhttp.send();
+	});
+	
+	$('#AUTOBTNd').click(function(){
+		var generatorid="GEN0002";
+		var path = "http://denyoapi.stridecdev.com/api2/"+generatorid+"/auto-mode/"+generatorid;
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.onreadystatechange = function() {
+			if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
+				if (xmlhttp.status == 200) {
+					$("#automodestatus").css('display', '');
+				}
+				else if (xmlhttp.status == 400) {
+					alert('There was an error 400');
+				}
+				else {
+					alert('something else other than 200 was returned');
+				}
+			}
+		};
+		xmlhttp.open("POST", path, true);
+		xmlhttp.send();
+	});
+	
+	$('#FAULTBTN').click(function(){
+		var generatorid="GEN0002";
+		var path = "http://denyoapi.stridecdev.com/api2/"+generatorid+"/fault-reset/"+generatorid;
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.onreadystatechange = function() {
+			if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
+				if (xmlhttp.status == 200) {
+					$("#faultmodestatus").css('display', '');
+				}
+				else if (xmlhttp.status == 400) {
+					alert('There was an error 400');
+				}
+				else {
+					alert('something else other than 200 was returned');
+				}
+			}
+		};
+		xmlhttp.open("POST", path, true);
+		xmlhttp.send();
+	});
   }
   servicingInfo() {
     this.nav.setRoot(ServicinginfoPage, {
