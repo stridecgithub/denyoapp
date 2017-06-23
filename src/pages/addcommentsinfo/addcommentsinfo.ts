@@ -268,12 +268,9 @@ export class AddcommentsinfoPage {
   // for the record data
   createEntry(comments, service_subject, addedImgLists, remarkget, micro_timestamp) {
 
-    let body: string = "is_mobile=1" +
-      "&service_priority=" + this.service_priority +
+    let body: string = "is_mobile=1" +    
       "&service_unitid=" + this.service_unitid +
       "&comments=" + comments +
-      "&service_remark=" + remarkget +      
-      "&serviced_by=" + this.unitDetailData.userId +
       "&service_subject=" + service_subject +
       "&micro_timestamp=" + micro_timestamp +
       "&uploadInfo=" + JSON.stringify(this.addedImgLists),
@@ -314,10 +311,8 @@ export class AddcommentsinfoPage {
   // for the record data
   updateEntry(comments, service_subject, addedImgLists, remarkget, micro_timestamp) {
     let body: string = "is_mobile=1&service_id=" + this.service_id +
-      "&comments=" + comments +
-      "&service_priority=" + this.service_priority +
-      "&service_unitid=" + this.service_unitid +
-      "&serviced_by=" + this.unitDetailData.userId +
+      "&comments=" + comments +     
+      "&service_unitid=" + this.service_unitid +     
       "&service_subject=" + service_subject +
       "&micro_timestamp=" + micro_timestamp +
       "&uploadInfo=" + JSON.stringify(this.addedImgLists),
