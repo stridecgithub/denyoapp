@@ -1,118 +1,63 @@
 [
     {
-        "category": "PC",
+        "category": "Dashboard"
+    },
+    {
+        "category": "Calendar"
+    },
+    {
+        "category": "Maps"
+    },
+    {
+        "category": "Units",
         "subs": [
             {
-                "subcategory": "Processor",
-                "manufactures": [
-                    {
-                        "manufacture": "Intel"
-                    },
-                    {
-                        "manufacture": "AMD"
-                    }
-                ]
+                "subcategory": "Unit Listing"
             },
             {
-                "subcategory": "Motherboard",
-                "manufactures": [
-                    {
-                        "manufacture": "Asus"
-                    },
-                    {
-                        "manufacture": "AMD"
-                    },
-                    {
-                        "manufacture": "GigaByte"
-                    },
-                    {
-                        "manufacture": "Intel"
-                    }
-                ]
-            },
-            {
-                "subcategory": "Memory",
-                "manufactures": [
-                    {
-                        "manufacture": "Visipro"
-                    },
-                    {
-                        "manufacture": "Crucial"
-                    },
-                    {
-                        "manufacture": "VenomRX"
-                    }
-                ]
+                "subcategory": "Unit Group"
             }
         ]
     },
     {
-        "category": "Laptop",
+        "category": "Settings",
         "subs": [
             {
-                "subcategory": "Notebook",
-                "manufactures": [
-                    {
-                        "manufacture": "Lenovo"
-                    },
-                    {
-                        "manufacture": "Dell"
-                    }
-                ]
+                "subcategory": "My Account"
             },
             {
-                "subcategory": "Netbook",
-                "manufactures": [
-                    {
-                        "manufacture": "Lenovo"
-                    },
-                    {
-                        "manufacture": "Dell"
-                    },
-                    {
-                        "manufacture": "Acer"
-                    },
-                    {
-                        "manufacture": "HP"
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "category": "Printer",
-        "subs": [
-            {
-                "subcategory": "Laserjet",
-                "manufactures": [
-                    {
-                        "manufacture": "HP"
-                    },
-                    {
-                        "manufacture": "Brother"
-                    },
-                    {
-                        "manufacture": "Canon"
-                    },
-                    {
-                        "manufacture": "Samsung"
-                    }
-                ]
+                "subcategory": "User"
             },
             {
-                "subcategory": "Deskjet",
-                "manufactures": [
-                    {
-                        "manufacture": "HP"
-                    },
-                    {
-                        "manufacture": "Canon"
-                    },
-                    {
-                        "manufacture": "Epson"
-                    }
-                ]
+                "subcategory": "Company Group"
+            },
+            {
+                "subcategory": "User Role"
+            },
+            {
+                "subcategory": "Report Template"
+            },
+            {
+                "subcategory": "Org Chart"
             }
         ]
+    },{
+        "category": "Reports"
+    }
+    ,{
+        "category": "Message",
+         "subs": [
+            {
+                "subcategory": "Create New Message"
+            },
+            {
+                "subcategory": "Inbox Message"
+            },
+            {
+                "subcategory": "Send"
+            }
+        ]
+    },{
+        "category": "Logout"
     }
 ]
