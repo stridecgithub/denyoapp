@@ -7,7 +7,6 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { TabsPage } from '../pages/tabs/tabs';
-import { OtherPage } from '../pages/other/other';
 import { CompanygroupPage } from '../pages/companygroup/companygroup';
 import { AddcompanygroupPage } from '../pages/addcompanygroup/addcompanygroup';
 import { ViewcompanygroupPage } from '../pages/viewcompanygroup/viewcompanygroup';
@@ -46,7 +45,7 @@ import { AddrequestsupportPage } from '../pages/addrequestsupport/addrequestsupp
     HomePage,
     LoginPage,
     TabsPage,
-    OtherPage,
+  
     CompanygroupPage,
     AddcompanygroupPage,
     ViewcompanygroupPage,
@@ -98,7 +97,7 @@ import { AddrequestsupportPage } from '../pages/addrequestsupport/addrequestsupp
     HomePage,
     LoginPage,
     TabsPage,
-    OtherPage,
+   
     CompanygroupPage,
     AddcompanygroupPage,
     ViewcompanygroupPage,
