@@ -15,7 +15,12 @@ import { LoginPage } from '../login/login';
 export class LogoutPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-     localStorage.setItem("userInfoId", '');
+    localStorage.setItem("userInfo", "");
+    localStorage.setItem("userInfoId", "");
+    localStorage.setItem("userInfoName", "");
+    localStorage.setItem("userInfoEmail", "");
+    localStorage.setItem("userInfoCompanyId", "");
+    localStorage.setItem("atMentionedStorage", "");
     this.navCtrl.push(LoginPage);
   }
 
