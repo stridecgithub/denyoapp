@@ -39,10 +39,13 @@ export class OrgchartPage {
   public reportAllLists = [];
   public colorListArr: any;
   public userId: any;
+  public companyId: any;
+  iframeContent: any;
   constructor(private httpdata: HTTP, public http: Http, public nav: NavController,
     public toastCtrl: ToastController, public alertCtrl: AlertController, public navParams: NavParams, public loadingCtrl: LoadingController) {
     this.loginas = localStorage.getItem("userInfoName");
     this.userId = localStorage.getItem("userInfoId");
+    this.companyId = localStorage.getItem("userInfoCompanyId");
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad OrgchartPage');
@@ -83,7 +86,7 @@ export class OrgchartPage {
         console.log(error.headers);
 
       });
-
+    this.iframeContent = '<iframe src=' + this.apiServiceURL + '/orgchart?company_id=' + this.companyId + '&is_mobile=1" height="350" frameborder="0"></iframe>';
   }
   dounitGroup() {
     this.colorListArr = [
