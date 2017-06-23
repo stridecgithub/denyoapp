@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
 import { IonicApp } from 'ionic-angular/index'
-import { Injectable } from '@angular/core';
+//import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 import { Http, Headers, RequestOptions } from "@angular/http";
-import { HttpModule } from "@angular/http";
+//import { HttpModule } from "@angular/http";
 import { Sendmsg } from '../sendmsg/sendmsg';
 import { Compose } from '../compose/compose';
-import { TabsPage } from '../tabs/tabs';
+//import { TabsPage } from '../tabs/tabs';
 import { CompanygroupPage } from '../companygroup/companygroup';
 import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
@@ -60,7 +60,7 @@ export class MessagesPage {
   presentAlert1() {
 
 
-    let text = "";
+    //let text = "";
     let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
     let options = new RequestOptions({ headers: headers });
     let linker = "http://denyoappv2.stridecdev.com/denyo2.php?method=inbox&id=1";

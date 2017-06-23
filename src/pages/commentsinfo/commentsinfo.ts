@@ -114,10 +114,12 @@ export class CommentsinfoPage {
     }
 
     //http://denyoappv2.stridecdev.com/companygroup?is_mobile=1
+
+    //http://denyoappv2.stridecdev.com/comments?is_mobile=1&startindex=0&results=8&sort=service_id&dir=asc&unitid=2
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/services?is_mobile=1&startindex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc + "&unitid=" + this.unit_id;
+      url: any = this.apiServiceURL + "/comments?is_mobile=1&startindex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc + "&unitid=" + this.unit_id;
     let res;
     console.log(url);
     this.http.get(url, options)
