@@ -32,7 +32,7 @@ export class RolePage {
   public reportData: any =
   {
     status: '',
-    sort: '',
+    sort: 'asc',
     sortascdesc: '',
     startindex: 0,
     results: 8
@@ -78,7 +78,7 @@ export class RolePage {
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "role?is_mobile=1";
+      url: any = this.apiServiceURL + "role?is_mobile=1&role_name="+this.reportData.sort;
     let res;
     this.http.get(url,options)
       .subscribe((data) => {
@@ -132,7 +132,15 @@ export class RolePage {
     } 
   }
 
-
+  onSegmentChanged(val) {
+    let splitdata = val.split(",");
+    this.reportData.sort = splitdata[1];
+    this.reportData.sortascdesc = splitdata[1];
+    //this.reportData.status = "ALL";
+    this.reportData.startindex = 0;
+    this.reportAllLists = [];
+    this.doRole();
+  }
 
 
   /******************************************/
@@ -168,18 +176,19 @@ export class RolePage {
   // for the record ID we want to remove from the remote database
   deleteEntry(recordID) {
     let
-      body: string = "key=delete&recordID=" + recordID,
+     // body: string = "key=delete&recordID=" + recordID,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "api/roles.php";
+      url: any = this.apiServiceURL + "role/" + recordID + "/1/delete";
+      console.log(url);
 
-    this.http.post(url, body, options)
+    this.http.get(url, options)
       .subscribe(data => {
         // If the request was successful notify the user
         if (data.status === 200) {
 
-          this.sendNotification(`Congratulations the role name was successfully deleted`);
+          this.sendNotification(`role name was successfully deleted`);
         }
         // Otherwise let 'em know anyway
         else {
@@ -260,6 +269,6 @@ export class RolePage {
   redirectToRole() {
     this.nav.setRoot(RolePage);
   }
-
+   
 }
 
