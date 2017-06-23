@@ -356,6 +356,7 @@ export class UserorgchartPage {
     this.http.get(url, options)
       .subscribe(data => {
         res = data.json();
+       // this.responseResultReportTo="N/A";
         this.responseResultReportTo = res.staffslist;
       });
 

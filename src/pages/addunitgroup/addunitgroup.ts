@@ -257,7 +257,7 @@ export class AddunitgroupPage {
   getColor(colorCodeValue) {
     if(this.nccode != colorCodeValue)
     {
-      document.getElementById(this.nccode).classList.remove("border-need");
+      document.getElementById(this.nccode);
     }
     console.log(colorCodeValue);
     this.ccode=colorCodeValue;

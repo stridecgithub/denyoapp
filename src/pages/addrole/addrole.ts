@@ -522,6 +522,7 @@ export class AddrolePage {
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
       url: any = this.apiServiceURL + "api/roles.php";
+      console.log(body);
 
     this.http.post(url, body, options)
       .subscribe(data => {
@@ -655,156 +656,156 @@ export class AddrolePage {
       setdeleteorg: string = this.form.controls["setdeleteorg"].value
       ;
     this.roleperMissionData.push({
-      "1": {
-        "8": {
-          "1": dashboardviewmap,
-          "2": dashboardcreatemap,
-          "3": dashboardeditmap,
-          "4": dashboarddeletemap,
-          "5": dashboardhidemap
+      "module_1": {
+        "page_8": {
+          "action_1": dashboardviewmap,
+          "action_2": dashboardcreatemap,
+          "action_3": dashboardeditmap,
+          "action_4": dashboarddeletemap,
+          "action_5": dashboardhidemap
         },
-        "12": {
-          "1": dashboardviewunits,
-          "2": dashboardcreateunits,
-          "3": dashboardeditunits,
-          "4": dashboarddeleteunits,
-          "5": dashboardhideunits
+        "page_12": {
+          "action_1": dashboardviewunits,
+          "action_2": dashboardcreateunits,
+          "action_3": dashboardeditunits,
+          "action_4": dashboarddeleteunits,
+          "action_5": dashboardhideunits
         }
       },
-      "2": {
+      "module_2": {
         // Calendar Events
-        "7": {
-          "1": calviewevents,
-          "2": calcreateevents,
-          "3": caleditevents,
-          "4": caldeleteevents
+        "page_7": {
+          "action_1": calviewevents,
+          "action_2": calcreateevents,
+          "action_3": caleditevents,
+          "action_4": caldeleteevents
         },
 
         // Calendar Services
-        "18": {
-          "1": calviewservices,
-          "2": calcreateservices,
-          "3": caleditservices,
-          "4": caldeleteservices
+        "page_18": {
+          "action_1": calviewservices,
+          "action_2": calcreateservices,
+          "action_3": caleditservices,
+          "action_4": caldeleteservices
         },
         // Calendar Alarm
-        "19": {
-          "1": calviewalarm,
-          "2": calcreatealarm,
-          "3": caleditalarm,
-          "4": caldeletealarm
+        "page_19": {
+          "action_1": calviewalarm,
+          "action_2": calcreatealarm,
+          "action_3": caleditalarm,
+          "action_4": caldeletealarm
         }
       },
-      "3": {
+      "module_3": {
         // Units Unit List
-        "9": {
-          "1": univiewlist,
-          "2": unicreatelist,
-          "3": unieditlist,
-          "4": unideletelist
+        "page_9": {
+          "action_1": univiewlist,
+          "action_2": unicreatelist,
+          "action_3": unieditlist,
+          "action_4": unideletelist
         },
         // Units Alaram
-        "13": {
-          "1": univiewalarm,
-          "2": unicreatealarm,
-          "3": unieditalarm,
-          "4": unideletealarm
+        "page_13": {
+          "action_1": univiewalarm,
+          "action_2": unicreatealarm,
+          "action_3": unieditalarm,
+          "action_4": unideletealarm
         },
         // Units Services Info
-        "14": {
-          "1": univiewservices,
-          "2": unicreateservices,
-          "3": unieditservices,
-          "4": unideleteservices
+        "page_14": {
+          "action_1": univiewservices,
+          "action_2": unicreateservices,
+          "action_3": unieditservices,
+          "action_4": unideleteservices
         },
         // Units Comments
-        "15": {
-          "1": univiewcomm,
-          "2": unicreatecomm,
-          "3": unieditcomm,
-          "4": unideletecomm
+        "page_15": {
+          "action_1": univiewcomm,
+          "action_2": unicreatecomm,
+          "action_3": unieditcomm,
+          "action_4": unideletecomm
         },
         // Units Unit Group
-        "16": {
-          "1": univiewgroup,
-          "2": unicreategroup,
-          "3": unieditgroup,
-          "4": unideletegroup
+        "page_16": {
+          "action_1": univiewgroup,
+          "action_2": unicreategroup,
+          "action_3": unieditgroup,
+          "action_4": unideletegroup
         },
         // Units Generator Model Managment
-        "20": {
-          "1": univiewgmm,
-          "2": unicreategmm,
-          "3": unieditgmm,
-          "4": unideletegmm
+        "page_20": {
+          "action_1": univiewgmm,
+          "action_2": unicreategmm,
+          "action_3": unieditgmm,
+          "action_4": unideletegmm
         }
       },
-      "4": {
-        "10": {
-          "1": viewreports,
-          "2": createreports,
-          "3": editreports,
-          "4": deletereports
+      "module_4": {
+        "page_10": {
+          "action_1": viewreports,
+          "action_2": createreports,
+          "action_3": editreports,
+          "action_4": deletereports
         }
       },
-      "5": {
+      "module_5": {
         // Message Inbox
-        "11": {
-          "1": msgviewinbox,
-          "2": msgcreateinbox,
-          "3": msgeditinbox,
-          "4": msgdeleteinbox
+        "page_11": {
+          "action_1": msgviewinbox,
+          "action_2": msgcreateinbox,
+          "action_3": msgeditinbox,
+          "action_4": msgdeleteinbox
         },
         // Message Sent
-        "17": {
-          "1": msgviewsent,
-          "2": msgcreatesent,
-          "3": msgeditsent,
-          "4": msgdeletesent
+        "page_17": {
+          "action_1": msgviewsent,
+          "action_2": msgcreatesent,
+          "action_3": msgeditsent,
+          "action_4": msgdeletesent
         }
       },
-      "6": {
+      "module_6": {
         // Settings My Account
-        "1": {
-          "1": setviewmyacc,
-          "2": setcreatemyacc,
-          "3": seteditmyacc,
-          "4": setdeletemyacc
+        "page_1": {
+          "action_1": setviewmyacc,
+          "action_2": setcreatemyacc,
+          "action_3": seteditmyacc,
+          "action_4": setdeletemyacc
         },
         // Settings User List
-        "2": {
-          "1": setviewuselst,
-          "2": setcreateuselst,
-          "3": setedituselst,
-          "4": setdeleteuselst
+        "page_2": {
+          "action_1": setviewuselst,
+          "action_2": setcreateuselst,
+          "action_3": setedituselst,
+          "action_4": setdeleteuselst
         },
         // Settings User Group
-        "3": {
-          "1": setviewusegru,
-          "2": setcreateusegru,
-          "3": seteditusegru,
-          "4": setdeleteusegru
+        "page_3": {
+          "action_1": setviewusegru,
+          "action_2": setcreateusegru,
+          "action_3": seteditusegru,
+          "action_4": setdeleteusegru
         },
         // Settings User Role
-        "4": {
-          "1": setviewuserle,
-          "2": setcreateuserle,
-          "3": setedituserle,
-          "4": setdeleteuserle
+        "page_4": {
+          "action_1": setviewuserle,
+          "action_2": setcreateuserle,
+          "action_3": setedituserle,
+          "action_4": setdeleteuserle
         },
         // Settings Report Template
-        "5": {
-          "1": setviewtmp,
-          "2": setcreatetmp,
-          "3": setedittmp,
-          "4": setdeletetmp
+        "page_5": {
+          "action_1": setviewtmp,
+          "action_2": setcreatetmp,
+          "action_3": setedittmp,
+          "action_4": setdeletetmp
         },
         // Settings Org Chart
-        "6": {
-          "1": setvieworg,
-          "2": setcreateorg,
-          "3": seteditorg,
-          "4": setdeleteorg
+        "page_6": {
+          "action_1": setvieworg,
+          "action_2": setcreateorg,
+          "action_3": seteditorg,
+          "action_4": setdeleteorg
         }
       }
     });

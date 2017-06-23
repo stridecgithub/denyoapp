@@ -72,6 +72,9 @@ background-color: #FBE983;
  .buttoncolorgroup button:focus {
 border: 1px solid #000;
 }
+ .buttoncolorgroup button.active {
+border: 1px solid #000;
+}
  /*.buttoncolorgroup button:active,.buttoncolorgroup button:focus,.buttoncolorgroup button:hover{border: 2px solid #000;}
  */.button9{
  background-color: #FF877C;

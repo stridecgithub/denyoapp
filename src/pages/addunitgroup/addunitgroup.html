@@ -28,6 +28,7 @@
 				<ion-label stacked>Company Name</ion-label>
 				<ion-input type="text" [disabled]="readOnly" formControlName="cname" [(ngModel)]="cname"></ion-input>
 			</div>
+			<div>
 			<div class="buttoncolorgroup">
 				<ion-label stacked>Select Color Code</ion-label>
 				<button class="button1" id="FBE983" (click)="getColor('FBE983')"></button>
@@ -44,6 +45,7 @@
 				<button class="button10" id="DC2128" (click)="getColor('DC2128')"></button>
 				<button class="button11" id="DAADFE" (click)="getColor('DAADFE')"></button>
 				<button class="button12" id="E1E1E1" (click)="getColor('E1E1E1')"></button>
+			</div>
 			</div>
 			<div>
 				<ion-label stacked>Remark</ion-label>
@@ -62,21 +64,21 @@
 	</div>
 </ion-content>
 <ion-footer color="bluedark">
-  <ion-toolbar color="bluedark">
-    <button ion-button icon-only clear>
+	<ion-toolbar color="bluedark">
+		<button ion-button icon-only clear>
 <ion-icon name="home" class="footer-icon"></ion-icon>
 </button>
-    <button ion-button icon-only (click)="redirectToUser()" clear>
+		<button ion-button icon-only (click)="redirectToUser()" clear>
 <ion-icon name="contacts" class="footer-icon"></ion-icon>
 </button>
-    <button ion-button icon-only (click)="redirectToUnitGroup()" clear>
+		<button ion-button icon-only (click)="redirectToUnitGroup()" clear>
 <ion-icon name="chatboxes" class="footer-icon"></ion-icon>
 </button>
-    <button ion-button icon-only (click)="redirectToUnits()" clear>
+		<button ion-button icon-only (click)="redirectToUnits()" clear>
 <ion-icon name="camera" class="footer-icon"></ion-icon>
-</button>   
-    <button ion-button icon-only (click)="redirectToRole()" clear>
+</button>
+		<button ion-button icon-only (click)="redirectToRole()" clear>
 <ion-icon name="settings" class="footer-icon"></ion-icon>
 </button>
-  </ion-toolbar>
+	</ion-toolbar>
 </ion-footer>
