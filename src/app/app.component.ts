@@ -36,8 +36,8 @@ export class MyApp {
 
   rootPage: any = LoginPage;
 
-  pages: Array<{ title: string, component: any }>;
-  //pages: any;
+  // pages: Array<{ title: string, component: any }>;
+  pages: any;
   showLevel1 = null;
   showLevel2 = null;
   constructor(public _platform: Platform, public statusBar: StatusBar, public _SplashScreen: SplashScreen,
@@ -45,35 +45,35 @@ export class MyApp {
 
 
     this.initializeApp();
-   /* this.dataService.getMenus()
+    this.dataService.getMenus()
       .subscribe((response) => {
         this.pages = response;
-        console.log(this.pages);
+        console.log("Pages Array:" + JSON.stringify(this.pages));
       });
-  */
-  // used for an example of ngFor and navigation
-  this.pages = [
-   
-    { title: 'Dashboard', component: HomePage },
-    { title: 'Company Group', component: CompanygroupPage },
-    { title: 'Users', component: UserPage },
-    //{ title: 'Add Unit Group', component: AddunitgroupPage },
-    { title: 'Unit Group', component: UnitgroupPage },
-    { title: 'Units', component: UnitsPage },
-    { title: 'Role', component: RolePage },
-    // { title: 'Add Role', component: AddrolePage },
-    { title: 'My Account', component: MyaccountPage },
-    // { title: 'At mentioned Page', component: AtmentionedPage },
 
-    { title: 'Report Template', component: ReporttemplatePage },
-    { title: 'Org Chart', component: OrgchartPage },
-    { title: 'Message', component: MessagesPage },
-    { title: 'Logout', component: LogoutPage },
-    // { title: 'Add Org', component: AddorgchartonePage },
-    //  { title: 'Add Org-2', component: AddorgcharttwoPage },
-    // { title: 'Add Report Template', component: AddreporttemplatePage}
+    // used for an example of ngFor and navigation
+    this.pages = [
 
-  ];
+      { title: 'Dashboard', component: HomePage },
+      { title: 'Company Group', component: CompanygroupPage },
+      { title: 'Users', component: UserPage },
+      //{ title: 'Add Unit Group', component: AddunitgroupPage },
+      { title: 'Unit Group', component: UnitgroupPage },
+      { title: 'Units', component: UnitsPage },
+      { title: 'Role', component: RolePage },
+      // { title: 'Add Role', component: AddrolePage },
+      { title: 'My Account', component: MyaccountPage },
+      // { title: 'At mentioned Page', component: AtmentionedPage },
+
+      { title: 'Report Template', component: ReporttemplatePage },
+      { title: 'Org Chart', component: OrgchartPage },
+      { title: 'Message', component: MessagesPage },
+      { title: 'Logout', component: LogoutPage },
+      // { title: 'Add Org', component: AddorgchartonePage },
+      //  { title: 'Add Org-2', component: AddorgcharttwoPage },
+      // { title: 'Add Report Template', component: AddreporttemplatePage}
+
+    ];
 
   }
 
@@ -114,8 +114,32 @@ export class MyApp {
       this.nav.setRoot(page);
     }*/
     //this.appCtrl.getRootNav().setRoot(page.component);
-    console.log("page com:-"+page.component);
-     this.nav.setRoot(page.component);
+    console.log("page com:-" + page.component);
+    console.log("1" + page);
+    console.log("2" + console.log(page));
+        // page.component = 'UnitsPage';
+
+    if (page.component == 'UnitsPage') {
+      this.nav.setRoot(UnitsPage);
+    } else if (page.component == 'UnitgroupPage') {
+      this.nav.setRoot(UnitgroupPage);
+    } else if (page.component == 'MyaccountPage') {
+      this.nav.setRoot(MyaccountPage);
+    } else if (page.component == 'UserPage') {
+      this.nav.setRoot(UserPage);
+    } else if (page.component == 'CompanygroupPage') {
+      this.nav.setRoot(CompanygroupPage);
+    } else if (page.component == 'RolePage') {
+      this.nav.setRoot(RolePage);
+    } else if (page.component == 'ReporttemplatePage') {
+      this.nav.setRoot(ReporttemplatePage);
+    } else if (page.component == 'OrgchartPage') {
+      this.nav.setRoot(OrgchartPage);
+    } else if (page.component == 'MessagesPage') {
+      this.nav.setRoot(MessagesPage);
+    } else if (page.component == 'LogoutPage') {
+      this.nav.setRoot(LogoutPage);
+    }
   }
 
   toggleLevel1(idx) {

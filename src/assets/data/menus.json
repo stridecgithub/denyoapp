@@ -1,63 +1,92 @@
 [
     {
-        "category": "Dashboard"
-    },
-    {
-        "category": "Calendar"
-    },
-    {
-        "category": "Maps"
-    },
-    {
-        "category": "Units",
+        "title": "Dashboard",
         "subs": [
             {
-                "subcategory": "Unit Listing"
-            },
-            {
-                "subcategory": "Unit Group"
+                "title": "Dash board",
+                "component": "HomePage"
             }
         ]
     },
     {
-        "category": "Settings",
+        "title": "Calendar",
         "subs": [
             {
-                "subcategory": "My Account"
-            },
-            {
-                "subcategory": "User"
-            },
-            {
-                "subcategory": "Company Group"
-            },
-            {
-                "subcategory": "User Role"
-            },
-            {
-                "subcategory": "Report Template"
-            },
-            {
-                "subcategory": "Org Chart"
+                "title": "Calendar",
+                "component": "CalendarPage"
             }
         ]
-    },{
-        "category": "Reports"
-    }
-    ,{
-        "category": "Message",
-         "subs": [
+    },
+    {
+        "title": "Maps",
+        "subs": [
             {
-                "subcategory": "Create New Message"
-            },
-            {
-                "subcategory": "Inbox Message"
-            },
-            {
-                "subcategory": "Send"
+                "title": "Maps",
+                "component": "MapsPage"
             }
         ]
-    },{
-        "category": "Logout"
+    },
+    {
+        "title": "Units",
+        "subs": [
+            {
+                "title": "Unit Listing",
+                "component": "UnitsPage"
+            },
+            {
+                "title": "Unit Group",
+                "component": "UnitgroupPage"
+            }
+        ]
+    },
+    {
+        "title": "Settings",
+        "subs": [
+            {
+                "title": "My Account",
+                "component": "MyaccountPage"
+            },
+            {
+                "title": "User",
+                "component": "UserPage"
+            },
+            {
+                "title": "Company Group",
+                "component": "CompanygroupPage"
+            },
+            {
+                "title": "User Role",
+                "component": "RolePage"
+            },
+            {
+                "title": "Report Template",
+                "component": "ReporttemplatePage"
+            },
+            {
+                "title": "Org Chart",
+                "component": "OrgchartPage"
+            }
+        ]
+    },
+    {
+        "title": "Reports"
+    },
+    {
+        "title": "Message",
+        "subs": [
+            {
+                "title": "Message",
+                "component": "MessagePage"
+            }
+        ]
+    },
+    {
+        "title": "Logout",
+        "subs": [
+            {
+                "title": "Logout",
+                "component": "LogoutPage"
+            }
+        ]
     }
 ]
