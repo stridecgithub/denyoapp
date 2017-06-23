@@ -18,7 +18,7 @@ import "slick-carousel";
 @Component({
   selector: 'page-orgchart',
   templateUrl: 'orgchart.html',
-	providers: [HTTP]
+  providers: [HTTP]
 })
 export class OrgchartPage {
 
