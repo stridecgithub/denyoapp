@@ -287,7 +287,7 @@ export class AddcommentsinfoPage {
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/services/store";
+      url: any = this.apiServiceURL + "/comments/store";
     console.log(url);
     console.log(body);
 
@@ -329,7 +329,7 @@ export class AddcommentsinfoPage {
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/services/update";
+      url: any = this.apiServiceURL + "/comments/update";
     console.log(url);
     console.log(body);
     this.http.post(url, body, options)
@@ -439,7 +439,7 @@ export class AddcommentsinfoPage {
       for (let i = 0; i < hashhypenhash.length; i++) {
         let imgDataArr = hashhypenhash[i].split("|");
         let imgSrc;
-        imgSrc = this.apiServiceURL + "/serviceimages" + '/' + imgDataArr[1];
+        imgSrc = this.apiServiceURL + "/commentimages" + '/' + imgDataArr[1];
         this.addedImgLists.push({
           imgSrc: imgSrc,
           imgDateTime: new Date(),
@@ -488,7 +488,7 @@ export class AddcommentsinfoPage {
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/" + recordID + "/removeresource";
+      url: any = this.apiServiceURL + "/" + recordID + "/removecommentresource";
     this.http.get(url, options)
       .subscribe(data => {
         // If the request was successful notify the user

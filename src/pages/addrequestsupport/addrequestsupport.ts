@@ -268,7 +268,7 @@ export class AddrequestsupportPage {
       "&service_remark=" + remarkget +
       "&service_subject=" + service_subject +
       "&micro_timestamp=" + micro_timestamp +
-      "&is_denyo_support=0" +
+      "&is_denyo_support=1" +
       "&uploadInfo=" + JSON.stringify(this.addedImgLists),
       //"&contact_number=" + this.contact_number +
       //"&contact_name=" + this.contact_name +
@@ -312,7 +312,7 @@ export class AddrequestsupportPage {
       "&next_service_date=" + nextServiceDate +
       "&serviced_by=" + this.unitDetailData.userId +
       "&service_subject=" + service_subject +
-      "&is_denyo_support=0" +
+      "&is_denyo_support=1" +
       "&micro_timestamp=" + micro_timestamp +
       "&uploadInfo=" + JSON.stringify(this.addedImgLists),
 
