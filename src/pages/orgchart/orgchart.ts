@@ -5,6 +5,9 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { AddorgchartonePage } from '../addorgchartone/addorgchartone';
 import { LoadingController } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
+import { HTTP } from '@ionic-native/http';
+import * as $ from 'jquery';
+import "slick-carousel";
 /**
  * Generated class for the UnitgroupPage page.
  *
@@ -15,11 +18,13 @@ import { TabsPage } from '../tabs/tabs';
 @Component({
   selector: 'page-orgchart',
   templateUrl: 'orgchart.html',
+	providers: [HTTP]
 })
 export class OrgchartPage {
 
   public pageTitle: string;
   public loginas: any;
+  public htmlContent;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   public totalCount;
   pet: string = "ALL";
@@ -34,7 +39,7 @@ export class OrgchartPage {
   public reportAllLists = [];
   public colorListArr: any;
   public userId: any;
-  constructor(public http: Http, public nav: NavController,
+  constructor(private httpdata: HTTP, public http: Http, public nav: NavController,
     public toastCtrl: ToastController, public alertCtrl: AlertController, public navParams: NavParams, public loadingCtrl: LoadingController) {
     this.loginas = localStorage.getItem("userInfoName");
     this.userId = localStorage.getItem("userInfoId");
@@ -59,6 +64,26 @@ export class OrgchartPage {
     this.reportData.startindex = 0;
     this.reportData.sort = "unitgroup_id";
     this.dounitGroup();
+
+
+    let url;
+    // url = this.apiServiceURL + "/orgchart?company_id=7&is_mobile=1";
+    //url = "http://strtheme.stridecdev.com/ioncalendar/calendar.html";
+    //url = this.apiServiceURL + "/2/1/unitdetails";
+    //http://denyoappv2.stridecdev.com/2/1/unitdetails
+    url = this.apiServiceURL + "/api/webview/orgchart.html";
+    this.httpdata.get(url, {}, {})
+      .then(data => {
+        this.htmlContent = data.data;
+      })
+      .catch(error => {
+
+        console.log(error.status);
+        console.log(error.error); // error message as string
+        console.log(error.headers);
+
+      });
+
   }
   dounitGroup() {
     this.colorListArr = [

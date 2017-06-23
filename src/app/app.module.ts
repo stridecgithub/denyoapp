@@ -40,7 +40,7 @@ import { AddreporttemplatePage } from '../pages/addreporttemplate/addreporttempl
 import { AddrequestsupportPage } from '../pages/addrequestsupport/addrequestsupport';
 import { CommentsinfoPage } from '../pages/commentsinfo/commentsinfo';
 import { AddcommentsinfoPage } from '../pages/addcommentsinfo/addcommentsinfo';
-
+import { DataServiceProvider } from '../providers/data-service/data-service';
 @NgModule({
   declarations: [
     MyApp,
@@ -76,6 +76,7 @@ import { AddcommentsinfoPage } from '../pages/addcommentsinfo/addcommentsinfo';
     UnitdetailsPage,
     ServicinginfoPage,
     CommentsinfoPage,
+    AddcommentsinfoPage,
     AddserviceinfoPage,
     AddreporttemplatePage,
     AddrequestsupportPage
@@ -130,6 +131,7 @@ import { AddcommentsinfoPage } from '../pages/addcommentsinfo/addcommentsinfo';
     UnitdetailsPage,
     ServicinginfoPage,
     CommentsinfoPage,
+    AddcommentsinfoPage,
     AddserviceinfoPage,
     AddreporttemplatePage,
     AddrequestsupportPage
@@ -137,7 +139,8 @@ import { AddcommentsinfoPage } from '../pages/addcommentsinfo/addcommentsinfo';
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: ErrorHandler, useClass: IonicErrorHandler }
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    DataServiceProvider
   ]
 })
 export class AppModule { }

@@ -25,7 +25,7 @@ import { OrgchartPage } from '../pages/orgchart/orgchart';
 //import { AddorgcharttwoPage } from '../pages/addorgcharttwo/addorgcharttwo';
 //import { AddreporttemplatePage } from '../pages/addreporttemplate/addreporttemplate';
 import { LogoutPage } from '../pages/logout/logout';
-
+import { DataServiceProvider } from '../providers/data-service/data-service';
 @Component({
   templateUrl: 'app.html'
 })
@@ -34,37 +34,42 @@ export class MyApp {
 
   rootPage: any = LoginPage;
 
-  pages: Array<{ title: string, component: any }>;
-
+  pages: any;
+  showLevel1 = null;
+  showLevel2 = null;
   constructor(public _platform: Platform, public statusBar: StatusBar, public _SplashScreen: SplashScreen,
-    public appCtrl: App) {
+    public appCtrl: App, public dataService: DataServiceProvider) {
 
 
     this.initializeApp();
+    this.dataService.getMenus()
+      .subscribe((response) => {
+        this.pages = response;
+        console.log(this.pages);
+      });
+    /*
+  // used for an example of ngFor and navigation
+  this.pages = [
+   
+    { title: 'Dashboard', component: HomePage },
+    { title: 'Company Group', component: CompanygroupPage },
+    { title: 'Users', component: UserPage },
+    //{ title: 'Add Unit Group', component: AddunitgroupPage },
+    { title: 'Unit Group', component: UnitgroupPage },
+    { title: 'Units', component: UnitsPage },
+    { title: 'Role', component: RolePage },
+    // { title: 'Add Role', component: AddrolePage },
+    { title: 'My Account', component: MyaccountPage },
+    // { title: 'At mentioned Page', component: AtmentionedPage },
 
-    // used for an example of ngFor and navigation
-    this.pages = [
-      /*{ title: 'Tabs Page', component: TabsPage  },
-      { title: 'Other Page', component: OtherPage },*/
-      { title: 'Dashboard', component: HomePage },
-      { title: 'Company Group', component: CompanygroupPage },
-      { title: 'Users', component: UserPage },
-      //{ title: 'Add Unit Group', component: AddunitgroupPage },
-      { title: 'Unit Group', component: UnitgroupPage },
-      { title: 'Units', component: UnitsPage },
-      { title: 'Role', component: RolePage },
-     // { title: 'Add Role', component: AddrolePage },
-      { title: 'My Account', component: MyaccountPage },
-      // { title: 'At mentioned Page', component: AtmentionedPage },
-
-      { title: 'Report Template', component: ReporttemplatePage },
-      { title: 'Org Chart', component: OrgchartPage },
-      { title: 'Logout', component: LogoutPage },
-     // { title: 'Add Org', component: AddorgchartonePage },
+    { title: 'Report Template', component: ReporttemplatePage },
+    { title: 'Org Chart', component: OrgchartPage },
+    { title: 'Logout', component: LogoutPage },
+    // { title: 'Add Org', component: AddorgchartonePage },
     //  { title: 'Add Org-2', component: AddorgcharttwoPage },
-     // { title: 'Add Report Template', component: AddreporttemplatePage}
+    // { title: 'Add Report Template', component: AddreporttemplatePage}
 
-    ];
+  ];*/
 
   }
 
@@ -92,5 +97,31 @@ export class MyApp {
     this.nav.setRoot(page.component);
     //this.appCtrl.getRootNav().setRoot(page.component);
   }
+
+  toggleLevel1(idx) {
+    if (this.isLevel1Shown(idx)) {
+      this.showLevel1 = null;
+    } else {
+      this.showLevel1 = idx;
+    }
+  };
+
+  toggleLevel2(idx) {
+    if (this.isLevel2Shown(idx)) {
+      this.showLevel1 = null;
+      this.showLevel2 = null;
+    } else {
+      this.showLevel1 = idx;
+      this.showLevel2 = idx;
+    }
+  };
+
+  isLevel1Shown(idx) {
+    return this.showLevel1 === idx;
+  };
+
+  isLevel2Shown(idx) {
+    return this.showLevel2 === idx;
+  };
 }
 
