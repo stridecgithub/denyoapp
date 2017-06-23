@@ -41,6 +41,7 @@ import { AddrequestsupportPage } from '../pages/addrequestsupport/addrequestsupp
 import { CommentsinfoPage } from '../pages/commentsinfo/commentsinfo';
 import { AddcommentsinfoPage } from '../pages/addcommentsinfo/addcommentsinfo';
 import { DataServiceProvider } from '../providers/data-service/data-service';
+import { MessagesPage } from '../pages/messages/messages';
 @NgModule({
   declarations: [
     MyApp,
@@ -79,7 +80,8 @@ import { DataServiceProvider } from '../providers/data-service/data-service';
     AddcommentsinfoPage,
     AddserviceinfoPage,
     AddreporttemplatePage,
-    AddrequestsupportPage
+    AddrequestsupportPage,
+    MessagesPage
   ],
   imports: [
     BrowserModule,
@@ -134,7 +136,8 @@ import { DataServiceProvider } from '../providers/data-service/data-service';
     AddcommentsinfoPage,
     AddserviceinfoPage,
     AddreporttemplatePage,
-    AddrequestsupportPage
+    AddrequestsupportPage,
+    MessagesPage
   ],
   providers: [
     StatusBar,

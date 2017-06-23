@@ -239,19 +239,19 @@ export class AddrequestsupportPage {
 
       let service_remark: string = this.form.controls["service_remark"].value,
         service_subject: string = this.form.controls["service_subject"].value;
-      
+
       console.log("service_remark:" + service_remark);
-    
+
       console.log("service_subject:" + service_subject);
       console.log("nextServiceDate:" + this.unitDetailData.nextServiceDate);
       console.log("Image Data" + JSON.stringify(this.addedImgLists));
       //let d = new Date();
       //let micro_timestamp = d.getFullYear() + "" + d.getMonth() + "" + d.getDate() + "" + d.getHours() + "" + d.getMinutes() + "" + d.getSeconds();
       if (this.isEdited) {
-        this.updateEntry( service_remark, service_subject, this.addedImgLists, this.unitDetailData.hashtag, this.unitDetailData.nextServiceDate, this.micro_timestamp);
+        this.updateEntry(service_remark, service_subject, this.addedImgLists, this.unitDetailData.hashtag, this.unitDetailData.nextServiceDate, this.micro_timestamp);
       }
       else {
-        this.createEntry( service_remark, service_subject, this.addedImgLists, this.unitDetailData.hashtag, this.unitDetailData.nextServiceDate, this.micro_timestamp);
+        this.createEntry(service_remark, service_subject, this.addedImgLists, this.unitDetailData.hashtag, this.unitDetailData.nextServiceDate, this.micro_timestamp);
       }
     }
   }
@@ -261,13 +261,14 @@ export class AddrequestsupportPage {
   // to our remote PHP script (note the body variable we have created which
   // supplies a variable of key with a value of create followed by the key/value pairs
   // for the record data
-  createEntry( service_remark,  service_subject, addedImgLists, remarkget, nextServiceDate, micro_timestamp) {
+  createEntry(service_remark, service_subject, addedImgLists, remarkget, nextServiceDate, micro_timestamp) {
 
     let body: string = "is_mobile=1" +
       "&service_unitid=" + this.service_unitid +
       "&service_remark=" + remarkget +
       "&service_subject=" + service_subject +
       "&micro_timestamp=" + micro_timestamp +
+      "&is_denyo_support=0" +
       "&uploadInfo=" + JSON.stringify(this.addedImgLists),
       //"&contact_number=" + this.contact_number +
       //"&contact_name=" + this.contact_name +
@@ -311,6 +312,7 @@ export class AddrequestsupportPage {
       "&next_service_date=" + nextServiceDate +
       "&serviced_by=" + this.unitDetailData.userId +
       "&service_subject=" + service_subject +
+      "&is_denyo_support=0" +
       "&micro_timestamp=" + micro_timestamp +
       "&uploadInfo=" + JSON.stringify(this.addedImgLists),
 

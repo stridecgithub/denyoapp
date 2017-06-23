@@ -19,11 +19,12 @@ import { LoadingController } from 'ionic-angular';
 export class ReporttemplatePage {
   public pageTitle: string;
   public loginas: any;
+  public userId: any;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   public templatenamehash;
   public templatenamecomm;
   public totalCount;
-  public userId: any;
+
   pet: string = "ALL";
   public reportData: any =
   {
@@ -81,12 +82,12 @@ export class ReporttemplatePage {
         console.log("1" + res.availabletemp.length);
         console.log("2" + res.availabletemp);
         if (res.availabletemp.length > 0) {
-          for (let availabletemps in res.availabletemp) {           
+          for (let availabletemps in res.availabletemp) {
             this.reportAllLists.push({
               templatename: res.availabletemp[availabletemps].templatename,
               availableheading: res.availabletemp[availabletemps].availableheading.split("#")
             });
-          }         
+          }
           this.totalCount = res.totalCount;
           this.reportData.startindex += this.reportData.results;
         } else {

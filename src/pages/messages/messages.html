@@ -1,0 +1,120 @@
+<!--
+  Generated template for the MessagesPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="bluedark">
+    <ion-title class="page-title">{{pageTitle}}</ion-title>
+    <ion-buttons start>
+      <button ion-button menuToggle class="menu-toggle">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    </ion-buttons>
+    <!--ion-buttons end>
+      <button (click)="doAdd()" style="background-color:transparent">
+            <ion-icon name="ios-add-circle-outline"></ion-icon>           
+        </button>
+    </ion-buttons-->
+    <ion-buttons end>
+      <button ion-button>
+  <ion-icon ios="ios-notifications-outline" md="md-notifications-outline"></ion-icon>
+</button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-navbar class="backtoprevious-navbar">
+    <ion-buttons start class="backtoprevious-start">
+      <button ion-button icon-left class="backtoprevious-button" (click)="previous()">
+ <ion-icon name="arrow-back" class="backtoprevious-icon"></ion-icon>
+ Back to previous
+</button>
+    </ion-buttons>
+    <ion-buttons end>
+      Login As:{{loginas}}
+    </ion-buttons>
+  </ion-navbar>
+  <button class="add-new-btn" (click)="doAdd()">
+  	<div class="algn-cent">
+    	<ion-icon name="ios-add-circle-outline"></ion-icon>
+        <span>Add New Units</span>
+    </div>
+  </button>
+</ion-header>
+
+<ion-content padding>
+  <p>
+    <button onclick="showtabs(0)">Inbox</button>
+    <button onclick="showtabs(1)">Sent</button>
+    <button onclick="showtabs(2)">Compose</button>
+    <button onclick="postmsg(this)" style="display:none" id="dm">Send Message</button>
+  </p>
+  <p id="homepage">
+    <select class="sel" name="sort" id="sort" onchange="ordermsg(this,0)">
+ <option value="0">Sort By</option>
+ <option value="1">Favorite Ascending</option>
+ <option value="2">Sender Ascending</option>
+ <option value="3">Sender Descending</option>
+ <option value="4">Subject Ascending</option>
+ <option value="5">Subject Descending</option>
+ </select>
+    <select class="sel" name="sort" id="sact" onchange="actmsg(this,0">
+  <option value="0">Action</option>
+ <option value="1">Delete</option>
+ <option value="2">Favorite</option>
+ <option value="5">Unfavorite</option>
+ <option value="3">Mark as Unread</option>
+  <option value="4">Mark as read</option>
+ </select>
+    <span id="contentview"></span>
+  </p>
+  <p id="sendpage" style="display:none">
+    <select class="sel" name="sort" id="sort" onchange="ordermsg(this,1)">
+ <option value="0">Sort By</option>
+ <option value="1">Sender Ascending</option>
+ <option value="2">Sender Descending</option>
+ <option value="3">Subject Ascending</option>
+ <option value="4">Subject Descending</option>
+ </select>
+    <select class="sel" name="sort" id="sact" onchange="actmsg(this,1)">
+  <option value="0">Action</option>
+ <option value="1">Delete</option>
+ </select>
+    <span id="contentview2"></span>
+  </p>
+  <p id="compose" style="display:none">
+    <span id="mwin">
+  <input type="hidden" value="0" name="message_priority" id="message_priority"/>
+  <p><input type="text" name="to" id="to" placeholder="To Address" class="suggest" onkeyup="sptions(event)"  onblur="sptionshide()"/></p>
+   <span><input type="checkbox" name="cmail" value="1"/>&nbsp; Copy Mail</span><span><img src="assets/icon/m1.png" onclick="e('message_priority').value=1" hspace="10"/><img onclick="e('message_priority').value=2" src="assets/icon/m2.png" hspace="10"/></span>
+
+
+    <p><input type="text" name="subject" id="subject" placeholder="Subject" /></p>
+    <p><textarea placeholder="Write Your Message" name="message" id="message"></textarea></p>
+
+    </span>
+  </p>
+  <p id="viewmsg" style="display:none">
+    <span id="contentview3"></span>
+    <span style="float:right"><a href="javascript:void(0)" onclick="replayall(0)" class="mlink">Replay All</a><a href="javascript:void(0)" onclick="replayall(1)">Forward</a></span>
+  </p>
+</ion-content>
+<ion-footer color="bluedark">
+  <ion-toolbar color="bluedark">
+    <button ion-button icon-only clear>
+<ion-icon name="home" class="footer-icon"></ion-icon>
+</button>
+    <button ion-button icon-only (click)="redirectToUser()" clear>
+<ion-icon name="contacts" class="footer-icon"></ion-icon>
+</button>
+    <button ion-button icon-only (click)="redirectToUnitGroup()" clear>
+<ion-icon name="chatboxes" class="footer-icon"></ion-icon>
+</button>
+    <button ion-button icon-only (click)="redirectToUnits()" clear>
+<ion-icon name="camera" class="footer-icon"></ion-icon>
+</button>   
+    <button ion-button icon-only (click)="redirectToRole()" clear>
+<ion-icon name="settings" class="footer-icon"></ion-icon>
+</button>
+  </ion-toolbar>
+</ion-footer>

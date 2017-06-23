@@ -1,0 +1,25 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>compose</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding  ng-controller="MainCtrl">
+<p>
+    <button [navPush]="home">Inbox</button> 
+    <button [navPush]="sendmsg">Sent</button>
+     <button onclick="postmsg(this)">Send Message</button>
+  </p>
+  <span id="mwin">
+  <input type="hidden" value="0" name="message_priority" id="message_priority"/>
+  <p><input type="text" name="to" id="to" placeholder="To Address" class="suggest" onkeyup="sptions(event)"  onblur="sptionshide()"/></p>
+   <p><span><input type="checkbox" name="cmail" value="1"/>&nbsp; Copy Mail</span><span><img src="assets/icon/m1.png" onclick="e('message_priority').value=1" hspace="10"/><img onclick="e('message_priority').value=2" src="assets/icon/m2.png" hspace="10"/></span></p>
+  <p><input type="text" name="subject" id="subject" placeholder="Subject"/></p>
+  <p><textarea placeholder="Write Your Message"  name="message" id="message"></textarea></p>
+  </span>
+ 
+  <div ng-init="function1()"></div>
+</ion-content>
+

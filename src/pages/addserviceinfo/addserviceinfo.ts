@@ -291,6 +291,7 @@ export class AddserviceinfoPage {
       "&serviced_datetime=" + serviced_datetime +
       "&service_remark=" + remarkget +
       "&next_service_date=" + nextServiceDate +
+      "&is_denyo_support=0" +
       "&serviced_by=" + this.unitDetailData.userId +
       "&is_request=" + is_request +
       "&service_subject=" + service_subject +
@@ -338,6 +339,7 @@ export class AddserviceinfoPage {
       "&service_unitid=" + this.service_unitid +
       "&service_remark=" + service_remark +
       "&next_service_date=" + nextServiceDate +
+      "&is_denyo_support=0" +
       "&serviced_by=" + this.unitDetailData.userId +
       "&is_request=" + is_request +
       "&service_subject=" + service_subject +

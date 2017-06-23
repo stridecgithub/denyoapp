@@ -26,6 +26,8 @@ import { OrgchartPage } from '../pages/orgchart/orgchart';
 //import { AddreporttemplatePage } from '../pages/addreporttemplate/addreporttemplate';
 import { LogoutPage } from '../pages/logout/logout';
 import { DataServiceProvider } from '../providers/data-service/data-service';
+import { MessagesPage } from '../pages/messages/messages';
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -65,6 +67,7 @@ export class MyApp {
 
     { title: 'Report Template', component: ReporttemplatePage },
     { title: 'Org Chart', component: OrgchartPage },
+    { title: 'Message', component: MessagesPage },
     { title: 'Logout', component: LogoutPage },
     // { title: 'Add Org', component: AddorgchartonePage },
     //  { title: 'Add Org-2', component: AddorgcharttwoPage },
@@ -111,6 +114,7 @@ export class MyApp {
       this.nav.setRoot(page);
     }*/
     //this.appCtrl.getRootNav().setRoot(page.component);
+    console.log("page com:-"+page.component);
      this.nav.setRoot(page.component);
   }
 
