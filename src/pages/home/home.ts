@@ -17,7 +17,7 @@ export class HomePage {
 
   goPage(page) {
     console.log(page);
-    //this.nav.setRoot(page);
+    this.nav.setRoot(page);
   }
   redirectToUser() {
     this.nav.setRoot(UserPage);

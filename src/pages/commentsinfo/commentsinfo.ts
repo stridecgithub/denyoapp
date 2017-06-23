@@ -4,7 +4,7 @@ import { CompanygroupPage } from '../companygroup/companygroup';
 import { UserPage } from '../user/user';
 import { LoadingController } from 'ionic-angular';
 import { MyaccountPage } from '../myaccount/myaccount';
-import { AddserviceinfoPage } from '../addserviceinfo/addserviceinfo';
+import { AddcommentsinfoPage } from '../addcommentsinfo/addcommentsinfo';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
 import { UnitsPage } from '../units/units';
 import { UnitdetailsPage } from '../unitdetails/unitdetails';
@@ -168,28 +168,19 @@ export class CommentsinfoPage {
   }
   doAdd() {
     localStorage.setItem("microtime", "");
-    this.nav.setRoot(AddserviceinfoPage, {
+    this.nav.setRoot(AddcommentsinfoPage, {
       record: this.NP.get("record"),
       act: 'Add',
       unit_id: this.unit_id
     });
   }
 
-
-  doRequest() {
-    localStorage.setItem("microtime", "");
-    this.nav.setRoot(AddrequestsupportPage, {
-      record: this.NP.get("record"),
-      act: 'Add',
-      unit_id: this.unit_id
-    });
-  }
 
 
 
   doEdit(item, act) {
     localStorage.setItem("microtime", "");
-    this.nav.setRoot(AddserviceinfoPage, {
+    this.nav.setRoot(AddcommentsinfoPage, {
       record: item,
       act: 'Edit'
     });
