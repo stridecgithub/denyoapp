@@ -77,11 +77,7 @@ export class AddcommentsinfoPage {
     this.form = formBuilder.group({
       profilePic: [''],
       comments: ['', Validators.required],
-      service_subject: ['', Validators.required],
-      service_remark: ['', Validators.required],
-      serviced_by: ['', Validators.required],
-      next_service_date: [''],
-      is_request: ['']
+      service_subject: ['', Validators.required]
     });
     this.service_priority = 0;
     // Watch the form for changes, and
