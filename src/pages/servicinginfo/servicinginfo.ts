@@ -11,6 +11,7 @@ import { UnitdetailsPage } from '../unitdetails/unitdetails';
 import { RolePage } from '../role/role';
 import 'rxjs/add/operator/map';
 import { Http, Headers, RequestOptions } from '@angular/http';
+import { AddrequestsupportPage } from '../addrequestsupport/addrequestsupport';
 /**
  * Generated class for the ServicinginfoPage page.
  *
@@ -170,10 +171,21 @@ export class ServicinginfoPage {
     this.nav.setRoot(AddserviceinfoPage, {
       record: this.NP.get("record"),
       act: 'Add',
-      unit_id:this.unit_id
+      unit_id: this.unit_id
     });
   }
 
+
+  doRequest() {
+    localStorage.setItem("microtime", "");
+    this.nav.setRoot(AddrequestsupportPage, {
+      record: this.NP.get("record"),
+      act: 'Add',
+      unit_id: this.unit_id
+    });
+  }
+
+  
 
   doEdit(item, act) {
     localStorage.setItem("microtime", "");

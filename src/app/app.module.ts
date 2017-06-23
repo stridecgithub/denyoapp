@@ -38,6 +38,8 @@ import { UnitdetailsPage } from '../pages/unitdetails/unitdetails';
 import { ServicinginfoPage } from '../pages/servicinginfo/servicinginfo';
 import { AddserviceinfoPage } from '../pages/addserviceinfo/addserviceinfo';
 import { AddreporttemplatePage } from '../pages/addreporttemplate/addreporttemplate';
+import { AddrequestsupportPage } from '../pages/addrequestsupport/addrequestsupport';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -73,7 +75,8 @@ import { AddreporttemplatePage } from '../pages/addreporttemplate/addreporttempl
     UnitdetailsPage,
     ServicinginfoPage,
     AddserviceinfoPage,
-    AddreporttemplatePage
+    AddreporttemplatePage,
+    AddrequestsupportPage
   ],
   imports: [
     BrowserModule,
@@ -125,7 +128,8 @@ import { AddreporttemplatePage } from '../pages/addreporttemplate/addreporttempl
     UnitdetailsPage,
     ServicinginfoPage,
     AddserviceinfoPage,
-    AddreporttemplatePage
+    AddreporttemplatePage,
+    AddrequestsupportPage
   ],
   providers: [
     StatusBar,   

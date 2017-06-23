@@ -1,0 +1,114 @@
+<!--
+  Generated template for the AddserviceinfoPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="bluedark">
+    <ion-title class="page-title">{{unitDetailData.pageTitle}}</ion-title>
+    <ion-buttons start>
+      <button ion-button menuToggle class="menu-toggle">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button>
+ <ion-icon name="notifications-outline"></ion-icon>
+</button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-navbar class="backtoprevious-navbar">
+    <ion-buttons start class="backtoprevious-start">
+      <button ion-button icon-left class="backtoprevious-button" (click)="previous()">
+ <ion-icon name="arrow-back" class="backtoprevious-icon"></ion-icon>
+ Back to previous
+</button>
+    </ion-buttons>
+    <ion-buttons end>
+      Login As:{{unitDetailData.loginas}}
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <form [formGroup]="form" (ngSubmit)="saveEntry()" enctype='application/x-www-form-urlencoded' method="post">
+    <ion-list>
+
+
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <p><b>Project Name :</b> Dum</p>
+            <p><b>Location :</b> Boonlay, Singapor
+              <br>(1.31425556,103.7093099)
+            </p>
+            <p><b>Next Servicing Date :</b> 2017 05 June</p>
+            <p><b>Running Hours :</b> 0.743</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-item>
+        <ion-label stacked>Subject <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
+        <ion-input type="text" [disabled]="readOnly" formControlName="service_subject" [(ngModel)]="service_subject"></ion-input>
+      </ion-item>
+      <b>Remark</b> <span class="mandatory" *ngIf="hideActionButton">*</span>
+      <input type="text" (keyup)=address1get($event.target.value); id="example1" class="form-control" rows="8" [disabled]="readOnly"
+        formControlName="service_remark" rows="6" [(ngModel)]="service_remark">
+      <p><b>Upload Images</b></p>
+      <p>Maximum Number of upload photos:10</p>
+      <div class="profile-image-wrapper" (click)="takePictureURL(micro_timestamp)" *ngIf="isUploaded">
+        <div class="profile-image-placeholder">
+          <ion-icon name="add" style="color: blue;
+    position: relative;
+    top: -7px;
+    left: 14px;"></ion-icon>
+        </div>
+        <div class="profile-image"></div>
+      </div>
+
+      <progress value="{{progress}}" max="100" *ngIf="isProgress"> </progress>
+      <span *ngIf="isProgress" style="padding:2px">{{progress}}%</span>
+
+      <div *ngIf="addedImgLists.length>0"></div>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-auto *ngFor="let item of addedImgLists; let i = index" [attr.data-index]="i">
+            <ion-item>
+              <ion-avatar item-start><img src="{{addedImgLists[i].imgSrc}}" width="100" height="50" /> </ion-avatar>
+            </ion-item>
+            <a href="#" (click)="doRemoveResouce(addedImgLists[i].resouce_id,item)">
+              <ion-icon name="backspace" style="color: brown;
+    font-size: 20px;
+    position: relative;
+    bottom: 55px;
+    left: 24px;"></ion-icon>
+            </a>
+          </ion-col>
+
+        </ion-row>
+      </ion-grid>
+      <ion-item *ngIf="hideActionButton">
+        <button ion-button color="primary" text-center block [disabled]="!form.valid">Complete and Save</button>
+      </ion-item>
+    </ion-list>
+  </form>
+</ion-content>
+<ion-footer color="bluedark">
+  <ion-toolbar color="bluedark">
+    <button ion-button icon-only clear>
+<ion-icon name="home" class="footer-icon"></ion-icon>
+</button>
+    <button ion-button icon-only (click)="redirectToUser()" clear>
+<ion-icon name="contacts" class="footer-icon"></ion-icon>
+</button>
+    <button ion-button icon-only (click)="redirectToUnitGroup()" clear>
+<ion-icon name="chatboxes" class="footer-icon"></ion-icon>
+</button>
+    <button ion-button icon-only (click)="redirectToUnits()" clear>
+<ion-icon name="camera" class="footer-icon"></ion-icon>
+</button>
+    <button ion-button icon-only (click)="redirectToRole()" clear>
+<ion-icon name="settings" class="footer-icon"></ion-icon>
+</button>
+  </ion-toolbar>
+</ion-footer>

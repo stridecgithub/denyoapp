@@ -2,23 +2,23 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 /**
- * Generated class for the OtherPage page.
+ * Generated class for the MapsPage page.
  *
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
 @IonicPage()
 @Component({
-  selector: 'page-other',
-  templateUrl: 'other.html',
+  selector: 'page-maps',
+  templateUrl: 'maps.html',
 })
-export class OtherPage {
+export class MapsPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad OtherPage');
+    console.log('ionViewDidLoad MapsPage');
   }
 
 }

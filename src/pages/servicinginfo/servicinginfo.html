@@ -34,13 +34,13 @@
       Login As:{{loginas}}
     </ion-buttons>
   </ion-navbar>
-  <button class="add-new-btn" small (click)="doAdd()">
+  <button class="add-new-btn" ion-button small (click)="doAdd()">
   	<div class="algn-cent">
     	<ion-icon name="ios-add-circle-outline"></ion-icon>
         <span>Servicing Action</span>
     </div>
  </button>
-  <button class="add-new-btn" small (click)="doRequest()">
+  <button class="add-new-btn"  ion-button small (click)="doRequest()">
   	<div class="algn-cent">
     	<ion-icon name="paper-plane"></ion-icon>
         <span>Request Support</span>
@@ -51,6 +51,9 @@
 
 
 <ion-content padding class="ion-content">
+
+ 
+
  <div class="error" *ngIf="totalCount==0">No entries found</div>
   <ion-item style="width: 100%; margin: 0; padding-left: 10px;">
     <ion-label>Sort By</ion-label>
