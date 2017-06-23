@@ -51,7 +51,6 @@
       <h2><b>Next Servicing:</b>{{unitDetailData.nextservicedate}}</h2>
     </div>
   </ion-item>
-  <iframe src="http://denyoappv2.stridecdev.com/2/1/unitdetails" height="350" frameborder="0"></iframe>
   <ion-item>
     <button ion-button icon-left>
   <ion-icon name="battery-charging"></ion-icon>
@@ -69,13 +68,13 @@
   <ion-icon name="alarm"></ion-icon>
  Alarm Log
 </button>
-    <button ion-button icon-left  (click)="commentsInfo()">
+    <button ion-button icon-left (click)="commentsInfo()">
   <ion-icon name="chatboxes"></ion-icon>
  Events / Comments
 </button>
   </ion-item>
-
-  
+  <!--div [innerHTML]="iframeContent"></div-->
+  <div [innerHTML]="sanitizer.bypassSecurityTrustHtml(iframeContent)"></div>
   <!--div [innerHTML]="unitDetailData.htmlContent"></div-->
 </ion-content>
 

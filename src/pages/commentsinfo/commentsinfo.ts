@@ -126,10 +126,10 @@ export class CommentsinfoPage {
       .subscribe((data) => {
         res = data.json();
         console.log(JSON.stringify(res));
-        console.log("1" + res.services.length);
-        console.log("2" + res.services);
-        if (res.services.length > 0) {
-          this.reportAllLists = res.services;
+        console.log("1" + res.comments.length);
+        console.log("2" + res.comments);
+        if (res.comments.length > 0) {
+          this.reportAllLists = res.comments;
           this.totalCount = res.totalCount;
           this.reportData.startindex += this.reportData.results;
           this.loadingMoreDataContent = 'Loading More Data';
@@ -215,13 +215,13 @@ export class CommentsinfoPage {
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/services/" + recordID + "/1/delete";
+      url: any = this.apiServiceURL + "/comments/" + recordID + "/1/delete";
     this.http.get(url, options)
       .subscribe(data => {
         // If the request was successful notify the user
         if (data.status === 200) {
 
-          this.sendNotification(`Services info was successfully deleted`);
+          this.sendNotification(`Comments was successfully deleted`);
         }
         // Otherwise let 'em know anyway
         else {

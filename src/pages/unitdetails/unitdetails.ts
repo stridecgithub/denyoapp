@@ -8,6 +8,7 @@ import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitsPage } from '../units/units';
 import { RolePage } from '../role/role';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
+import { DomSanitizer } from '@angular/platform-browser';
 //import { Http, Headers, RequestOptions } from '@angular/http';
 import { HTTP } from '@ionic-native/http';
 import * as $ from 'jquery';
@@ -29,7 +30,14 @@ export class UnitdetailsPage {
 
 	public item = [];
 	public colorListArr = [];
+	iframeContent: any;
+	//private _inputpdf: string = '<iframe src="http://denyoappv2.stridecdev.com/2/1/unitdetails" height="350" frameborder="0"></iframe>';
 	private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
+
+
+	
+
+    
 	public unitDetailData: any = {
 		unit_id: '',
 		unitname: '',
@@ -45,16 +53,20 @@ export class UnitdetailsPage {
 		htmlContent: '',
 		iframeURL: ''
 	}
-	constructor(private httpdata: HTTP, public NP: NavParams, public navCtrl: NavController, public navParams: NavParams, public nav: NavController) {
+	constructor(private sanitizer: DomSanitizer,private httpdata: HTTP, public NP: NavParams, public navCtrl: NavController, public navParams: NavParams, public nav: NavController) {
 		this.unitDetailData.loginas = localStorage.getItem("userInfoName");
 		this.unitDetailData.userId = localStorage.getItem("userInfoId");
 	}
+
+	
 
 	ionViewDidLoad() {
 		console.log('ionViewDidLoad UnitdetailsPage');
 	}
 
 	ionViewWillEnter() {
+
+
 		this.colorListArr = [
 			"FBE983",
 			"5584EE",
@@ -98,6 +110,8 @@ export class UnitdetailsPage {
 		this.unitDetailData.nextservicedate = editItem.nextservicedate;
 		this.unitDetailData.alarmnotificationto = editItem.nextservicedate;
 		this.unitDetailData.favoriteindication = favorite;
+
+		this.iframeContent = '<iframe src="http://denyoappv2.stridecdev.com/'+this.unitDetailData.unit_id+'/1/unitdetails" height="350" frameborder="0"></iframe>';
 		let url;
 		// url = this.apiServiceURL + "/orgchart?company_id=7&is_mobile=1";
 		//url = "http://strtheme.stridecdev.com/ioncalendar/calendar.html";

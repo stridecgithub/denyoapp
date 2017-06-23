@@ -269,10 +269,11 @@ export class AddcommentsinfoPage {
   createEntry(comments, service_subject, addedImgLists, remarkget, micro_timestamp) {
 
     let body: string = "is_mobile=1" +
-      "&service_unitid=" + this.service_unitid +
-      "&service_priority=" + this.service_priority +
+      "&comment_unit_id=" + this.service_unitid +
+      "&comment_priority=" + this.service_priority +
       "&comments=" + comments +
-      "&service_subject=" + service_subject +
+      "&comment_by=" + this.unitDetailData.userId +
+      "&comment_subject=" + service_subject +
       "&micro_timestamp=" + micro_timestamp +
       "&uploadInfo=" + JSON.stringify(this.addedImgLists),
       //"&contact_number=" + this.contact_number +
@@ -291,7 +292,7 @@ export class AddcommentsinfoPage {
         // If the request was successful notify the user
         if (data.status === 200) {
           localStorage.setItem("microtime", "");
-          this.sendNotification(`Servicing info was successfully added`);
+          this.sendNotification(`Comments was successfully added`);
           this.nav.setRoot(CommentsinfoPage, {
             record: this.NP.get("record")
           });
@@ -313,9 +314,10 @@ export class AddcommentsinfoPage {
   updateEntry(comments, service_subject, addedImgLists, remarkget, micro_timestamp) {
     let body: string = "is_mobile=1&service_id=" + this.service_id +
       "&comments=" + comments +
-      "&service_priority=" + this.service_priority +
-      "&service_unitid=" + this.service_unitid +
-      "&service_subject=" + service_subject +
+      "&comment_priority=" + this.service_priority +
+      "&comment_unit_id=" + this.service_unitid +
+      "&comment_by=" + this.unitDetailData.userId +
+      "&comment_subject=" + service_subject +
       "&micro_timestamp=" + micro_timestamp +
       "&uploadInfo=" + JSON.stringify(this.addedImgLists),
 
@@ -331,7 +333,7 @@ export class AddcommentsinfoPage {
         // If the request was successful notify the user
         if (data.status === 200) {
           localStorage.setItem("microtime", "");
-          this.sendNotification(`Servicing info  was successfully updated`);
+          this.sendNotification(`Comments was successfully updated`);
           this.nav.setRoot(CommentsinfoPage, {
             record: this.NP.get("record")
           });
