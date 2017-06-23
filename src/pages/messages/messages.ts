@@ -27,7 +27,7 @@ export class MessagesPage {
   public loginas: any;
   public userId: any;
   public rootPage: any;
-
+ public pageTitle: string;
   Catdata: any;
   constructor(app: IonicApp, public navCtrl: NavController, private alertCtrl: AlertController, private http: Http) {
     this.rootPage = MessagesPage; this.app = app;
@@ -44,6 +44,7 @@ export class MessagesPage {
     console.log('ionViewDidLoad MessagesPage');
   }
   ionViewWillEnter() {
+     this.pageTitle = "Messages";
     this.presentAlert1();
   }
 
