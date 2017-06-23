@@ -43,7 +43,7 @@ export class AddunitstwoPage {
   public readOnly: boolean = false;
   public addedImgLists: any;
   public userInfo = [];
-  public atMentionedInfo = [];
+  
   // Flag to hide the form upon successful completion of remote operation
   public hideForm: boolean = false;
   public hideActionButton = true;
@@ -146,41 +146,7 @@ export class AddunitstwoPage {
       }
     }
 
-    // Atmentioned Tag Storage
-    let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
-      headers: any = new Headers({ 'Content-Type': type }),
-      options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/getstaffs";
-    let res;
-    localStorage.setItem("atMentionedStorage", JSON.stringify(this.atMentionedInfo));
-    this.http.get(url, options)
-      .subscribe(data => {
-        res = data.json();
-        res.staffslist;
-        if (res.staffslist.length > 0) {
-          for (let userdata in res.staffslist) {
-            let len = res.staffslist[userdata].personalhashtag.length;
-            let perstag = res.staffslist[userdata].personalhashtag.substring(1, len);
-
-            console.log("Length:" + len);
-            console.log("perstag:" + perstag);
-            this.atMentionedInfo.push({
-              username: perstag,
-              fullname: res.staffslist[userdata].firstname + " " + res.staffslist[userdata].lastname
-            });
-          }
-
-          localStorage.setItem("atMentionedStorage", JSON.stringify(this.atMentionedInfo));
-          //"unitgroup_id":1,"unitgroup_name":"demo unit","colorcode":"FBD75C","remark":"nice","favorite":1,"totalunits":5
-          /*this.reportAllLists = res.unitgroups;
-         
-          console.log("Total Record:`" + this.totalCount);
-          console.log(JSON.stringify(this.reportAllLists));*/
-
-        }
-      });
-
-    // Atmentioned Tag Storage
+    
     //Static Storage
     /*let data = [
       { username: 'Krishanth', fullname: 'Kannan' },

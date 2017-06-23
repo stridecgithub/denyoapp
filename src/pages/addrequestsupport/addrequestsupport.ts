@@ -237,26 +237,21 @@ export class AddrequestsupportPage {
          photos: object = this.addedImgLists;*/
 
 
-      let serviced_datetime: string = this.form.controls["serviced_datetime"].value,
-        service_remark: string = this.form.controls["service_remark"].value,
-        next_service_date: string = this.form.controls["next_service_date"].value,
-        serviced_by: string = this.form.controls["serviced_by"].value,
-        is_request: string = this.form.controls["is_request"].value,
+      let service_remark: string = this.form.controls["service_remark"].value,
         service_subject: string = this.form.controls["service_subject"].value;
-      console.log("serviced_datetime:" + serviced_datetime);
+      
       console.log("service_remark:" + service_remark);
-      console.log("serviced_by:" + serviced_by);
-      console.log("is_request:" + is_request);
+    
       console.log("service_subject:" + service_subject);
       console.log("nextServiceDate:" + this.unitDetailData.nextServiceDate);
       console.log("Image Data" + JSON.stringify(this.addedImgLists));
       //let d = new Date();
       //let micro_timestamp = d.getFullYear() + "" + d.getMonth() + "" + d.getDate() + "" + d.getHours() + "" + d.getMinutes() + "" + d.getSeconds();
       if (this.isEdited) {
-        this.updateEntry(serviced_datetime, service_remark, next_service_date, serviced_by, service_subject, this.addedImgLists, this.unitDetailData.hashtag, this.unitDetailData.nextServiceDate, this.micro_timestamp);
+        this.updateEntry( service_remark, service_subject, this.addedImgLists, this.unitDetailData.hashtag, this.unitDetailData.nextServiceDate, this.micro_timestamp);
       }
       else {
-        this.createEntry(serviced_datetime, service_remark, next_service_date, serviced_by, service_subject, this.addedImgLists, this.unitDetailData.hashtag, this.unitDetailData.nextServiceDate, this.micro_timestamp);
+        this.createEntry( service_remark, service_subject, this.addedImgLists, this.unitDetailData.hashtag, this.unitDetailData.nextServiceDate, this.micro_timestamp);
       }
     }
   }
@@ -266,7 +261,7 @@ export class AddrequestsupportPage {
   // to our remote PHP script (note the body variable we have created which
   // supplies a variable of key with a value of create followed by the key/value pairs
   // for the record data
-  createEntry(serviced_datetime, service_remark, next_service_date, serviced_by, service_subject, addedImgLists, remarkget, nextServiceDate, micro_timestamp) {
+  createEntry( service_remark,  service_subject, addedImgLists, remarkget, nextServiceDate, micro_timestamp) {
 
     let body: string = "is_mobile=1" +
       "&service_unitid=" + this.service_unitid +
@@ -309,15 +304,12 @@ export class AddrequestsupportPage {
   // to our remote PHP script (note the body variable we have created which
   // supplies a variable of key with a value of update followed by the key/value pairs
   // for the record data
-  updateEntry(serviced_datetime, service_remark, next_service_date, serviced_by, service_subject, addedImgLists, remarkget, nextServiceDate, micro_timestamp) {
+  updateEntry(service_remark, service_subject, addedImgLists, remarkget, nextServiceDate, micro_timestamp) {
     let body: string = "is_mobile=1&service_id=" + this.service_id +
-      "&serviced_datetime=" + serviced_datetime +
-
       "&service_unitid=" + this.service_unitid +
       "&service_remark=" + service_remark +
       "&next_service_date=" + nextServiceDate +
       "&serviced_by=" + this.unitDetailData.userId +
-
       "&service_subject=" + service_subject +
       "&micro_timestamp=" + micro_timestamp +
       "&uploadInfo=" + JSON.stringify(this.addedImgLists),

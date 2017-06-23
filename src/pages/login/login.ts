@@ -23,6 +23,7 @@ export class LoginPage {
   public userId: any;
   public passWrd: any;
   public userInf: any;
+  public atMentionedInfo = [];
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   constructor(public device: Device, public fb: FormBuilder, private http: Http, public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController, public loadingCtrl: LoadingController) {
     this.userInf = localStorage.getItem("userInfoId");
@@ -43,7 +44,7 @@ export class LoginPage {
 
 
 
-  loginEntry(username, password) {   
+  loginEntry(username, password) {
     let res;
     let body: string = "username=" + username +
       "&password=" + password +
@@ -68,6 +69,42 @@ export class LoginPage {
           localStorage.setItem("userInfoEmail", res['staffdetails'][0].email);
           localStorage.setItem("userInfoCompanyId", res['staffdetails'][0].company_id);
           this.presentLoading(0);
+
+
+          // Atmentioned Tag Storage
+          let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+            headers: any = new Headers({ 'Content-Type': type }),
+            options: any = new RequestOptions({ headers: headers }),
+            url: any = this.apiServiceURL + "/getstaffs";
+          let resatmentioned;
+          localStorage.setItem("atMentionedStorage", JSON.stringify(this.atMentionedInfo));
+          this.http.get(url, options)
+            .subscribe(data => {
+              resatmentioned = data.json();             
+              if (resatmentioned.staffslist.length > 0) {
+                for (let userdata in resatmentioned.staffslist) {
+                  let len = resatmentioned.staffslist[userdata].personalhashtag.length;
+                  let perstag = resatmentioned.staffslist[userdata].personalhashtag.substring(1, len);
+
+                  console.log("Length:" + len);
+                  console.log("perstag:" + perstag);
+                  this.atMentionedInfo.push({
+                    username: perstag,
+                    fullname: resatmentioned.staffslist[userdata].firstname + " " + resatmentioned.staffslist[userdata].lastname
+                  });
+                }
+
+                localStorage.setItem("atMentionedStorage", JSON.stringify(this.atMentionedInfo));
+                //"unitgroup_id":1,"unitgroup_name":"demo unit","colorcode":"FBD75C","remark":"nice","favorite":1,"totalunits":5
+                /*this.reportAllLists = res.unitgroups;
+               
+                console.log("Total Record:`" + this.totalCount);
+                console.log(JSON.stringify(this.reportAllLists));*/
+
+              }
+            });
+
+          // Atmentioned Tag Storage
           this.navCtrl.setRoot(HomePage);
         }
 
