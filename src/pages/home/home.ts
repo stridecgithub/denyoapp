@@ -4,7 +4,7 @@ import { UserPage } from '../user/user';
 import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
 import { UnitsPage } from '../units/units';
-import { RolePage } from '../role/role'; 
+import { RolePage } from '../role/role';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -14,7 +14,12 @@ export class HomePage {
   constructor(public nav: NavController) {
     this.loginas = localStorage.getItem("userInfoName");
   }
- redirectToUser() {
+
+  goPage(page) {
+    console.log(page);
+    //this.nav.setRoot(page);
+  }
+  redirectToUser() {
     this.nav.setRoot(UserPage);
   }
   redirectToUnitGroup() {

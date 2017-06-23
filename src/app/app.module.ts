@@ -38,6 +38,8 @@ import { ServicinginfoPage } from '../pages/servicinginfo/servicinginfo';
 import { AddserviceinfoPage } from '../pages/addserviceinfo/addserviceinfo';
 import { AddreporttemplatePage } from '../pages/addreporttemplate/addreporttemplate';
 import { AddrequestsupportPage } from '../pages/addrequestsupport/addrequestsupport';
+import { CommentsinfoPage } from '../pages/commentsinfo/commentsinfo';
+import { AddcommentsinfoPage } from '../pages/addcommentsinfo/addcommentsinfo';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,7 @@ import { AddrequestsupportPage } from '../pages/addrequestsupport/addrequestsupp
     HomePage,
     LoginPage,
     TabsPage,
-  
+
     CompanygroupPage,
     AddcompanygroupPage,
     ViewcompanygroupPage,
@@ -73,6 +75,7 @@ import { AddrequestsupportPage } from '../pages/addrequestsupport/addrequestsupp
     OrgchartPage,
     UnitdetailsPage,
     ServicinginfoPage,
+    CommentsinfoPage,
     AddserviceinfoPage,
     AddreporttemplatePage,
     AddrequestsupportPage
@@ -97,7 +100,7 @@ import { AddrequestsupportPage } from '../pages/addrequestsupport/addrequestsupp
     HomePage,
     LoginPage,
     TabsPage,
-   
+
     CompanygroupPage,
     AddcompanygroupPage,
     ViewcompanygroupPage,
@@ -126,12 +129,13 @@ import { AddrequestsupportPage } from '../pages/addrequestsupport/addrequestsupp
     OrgchartPage,
     UnitdetailsPage,
     ServicinginfoPage,
+    CommentsinfoPage,
     AddserviceinfoPage,
     AddreporttemplatePage,
     AddrequestsupportPage
   ],
   providers: [
-    StatusBar,   
+    StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]

@@ -18,25 +18,25 @@
             Welcome to Denyo<br> E-Management System<br><strong>Mr {{loginas}}</strong>
         </div>
         <div class="four-icons">
-            <div class="icon-top">
+            <div class="icon-top" (click)="goPage('MapsPage')">
                 <div class="icon-left">
                     <div class="maps">
                         <span>maps</span>
                     </div>
                 </div>
-                <div class="icon-right">
+                <div class="icon-right" (click)="goPage('UnitsPage')">
                     <div class="units">
                         <span>units</span>
                     </div>
                 </div>
             </div>
             <div class="icon-bottom">
-                <div class="icon-left">
+                <div class="icon-left" (click)="goPage('ReportsPage')">
                     <div class="reports">
                         <span>reports</span>
                     </div>
                 </div>
-                <div class="icon-right">
+                <div class="icon-right" (click)="goPage('CalendarPage')">
                     <div class="calendar">
                         <span>calendar</span>
                     </div>
@@ -45,4 +45,3 @@
         </div>
     </div>
 </ion-content>
-

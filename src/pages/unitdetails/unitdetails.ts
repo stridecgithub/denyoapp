@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ServicinginfoPage } from '../servicinginfo/servicinginfo';
+import { CommentsinfoPage } from '../commentsinfo/commentsinfo';
 import { UserPage } from '../user/user';
 import { CompanygroupPage } from '../companygroup/companygroup';
 import { MyaccountPage } from '../myaccount/myaccount';
@@ -346,6 +347,11 @@ export class UnitdetailsPage {
   }
   servicingInfo() {
     this.nav.setRoot(ServicinginfoPage, {
+      record: this.NP.get("record")
+    });
+  }
+	commentsInfo() {
+    this.nav.setRoot(CommentsinfoPage, {
       record: this.NP.get("record")
     });
   }
