@@ -34,7 +34,8 @@ export class MyApp {
 
   rootPage: any = LoginPage;
 
-  pages: any;
+  pages: Array<{ title: string, component: any }>;
+  //pages: any;
   showLevel1 = null;
   showLevel2 = null;
   constructor(public _platform: Platform, public statusBar: StatusBar, public _SplashScreen: SplashScreen,
@@ -42,12 +43,12 @@ export class MyApp {
 
 
     this.initializeApp();
-    this.dataService.getMenus()
+   /* this.dataService.getMenus()
       .subscribe((response) => {
         this.pages = response;
         console.log(this.pages);
       });
-    /*
+  */
   // used for an example of ngFor and navigation
   this.pages = [
    
@@ -69,7 +70,7 @@ export class MyApp {
     //  { title: 'Add Org-2', component: AddorgcharttwoPage },
     // { title: 'Add Report Template', component: AddreporttemplatePage}
 
-  ];*/
+  ];
 
   }
 
@@ -85,6 +86,16 @@ export class MyApp {
   }
 
   openPage(page) {
+    /*console.log("Category:" + page.category);
+    console.log("Sub Category:" + page.subcategory);
+
+    if (page.category == 'Dashboard') {
+      page = 'HomePage';
+    } else if (page.subcategory == 'Unit Listing') {
+      page = 'UnitgroupPage';
+    } else {
+      page = '';
+    }*/
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     //this.nav.push(page.component);
@@ -94,8 +105,13 @@ export class MyApp {
 
     //this.viewCtrl.dismiss();
     //this.nav.push(page.component);
-    this.nav.setRoot(page.component);
+    /*console.log("Page Is:" + page);
+    if (page != '') {
+      console.log("Root:"+page.component);
+      this.nav.setRoot(page);
+    }*/
     //this.appCtrl.getRootNav().setRoot(page.component);
+     this.nav.setRoot(page.component);
   }
 
   toggleLevel1(idx) {
