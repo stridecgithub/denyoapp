@@ -111,7 +111,7 @@ export class UnitdetailsPage {
 		this.unitDetailData.alarmnotificationto = editItem.nextservicedate;
 		this.unitDetailData.favoriteindication = favorite;
 
-		this.iframeContent = '<iframe src='+this.apiServiceURL+'/'+this.unitDetailData.unit_id+'/1/unitdetails" height="350" frameborder="0"></iframe>';
+		this.iframeContent = "<iframe src="+this.apiServiceURL+"/"+this.unitDetailData.unit_id+"/1/unitdetails height=350 frameborder=0></iframe>";
 		let url;
 		// url = this.apiServiceURL + "/orgchart?company_id=7&is_mobile=1";
 		//url = "http://strtheme.stridecdev.com/ioncalendar/calendar.html";
