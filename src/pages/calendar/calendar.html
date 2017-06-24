@@ -3,6 +3,7 @@
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
+  https://www.npmjs.com/package/ionic2-calendar
 -->
 <ion-header>
   <ion-navbar color="bluedark">
@@ -37,7 +38,44 @@
 </ion-header>
 
 <ion-content padding>
- Page under Construction
+  <ion-list class="eventlist-grid">
+    <ion-item-sliding *ngFor="let item of calendarResult; let i = index" [attr.data-index]="i">
+      <ion-item>
+
+        <div>
+          <h2 clear item-right><b><!-- {{calendarResult[i].eventdate}} - -->{{calendarResult[i].eventitle}}  </b></h2>
+        </div>
+        <div>{{calendarResult[i].description}}</div>
+
+
+      </ion-item>
+
+      <ion-item-options>
+        <button eyecolor (click)="doView(item.reportUUID,'DRAFT',item.title)">
+                        <ion-icon ios="ios-eye-outline" md="ios-eye-outline"></ion-icon>
+                    </button>
+        <button mycolor (click)="doEdit(item.reportUUID,'DRAFT',item.title)">
+                        <ion-icon ios="ios-create-outline" md="ios-create-outline"></ion-icon>
+                    </button>
+        <button *ngIf="DELETE_EXPENSEREPORT" trashcolor (click)="doConfirm(item,'DRAFT')">
+                        <ion-icon ios="ios-trash-outline" md="ios-trash-outline"></ion-icon>
+                    </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+  <button ion-button (click)="pre()" class="calendar_pre"><<</button>
+  <button ion-button class="calendar_ttl">{{dateHeaderTitle}}</button>
+  <button ion-button (click)="nex()" class="calendar_nex">>></button>
+  <!--calendar [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate" (onCurrentDateChanged)="onCurrentDateChanged($event)"
+    (onEventSelected)="onEventSelected($event)" (onTitleChanged)="onViewTitleChanged($event)" (onTimeSelected)="onTimeSelected($event)"
+    step="30">
+
+  </calendar-->
+
+  <!--calendar [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate" (onCurrentDateChanged)="onCurrentDateChanged($event)"
+    (onRangeChanged)="reloadSource(startTime, endTime)" (onEventSelected)="onEventSelected($event)" (onTitleChanged)="onViewTitleChanged($event)"
+    (onTimeSelected)="onTimeSelected($event)" step="30">
+  </calendar-->
 </ion-content>
 <ion-footer color="bluedark">
   <ion-toolbar color="bluedark">
@@ -52,7 +90,7 @@
 </button>
     <button ion-button icon-only (click)="redirectToUnits()" clear>
 <ion-icon name="camera" class="footer-icon"></ion-icon>
-</button>   
+</button>
     <button ion-button icon-only (click)="redirectToRole()" clear>
 <ion-icon name="settings" class="footer-icon"></ion-icon>
 </button>
