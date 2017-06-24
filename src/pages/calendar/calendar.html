@@ -38,7 +38,7 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-list class="eventlist-grid">
+ <ion-list class="eventlist-grid">
     <ion-item-sliding *ngFor="let item of calendarResult; let i = index" [attr.data-index]="i">
       <ion-item>
 
@@ -66,16 +66,11 @@
   <button ion-button (click)="pre()" class="calendar_pre"><<</button>
   <button ion-button class="calendar_ttl">{{dateHeaderTitle}}</button>
   <button ion-button (click)="nex()" class="calendar_nex">>></button>
-  <!--calendar [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate" (onCurrentDateChanged)="onCurrentDateChanged($event)"
+  <calendar [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate" (onCurrentDateChanged)="onCurrentDateChanged($event)"
     (onEventSelected)="onEventSelected($event)" (onTitleChanged)="onViewTitleChanged($event)" (onTimeSelected)="onTimeSelected($event)"
     step="30">
 
-  </calendar-->
-
-  <!--calendar [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate" (onCurrentDateChanged)="onCurrentDateChanged($event)"
-    (onRangeChanged)="reloadSource(startTime, endTime)" (onEventSelected)="onEventSelected($event)" (onTitleChanged)="onViewTitleChanged($event)"
-    (onTimeSelected)="onTimeSelected($event)" step="30">
-  </calendar-->
+  </calendar>
 </ion-content>
 <ion-footer color="bluedark">
   <ion-toolbar color="bluedark">

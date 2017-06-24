@@ -13,3 +13,8 @@ main.js:79667 is_mobile=1&serviced_datetime=2007-01-01T13:04:00Z&service_remark=
 
 
 is_mobile=1&serviced_datetime=2017-06-05T13:03:00Z&service_remark=This is @denyov4 tes&next_service_date=Fri Jun 23 2017 00:00:00 GMT+0530 (IST)&serviced_by=1&is_request=true&service_subject=Test fgggh&micro_timestamp=201752113359&uploadInfo=[{"imgSrc":"http://denyoappv2.stridecdev.com/serviceimages/201752113180_123_1498031280639.jpg","imgDateTime":"2017-06-21T07:48:42.598Z","fileName":"201752113180_123_1498031280639.jpg"},{"imgSrc":"http://denyoappv2.stridecdev.com/serviceimages/201752113193_123_1498031343995.jpg","imgDateTime":"2017-06-21T07:49:51.099Z","fileName":"201752113193_123_1498031343995.jpg"},{"imgSrc":"http://denyoappv2.stridecdev.com/serviceimages/201752113205_123_1498031405603.jpg","imgDateTime":"2017-06-21T07:50:50.906Z","fileName":"201752113205_123_1498031405603.jpg"}]
+
+
+https://stackoverflow.com/questions/35017800/ionic-2-using-angular-2-pipe-breaks-on-ios-cant-find-variable-intl
+
+https://www.npmjs.com/package/ionic2-calendar

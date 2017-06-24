@@ -46,6 +46,7 @@ import { CalendarPage } from '../pages/calendar/calendar';
 import { AlarmPage } from '../pages/alarm/alarm';
 import { AddalarmPage } from '../pages/addalarm/addalarm';
 import { MapsPage } from '../pages/maps/maps';
+import { NgCalendarModule } from 'ionic2-calendar';
 @NgModule({
   declarations: [
     MyApp,
@@ -92,6 +93,7 @@ import { MapsPage } from '../pages/maps/maps';
     MapsPage
   ],
   imports: [
+    NgCalendarModule,
     BrowserModule,
     HttpModule,  
     IonicModule.forRoot(MyApp, {
