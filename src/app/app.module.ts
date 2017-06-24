@@ -44,6 +44,7 @@ import { DataServiceProvider } from '../providers/data-service/data-service';
 import { MessagesPage } from '../pages/messages/messages';
 import { CalendarPage } from '../pages/calendar/calendar';
 import { AlarmPage } from '../pages/alarm/alarm';
+import { AddalarmPage } from '../pages/addalarm/addalarm';
 import { MapsPage } from '../pages/maps/maps';
 @NgModule({
   declarations: [
@@ -87,6 +88,7 @@ import { MapsPage } from '../pages/maps/maps';
     MessagesPage,
     CalendarPage,
     AlarmPage,
+    AddalarmPage,
     MapsPage
   ],
   imports: [
@@ -146,6 +148,7 @@ import { MapsPage } from '../pages/maps/maps';
     MessagesPage,
     CalendarPage,
     AlarmPage,
+    AddalarmPage,
     MapsPage
   ],
   providers: [

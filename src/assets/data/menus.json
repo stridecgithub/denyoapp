@@ -92,6 +92,10 @@
             {
                 "title": "Alarm List",
                 "component": "AlarmPage"
+            },
+             {
+                "title": "Alarm",
+                "component": "AddalarmPage"
             }
         ]
     },
