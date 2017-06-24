@@ -10,9 +10,9 @@ import { RolePage } from '../role/role';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
 import { DomSanitizer } from '@angular/platform-browser';
 //import { Http, Headers, RequestOptions } from '@angular/http';
-import { HTTP } from '@ionic-native/http';
-import * as $ from 'jquery';
-import "slick-carousel";
+//import { HTTP } from '@ionic-native/http';
+//import * as $ from 'jquery';
+//import "slick-carousel";
 /**
  * Generated class for the UnitdetailsPage page.
  *
@@ -22,8 +22,7 @@ import "slick-carousel";
 @IonicPage()
 @Component({
 	selector: 'page-unitdetails',
-	templateUrl: 'unitdetails.html',
-	providers: [HTTP]
+	templateUrl: 'unitdetails.html'
 })
 export class UnitdetailsPage {
 	public pageTitle: string;
@@ -53,7 +52,7 @@ export class UnitdetailsPage {
 		htmlContent: '',
 		iframeURL: ''
 	}
-	constructor(private sanitizer: DomSanitizer, private httpdata: HTTP, public NP: NavParams, public navCtrl: NavController, public navParams: NavParams, public nav: NavController) {
+	constructor(private sanitizer: DomSanitizer, public NP: NavParams, public navCtrl: NavController, public navParams: NavParams, public nav: NavController) {
 		this.unitDetailData.loginas = localStorage.getItem("userInfoName");
 		this.unitDetailData.userId = localStorage.getItem("userInfoId");
 	}

@@ -35,10 +35,42 @@
       Login As:{{loginas}}
     </ion-buttons>
   </ion-navbar>
+  <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="pet" (ionChange)="onSegmentChanged(pet)">
+    <ion-option value="unitgroup_id,asc" selected="true">All</ion-option>
+    <ion-option value="unitgroup_id,desc">Service</ion-option>
+    <ion-option value="favorite,desc">Alarm</ion-option>
+    <ion-option value="favorite,desc">Event</ion-option>
+  </ion-select>
+
+  <calendar [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate" (onCurrentDateChanged)="onCurrentDateChanged($event)"
+    (onEventSelected)="onEventSelected($event)" (onTitleChanged)="onViewTitleChanged($event)" (onTimeSelected)="onTimeSelected($event)"
+    step="30">
+  </calendar>
 </ion-header>
 
 <ion-content padding>
- <ion-list class="eventlist-grid">
+  <button ion-button (click)="pre()" class="calendar_pre"><<</button>
+  <button ion-button class="calendar_ttl">{{dateHeaderTitle}}</button>
+  <button ion-button (click)="nex()" class="calendar_nex">>></button>
+  <b>Legend</b>
+  <button class="add-new-btn" ion-button small (click)="doTripped()">
+  Tripped
+ </button>
+  <button class="add-new-btn" ion-button small (click)="doEvent()">
+  Event
+ </button>
+  <button class="add-new-btn" ion-button small (click)="doWarning()">
+  Warning
+ </button>
+  <button class="add-new-btn" ion-button small (click)="doService()">
+  Service
+ </button>
+  <h1>Today Event</h1>
+  <button class="add-new-btn" ion-button small (click)="doAdd()">
+  +
+ </button>
+
+  <ion-list class="eventlist-grid">
     <ion-item-sliding *ngFor="let item of calendarResult; let i = index" [attr.data-index]="i">
       <ion-item>
 
@@ -63,14 +95,6 @@
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
-  <button ion-button (click)="pre()" class="calendar_pre"><<</button>
-  <button ion-button class="calendar_ttl">{{dateHeaderTitle}}</button>
-  <button ion-button (click)="nex()" class="calendar_nex">>></button>
-  <calendar [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate" (onCurrentDateChanged)="onCurrentDateChanged($event)"
-    (onEventSelected)="onEventSelected($event)" (onTitleChanged)="onViewTitleChanged($event)" (onTimeSelected)="onTimeSelected($event)"
-    step="30">
-
-  </calendar>
 </ion-content>
 <ion-footer color="bluedark">
   <ion-toolbar color="bluedark">

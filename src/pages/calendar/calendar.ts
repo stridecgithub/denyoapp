@@ -1,12 +1,9 @@
 
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController, LoadingController } from 'ionic-angular';
-import { IonicApp } from 'ionic-angular/index'
 import 'rxjs/add/operator/map';
 import { Http, Headers, RequestOptions } from "@angular/http";
-import { Sendmsg } from '../sendmsg/sendmsg';
-import { Compose } from '../compose/compose';
-import { CompanygroupPage } from '../companygroup/companygroup';
+
 import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
 import { UnitsPage } from '../units/units';
@@ -235,7 +232,7 @@ export class CalendarPage {
     }
   }
   previous() {
-    this.navCtrl.setRoot(TabsPage);
+    this.navCtrl.setRoot(HomePage);
   }
   redirectToUser() {
     this.navCtrl.setRoot(UserPage);
