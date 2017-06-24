@@ -69,14 +69,20 @@
         ]
     },
     {
-        "title": "Reports"
+        "title": "Reports",
+        "subs": [
+            {
+                "title": "Reports",
+                "component": "ReportsPage"
+            }
+        ]
     },
     {
         "title": "Message",
         "subs": [
             {
                 "title": "Message",
-                "component": "MessagePage"
+                "component": "MessagesPage"
             }
         ]
     },

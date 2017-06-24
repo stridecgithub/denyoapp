@@ -27,6 +27,10 @@ import { OrgchartPage } from '../pages/orgchart/orgchart';
 import { LogoutPage } from '../pages/logout/logout';
 import { DataServiceProvider } from '../providers/data-service/data-service';
 import { MessagesPage } from '../pages/messages/messages';
+import { CalendarPage } from '../pages/calendar/calendar';
+import { MapsPage } from '../pages/maps/maps';
+import { ReportsPage } from '../pages/reports/reports';
+
 
 @Component({
   templateUrl: 'app.html'
@@ -35,8 +39,6 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = LoginPage;
-
-  // pages: Array<{ title: string, component: any }>;
   pages: any;
   showLevel1 = null;
   showLevel2 = null;
@@ -48,7 +50,6 @@ export class MyApp {
     this.dataService.getMenus()
       .subscribe((response) => {
         this.pages = response;
-        console.log("Pages Array:" + JSON.stringify(this.pages));
       });
 
     // used for an example of ngFor and navigation
@@ -57,22 +58,17 @@ export class MyApp {
       { title: 'Dashboard', component: HomePage },
       { title: 'Company Group', component: CompanygroupPage },
       { title: 'Users', component: UserPage },
-      //{ title: 'Add Unit Group', component: AddunitgroupPage },
       { title: 'Unit Group', component: UnitgroupPage },
       { title: 'Units', component: UnitsPage },
       { title: 'Role', component: RolePage },
-      // { title: 'Add Role', component: AddrolePage },
       { title: 'My Account', component: MyaccountPage },
-      // { title: 'At mentioned Page', component: AtmentionedPage },
-
       { title: 'Report Template', component: ReporttemplatePage },
       { title: 'Org Chart', component: OrgchartPage },
       { title: 'Message', component: MessagesPage },
-      { title: 'Logout', component: LogoutPage },
-      // { title: 'Add Org', component: AddorgchartonePage },
-      //  { title: 'Add Org-2', component: AddorgcharttwoPage },
-      // { title: 'Add Report Template', component: AddreporttemplatePage}
-
+      { title: 'Maps', component: MapsPage },
+      { title: 'Calendar', component: CalendarPage },
+      { title: 'Reports', component: ReportsPage },
+      { title: 'Logout', component: LogoutPage }
     ];
 
   }
@@ -89,35 +85,10 @@ export class MyApp {
   }
 
   openPage(page) {
-    /*console.log("Category:" + page.category);
-    console.log("Sub Category:" + page.subcategory);
-
-    if (page.category == 'Dashboard') {
-      page = 'HomePage';
-    } else if (page.subcategory == 'Unit Listing') {
-      page = 'UnitgroupPage';
-    } else {
-      page = '';
-    }*/
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    //this.nav.push(page.component);
-
-    //this.nav.getRootNav().push
-    //this.nav.getRootNav().push(page.component);
-
-    //this.viewCtrl.dismiss();
-    //this.nav.push(page.component);
-    /*console.log("Page Is:" + page);
-    if (page != '') {
-      console.log("Root:"+page.component);
-      this.nav.setRoot(page);
-    }*/
-    //this.appCtrl.getRootNav().setRoot(page.component);
     console.log("page com:-" + page.component);
     console.log("1" + page);
     console.log("2" + console.log(page));
-        // page.component = 'UnitsPage';
+    // page.component = 'UnitsPage';
 
     if (page.component == 'UnitsPage') {
       this.nav.setRoot(UnitsPage);
@@ -139,6 +110,14 @@ export class MyApp {
       this.nav.setRoot(MessagesPage);
     } else if (page.component == 'LogoutPage') {
       this.nav.setRoot(LogoutPage);
+    } else if (page.component == 'HomePage') {
+      this.nav.setRoot(HomePage);
+    } else if (page.component == 'CalendarPage') {
+      this.nav.setRoot(CalendarPage);
+    } else if (page.component == 'MapsPage') {
+      this.nav.setRoot(MapsPage);
+    } else if (page.component == 'ReportsPage') {
+      this.nav.setRoot(ReportsPage);
     }
   }
 

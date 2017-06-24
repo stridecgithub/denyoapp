@@ -35,9 +35,9 @@ export class UnitdetailsPage {
 	private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
 
 
-	
 
-    
+
+
 	public unitDetailData: any = {
 		unit_id: '',
 		unitname: '',
@@ -53,12 +53,12 @@ export class UnitdetailsPage {
 		htmlContent: '',
 		iframeURL: ''
 	}
-	constructor(private sanitizer: DomSanitizer,private httpdata: HTTP, public NP: NavParams, public navCtrl: NavController, public navParams: NavParams, public nav: NavController) {
+	constructor(private sanitizer: DomSanitizer, private httpdata: HTTP, public NP: NavParams, public navCtrl: NavController, public navParams: NavParams, public nav: NavController) {
 		this.unitDetailData.loginas = localStorage.getItem("userInfoName");
 		this.unitDetailData.userId = localStorage.getItem("userInfoId");
 	}
 
-	
+
 
 	ionViewDidLoad() {
 		console.log('ionViewDidLoad UnitdetailsPage');
@@ -110,14 +110,14 @@ export class UnitdetailsPage {
 		this.unitDetailData.nextservicedate = editItem.nextservicedate;
 		this.unitDetailData.alarmnotificationto = editItem.nextservicedate;
 		this.unitDetailData.favoriteindication = favorite;
-
-		this.iframeContent = "<iframe src="+this.apiServiceURL+"/"+this.unitDetailData.unit_id+"/1/unitdetails height=350 frameborder=0></iframe>";
+		console.log(this.apiServiceURL + "/" + this.unitDetailData.unit_id + "/1/unitdetails");
+		this.iframeContent = "<iframe src=" + this.apiServiceURL + "/" + this.unitDetailData.unit_id + "/1/unitdetails height=350 frameborder=0></iframe>";
 		let url;
 		// url = this.apiServiceURL + "/orgchart?company_id=7&is_mobile=1";
 		//url = "http://strtheme.stridecdev.com/ioncalendar/calendar.html";
 		//url = this.apiServiceURL + "/2/1/unitdetails";
 		//http://denyoappv2.stridecdev.com/2/1/unitdetails
-		url = this.apiServiceURL + "/api/webview/unitedetails.html";
+		/*url = this.apiServiceURL + "/api/webview/unitedetails.html";
 		this.httpdata.get(url, {}, {})
 			.then(data => {
 				this.unitDetailData.htmlContent = data.data;
@@ -134,7 +134,7 @@ export class UnitdetailsPage {
 		$(".serv-info").click(function () {
 			alert('Serve info calling...');
 		})
-
+*/
 
 		/*
 										

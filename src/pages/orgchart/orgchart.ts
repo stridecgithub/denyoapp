@@ -42,7 +42,7 @@ export class OrgchartPage {
   public userId: any;
   public companyId: any;
   iframeContent: any;
-  constructor(private sanitizer: DomSanitizer,private httpdata: HTTP, public http: Http, public nav: NavController,
+  constructor(private sanitizer: DomSanitizer, private httpdata: HTTP, public http: Http, public nav: NavController,
     public toastCtrl: ToastController, public alertCtrl: AlertController, public navParams: NavParams, public loadingCtrl: LoadingController) {
     this.loginas = localStorage.getItem("userInfoName");
     this.userId = localStorage.getItem("userInfoId");
@@ -87,6 +87,7 @@ export class OrgchartPage {
         console.log(error.headers);
 
       });
+    console.log(this.apiServiceURL + "/orgchart?company_id=" + this.companyId + "&is_mobile=1");
     this.iframeContent = "<iframe src=" + this.apiServiceURL + "/orgchart?company_id=" + this.companyId + "&is_mobile=1 height=350 frameborder=0></iframe>";
   }
   dounitGroup() {
