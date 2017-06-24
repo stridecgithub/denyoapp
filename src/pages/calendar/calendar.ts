@@ -9,9 +9,8 @@ import { UnitgroupPage } from '../unitgroup/unitgroup';
 import { UnitsPage } from '../units/units';
 import { RolePage } from '../role/role';
 import { HomePage } from '../home/home';
-import { TabsPage } from '../tabs/tabs';
 import { UserPage } from '../user/user';
-
+import { AddcalendarPage } from '../addcalendar/addcalendar';
 
 import { DatePicker } from '@ionic-native/date-picker';
 import 'intl';
@@ -22,16 +21,19 @@ import 'intl/locale-data/jsonp/en';
   providers: [DatePicker]
 })
 export class CalendarPage {
-@ViewChild('postcontent') postcontent: ElementRef;
+  @ViewChild('postcontent') postcontent: ElementRef;
   myVal: any;
   viewLink: any;
   viewHtml: any;
   dateHeaderTitle: any;
   calendarResult: any;
-  userInf: any;
-  private baseURI: string = "http://strtheme.stridecdev.com/";
+  public pageTitle: string;
+  public loginas: any;
+  public userId:any;
+  private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   constructor(public navCtrl: NavController, private datePicker: DatePicker, private http: Http, public loadingCtrl: LoadingController) {
-
+ this.loginas = localStorage.getItem("userInfoName");
+    this.userId = localStorage.getItem("userInfoId");
   }
 
   opendatePicker() {
@@ -45,7 +47,7 @@ export class CalendarPage {
       );
   }
   ionViewWillEnter() {
-    this.userInf = localStorage.getItem("userInfoName");
+   this.pageTitle = "Calendar";
     //console.log(JSON.stringify(this.userInf));
     this.presentLoading(1);
     let curDate = new Date();
@@ -124,7 +126,7 @@ export class CalendarPage {
     return monthYear;
   }
   onTimeSelected(ev) {
-    this.presentLoading(1);
+
     console.log("2" + ev.selectedTime);
     console.log("3" + JSON.stringify(ev));
     let month;
@@ -148,7 +150,7 @@ export class CalendarPage {
       month = '0' + month;
     }
     console.log('Selected time: ' + year + "-" + month + "-" + date);
-    let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+    /*let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
       url: any = this.baseURI + "events.php?date=" + year + "-" + month + "-" + date;
@@ -159,7 +161,17 @@ export class CalendarPage {
         this.calendarResult = data.json();
         //this.eventSource=data.json();
       });
-    this.presentLoading(0);
+      */
+
+
+    let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/services?is_mobile=1&startindex=0&results=8&sort=service_id&dir=asc&unitid=1";
+    this.http.get(url, options)
+      .subscribe((data) => {
+        this.calendarResult  = data.json().services;
+      });
   }
   onCurrentDateChanged(event: Date) {
     var today = new Date();
@@ -248,6 +260,10 @@ export class CalendarPage {
   }
   redirectToRole() {
     this.navCtrl.setRoot(RolePage);
+  }
+
+  doAdd() {
+    this.navCtrl.setRoot(AddcalendarPage);
   }
 }
 

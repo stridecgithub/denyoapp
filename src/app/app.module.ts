@@ -43,6 +43,7 @@ import { AddcommentsinfoPage } from '../pages/addcommentsinfo/addcommentsinfo';
 import { DataServiceProvider } from '../providers/data-service/data-service';
 import { MessagesPage } from '../pages/messages/messages';
 import { CalendarPage } from '../pages/calendar/calendar';
+import { AddcalendarPage } from '../pages/addcalendar/addcalendar';
 import { AlarmPage } from '../pages/alarm/alarm';
 import { AddalarmPage } from '../pages/addalarm/addalarm';
 import { MapsPage } from '../pages/maps/maps';
@@ -88,6 +89,7 @@ import { NgCalendarModule } from 'ionic2-calendar';
     AddrequestsupportPage,
     MessagesPage,
     CalendarPage,
+    AddcalendarPage,
     AlarmPage,
     AddalarmPage,
     MapsPage
@@ -95,7 +97,7 @@ import { NgCalendarModule } from 'ionic2-calendar';
   imports: [
     NgCalendarModule,
     BrowserModule,
-    HttpModule,  
+    HttpModule,
     IonicModule.forRoot(MyApp, {
       backButtonText: 'Go Back',
       iconMode: 'ios',
@@ -150,6 +152,7 @@ import { NgCalendarModule } from 'ionic2-calendar';
     CalendarPage,
     AlarmPage,
     AddalarmPage,
+    AddcalendarPage,
     MapsPage
   ],
   providers: [

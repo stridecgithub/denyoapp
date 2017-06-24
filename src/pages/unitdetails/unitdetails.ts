@@ -111,7 +111,6 @@ export class UnitdetailsPage {
 		this.unitDetailData.favoriteindication = favorite;
 		console.log(this.apiServiceURL + "/" + this.unitDetailData.unit_id + "/1/unitdetails");
 		this.iframeContent = "<iframe src=" + this.apiServiceURL + "/" + this.unitDetailData.unit_id + "/1/unitdetails height=350 frameborder=0></iframe>";
-		let url;
 		// url = this.apiServiceURL + "/orgchart?company_id=7&is_mobile=1";
 		//url = "http://strtheme.stridecdev.com/ioncalendar/calendar.html";
 		//url = this.apiServiceURL + "/2/1/unitdetails";

@@ -35,53 +35,41 @@
       Login As:{{loginas}}
     </ion-buttons>
   </ion-navbar>
+
+
+
+</ion-header>
+
+<ion-content padding>
   <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="pet" (ionChange)="onSegmentChanged(pet)">
     <ion-option value="unitgroup_id,asc" selected="true">All</ion-option>
     <ion-option value="unitgroup_id,desc">Service</ion-option>
     <ion-option value="favorite,desc">Alarm</ion-option>
     <ion-option value="favorite,desc">Event</ion-option>
   </ion-select>
-
-  <calendar [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate" (onCurrentDateChanged)="onCurrentDateChanged($event)"
-    (onEventSelected)="onEventSelected($event)" (onTitleChanged)="onViewTitleChanged($event)" (onTimeSelected)="onTimeSelected($event)"
-    step="30">
-  </calendar>
-</ion-header>
-
-<ion-content padding>
-  <button ion-button (click)="pre()" class="calendar_pre"><<</button>
-  <button ion-button class="calendar_ttl">{{dateHeaderTitle}}</button>
-  <button ion-button (click)="nex()" class="calendar_nex">>></button>
-  <b>Legend</b>
-  <button class="add-new-btn" ion-button small (click)="doTripped()">
-  Tripped
- </button>
-  <button class="add-new-btn" ion-button small (click)="doEvent()">
-  Event
- </button>
-  <button class="add-new-btn" ion-button small (click)="doWarning()">
-  Warning
- </button>
-  <button class="add-new-btn" ion-button small (click)="doService()">
-  Service
- </button>
-  <h1>Today Event</h1>
-  <button class="add-new-btn" ion-button small (click)="doAdd()">
-  +
- </button>
-
   <ion-list class="eventlist-grid">
+
+
+    <ion-item class="item-calendar">
+      <button ion-button (click)="pre()" class="calendar_pre"><<</button>
+      <button ion-button class="calendar_ttl">{{dateHeaderTitle}}</button>
+      <button ion-button (click)="nex()" class="calendar_nex">>></button>
+      <calendar [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate" (onCurrentDateChanged)="onCurrentDateChanged($event)"
+        (onEventSelected)="onEventSelected($event)" (onTitleChanged)="onViewTitleChanged($event)" (onTimeSelected)="onTimeSelected($event)"
+        step="30">
+      </calendar>
+    </ion-item>
     <ion-item-sliding *ngFor="let item of calendarResult; let i = index" [attr.data-index]="i">
       <ion-item>
-
         <div>
-          <h2 clear item-right><b><!-- {{calendarResult[i].eventdate}} - -->{{calendarResult[i].eventitle}}  </b></h2>
+          <h2 clear item-right><b>Service:{{item.service_subject}}  </b></h2>
         </div>
-        <div>{{calendarResult[i].description}}</div>
-
+        <div>Date & Time:{{item.next_service_date}}</div>
+        <div>Location:Singapore</div>
+        <div>Notes:{{item.service_remark}}</div>
+        <div>Serviced By:{{item.serviced_by_name}}</div>
 
       </ion-item>
-
       <ion-item-options>
         <button eyecolor (click)="doView(item.reportUUID,'DRAFT',item.title)">
                         <ion-icon ios="ios-eye-outline" md="ios-eye-outline"></ion-icon>
@@ -94,6 +82,28 @@
                     </button>
       </ion-item-options>
     </ion-item-sliding>
+
+    <ion-item class="item-action">
+      <div class="div-action">
+        <b>Legend</b>
+        <button class="add-new-btn" ion-button small (click)="doTripped()">
+  Tripped
+ </button>
+        <button class="add-new-btn" ion-button small (click)="doEvent()">
+  Event
+ </button>
+        <button class="add-new-btn" ion-button small (click)="doWarning()">
+  Warning
+ </button>
+        <button class="add-new-btn" ion-button small (click)="doService()">
+  Service
+ </button>
+        <h3>Today Event</h3>
+        <button class="add-new-btn" ion-button small (click)="doAdd()">
+  +
+ </button>
+      </div>
+    </ion-item>
   </ion-list>
 </ion-content>
 <ion-footer color="bluedark">

@@ -1,5 +1,5 @@
 
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
 import { IonicApp } from 'ionic-angular/index'
 import 'rxjs/add/operator/map';
@@ -17,6 +17,7 @@ import { HomePage } from '../home/home';
   templateUrl: 'maps.html',
 })
 export class MapsPage {
+  @ViewChild('mapContainer') mapContainer: ElementRef;
   sendmsg = Sendmsg;
   compose = Compose;
   app: IonicApp;
@@ -25,6 +26,11 @@ export class MapsPage {
   public userId: any;
   public rootPage: any;
   public pageTitle: string;
+  
+
+  
+  map: any;
+  private baseURI: string = "http://strtheme.stridecdev.com/";
   Catdata: any;
   constructor(app: IonicApp, public navCtrl: NavController, private alertCtrl: AlertController, private http: Http) {
     this.rootPage = MapsPage; this.app = app;
@@ -39,9 +45,46 @@ export class MapsPage {
   }
 
 
+ ionViewWillEnter() {
+    
+    this.displayGoogleMap();
+    this.getMarkers();
+    
+  }
 
+displayGoogleMap() {
+    /*let latLng = new google.maps.LatLng(9.9252, 78.1198);
 
+    let mapOptions = {
+      center: latLng,
+      disableDefaultUI: true,
+      zoom: 11,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+    this.map = new google.maps.Map(this.mapContainer.nativeElement, mapOptions);*/
+  }
 
+  getMarkers() {
+    let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.baseURI + "googlemap.php";
+
+    this.http.get(url, options)
+      .subscribe(data => {
+        console.log(JSON.stringify(data.json()));
+        this.addMarkersToMap(data.json());
+      });
+  }
+
+  addMarkersToMap(markers) {
+   /* for (let marker of markers) {
+      var position = new google.maps.LatLng(marker.lat, marker.lng);
+      var dogwalkMarker = new google.maps.Marker({ position: position, title: marker.address });
+      dogwalkMarker.setMap(this.map);
+    }*/
+  }
+  
 
   redirectToUnitGroup() {
     this.navCtrl.setRoot(UnitgroupPage);
