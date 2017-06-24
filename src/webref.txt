@@ -18,3 +18,16 @@ is_mobile=1&serviced_datetime=2017-06-05T13:03:00Z&service_remark=This is @denyo
 https://stackoverflow.com/questions/35017800/ionic-2-using-angular-2-pipe-breaks-on-ios-cant-find-variable-intl
 
 https://www.npmjs.com/package/ionic2-calendar
+
+
+Need the following API:
+
+calandar API:-
+
+Calendar List:-
+1 filter the services based on date example pass the date YYYY-mm-dd filter the next_service_date from services table of db
+Add Calendar:-
+1 Unit list for Dropdown getunitlist like companygroup
+2  in service type unit/project/location based on filter exampe if pass the unit id related data assigne the text field project and location in textfield
+3 Save the calendar event details based on Service/Event selected type
+

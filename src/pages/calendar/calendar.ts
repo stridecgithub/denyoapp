@@ -49,7 +49,7 @@ export class CalendarPage {
   ionViewWillEnter() {
    this.pageTitle = "Calendar";
     //console.log(JSON.stringify(this.userInf));
-    this.presentLoading(1);
+   
     let curDate = new Date();
     console.log('1' + curDate);
     let yearMonth = this.splitDate(curDate)
@@ -57,7 +57,7 @@ export class CalendarPage {
     this.onTimeSelected(curDate);
 
 
-    this.presentLoading(0);
+    
   }
 
   eventSource;
@@ -98,24 +98,24 @@ export class CalendarPage {
     this.calendar.currentDate = new Date();
   }
   pre() {
-    this.presentLoading(1);
+   
     let prevmonth = this.addMonthsUTC(this.calendar.currentDate, -1);
     //console.log("nextmonth:" + prevmonth);
     this.calendar.currentDate = prevmonth;
     let yearMonth = this.splitDate(this.calendar.currentDate)
     this.dateHeaderTitle = yearMonth;
     //this.dateHeaderTitle = this.calendar.currentDate;
-    this.presentLoading(0);
+    
   }
   nex() {
-    this.presentLoading(1);
+    
     let nextmonth = this.addMonthsUTC(this.calendar.currentDate, 1);
     //console.log("nextmonth:" + nextmonth);
     this.calendar.currentDate = nextmonth;
     let yearMonth = this.splitDate(this.calendar.currentDate)
     this.dateHeaderTitle = yearMonth;
     //this.dateHeaderTitle = this.calendar.currentDate;
-    this.presentLoading(0);
+    
   }
   splitDate(curdate) {
     //var splitDt = curdate.split("@");

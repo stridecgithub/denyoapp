@@ -8,8 +8,8 @@ import { UserPage } from '../user/user';
 import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
 import { UnitsPage } from '../units/units';
-import { RolePage } from '../role/role'; 
-import {CalendarPage} from '../calendar/calendar'; 
+import { RolePage } from '../role/role';
+import { CalendarPage } from '../calendar/calendar';
 /**
  * Generated class for the AddcompanygroupPage page.
  *
@@ -25,12 +25,18 @@ export class AddcalendarPage {
   // Define FormBuilder /model properties
   public loginas: any;
   public form: FormGroup;
-  public companygroup_name: any;
-  public address: any;
-  public country: any;
-  public contact: any;
+  public type_name: any;
+  public service_project: any;
+  public event_subject: any;
+  public service_unitid: any;
+  public event_date: any;
   public userId: any;
-  public responseResultCountry: any;
+  public responseResultType = [];
+  public responseResultTime = [];
+  public responseResultCompany: any;
+  public unitfield: any;
+  disunit: any;
+
 
   // Flag to be used for checking whether we are adding/editing an entry
   public isEdited: boolean = false;
@@ -52,24 +58,56 @@ export class AddcalendarPage {
     this.loginas = localStorage.getItem("userInfoName");
     // Create form builder validation rules
     this.form = fb.group({
-      "companygroup_name": ["", Validators.required],
-      "country": ["", Validators.required],
-      "contact": ["", Validators.required],
-      "address": [""]
+      "service_location": ["", Validators.required],
+      "event_subject": ["", Validators.required],
+      "service_unitid": ["", Validators.required],
+      "service_project": [""],
+      "event_date": [""],
+      "event_type": [""],
+      "event_notes": [""],
+      "serviced_datetime": [""]
     });
-
+    this.disunit = false;
     this.userId = localStorage.getItem("userInfoId");
+    this.responseResultType.push({
+      id: '1',
+      type_name: 'Service',
+    }, {
+        id: '2',
+        type_name: 'Event'
+      });
+
+    this.responseResultTime.push({
+      id: '6:00 am',
+      time_name: '6:00 am',
+    }, {
+        id: '6:15 am',
+        time_name: '6:15 am'
+      }), {
+        id: '6:30 am',
+        time_name: '6:30 am'
+      };
+    let dateStr = new Date();
+    this.event_date = dateStr.getFullYear() + "-" + dateStr.getMonth() + "-" + dateStr.getDate();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad  AddcalendarPage');
   }
-
+  getType(type) {
+    console.log(type);
+    if (type == 1) {
+      this.unitfield = true;
+      this.disunit = true;
+    } else {
+      this.unitfield = false;
+    }
+  }
   // Determine whether we adding or editing a record
   // based on any supplied navigation parameters
   ionViewWillEnter() {
+    this.getCompanyListData();
     this.resetFields();
-    this.getJsonCountryListData();
     if (this.NP.get("record")) {
       console.log(this.NP.get("act"));
       this.isEdited = true;
@@ -89,10 +127,10 @@ export class AddcalendarPage {
   // Assign the navigation retrieved data to properties
   // used as models on the page's HTML form
   selectEntry(item) {
-    this.companygroup_name = item.companygroup_name;
-    this.address = item.address;
-    this.country = item.country;
-    this.contact = item.contact;
+    this.type_name = item.type_name;
+    this.service_project = item.service_project;
+    this.event_subject = item.event_subject;
+    this.service_unitid = item.service_unitid;
     this.recordID = item.companygroup_id;
   }
 
@@ -103,9 +141,9 @@ export class AddcalendarPage {
   // to our remote PHP script (note the body variable we have created which
   // supplies a variable of key with a value of create followed by the key/value pairs
   // for the record data
-  createEntry(companygroup_name, address, country, contact, createdby) {
+  createEntry(type_name, service_project, event_subject, service_unitid, createdby) {
     let updatedby = createdby;
-    let body: string = "is_mobile=1&companygroup_name=" + companygroup_name + "&address=" + address + "&country=" + country + "&contact=" + contact + "&createdby=" + createdby + "&updatedby=" + updatedby,
+    let body: string = "is_mobile=1&type_name=" + type_name + "&service_project=" + service_project + "&event_subject=" + event_subject + "&service_unitid=" + service_unitid + "&createdby=" + createdby + "&updatedby=" + updatedby,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
@@ -139,9 +177,9 @@ export class AddcalendarPage {
   // to our remote PHP script (note the body variable we have created which
   // supplies a variable of key with a value of update followed by the key/value pairs
   // for the record data
-  updateEntry(companygroup_name, address, country, contact, createdby) {
+  updateEntry(type_name, service_project, event_subject, service_unitid, createdby) {
     let updatedby = createdby;
-    let body: string = "is_mobile=1&companygroup_name=" + companygroup_name + "&address=" + address + "&country=" + country + "&contact=" + contact + "&companygroup_id=" + this.recordID + "&createdby=" + createdby + "&updatedby=" + updatedby,
+    let body: string = "is_mobile=1&type_name=" + type_name + "&service_project=" + service_project + "&event_subject=" + event_subject + "&service_unitid=" + service_unitid + "&companygroup_id=" + this.recordID + "&createdby=" + createdby + "&updatedby=" + updatedby,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
@@ -179,7 +217,7 @@ export class AddcalendarPage {
   deleteEntry() {
 
     //http://denyoappv2.stridecdev.com/companygroup/8/1/delete
-    let companygroup_name: string = this.form.controls["companygroup_name"].value,
+    let type_name: string = this.form.controls["type_name"].value,
       //body: string = "key=delete&recordID=" + this.recordID,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
@@ -191,7 +229,7 @@ export class AddcalendarPage {
         // If the request was successful notify the user
         if (data.status === 200) {
           this.hideForm = true;
-          this.sendNotification(`Congratulations the company group: ${companygroup_name} was successfully deleted`);
+          this.sendNotification(`Congratulations the company group: ${type_name} was successfully deleted`);
         }
         // Otherwise let 'em know anyway
         else {
@@ -206,16 +244,16 @@ export class AddcalendarPage {
   // Determine whether we are adding a new record or amending an
   // existing record
   saveEntry() {
-    let companygroup_name: string = this.form.controls["companygroup_name"].value,
-      address: string = this.form.controls["address"].value,
-      country: string = this.form.controls["country"].value,
-      contact: string = this.form.controls["contact"].value;
+    let type_name: string = this.form.controls["type_name"].value,
+      service_project: string = this.form.controls["service_project"].value,
+      event_subject: string = this.form.controls["event_subject"].value,
+      service_unitid: string = this.form.controls["service_unitid"].value;
 
     if (this.isEdited) {
-      this.updateEntry(companygroup_name, address, country, contact, this.userId);
+      this.updateEntry(type_name, service_project, event_subject, service_unitid, this.userId);
     }
     else {
-      this.createEntry(companygroup_name, address, country, contact, this.userId);
+      this.createEntry(type_name, service_project, event_subject, service_unitid, this.userId);
     }
   }
 
@@ -223,13 +261,27 @@ export class AddcalendarPage {
 
   // Clear values in the page's HTML form fields
   resetFields(): void {
-    this.companygroup_name = "";
-    this.address = "";
-    this.country = "";
-    this.contact = "";
+    this.type_name = "";
+    this.service_project = "";
+    this.event_subject = "";
+    this.service_unitid = "";
   }
 
+  getCompanyListData() {
+    let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/getcompanies";
+    let res;
+    console.log("URL" + url);
+    this.http.get(url, options)
+      .subscribe(data => {
+        res = data.json();
+        console.log(JSON.stringify(res));
+        this.responseResultCompany = res.companies;
+      });
 
+  }
 
   // Manage notifying the user of the outcome
   // of remote operations
@@ -241,19 +293,7 @@ export class AddcalendarPage {
     notification.present();
   }
 
-  getJsonCountryListData() {
-    let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
-      headers: any = new Headers({ 'Content-Type': type }),
-      options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/getCountries";
-    let res;
-    this.http.get(url, options)
-      .subscribe(data => {
-        res = data.json();
-        this.responseResultCountry = res.countries;
-      });
 
-  }
   previous() {
     this.nav.setRoot(CalendarPage);
   }
