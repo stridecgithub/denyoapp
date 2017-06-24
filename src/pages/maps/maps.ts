@@ -16,7 +16,7 @@ import { HomePage } from '../home/home';
   selector: 'page-maps',
   templateUrl: 'maps.html',
 })
-export class CalendarPage {
+export class MapsPage {
   sendmsg = Sendmsg;
   compose = Compose;
   app: IonicApp;
@@ -27,7 +27,7 @@ export class CalendarPage {
   public pageTitle: string;
   Catdata: any;
   constructor(app: IonicApp, public navCtrl: NavController, private alertCtrl: AlertController, private http: Http) {
-    this.rootPage = CalendarPage; this.app = app;
+    this.rootPage = MapsPage; this.app = app;
     this.loginas = localStorage.getItem("userInfoName");
     this.userId = localStorage.getItem("userInfoId");
     this.pageTitle = "Calendar";
