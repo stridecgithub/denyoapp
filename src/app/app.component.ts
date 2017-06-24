@@ -21,7 +21,7 @@ import { App } from 'ionic-angular';
 //import { AtmentionedPage } from '../pages/atmentioned/atmentioned';
 import { UnitsPage } from '../pages/units/units';
 import { OrgchartPage } from '../pages/orgchart/orgchart';
-//import { AddorgchartonePage } from '../pages/addorgchartone/addorgchartone';
+import { AlarmPage } from '../pages/alarm/alarm';
 //import { AddorgcharttwoPage } from '../pages/addorgcharttwo/addorgcharttwo';
 //import { AddreporttemplatePage } from '../pages/addreporttemplate/addreporttemplate';
 import { LogoutPage } from '../pages/logout/logout';
@@ -68,6 +68,7 @@ export class MyApp {
       { title: 'Maps', component: MapsPage },
       { title: 'Calendar', component: CalendarPage },
       { title: 'Reports', component: ReportsPage },
+      { title: 'Alarm List', component: AlarmPage },
       { title: 'Logout', component: LogoutPage }
     ];
 
@@ -118,6 +119,9 @@ export class MyApp {
       this.nav.setRoot(MapsPage);
     } else if (page.component == 'ReportsPage') {
       this.nav.setRoot(ReportsPage);
+    }
+     else if (page.component == 'AlarmPage') {
+      this.nav.setRoot(AlarmPage);
     }
   }
 
