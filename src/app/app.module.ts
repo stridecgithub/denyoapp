@@ -43,6 +43,7 @@ import { AddcommentsinfoPage } from '../pages/addcommentsinfo/addcommentsinfo';
 import { DataServiceProvider } from '../providers/data-service/data-service';
 import { MessagesPage } from '../pages/messages/messages';
 import { CalendarPage } from '../pages/calendar/calendar';
+import { AlarmPage } from '../pages/alarm/alarm';
 import { MapsPage } from '../pages/maps/maps';
 @NgModule({
   declarations: [
@@ -85,6 +86,7 @@ import { MapsPage } from '../pages/maps/maps';
     AddrequestsupportPage,
     MessagesPage,
     CalendarPage,
+    AlarmPage,
     MapsPage
   ],
   imports: [
@@ -143,6 +145,7 @@ import { MapsPage } from '../pages/maps/maps';
     AddrequestsupportPage,
     MessagesPage,
     CalendarPage,
+    AlarmPage,
     MapsPage
   ],
   providers: [

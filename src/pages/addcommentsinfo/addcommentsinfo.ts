@@ -194,10 +194,10 @@ export class AddcommentsinfoPage {
     //  http://127.0.0.1/ionic/upload_attach.php
     //http://amahr.stridecdev.com/getgpsvalue.php?key=create&lat=34&long=45
     fileTransfer.onProgress(this.onProgress);
-    fileTransfer.upload(path, this.apiServiceURL + '/fileupload.php?micro_timestamp=' + micro_timestamp, options)
+    fileTransfer.upload(path, this.apiServiceURL + '/commentupload.php?micro_timestamp=' + micro_timestamp, options)
       .then((data) => {
         let imgSrc;
-        imgSrc = this.apiServiceURL + "/serviceimages" + '/' + newFileName;
+        imgSrc = this.apiServiceURL + "/commentimages" + '/' + newFileName;
         this.addedImgLists.push({
           imgSrc: imgSrc,
           imgDateTime: new Date(),
@@ -283,8 +283,10 @@ export class AddcommentsinfoPage {
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
       url: any = this.apiServiceURL + "/comments/store";
+      console.log(body);
+      console.log("Hello");
     console.log(url);
-    console.log(body);
+    
 
     this.http.post(url, body, options)
       .subscribe((data) => {
