@@ -93,8 +93,7 @@ import { MapsPage } from '../pages/maps/maps';
   ],
   imports: [
     BrowserModule,
-    HttpModule,
-
+    HttpModule,  
     IonicModule.forRoot(MyApp, {
       backButtonText: 'Go Back',
       iconMode: 'ios',
