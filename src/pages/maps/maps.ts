@@ -30,12 +30,12 @@ export class MapsPage {
     this.rootPage = MapsPage; this.app = app;
     this.loginas = localStorage.getItem("userInfoName");
     this.userId = localStorage.getItem("userInfoId");
-    this.pageTitle = "Calendar";
+    this.pageTitle = "Maps";
   }
 
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad CalendarPage');
+    console.log('ionViewDidLoad MapsPage');
   }
 
 
