@@ -42,6 +42,8 @@ import { CommentsinfoPage } from '../pages/commentsinfo/commentsinfo';
 import { AddcommentsinfoPage } from '../pages/addcommentsinfo/addcommentsinfo';
 import { DataServiceProvider } from '../providers/data-service/data-service';
 import { MessagesPage } from '../pages/messages/messages';
+import { CalendarPage } from '../pages/calendar/calendar';
+import { MapsPage } from '../pages/maps/maps';
 @NgModule({
   declarations: [
     MyApp,
@@ -81,7 +83,9 @@ import { MessagesPage } from '../pages/messages/messages';
     AddserviceinfoPage,
     AddreporttemplatePage,
     AddrequestsupportPage,
-    MessagesPage
+    MessagesPage,
+    CalendarPage,
+    MapsPage
   ],
   imports: [
     BrowserModule,
@@ -137,7 +141,9 @@ import { MessagesPage } from '../pages/messages/messages';
     AddserviceinfoPage,
     AddreporttemplatePage,
     AddrequestsupportPage,
-    MessagesPage
+    MessagesPage,
+    CalendarPage,
+    MapsPage
   ],
   providers: [
     StatusBar,
