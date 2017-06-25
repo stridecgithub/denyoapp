@@ -43,8 +43,8 @@
 </ion-header>
 
 <ion-content padding class="ion-content">
-  <div class="error" *ngIf="totalCount==0">No users entries found</div>
-  <ion-item style="width: 100%; margin: 0; padding-left: 10px;">
+ 
+  <ion-item style="width: 100%; margin: 0; padding-left: 10px;" *ngIf="totalCount!=0">
     <ion-label>Sort By</ion-label>
     <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="pet" (ionChange)="onSegmentChanged(pet)">
       <ion-option value="unitname,desc">Favorite</ion-option>
@@ -58,6 +58,7 @@
       <ion-option value="unitname,desc">Offline</ion-option>
     </ion-select>
   </ion-item>
+   <div class="error" *ngIf="totalCount==0">No users entries found</div>
   <div class="separator-line" *ngIf="totalCount!=0">&nbsp;</div>
   <ion-refresher (ionRefresh)="doRefresh($event)" *ngIf="totalCount!=0">
     <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
