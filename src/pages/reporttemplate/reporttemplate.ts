@@ -24,6 +24,7 @@ export class ReporttemplatePage {
   public templatenamehash;
   public templatenamecomm;
   public totalCount;
+  public reporttemplate;
 
   pet: string = "ALL";
   public reportData: any =
@@ -45,12 +46,33 @@ export class ReporttemplatePage {
   }
 
 
-
-
-  ionViewWillEnter() {
+  onSegmentChanged(val) {
+    let splitdata = val.split(",");
+    this.reportData.sort = splitdata[0];
+    this.reportData.sortascdesc = splitdata[1];
+    //this.reportData.status = "ALL";
+    this.reportData.startindex = 0;
+    this.reportAllLists = [];
     this.doReport();
   }
 
+  ionViewWillEnter() {
+    this.doReport();
+    this.doReportTemplate();
+  }
+  doReportTemplate() {
+    let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/getavailableheading";
+    let res;
+    console.log(url);
+    this.http.get(url, options)
+      .subscribe((data) => {
+        res = data.json();       
+        this.reporttemplate = JSON.stringify(res.comm_datas);
+      });
+  }
   doRefresh(refresher) {
     console.log('doRefresh function calling...');
     this.reportData.startindex = 0;
@@ -72,7 +94,8 @@ export class ReporttemplatePage {
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/reporttemplate?is_mobile=1";
+      // url: any = this.apiServiceURL + "/reporttemplate?is_mobile=1";
+      url: any = this.apiServiceURL + "/reporttemplate?is_mobile=1&startindex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc;
     let res;
     console.log(url);
     this.http.get(url, options)
@@ -133,8 +156,10 @@ export class ReporttemplatePage {
     });
     notification.present();
   }
-  doAdd() {
-    this.nav.setRoot(AddreporttemplatePage);
+  doAdd(availableheading) {
+    this.nav.setRoot(AddreporttemplatePage, {
+      availableheading: availableheading
+    });
   }
   doConfirm(id, item) {
     console.log("Deleted Id" + id);
@@ -178,11 +203,12 @@ export class ReporttemplatePage {
         }
       });
   }
-  doEdit(item, act) {
+  doEdit(item, act, availableheading) {
     if (act == 'edit') {
       this.nav.setRoot(AddreporttemplatePage, {
         record: item,
-        act: act
+        act: act,
+        availableheading: availableheading
       });
     }
   }

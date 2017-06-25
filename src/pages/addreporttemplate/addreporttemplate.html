@@ -5,38 +5,37 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-	<ion-navbar color="header">
-		<button ion-button menuToggle>
+  <ion-navbar color="header">
+    <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-		<ion-title>Add Report Template</ion-title>
-	</ion-navbar>
-	<ion-navbar>
-		<p><label class="sheader1" (click)="previous()"><Back to Previous</label>
+    <ion-title>{{pageTitle}}</ion-title>
+  </ion-navbar>
+  <ion-navbar>
+    <p><label class="sheader1" (click)="previous()"><Back to Previous</label>
 
-			<label class="sheader2">Login as:{{loginas}}</label>
+      <label class="sheader2">Login as:{{loginas}}</label>
 
-		</p>
-	</ion-navbar>
+    </p>
+  </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
-  
-<div>
-  <form [formGroup]="form">
-  <ion-item>
-          <ion-label stacked>Template Name <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
-          <ion-input type="text" [disabled]="readOnly" formControlName="templatename" [(ngModel)]="templatename"></ion-input>
-        </ion-item>
-        <ion-item ion-item *ngFor="let item of items" >
-    <ion-label>{{item.name}}</ion-label>
-    <ion-checkbox color="bluedark"   (click)="getCheckBoxValue(item.name)" 
-    ></ion-checkbox>
-</ion-item>
-			 <ion-item >
-          <button ion-button color="bluedark"  text-center block  (click)="saveEntry()">Continue</button>
-        </ion-item>
-  </form>
-</div>
+
+  <div>
+    <form [formGroup]="form">
+      <ion-item>
+        <ion-label stacked>Template Name <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
+        <ion-input type="text" [disabled]="readOnly" formControlName="templatename" [(ngModel)]="templatename"></ion-input>
+      </ion-item>
+      <ion-item ion-item *ngFor="let item of availableheadingitem">
+        <ion-label>{{item.val}}</ion-label>
+        <ion-checkbox color="bluedark" (click)="getCheckBoxValue(item.val)" checked={{item.check}}></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <button ion-button color="bluedark" text-center block (click)="saveEntry()">Continue</button>
+      </ion-item>
+    </form>
+  </div>
 </ion-content>

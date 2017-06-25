@@ -34,7 +34,7 @@
       Login As:{{loginas}}
     </ion-buttons>
   </ion-navbar>
-  <button class="add-new-btn" (click)="doAdd()">
+  <button class="add-new-btn" (click)="doAdd(reporttemplate)">
   	<div class="algn-cent">
     	<ion-icon name="ios-add-circle-outline"></ion-icon>
         <span>Add Report Template</span>
@@ -76,7 +76,7 @@
         <!--button class="viewcolor" (click)="doEdit(item,'view')">
                        <ion-icon name="eye" class="icon-size"></ion-icon>
                     </button-->
-        <button class="editcolor" (click)="doEdit(item,'edit')">                      
+        <button class="editcolor" (click)="doEdit(item,'edit',reporttemplate)">                      
                         <ion-icon name="create" class="icon-size"></ion-icon>
                     </button>
         <button class="trashcolor" (click)="doConfirm(item.id,item)">                        
