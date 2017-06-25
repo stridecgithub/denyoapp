@@ -93,31 +93,33 @@ export class AddreporttemplatePage {
 
     if (this.NP.get("availableheading")) {
       let getavailableheading = this.NP.get("availableheading");
-      if(getavailableheading!=undefined && getavailableheading!='undefined'){
-      this.availableheading = getavailableheading.split(",");
-      console.log("Length" + this.availableheading.length);
-      let checkvalue = false;
-      for (let i = 0; i < this.availableheading.length; i++) {
-        let a = this.NP.get("record").availableheading.indexOf(this.availableheading[i]);
-        if (a > 0) {
-          checkvalue = true;
-          console.log(this.availableheading[i]+":"+checkvalue);
-        }else{
-          checkvalue = false;
-           console.log(this.availableheading[i]+":"+checkvalue);
-        }
-        this.availableheadingitem.push(
-          {
-            val: this.availableheading[i],
-            check: checkvalue
+     
+        this.availableheading = getavailableheading.split(",");
+        console.log("Length" + this.availableheading.length);
+        let checkvalue = false;
+        for (let i = 0; i < this.availableheading.length; i++) {
+          if (this.NP.get("record")) {
+            let a = this.NP.get("record").availableheading.indexOf(this.availableheading[i]);
+            if (a > 0) {
+              checkvalue = true;
+              console.log(this.availableheading[i] + ":" + checkvalue);
+            } else {
+              checkvalue = false;
+              console.log(this.availableheading[i] + ":" + checkvalue);
+            }
           }
-        )
-      }
-    }
+          this.availableheadingitem.push(
+            {
+              val: this.availableheading[i],
+              check: checkvalue
+            }
+          )
+        }
+      
     }
   }
 
-  
+
 
   getCheckBoxValue(name) {
     console.log(name);
