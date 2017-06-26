@@ -37,8 +37,8 @@
       <ion-list>
 
         <ion-item>
-          <ion-label stacked>Date <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
-          <ion-input type="text" [disabled]=true formControlName="event_title" [(ngModel)]="event_title"></ion-input>
+          <ion-label stacked>Event Title <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
+          <ion-input type="text" [disabled]="readOnly" formControlName="event_title" [(ngModel)]="event_title"></ion-input>
         </ion-item>
 
         <ion-item>
@@ -59,7 +59,7 @@
 
         <ion-item *ngIf="unitfield">
           <ion-label stacked>Units <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
-          <ion-select [disabled]="readOnly" [(ngModel)]="service_unitid" formControlName="service_unitid">
+          <ion-select [disabled]="readOnly" [(ngModel)]="event_unitid" formControlName="event_unitid"  (ionChange)="getProjectLocation(event_type)">
             <ion-option *ngFor="let companyData of responseResultCompany" value="{{companyData.companygroup_id}}">{{companyData.companygroup_name}}</ion-option>
           </ion-select>
         </ion-item>
