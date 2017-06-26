@@ -295,6 +295,7 @@ export class AddrolePage {
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
       url: any = this.apiServiceURL + "api/roles.php";
+      console.log(url);
     let res;
     this.http.post(url, body, options)
       .subscribe((data) => {
@@ -444,11 +445,11 @@ export class AddrolePage {
   // supplies a variable of key with a value of create followed by the key/value pairs
   // for the record data
   createEntry(role_name, roleperMissionData, createdby) {
-    let body: string = "key=create&role_name=" + role_name + "&roleperMissionData=" + JSON.stringify(roleperMissionData) + "&createdby=" + createdby,
+    let body: string = "is_mobile=1&role_name=" + role_name + "&module=" + JSON.stringify(roleperMissionData) + "&createdby=" + createdby,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "api/roles.php";
+     url: any = this.apiServiceURL + "role/store";
       console.log(url);
       console.log(body);
 
@@ -486,7 +487,7 @@ export class AddrolePage {
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "api/roles.php";
+      url: any = this.apiServiceURL + "role/store";
 
     this.http.post(url, body, options)
       .subscribe(data => {
@@ -517,11 +518,11 @@ export class AddrolePage {
   // for the record ID we want to remove from the remote database
   deleteEntry() {
     let role_name: string = this.form.controls["role_name"].value,
-      body: string = "key=delete&recordID=" + this.recordID,
+      body: string = "is_mobile=1&role_name=" + role_name+"&module="+JSON.stringify(this.roleperMissionData)+"&updatedby="+this.userId,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "api/roles.php";
+      url: any = this.apiServiceURL + "role/store";
       console.log(body);
 
     this.http.post(url, body, options)
