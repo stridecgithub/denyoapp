@@ -7,6 +7,7 @@ import { CompanygroupPage } from '../companygroup/companygroup';
 import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitsPage } from '../units/units';
 import { RolePage } from '../role/role';
+import { AlarmPage } from '../alarm/alarm';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
 import { DomSanitizer } from '@angular/platform-browser';
 //import { Http, Headers, RequestOptions } from '@angular/http';
@@ -364,6 +365,11 @@ export class UnitdetailsPage {
 	}
 	commentsInfo() {
 		this.nav.setRoot(CommentsinfoPage, {
+			record: this.NP.get("record")
+		});
+	}
+		alarm() {
+		this.nav.setRoot(AlarmPage, {
 			record: this.NP.get("record")
 		});
 	}

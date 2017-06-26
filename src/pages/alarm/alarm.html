@@ -47,7 +47,7 @@
 
 
 <ion-content padding  class="ion-content">
-  <div class="error" *ngIf="totalCount==0">No unit group entries found</div>
+  <div class="error" *ngIf="totalCount==0">No entries found</div>
 
   <ion-refresher (ionRefresh)="doRefresh($event)" *ngIf="totalCount!=0">
     <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
@@ -60,9 +60,10 @@
         
         
         <div style="overflow: hidden; padding-left: .5em;">
-          <h2><b>Fault Code:{{item.faultcode}}</b>
+          <h2><b>Fault Code:{{item.alarm_name}}</b>
           </h2>
-          <h2><b>Assigned by:{{item.assignedby}}</b></h2>
+          <h2><b>Assigned by:{{item.alarm_assigned_by}}</b></h2>
+           <h2><b>Assigned to:{{item.alarm_assigned_to}}</b></h2>
 
         </div>
 
@@ -75,9 +76,7 @@
         <button class="editcolor" (click)="doEdit(item,'edit')">                      
                         <ion-icon name="create" class="icon-size"></ion-icon>
                     </button>
-        <button class="trashcolor" (click)="doConfirm(item.unitgroup_id,item)">                        
-                         <ion-icon name="trash" class="icon-size"></ion-icon>
-                    </button>
+      
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
