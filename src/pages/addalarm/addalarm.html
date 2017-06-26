@@ -41,29 +41,29 @@
 
 <ion-content padding>
   <div>
-    <form>
+    <form [formGroup]="form" (ngSubmit)="saveEntry()">
       <ion-item>
           <ion-label stacked>Subject<span class="mandatory" *ngIf="hideActionButton"> *</span></ion-label>
-          <ion-input ></ion-input>
+          <ion-input type ="text" [disabled]=true formControlName="subject" [(ngModel)]="subject"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label stacked>Assign by <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
-          <ion-input></ion-input>
+          <ion-input type = "text" [disabled]=true formControlName="assignedby" [(ngModel)]="assignedby"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label stacked>Assigned To <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
-          <ion-select >
-            <ion-option *ngFor="let countryData of responseResultCountry" value="{{countryData.id}}">{{countryData.country_name}}</ion-option>
+          <ion-label stacked>Assigned To</ion-label>
+          <ion-select [disabled]="readOnly" [(ngModel)]="assigned_to" formControlName="assigned_to">
+            <ion-option *ngFor="let userData of responseResultReportTo" value="{{userData.staff_id}}">{{userData.firstname}} {{userData.lastname}}</ion-option>
           </ion-select>
         </ion-item>
         <div>
 				<ion-label stacked>Remark</ion-label>
-				<ion-textarea rows="6" type="text" ></ion-textarea>
+				<ion-textarea rows="6" type="text" [disabled]="readOnly" formControlName="remark" [(ngModel)]="remark"></ion-textarea>
 
 			</div>
       <ion-item>
-          <button ion-button color="primary" text-center >Continue</button>
+          <button ion-button color="primary" text-center  [disabled]="!form.valid">Complete and Save</button>
         </ion-item>
       </form>
   </div>

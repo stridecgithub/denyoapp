@@ -22,6 +22,7 @@ import { App } from 'ionic-angular';
 import { UnitsPage } from '../pages/units/units';
 import { OrgchartPage } from '../pages/orgchart/orgchart';
 import { AlarmPage } from '../pages/alarm/alarm';
+import { AlarmlogPage } from '../pages/alarmlog/alarmlog';
 import { AddalarmPage } from '../pages/addalarm/addalarm';
 //import { AddorgcharttwoPage } from '../pages/addorgcharttwo/addorgcharttwo';
 //import { AddreporttemplatePage } from '../pages/addreporttemplate/addreporttemplate';
@@ -71,6 +72,7 @@ export class MyApp {
       { title: 'Reports', component: ReportsPage },
       { title: 'Alarm List', component: AlarmPage },
        { title: 'Alarm', component: AddalarmPage },
+        { title: 'Alarm Log', component: AlarmlogPage },
       { title: 'Logout', component: LogoutPage }
     ];
 

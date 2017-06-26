@@ -7,7 +7,8 @@ import { CompanygroupPage } from '../companygroup/companygroup';
 import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitsPage } from '../units/units';
 import { RolePage } from '../role/role';
-import { AlarmPage } from '../alarm/alarm';
+//import { AlarmPage } from '../alarm/alarm';
+import { AlarmlogPage } from '../alarmlog/alarmlog';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
 import { DomSanitizer } from '@angular/platform-browser';
 //import { Http, Headers, RequestOptions } from '@angular/http';
@@ -369,7 +370,7 @@ export class UnitdetailsPage {
 		});
 	}
 		alarm() {
-		this.nav.setRoot(AlarmPage, {
+		this.nav.setRoot(AlarmlogPage, {
 			record: this.NP.get("record")
 		});
 	}

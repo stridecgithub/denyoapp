@@ -214,6 +214,7 @@ export class AddorgcharttwoPage {
       "&contact_number=" + this.contact +
       "&createdby=" + this.createdby +
       "&updatedby=" + this.createdby +
+      "&report_to=" + this.report_to +
       "&company_id=" + this.company_group +
       "&job_position=" + this.job_position,
 
