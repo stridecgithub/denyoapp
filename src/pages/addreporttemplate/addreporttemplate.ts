@@ -91,7 +91,7 @@ export class AddreporttemplatePage {
       //  this.selectoption=true;
     }
 
-    if (this.NP.get("availableheading")) {
+    /*if (this.NP.get("availableheading")) {
       let getavailableheading = this.NP.get("availableheading");
      
         this.availableheading = getavailableheading.split(",");
@@ -116,7 +116,41 @@ export class AddreporttemplatePage {
           )
         }
       
-    }
+    }*/
+
+    let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/getavailableheading";
+    let res;
+    console.log(url);
+    this.http.get(url, options)
+      .subscribe((data) => {
+        res = data.json();
+        // this.availableheadingitem = res.templatedata;
+        let checkvalue = false;
+        if (res.unitgroups.length > 0) {
+
+          for (let unitgroup in res.unitgroups) {
+
+            if (this.NP.get("record")) {
+              let a = this.NP.get("record").availableheading.indexOf(res.unitgroups[unitgroup].id);
+              if (a > 0) {
+                checkvalue = true;
+                console.log(res.unitgroups[unitgroup].availabledata + ":" + checkvalue);
+              } else {
+                checkvalue = false;
+                console.log(res.unitgroups[unitgroup].availabledata + ":" + checkvalue);
+              }
+            }
+            this.availableheadingitem.push({
+              id: res.unitgroups[unitgroup].id,
+              availabledata: res.unitgroups[unitgroup].availabledata,
+              check: checkvalue
+            });
+          }
+        }
+      });
   }
 
 

@@ -30,8 +30,8 @@
         <ion-input type="text" [disabled]="readOnly" formControlName="templatename" [(ngModel)]="templatename"></ion-input>
       </ion-item>
       <ion-item ion-item *ngFor="let item of availableheadingitem">
-        <ion-label>{{item.val}}</ion-label>
-        <ion-checkbox color="bluedark" (click)="getCheckBoxValue(item.val)" checked={{item.check}}></ion-checkbox>
+        <ion-label>{{item.availabledata}}</ion-label>
+        <ion-checkbox color="bluedark" (click)="getCheckBoxValue(item.id)" checked={{item.id}}></ion-checkbox>
       </ion-item>
       <ion-item>
         <button ion-button color="bluedark" text-center block (click)="saveEntry()">Continue</button>
