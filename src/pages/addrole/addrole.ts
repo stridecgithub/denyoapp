@@ -290,23 +290,59 @@ export class AddrolePage {
   selectEntry(item) {
     this.role_name = item.role_name;
     this.recordID = item.role_id;
-    let body: string = "key=permissiondata&role_id=" + this.recordID,
-      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+   // let body: string = "key=permissiondata&role_id=" + this.recordID,
+     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "api/roles.php";
+      url: any = this.apiServiceURL + "editrole?is_mobile=1&role_id="+this.recordID;
       console.log(url);
     let res;
-    this.http.post(url, body, options)
+    this.http.get(url,options)
       .subscribe((data) => {
 
         res = data.json();
 
-        // Dashboard Map
-        this.rolepermissionData.dashboardviewmap = res[0].dashboardviewmap;
-        this.rolepermissionData.dashboardcreatemap = res[0].dashboardcreatemap;
-        this.rolepermissionData.dashboardeditmap = res[0].dashboardeditmap;
-        this.rolepermissionData.dashboarddeletemap = res[0].dashboarddeletemap;
+        // Dashboard Mapif()
+        if(res.roledata[0].view_action==1 )
+        {
+           this.rolepermissionData.dashboardviewmap=true;
+        }
+        else
+        {
+          
+           this.rolepermissionData.dashboardviewmap=false;
+        
+        }
+        if(res.roledata[0].create_action==1 )
+        {
+          this.rolepermissionData.dashboardcreatemap=true;
+        }
+        else
+         {
+          this.rolepermissionData.dashboardcreatemap=false;
+        }
+        if(res.roledata[0].edit_action==1 )
+        {
+          this.rolepermissionData.dashboardeditmap=true;
+        }
+        else
+        {
+           
+          this.rolepermissionData.dashboardeditmap=false;
+        
+        }
+        if(res.roledata[0].delete_action==1 )
+        {
+this.rolepermissionData.dashboarddeletemap=true;
+        }
+        else
+        {
+this.rolepermissionData.dashboarddeletemap=false;
+        }
+        //this.rolepermissionData.dashboardviewmap = res[0].dashboardviewmap;
+        //this.rolepermissionData.dashboardcreatemap = res[0].dashboardcreatemap;
+        //this.rolepermissionData.dashboardeditmap = res[0].dashboardeditmap;
+        //this.rolepermissionData.dashboarddeletemap = res[0].dashboarddeletemap;
         this.rolepermissionData.dashboardhidemap = res[0].dashboardhidemap;
 
         // Dashboard Units
