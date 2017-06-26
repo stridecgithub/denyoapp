@@ -29,13 +29,13 @@ export class CalendarPage {
   calendarResult: any;
   public pageTitle: string;
   public loginas: any;
-  public userId:any;
-   public companyId: any;
+  public userId: any;
+  public companyId: any;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   constructor(public navCtrl: NavController, private datePicker: DatePicker, private http: Http, public loadingCtrl: LoadingController) {
- this.loginas = localStorage.getItem("userInfoName");
+    this.loginas = localStorage.getItem("userInfoName");
     this.userId = localStorage.getItem("userInfoId");
-     this.userId = localStorage.getItem("userInfoId");
+    this.userId = localStorage.getItem("userInfoId");
     this.companyId = localStorage.getItem("userInfoCompanyId");
   }
 
@@ -50,9 +50,9 @@ export class CalendarPage {
       );
   }
   ionViewWillEnter() {
-   this.pageTitle = "Calendar";
+    this.pageTitle = "Calendar";
     //console.log(JSON.stringify(this.userInf));
-   
+
     let curDate = new Date();
     console.log('1' + curDate);
     let yearMonth = this.splitDate(curDate)
@@ -60,7 +60,7 @@ export class CalendarPage {
     this.onTimeSelected(curDate);
 
 
-    
+
   }
 
   eventSource;
@@ -101,24 +101,24 @@ export class CalendarPage {
     this.calendar.currentDate = new Date();
   }
   pre() {
-   
+
     let prevmonth = this.addMonthsUTC(this.calendar.currentDate, -1);
     //console.log("nextmonth:" + prevmonth);
     this.calendar.currentDate = prevmonth;
     let yearMonth = this.splitDate(this.calendar.currentDate)
     this.dateHeaderTitle = yearMonth;
     //this.dateHeaderTitle = this.calendar.currentDate;
-    
+
   }
   nex() {
-    
+
     let nextmonth = this.addMonthsUTC(this.calendar.currentDate, 1);
     //console.log("nextmonth:" + nextmonth);
     this.calendar.currentDate = nextmonth;
     let yearMonth = this.splitDate(this.calendar.currentDate)
     this.dateHeaderTitle = yearMonth;
     //this.dateHeaderTitle = this.calendar.currentDate;
-    
+
   }
   splitDate(curdate) {
     //var splitDt = curdate.split("@");
@@ -170,12 +170,12 @@ export class CalendarPage {
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/calendar?is_mobile=1&loginid="+this.userId+"&companyid="+this.companyId+"&date=" + year + "-" + month + "-" + date;
+      url: any = this.apiServiceURL + "/calendar?is_mobile=1&loginid=" + this.userId + "&companyid=" + this.companyId + "&date=" + year + "-" + month + "-" + date;
     console.log(url);
     this.http.get(url, options)
       .subscribe((data) => {
 
-        this.calendarResult  = data.json().services;
+        this.calendarResult = data.json().services;
       });
   }
   onCurrentDateChanged(event: Date) {

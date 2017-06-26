@@ -35,6 +35,12 @@
   <div>
     <form [formGroup]="form" (ngSubmit)="saveEntry()">
       <ion-list>
+
+        <ion-item>
+          <ion-label stacked>Date <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
+          <ion-input type="text" [disabled]=true formControlName="event_title" [(ngModel)]="event_title"></ion-input>
+        </ion-item>
+
         <ion-item>
           <ion-label stacked>Date <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
           <ion-input type="text" [disabled]=true formControlName="event_date" [(ngModel)]="event_date"></ion-input>
@@ -68,12 +74,12 @@
 
         <ion-item>
           <ion-label stacked>Location <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
-          <ion-input [disabled]="disunit" type="text" formControlName="service_location" [(ngModel)]="service_location"></ion-input>
+          <ion-input [disabled]="disunit" type="text" formControlName="event_location" [(ngModel)]="event_location"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label stacked>Time <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
-          <ion-select [disabled]="readOnly" [(ngModel)]="serviced_datetime" formControlName="serviced_datetime">
+          <ion-select [disabled]="readOnly" [(ngModel)]="event_time" formControlName="event_time">
             <ion-option *ngFor="let timeData of responseResultTime" value="{{timeData.id}}">{{timeData.time_name}}</ion-option>
           </ion-select>
         </ion-item>

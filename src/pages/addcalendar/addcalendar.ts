@@ -30,6 +30,7 @@ export class AddcalendarPage {
   public event_subject: any;
   public service_unitid: any;
   public event_date: any;
+  public event_title: any;
   public userId: any;
   public responseResultType = [];
   public responseResultTime = [];
@@ -58,14 +59,15 @@ export class AddcalendarPage {
     this.loginas = localStorage.getItem("userInfoName");
     // Create form builder validation rules
     this.form = fb.group({
-      "service_location": ["", Validators.required],
+      "event_location": ["", Validators.required],
       "event_subject": ["", Validators.required],
       "service_unitid": ["", Validators.required],
+      "event_title": ["", Validators.required],
       "service_project": [""],
       "event_date": [""],
       "event_type": [""],
       "event_notes": [""],
-      "serviced_datetime": [""]
+      "event_time": [""]
     });
     this.disunit = false;
     this.userId = localStorage.getItem("userInfoId");
@@ -141,13 +143,14 @@ export class AddcalendarPage {
   // to our remote PHP script (note the body variable we have created which
   // supplies a variable of key with a value of create followed by the key/value pairs
   // for the record data
-  createEntry(type_name, service_project, event_subject, service_unitid, createdby) {
+  createEntry(event_title, type_name, service_project, event_subject, service_unitid, event_time, createdby) {
     let updatedby = createdby;
-    let body: string = "is_mobile=1&type_name=" + type_name + "&service_project=" + service_project + "&event_subject=" + event_subject + "&service_unitid=" + service_unitid + "&createdby=" + createdby + "&updatedby=" + updatedby,
+    let body: string = "is_mobile=1&event_type="
+      + type_name + "&event_title=" + event_title + "&event_subject=" + event_subject + "&event_date=" + this.event_date + "&event_time=" + event_time + "&event_added_by=" + createdby,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/services/store";
+      url: any = this.apiServiceURL + "/storeevent";
     this.http.post(url, body, options)
       .subscribe((data) => {
         let res = data.json();
@@ -177,7 +180,7 @@ export class AddcalendarPage {
   // to our remote PHP script (note the body variable we have created which
   // supplies a variable of key with a value of update followed by the key/value pairs
   // for the record data
-  updateEntry(type_name, service_project, event_subject, service_unitid, createdby) {
+  updateEntry(event_title, type_name, service_project, event_subject, service_unitid, event_time, createdby) {
     let updatedby = createdby;
     let body: string = "is_mobile=1&type_name=" + type_name + "&service_project=" + service_project + "&event_subject=" + event_subject + "&service_unitid=" + service_unitid + "&companygroup_id=" + this.recordID + "&createdby=" + createdby + "&updatedby=" + updatedby,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
@@ -247,13 +250,15 @@ export class AddcalendarPage {
     let type_name: string = this.form.controls["type_name"].value,
       service_project: string = this.form.controls["service_project"].value,
       event_subject: string = this.form.controls["event_subject"].value,
-      service_unitid: string = this.form.controls["service_unitid"].value;
+      service_unitid: string = this.form.controls["service_unitid"].value,
+      event_title: string = this.form.controls["event_title"].value,
+      event_time: string = this.form.controls["event_time"].value;
 
     if (this.isEdited) {
-      this.updateEntry(type_name, service_project, event_subject, service_unitid, this.userId);
+      this.updateEntry(event_title, type_name, service_project, event_subject, service_unitid, event_time, this.userId);
     }
     else {
-      this.createEntry(type_name, service_project, event_subject, service_unitid, this.userId);
+      this.createEntry(event_title, type_name, service_project, event_subject, service_unitid, event_time, this.userId);
     }
   }
 
