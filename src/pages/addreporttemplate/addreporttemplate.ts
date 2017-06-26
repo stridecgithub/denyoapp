@@ -127,25 +127,32 @@ export class AddreporttemplatePage {
     this.http.get(url, options)
       .subscribe((data) => {
         res = data.json();
-        // this.availableheadingitem = res.templatedata;
+        //this.availableheadingitem = res.templatedata;
         let checkvalue = false;
-        if (res.unitgroups.length > 0) {
+        if (res.templatedata.length > 0) {
 
-          for (let unitgroup in res.unitgroups) {
+          for (let tempdata in res.templatedata) {
 
             if (this.NP.get("record")) {
-              let a = this.NP.get("record").availableheading.indexOf(res.unitgroups[unitgroup].id);
+              /*let a = this.NP.get("record").availableheading.indexOf(res.templatedata[tempdata].availabledata);
               if (a > 0) {
                 checkvalue = true;
-                console.log(res.unitgroups[unitgroup].availabledata + ":" + checkvalue);
+                console.log(res.templatedata[tempdata].availabledata + ":" + checkvalue);
               } else {
                 checkvalue = false;
-                console.log(res.unitgroups[unitgroup].availabledata + ":" + checkvalue);
+                console.log(res.templatedata[tempdata].availabledata + ":" + checkvalue);
+              }
+              */
+              if (this.in_array(res.templatedata[tempdata].availabledata, this.NP.get("record").availableheading) != -1) {
+                //is in array
+                checkvalue = true;
+              } else {
+                checkvalue = false;
               }
             }
             this.availableheadingitem.push({
-              id: res.unitgroups[unitgroup].id,
-              availabledata: res.unitgroups[unitgroup].availabledata,
+              id: res.templatedata[tempdata].id,
+              availabledata: res.templatedata[tempdata].availabledata,
               check: checkvalue
             });
           }
@@ -153,13 +160,20 @@ export class AddreporttemplatePage {
       });
   }
 
+  in_array(needle, haystack) {
+    var found = 0;
+    for (var i = 0, len = haystack.length; i < len; i++) {
+      if (haystack[i] == needle) return i;
+      found++;
+    }
+    return -1;
+  }
 
 
   getCheckBoxValue(name) {
-    console.log(name);
+    console.log("Available data" + name);
     this.getCheckboxData.push({
       availabledata: name
-
     })
     console.log(JSON.stringify(this.getCheckboxData));
   }
@@ -176,7 +190,36 @@ export class AddreporttemplatePage {
   }
   updateEntry() {
     console.log("Edit");
-
+    console.log(JSON.stringify(this.getCheckboxData));
+    let templatename: string = this.form.controls["templatename"].value
+    let body: string = "is_mobile=1&templatename=" + templatename + "&availabledata=" + JSON.stringify(this.getCheckboxData),
+      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/reporttemplate/update";
+    console.log(url);
+    console.log(body);
+    this.http.post(url, body, options)
+      .subscribe((data) => {
+        let res = data.json();
+        console.log(JSON.stringify(data.json()));
+        // If the request was successful notify the user
+        if (data.status === 200) {
+          console.log("Msg Results:-" + res.msg[0].result);
+          // this.hideForm = true;
+          if (res.msg[0].result > 0) {
+            this.sendNotification(res.msg[0].result);
+            this.nav.setRoot(ReporttemplatePage);
+          } else {
+            this.sendNotification(res.msg[0].result);
+            this.nav.setRoot(ReporttemplatePage);
+          }
+        }
+        // Otherwise let 'em know anyway
+        else {
+          this.sendNotification('Something went wrong!');
+        }
+      });
   }
   selectEntry(item) {
 
