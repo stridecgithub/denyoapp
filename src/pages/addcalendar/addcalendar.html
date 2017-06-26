@@ -48,7 +48,7 @@
         <ion-item>
           <ion-label stacked>Type <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
           <ion-select [disabled]="readOnly" [(ngModel)]="event_type" formControlName="event_type" (ionChange)="getType(event_type)">
-            <ion-option *ngFor="let typeData of responseResultType" value="{{typeData.id}}">{{typeData.type_name}}</ion-option>
+            <ion-option *ngFor="let typeData of responseResultType" value="{{typeData.type_name}}">{{typeData.type_name}}</ion-option>
           </ion-select>
         </ion-item>
         <ion-item>
@@ -59,7 +59,7 @@
 
         <ion-item *ngIf="unitfield">
           <ion-label stacked>Units <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
-          <ion-select [disabled]="readOnly" [(ngModel)]="event_unitid" formControlName="event_unitid"  (ionChange)="getProjectLocation(event_type)">
+          <ion-select [disabled]="readOnly" [(ngModel)]="event_unitid" formControlName="event_unitid"  (ionChange)="getProjectLocation(event_unitid)">
             <ion-option *ngFor="let companyData of responseResultCompany" value="{{companyData.companygroup_id}}">{{companyData.companygroup_name}}</ion-option>
           </ion-select>
         </ion-item>
@@ -69,7 +69,7 @@
 
         <ion-item *ngIf="unitfield">
           <ion-label stacked>Project <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
-          <ion-input [disabled]="disunit" type="text" formControlName="service_project" [(ngModel)]="service_project"></ion-input>
+          <ion-input [disabled]="disunit" type="text" formControlName="event_project" [(ngModel)]="event_project"></ion-input>
         </ion-item>
 
         <ion-item>

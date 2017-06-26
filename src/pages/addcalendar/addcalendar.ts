@@ -26,8 +26,10 @@ export class AddcalendarPage {
   public loginas: any;
   public form: FormGroup;
   public type_name: any;
-  public service_project: any;
+  public event_project: any;
   public event_subject: any;
+  public event_location: any;
+
   public event_unitid: any;
   public event_date: any;
   public event_title: any;
@@ -63,7 +65,7 @@ export class AddcalendarPage {
       "event_subject": ["", Validators.required],
       "event_unitid": ["", Validators.required],
       "event_title": ["", Validators.required],
-      "service_project": [""],
+      "event_project": [""],
       "event_date": [""],
       "event_type": [""],
       "event_notes": [""],
@@ -98,7 +100,7 @@ export class AddcalendarPage {
   }
   getType(type) {
     console.log(type);
-    if (type == 1) {
+    if (type == "Service") {
       this.unitfield = true;
       this.disunit = true;
     } else {
@@ -130,7 +132,7 @@ export class AddcalendarPage {
   // used as models on the page's HTML form
   selectEntry(item) {
     this.type_name = item.type_name;
-    this.service_project = item.service_project;
+    this.event_project = item.event_project;
     this.event_subject = item.event_subject;
     this.event_unitid = item.event_unitid;
     this.recordID = item.companygroup_id;
@@ -143,14 +145,15 @@ export class AddcalendarPage {
   // to our remote PHP script (note the body variable we have created which
   // supplies a variable of key with a value of create followed by the key/value pairs
   // for the record data
-  createEntry(event_title, type_name, service_project, event_subject, event_unitid, event_time, createdby) {
-    let updatedby = createdby;
+  createEntry(event_title, type_name, event_project, event_subject, event_unitid, event_time, createdby) {
+    //let updatedby = createdby;
     let body: string = "is_mobile=1&event_type="
       + type_name + "&event_title=" + event_title + "&event_subject=" + event_subject + "&event_date=" + this.event_date + "&event_time=" + event_time + "&event_added_by=" + createdby,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
       url: any = this.apiServiceURL + "/storeevent";
+      console.log(url+"?"+body);
     this.http.post(url, body, options)
       .subscribe((data) => {
         let res = data.json();
@@ -180,9 +183,9 @@ export class AddcalendarPage {
   // to our remote PHP script (note the body variable we have created which
   // supplies a variable of key with a value of update followed by the key/value pairs
   // for the record data
-  updateEntry(event_title, type_name, service_project, event_subject, event_unitid, event_time, createdby) {
+  updateEntry(event_title, type_name, event_project, event_subject, event_unitid, event_time, createdby) {
     let updatedby = createdby;
-    let body: string = "is_mobile=1&type_name=" + type_name + "&service_project=" + service_project + "&event_subject=" + event_subject + "&event_unitid=" + event_unitid + "&companygroup_id=" + this.recordID + "&createdby=" + createdby + "&updatedby=" + updatedby,
+    let body: string = "is_mobile=1&type_name=" + type_name + "&event_project=" + event_project + "&event_subject=" + event_subject + "&event_unitid=" + event_unitid + "&companygroup_id=" + this.recordID + "&createdby=" + createdby + "&updatedby=" + updatedby,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
@@ -247,18 +250,18 @@ export class AddcalendarPage {
   // Determine whether we are adding a new record or amending an
   // existing record
   saveEntry() {
-    let type_name: string = this.form.controls["type_name"].value,
-      service_project: string = this.form.controls["service_project"].value,
+    let type_name: string = this.form.controls["event_type"].value,
+      event_project: string = this.form.controls["event_project"].value,
       event_subject: string = this.form.controls["event_subject"].value,
       event_unitid: string = this.form.controls["event_unitid"].value,
       event_title: string = this.form.controls["event_title"].value,
       event_time: string = this.form.controls["event_time"].value;
 
     if (this.isEdited) {
-      this.updateEntry(event_title, type_name, service_project, event_subject, event_unitid, event_time, this.userId);
+      this.updateEntry(event_title, type_name, event_project, event_subject, event_unitid, event_time, this.userId);
     }
     else {
-      this.createEntry(event_title, type_name, service_project, event_subject, event_unitid, event_time, this.userId);
+      this.createEntry(event_title, type_name, event_project, event_subject, event_unitid, event_time, this.userId);
     }
   }
 
@@ -267,7 +270,7 @@ export class AddcalendarPage {
   // Clear values in the page's HTML form fields
   resetFields(): void {
     this.type_name = "";
-    this.service_project = "";
+    this.event_project = "";
     this.event_subject = "";
     this.event_unitid = "";
   }
@@ -286,6 +289,25 @@ export class AddcalendarPage {
         this.responseResultCompany = res.companies;
       });
 
+  }
+
+  getProjectLocation(unitid) {
+    let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/" + unitid + "/1/getunitdata";
+    let res;
+    console.log("URL" + url);
+    this.http.get(url, options)
+      .subscribe(data => {
+        res = data.json();
+        console.log(JSON.stringify(res));
+        console.log("Project Name:" + res.unitdata[0].projectname);
+        console.log("Project Location:" + res.unitdata[0].location);
+        this.event_project = res.unitdata[0].projectname;
+        this.event_location = res.unitdata[0].location;
+        //this.responseResultCompany = res.companies;
+      });
   }
 
   // Manage notifying the user of the outcome
