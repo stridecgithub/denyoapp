@@ -30,10 +30,13 @@ export class CalendarPage {
   public pageTitle: string;
   public loginas: any;
   public userId:any;
+   public companyId: any;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   constructor(public navCtrl: NavController, private datePicker: DatePicker, private http: Http, public loadingCtrl: LoadingController) {
  this.loginas = localStorage.getItem("userInfoName");
     this.userId = localStorage.getItem("userInfoId");
+     this.userId = localStorage.getItem("userInfoId");
+    this.companyId = localStorage.getItem("userInfoCompanyId");
   }
 
   opendatePicker() {
@@ -167,9 +170,11 @@ export class CalendarPage {
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/services?is_mobile=1&startindex=0&results=8&sort=service_id&dir=asc&unitid=1";
+      url: any = this.apiServiceURL + "/calendar?is_mobile=1&loginid="+this.userId+"&companyid="+this.companyId+"&date=" + year + "-" + month + "-" + date;
+    console.log(url);
     this.http.get(url, options)
       .subscribe((data) => {
+
         this.calendarResult  = data.json().services;
       });
   }
