@@ -414,7 +414,8 @@ export class AddunitsthreePage {
   }
   previous() {
     this.nav.setRoot(AddunitstwoPage, {
-      accountInfo: this.userInfo
+      accountInfo: this.userInfo,
+      record: this.NP.get("record")
     });
   }
 
