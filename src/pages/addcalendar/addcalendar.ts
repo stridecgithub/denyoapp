@@ -95,7 +95,7 @@ export class AddcalendarPage {
     }, {
         id: '6.15AM',
         time_name: '6:15 am'
-      }), {
+      }, {
         id: '6.30AM',
         time_name: '6:30 AM'
       }, {
@@ -194,7 +194,7 @@ export class AddcalendarPage {
       }, {
         id: '12.45PM',
         time_name: '12:45 PM'
-      };
+      });
     let dateStr = new Date();
     let month=dateStr.getMonth()+1;
     this.event_date = dateStr.getFullYear() + "-" + month + "-" + dateStr.getDate();

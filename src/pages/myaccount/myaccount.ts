@@ -66,7 +66,13 @@ export class MyaccountPage {
           this.country = res.settings[0].country_name;
           this.job_position = res.settings[0].job_position;
           this.accountcreatedby = res.settings[0].report_to;
-          this.photo = this.apiServiceURL + "/staffphotos/" + res.settings[0].photo_filename;
+          if (res.settings[0].photo_filename == 'undefined' && res.settings[0].photo_filename == undefined) {
+            this.photo = this.apiServiceURL + "/staffphotos/" + res.settings[0].photo_filename;
+          }else{
+            console.log('No photo available');
+            
+            this.photo = 'img/undefined.png';
+          }
         }
         // [{ "userid": "1", "userdetailsid": "1", "username": "denyov2", "password": "e3b81d385ca4c26109dfbda28c563e2b", "firstname": "Super Admin", "lastname": "Denyo", "email": "balamurugan@webneo.in", "contact_number": "9597645985", "country_id": "99", "photo": "1496647262537.jpg", "job_position": "Country Manager", "report_to": "0", "company_id": "1", "companygroup_name": "Denyo" }]
 

@@ -174,7 +174,8 @@ export class CalendarPage {
     console.log(url);
     this.http.get(url, options)
       .subscribe((data) => {
-        console.log("Calendar Response:" +data.json().services);
+        console.log("All Response:" +JSON.stringify(data.json()));
+        console.log("Calendar Response:" +JSON.stringify(data.json().services));
         this.calendarResult = data.json().services;
       });
   }
