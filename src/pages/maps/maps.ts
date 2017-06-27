@@ -6,8 +6,6 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { AddunitsonePage } from '../addunitsone/addunitsone';
 import { ViewcompanygroupPage } from '../viewcompanygroup/viewcompanygroup';
 import { LoadingController } from 'ionic-angular';
-import { TabsPage } from '../tabs/tabs';
-import { UserPage } from '../user/user';
 import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
 import { CompanygroupPage } from '../companygroup/companygroup';
@@ -15,6 +13,7 @@ import { RolePage } from '../role/role';
 import { HomePage } from '../home/home';
 import { UnitsPage } from '../units/units';
 import { UnitdetailsPage } from '../unitdetails/unitdetails';
+@IonicPage()
 @Component({
   selector: 'page-maps',
   templateUrl: 'maps.html',
