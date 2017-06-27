@@ -38,7 +38,7 @@
 
 <ion-content padding class="ion-content">
  
-  <ion-item style="width: 100%; margin: 0; padding-left: 10px;" *ngIf="totalCount!=0">
+  <!--ion-item style="width: 100%; margin: 0; padding-left: 10px;" *ngIf="totalCount!=0">
     <ion-label>Sort By</ion-label>
     <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="pet" (ionChange)="onSegmentChanged(pet)">
       <ion-option value="unitname,desc">Favorite</ion-option>
@@ -73,9 +73,7 @@
         </div>
       </ion-item>
       <ion-item-options>
-        <!--button class="viewcolor" (click)="doEdit(item,'view')">
-                       <ion-icon name="eye" class="icon-size"></ion-icon>
-                    </button-->
+       
         <button class="editcolor" (click)="doEdit(item,'edit')">                      
                         <ion-icon name="create" class="icon-size"></ion-icon>
                     </button>
@@ -87,7 +85,8 @@
   </ion-list>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="totalCount!=0">
     <ion-infinite-scroll-content loadingText="Loading More Data"></ion-infinite-scroll-content>
-  </ion-infinite-scroll>
+  </ion-infinite-scroll-->
+  <div #mapContainer id="map"></div>
 </ion-content>
 <ion-footer color="bluedark">
   <ion-toolbar color="bluedark">

@@ -52,8 +52,13 @@
         </p>
 
         <b>Select Notification List</b> <span class="mandatory" *ngIf="hideActionButton">*</span>
-        <textarea (keyup)=address1get($event.target.value); id="example1" class="form-control" rows="8" [disabled]="readOnly" formControlName="alarmhashtags"
+        <!--textarea (keyup)=address1get($event.target.value); id="example1" class="form-control" rows="8" [disabled]="readOnly" formControlName="alarmhashtags"
+          rows="6" [(ngModel)]="alarmhashtags"></textarea-->
+
+        <textarea name="to" id="to"  class="suggest form-control" onkeyup="sptions(event)" onblur="sptionshide()" rows="8" [disabled]="readOnly" formControlName="alarmhashtags"
           rows="6" [(ngModel)]="alarmhashtags"></textarea>
+
+
 
         <b>Contact Person</b> <span class="mandatory" *ngIf="hideActionButton">*</span>
         <ion-item>

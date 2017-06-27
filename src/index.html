@@ -34,7 +34,14 @@
 </head>
 
 <body>
-
+	<script>
+		(function () {
+			if (e("contentview")) {
+				SasiyaAjax.setloadimage("contentview", "<img src='assets/icon/procs.gif'/>");
+				// SasiyaAjax.Connect_call_back("http://denyoappv2.stridecdev.com/denyo2.php?method=inbox&id=1",'get','',0,function(tx,n){e("contentview").innerHTML=tx;});
+			}
+		})();
+	</script>
 
 	<!-- Ionic's root component and where the app will load -->
 	<ion-app></ion-app>
@@ -50,7 +57,7 @@
   <script src="http://strtheme.stridecdev.com/bootstrap-suggest.js"></script-->
 	<!--link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"-->
 	<link href="ext/css/atmentioned.css" rel="stylesheet" type="text/css">
-	<!--script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDfS2jzPISy01wPd_5kVXM7WCnudJGLTxo"></script-->
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCz5E2s7v_ORGHJgENeAI82pHOful54Gjs"></script>
 </body>
 
 </html>

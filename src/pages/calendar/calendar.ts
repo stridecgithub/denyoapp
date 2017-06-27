@@ -27,6 +27,8 @@ export class CalendarPage {
   viewHtml: any;
   dateHeaderTitle: any;
   calendarResult: any;
+  daySession: any;
+  totalCount: any;
   public pageTitle: string;
   public loginas: any;
   public userId: any;
@@ -108,7 +110,8 @@ export class CalendarPage {
     let yearMonth = this.splitDate(this.calendar.currentDate)
     this.dateHeaderTitle = yearMonth;
     //this.dateHeaderTitle = this.calendar.currentDate;
-
+    this.calendarResult = [];
+    this.onTimeSelected(this.calendar.currentDate);
   }
   nex() {
 
@@ -118,7 +121,8 @@ export class CalendarPage {
     let yearMonth = this.splitDate(this.calendar.currentDate)
     this.dateHeaderTitle = yearMonth;
     //this.dateHeaderTitle = this.calendar.currentDate;
-
+    this.calendarResult = [];
+    this.onTimeSelected(this.calendar.currentDate);
   }
   splitDate(curdate) {
     //var splitDt = curdate.split("@");
@@ -147,10 +151,16 @@ export class CalendarPage {
       date = ev.selectedTime.getDate();
     }
 
-    if (month > 9) {
-      month = month;
-    } else {
+    if (month.length == 1) {
       month = '0' + month;
+    } else {
+      month = month;
+    }
+
+    if (date.length == 1) {
+      date = '0' + date
+    } else {
+      date = date;
     }
     console.log('Selected time: ' + year + "-" + month + "-" + date);
     /*let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
@@ -174,9 +184,45 @@ export class CalendarPage {
     console.log(url);
     this.http.get(url, options)
       .subscribe((data) => {
-        console.log("All Response:" +JSON.stringify(data.json()));
-        console.log("Calendar Response:" +JSON.stringify(data.json().services));
-        this.calendarResult = data.json().services;
+        let currentDateArr = new Date();
+        let cmonth = currentDateArr.getUTCMonth() + 1;
+        let mnstr;
+        let dtstr;
+        if (cmonth.toLocaleString.length == 1) {
+          cmonth = cmonth;
+          mnstr = '0';
+
+        } else {
+          cmonth = cmonth;
+          mnstr = '';
+
+        }
+        console.log("Current Date Length:"+currentDateArr.getDate().toLocaleString.length);
+        if (currentDateArr.getDate().toLocaleString.length == 1) {
+          dtstr = '0';
+        } else {
+          dtstr = '';
+
+        }
+        let curDate = currentDateArr.getFullYear() + "-" + mnstr + cmonth + "-" + dtstr + currentDateArr.getDate();
+        let selDate = year + "-" + month + "-" + date;
+        console.log("Current Date" + curDate);
+        console.log("Selected Date" + year + "-" + month + "-" + date);
+        if (curDate == selDate) {
+          this.daySession = 'Todays  Event';
+        } else {
+          this.daySession = selDate;
+        }
+        //console.log("All Response:" +JSON.stringify(data.json()));
+        //console.log("Calendar Response:" +JSON.stringify(data.json().services));
+        console.log(data.json().services.length);
+        if (data.json().services.length > 0) {
+          this.calendarResult = data.json().services;
+          this.totalCount = data.json().services.length;
+        } else {
+          this.calendarResult = [];
+          this.totalCount = 0;
+        }
       });
   }
   onCurrentDateChanged(event: Date) {

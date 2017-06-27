@@ -43,9 +43,9 @@
 <ion-content padding>
   <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="pet" (ionChange)="onSegmentChanged(pet)">
     <ion-option value="unitgroup_id,asc" selected="true">All</ion-option>
-    <ion-option value="unitgroup_id,desc">Service</ion-option>
-    <ion-option value="favorite,desc">Alarm</ion-option>
-    <ion-option value="favorite,desc">Event</ion-option>
+    <ion-option value="Service">Service</ion-option>
+    <ion-option value="Alarm">Alarm</ion-option>
+    <ion-option value="Event">Event</ion-option>
   </ion-select>
   <ion-list class="eventlist-grid">
 
@@ -59,48 +59,40 @@
         step="30">
       </calendar>
     </ion-item>
-    <ion-item-sliding *ngFor="let item of calendarResult; let i = index" [attr.data-index]="i">
-      <ion-item>
-        <div>
-          <h2 clear item-right><b>Service:{{item.service_subject}}  </b></h2>
-        </div>
-        <div>Date & Time:{{item.next_service_date}}</div>
-        <div>Location:Singapore</div>
-        <div>Notes:{{item.service_remark}}</div>
-        <div>Serviced By:{{item.serviced_by_name}}</div>
+    <h3>{{daySession}}</h3>
+    <button class="add-new-btn" ion-button small (click)="doAdd()">
+  +
+ </button>
 
-      </ion-item>
-      <ion-item-options>
-        <button eyecolor (click)="doView(item.reportUUID,'DRAFT',item.title)">
-                        <ion-icon ios="ios-eye-outline" md="ios-eye-outline"></ion-icon>
-                    </button>
-        <button mycolor (click)="doEdit(item.reportUUID,'DRAFT',item.title)">
-                        <ion-icon ios="ios-create-outline" md="ios-create-outline"></ion-icon>
-                    </button>
-        <button *ngIf="DELETE_EXPENSEREPORT" trashcolor (click)="doConfirm(item,'DRAFT')">
-                        <ion-icon ios="ios-trash-outline" md="ios-trash-outline"></ion-icon>
-                    </button>
-      </ion-item-options>
-    </ion-item-sliding>
+    <ion-item *ngFor="let item of calendarResult; let i = index" [attr.data-index]="i">
+      <div>
+        <h2 clear item-right><b>Service:{{item.service_subject}}  </b></h2>
+      </div>
+      <div>Date & Time:{{item.next_service_date}}</div>
+      <div>Location:Singapore</div>
+      <div>Notes:{{item.service_remark}}</div>
+      <div>Serviced By:{{item.serviced_by_name}}</div>
 
-    <div> <b>Legend</b></div>
+    </ion-item>
+    <ion-item *ngIf="totalCount==0">
+      <div class="error">There is No Event</div>
+    </ion-item>
+
+
+
+    <div><b>Legend</b></div>
     <div class="div-action">
-
-      <button class="add-new-btn" ion-button small (click)="doTripped()">
+      <button class="add-new-btn trippedcolor" small>
   Tripped
  </button>
-      <button class="add-new-btn" ion-button small (click)="doEvent()">
+      <button class="add-new-btn eventcolor">
   Event
  </button>
-      <button class="add-new-btn" ion-button small (click)="doWarning()">
+      <button class="add-new-btn warningcolor">
   Warning
  </button>
-      <button class="add-new-btn" ion-button small (click)="doService()">
+      <button class="add-new-btn servicecolor">
   Service
- </button>
-      <h3>Todays Event</h3>
-      <button class="add-new-btn" ion-button small (click)="doAdd()">
-  +
  </button>
     </div>
 

@@ -13,6 +13,7 @@ import { RolePage } from '../role/role';
 import { HomePage } from '../home/home';
 import { UnitsPage } from '../units/units';
 import { UnitdetailsPage } from '../unitdetails/unitdetails';
+declare var google;
 @IonicPage()
 @Component({
   selector: 'page-maps',
@@ -20,9 +21,9 @@ import { UnitdetailsPage } from '../unitdetails/unitdetails';
 })
 export class MapsPage {
   @ViewChild('mapContainer') mapContainer: ElementRef;
-  
+  map: any;
   public loginas: any;
-  public userid:any;
+  public userid: any;
   public pageTitle: string;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   public totalCount;
@@ -44,7 +45,7 @@ export class MapsPage {
     public toastCtrl: ToastController, public alertCtrl: AlertController, public navParams: NavParams, public loadingCtrl: LoadingController) {
     this.pageTitle = 'Maps';
     this.loginas = localStorage.getItem("userInfoName");
-    this.userid=localStorage.getItem("userInfoId");
+    this.userid = localStorage.getItem("userInfoId");
   }
 
 
@@ -54,7 +55,7 @@ export class MapsPage {
   }
 
 
- doRefresh(refresher) {
+  doRefresh(refresher) {
     console.log('doRefresh function calling...');
     this.reportData.startindex = 0;
     this.reportAllLists = [];
@@ -93,7 +94,7 @@ export class MapsPage {
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/dashboard?is_mobile=1&startindex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc+"&loginid="+this.userid;
+      url: any = this.apiServiceURL + "/dashboard?is_mobile=1&startindex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc + "&loginid=" + this.userid;
     let res;
     console.log(url);
     this.http.get(url, options)
@@ -131,7 +132,7 @@ export class MapsPage {
               neaplateno: res.units[unit].neaplateno,
               companys_id: res.units[unit].companys_id,
               unitgroups_id: res.units[unit].unitgroups_id,
-              runninghr:res.units[unit].runninghr,
+              runninghr: res.units[unit].runninghr,
               models_id: res.units[unit].models_id,
               alarmnotificationto: res.units[unit].alarmnotificationto,
               favoriteindication: favorite
@@ -168,11 +169,44 @@ export class MapsPage {
     console.log('E');
   }
   ionViewWillEnter() {
+    this.displayGoogleMap();
+    this.getMarkers();
     this.reportData.startindex = 0;
     this.reportData.sort = "unit_id";
     this.doUser();
   }
+  displayGoogleMap() {
+    let latLng = new google.maps.LatLng(9.9252, 78.1198);
 
+    let mapOptions = {
+      center: latLng,
+      disableDefaultUI: true,
+      zoom: 11,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+    this.map = new google.maps.Map(this.mapContainer.nativeElement, mapOptions);
+  }
+
+  getMarkers() {
+    let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      //url: any = this.apiServiceURL + "/api/webview/googlemap.php";
+      url: any = "http://strtheme.stridecdev.com/googlemap.php";
+    this.http.get(url, options)
+      .subscribe(data => {
+        console.log(JSON.stringify(data.json()));
+        //let staticdata = [{ "id": 1, "address": "Ambiga Cinemas", "lat": "9.918418", "lng": "78.148566" }, { "id": 2, "address": "Vasan Eye Care", "lat": "9.920792", "lng": "78.148785" }, { "id": 3, "address": "Naveen Bakery & Sweets", "lat": "9.921392", "lng": "78.148819" }, { "id": 4, "address": "Thanga Mayil Jewllery Shop", "lat": "9.918599", "lng": "78.148852" }, { "id": 5, "address": "Aravind Eye Hospital", "lat": "9.921358", "lng": "78.140062" }, { "id": 6, "address": "No 12 Vaigai Nagar", "lat": "9.918418", "lng": "78.140062" }];
+        this.addMarkersToMap(data.json());
+      });
+  }
+  addMarkersToMap(markers) {
+    for (let marker of markers) {
+      var position = new google.maps.LatLng(marker.lat, marker.lng);
+      var dogwalkMarker = new google.maps.Marker({ position: position, title: marker.address });
+      dogwalkMarker.setMap(this.map);
+    }
+  }
   doAdd() {
     this.navCtrl.setRoot(AddunitsonePage);
   }
@@ -211,7 +245,7 @@ export class MapsPage {
       buttons: [{
         text: 'Yes',
         handler: () => {
-          
+
           for (let q: number = 0; q < this.reportAllLists.length; q++) {
             if (this.reportAllLists[q] == item) {
               this.reportAllLists.splice(q, 1);
@@ -232,7 +266,7 @@ export class MapsPage {
   // to our remote PHP script (note the body variable we have created which
   // supplies a variable of key with a value of delete followed by the key/value pairs
   // for the record ID we want to remove from the remote database
- 
+
   // Manage notifying the user of the outcome
   // of remote operations
   sendNotification(message): void {
@@ -294,11 +328,11 @@ export class MapsPage {
     }
   }
 
- 
 
 
- 
-  
+
+
+
 
   redirectToUnitGroup() {
     this.navCtrl.setRoot(UnitgroupPage);
