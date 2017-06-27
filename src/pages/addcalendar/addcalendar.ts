@@ -82,13 +82,13 @@ export class AddcalendarPage {
       });
 
 
-    for (let am = 600; am <= 1145; am++) {
+    /*for (let am = 600; am <= 1145; am++) {
       let am15plus=am+15;
       this.responseResultTime.push({
         id: am15plus+'AM',
         time_name: am15plus+' AM',
       });
-    }
+    }*/
     this.responseResultTime.push({
       id: '6.00AM',
       time_name: '6:00 AM',
@@ -101,6 +101,99 @@ export class AddcalendarPage {
       }, {
         id: '6.30AM',
         time_name: '6:30 AM'
+      }, {
+        id: '6.45AM',
+        time_name: '6:45 AM'
+      }, {
+        id: '7.00AM',
+        time_name: '7:00 AM'
+      }, {
+        id: '7.15AM',
+        time_name: '7:15 AM'
+      }, {
+        id: '7.30AM',
+        time_name: '7:30 AM'
+      }, {
+        id: '7.45AM',
+        time_name: '7:45 AM'
+      }, {
+        id: '8.00AM',
+        time_name: '8:00 AM'
+      }, {
+        id: '8.15AM',
+        time_name: '8:15 AM'
+      }, {
+        id: '8.30AM',
+        time_name: '8:30 AM'
+      }, {
+        id: '8.45AM',
+        time_name: '8:45 AM'
+      }, {
+        id: '9.00AM',
+        time_name: '9:00 AM'
+      }, {
+        id: '9.15AM',
+        time_name: '9:15 AM'
+      }, {
+        id: '9.30AM',
+        time_name: '9:30 AM'
+      }, {
+        id: '9.45AM',
+        time_name: '9:45 AM'
+      }, {
+        id: '10.00AM',
+        time_name: '10:00 AM'
+      }, {
+        id: '10.15AM',
+        time_name: '10:15 AM'
+      }, {
+        id: '10.30AM',
+        time_name: '10:30 AM'
+      }, {
+        id: '10.45AM',
+        time_name: '10:45 AM'
+      }, {
+        id: '11.00AM',
+        time_name: '11:00 AM'
+      }, {
+        id: '11.15AM',
+        time_name: '11:15 AM'
+      }, {
+        id: '11.30AM',
+        time_name: '11:30 AM'
+      }, {
+        id: '11.45AM',
+        time_name: '11:45 AM'
+      }, {
+        id: '11.00PM',
+        time_name: '11:00 PM'
+      }, {
+        id: '11.15PM',
+        time_name: '11:15 PM'
+      }, {
+        id: '11.30PM',
+        time_name: '11:30 PM'
+      }, {
+        id: '11.45PM',
+        time_name: '11:45 PM'
+      }, {
+        id: '11.45PM',
+        time_name: '11:45 PM'
+      }, {
+        id: '12.00PM',
+        time_name: '12:00 PM'
+      }, {
+        id: '12.15PM',
+        time_name: '12:15 PM'
+      }, {
+        id: '12.30PM',
+        time_name: '12:30 PM'
+      }, {
+        id: '12.45PM',
+        time_name: '12:45 PM'
+      }, {
+        id: '12.45PM',
+        time_name: '12:45 PM'
       };
     let dateStr = new Date();
     let month=dateStr.getMonth()+1;
