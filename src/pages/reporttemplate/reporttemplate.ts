@@ -4,6 +4,12 @@ import 'rxjs/add/operator/map';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { AddreporttemplatePage } from '../addreporttemplate/addreporttemplate';
 import { LoadingController } from 'ionic-angular';
+import { HomePage } from '../home/home';
+import { UserPage } from '../user/user';
+import { MyaccountPage } from '../myaccount/myaccount';
+import { UnitgroupPage } from '../unitgroup/unitgroup';
+import { UnitsPage } from '../units/units';
+import { RolePage } from '../role/role';
 //import { TabsPage } from '../tabs/tabs';
 /**
  * Generated class for the UnitgroupPage page.
@@ -61,7 +67,7 @@ export class ReporttemplatePage {
     this.doReportTemplate();
   }
   doReportTemplate() {
-   
+
   }
   doRefresh(refresher) {
     console.log('doRefresh function calling...');
@@ -97,7 +103,7 @@ export class ReporttemplatePage {
         if (res.availabletemp.length > 0) {
           for (let availabletemps in res.availabletemp) {
             this.reportAllLists.push({
-               id: res.availabletemp[availabletemps].id,
+              id: res.availabletemp[availabletemps].id,
               templatename: res.availabletemp[availabletemps].templatename,
               availableheading: res.availabletemp[availabletemps].availableheading.split("#")
             });
@@ -202,6 +208,25 @@ export class ReporttemplatePage {
         availableheading: availableheading
       });
     }
+  }
+
+  previous() {
+    this.nav.setRoot(HomePage);
+  }
+  redirectToUser() {
+    this.nav.setRoot(UserPage);
+  }
+  redirectToUnitGroup() {
+    this.nav.setRoot(UnitgroupPage);
+  }
+  redirectToUnits() {
+    this.nav.setRoot(UnitsPage);
+  }
+  redirectToMyAccount() {
+    this.nav.setRoot(MyaccountPage);
+  }
+  redirectToRole() {
+    this.nav.setRoot(RolePage);
   }
 }
 

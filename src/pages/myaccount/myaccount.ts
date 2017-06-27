@@ -69,8 +69,7 @@ export class MyaccountPage {
           if (res.settings[0].photo_filename == 'undefined' && res.settings[0].photo_filename == undefined) {
             this.photo = this.apiServiceURL + "/staffphotos/" + res.settings[0].photo_filename;
           }else{
-            console.log('No photo available');
-            
+            console.log('No photo available');            
             this.photo = 'img/undefined.png';
           }
         }

@@ -413,7 +413,9 @@ export class AddunitsthreePage {
     }
   }
   previous() {
-    this.nav.setRoot(AddunitstwoPage);
+    this.nav.setRoot(AddunitstwoPage, {
+      accountInfo: this.userInfo
+    });
   }
 
   address1get(hashtag) {

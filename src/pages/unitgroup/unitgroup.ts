@@ -328,8 +328,8 @@ export class UnitgroupPage {
         else {
           this.sendNotification('Something went wrong!');
         }
-      });
-    this.dounitGroup();
+      });      
+    //this.dounitGroup();
   }
 
   redirectToUser() {

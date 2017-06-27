@@ -341,7 +341,10 @@ export class AddunitstwoPage {
     }
   }
   previous() {
-    this.nav.setRoot(AddunitsonePage);
+    this.nav.setRoot(AddunitsonePage, {
+      accountInfo: this.userInfo,
+      record: this.NP.get("record")
+    });
   }
 
   redirectToUser() {
