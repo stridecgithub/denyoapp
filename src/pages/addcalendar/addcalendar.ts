@@ -103,7 +103,8 @@ export class AddcalendarPage {
         time_name: '6:30 AM'
       };
     let dateStr = new Date();
-    this.event_date = dateStr.getFullYear() + "-" + dateStr.getMonth() + "-" + dateStr.getDate();
+    let month=dateStr.getMonth()+1;
+    this.event_date = dateStr.getFullYear() + "-" + month + "-" + dateStr.getDate();
   }
 
   ionViewDidLoad() {
