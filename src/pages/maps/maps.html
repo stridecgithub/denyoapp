@@ -36,9 +36,81 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <div #mapContainer id="map"></div>
+<ion-content padding class="ion-content">
+ 
+  <ion-item style="width: 100%; margin: 0; padding-left: 10px;" *ngIf="totalCount!=0">
+    <ion-label>Sort By</ion-label>
+    <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="pet" (ionChange)="onSegmentChanged(pet)">
+      <ion-option value="unitname,desc">Favorite</ion-option>
+      <ion-option value="unitname,asc">Unit Name Ascending</ion-option>
+      <ion-option value="unitname,desc">Unit Name Descending</ion-option>
+      <ion-option value="companygroup_name,asc">Unit Group Ascending</ion-option>
+      <ion-option value="companygroup_name,desc">Unit Group Descending</ion-option>
+      <ion-option value="unitname,desc">Tripped</ion-option>
+      <ion-option value="unitname,desc">Warning</ion-option>
+      <ion-option value="unitname,desc">Running</ion-option>
+      <ion-option value="unitname,desc">Offline</ion-option>
+    </ion-select>
+  </ion-item>
+   <div class="error" *ngIf="totalCount==0">No users entries found</div>
+  <div class="separator-line" *ngIf="totalCount!=0">&nbsp;</div>
+  <ion-refresher (ionRefresh)="doRefresh($event)" *ngIf="totalCount!=0">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-list *ngIf="totalCount!=0">
+    <ion-item-sliding *ngFor="let item of reportAllLists;">
+      <ion-item  (click)="doEdit(item,'detail')">
+        <button class="{{item.colorcodeindications}}" style="float: left ;width:8px;height:100px">
+         
+        </button>
+       
+        <div style="overflow: hidden; padding-left: .5em;">
+          <h2><b>{{item.unitname}}</b></h2>
+          <h2><b>{{item.projectname}}</b></h2>
+          <h2><b>Gen Status:</b>{{item.gen_status}}</h2>
+          <h2><b>Next Servicing:</b>{{item.runninghr}}</h2>
+        </div>
+      </ion-item>
+      <ion-item-options>
+        <!--button class="viewcolor" (click)="doEdit(item,'view')">
+                       <ion-icon name="eye" class="icon-size"></ion-icon>
+                    </button-->
+        <button class="editcolor" (click)="doEdit(item,'edit')">                      
+                        <ion-icon name="create" class="icon-size"></ion-icon>
+                    </button>
+        <button class="trashcolor" (click)="doConfirm(item.unit_id,item)">                        
+                         <ion-icon name="trash" class="icon-size"></ion-icon>
+                    </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="totalCount!=0">
+    <ion-infinite-scroll-content loadingText="Loading More Data"></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
+<ion-footer color="bluedark">
+  <ion-toolbar color="bluedark">
+    <button ion-button icon-only (click)="redirectToCompanyGroup()" clear>
+<ion-icon name="home" class="footer-icon"></ion-icon>
+</button>
+    <button ion-button icon-only (click)="redirectToUser()" clear>
+<ion-icon name="contacts" class="footer-icon"></ion-icon>
+</button>
+    <button ion-button icon-only (click)="redirectToUnitGroup()" clear>
+<ion-icon name="chatboxes" class="footer-icon"></ion-icon>
+</button>
+    <button ion-button icon-only (click)="redirectToUnits()" clear>
+<ion-icon name="camera" class="footer-icon"></ion-icon>
+</button>
+    <!--button ion-button icon-only (click)="redirectToMyAccount()" clear>
+<ion-icon name="calendar" ></ion-icon>
+</button-->
+    <button ion-button icon-only (click)="redirectToRole()" clear>
+<ion-icon name="settings" class="footer-icon"></ion-icon>
+</button>
+  </ion-toolbar>
+</ion-footer>
 <ion-footer color="bluedark">
   <ion-toolbar color="bluedark">
     <button ion-button icon-only clear>
