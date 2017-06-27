@@ -81,6 +81,14 @@ export class AddcalendarPage {
         type_name: 'Event'
       });
 
+
+    for (let am = 600; am <= 1145; am++) {
+      let am15plus=am+15;
+      this.responseResultTime.push({
+        id: am15plus+'AM',
+        time_name: am15plus+' AM',
+      });
+    }
     this.responseResultTime.push({
       id: '6.00AM',
       time_name: '6:00 AM',
@@ -88,6 +96,9 @@ export class AddcalendarPage {
         id: '6.15AM',
         time_name: '6:15 am'
       }), {
+        id: '6.30AM',
+        time_name: '6:30 AM'
+      }, {
         id: '6.30AM',
         time_name: '6:30 AM'
       };

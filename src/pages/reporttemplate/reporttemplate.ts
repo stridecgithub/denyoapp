@@ -97,6 +97,7 @@ export class ReporttemplatePage {
         if (res.availabletemp.length > 0) {
           for (let availabletemps in res.availabletemp) {
             this.reportAllLists.push({
+               id: res.availabletemp[availabletemps].id,
               templatename: res.availabletemp[availabletemps].templatename,
               availableheading: res.availabletemp[availabletemps].availableheading.split("#")
             });

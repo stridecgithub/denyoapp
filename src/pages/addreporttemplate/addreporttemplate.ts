@@ -32,6 +32,8 @@ export class AddreporttemplatePage {
   public availableheading = [];
   public availableheadingitem = [];
   pageTitle: string;
+
+  public recordID: any = null;
   public isEdited: boolean = false;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   constructor(public nav: NavController,
@@ -55,7 +57,7 @@ export class AddreporttemplatePage {
   ionViewWillEnter() {
     if (this.NP.get("record")) {
       this.pageTitle = "Edit Template";
-      console.log(this.NP.get("act"));
+      console.log(this.NP.get("record"));
       this.isEdited = true;
       //this.selectoption=true;
 
@@ -172,6 +174,8 @@ export class AddreporttemplatePage {
 
   getCheckBoxValue(name) {
     console.log("Available data" + name);
+
+
     this.getCheckboxData.push({
       availabledata: name
     })
@@ -192,13 +196,13 @@ export class AddreporttemplatePage {
     console.log("Edit");
     console.log(JSON.stringify(this.getCheckboxData));
     let templatename: string = this.form.controls["templatename"].value
-    let body: string = "is_mobile=1&templatename=" + templatename + "&availabledata=" + JSON.stringify(this.getCheckboxData),
+    let body: string = "is_mobile=1&templatename=" + templatename + "&data=" + JSON.stringify(this.getCheckboxData) + "&id=" + this.recordID + "&ses_login_id=" + this.userId,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
       url: any = this.apiServiceURL + "/reporttemplate/update";
-    console.log(url);
-    console.log(body);
+    console.log(url + "?" + body);
+
     this.http.post(url, body, options)
       .subscribe((data) => {
         let res = data.json();
@@ -224,37 +228,27 @@ export class AddreporttemplatePage {
   selectEntry(item) {
 
     this.templatename = item.templatename;
+    console.log("Id:" + item.id);
+    this.recordID = item.id;
     console.log("Available Heading:" + JSON.stringify(item.availableheading));
-    /* this.templatedata1 =item.availableheading.split("#");
-     console.log(this.templatedata1[0]);
-     console.log(this.template_data[0]);
-     for(var i = 0 ;i<this.template_data.length;i++)
-     {
-      // console.log(this.template_data[i]);
-       if(this.template_data[i]==this.templatedata1[i])
-       {
-             this.selectoption = true;
-             console.log("true");
-       }
-       else
-       {
-         this.selectoption = false;
-         console.log("false");
-       }
-  
-     }*/
+    console.log(item.availableheading);
+    for (let ava = 0; ava < item.availableheading; ava++) {
+      console.log(item.availableheading[ava]);
+      this.getCheckBoxValue(item.availableheading[ava]);
+    }
+
   }
   createEntry() {
 
     console.log(JSON.stringify(this.getCheckboxData));
     let templatename: string = this.form.controls["templatename"].value
-    let body: string = "is_mobile=1&templatename=" + templatename + "&availabledata=" + JSON.stringify(this.getCheckboxData),
+    let body: string = "is_mobile=1&templatename=" + templatename + "&data=" + JSON.stringify(this.getCheckboxData)+ "&ses_login_id=" + this.userId,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
       url: any = this.apiServiceURL + "/reporttemplate/store";
-    console.log(url);
-    console.log(body);
+    console.log(url + "?" + body);
+
     this.http.post(url, body, options)
       .subscribe((data) => {
         let res = data.json();
