@@ -119,6 +119,15 @@ export class AddserviceinfoPage {
   ionViewWillEnter() {
     let users = localStorage.getItem("atMentionedStorage");
     this.is_request = false;
+    console.log(JSON.stringify(this.NP.get("record")));
+		let editItem = this.NP.get("record");
+    	this.unitDetailData.unit_id = editItem.unit_id;
+		this.unitDetailData.unitname = editItem.unitname;
+		this.unitDetailData.location = editItem.location;
+		this.unitDetailData.projectname = editItem.projectname;
+		this.unitDetailData.runninghr = editItem.runninghr;
+		this.unitDetailData.gen_status = editItem.gen_status;
+		this.unitDetailData.nextservicedate = editItem.nextservicedate;
     if (this.NP.get("record")) {
       this.selectEntry(this.NP.get("record"));
       this.service_id = this.NP.get("record").service_id;
