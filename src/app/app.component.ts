@@ -32,7 +32,7 @@ import { MessagesPage } from '../pages/messages/messages';
 import { CalendarPage } from '../pages/calendar/calendar';
 import { MapsPage } from '../pages/maps/maps';
 import { ReportsPage } from '../pages/reports/reports';
-
+//import { MapdemoPage } from '../pages/mapdemo/mapdemo';
 
 @Component({
   templateUrl: 'app.html'
@@ -71,8 +71,10 @@ export class MyApp {
       { title: 'Calendar', component: CalendarPage },
       { title: 'Reports', component: ReportsPage },
       { title: 'Alarm List', component: AlarmPage },
-       { title: 'Alarm', component: AddalarmPage },
-        { title: 'Alarm Log', component: AlarmlogPage },
+      { title: 'Alarm', component: AddalarmPage },
+      { title: 'Alarm Log', component: AlarmlogPage },
+     // { title: 'Map Demo', component: MapdemoPage },
+
       { title: 'Logout', component: LogoutPage }
     ];
 
@@ -124,11 +126,14 @@ export class MyApp {
     } else if (page.component == 'ReportsPage') {
       this.nav.setRoot(ReportsPage);
     }
-     else if (page.component == 'AlarmPage') {
+    else if (page.component == 'AlarmPage') {
       this.nav.setRoot(AlarmPage);
     }
-     else if (page.component == 'AddalarmPage') {
+    else if (page.component == 'AddalarmPage') {
       this.nav.setRoot(AddalarmPage);
+    }
+    else if (page.component == 'MapdemoPage') {
+      //this.nav.setRoot(MapdemoPage);
     }
   }
 

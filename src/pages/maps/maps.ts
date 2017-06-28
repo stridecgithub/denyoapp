@@ -13,15 +13,16 @@ import { RolePage } from '../role/role';
 import { HomePage } from '../home/home';
 import { UnitsPage } from '../units/units';
 import { UnitdetailsPage } from '../unitdetails/unitdetails';
-declare var google;
+//declare var google;
+import { DomSanitizer } from '@angular/platform-browser';
 @IonicPage()
 @Component({
   selector: 'page-maps',
   templateUrl: 'maps.html',
 })
 export class MapsPage {
-  @ViewChild('mapContainer') mapContainer: ElementRef;
-  map: any;
+  //@ViewChild('mapContainer') mapContainer: ElementRef;
+  //map: any;
   public loginas: any;
   public userid: any;
   public pageTitle: string;
@@ -32,6 +33,7 @@ export class MapsPage {
   public vendorsort = "asc";
   public ascending = true;
   public colorListArr: any;
+  iframeContent: any;
   public reportData: any =
   {
     status: '',
@@ -41,7 +43,7 @@ export class MapsPage {
     results: 8
   }
   public reportAllLists = [];
-  constructor(public http: Http, public navCtrl: NavController,
+  constructor(private sanitizer: DomSanitizer,public http: Http, public navCtrl: NavController,
     public toastCtrl: ToastController, public alertCtrl: AlertController, public navParams: NavParams, public loadingCtrl: LoadingController) {
     this.pageTitle = 'Maps';
     this.loginas = localStorage.getItem("userInfoName");
@@ -169,13 +171,15 @@ export class MapsPage {
     console.log('E');
   }
   ionViewWillEnter() {
-    this.displayGoogleMap();
-    this.getMarkers();
+    //this.displayGoogleMap();
+    //this.getMarkers();
     this.reportData.startindex = 0;
     this.reportData.sort = "unit_id";
     this.doUser();
+    console.log(this.apiServiceURL + "/api/webview/map.php?is_mobile=1&loginid=1&startindex=0&results=8&sort=unit_id&dir=desc");
+    this.iframeContent = "<iframe src=" + this.apiServiceURL + "/api/webview/map.php?is_mobile=1&loginid=1&startindex=0&results=8&sort=unit_id&dir=desc height=350 frameborder=0></iframe>";
   }
-  displayGoogleMap() {
+  /*displayGoogleMap() {
     let latLng = new google.maps.LatLng(9.9252, 78.1198);
 
     let mapOptions = {
@@ -185,9 +189,9 @@ export class MapsPage {
       mapTypeId: google.maps.MapTypeId.ROADMAP
     }
     this.map = new google.maps.Map(this.mapContainer.nativeElement, mapOptions);
-  }
+  }*/
 
-  getMarkers() {
+  /*getMarkers() {
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
@@ -195,18 +199,21 @@ export class MapsPage {
       url: any = "http://strtheme.stridecdev.com/googlemap.php";
     this.http.get(url, options)
       .subscribe(data => {
-        console.log(JSON.stringify(data.json()));
+        console.log("Map Response:-" + JSON.stringify(data.json()));
         //let staticdata = [{ "id": 1, "address": "Ambiga Cinemas", "lat": "9.918418", "lng": "78.148566" }, { "id": 2, "address": "Vasan Eye Care", "lat": "9.920792", "lng": "78.148785" }, { "id": 3, "address": "Naveen Bakery & Sweets", "lat": "9.921392", "lng": "78.148819" }, { "id": 4, "address": "Thanga Mayil Jewllery Shop", "lat": "9.918599", "lng": "78.148852" }, { "id": 5, "address": "Aravind Eye Hospital", "lat": "9.921358", "lng": "78.140062" }, { "id": 6, "address": "No 12 Vaigai Nagar", "lat": "9.918418", "lng": "78.140062" }];
         this.addMarkersToMap(data.json());
+      },
+      err => {
+        console.log("Map error:-" + JSON.stringify(err));
       });
-  }
-  addMarkersToMap(markers) {
+  }*/
+  /*addMarkersToMap(markers) {
     for (let marker of markers) {
       var position = new google.maps.LatLng(marker.lat, marker.lng);
       var dogwalkMarker = new google.maps.Marker({ position: position, title: marker.address });
       dogwalkMarker.setMap(this.map);
     }
-  }
+  }*/
   doAdd() {
     this.navCtrl.setRoot(AddunitsonePage);
   }

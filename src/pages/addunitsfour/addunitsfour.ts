@@ -8,7 +8,7 @@ import { UserPage } from '../user/user';
 import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
 import { UnitsPage } from '../units/units';
-import { RolePage } from '../role/role'; 
+import { RolePage } from '../role/role';
 
 /**
  * Generated class for the AddcompanygroupPage page.
@@ -55,6 +55,8 @@ export class AddunitsfourPage {
   public hideActionButton = true;
   // Property to help ste the page title
   public pageTitle: string;
+  public latitude: any;
+  public longitude: any;
   // Property to store the recordID for when an existing entry is being edited
   public recordID: any = null;
   public isUploadedProcessing: boolean = false;
@@ -194,7 +196,8 @@ export class AddunitsfourPage {
 
 
     this.timezone = '2017-06-15 00:00:00';
-
+    this.longitude = "9.918418";
+    this.latitude = "78.148566";
 
 
     console.log("Final User Info 1:" + this.userInfo);
@@ -208,6 +211,8 @@ export class AddunitsfourPage {
       "&models_id=" + this.models_id +
       "&location=" + this.location +
       "&createdby=" + this.createdby +
+      "&longitude=" + this.longitude +
+      "&latitude=" + this.latitude +
       "&updatedby=" + this.createdby +
       "&contactInfo=" + JSON.stringify(this.contactInfo) +
       //"&contact_number=" + this.contact_number +
@@ -258,6 +263,8 @@ export class AddunitsfourPage {
       createdby: createdby,
 
     });
+    this.longitude = "9.918418";
+    this.latitude = "78.148566";
 
     this.timezone = '2017-06-15 00:00:00';
     let body: string = "is_mobile=1&unit_id=" + this.recordID +
@@ -269,6 +276,8 @@ export class AddunitsfourPage {
       "&location=" + this.location +
       "&createdby=" + this.createdby +
       "&updatedby=" + this.createdby +
+      "&longitude=" + this.longitude +
+      "&latitude=" + this.latitude +
       "&contactInfo=" + JSON.stringify(this.contactInfo) +
       //"&contact_number=" + this.contact_number +
       // "&contact_name=" + this.contact_name +

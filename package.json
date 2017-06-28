@@ -86,7 +86,7 @@
             "cordova-plugin-inappbrowser": {},
             "cordova-plugin-calendar": {},
             "cordova-plugin-googlemaps": {
-                "API_KEY_FOR_ANDROID": "AIzaSyCz5E2s7v_ORGHJgENeAI82pHOful54Gjs"
+                "API_KEY_FOR_ANDROID": "AIzaSyAL-wWlMxWTD68YOD3C3GDzIKcRtCtQhbg"
             }
         },
         "platforms": [

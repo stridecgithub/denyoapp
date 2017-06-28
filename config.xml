@@ -89,7 +89,7 @@
     <plugin name="cordova-plugin-filechooser" spec="^1.0.1" />
     <plugin name="cordova-plugin-filepath" spec="^1.0.2" />
     <plugin name="cordova-plugin-googlemaps" spec="^1.4.0">
-        <variable name="API_KEY_FOR_ANDROID" value="AIzaSyCz5E2s7v_ORGHJgENeAI82pHOful54Gjs" />
+        <variable name="API_KEY_FOR_ANDROID" value="AIzaSyAL-wWlMxWTD68YOD3C3GDzIKcRtCtQhbg" />
     </plugin>
     <plugin name="cordova-plugin-http" spec="^1.2.0" />
     <plugin name="cordova-plugin-inappbrowser" spec="^1.7.1" />
