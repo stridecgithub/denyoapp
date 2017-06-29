@@ -6,6 +6,7 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { AddalarmPage } from '../addalarm/addalarm';
 import { LoadingController } from 'ionic-angular';
 import { UnitdetailsPage } from '../unitdetails/unitdetails';
+import { AlarmdetailsPage } from '../alarmdetails/alarmdetails';
 
 /**
  * Generated class for the AlarmlogPage page.
@@ -161,6 +162,15 @@ doRefresh(refresher) {
       });
     }
   }
-   
+   details(item,act)
+   {
+      if (act == 'edit') {
+      this.nav.setRoot(AlarmdetailsPage, {
+        record: item,
+        act: act
+      });
+      return false;
+    }
+   }
   
 }
