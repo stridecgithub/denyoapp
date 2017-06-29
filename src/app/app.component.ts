@@ -83,6 +83,7 @@ export class MyApp {
       { title: 'Alarm Log', component: AlarmlogPage },
       { title: 'Service Details', component: ServicedetailsPage },
        { title: 'Comment Details', component: CommentdetailsPage },
+        { title: 'Alarm Details', component: AlarmdetailsPage },
      // { title: 'Map Demo', component: MapdemoPage },
 
       { title: 'Logout', component: LogoutPage }
