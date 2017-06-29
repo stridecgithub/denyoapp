@@ -86,7 +86,7 @@ export class CalendarPage {
     this.dateHeaderTitle = yearMonth;
     this.onTimeSelected(this.curDate);
 
-
+    //this.loadEvents();
 
   }
 
@@ -104,6 +104,7 @@ export class CalendarPage {
 
   loadEvents() {
     this.eventSource = this.createRandomEvents();
+    console.log("Event Source:" + console.log(JSON.stringify(this.eventSource)));
   }
   onViewTitleChanged(title) {
     this.viewTitle = title;
@@ -181,10 +182,10 @@ export class CalendarPage {
     let month;
     let year;
     let date;
-    console.log("Event ev?"+ev);
+    console.log("Event ev?" + ev);
     if (ev != '') {
       //this.pet = '';
-     this.petselection = '';
+      this.petselection = '';
       this.calendarResultAll = [];
       this.calendarResultService = [];
       this.calendarResultEvent = [];
@@ -324,9 +325,21 @@ export class CalendarPage {
             }
           }
         }
-
+        
 
       });
+
+      this.eventSource = [{
+          "title": "All Day - 0",
+          "startTime": "2017-06-16T00:00:00.000Z",
+          "endTime": "2017-06-17T00:00:00.000Z",
+          "allDay": true
+        }, {
+          "title": "All Day - 1",
+          "startTime": "2017-06-02T00:00:00.000Z",
+          "endTime": "2017-06-03T00:00:00.000Z",
+          "allDay": true
+        }];
   }
   onCurrentDateChanged(event: Date) {
     var today = new Date();

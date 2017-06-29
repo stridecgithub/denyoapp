@@ -53,7 +53,7 @@
     <button ion-button class="calendar_ttl">{{dateHeaderTitle}}</button>
     <button ion-button (click)="nex()" class="calendar_nex">>></button>
     <calendar [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate" (onCurrentDateChanged)="onCurrentDateChanged($event)"
-      (onEventSelected)="onEventSelected($event)" (onTitleChanged)="onViewTitleChanged($event)" (onTimeSelected)="onTimeSelected($event)"
+      (onEventSelected)="onEventSelected($event)" (showEventDetail)=true (onTitleChanged)="onViewTitleChanged($event)" (onTimeSelected)="onTimeSelected($event)"
       step="30">
     </calendar>
   </ion-item>
