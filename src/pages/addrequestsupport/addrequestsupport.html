@@ -52,8 +52,13 @@
         <ion-input type="text" [disabled]="readOnly" formControlName="service_subject" [(ngModel)]="service_subject"></ion-input>
       </ion-item>
       <b>Remark</b> <span class="mandatory" *ngIf="hideActionButton">*</span>
-      <input type="text" (keyup)=address1get($event.target.value); id="example1" class="form-control" rows="8" [disabled]="readOnly"
+      <!--input type="text" (keyup)=address1get($event.target.value); id="example1" class="form-control" rows="8" [disabled]="readOnly"
+        formControlName="service_remark" rows="6" [(ngModel)]="service_remark"-->
+
+
+         <input type="text" (keyup)=address1get($event.target.value); name="to" id="to"  class="sugges" onkeyup="sptions(event)" onblur="sptionshide()" class="form-control" rows="8" [disabled]="readOnly"
         formControlName="service_remark" rows="6" [(ngModel)]="service_remark">
+
       <p><b>Upload Images</b></p>
       <p>Maximum Number of upload photos:10</p>
       <div class="profile-image-wrapper" (click)="takePictureURL(micro_timestamp)" *ngIf="isUploaded">

@@ -1,7 +1,18 @@
 page-unitdetails {
 
+.notify-badge{
+color: #cccccc;
+    background-color: #000000;
+    border-radius: 60px;
+    margin-left: 5px;
+    
+    
+}
      .ion-content{
     background-color:white;
+}
+.item-md [item-end] {
+  margin: 0px 0px 0px 9px;
 }
 
 .footer-icon{

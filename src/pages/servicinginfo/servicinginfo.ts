@@ -63,6 +63,29 @@ export class ServicinginfoPage {
     this.reportData.sort = "service_id";
     this.doService();
 
+    this.unit_id = this.NP.get("record").unit_id;
+    let body: string = "is_mobile=1&userid=" + this.userId +
+      "&unitid=" + this.unit_id,
+      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/removeservicecount";
+    console.log(url);
+    console.log(body);
+
+    this.http.post(url, body, options)
+      .subscribe((data) => {
+        //console.log("Response Success:" + JSON.stringify(data.json()));
+        // If the request was successful notify the user
+        if (data.status === 200) {
+          this.sendNotification(`Service count successfully removed`);
+
+        }
+        // Otherwise let 'em know anyway
+        else {
+          this.sendNotification('Something went wrong!');
+        }
+      });
     // Atmentioned Tag Storage
   }
   presentLoading(parm) {
@@ -192,7 +215,7 @@ export class ServicinginfoPage {
     });
   }
 
-  
+
 
   doEdit(item, act) {
     localStorage.setItem("microtime", "");
@@ -201,9 +224,8 @@ export class ServicinginfoPage {
       act: 'Edit'
     });
   }
-  servicedetails(item,act)
-  {
-     localStorage.setItem("microtime", "");
+  servicedetails(item, act) {
+    localStorage.setItem("microtime", "");
     this.nav.setRoot(ServicedetailsPage, {
       record: item,
       act: 'Edit'

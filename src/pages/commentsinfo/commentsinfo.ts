@@ -57,8 +57,31 @@ export class CommentsinfoPage {
       console.log("Service Info Record Param Value:" + JSON.stringify(this.NP.get("record")));
     }
     this.reportData.startindex = 0;
-    this.reportData.sort = "service_id";
+    this.reportData.sort = "comment_id";
     this.doService();
+    this.unit_id = this.NP.get("record").unit_id;
+    let body: string = "is_mobile=1&userid=" + this.userId +
+      "&unitid=" + this.unit_id,
+      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/removecommentcount";
+    console.log(url);
+    console.log(body);
+
+    this.http.post(url, body, options)
+      .subscribe((data) => {
+        //console.log("Response Success:" + JSON.stringify(data.json()));
+        // If the request was successful notify the user
+        if (data.status === 200) {
+          this.sendNotification(`Comment count successfully removed`);
+          
+        }
+        // Otherwise let 'em know anyway
+        else {
+          this.sendNotification('Something went wrong!');
+        }
+      });
 
     // Atmentioned Tag Storage
   }
@@ -143,7 +166,7 @@ export class CommentsinfoPage {
       });
     this.presentLoading(0);
   }
-   notification() {
+  notification() {
     this.nav.setRoot(NotificationPage);
   }
   previous() {
