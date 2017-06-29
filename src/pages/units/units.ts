@@ -12,6 +12,7 @@ import { UnitgroupPage } from '../unitgroup/unitgroup';
 import { CompanygroupPage } from '../companygroup/companygroup';
 import { RolePage } from '../role/role';
 import { UnitdetailsPage } from '../unitdetails/unitdetails';
+import { NotificationPage } from '../notification/notification';
 /**
  * Generated class for the UserPage page.
  *
@@ -395,6 +396,9 @@ export class UnitsPage {
     this.doUser();
   }
 
+  notification() {
+    this.nav.setRoot(NotificationPage);
+  }
   redirectToUser() {
     this.nav.setRoot(UserPage);
   }

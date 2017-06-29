@@ -12,6 +12,7 @@ import { UnitsPage } from '../units/units';
 import { RolePage } from '../role/role';
 import * as $ from 'jquery'
 import "slick-carousel";
+import { NotificationPage } from '../notification/notification';
 /**
  * Generated class for the AddcompanygroupPage page.
  *
@@ -472,6 +473,12 @@ export class AddunitsthreePage {
 
   }
 
+
+
+
+  notification() {
+    this.nav.setRoot(NotificationPage);
+  }
 
   redirectToUser() {
     this.nav.setRoot(UserPage);

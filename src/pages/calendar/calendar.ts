@@ -176,14 +176,15 @@ export class CalendarPage {
     this.calendarResultEvent = [];
     this.calendarResultAlarm = [];
 
-    //this.petselection = '';
+
     let dateStr;
     let month;
     let year;
     let date;
-    console.log(ev);
+    console.log("Event ev?"+ev);
     if (ev != '') {
-      this.pet = '';
+      //this.pet = '';
+     this.petselection = '';
       this.calendarResultAll = [];
       this.calendarResultService = [];
       this.calendarResultEvent = [];

@@ -7,6 +7,8 @@ import { UserPage } from '../user/user';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
 import { UnitsPage } from '../units/units';
 import { RolePage } from '../role/role';
+import { NotificationPage } from '../notification/notification';
+
 /**
  * Generated class for the MyaccountPage page.
  *
@@ -88,6 +90,9 @@ export class MyaccountPage {
     });
   }
 
+  notification() {
+    this.nav.setRoot(NotificationPage);
+  }
   previous() {
     this.nav.setRoot(TabsPage);
   }

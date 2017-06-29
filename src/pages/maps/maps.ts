@@ -43,7 +43,7 @@ export class MapsPage {
     results: 8
   }
   public reportAllLists = [];
-  constructor(private sanitizer: DomSanitizer,public http: Http, public navCtrl: NavController,
+  constructor(private sanitizer: DomSanitizer, public http: Http, public navCtrl: NavController,
     public toastCtrl: ToastController, public alertCtrl: AlertController, public navParams: NavParams, public loadingCtrl: LoadingController) {
     this.pageTitle = 'Maps';
     this.loginas = localStorage.getItem("userInfoName");
@@ -177,7 +177,10 @@ export class MapsPage {
     this.reportData.sort = "unit_id";
     this.doUser();
     console.log(this.apiServiceURL + "/api/webview/map.php?is_mobile=1&loginid=1&startindex=0&results=8&sort=unit_id&dir=desc");
-    this.iframeContent = "<iframe src=" + this.apiServiceURL + "/api/webview/map.php?is_mobile=1&loginid=1&startindex=0&results=8&sort=unit_id&dir=desc height=350 frameborder=0></iframe>";
+    //this.iframeContent = "<iframe src=" + this.apiServiceURL + "/api/webview/map.php?is_mobile=1&loginid=1&startindex=0&results=8&sort=unit_id&dir=desc height=350 frameborder=0></iframe>";
+
+    this.iframeContent = "<iframe src=" + this.apiServiceURL + "/mapwebview?ses_login_id=" + this.userid + " height=350 frameborder=0></iframe>";
+
   }
   /*displayGoogleMap() {
     let latLng = new google.maps.LatLng(9.9252, 78.1198);

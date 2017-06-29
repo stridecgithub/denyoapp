@@ -9,6 +9,8 @@ import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
 import { UnitsPage } from '../units/units';
 import { CompanygroupPage } from '../companygroup/companygroup';
+import { NotificationPage } from '../notification/notification';
+
 /**
  * Generated class for the AddrolePage page.
  *
@@ -248,7 +250,9 @@ export class RolePage {
       loader.dismiss();
     }
   }
-
+  notification() {
+    this.nav.setRoot(NotificationPage);
+  }
   redirectToUser() {
     this.nav.setRoot(UserPage);
   }

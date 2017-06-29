@@ -11,6 +11,7 @@ import { UnitdetailsPage } from '../unitdetails/unitdetails';
 import { RolePage } from '../role/role';
 import 'rxjs/add/operator/map';
 import { Http, Headers, RequestOptions } from '@angular/http';
+import { NotificationPage } from '../notification/notification';
 /**
  * Generated class for the ServicinginfoPage page.
  *
@@ -141,6 +142,9 @@ export class CommentsinfoPage {
 
       });
     this.presentLoading(0);
+  }
+   notification() {
+    this.nav.setRoot(NotificationPage);
   }
   previous() {
     this.nav.setRoot(UnitdetailsPage, {

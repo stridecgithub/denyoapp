@@ -13,6 +13,7 @@ import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
 import { UnitsPage } from '../units/units';
 import { RolePage } from '../role/role'; 
+import { NotificationPage } from '../notification/notification';
 /**
  * Generated class for the AddcompanygroupPage page.
  *
@@ -394,6 +395,12 @@ export class AdduserPage {
         this.progress = progress;
       }
     });
+  }
+  
+
+
+  notification() {
+    this.nav.setRoot(NotificationPage);
   }
   previous() {
     this.nav.setRoot(UserPage);

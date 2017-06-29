@@ -11,6 +11,8 @@ import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
 import { UnitsPage } from '../units/units';
 import { RolePage } from '../role/role';
+import { NotificationPage } from '../notification/notification';
+
 /**
  * Generated class for the CompanygroupPage page.
  *
@@ -262,6 +264,9 @@ export class CompanygroupPage {
     }
   }
 
+  notification() {
+    this.nav.setRoot(NotificationPage);
+  }
   previous() {
     this.nav.setRoot(HomePage);
   }

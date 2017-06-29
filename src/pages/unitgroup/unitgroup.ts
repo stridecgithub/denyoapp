@@ -10,6 +10,7 @@ import { CompanygroupPage } from '../companygroup/companygroup';
 import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitsPage } from '../units/units';
 import { RolePage } from '../role/role';
+import { NotificationPage } from '../notification/notification';
 
 /**
  * Generated class for the UnitgroupPage page.
@@ -332,6 +333,9 @@ export class UnitgroupPage {
     //this.dounitGroup();
   }
 
+  notification() {
+    this.nav.setRoot(NotificationPage);
+  }
   redirectToUser() {
     this.nav.setRoot(UserPage);
   }

@@ -16,6 +16,7 @@ import * as $ from 'jquery'
 import "slick-carousel";
 import 'rxjs/add/operator/map';
 import { Http, Headers, RequestOptions } from '@angular/http';
+ import { NotificationPage } from '../notification/notification';
 /**
  * Generated class for the AddserviceinfoPage page.
  *
@@ -430,6 +431,13 @@ export class AddserviceinfoPage {
     this.nav.setRoot(ServicinginfoPage, {
       record: this.NP.get("record")
     });
+  }
+ 
+
+
+
+  notification() {
+    this.nav.setRoot(NotificationPage);
   }
   redirectToUser() {
     this.nav.setRoot(UserPage);

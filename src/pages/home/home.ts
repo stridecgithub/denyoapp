@@ -5,6 +5,8 @@ import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
 import { UnitsPage } from '../units/units';
 import { RolePage } from '../role/role';
+import { NotificationPage } from '../notification/notification';
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -18,6 +20,9 @@ export class HomePage {
   goPage(page) {
     console.log(page);
     this.nav.setRoot(page);
+  }
+  notification() {
+    this.nav.setRoot(NotificationPage);
   }
   redirectToUser() {
     this.nav.setRoot(UserPage);

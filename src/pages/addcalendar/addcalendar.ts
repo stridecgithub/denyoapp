@@ -10,6 +10,7 @@ import { UnitgroupPage } from '../unitgroup/unitgroup';
 import { UnitsPage } from '../units/units';
 import { RolePage } from '../role/role';
 import { CalendarPage } from '../calendar/calendar';
+import { NotificationPage } from '../notification/notification';
 /**
  * Generated class for the AddcompanygroupPage page.
  *
@@ -426,7 +427,9 @@ export class AddcalendarPage {
     notification.present();
   }
 
-
+ notification() {
+    this.nav.setRoot(NotificationPage);
+  }
   previous() {
     this.nav.setRoot(CalendarPage);
   }

@@ -8,6 +8,7 @@ import { UnitgroupPage } from '../unitgroup/unitgroup';
 import { UnitsPage } from '../units/units';
 import { RolePage } from '../role/role'; 
 import 'rxjs/add/operator/map';
+import { NotificationPage } from '../notification/notification';
 
 
 /**
@@ -262,6 +263,12 @@ export class AddunitgroupPage {
     console.log(colorCodeValue);
     this.ccode=colorCodeValue;
    // document.getElementById("colorcode").classList.remove("border-need");
+  }
+  
+
+
+  notification() {
+    this.nav.setRoot(NotificationPage);
   }
    previous() {
     this.nav.setRoot(UnitgroupPage);
