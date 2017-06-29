@@ -48,6 +48,7 @@ import { AlarmPage } from '../pages/alarm/alarm';
 import { AlarmlogPage } from '../pages/alarmlog/alarmlog';
 import { AddalarmPage } from '../pages/addalarm/addalarm';
 import { MapsPage } from '../pages/maps/maps';
+import { NotificationPage } from '../pages/notification/notification';
 //import { MapdemoPage } from '../pages/mapdemo/mapdemo';
 import { NgCalendarModule } from 'ionic2-calendar';
 
@@ -97,6 +98,7 @@ import { NgCalendarModule } from 'ionic2-calendar';
     AddalarmPage,
     AlarmlogPage,
     MapsPage,
+    NotificationPage
     //MapdemoPage
   ],
   imports: [
@@ -160,6 +162,7 @@ import { NgCalendarModule } from 'ionic2-calendar';
     AddcalendarPage,
     AlarmlogPage,
     MapsPage,
+    NotificationPage
     //MapdemoPage
   ],
   providers: [

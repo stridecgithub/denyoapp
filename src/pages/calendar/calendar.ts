@@ -10,6 +10,8 @@ import { UnitsPage } from '../units/units';
 import { RolePage } from '../role/role';
 import { HomePage } from '../home/home';
 import { UserPage } from '../user/user';
+import { NotificationPage } from '../notification/notification';
+
 import { AddcalendarPage } from '../addcalendar/addcalendar';
 
 import { DatePicker } from '@ionic-native/date-picker';
@@ -171,6 +173,8 @@ export class CalendarPage {
     this.calendarResultService = [];
     this.calendarResultEvent = [];
     this.calendarResultAlarm = [];
+
+    this.petselection = '';
     let dateStr;
     let month;
     let year;
@@ -384,6 +388,10 @@ export class CalendarPage {
     } else {
       loader.dismiss();
     }
+  }
+
+  notification(){
+    this.navCtrl.setRoot(NotificationPage);
   }
   previous() {
     this.navCtrl.setRoot(HomePage);

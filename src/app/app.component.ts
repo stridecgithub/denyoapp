@@ -32,6 +32,8 @@ import { MessagesPage } from '../pages/messages/messages';
 import { CalendarPage } from '../pages/calendar/calendar';
 import { MapsPage } from '../pages/maps/maps';
 import { ReportsPage } from '../pages/reports/reports';
+import { NotificationPage } from '../pages/notification/notification';
+
 //import { MapdemoPage } from '../pages/mapdemo/mapdemo';
 
 @Component({
