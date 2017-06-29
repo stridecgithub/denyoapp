@@ -24,8 +24,7 @@ import { AddrequestsupportPage } from '../addrequestsupport/addrequestsupport';
   templateUrl: 'notification.html',
 })
 export class NotificationPage {
-  public pageTitle: string;
-  public unit_id: any;
+  public pageTitle: string; 
   public atMentionedInfo = [];
   public reportData: any =
   {
@@ -108,35 +107,33 @@ export class NotificationPage {
     }
     let editItem = this.NP.get("record");
 
-    if (this.NP.get("record").unit_id != undefined && this.NP.get("record").unit_id != 'undefined') {
-      this.unit_id = '1';
-    } else {
-      this.unit_id = '1';
-    }
-
-    //http://denyoappv2.stridecdev.com/companygroup?is_mobile=1
-    let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+   let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/comments?is_mobile=1&startindex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc + "&unitid=" + this.unit_id;
+      // url: any = this.apiServiceURL + "/reporttemplate?is_mobile=1";
+      url: any = this.apiServiceURL + "/reporttemplate?is_mobile=1&startindex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc;
     let res;
     console.log(url);
     this.http.get(url, options)
       .subscribe((data) => {
         res = data.json();
         console.log(JSON.stringify(res));
-        console.log("1" + res.comments.length);
-        console.log("2" + res.comments);
-        if (res.comments.length > 0) {
-          this.reportAllLists = res.comments;
+        console.log("1" + res.availabletemp.length);
+        console.log("2" + res.availabletemp);
+        if (res.availabletemp.length > 0) {
+          for (let availabletemps in res.availabletemp) {
+            this.reportAllLists.push({
+              id: res.availabletemp[availabletemps].id,
+              templatename: res.availabletemp[availabletemps].templatename,
+              availableheading: res.availabletemp[availabletemps].availableheading.split("#")
+            });
+          }
           this.totalCount = res.totalCount;
           this.reportData.startindex += this.reportData.results;
-          this.loadingMoreDataContent = 'Loading More Data';
         } else {
-          this.totalCount = 0;
-          this.loadingMoreDataContent = 'No More Data';
+          //this.totalCount = 0;
         }
-        console.log("Total Record:" + this.totalCount);
+        // console.log("Total Record:2" + this.totalCount);
 
       });
     this.presentLoading(0);
