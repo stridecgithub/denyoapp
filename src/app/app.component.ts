@@ -32,6 +32,7 @@ import { MessagesPage } from '../pages/messages/messages';
 import { CalendarPage } from '../pages/calendar/calendar';
 import { MapsPage } from '../pages/maps/maps';
 import { ReportsPage } from '../pages/reports/reports';
+import { ServicedetailsPage } from '../pages/servicedetails/servicedetails';
 //import { MapdemoPage } from '../pages/mapdemo/mapdemo';
 
 @Component({
@@ -73,6 +74,7 @@ export class MyApp {
       { title: 'Alarm List', component: AlarmPage },
       { title: 'Alarm', component: AddalarmPage },
       { title: 'Alarm Log', component: AlarmlogPage },
+      { title: 'Service Details', component: ServicedetailsPage },
      // { title: 'Map Demo', component: MapdemoPage },
 
       { title: 'Logout', component: LogoutPage }

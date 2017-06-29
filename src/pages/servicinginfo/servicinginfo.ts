@@ -8,6 +8,7 @@ import { AddserviceinfoPage } from '../addserviceinfo/addserviceinfo';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
 import { UnitsPage } from '../units/units';
 import { UnitdetailsPage } from '../unitdetails/unitdetails';
+import { ServicedetailsPage } from '../servicedetails/servicedetails';
 import { RolePage } from '../role/role';
 import 'rxjs/add/operator/map';
 import { Http, Headers, RequestOptions } from '@angular/http';
@@ -190,6 +191,14 @@ export class ServicinginfoPage {
   doEdit(item, act) {
     localStorage.setItem("microtime", "");
     this.nav.setRoot(AddserviceinfoPage, {
+      record: item,
+      act: 'Edit'
+    });
+  }
+  servicedetails(item,act)
+  {
+     localStorage.setItem("microtime", "");
+    this.nav.setRoot(ServicedetailsPage, {
       record: item,
       act: 'Edit'
     });

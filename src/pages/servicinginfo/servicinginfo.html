@@ -69,7 +69,7 @@
   </ion-refresher>
   <ion-list *ngIf="totalCount!=0">
     <ion-item-sliding *ngFor="let item of reportAllLists;">
-      <ion-item>
+      <ion-item (click)="servicedetails(item,'view')">
         <h2><b>{{item.service_subject}}</b></h2>
         <h2><b>Serviced By:</b>{{item.serviced_by_name}}</h2>
         <h2><b>Next Servicing:</b>{{item.next_service_date}}</h2>

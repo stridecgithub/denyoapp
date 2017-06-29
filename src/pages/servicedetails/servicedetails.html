@@ -5,14 +5,81 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>servicedetails</ion-title>
+  <ion-navbar color="bluedark">
+    <ion-title class="page-title">Service Details</ion-title>
+    <ion-buttons start>
+      <button ion-button menuToggle class="menu-toggle">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button>
+ <ion-icon name="notifications-outline"></ion-icon>
+</button>
+    </ion-buttons>
   </ion-navbar>
-
+  <ion-navbar class="backtoprevious-navbar">
+    <ion-buttons start class="backtoprevious-start">
+      <button ion-button icon-left class="backtoprevious-button" (click)="previous()">
+ <ion-icon name="arrow-back" class="backtoprevious-icon"></ion-icon>
+ Back to previous
+</button>
+    </ion-buttons>
+    <ion-buttons end>
+      Login As:{{unitDetailData.loginas}}
+    </ion-buttons>
+  </ion-navbar>
+  
 </ion-header>
 
 
 <ion-content padding>
+   
+ <ion-grid>
+        <ion-row>
+          <ion-col>
+            <p><b>Subject:</b>{{service_subject}}</p>
+            <p><b>Serviced Date:</b>{{serviced_datetime}}</p>
+            <p><b>Serviced By:</b>{{serviced_by_name}}
+        
+            </p>
+  
+          </ion-col>
 
+          <ion-col>
+            <a href="#" >
+              <ion-icon name="download{{service_priority_class1}}" style="color:aquamarine;font-size: 37px;"></ion-icon>
+            </a>
+          </ion-col>
+
+
+          <ion-col>
+            <a href="#">
+              <ion-icon name="alert{{service_priority_class2}}" style="color: brown;font-size: 37px;"></ion-icon>
+            </a>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <div>
+        <p><b>Remark:</b>
+        <br>{{service_remark}}</p>
+        </div>
+        <div>
+         <ion-row>
+          <ion-col col-auto *ngFor="let item of addedImgLists; let i = index" [attr.data-index]="i">
+            <ion-item>
+              <img src="{{addedImgLists[i].imgSrc}}" width=100% height=100% /> 
+            </ion-item>
+       
+          </ion-col>
+
+        </ion-row>
+        </div>
+        
+        <div *ngIf="requestbutton==1" width=100%>
+          <button ion-button icon-start width=100%>
+  <ion-icon name="md-checkmark"></ion-icon>
+  Request Denyo Support
+</button>
+        </div>
 </ion-content>
