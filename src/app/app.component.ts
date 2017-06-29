@@ -34,6 +34,7 @@ import { MapsPage } from '../pages/maps/maps';
 import { ReportsPage } from '../pages/reports/reports';
 
 import { ServicedetailsPage } from '../pages/servicedetails/servicedetails';
+import { AlarmdetailsPage } from '../pages/alarmdetails/alarmdetails';
 import { CommentdetailsPage } from '../pages/commentdetails/commentdetails';
 
 import { NotificationPage } from '../pages/notification/notification';
