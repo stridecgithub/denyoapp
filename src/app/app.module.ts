@@ -48,11 +48,11 @@ import { AlarmPage } from '../pages/alarm/alarm';
 import { AlarmlogPage } from '../pages/alarmlog/alarmlog';
 import { AddalarmPage } from '../pages/addalarm/addalarm';
 import { MapsPage } from '../pages/maps/maps';
-<<<<<<< HEAD
+
 import { ServicedetailsPage } from '../pages/servicedetails/servicedetails';
-=======
+
 import { NotificationPage } from '../pages/notification/notification';
->>>>>>> 6697fdac01cac675d982d556533fedac36345152
+
 //import { MapdemoPage } from '../pages/mapdemo/mapdemo';
 import { NgCalendarModule } from 'ionic2-calendar';
 
@@ -102,11 +102,9 @@ import { NgCalendarModule } from 'ionic2-calendar';
     AddalarmPage,
     AlarmlogPage,
     MapsPage,
-<<<<<<< HEAD
-    ServicedetailsPage
-=======
+    ServicedetailsPage,
     NotificationPage
->>>>>>> 6697fdac01cac675d982d556533fedac36345152
+
     //MapdemoPage
   ],
   imports: [
@@ -170,11 +168,11 @@ import { NgCalendarModule } from 'ionic2-calendar';
     AddcalendarPage,
     AlarmlogPage,
     MapsPage,
-<<<<<<< HEAD
-    ServicedetailsPage
-=======
+
+    ServicedetailsPage,
     NotificationPage
->>>>>>> 6697fdac01cac675d982d556533fedac36345152
+
+
     //MapdemoPage
   ],
   providers: [
