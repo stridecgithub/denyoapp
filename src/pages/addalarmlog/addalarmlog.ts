@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { Http, Headers, RequestOptions } from '@angular/http';
+import { AlarmPage } from '../alarm/alarm';
 
 /**
  * Generated class for the AddalarmlogPage page.
@@ -14,11 +17,146 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class AddalarmlogPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  
+  public loginas: any;
+   public companyid: any;
+     public form: FormGroup;
+  public assigned_to: any;
+  public remark: any;
+  public userdata = [];
+  public subject: any;
+  public uname: any;
+  public assignedby:any;
+  micro_timestamp: any;
+  public userId: any;
+  public responseResultCountry: any;
+ public responseResultReportTo: any;
+  // Flag to be used for checking whether we are adding/editing an entry
+  public isEdited: boolean = false;
+  public readOnly: boolean = false;
+
+  // Flag to hide the form upon successful completion of remote operation
+  public hideForm: boolean = false;
+  public hideActionButton = true;
+ // public isUploadedProcessing: boolean = false;
+  // Property to help ste the page title
+  public pageTitle: string;
+  // Property to store the recordID for when an existing entry is being edited
+  public recordID: any = null;
+  private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
+
+    constructor(public navCtrl: NavController,
+    public http: Http,
+    public NP: NavParams,
+    public fb: FormBuilder,
+    public toastCtrl: ToastController) {
+    this.loginas = localStorage.getItem("userInfoName");
+    // Create form builder validation rules
+    this.form = fb.group({
+      "assigned_to": ["", Validators.required],
+      "remark": ["", Validators.required],
+         "subject": ["", Validators.required],
+            "assignedby": ["", Validators.required]
+    });
+     let already = localStorage.getItem("microtime");
+    if (already != undefined && already != 'undefined' && already != '') {
+      this.micro_timestamp = already;
+    } else {
+      let dateStr = new Date();
+      let yearstr = dateStr.getFullYear();
+      let monthstr = dateStr.getMonth();
+      let datestr = dateStr.getDate();
+      let hrstr = dateStr.getHours();
+      let mnstr = dateStr.getMinutes();
+      let secstr = dateStr.getSeconds();
+      this.micro_timestamp = yearstr + "" + monthstr + "" + datestr + "" + hrstr + "" + mnstr + "" + secstr;
+
+    }
+    localStorage.setItem("microtime", this.micro_timestamp);
+    this.uname= localStorage.getItem("userInfoName");
+    this.userId = localStorage.getItem("userInfoId");
+    this.companyid = localStorage.getItem("userInfoCompanyId");
   }
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddalarmlogPage');
   }
+ ionViewWillEnter() {
+    this.getUserListData();
+    
+   if (this.NP.get("record")) {
+       console.log(this.NP.get("act"));
+      this.isEdited = true;
+      this.selectEntry(this.NP.get("record"));
+     // this.pageTitle = 'Edit Company Group';
+      this.readOnly = false;
+      this.hideActionButton = true;
+    }
+    else {
+      this.isEdited = false;
+      //this.pageTitle = 'New  Org Chart';
+    }
+  }
+   selectEntry(item) {
+    this.subject = item.alarm_name;
+    this.assignedby=this.uname;
+    this.assigned_to = item.assigned_to;
+     this.recordID = item.alarm_id;
+    
+    
+  }
+  getUserListData() {
+    let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/getstaffs";
+    let res;
+    console.log(url);
+    this.http.get(url, options)
+      .subscribe(data => {
+        res = data.json();
+       // console.log(data.json);
+        this.responseResultReportTo = res.staffslist;
+      });
 
+  }
+  saveEntry()
+  {
+     let body: string = "is_mobile=1&alarmid=" + this.recordID +
+      "&alarm_assigned_by=" + this.userId +
+      "&alarm_assigned_to=" + this.assigned_to +
+      "&alarm_remark=" + this.remark +
+      "&alarm_assigned_date=" + this.micro_timestamp  ,
+      
+      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/alarms/assignalarm";
+    console.log(url);
+    console.log(body);
+
+    this.http.post(url, body, options)
+      .subscribe((data) => {
+        //console.log("Response Success:" + JSON.stringify(data.json()));
+        // If the request was successful notify the user
+        if (data.status === 200) {
+          this.hideForm = true;
+          this.sendNotification(`successfully Assigned`);
+          localStorage.setItem("userPhotoFile", "");
+          this.navCtrl.setRoot(AlarmPage);
+        }
+        // Otherwise let 'em know anyway
+        else {
+          this.sendNotification('Something went wrong!');
+        }
+      });
+  }
+   sendNotification(message): void {
+    let notification = this.toastCtrl.create({
+      message: message,
+      duration: 3000
+    });
+    notification.present();
+  }
 }
