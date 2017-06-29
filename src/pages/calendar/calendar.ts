@@ -26,12 +26,26 @@ export class CalendarPage {
   viewLink: any;
   viewHtml: any;
   dateHeaderTitle: any;
-  calendarResult: any;
+  petselection: any;
+  calendarResultAll: any;
+  calendarResultService: any;
+  calendarResultEvent: any;
+  calendarResultAlarm: any;
+  noeventtitle: any;
+  noservicetitle: any;
+  noalarmtitle: any;
+  noalltitle: any;
   daySession: any;
   totalCount: any;
+  totalCountEvent: any;
+  curDate: any;
   public pageTitle: string;
   public loginas: any;
   public userId: any;
+  allselected: any;
+  serviceselected: any;
+  alarmselected: any;
+  eventsselected: any;
   public companyId: any;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   constructor(public navCtrl: NavController, private datePicker: DatePicker, private http: Http, public loadingCtrl: LoadingController) {
@@ -51,19 +65,30 @@ export class CalendarPage {
       err => console.log('Error occurred while getting date: ', err)
       );
   }
+
+
   ionViewWillEnter() {
+    this.eventsselected = true;
+    this.allselected = false;
+    this.serviceselected = false;
+    this.alarmselected = false;
+    this.eventsselected = false;
+
     this.pageTitle = "Calendar";
     //console.log(JSON.stringify(this.userInf));
 
-    let curDate = new Date();
-    console.log('1' + curDate);
-    let yearMonth = this.splitDate(curDate)
+    this.curDate = new Date();
+    console.log('1' + this.curDate);
+    let yearMonth = this.splitDate(this.curDate)
     this.dateHeaderTitle = yearMonth;
-    this.onTimeSelected(curDate);
+    this.onTimeSelected(this.curDate);
 
 
 
   }
+
+
+
 
   eventSource;
   viewTitle;
@@ -103,26 +128,34 @@ export class CalendarPage {
     this.calendar.currentDate = new Date();
   }
   pre() {
-
+    this.calendarResultAll = [];
+    this.calendarResultService = [];
+    this.calendarResultEvent = [];
+    this.calendarResultAlarm = [];
     let prevmonth = this.addMonthsUTC(this.calendar.currentDate, -1);
     //console.log("nextmonth:" + prevmonth);
     this.calendar.currentDate = prevmonth;
     let yearMonth = this.splitDate(this.calendar.currentDate)
     this.dateHeaderTitle = yearMonth;
     //this.dateHeaderTitle = this.calendar.currentDate;
-    this.calendarResult = [];
-    this.onTimeSelected(this.calendar.currentDate);
+    this.calendarResultAll = [];
+    this.curDate = this.calendar.currentDate;
+    this.onTimeSelected(this.curDate);
   }
   nex() {
-
+    this.calendarResultAll = [];
+    this.calendarResultService = [];
+    this.calendarResultEvent = [];
+    this.calendarResultAlarm = [];
     let nextmonth = this.addMonthsUTC(this.calendar.currentDate, 1);
     //console.log("nextmonth:" + nextmonth);
     this.calendar.currentDate = nextmonth;
     let yearMonth = this.splitDate(this.calendar.currentDate)
     this.dateHeaderTitle = yearMonth;
     //this.dateHeaderTitle = this.calendar.currentDate;
-    this.calendarResult = [];
-    this.onTimeSelected(this.calendar.currentDate);
+    this.calendarResultAll = [];
+    this.curDate = this.calendar.currentDate;
+    this.onTimeSelected(this.curDate);
   }
   splitDate(curdate) {
     //var splitDt = curdate.split("@");
@@ -134,53 +167,51 @@ export class CalendarPage {
   }
   onTimeSelected(ev) {
 
-    console.log("2" + ev.selectedTime);
-    console.log("3" + JSON.stringify(ev));
+    this.calendarResultAll = [];
+    this.calendarResultService = [];
+    this.calendarResultEvent = [];
+    this.calendarResultAlarm = [];
+    let dateStr;
     let month;
     let year;
     let date;
-    if (ev.selectedTime == undefined) {
-      console.log('undefined' + ev);
-      month = ev.getUTCMonth() + 1;
-      year = ev.getFullYear();
-      date = ev.getDate();
+    if (ev != '') {
+      console.log("2" + ev.selectedTime);
+      console.log("3" + JSON.stringify(ev));
+
+      if (ev.selectedTime == undefined) {
+        console.log('undefined' + ev);
+        month = ev.getUTCMonth() + 1;
+        year = ev.getFullYear();
+        date = ev.getDate();
+      } else {
+        console.log('defined');
+        month = ev.selectedTime.getUTCMonth() + 1;
+        year = ev.selectedTime.getFullYear();
+        date = ev.selectedTime.getDate();
+      }
+
+      if (month.length == 1) {
+        month = '0' + month;
+      } else {
+        month = month;
+      }
+
+      if (date.length == 1) {
+        date = '0' + date
+      } else {
+        date = date;
+      }
+      console.log('Selected time: ' + year + "-" + month + "-" + date);
+      dateStr = "&date=" + year + "-" + month + "-" + date;
     } else {
-      console.log('defined');
-      month = ev.selectedTime.getUTCMonth() + 1;
-      year = ev.selectedTime.getFullYear();
-      date = ev.selectedTime.getDate();
+      dateStr = "";
     }
-
-    if (month.length == 1) {
-      month = '0' + month;
-    } else {
-      month = month;
-    }
-
-    if (date.length == 1) {
-      date = '0' + date
-    } else {
-      date = date;
-    }
-    console.log('Selected time: ' + year + "-" + month + "-" + date);
-    /*let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
-      headers: any = new Headers({ 'Content-Type': type }),
-      options: any = new RequestOptions({ headers: headers }),
-      url: any = this.baseURI + "events.php?date=" + year + "-" + month + "-" + date;
-
-    this.http.get(url, options)
-      .subscribe(data => {
-        // console.log(JSON.stringify(data.json()));
-        this.calendarResult = data.json();
-        //this.eventSource=data.json();
-      });
-      */
-
 
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/calendar?is_mobile=1&loginid=" + this.userId + "&companyid=" + this.companyId + "&date=" + year + "-" + month + "-" + date;
+      url: any = this.apiServiceURL + "/calendar?is_mobile=1&loginid=" + this.userId + "&companyid=" + this.companyId + "" + dateStr;
     console.log(url);
     this.http.get(url, options)
       .subscribe((data) => {
@@ -197,7 +228,7 @@ export class CalendarPage {
           mnstr = '';
 
         }
-        console.log("Current Date Length:"+currentDateArr.getDate().toLocaleString.length);
+        console.log("Current Date Length:" + currentDateArr.getDate().toLocaleString.length);
         if (currentDateArr.getDate().toLocaleString.length == 1) {
           dtstr = '0';
         } else {
@@ -208,21 +239,80 @@ export class CalendarPage {
         let selDate = year + "-" + month + "-" + date;
         console.log("Current Date" + curDate);
         console.log("Selected Date" + year + "-" + month + "-" + date);
-        if (curDate == selDate) {
-          this.daySession = 'Todays  Event';
+        if (ev != '') {
+          if (curDate == selDate) {
+            this.daySession = 'Todays  Event';
+          } else {
+            this.daySession = selDate;
+          }
         } else {
-          this.daySession = selDate;
+          this.daySession = "";
         }
         //console.log("All Response:" +JSON.stringify(data.json()));
         //console.log("Calendar Response:" +JSON.stringify(data.json().services));
         console.log(data.json().services.length);
-        if (data.json().services.length > 0) {
-          this.calendarResult = data.json().services;
-          this.totalCount = data.json().services.length;
+        console.log("Your selection pet:" + this.petselection);
+        if (this.petselection == 'ALL') {
+          if (data.json().allservices.length > 0) {
+            this.calendarResultService = data.json().allservices;
+            this.totalCount = data.json().allservices.length;
+          }
+          if (data.json().allevents.length > 0) {
+            this.calendarResultEvent = data.json().allevents;
+            this.totalCount = data.json().allevents.length;
+          }
+          if (data.json().allalarms.length > 0) {
+            this.calendarResultAlarm = data.json().allalarms;
+            this.totalCount = data.json().allalarms.length;
+          }
+        } else if (this.petselection == 'SERVICE') {
+          if (data.json().allservices.length > 0) {
+            this.calendarResultService = data.json().allservices;
+            this.totalCount = data.json().allservices.length;
+          } else {
+            this.calendarResultService = [];
+            this.totalCount = 0;
+          }
+        } else if (this.petselection == 'EVENT') {
+          if (data.json().allevents.length > 0) {
+            this.calendarResultEvent = data.json().allevents;
+            this.totalCount = data.json().allevents.length;
+          } else {
+            this.calendarResultEvent = [];
+            this.totalCount = 0;
+          }
+        } else if (this.petselection == 'ALARM') {
+          if (data.json().allalarms.length > 0) {
+            this.calendarResultAlarm = data.json().allalarms;
+            this.totalCount = data.json().allalarms.length;
+          } else {
+            this.calendarResultAlarm = [];
+            this.totalCount = 0;
+          }
         } else {
-          this.calendarResult = [];
-          this.totalCount = 0;
+          //this.onSegmentChanged('EVENT');
+          if (ev != '') {
+            if (data.json().events.length > 0) {
+              this.calendarResultEvent = data.json().events;
+              this.totalCountEvent = data.json().events.length;
+            } else {
+              this.calendarResultEvent = [];
+              this.totalCountEvent = 0;
+              this.noeventtitle = 'There is No Event';
+            }
+          } else {
+            if (data.json().allevents.length > 0) {
+              this.calendarResultEvent = data.json().allevents;
+              this.totalCountEvent = data.json().allevents.length;
+            } else {
+              this.calendarResultEvent = [];
+              this.totalCountEvent = 0;
+              this.noeventtitle = 'There is No Event';
+            }
+          }
         }
+
+
       });
   }
   onCurrentDateChanged(event: Date) {
@@ -316,6 +406,50 @@ export class CalendarPage {
 
   doAdd() {
     this.navCtrl.setRoot(AddcalendarPage);
+  }
+
+
+  /**********************************/
+  /* Dropdown Filter onchange event */
+  /**********************************/
+  onSegmentChanged(val) {
+    this.noeventtitle = '';
+    this.calendarResultEvent = [];
+    this.calendarResultAll = [];
+    this.calendarResultService = [];
+    this.calendarResultAlarm = [];
+    if (val == "ALL") {
+      // this.reportData.status = "DRAFT";
+      // this.reportData.startindex = 0;
+      this.calendarResultAll = [];
+      this.petselection = 'ALL';
+      this.allselected = true;
+
+    } else if (val == "SERVICE") {
+      this.serviceselected = true;
+
+      //this.reportData.status = val;
+      //this.reportData.startindex = 0;
+      this.calendarResultService = [];
+      this.petselection = 'SERVICE';
+    } else if (val == "EVENT") {
+
+      this.eventsselected = true;
+      //this.reportData.status = val;
+      //this.reportData.startindex = 0;
+      this.calendarResultEvent = [];
+      this.petselection = 'EVENT';
+    } else if (val == "ALARM") {
+      this.alarmselected = true;
+      //this.reportData.status = val;
+      //this.reportData.startindex = 0;
+      this.calendarResultAlarm = [];
+      this.petselection = 'ALARM';
+    }
+
+    //this.doReport();
+
+    this.onTimeSelected('');
   }
 }
 
