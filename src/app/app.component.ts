@@ -32,7 +32,12 @@ import { MessagesPage } from '../pages/messages/messages';
 import { CalendarPage } from '../pages/calendar/calendar';
 import { MapsPage } from '../pages/maps/maps';
 import { ReportsPage } from '../pages/reports/reports';
+<<<<<<< HEAD
 import { ServicedetailsPage } from '../pages/servicedetails/servicedetails';
+=======
+import { NotificationPage } from '../pages/notification/notification';
+
+>>>>>>> 6697fdac01cac675d982d556533fedac36345152
 //import { MapdemoPage } from '../pages/mapdemo/mapdemo';
 
 @Component({
