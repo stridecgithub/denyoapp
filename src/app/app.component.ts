@@ -34,6 +34,7 @@ import { MapsPage } from '../pages/maps/maps';
 import { ReportsPage } from '../pages/reports/reports';
 
 import { ServicedetailsPage } from '../pages/servicedetails/servicedetails';
+import { CommentdetailsPage } from '../pages/commentdetails/commentdetails';
 
 import { NotificationPage } from '../pages/notification/notification';
 
@@ -80,6 +81,7 @@ export class MyApp {
       { title: 'Alarm', component: AddalarmPage },
       { title: 'Alarm Log', component: AlarmlogPage },
       { title: 'Service Details', component: ServicedetailsPage },
+       { title: 'Comment Details', component: CommentdetailsPage },
      // { title: 'Map Demo', component: MapdemoPage },
 
       { title: 'Logout', component: LogoutPage }
