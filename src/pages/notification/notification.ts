@@ -167,8 +167,7 @@ export class NotificationPage {
     localStorage.setItem("microtime", "");
     this.nav.setRoot(AddserviceinfoPage, {
       record: this.NP.get("record"),
-      act: 'Add',
-      unit_id: this.unit_id
+      act: 'Add'
     });
   }
 
@@ -177,8 +176,7 @@ export class NotificationPage {
     localStorage.setItem("microtime", "");
     this.nav.setRoot(AddrequestsupportPage, {
       record: this.NP.get("record"),
-      act: 'Add',
-      unit_id: this.unit_id
+      act: 'Add'
     });
   }
 
