@@ -192,5 +192,5 @@ if (this.service_resources != undefined && this.service_resources != 'undefined'
     this.nav.setRoot(ServicinginfoPage, {
       record: this.NP.get("record")
     });
-  }
+    }
 }
