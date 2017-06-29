@@ -29,6 +29,7 @@ export class CalendarPage {
   viewHtml: any;
   dateHeaderTitle: any;
   petselection: any;
+  pet: string = "ALL";
   calendarResultAll: any;
   calendarResultService: any;
   calendarResultEvent: any;
@@ -174,7 +175,7 @@ export class CalendarPage {
     this.calendarResultEvent = [];
     this.calendarResultAlarm = [];
 
-    this.petselection = '';
+    //this.petselection = '';
     let dateStr;
     let month;
     let year;
@@ -390,7 +391,7 @@ export class CalendarPage {
     }
   }
 
-  notification(){
+  notification() {
     this.navCtrl.setRoot(NotificationPage);
   }
   previous() {
@@ -432,6 +433,7 @@ export class CalendarPage {
       this.calendarResultAll = [];
       this.petselection = 'ALL';
       this.allselected = true;
+       this.pet ='ALL';
 
     } else if (val == "SERVICE") {
       this.serviceselected = true;
@@ -440,6 +442,7 @@ export class CalendarPage {
       //this.reportData.startindex = 0;
       this.calendarResultService = [];
       this.petselection = 'SERVICE';
+       this.pet = 'SERVICE';
     } else if (val == "EVENT") {
 
       this.eventsselected = true;
@@ -447,12 +450,14 @@ export class CalendarPage {
       //this.reportData.startindex = 0;
       this.calendarResultEvent = [];
       this.petselection = 'EVENT';
+       this.pet = 'EVENT';
     } else if (val == "ALARM") {
       this.alarmselected = true;
       //this.reportData.status = val;
       //this.reportData.startindex = 0;
       this.calendarResultAlarm = [];
       this.petselection = 'ALARM';
+       this.pet ='ALARM';
     }
 
     //this.doReport();
