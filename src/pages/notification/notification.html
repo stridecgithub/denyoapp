@@ -18,7 +18,7 @@
         </button>
     </ion-buttons-->
     <ion-buttons end>
-      <button ion-button>
+      <button ion-button  (click)="notification()">
   <ion-icon ios="ios-notifications-outline" md="md-notifications-outline"></ion-icon>
 </button>
     </ion-buttons>
@@ -34,19 +34,6 @@
       Login As:{{loginas}}
     </ion-buttons>
   </ion-navbar>
-  <button class="add-new-btn" ion-button small (click)="doAdd()">
-  	<div class="algn-cent">
-    	<ion-icon name="ios-add-circle-outline"></ion-icon>
-        <span>Servicing Action</span>
-    </div>
- </button>
-  <button class="add-new-btn"  ion-button small (click)="doRequest()">
-  	<div class="algn-cent">
-    	<ion-icon name="paper-plane"></ion-icon>
-        <span>Request Support</span>
-    </div>
-  </button>
-
 </ion-header>
 
 

@@ -42,7 +42,7 @@
 
 <ion-content padding>
   <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="pet" (ionChange)="onSegmentChanged(pet)">
-    <ion-option value="ALL">All</ion-option>
+    <ion-option value="ALL" selected=true>All</ion-option>
     <ion-option value="SERVICE">Service</ion-option>
     <ion-option value="ALARM">Alarm</ion-option>
     <ion-option value="EVENT">Event</ion-option>

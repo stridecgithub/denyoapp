@@ -170,6 +170,7 @@ export class CalendarPage {
   }
   onTimeSelected(ev) {
 
+
     this.calendarResultAll = [];
     this.calendarResultService = [];
     this.calendarResultEvent = [];
@@ -180,7 +181,13 @@ export class CalendarPage {
     let month;
     let year;
     let date;
+    console.log(ev);
     if (ev != '') {
+      this.pet = '';
+      this.calendarResultAll = [];
+      this.calendarResultService = [];
+      this.calendarResultEvent = [];
+      this.calendarResultAlarm = [];
       console.log("2" + ev.selectedTime);
       console.log("3" + JSON.stringify(ev));
 
@@ -433,7 +440,7 @@ export class CalendarPage {
       this.calendarResultAll = [];
       this.petselection = 'ALL';
       this.allselected = true;
-       this.pet ='ALL';
+      this.pet = 'ALL';
 
     } else if (val == "SERVICE") {
       this.serviceselected = true;
@@ -442,7 +449,7 @@ export class CalendarPage {
       //this.reportData.startindex = 0;
       this.calendarResultService = [];
       this.petselection = 'SERVICE';
-       this.pet = 'SERVICE';
+      this.pet = 'SERVICE';
     } else if (val == "EVENT") {
 
       this.eventsselected = true;
@@ -450,14 +457,14 @@ export class CalendarPage {
       //this.reportData.startindex = 0;
       this.calendarResultEvent = [];
       this.petselection = 'EVENT';
-       this.pet = 'EVENT';
+      this.pet = 'EVENT';
     } else if (val == "ALARM") {
       this.alarmselected = true;
       //this.reportData.status = val;
       //this.reportData.startindex = 0;
       this.calendarResultAlarm = [];
       this.petselection = 'ALARM';
-       this.pet ='ALARM';
+      this.pet = 'ALARM';
     }
 
     //this.doReport();

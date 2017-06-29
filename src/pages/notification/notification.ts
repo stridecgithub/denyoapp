@@ -43,7 +43,7 @@ export class NotificationPage {
   public totalCount;
   constructor(public http: Http,
     public toastCtrl: ToastController, public alertCtrl: AlertController, public NP: NavParams, public navParams: NavParams, public nav: NavController, public loadingCtrl: LoadingController) {
-    this.pageTitle = 'Servicing Info';
+    this.pageTitle = 'Notifications';
     this.loginas = localStorage.getItem("userInfoName");
     this.userId = localStorage.getItem("userInfoId");
   }
@@ -109,9 +109,9 @@ export class NotificationPage {
     let editItem = this.NP.get("record");
 
     if (this.NP.get("record").unit_id != undefined && this.NP.get("record").unit_id != 'undefined') {
-      this.unit_id = editItem.unit_id;
+      this.unit_id = '1';
     } else {
-      this.unit_id = editItem.service_unitid;
+      this.unit_id = '1';
     }
 
     //http://denyoappv2.stridecdev.com/companygroup?is_mobile=1
@@ -185,7 +185,7 @@ export class NotificationPage {
     });
   }
 
-  
+
 
   doEdit(item, act) {
     localStorage.setItem("microtime", "");
