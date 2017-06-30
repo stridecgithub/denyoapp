@@ -168,4 +168,9 @@ export class CommentdetailsPage {
       }
     }
   }
+    previous() {
+    this.nav.setRoot(CommentsinfoPage, {
+      record: this.NP.get("record")
+    });
+  }
 }

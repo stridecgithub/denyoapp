@@ -416,11 +416,11 @@ export class AddcommentsinfoPage {
   }
   selectEntry(item) {
 
-    this.comments = item.comments;
-    this.service_subject = item.service_subject;
+    this.comments = item.comment_remark;
+    this.service_subject = item.comment_subject;
 
     //this.next_service_date = item.next_service_date;
-    this.service_priority = item.service_priority;
+    this.service_priority = item.comment_priority;
     console.log("X" + this.service_priority);
     if (this.service_priority == "1") {
       this.service_priority_class1 = '';
@@ -430,9 +430,9 @@ export class AddcommentsinfoPage {
       console.log("Z");
     }
 
-    this.service_resources = item.service_resources;
+    this.service_resources = item.comment_resources;
     this.unitDetailData.nextServiceDate = item.next_service_date;
-    this.service_resources = item.service_resources;
+    this.service_resources = item.comment_resources;
 
     if (this.service_resources != undefined && this.service_resources != 'undefined' && this.service_resources != '') {
       let hashhypenhash = this.service_resources.split("#-#");
