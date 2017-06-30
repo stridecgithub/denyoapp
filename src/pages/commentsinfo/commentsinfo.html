@@ -64,10 +64,10 @@
   </ion-refresher>
   <ion-list *ngIf="totalCount!=0">
     <ion-item-sliding *ngFor="let item of reportAllLists;">
-      <ion-item>
-        <h2><b>{{item.service_subject}}</b></h2>
-        <h2><b>Serviced By:</b>{{item.serviced_by}}</h2>
-        <h2><b>Next Servicing:</b>{{item.next_service_date}}</h2>
+      <ion-item (click)="details(item,'edit')">
+        <h2><b>{{item.comment_subject}}</b></h2>
+        <h2><b>Comment By:</b>{{item.comment_by_name}}</h2>
+        <h2><b>Remark:</b>{{item.comment_remark}}</h2>
       </ion-item>
       <ion-item-options>
         <!--button class="viewcolor" (click)="doEdit(item,'view')">

@@ -25,6 +25,7 @@ export class MapsPage {
   //map: any;
   public loginas: any;
   public userid: any;
+  public companyid:any;
   public pageTitle: string;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   public totalCount;
@@ -48,6 +49,7 @@ export class MapsPage {
     this.pageTitle = 'Maps';
     this.loginas = localStorage.getItem("userInfoName");
     this.userid = localStorage.getItem("userInfoId");
+    this.companyid = localStorage.getItem("userInfoCompanyId");
   }
 
 
@@ -96,7 +98,7 @@ export class MapsPage {
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/dashboard?is_mobile=1&startindex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc + "&loginid=" + this.userid;
+      url: any = this.apiServiceURL + "/dashboard?is_mobile=1&startindex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc + "&loginid=" + this.userid+"&company_id="+this.companyid;
     let res;
     console.log(url);
     this.http.get(url, options)
@@ -302,29 +304,29 @@ export class MapsPage {
   /********************/
   /* Sorting function */
   /********************/
-  // doSort(val) {
-  //   console.log('1');
-  //   this.reportAllLists = [];
-  //   this.reportData.startindex = 0;
-  //   console.log('2');
-  //   this.sortby = 1;
-  //   if (this.vendorsort == "asc") {
-  //     this.reportData.sortascdesc = "desc";
-  //     this.vendorsort = "desc";
-  //     this.ascending = false;
-  //     console.log('3');
-  //   }
-  //   else {
-  //     console.log('4');
-  //     this.reportData.sortascdesc = "asc";
-  //     this.vendorsort = "asc";
-  //     this.ascending = true;
-  //   }
-  //   console.log('5');
-  //   this.reportData.sort = val;
-  //   this.doUser();
-  //   console.log('6');
-  // }
+  doSort(val) {
+    console.log('1');
+    this.reportAllLists = [];
+    this.reportData.startindex = 0;
+    console.log('2');
+    this.sortby = 1;
+    if (this.vendorsort == "asc") {
+      this.reportData.sortascdesc = "desc";
+      this.vendorsort = "desc";
+      this.ascending = false;
+      console.log('3');
+    }
+    else {
+      console.log('4');
+      this.reportData.sortascdesc = "asc";
+      this.vendorsort = "asc";
+      this.ascending = true;
+    }
+    console.log('5');
+    this.reportData.sort = val;
+    this.doUser();
+    console.log('6');
+  }
   presentLoading(parm) {
     let loader;
     loader = this.loadingCtrl.create({
