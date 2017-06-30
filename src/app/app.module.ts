@@ -174,6 +174,7 @@ import { NgCalendarModule } from 'ionic2-calendar';
     MapsPage,
 
     ServicedetailsPage,
+    CommentdetailsPage,
     NotificationPage,
     
     AlarmdetailsPage

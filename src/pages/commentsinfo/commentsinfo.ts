@@ -8,6 +8,7 @@ import { AddcommentsinfoPage } from '../addcommentsinfo/addcommentsinfo';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
 import { UnitsPage } from '../units/units';
 import { UnitdetailsPage } from '../unitdetails/unitdetails';
+import { CommentdetailsPage } from '../commentdetails/commentdetails';
 import { RolePage } from '../role/role';
 import 'rxjs/add/operator/map';
 import { Http, Headers, RequestOptions } from '@angular/http';
@@ -209,6 +210,13 @@ export class CommentsinfoPage {
   doEdit(item, act) {
     localStorage.setItem("microtime", "");
     this.nav.setRoot(AddcommentsinfoPage, {
+      record: item,
+      act: 'Edit'
+    });
+  }
+   details(item, act) {
+    localStorage.setItem("microtime", "");
+    this.nav.setRoot(CommentdetailsPage, {
       record: item,
       act: 'Edit'
     });

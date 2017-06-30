@@ -11,7 +11,6 @@ import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
 import { UnitsPage } from '../units/units';
 import { RolePage } from '../role/role';
-import { DatePicker } from '@ionic-native/date-picker';
 import * as $ from 'jquery'
 import "slick-carousel";
 import 'rxjs/add/operator/map';
@@ -27,6 +26,8 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 @Component({
   selector: 'page-commentdetails',
   templateUrl: 'commentdetails.html',
+     providers: [Camera, FileChooser, Transfer, File]
+
 })
 export class CommentdetailsPage {
   isReadyToSave: boolean;
@@ -38,6 +39,8 @@ export class CommentdetailsPage {
   public comment_unitid: any;
   public comment_id: any;
   public comments: any;
+  public comment_by_name:any;
+  public comment_remark:any;
   public comment_subject: any;
   public comment_priority: any;
   public comment_resources: any;
@@ -63,7 +66,7 @@ export class CommentdetailsPage {
     addedImgLists2: ''
   }
   public hideActionButton = true;
-  constructor(public http: Http, public alertCtrl: AlertController, private datePicker: DatePicker, public NP: NavParams, public nav: NavController, public toastCtrl: ToastController, public navParams: NavParams, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera, private filechooser: FileChooser,
+  constructor(public http: Http, public alertCtrl: AlertController, public NP: NavParams, public nav: NavController, public toastCtrl: ToastController, public navParams: NavParams, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera, private filechooser: FileChooser,
     private transfer: Transfer,
     private file: File, private ngZone: NgZone) {
     this.service_priority_class1 = "-outline";
@@ -101,6 +104,7 @@ export class CommentdetailsPage {
  ionViewWillEnter() {
    this.getPrority(1);
     let users = localStorage.getItem("atMentionedStorage");
+    console.log("comment:"+JSON.stringify(this.NP.get("record")));
     if (this.NP.get("record")) {
       this.selectEntry(this.NP.get("record"));
       this.comment_id = this.NP.get("record").comment_id;
@@ -129,8 +133,9 @@ export class CommentdetailsPage {
     this.comments = item.comments;
     this.comment_subject = item.comment_subject;
 
-    //this.next_service_date = item.next_service_date;
+    this.comment_by_name = item.comment_by_name;
     this.comment_priority = item.comment_priority;
+    this.comment_remark = item.comment_remark;
     console.log("X" + this.comment_priority);
     if (this.comment_priority == "1") {
       this.service_priority_class1 = '';
