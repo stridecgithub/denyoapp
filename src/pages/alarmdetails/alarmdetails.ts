@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, ToastController, AlertController, NavParams } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 import { Http, Headers, RequestOptions } from '@angular/http';
+import { AddalarmPage } from '../addalarm/addalarm'; 
 
 /**
  * Generated class for the AlarmdetailsPage page.
@@ -69,5 +70,9 @@ export class AlarmdetailsPage {
     this.alarm_name = item.alarm_name;
     this.alarm_assginedby_name=item.alarm_assginedby_name;
     this.alarm_assginedto_name=item.alarm_assginedto_name;
+  }
+  editalarm()
+  {
+     this.nav.setRoot(AddalarmPage);
   }
 }
