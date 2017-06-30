@@ -41,10 +41,12 @@ export class UnitgroupPage {
   public reportAllLists = [];
   public colorListArr: any;
   public userId: any;
+  public companyId;
   constructor(public http: Http, public nav: NavController,
     public toastCtrl: ToastController, public alertCtrl: AlertController, public navParams: NavParams, public loadingCtrl: LoadingController) {
     this.loginas = localStorage.getItem("userInfoName");
     this.userId = localStorage.getItem("userInfoId");
+    this.companyId = localStorage.getItem("userInfoCompanyId");
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad UnitgroupPage');
@@ -94,7 +96,7 @@ export class UnitgroupPage {
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/unitgroup?is_mobile=1&startindex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc;
+      url: any = this.apiServiceURL + "/unitgroup?is_mobile=1&startindex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc + "&company_id=" + this.companyId;
     let res;
     console.log(url);
     this.http.get(url, options)
@@ -262,7 +264,7 @@ export class UnitgroupPage {
     this.reportAllLists = [];
     let body: string = "unitgroupid=" + unit_id +
       "&staffs_id=" + this.userId +
-      "&is_mobile=1",
+      "&is_mobile=1"+"&company_id="+this.companyId,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
@@ -329,7 +331,7 @@ export class UnitgroupPage {
         else {
           this.sendNotification('Something went wrong!');
         }
-      });      
+      });
     //this.dounitGroup();
   }
 
@@ -355,5 +357,5 @@ export class UnitgroupPage {
 
   redirectToRole() {
     this.nav.setRoot(RolePage);
-  } 
+  }
 }

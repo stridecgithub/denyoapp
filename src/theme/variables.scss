@@ -176,3 +176,11 @@ font-size:32px
 .select-popover ion-list {
   @include margin($select-popover-list-margin-top, $select-popover-list-margin-end, $select-popover-list-margin-bottom, $select-popover-list-margin-start);
 }
+
+body{
+    background-color:transparent;
+    background-image: url(../../img/body.png);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;   
+}
