@@ -75,7 +75,7 @@ export class CommentsinfoPage {
         //console.log("Response Success:" + JSON.stringify(data.json()));
         // If the request was successful notify the user
         if (data.status === 200) {
-          this.sendNotification(`Comment count successfully removed`);
+          //this.sendNotification(`Comment count successfully removed`);
           
         }
         // Otherwise let 'em know anyway

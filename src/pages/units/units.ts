@@ -5,7 +5,7 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { AddunitsonePage } from '../addunitsone/addunitsone';
 import { ViewcompanygroupPage } from '../viewcompanygroup/viewcompanygroup';
 import { LoadingController } from 'ionic-angular';
-import { TabsPage } from '../tabs/tabs';
+import { HomePage } from '../home/home';
 import { UserPage } from '../user/user';
 import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
@@ -321,7 +321,7 @@ export class UnitsPage {
   }
 
   previous() {
-    this.nav.setRoot(TabsPage);
+    this.nav.setRoot(HomePage);
   }
   favorite(unit_id) {
     this.reportData.startindex = 0;

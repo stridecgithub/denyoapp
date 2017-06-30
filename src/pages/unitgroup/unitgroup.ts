@@ -4,7 +4,7 @@ import 'rxjs/add/operator/map';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { AddunitgroupPage } from '../addunitgroup/addunitgroup';
 import { LoadingController } from 'ionic-angular';
-import { TabsPage } from '../tabs/tabs';
+import { HomePage } from '../home/home';
 import { UserPage } from '../user/user';
 import { CompanygroupPage } from '../companygroup/companygroup';
 import { MyaccountPage } from '../myaccount/myaccount';
@@ -188,7 +188,7 @@ export class UnitgroupPage {
     this.nav.setRoot(AddunitgroupPage);
   }
   previous() {
-    this.nav.setRoot(TabsPage);
+    this.nav.setRoot(HomePage);
   }
   doEdit(item, act) {
     if (act == 'edit') {
