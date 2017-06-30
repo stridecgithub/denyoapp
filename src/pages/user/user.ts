@@ -5,7 +5,7 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { AdduserPage } from '../adduser/adduser';
 import { ViewcompanygroupPage } from '../viewcompanygroup/viewcompanygroup';
 import { LoadingController } from 'ionic-angular';
-import { TabsPage } from '../tabs/tabs';
+import { HomePage } from '../home/home';
 import { CompanygroupPage } from '../companygroup/companygroup';
 import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
@@ -261,7 +261,7 @@ export class UserPage {
   }
 
   previous() {
-    this.nav.setRoot(TabsPage);
+    this.nav.setRoot(HomePage);
   }
   redirectToCompanyGroup() {
     this.nav.setRoot(CompanygroupPage);

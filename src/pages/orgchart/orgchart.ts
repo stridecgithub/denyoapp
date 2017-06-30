@@ -4,7 +4,7 @@ import 'rxjs/add/operator/map';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { AddorgchartonePage } from '../addorgchartone/addorgchartone';
 import { LoadingController } from 'ionic-angular';
-import { TabsPage } from '../tabs/tabs';
+import { HomePage } from '../home/home';
 import { HTTP } from '@ionic-native/http';
 import { DomSanitizer } from '@angular/platform-browser';
 //import * as $ from 'jquery';
@@ -211,7 +211,7 @@ export class OrgchartPage {
     this.nav.setRoot(AddorgchartonePage);
   }
   previous() {
-    this.nav.setRoot(TabsPage);
+    this.nav.setRoot(HomePage);
   }
   doEdit(item, act) {
     if (act == 'edit') {

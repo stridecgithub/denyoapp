@@ -18,7 +18,7 @@
         </button>
     </ion-buttons-->
     <ion-buttons end>
-      <button ion-button  (click)="notification()">
+      <button ion-button (click)="notification()">
   <ion-icon ios="ios-notifications-outline" md="md-notifications-outline"></ion-icon>
 </button>
     </ion-buttons>
@@ -59,21 +59,21 @@
     <button ion-button icon-left (click)="servicingInfo()">
   <ion-icon name="information-circle"></ion-icon>
   Servicing Info
-  <ion-badge item-end class="notify-badge">1</ion-badge>
+  <ion-badge item-end class="notify-badge">{{serviceCount}}</ion-badge>
 </button>
 
   </ion-item>
 
 
   <ion-item>
-    <button ion-button icon-left  (click)="alarm()">
+    <button ion-button icon-left (click)="alarm()">
   <ion-icon name="alarm"></ion-icon>
  Alarm Log
 </button>
     <button ion-button icon-left (click)="commentsInfo()">
   <ion-icon name="chatboxes"></ion-icon>
  Events / Comments
- <ion-badge item-end class="notify-badge">1</ion-badge>
+ <ion-badge item-end class="notify-badge">{{commentCount}}</ion-badge>
 </button>
   </ion-item>
   <!--div [innerHTML]="iframeContent"></div-->

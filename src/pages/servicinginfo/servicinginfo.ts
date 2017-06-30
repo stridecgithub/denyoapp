@@ -78,7 +78,7 @@ export class ServicinginfoPage {
         //console.log("Response Success:" + JSON.stringify(data.json()));
         // If the request was successful notify the user
         if (data.status === 200) {
-          this.sendNotification(`Service count successfully removed`);
+          // this.sendNotification(`Service count successfully removed`);
 
         }
         // Otherwise let 'em know anyway

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { EditprofilesteponePage } from '../editprofilestepone/editprofilestepone';
-import { TabsPage } from '../tabs/tabs';
+import { HomePage } from '../home/home';
 import { UserPage } from '../user/user';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
 import { UnitsPage } from '../units/units';
@@ -94,7 +94,7 @@ export class MyaccountPage {
     this.nav.setRoot(NotificationPage);
   }
   previous() {
-    this.nav.setRoot(TabsPage);
+    this.nav.setRoot(HomePage);
   }
 
   redirectToUser() {
