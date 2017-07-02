@@ -22,7 +22,6 @@ import { RolePage } from '../pages/role/role';
 import { AddrolePage } from '../pages/addrole/addrole';
 import { AddunitgroupPage } from '../pages/addunitgroup/addunitgroup';
 import { UnitgroupPage } from '../pages/unitgroup/unitgroup';
-
 import { AtmentionedPage } from '../pages/atmentioned/atmentioned';
 import { UnitsPage } from '../pages/units/units';
 import { AddunitsonePage } from '../pages/addunitsone/addunitsone';
@@ -48,14 +47,10 @@ import { AlarmPage } from '../pages/alarm/alarm';
 import { AlarmlogPage } from '../pages/alarmlog/alarmlog';
 import { AddalarmPage } from '../pages/addalarm/addalarm';
 import { MapsPage } from '../pages/maps/maps';
-
 import { ServicedetailsPage } from '../pages/servicedetails/servicedetails';
 import { CommentdetailsPage } from '../pages/commentdetails/commentdetails';
 import { AlarmdetailsPage } from '../pages/alarmdetails/alarmdetails';
-
 import { NotificationPage } from '../pages/notification/notification';
-
-//import { MapdemoPage } from '../pages/mapdemo/mapdemo';
 import { NgCalendarModule } from 'ionic2-calendar';
 import { HttpModule } from '@angular/http';
 @NgModule({
@@ -64,7 +59,6 @@ import { HttpModule } from '@angular/http';
     HomePage,
     LoginPage,
     TabsPage,
-
     CompanygroupPage,
     AddcompanygroupPage,
     ViewcompanygroupPage,
@@ -108,8 +102,6 @@ import { HttpModule } from '@angular/http';
     NotificationPage,
     CommentdetailsPage,
     AlarmdetailsPage
-
-    //MapdemoPage
   ],
   imports: [
     NgCalendarModule,
@@ -122,7 +114,7 @@ import { HttpModule } from '@angular/http';
       modalLeave: 'modal-slide-out',
       tabsPlacement: 'bottom',
       pageTransition: 'ios-transition',
-      tabSubPages: false//tabsHideOnSubPagestabsHideOnSubPages
+      tabSubPages: false
     })
   ],
   bootstrap: [IonicApp],
@@ -131,7 +123,6 @@ import { HttpModule } from '@angular/http';
     HomePage,
     LoginPage,
     TabsPage,
-
     CompanygroupPage,
     AddcompanygroupPage,
     ViewcompanygroupPage,
@@ -172,15 +163,10 @@ import { HttpModule } from '@angular/http';
     AddcalendarPage,
     AlarmlogPage,
     MapsPage,
-
     ServicedetailsPage,
     CommentdetailsPage,
     NotificationPage,
-
     AlarmdetailsPage
-
-
-    //MapdemoPage
   ],
   providers: [
     StatusBar,
