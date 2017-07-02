@@ -93,10 +93,10 @@ export class MyApp {
     this.statusBar.styleDefault();
     this._platform.ready().then(() => {
       // do whatever you need to do here.
-      /* setTimeout(() => {
+     setTimeout(() => {
          this._SplashScreen.hide();
-       }, 100);*/
-      this._SplashScreen.hide();
+       }, 100);
+      //this._SplashScreen.hide();
     });
   }
 

@@ -83,7 +83,8 @@
    <span><input type="checkbox" name="cmail" value="1"/>&nbsp; Copy Mail</span><span><img src="assets/icon/m1.png" onclick="e('message_priority').value=1" hspace="10"/><img onclick="e('message_priority').value=2" src="assets/icon/m2.png" hspace="10"/><ion-icon (click)="fileChooser()" *ngIf="isUploaded" name="attach" style="color: black;
     position: relative;
     top: 5px;
-    left: 10px;"></ion-icon></span>
+    left: 10px;
+    font-size:20px"></ion-icon></span>
 
     <progress value="{{progress}}" max="100" *ngIf="isProgress"> </progress>
     <span *ngIf="isProgress" style="padding:2px">{{progress}}%</span>

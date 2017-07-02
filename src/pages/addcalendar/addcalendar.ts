@@ -100,9 +100,6 @@ export class AddcalendarPage {
         id: '6.30AM',
         time_name: '6:30 AM'
       }, {
-        id: '6.30AM',
-        time_name: '6:30 AM'
-      }, {
         id: '6.45AM',
         time_name: '6:45 AM'
       }, {
