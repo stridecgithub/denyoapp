@@ -91,7 +91,7 @@
     <div *ngIf="addedImgLists.length>0">Attached List:</div>
     <ion-grid>
       <ion-row>
-        <ion-col col-3 *ngFor="let item of addedImgLists; let i = index" [attr.data-index]="i"><img src="{{addedImgLists[i].imgSrc}}" width="175" height="75" /></ion-col>
+        <ion-col col-3 *ngFor="let item of addedImgLists; let i = index" [attr.data-index]="i"><img src="{{addedImgLists[i].imgSrc}}"/></ion-col>
       </ion-row>
     </ion-grid>
 

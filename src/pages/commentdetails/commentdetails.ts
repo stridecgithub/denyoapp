@@ -1,9 +1,9 @@
-import { Component, ViewChild, NgZone } from '@angular/core';
+import { Component,  NgZone } from '@angular/core';
 import { IonicPage, AlertController, NavController, NavParams, ViewController, ToastController } from 'ionic-angular';
-import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { Camera, CameraOptions } from '@ionic-native/camera';
+import {  FormBuilder, FormGroup } from '@angular/forms';
+import { Camera} from '@ionic-native/camera';
 import { FileChooser } from '@ionic-native/file-chooser';
-import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
+
 import { File } from '@ionic-native/file';
 import { UserPage } from '../user/user';
 import { CommentsinfoPage } from '../commentsinfo/commentsinfo';
@@ -25,7 +25,7 @@ import 'rxjs/add/operator/map';
 @Component({
   selector: 'page-commentdetails',
   templateUrl: 'commentdetails.html',
-  providers: [Camera, FileChooser, Transfer, File]
+  providers: [Camera, FileChooser, File]
 
 })
 export class CommentdetailsPage {
@@ -66,7 +66,7 @@ export class CommentdetailsPage {
   }
   public hideActionButton = true;
   constructor(public alertCtrl: AlertController, public NP: NavParams, public nav: NavController, public toastCtrl: ToastController, public navParams: NavParams, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera, private filechooser: FileChooser,
-    private transfer: Transfer,
+   
     private file: File, private ngZone: NgZone) {
     this.service_priority_class1 = "-outline";
     this.service_priority_class2 = "-outline";
