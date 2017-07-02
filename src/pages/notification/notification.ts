@@ -105,7 +105,7 @@ export class NotificationPage {
     if (this.reportData.sort == '') {
       this.reportData.sort = "comapny";
     }
-    let editItem = this.NP.get("record");
+   // let editItem = this.NP.get("record");
 
    let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),

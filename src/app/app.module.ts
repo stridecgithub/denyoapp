@@ -51,6 +51,7 @@ import { ServicedetailsPage } from '../pages/servicedetails/servicedetails';
 import { CommentdetailsPage } from '../pages/commentdetails/commentdetails';
 import { AlarmdetailsPage } from '../pages/alarmdetails/alarmdetails';
 import { NotificationPage } from '../pages/notification/notification';
+import { ReportsPage } from '../pages/reports/reports';
 import { NgCalendarModule } from 'ionic2-calendar';
 import { HttpModule } from '@angular/http';
 @NgModule({
@@ -101,7 +102,8 @@ import { HttpModule } from '@angular/http';
     ServicedetailsPage,
     NotificationPage,
     CommentdetailsPage,
-    AlarmdetailsPage
+    AlarmdetailsPage,
+    ReportsPage
   ],
   imports: [
     NgCalendarModule,
@@ -166,7 +168,8 @@ import { HttpModule } from '@angular/http';
     ServicedetailsPage,
     CommentdetailsPage,
     NotificationPage,
-    AlarmdetailsPage
+    AlarmdetailsPage,
+    ReportsPage
   ],
   providers: [
     StatusBar,

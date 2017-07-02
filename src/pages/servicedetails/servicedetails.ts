@@ -3,7 +3,6 @@ import { IonicPage, AlertController, NavController, NavParams, ViewController, T
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { FileChooser } from '@ionic-native/file-chooser';
-import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
 import { UserPage } from '../user/user';
 import { ServicinginfoPage } from '../servicinginfo/servicinginfo';
@@ -11,11 +10,12 @@ import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
 import { UnitsPage } from '../units/units';
 import { RolePage } from '../role/role';
+import { CompanygroupPage } from '../companygroup/companygroup';
 import { DatePicker } from '@ionic-native/date-picker';
-import * as $ from 'jquery'
-import "slick-carousel";
+//import * as $ from 'jquery'
+//import "slick-carousel";
 import 'rxjs/add/operator/map';
-import { Http, Headers, RequestOptions } from '@angular/http';
+//import { Http, Headers, RequestOptions } from '@angular/http';
 
 /**
  * Generated class for the ServicedetailsPage page.
@@ -27,7 +27,7 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 @Component({
   selector: 'page-servicedetails',
   templateUrl: 'servicedetails.html',
-   providers: [Camera, FileChooser, Transfer, File, DatePicker]
+   providers: [Camera, FileChooser, File, DatePicker]
 })
 export class ServicedetailsPage {
  isReadyToSave: boolean;
@@ -72,8 +72,8 @@ export class ServicedetailsPage {
     addedImgLists2: ''
   }
   public hideActionButton = true;
-  constructor(public http: Http, public alertCtrl: AlertController, private datePicker: DatePicker, public NP: NavParams, public nav: NavController, public toastCtrl: ToastController, public navParams: NavParams, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera, private filechooser: FileChooser,
-    private transfer: Transfer,
+  constructor( public alertCtrl: AlertController, private datePicker: DatePicker, public NP: NavParams, public nav: NavController, public toastCtrl: ToastController, public navParams: NavParams, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera, private filechooser: FileChooser,
+  
     private file: File, private ngZone: NgZone) {
     this.service_priority_class1 = "-outline";
     this.service_priority_class2 = "-outline";
@@ -108,8 +108,7 @@ export class ServicedetailsPage {
     console.log('ionViewDidLoad ServicedetailsPage');
   }
  ionViewWillEnter() {
-    this.getPrority(1);
-    let users = localStorage.getItem("atMentionedStorage");
+    this.getPrority(1);    
     this.is_request = false;
     console.log(JSON.stringify(this.NP.get("record")));
     let editItem = this.NP.get("record");
@@ -192,5 +191,25 @@ if (this.service_resources != undefined && this.service_resources != 'undefined'
     this.nav.setRoot(ServicinginfoPage, {
       record: this.NP.get("record")
     });
-    }
+  }
+   redirectToUser() {
+    this.nav.setRoot(UserPage);
+  }
+
+  redirectToUnitGroup() {
+    this.nav.setRoot(UnitgroupPage);
+  }
+  redirectToCompanyGroup() {
+    this.nav.setRoot(CompanygroupPage);
+  }
+  redirectToUnits() {
+    this.nav.setRoot(UnitsPage);
+  }
+  redirectToMyAccount() {
+    this.nav.setRoot(MyaccountPage);
+  }
+
+  redirectToRole() {
+    this.nav.setRoot(RolePage);
+  }
 }
