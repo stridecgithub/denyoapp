@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController, AlertController } from 'ionic-angular';
+import { Component , NgZone} from '@angular/core';
+import { NavController, AlertController ,ToastController} from 'ionic-angular';
 import { IonicApp } from 'ionic-angular/index'
 //import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
@@ -14,10 +14,14 @@ import { UnitgroupPage } from '../unitgroup/unitgroup';
 import { UnitsPage } from '../units/units';
 import { RolePage } from '../role/role';
 import { HomePage } from '../home/home';
-
+import { Camera } from '@ionic-native/camera';
+import { FileChooser } from '@ionic-native/file-chooser';
+import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
+import { File } from '@ionic-native/file';
 @Component({
   selector: 'page-messages',
   templateUrl: 'messages.html',
+  providers: [Camera, FileChooser, Transfer, File]
 })
 export class MessagesPage {
   sendmsg = Sendmsg;
@@ -28,12 +32,24 @@ export class MessagesPage {
   public userId: any;
   public rootPage: any;
   public pageTitle: string;
+  progress: number;
+  public isProgress = false;
+  public addedImgLists = [];
+  public base64Image: any;
+  public addedAttachList;
+  public isUploaded: boolean = true;
+  public isUploadedProcessing: boolean = false;
   Catdata: any;
-  constructor(app: IonicApp, public navCtrl: NavController, private alertCtrl: AlertController, private http: Http) {
+   private baseURI: string = "";
+  constructor(app: IonicApp, public navCtrl: NavController, private alertCtrl: AlertController, private http: Http ,private camera: Camera,      
+        private filechooser: FileChooser,
+        private transfer: Transfer,
+        private file: File, private ngZone: NgZone, public toastCtrl: ToastController,) {
     this.rootPage = MessagesPage; this.app = app;
     this.loginas = localStorage.getItem("userInfoName");
     this.userId = localStorage.getItem("userInfoId");
     this.pageTitle = "Messages";
+    
   }
 
   ionViewDidEnter() {
@@ -107,4 +123,126 @@ export class MessagesPage {
   previous() {
     this.navCtrl.setRoot(HomePage);
   }
+
+   fileChooser() {
+        this.isUploadedProcessing = true;
+        this.filechooser.open()
+            .then(
+            uri => {
+                console.log(uri);
+                this.fileTrans(uri);
+                this.addedAttachList = uri;
+            }
+
+            )
+            .catch(e => console.log(e));
+
+
+        return false;
+
+
+    }
+
+    fileTrans(path) {
+        /* let loading = this.loadingCtrl.create({
+             content: 'Uploading processing Please wait...'
+         });
+         loading.present();*/
+        let fileName = path.substr(path.lastIndexOf('/') + 1);
+        const fileTransfer: TransferObject = this.transfer.create();
+        let currentName = path.replace(/^.*[\\\/]/, '');
+        console.log("File Name is:" + currentName);
+
+
+        /*var d = new Date(),
+            n = d.getTime(),
+            newFileName = n + ".jpg";*/
+
+        let options: FileUploadOptions = {
+            fileKey: 'file',
+            fileName: fileName,
+            headers: {},
+            chunkedMode: false,
+            mimeType: "text/plain",
+        }
+
+        //  http://127.0.0.1/ionic/upload_attach.php
+        //http://amahr.stridecdev.com/getgpsvalue.php?key=create&lat=34&long=45
+        fileTransfer.onProgress(this.onProgress);
+        fileTransfer.upload(path, this.baseURI + 'http://denyoappv2.stridecdev.com/api/upload_attach.php', options)
+            .then((data) => {
+
+                console.log("UPLOAD SUCCESS:" + data.response);
+                let successData = JSON.parse(data.response);
+                this.sendNotification("UPLOAD SUCCESS:");
+                console.log('http:' + '//' + successData.baseURL + '/' + successData.target_dir + '/' + successData.fileName);
+
+                //<img src="{{addedImgLists[i].imgSrc}}" width="75%" height="75%" />
+                let imgSrc;
+                if (successData.ext == 'jpg') {
+                    //imgSrc = 'http://denyoappv2.stridecdev.com/api/uploads/' + successData.fileName;
+                    imgSrc = '<ion-icon name="image"></ion-icon>';
+                    this.addedImgLists.push({
+                        imgSrc: imgSrc
+                    });
+                } else {
+                    if (successData.ext == 'pdf') {
+                        //imgSrc = 'img/pdf.png';
+                         imgSrc = '<ion-icon name="document"></ion-icon>';
+                    }
+                    if (successData.ext == 'doc' || successData.ext == 'docx') {
+                       // imgSrc = 'img/doc.png';
+                       imgSrc = '<ion-icon name="document"></ion-icon>';
+                    }
+                    if (successData.ext == 'xls' || successData.ext == 'xlsx') {
+                        //imgSrc = 'img/xls.png';
+                         imgSrc = '<ion-icon name="document"></ion-icon>';
+                    }
+                    if (successData.ext == 'ppt' || successData.ext == 'pptx') {
+                       // imgSrc = 'img/ppt.png';
+                        imgSrc = '<ion-icon name="document"></ion-icon>';
+                    }                    
+                    this.addedImgLists.push({
+                        imgSrc: imgSrc
+                    });
+                }
+                //loading.dismiss();
+                if (this.addedImgLists.length > 9) {
+                    this.isUploaded = false;
+                }
+                this.progress += 5;
+                this.isProgress = false;
+                this.isUploadedProcessing = false;
+                return false;
+
+
+
+                // Save in Backend and MysQL
+                //this.uploadToServer(data.response);
+                // Save in Backend and MysQL
+            }, (err) => {
+                //loading.dismiss();
+                console.log("Upload Error:" + JSON.stringify(err));
+                this.sendNotification("Upload Error:" + JSON.stringify(err));
+            })
+    }
+
+      onProgress = (progressEvent: ProgressEvent): void => {
+        this.ngZone.run(() => {
+            if (progressEvent.lengthComputable) {
+                let progress = Math.round((progressEvent.loaded / progressEvent.total) * 95);
+                this.isProgress = true;
+                this.progress = progress;
+            }
+        });
+    }
+
+        sendNotification(message): void {
+        let notification = this.toastCtrl.create({
+            message: message,
+            duration: 3000
+        });
+        notification.present();
+    }
+
 }

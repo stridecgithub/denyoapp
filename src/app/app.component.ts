@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, MenuController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 //import { OtherPage } from '../pages/other/other';
@@ -50,7 +50,7 @@ export class MyApp {
   showLevel1 = null;
   showLevel2 = null;
   constructor(public _platform: Platform, public statusBar: StatusBar, public _SplashScreen: SplashScreen,
-    public appCtrl: App, public dataService: DataServiceProvider) {
+    public appCtrl: App, public dataService: DataServiceProvider, public menuCtrl: MenuController) {
 
 
     this.initializeApp();
@@ -93,16 +93,17 @@ export class MyApp {
     this.statusBar.styleDefault();
     this._platform.ready().then(() => {
       // do whatever you need to do here.
-      setTimeout(() => {
-        this._SplashScreen.hide();
-      }, 100);
+      /* setTimeout(() => {
+         this._SplashScreen.hide();
+       }, 100);*/
+      this._SplashScreen.hide();
     });
   }
 
   openPage(page) {
     console.log("page com:-" + page.component);
     console.log("1" + page);
-    console.log("2" + console.log(page));
+    console.log("2" + JSON.stringify(page));
     // page.component = 'UnitsPage';
 
     if (page.component == 'UnitsPage') {
@@ -121,20 +122,27 @@ export class MyApp {
       this.nav.setRoot(ReporttemplatePage);
     } else if (page.component == 'OrgchartPage') {
       this.nav.setRoot(OrgchartPage);
-    } else if (page.component == 'MessagesPage') {
+    } else if (page.title == 'Message') {
+       this.menuCtrl.close();
       this.nav.setRoot(MessagesPage);
-    } else if (page.component == 'LogoutPage') {
+    } else if (page.title == 'Logout') {
+      this.menuCtrl.close();
       this.nav.setRoot(LogoutPage);
-    } else if (page.component == 'HomePage') {
+    } else if (page.title == 'Dashboard') {
+      this.menuCtrl.close();
       this.nav.setRoot(HomePage);
-    } else if (page.component == 'CalendarPage') {
+    } else if (page.title == 'Calendar') {
+      this.menuCtrl.close();
       this.nav.setRoot(CalendarPage);
-    } else if (page.component == 'MapsPage') {
+    } else if (page.title == 'Maps') {
+      this.menuCtrl.close();
       this.nav.setRoot(MapsPage);
-    } else if (page.component == 'ReportsPage') {
+    } else if (page.title == 'Reports') {
+      this.menuCtrl.close();
       this.nav.setRoot(ReportsPage);
     }
-    else if (page.component == 'AlarmPage') {
+    else if (page.title == 'Alarm') {
+      this.menuCtrl.close();
       this.nav.setRoot(AlarmPage);
     }
     else if (page.component == 'AddalarmPage') {

@@ -22,7 +22,7 @@ import { RolePage } from '../pages/role/role';
 import { AddrolePage } from '../pages/addrole/addrole';
 import { AddunitgroupPage } from '../pages/addunitgroup/addunitgroup';
 import { UnitgroupPage } from '../pages/unitgroup/unitgroup';
-import { HttpModule } from '@angular/http';
+
 import { AtmentionedPage } from '../pages/atmentioned/atmentioned';
 import { UnitsPage } from '../pages/units/units';
 import { AddunitsonePage } from '../pages/addunitsone/addunitsone';
@@ -57,7 +57,7 @@ import { NotificationPage } from '../pages/notification/notification';
 
 //import { MapdemoPage } from '../pages/mapdemo/mapdemo';
 import { NgCalendarModule } from 'ionic2-calendar';
-
+import { HttpModule } from '@angular/http';
 @NgModule({
   declarations: [
     MyApp,
@@ -176,7 +176,7 @@ import { NgCalendarModule } from 'ionic2-calendar';
     ServicedetailsPage,
     CommentdetailsPage,
     NotificationPage,
-    
+
     AlarmdetailsPage
 
 

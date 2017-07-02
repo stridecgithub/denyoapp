@@ -18,7 +18,7 @@
         </button>
     </ion-buttons-->
     <ion-buttons end>
-      <button ion-button  (click)="notification()">
+      <button ion-button (click)="notification()">
   <ion-icon ios="ios-notifications-outline" md="md-notifications-outline"></ion-icon>
 </button>
     </ion-buttons>
@@ -80,9 +80,20 @@
     <span id="mwin">
   <input type="hidden" value="0" name="message_priority" id="message_priority"/>
   <p><input type="text" name="to" id="to" placeholder="To Address" class="suggest" onkeyup="sptions(event)"  onblur="sptionshide()"/></p>
-   <span><input type="checkbox" name="cmail" value="1"/>&nbsp; Copy Mail</span><span><img src="assets/icon/m1.png" onclick="e('message_priority').value=1" hspace="10"/><img onclick="e('message_priority').value=2" src="assets/icon/m2.png" hspace="10"/></span>
+   <span><input type="checkbox" name="cmail" value="1"/>&nbsp; Copy Mail</span><span><img src="assets/icon/m1.png" onclick="e('message_priority').value=1" hspace="10"/><img onclick="e('message_priority').value=2" src="assets/icon/m2.png" hspace="10"/><ion-icon (click)="fileChooser()" *ngIf="isUploaded" name="attach" style="color: black;
+    position: relative;
+    top: 5px;
+    left: 10px;"></ion-icon></span>
 
-
+    <progress value="{{progress}}" max="100" *ngIf="isProgress"> </progress>
+    <span *ngIf="isProgress" style="padding:2px">{{progress}}%</span>
+    <div *ngIf="addedImgLists.length>0">Picture List:</div>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-3 *ngFor="let item of addedImgLists; let i = index" [attr.data-index]="i">{{addedImgLists[i].imgSrc}}<!--img src="{{addedImgLists[i].imgSrc}}" width="175" height="75" /--></ion-col>
+      </ion-row>
+    </ion-grid>
+    
     <p><input type="text" name="subject" id="subject" placeholder="Subject" /></p>
     <p><textarea placeholder="Write Your Message" name="message" id="message"></textarea></p>
 
@@ -106,7 +117,7 @@
 </button>
     <button ion-button icon-only (click)="redirectToUnits()" clear>
 <ion-icon name="camera" class="footer-icon"></ion-icon>
-</button>   
+</button>
     <button ion-button icon-only (click)="redirectToRole()" clear>
 <ion-icon name="settings" class="footer-icon"></ion-icon>
 </button>

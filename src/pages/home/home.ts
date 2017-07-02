@@ -6,7 +6,9 @@ import { UnitgroupPage } from '../unitgroup/unitgroup';
 import { UnitsPage } from '../units/units';
 import { RolePage } from '../role/role';
 import { NotificationPage } from '../notification/notification';
-
+import { MapsPage } from '../maps/maps';
+import { ReportsPage } from '../reports/reports';
+import { CalendarPage } from '../calendar/calendar';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -19,7 +21,16 @@ export class HomePage {
 
   goPage(page) {
     console.log(page);
-    this.nav.setRoot(page);
+    if (page == 'MapsPage') {
+      this.nav.setRoot(MapsPage);
+    } else if (page == 'ReportsPage') {
+      this.nav.setRoot(ReportsPage);
+    } else if (page == 'CalendarPage') {
+      this.nav.setRoot(CalendarPage);
+    }else if (page == 'UnitsPage') {
+      this.nav.setRoot(UnitsPage);
+    }
+
   }
   notification() {
     this.nav.setRoot(NotificationPage);
