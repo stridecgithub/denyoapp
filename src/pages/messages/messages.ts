@@ -1,5 +1,5 @@
-import { Component , NgZone} from '@angular/core';
-import { NavController, AlertController ,ToastController} from 'ionic-angular';
+import { Component, NgZone } from '@angular/core';
+import { NavController, AlertController, ToastController } from 'ionic-angular';
 import { IonicApp } from 'ionic-angular/index'
 //import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
@@ -19,112 +19,112 @@ import { FileChooser } from '@ionic-native/file-chooser';
 import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
 @Component({
-  selector: 'page-messages',
-  templateUrl: 'messages.html',
-  providers: [Camera, FileChooser, Transfer, File]
+    selector: 'page-messages',
+    templateUrl: 'messages.html',
+    providers: [Camera, FileChooser, Transfer, File]
 })
 export class MessagesPage {
-  sendmsg = Sendmsg;
-  compose = Compose;
-  app: IonicApp;
-  data: any;
-  public loginas: any;
-  public userId: any;
-  public rootPage: any;
-  public pageTitle: string;
-  progress: number;
-  public isProgress = false;
-  public addedImgLists = [];
-  public base64Image: any;
-  public addedAttachList;
-  public isUploaded: boolean = true;
-  public isUploadedProcessing: boolean = false;
-  Catdata: any;
-   private baseURI: string = "";
-  constructor(app: IonicApp, public navCtrl: NavController, private alertCtrl: AlertController, private http: Http ,private camera: Camera,      
+    sendmsg = Sendmsg;
+    compose = Compose;
+    app: IonicApp;
+    data: any;
+    public loginas: any;
+    public userId: any;
+    public rootPage: any;
+    public pageTitle: string;
+    progress: number;
+    public isProgress = false;
+    public addedImgLists = [];
+    public base64Image: any;
+    public addedAttachList;
+    public isUploaded: boolean = true;
+    public isUploadedProcessing: boolean = false;
+    Catdata: any;
+    private baseURI: string = "";
+    constructor(app: IonicApp, public navCtrl: NavController, private alertCtrl: AlertController, private http: Http, private camera: Camera,
         private filechooser: FileChooser,
         private transfer: Transfer,
-        private file: File, private ngZone: NgZone, public toastCtrl: ToastController,) {
-    this.rootPage = MessagesPage; this.app = app;
-    this.loginas = localStorage.getItem("userInfoName");
-    this.userId = localStorage.getItem("userInfoId");
-    this.pageTitle = "Messages";
-    
-  }
+        private file: File, private ngZone: NgZone, public toastCtrl: ToastController, ) {
+        this.rootPage = MessagesPage; this.app = app;
+        this.loginas = localStorage.getItem("userInfoName");
+        this.userId = localStorage.getItem("userInfoId");
+        this.pageTitle = "Messages";
 
-  ionViewDidEnter() {
-    // this.presentAlert();
+    }
 
-  }
+    ionViewDidEnter() {
+        // this.presentAlert();
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad MessagesPage');
-  }
-  ionViewWillEnter() {
+    }
 
-    this.presentAlert1();
-  }
+    ionViewDidLoad() {
+        console.log('ionViewDidLoad MessagesPage');
+    }
+    ionViewWillEnter() {
 
-  presentAlert() {
-    let alert = this.alertCtrl.create({
-      title: 'Low battery',
-      subTitle: '10% of battery remaining',
-      buttons: ['Dismiss']
-    });
-    alert.present();
-  }
-  presentAlert1() {
+        this.presentAlert1();
+    }
 
-
-    //let text = "";
-    let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-    let options = new RequestOptions({ headers: headers });
-    let linker = "http://denyoappv2.stridecdev.com/denyo2.php?method=inbox&id=1";
-    this.http.get(linker, options)
-      .map(res => res.text())
-      .subscribe(data => {
-        var element = document.createElement("input");
-        element.setAttribute("type", "text");
-        element.setAttribute("value", data);
-        element.setAttribute("style", "color:Red");
-        // (document.getElementById('contentview') as HTMLDivElement).appendChild(element);
-        (document.getElementById('contentview') as HTMLDivElement).innerHTML = data;
-
-      });
-
-  }
-  openPage(component) {
-    this.presentAlert();
-
-  }
-  onPageDidEnter() {
-    // this.presentAlert()
-  }
+    presentAlert() {
+        let alert = this.alertCtrl.create({
+            title: 'Low battery',
+            subTitle: '10% of battery remaining',
+            buttons: ['Dismiss']
+        });
+        alert.present();
+    }
+    presentAlert1() {
 
 
+        //let text = "";
+        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        let options = new RequestOptions({ headers: headers });
+        let linker = "http://denyoappv2.stridecdev.com/denyo2.php?method=inbox&id=1";
+        this.http.get(linker, options)
+            .map(res => res.text())
+            .subscribe(data => {
+                var element = document.createElement("input");
+                element.setAttribute("type", "text");
+                element.setAttribute("value", data);
+                element.setAttribute("style", "color:Red");
+                // (document.getElementById('contentview') as HTMLDivElement).appendChild(element);
+                (document.getElementById('contentview') as HTMLDivElement).innerHTML = data;
 
-  redirectToUnitGroup() {
-    this.navCtrl.setRoot(UnitgroupPage);
-  }
-  redirectToCompanyGroup() {
-    this.navCtrl.setRoot(CompanygroupPage);
-  }
+            });
 
-  redirectToUnits() {
-    this.navCtrl.setRoot(UnitsPage);
-  }
-  redirectToMyAccount() {
-    this.navCtrl.setRoot(MyaccountPage);
-  }
+    }
+    openPage(component) {
+        this.presentAlert();
 
-  redirectToRole() {
-    this.navCtrl.setRoot(RolePage);
-  }
-  previous() {
-    this.navCtrl.setRoot(HomePage);
-  }
+    }
+    onPageDidEnter() {
+        // this.presentAlert()
+    }
 
-   fileChooser() {
+
+
+    redirectToUnitGroup() {
+        this.navCtrl.setRoot(UnitgroupPage);
+    }
+    redirectToCompanyGroup() {
+        this.navCtrl.setRoot(CompanygroupPage);
+    }
+
+    redirectToUnits() {
+        this.navCtrl.setRoot(UnitsPage);
+    }
+    redirectToMyAccount() {
+        this.navCtrl.setRoot(MyaccountPage);
+    }
+
+    redirectToRole() {
+        this.navCtrl.setRoot(RolePage);
+    }
+    previous() {
+        this.navCtrl.setRoot(HomePage);
+    }
+
+    fileChooser() {
         this.isUploadedProcessing = true;
         this.filechooser.open()
             .then(
@@ -181,27 +181,28 @@ export class MessagesPage {
                 let imgSrc;
                 if (successData.ext == 'jpg') {
                     //imgSrc = 'http://denyoappv2.stridecdev.com/api/uploads/' + successData.fileName;
-                    imgSrc = '<ion-icon name="image"></ion-icon>';
+                    //imgSrc = '<ion-icon name="image"></ion-icon>';
+                    imgSrc = 'img/img.png';
                     this.addedImgLists.push({
                         imgSrc: imgSrc
                     });
                 } else {
                     if (successData.ext == 'pdf') {
-                        //imgSrc = 'img/pdf.png';
-                         imgSrc = '<ion-icon name="document"></ion-icon>';
+                        imgSrc = 'img/pdf.png';
+                        // imgSrc = '<ion-icon name="document"></ion-icon>';
                     }
                     if (successData.ext == 'doc' || successData.ext == 'docx') {
-                       // imgSrc = 'img/doc.png';
-                       imgSrc = '<ion-icon name="document"></ion-icon>';
+                        imgSrc = 'img/doc.png';
+                        //imgSrc = '<ion-icon name="document"></ion-icon>';
                     }
                     if (successData.ext == 'xls' || successData.ext == 'xlsx') {
-                        //imgSrc = 'img/xls.png';
-                         imgSrc = '<ion-icon name="document"></ion-icon>';
+                        imgSrc = 'img/xls.png';
+                        //imgSrc = '<ion-icon name="document"></ion-icon>';
                     }
                     if (successData.ext == 'ppt' || successData.ext == 'pptx') {
-                       // imgSrc = 'img/ppt.png';
-                        imgSrc = '<ion-icon name="document"></ion-icon>';
-                    }                    
+                        imgSrc = 'img/ppt.png';
+                        //imgSrc = '<ion-icon name="document"></ion-icon>';
+                    }
                     this.addedImgLists.push({
                         imgSrc: imgSrc
                     });
@@ -227,7 +228,7 @@ export class MessagesPage {
             })
     }
 
-      onProgress = (progressEvent: ProgressEvent): void => {
+    onProgress = (progressEvent: ProgressEvent): void => {
         this.ngZone.run(() => {
             if (progressEvent.lengthComputable) {
                 let progress = Math.round((progressEvent.loaded / progressEvent.total) * 95);
@@ -237,7 +238,7 @@ export class MessagesPage {
         });
     }
 
-        sendNotification(message): void {
+    sendNotification(message): void {
         let notification = this.toastCtrl.create({
             message: message,
             duration: 3000

@@ -11,10 +11,9 @@ import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
 import { UnitsPage } from '../units/units';
 import { RolePage } from '../role/role';
-import * as $ from 'jquery'
-import "slick-carousel";
+import { CompanygroupPage } from '../companygroup/companygroup';
+
 import 'rxjs/add/operator/map';
-import { Http, Headers, RequestOptions } from '@angular/http';
 
 /**
  * Generated class for the CommentdetailsPage page.
@@ -26,7 +25,7 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 @Component({
   selector: 'page-commentdetails',
   templateUrl: 'commentdetails.html',
-     providers: [Camera, FileChooser, Transfer, File]
+  providers: [Camera, FileChooser, Transfer, File]
 
 })
 export class CommentdetailsPage {
@@ -39,8 +38,8 @@ export class CommentdetailsPage {
   public comment_unitid: any;
   public comment_id: any;
   public comments: any;
-  public comment_by_name:any;
-  public comment_remark:any;
+  public comment_by_name: any;
+  public comment_remark: any;
   public comment_subject: any;
   public comment_priority: any;
   public comment_resources: any;
@@ -66,19 +65,19 @@ export class CommentdetailsPage {
     addedImgLists2: ''
   }
   public hideActionButton = true;
-  constructor(public http: Http, public alertCtrl: AlertController, public NP: NavParams, public nav: NavController, public toastCtrl: ToastController, public navParams: NavParams, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera, private filechooser: FileChooser,
+  constructor(public alertCtrl: AlertController, public NP: NavParams, public nav: NavController, public toastCtrl: ToastController, public navParams: NavParams, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera, private filechooser: FileChooser,
     private transfer: Transfer,
     private file: File, private ngZone: NgZone) {
     this.service_priority_class1 = "-outline";
     this.service_priority_class2 = "-outline";
     this.unitDetailData.loginas = localStorage.getItem("userInfoName");
     this.unitDetailData.userId = localStorage.getItem("userInfoId");
-   
 
-  
+
+
     this.comment_priority = 0;
     // Watch the form for changes, and
-   
+
 
 
     let already = localStorage.getItem("microtime");
@@ -101,10 +100,10 @@ export class CommentdetailsPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad CommentdetailsPage');
   }
- ionViewWillEnter() {
-   this.getPrority(1);
-    let users = localStorage.getItem("atMentionedStorage");
-    console.log("comment:"+JSON.stringify(this.NP.get("record")));
+  ionViewWillEnter() {
+    this.getPrority(1);
+
+    console.log("comment:" + JSON.stringify(this.NP.get("record")));
     if (this.NP.get("record")) {
       this.selectEntry(this.NP.get("record"));
       this.comment_id = this.NP.get("record").comment_id;
@@ -121,7 +120,7 @@ export class CommentdetailsPage {
       console.log("Comment Unit Id:" + this.comment_unitid);
     }
 
-  
+
 
 
   }
@@ -168,9 +167,30 @@ export class CommentdetailsPage {
       }
     }
   }
-    previous() {
+  previous() {
     this.nav.setRoot(CommentsinfoPage, {
       record: this.NP.get("record")
     });
+  }
+
+  redirectToUser() {
+    this.nav.setRoot(UserPage);
+  }
+
+  redirectToUnitGroup() {
+    this.nav.setRoot(UnitgroupPage);
+  }
+  redirectToCompanyGroup() {
+    this.nav.setRoot(CompanygroupPage);
+  }
+  redirectToUnits() {
+    this.nav.setRoot(UnitsPage);
+  }
+  redirectToMyAccount() {
+    this.nav.setRoot(MyaccountPage);
+  }
+
+  redirectToRole() {
+    this.nav.setRoot(RolePage);
   }
 }

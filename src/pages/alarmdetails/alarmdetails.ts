@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, ToastController, AlertController, NavParams } from 'ionic-angular';
 import 'rxjs/add/operator/map';
-import { Http, Headers, RequestOptions } from '@angular/http';
+
 import { AddalarmPage } from '../addalarm/addalarm'; 
 
 /**
@@ -18,7 +18,7 @@ import { AddalarmPage } from '../addalarm/addalarm';
 export class AlarmdetailsPage {
  public loginas: any;
   public pageTitle: string;
-  private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
+  
   public totalCount;
   pet: string = "ALL";
   public sortby = 2;
@@ -39,7 +39,7 @@ export class AlarmdetailsPage {
     results: 8
   }
   public reportAllLists = [];
-  constructor(public http: Http, public nav: NavController,
+  constructor(public nav: NavController,
     public toastCtrl: ToastController, public alertCtrl: AlertController, public NP: NavParams) {
     this.pageTitle = 'Units';
     this.loginas = localStorage.getItem("userInfoName");

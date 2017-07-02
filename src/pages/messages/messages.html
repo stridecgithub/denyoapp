@@ -88,13 +88,13 @@
 
     <progress value="{{progress}}" max="100" *ngIf="isProgress"> </progress>
     <span *ngIf="isProgress" style="padding:2px">{{progress}}%</span>
-    <div *ngIf="addedImgLists.length>0">Picture List:</div>
+    <div *ngIf="addedImgLists.length>0">Attached List:</div>
     <ion-grid>
       <ion-row>
-        <ion-col col-3 *ngFor="let item of addedImgLists; let i = index" [attr.data-index]="i">{{addedImgLists[i].imgSrc}}<!--img src="{{addedImgLists[i].imgSrc}}" width="175" height="75" /--></ion-col>
+        <ion-col col-3 *ngFor="let item of addedImgLists; let i = index" [attr.data-index]="i"><img src="{{addedImgLists[i].imgSrc}}" width="175" height="75" /></ion-col>
       </ion-row>
     </ion-grid>
-    
+
     <p><input type="text" name="subject" id="subject" placeholder="Subject" /></p>
     <p><textarea placeholder="Write Your Message" name="message" id="message"></textarea></p>
 

@@ -1,7 +1,7 @@
-import { Component,ViewChild, NgZone } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { IonicPage, AlertController, NavController, NavParams, ViewController, ToastController } from 'ionic-angular';
-import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { Camera, CameraOptions } from '@ionic-native/camera';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Camera } from '@ionic-native/camera';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { File } from '@ionic-native/file';
 import { UserPage } from '../user/user';
