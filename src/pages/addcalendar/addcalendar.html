@@ -59,7 +59,7 @@
 
         <ion-item *ngIf="unitfield">
           <ion-label stacked>Units <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
-          <ion-select [disabled]="readOnly" [(ngModel)]="event_unitid" formControlName="event_unitid"  (ionChange)="getProjectLocation(event_unitid)">
+          <ion-select [disabled]="readOnly" [(ngModel)]="event_unitid" formControlName="event_unitid" (ionChange)="getProjectLocation(event_unitid)">
             <ion-option *ngFor="let companyData of responseResultCompany" value="{{companyData.companygroup_id}}">{{companyData.companygroup_name}}</ion-option>
           </ion-select>
         </ion-item>
@@ -84,13 +84,13 @@
           </ion-select>
         </ion-item>
 
-
-
-        <ion-item>
-          <ion-label stacked>Notes</ion-label>
-          <ion-textarea [disabled]="readOnly" formControlName="event_notes" rows="6" [(ngModel)]="event_notes"></ion-textarea>
-        </ion-item>
-
+         <div><b>Notes/Remarks</b> <span class="mandatory" *ngIf="hideActionButton">*</span></div>
+        <!--textarea (keyup)=address1get($event.target.value); id="example1" class="form-control" rows="8" [disabled]="readOnly" formControlName="alarmhashtags"
+          rows="6" [(ngModel)]="alarmhashtags"></textarea-->
+<div>
+         <textarea (keyup)=address1get($event.target.value); name="to" id="to"  class="suggest form-control" onkeyup="sptions(event)" onblur="sptionshide()" rows="8" [disabled]="readOnly" formControlName="event_notes"
+          cols="62" [(ngModel)]="event_notes"></textarea>
+</div>
         <ion-item *ngIf="hideActionButton">
           <button ion-button color="primary" text-center block [disabled]="!form.valid">Complete and Save</button>
         </ion-item>

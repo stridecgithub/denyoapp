@@ -56,6 +56,7 @@
         "ionic-plugin-keyboard": "^2.2.1",
         "ionic2-calendar": "^0.3.6",
         "ionicons": "3.0.0",
+        "remove": "^0.1.5",
         "rxjs": "5.4.0",
         "slick-carousel": "^1.6.0",
         "sw-toolbox": "3.6.0",

@@ -144,20 +144,10 @@ export class MessagesPage {
     }
 
     fileTrans(path) {
-        /* let loading = this.loadingCtrl.create({
-             content: 'Uploading processing Please wait...'
-         });
-         loading.present();*/
         let fileName = path.substr(path.lastIndexOf('/') + 1);
         const fileTransfer: TransferObject = this.transfer.create();
         let currentName = path.replace(/^.*[\\\/]/, '');
         console.log("File Name is:" + currentName);
-
-
-        /*var d = new Date(),
-            n = d.getTime(),
-            newFileName = n + ".jpg";*/
-
         let options: FileUploadOptions = {
             fileKey: 'file',
             fileName: fileName,
@@ -165,26 +155,21 @@ export class MessagesPage {
             chunkedMode: false,
             mimeType: "text/plain",
         }
-
-        //  http://127.0.0.1/ionic/upload_attach.php
-        //http://amahr.stridecdev.com/getgpsvalue.php?key=create&lat=34&long=45
         fileTransfer.onProgress(this.onProgress);
         fileTransfer.upload(path, this.baseURI + 'http://denyoappv2.stridecdev.com/api/upload_attach.php', options)
             .then((data) => {
-
                 console.log("UPLOAD SUCCESS:" + data.response);
                 let successData = JSON.parse(data.response);
-                this.sendNotification("UPLOAD SUCCESS:");
+                this.sendNotification("File attached successfully");
                 console.log('http:' + '//' + successData.baseURL + '/' + successData.target_dir + '/' + successData.fileName);
-
-                //<img src="{{addedImgLists[i].imgSrc}}" width="75%" height="75%" />
                 let imgSrc;
                 if (successData.ext == 'jpg') {
                     //imgSrc = 'http://denyoappv2.stridecdev.com/api/uploads/' + successData.fileName;
                     //imgSrc = '<ion-icon name="image"></ion-icon>';
                     imgSrc = 'img/img.png';
                     this.addedImgLists.push({
-                        imgSrc: imgSrc
+                        imgSrc: imgSrc,
+                        file: successData.fileName
                     });
                 } else {
                     if (successData.ext == 'pdf') {
@@ -204,10 +189,11 @@ export class MessagesPage {
                         //imgSrc = '<ion-icon name="document"></ion-icon>';
                     }
                     this.addedImgLists.push({
-                        imgSrc: imgSrc
+                        imgSrc: imgSrc,
+                        file: fileName
                     });
                 }
-                //loading.dismiss();
+                localStorage.setItem('fileAttach', JSON.stringify(this.addedImgLists));
                 if (this.addedImgLists.length > 9) {
                     this.isUploaded = false;
                 }
@@ -215,14 +201,7 @@ export class MessagesPage {
                 this.isProgress = false;
                 this.isUploadedProcessing = false;
                 return false;
-
-
-
-                // Save in Backend and MysQL
-                //this.uploadToServer(data.response);
-                // Save in Backend and MysQL
             }, (err) => {
-                //loading.dismiss();
                 console.log("Upload Error:" + JSON.stringify(err));
                 this.sendNotification("Upload Error:" + JSON.stringify(err));
             })
@@ -246,4 +225,15 @@ export class MessagesPage {
         notification.present();
     }
 
+    download(file) {
+        console.log("Download calling..." + file);
+        const fileTransfer: TransferObject = this.transfer.create();
+        const url = 'http://denyoappv2.stridecdev.com/api/uploads/' + file;
+        fileTransfer.download(url, this.file.dataDirectory + file).then((entry) => {
+            console.log('download complete: ' + entry.toURL());
+        }, (error) => {
+            // handle error
+        });
+
+    }
 }

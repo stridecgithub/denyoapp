@@ -52,7 +52,7 @@
  <option value="4">Subject Ascending</option>
  <option value="5">Subject Descending</option>
  </select>
-    <select class="sel" name="sort" id="sact" onchange="actmsg(this,0">
+    <select class="sel" name="sort" id="sact" onchange="actmsg(this,0)">
   <option value="0">Action</option>
  <option value="1">Delete</option>
  <option value="2">Favorite</option>
@@ -79,6 +79,7 @@
   <p id="compose" style="display:none">
     <span id="mwin">
   <input type="hidden" value="0" name="message_priority" id="message_priority"/>
+  <input type="hidden" value="{{addedImgLists}}" name="attchedlist" id="attchedlist"/>
   <p><input type="text" name="to" id="to" placeholder="To Address" class="suggest" onkeyup="sptions(event)"  onblur="sptionshide()"/></p>
    <span><input type="checkbox" name="cmail" value="1"/>&nbsp; Copy Mail</span><span><img src="assets/icon/m1.png" onclick="e('message_priority').value=1" hspace="10"/><img onclick="e('message_priority').value=2" src="assets/icon/m2.png" hspace="10"/><ion-icon (click)="fileChooser()" *ngIf="isUploaded" name="attach" style="color: black;
     position: relative;
@@ -91,9 +92,12 @@
     <div *ngIf="addedImgLists.length>0">Attached List:</div>
     <ion-grid>
       <ion-row>
-        <ion-col col-3 *ngFor="let item of addedImgLists; let i = index" [attr.data-index]="i"><img src="{{addedImgLists[i].imgSrc}}"/></ion-col>
+        <ion-col  col-auto *ngFor="let item of addedImgLists; let i = index" [attr.data-index]="i"><img src="{{addedImgLists[i].imgSrc}}" /></ion-col>
       </ion-row>
     </ion-grid>
+    <!--div *ngFor="let item of addedImgLists; let i = index" [attr.data-index]="i">
+      <img src="{{addedImgLists[i].imgSrc}}" />
+    </div-->
 
     <p><input type="text" name="subject" id="subject" placeholder="Subject" /></p>
     <p><textarea placeholder="Write Your Message" name="message" id="message"></textarea></p>

@@ -58,6 +58,20 @@
 	<!--link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"-->
 	<!--link href="ext/css/atmentioned.css" rel="stylesheet" type="text/css"-->
 	<!--script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCz5E2s7v_ORGHJgENeAI82pHOful54Gjs"></script-->
+
+	<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css"
+	/>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+	<script>
+		var $dialog = $('#dialog').dialog({
+			close: function () {
+				//USING NORMAL JS
+				document.getElementById('ifrmMsg').contentWindow.$('a:first').trigger('click');
+			}
+		});
+	</script>
+
 </body>
 
 </html>

@@ -30,10 +30,11 @@ export class AddcalendarPage {
   public event_project: any;
   public event_subject: any;
   public event_location: any;
-
+  public gethashtag: any;
   public event_unitid: any;
   public event_date: any;
   public event_title: any;
+  public service_remark: any;  
   public userId: any;
   public responseResultType = [];
   public responseResultTime = [];
@@ -69,7 +70,7 @@ export class AddcalendarPage {
       "event_project": [""],
       "event_date": [""],
       "event_type": [""],
-      "event_notes": [""],
+      "event_notes": ["", Validators.required],
       "event_time": [""]
     });
     this.disunit = false;
@@ -194,12 +195,17 @@ export class AddcalendarPage {
         time_name: '12:45 PM'
       });
     let dateStr = new Date();
-    let month=dateStr.getMonth()+1;
+    let month = dateStr.getMonth() + 1;
     this.event_date = dateStr.getFullYear() + "-" + month + "-" + dateStr.getDate();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad  AddcalendarPage');
+  }
+
+  address1get(hashtag) {
+    console.log(hashtag);
+    this.gethashtag = hashtag;
   }
   getType(type) {
     console.log(type);
@@ -248,10 +254,10 @@ export class AddcalendarPage {
   // to our remote PHP script (note the body variable we have created which
   // supplies a variable of key with a value of create followed by the key/value pairs
   // for the record data
-  createEntry(event_title, type_name, event_project, event_subject, event_unitid, event_time, event_location, createdby) {
+  createEntry(event_title, type_name, event_project, event_subject, event_unitid, event_time, event_location,service_remark, createdby) {
     //let updatedby = createdby;
     let body: string = "is_mobile=1&event_type="
-      + type_name + "&event_title=" + event_title + "&event_subject=" + event_subject + "&event_date=" + this.event_date + "&event_time=" + event_time + "&service_unitid=" + event_unitid + "&event_location=" + event_location + "&event_added_by=" + createdby,
+      + type_name + "&event_title=" + event_title + "&event_subject=" + event_subject + "&event_date=" + this.event_date + "&event_time=" + event_time + "&service_unitid=" + event_unitid + "&event_location=" + event_location+ "&service_remark=" + service_remark + "&event_added_by=" + createdby,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
@@ -286,7 +292,7 @@ export class AddcalendarPage {
   // to our remote PHP script (note the body variable we have created which
   // supplies a variable of key with a value of update followed by the key/value pairs
   // for the record data
-  updateEntry(event_title, type_name, event_project, event_subject, event_unitid, event_time, event_location, createdby) {
+  updateEntry(event_title, type_name, event_project, event_subject, event_unitid, event_time, event_location,service_remark, createdby) {
     let updatedby = createdby;
     let body: string = "is_mobile=1&type_name=" + type_name + "&event_project=" + event_project + "&event_subject=" + event_subject + "&event_unitid=" + event_unitid + "&companygroup_id=" + this.recordID + "&createdby=" + createdby + "&updatedby=" + updatedby,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
@@ -359,13 +365,14 @@ export class AddcalendarPage {
       event_unitid: string = this.form.controls["event_unitid"].value,
       event_title: string = this.form.controls["event_title"].value,
       event_time: string = this.form.controls["event_time"].value,
-      event_location: string = this.form.controls["event_location"].value;
+      event_location: string = this.form.controls["event_location"].value,
+      service_remark: string = this.form.controls["event_notes"].value;
 
     if (this.isEdited) {
-      this.updateEntry(event_title, type_name, event_project, event_subject, event_unitid, event_time, event_location, this.userId);
+      this.updateEntry(event_title, type_name, event_project, event_subject, event_unitid, event_time, event_location,service_remark, this.userId);
     }
     else {
-      this.createEntry(event_title, type_name, event_project, event_subject, event_unitid, event_time, event_location, this.userId);
+      this.createEntry(event_title, type_name, event_project, event_subject, event_unitid, event_time, event_location,service_remark, this.userId);
     }
   }
 
@@ -424,7 +431,7 @@ export class AddcalendarPage {
     notification.present();
   }
 
- notification() {
+  notification() {
     this.nav.setRoot(NotificationPage);
   }
   previous() {

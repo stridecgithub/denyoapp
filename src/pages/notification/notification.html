@@ -41,7 +41,7 @@
 
 
 
-  <div class="error" *ngIf="totalCount==0">No entries found</div>
+  <div class="error" *ngIf="reportAllLists.length==0">No entries found</div>
   <ion-item style="width: 100%; margin: 0; padding-left: 10px;">
     <ion-label>Sort By</ion-label>
     <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="pet" (ionChange)="onSegmentChanged(pet)">
@@ -62,7 +62,7 @@
         <div style="overflow: hidden; padding-left: .5em;">
           <h2><b>{{item.templatename}}</b>
           </h2>
-         
+
 
         </div>
 

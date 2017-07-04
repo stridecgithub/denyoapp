@@ -116,7 +116,7 @@ export class UnitdetailsPage {
 		this.unitDetailData.alarmnotificationto = editItem.nextservicedate;
 		this.unitDetailData.favoriteindication = favorite;
 		console.log(this.apiServiceURL + "/" + this.unitDetailData.unit_id + "/1/unitdetails");
-		this.iframeContent = "<iframe src=" + this.apiServiceURL + "/" + this.unitDetailData.unit_id + "/1/unitdetails height=350 frameborder=0></iframe>";
+		this.iframeContent = "<iframe id='ifrmMsg' src=" + this.apiServiceURL + "/" + this.unitDetailData.unit_id + "/1/unitdetails height=350 frameborder=0></iframe>";
 
 		//http://denyoappv2.stridecdev.com/getcount?loginid=1&unitid=2
 

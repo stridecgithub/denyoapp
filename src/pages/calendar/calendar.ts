@@ -87,7 +87,7 @@ export class CalendarPage {
     this.dateHeaderTitle = yearMonth;
     this.onTimeSelected(this.curDate);
 
-    //this.loadEvents();
+    this.createRandomEvents();
     // this.loadDynamicEvents();
   }
 
@@ -104,8 +104,8 @@ export class CalendarPage {
 
 
   loadEvents() {
-    this.eventSource = this.createRandomEvents();
-    console.log("Event Source:" + console.log(JSON.stringify(this.eventSource)));
+    //this.eventSource = this.createRandomEvents();
+
   }
 
 
@@ -114,7 +114,7 @@ export class CalendarPage {
     this.viewTitle = title;
   }
   onEventSelected(event) {
-    console.log('Event selected:' + event.startTime + '-' + event.endTime + ',' + event.title);
+
   }
   changeMode(mode) {
     this.calendar.mode = mode;
@@ -184,7 +184,7 @@ export class CalendarPage {
     let month;
     let year;
     let date;
-    console.log("Event ev?" + ev);
+
     if (ev != '') {
       //this.pet = '';
       this.petselection = '';
@@ -192,16 +192,15 @@ export class CalendarPage {
       this.calendarResultService = [];
       this.calendarResultEvent = [];
       this.calendarResultAlarm = [];
-      console.log("2" + ev.selectedTime);
-      console.log("3" + JSON.stringify(ev));
+
 
       if (ev.selectedTime == undefined) {
-        console.log('undefined' + ev);
+
         month = ev.getUTCMonth() + 1;
         year = ev.getFullYear();
         date = ev.getDate();
       } else {
-        console.log('defined');
+
         month = ev.selectedTime.getUTCMonth() + 1;
         year = ev.selectedTime.getFullYear();
         date = ev.selectedTime.getDate();
@@ -218,7 +217,7 @@ export class CalendarPage {
       } else {
         date = date;
       }
-      console.log('Selected time: ' + year + "-" + month + "-" + date);
+
       dateStr = "&date=" + year + "-" + month + "-" + date;
     } else {
       dateStr = "";
@@ -244,7 +243,7 @@ export class CalendarPage {
           mnstr = '';
 
         }
-        console.log("Current Date Length:" + currentDateArr.getDate().toLocaleString.length);
+
         if (currentDateArr.getDate().toLocaleString.length == 1) {
           dtstr = '0';
         } else {
@@ -253,8 +252,7 @@ export class CalendarPage {
         }
         let curDate = currentDateArr.getFullYear() + "-" + mnstr + cmonth + "-" + dtstr + currentDateArr.getDate();
         let selDate = year + "-" + month + "-" + date;
-        console.log("Current Date" + curDate);
-        console.log("Selected Date" + year + "-" + month + "-" + date);
+
         if (ev != '') {
           if (curDate == selDate) {
             this.daySession = 'Todays  Event';
@@ -266,8 +264,7 @@ export class CalendarPage {
         }
         //console.log("All Response:" +JSON.stringify(data.json()));
         //console.log("Calendar Response:" +JSON.stringify(data.json().services));
-        console.log(data.json().services.length);
-        console.log("Your selection pet:" + this.petselection);
+
         if (this.petselection == 'ALL') {
           if (data.json().allservices.length > 0) {
             this.calendarResultService = data.json().allservices;
@@ -335,24 +332,24 @@ export class CalendarPage {
             }
           }
         }
-       /* this.eventSource = '';
-        console.log("Calendar Event Length" + data.json().allevents.length);
-        console.log('1');
-        if (data.json().allevents.length > 0) {
-          console.log('2');
-          let dataArray=data.json().allevents;
-          for (let evt in dataArray) {
-            console.log('3');
-            console.log('kannan');
-            this.eventSource = this.eventIdentify.push({
-              "title": data.json().allevents[evt].event_title,
-              "startTime": "2017-06-16T00:00:00.000Z",
-              "endTime": "2017-06-17T00:00:00.000Z",
-              "allDay": true
-            });
-            console.log("Final Output is:" + JSON.stringify(this.eventSource));
-          }
-        }*/
+        /* this.eventSource = '';
+         console.log("Calendar Event Length" + data.json().allevents.length);
+         console.log('1');
+         if (data.json().allevents.length > 0) {
+           console.log('2');
+           let dataArray=data.json().allevents;
+           for (let evt in dataArray) {
+             console.log('3');
+             console.log('kannan');
+             this.eventSource = this.eventIdentify.push({
+               "title": data.json().allevents[evt].event_title,
+               "startTime": "2017-06-16T00:00:00.000Z",
+               "endTime": "2017-06-17T00:00:00.000Z",
+               "allDay": true
+             });
+             console.log("Final Output is:" + JSON.stringify(this.eventSource));
+           }
+         }*/
 
       });
 
@@ -383,44 +380,95 @@ export class CalendarPage {
   }
   createRandomEvents() {
     var events = [];
-    for (var i = 0; i < 50; i += 1) {
-      var date = new Date();
-      var eventType = Math.floor(Math.random() * 2);
-      var startDay = Math.floor(Math.random() * 90) - 45;
-      var endDay = Math.floor(Math.random() * 2) + startDay;
-      var startTime;
-      var endTime;
-      if (eventType === 0) {
-        startTime = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + startDay));
-        if (endDay === startDay) {
-          endDay += 1;
+
+    let
+      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/calendar? is_mobile=1&loginid=" + this.userId;
+    console.log(url);
+    //console.log(body);
+
+    this.http.get(url, options)
+      .subscribe((data) => {
+        let res = data.json();
+        console.log("All Event Response:" + JSON.stringify(res.allevents));
+        this.eventIdentify = res.allevents;
+        console.log("All Event Response Length:" + this.eventIdentify.length);
+        for (var i = 0; i < this.eventIdentify.length; i += 1) {
+          //var date = new Date();
+          //var eventType = Math.floor(Math.random() * 2);
+          //var startDay = Math.floor(Math.random() * 90) - 45;
+          //var endDay = Math.floor(Math.random() * 2) + startDay;
+          var startTime;
+          var endTime;
+          var event_date_array = this.eventIdentify[i]['event_date'].split('-');
+          var yearstr = event_date_array[0];
+          var monthstr = parseInt(event_date_array[1], 10)-1;
+          var datestr =  parseInt(event_date_array[2], 10);;
+          var startMinute = Math.floor(Math.random() * 24 * 60);
+          var endMinute = Math.floor(Math.random() * 180) + startMinute;
+
+          console.log("Get Full year" + yearstr);
+          console.log("Get Month" + monthstr);
+          console.log("Get Day" + datestr);
+          startTime = new Date(yearstr, monthstr, datestr , 0,0 + startMinute);
+          endTime = new Date(yearstr, monthstr, datestr , 0,0 + endMinute);
+          events.push({           
+            title: this.eventIdentify[i]['event_title'],
+            startTime: startTime,
+            endTime: endTime,
+            allDay: true           
+          });
         }
-        endTime = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + endDay));
-        events.push({
-          title: 'All Day - ' + i,
-          startTime: startTime,
-          endTime: endTime,
-          allDay: true
-        });
-      } else {
-        var startMinute = Math.floor(Math.random() * 24 * 60);
-        var endMinute = Math.floor(Math.random() * 180) + startMinute;
-        startTime = new Date(date.getFullYear(), date.getMonth(), date.getDate() + startDay, 0, date.getMinutes() + startMinute);
-        endTime = new Date(date.getFullYear(), date.getMonth(), date.getDate() + endDay, 0, date.getMinutes() + endMinute);
-        events.push({
-          title: 'Event - ' + i,
-          startTime: startTime,
-          endTime: endTime,
-          allDay: false
-        });
-      }
-    }
+        /*
+                for (var i = 0; i < this.eventIdentify.length; i += 1) {
+                  console.log("I" + i);
+                  var date = new Date();
+                  //var eventType = Math.floor(Math.random() * 2);
+                  var startDay = Math.floor(Math.random() * 90) - 45;
+                  var endDay = Math.floor(Math.random() * 2) + startDay;
+                  var startTime;
+                  var endTime;
+        
+                  var startMinute = Math.floor(Math.random() * 24 * 60);
+                  var endMinute = Math.floor(Math.random() * 180) + startMinute;
+                  startTime = new Date(date.getFullYear(), date.getMonth(), date.getDate() + startDay, 0, date.getMinutes() + startMinute);
+                  endTime = new Date(date.getFullYear(), date.getMonth(), date.getDate() + endDay, 0, date.getMinutes() + endMinute);
+                  events.push({
+                    title: 'Event - '  +i,
+                    startTime: startTime,
+                    endTime: endTime,
+                    allDay: true,
+                    color: "red"
+                  });
+                }
+                */
+        // If the request was successful notify the user
+        if (data.status === 200) {
+          //this.sendNotification(`Comment count successfully removed`);
+
+        }
+        // Otherwise let 'em know anyway
+        else {
+          // this.sendNotification('Something went wrong!');
+        }
+
+        // console.log("Events Response:-" + JSON.stringify(events));
+        //return events;
+
+        this.eventSource = events;
+
+        console.log("Calendar response:" + JSON.stringify(this.eventSource));
+      });
+    //console.log("Event Length2:" + this.eventIdentify.length);
+
     //events=[{"id":4,"title":"Joined new company","startTime":"2017-05-15T00:00:00.000Z","description":"I have joined the new company of webneo technology in anna nagar vaigai street"},{"id":5,"title":"New Task assigned","startTime":"2017-05-15T00:00:00.000Z","description":"I have start the new work joined"}]
     //events=[{"title":"All Day - 0","startTime":"2017-06-03T00:00:00.000Z","endTime":"2017-06-04T00:00:00.000Z","allDay":true},{"title":"Event - 1","startTime":"2017-04-15T06:55:00.000Z","endTime":"2017-04-15T08:34:00.000Z","allDay":false},{"title":"All Day - 2","startTime":"2017-06-02T00:00:00.000Z","endTime":"2017-06-03T00:00:00.000Z","allDay":true},{"title":"All Day - 3","startTime":"2017-06-15T00:00:00.000Z","endTime":"2017-06-16T00:00:00.000Z","allDay":true},{"title":"All Day - 4","startTime":"2017-06-08T00:00:00.000Z","endTime":"2017-06-09T00:00:00.000Z","allDay":true},{"title":"Event - 5","startTime":"2017-05-04T04:23:00.000Z","endTime":"2017-05-04T05:06:00.000Z","allDay":false},{"title":"Event - 6","startTime":"2017-05-24T10:13:00.000Z","endTime":"2017-05-25T12:51:00.000Z","allDay":false},{"title":"All Day - 7","startTime":"2017-07-07T00:00:00.000Z","endTime":"2017-07-08T00:00:00.000Z","allDay":true},{"title":"Event - 8","startTime":"2017-06-24T12:04:00.000Z","endTime":"2017-06-25T14:27:00.000Z","allDay":false},{"title":"All Day - 9","startTime":"2017-05-17T00:00:00.000Z","endTime":"2017-05-18T00:00:00.000Z","allDay":true},{"title":"All Day - 10","startTime":"2017-06-06T00:00:00.000Z","endTime":"2017-06-07T00:00:00.000Z","allDay":true},{"title":"Event - 11","startTime":"2017-05-26T12:08:00.000Z","endTime":"2017-05-26T13:00:00.000Z","allDay":false},{"title":"All Day - 12","startTime":"2017-06-22T00:00:00.000Z","endTime":"2017-06-23T00:00:00.000Z","allDay":true},{"title":"All Day - 13","startTime":"2017-05-04T00:00:00.000Z","endTime":"2017-05-05T00:00:00.000Z","allDay":true},{"title":"Event - 14","startTime":"2017-04-18T10:15:00.000Z","endTime":"2017-04-18T11:14:00.000Z","allDay":false},{"title":"Event - 15","startTime":"2017-05-12T10:51:00.000Z","endTime":"2017-05-13T13:13:00.000Z","allDay":false},{"title":"Event - 16","startTime":"2017-04-29T18:48:00.000Z","endTime":"2017-04-29T20:45:00.000Z","allDay":false},{"title":"All Day - 17","startTime":"2017-06-21T00:00:00.000Z","endTime":"2017-06-22T00:00:00.000Z","allDay":true},{"title":"Event - 18","startTime":"2017-05-15T15:13:00.000Z","endTime":"2017-05-15T16:56:00.000Z","allDay":false},{"title":"All Day - 19","startTime":"2017-04-21T00:00:00.000Z","endTime":"2017-04-22T00:00:00.000Z","allDay":true},{"title":"All Day - 20","startTime":"2017-06-04T00:00:00.000Z","endTime":"2017-06-05T00:00:00.000Z","allDay":true},{"title":"Event - 21","startTime":"2017-06-06T12:02:00.000Z","endTime":"2017-06-07T13:18:00.000Z","allDay":false},{"title":"All Day - 22","startTime":"2017-06-07T00:00:00.000Z","endTime":"2017-06-08T00:00:00.000Z","allDay":true},{"title":"All Day - 23","startTime":"2017-07-08T00:00:00.000Z","endTime":"2017-07-09T00:00:00.000Z","allDay":true},{"title":"Event - 24","startTime":"2017-04-27T09:04:00.000Z","endTime":"2017-04-28T11:09:00.000Z","allDay":false},{"title":"Event - 25","startTime":"2017-05-15T11:41:00.000Z","endTime":"2017-05-15T13:20:00.000Z","allDay":false},{"title":"All Day - 26","startTime":"2017-05-09T00:00:00.000Z","endTime":"2017-05-10T00:00:00.000Z","allDay":true},{"title":"All Day - 27","startTime":"2017-05-13T00:00:00.000Z","endTime":"2017-05-14T00:00:00.000Z","allDay":true},{"title":"All Day - 28","startTime":"2017-04-28T00:00:00.000Z","endTime":"2017-04-29T00:00:00.000Z","allDay":true},{"title":"All Day - 29","startTime":"2017-07-03T00:00:00.000Z","endTime":"2017-07-04T00:00:00.000Z","allDay":true},{"title":"Event - 30","startTime":"2017-06-05T17:38:00.000Z","endTime":"2017-06-06T19:40:00.000Z","allDay":false},{"title":"All Day - 31","startTime":"2017-05-06T00:00:00.000Z","endTime":"2017-05-07T00:00:00.000Z","allDay":true},{"title":"Event - 32","startTime":"2017-06-15T21:46:00.000Z","endTime":"2017-06-15T22:13:00.000Z","allDay":false},{"title":"Event - 33","startTime":"2017-05-10T20:47:00.000Z","endTime":"2017-05-10T20:54:00.000Z","allDay":false},{"title":"All Day - 34","startTime":"2017-06-14T00:00:00.000Z","endTime":"2017-06-15T00:00:00.000Z","allDay":true},{"title":"All Day - 35","startTime":"2017-06-03T00:00:00.000Z","endTime":"2017-06-04T00:00:00.000Z","allDay":true},{"title":"All Day - 36","startTime":"2017-07-02T00:00:00.000Z","endTime":"2017-07-03T00:00:00.000Z","allDay":true},{"title":"Event - 37","startTime":"2017-06-13T14:22:00.000Z","endTime":"2017-06-14T16:03:00.000Z","allDay":false},{"title":"Event - 38","startTime":"2017-07-08T18:34:00.000Z","endTime":"2017-07-08T18:43:00.000Z","allDay":false},{"title":"All Day - 39","startTime":"2017-07-06T00:00:00.000Z","endTime":"2017-07-07T00:00:00.000Z","allDay":true},{"title":"Event - 40","startTime":"2017-05-25T16:23:00.000Z","endTime":"2017-05-26T18:22:00.000Z","allDay":false},{"title":"All Day - 41","startTime":"2017-04-26T00:00:00.000Z","endTime":"2017-04-27T00:00:00.000Z","allDay":true},{"title":"Event - 42","startTime":"2017-07-09T16:37:00.000Z","endTime":"2017-07-10T18:47:00.000Z","allDay":false},{"title":"Event - 43","startTime":"2017-04-28T17:33:00.000Z","endTime":"2017-04-28T19:12:00.000Z","allDay":false},{"title":"Event - 44","startTime":"2017-05-17T23:08:00.000Z","endTime":"2017-05-19T01:13:00.000Z","allDay":false},{"title":"All Day - 45","startTime":"2017-04-13T00:00:00.000Z","endTime":"2017-04-14T00:00:00.000Z","allDay":true},{"title":"All Day - 46","startTime":"2017-06-04T00:00:00.000Z","endTime":"2017-06-05T00:00:00.000Z","allDay":true},{"title":"Event - 47","startTime":"2017-04-17T16:10:00.000Z","endTime":"2017-04-17T18:58:00.000Z","allDay":false},{"title":"Event - 48","startTime":"2017-04-15T00:35:00.000Z","endTime":"2017-04-15T02:24:00.000Z","allDay":false},{"title":"Event - 49","startTime":"2017-05-06T11:20:00.000Z","endTime":"2017-05-06T13:58:00.000Z","allDay":false}]
 
+    // console.log("Events Response:-" + JSON.stringify(events));
+    //return events;
 
-    console.log("Events Response:-" + JSON.stringify(events));
-    return events;
   }
 
 
@@ -496,8 +544,8 @@ export class CalendarPage {
     //events=[{"title":"All Day - 0","startTime":"2017-06-03T00:00:00.000Z","endTime":"2017-06-04T00:00:00.000Z","allDay":true},{"title":"Event - 1","startTime":"2017-04-15T06:55:00.000Z","endTime":"2017-04-15T08:34:00.000Z","allDay":false},{"title":"All Day - 2","startTime":"2017-06-02T00:00:00.000Z","endTime":"2017-06-03T00:00:00.000Z","allDay":true},{"title":"All Day - 3","startTime":"2017-06-15T00:00:00.000Z","endTime":"2017-06-16T00:00:00.000Z","allDay":true},{"title":"All Day - 4","startTime":"2017-06-08T00:00:00.000Z","endTime":"2017-06-09T00:00:00.000Z","allDay":true},{"title":"Event - 5","startTime":"2017-05-04T04:23:00.000Z","endTime":"2017-05-04T05:06:00.000Z","allDay":false},{"title":"Event - 6","startTime":"2017-05-24T10:13:00.000Z","endTime":"2017-05-25T12:51:00.000Z","allDay":false},{"title":"All Day - 7","startTime":"2017-07-07T00:00:00.000Z","endTime":"2017-07-08T00:00:00.000Z","allDay":true},{"title":"Event - 8","startTime":"2017-06-24T12:04:00.000Z","endTime":"2017-06-25T14:27:00.000Z","allDay":false},{"title":"All Day - 9","startTime":"2017-05-17T00:00:00.000Z","endTime":"2017-05-18T00:00:00.000Z","allDay":true},{"title":"All Day - 10","startTime":"2017-06-06T00:00:00.000Z","endTime":"2017-06-07T00:00:00.000Z","allDay":true},{"title":"Event - 11","startTime":"2017-05-26T12:08:00.000Z","endTime":"2017-05-26T13:00:00.000Z","allDay":false},{"title":"All Day - 12","startTime":"2017-06-22T00:00:00.000Z","endTime":"2017-06-23T00:00:00.000Z","allDay":true},{"title":"All Day - 13","startTime":"2017-05-04T00:00:00.000Z","endTime":"2017-05-05T00:00:00.000Z","allDay":true},{"title":"Event - 14","startTime":"2017-04-18T10:15:00.000Z","endTime":"2017-04-18T11:14:00.000Z","allDay":false},{"title":"Event - 15","startTime":"2017-05-12T10:51:00.000Z","endTime":"2017-05-13T13:13:00.000Z","allDay":false},{"title":"Event - 16","startTime":"2017-04-29T18:48:00.000Z","endTime":"2017-04-29T20:45:00.000Z","allDay":false},{"title":"All Day - 17","startTime":"2017-06-21T00:00:00.000Z","endTime":"2017-06-22T00:00:00.000Z","allDay":true},{"title":"Event - 18","startTime":"2017-05-15T15:13:00.000Z","endTime":"2017-05-15T16:56:00.000Z","allDay":false},{"title":"All Day - 19","startTime":"2017-04-21T00:00:00.000Z","endTime":"2017-04-22T00:00:00.000Z","allDay":true},{"title":"All Day - 20","startTime":"2017-06-04T00:00:00.000Z","endTime":"2017-06-05T00:00:00.000Z","allDay":true},{"title":"Event - 21","startTime":"2017-06-06T12:02:00.000Z","endTime":"2017-06-07T13:18:00.000Z","allDay":false},{"title":"All Day - 22","startTime":"2017-06-07T00:00:00.000Z","endTime":"2017-06-08T00:00:00.000Z","allDay":true},{"title":"All Day - 23","startTime":"2017-07-08T00:00:00.000Z","endTime":"2017-07-09T00:00:00.000Z","allDay":true},{"title":"Event - 24","startTime":"2017-04-27T09:04:00.000Z","endTime":"2017-04-28T11:09:00.000Z","allDay":false},{"title":"Event - 25","startTime":"2017-05-15T11:41:00.000Z","endTime":"2017-05-15T13:20:00.000Z","allDay":false},{"title":"All Day - 26","startTime":"2017-05-09T00:00:00.000Z","endTime":"2017-05-10T00:00:00.000Z","allDay":true},{"title":"All Day - 27","startTime":"2017-05-13T00:00:00.000Z","endTime":"2017-05-14T00:00:00.000Z","allDay":true},{"title":"All Day - 28","startTime":"2017-04-28T00:00:00.000Z","endTime":"2017-04-29T00:00:00.000Z","allDay":true},{"title":"All Day - 29","startTime":"2017-07-03T00:00:00.000Z","endTime":"2017-07-04T00:00:00.000Z","allDay":true},{"title":"Event - 30","startTime":"2017-06-05T17:38:00.000Z","endTime":"2017-06-06T19:40:00.000Z","allDay":false},{"title":"All Day - 31","startTime":"2017-05-06T00:00:00.000Z","endTime":"2017-05-07T00:00:00.000Z","allDay":true},{"title":"Event - 32","startTime":"2017-06-15T21:46:00.000Z","endTime":"2017-06-15T22:13:00.000Z","allDay":false},{"title":"Event - 33","startTime":"2017-05-10T20:47:00.000Z","endTime":"2017-05-10T20:54:00.000Z","allDay":false},{"title":"All Day - 34","startTime":"2017-06-14T00:00:00.000Z","endTime":"2017-06-15T00:00:00.000Z","allDay":true},{"title":"All Day - 35","startTime":"2017-06-03T00:00:00.000Z","endTime":"2017-06-04T00:00:00.000Z","allDay":true},{"title":"All Day - 36","startTime":"2017-07-02T00:00:00.000Z","endTime":"2017-07-03T00:00:00.000Z","allDay":true},{"title":"Event - 37","startTime":"2017-06-13T14:22:00.000Z","endTime":"2017-06-14T16:03:00.000Z","allDay":false},{"title":"Event - 38","startTime":"2017-07-08T18:34:00.000Z","endTime":"2017-07-08T18:43:00.000Z","allDay":false},{"title":"All Day - 39","startTime":"2017-07-06T00:00:00.000Z","endTime":"2017-07-07T00:00:00.000Z","allDay":true},{"title":"Event - 40","startTime":"2017-05-25T16:23:00.000Z","endTime":"2017-05-26T18:22:00.000Z","allDay":false},{"title":"All Day - 41","startTime":"2017-04-26T00:00:00.000Z","endTime":"2017-04-27T00:00:00.000Z","allDay":true},{"title":"Event - 42","startTime":"2017-07-09T16:37:00.000Z","endTime":"2017-07-10T18:47:00.000Z","allDay":false},{"title":"Event - 43","startTime":"2017-04-28T17:33:00.000Z","endTime":"2017-04-28T19:12:00.000Z","allDay":false},{"title":"Event - 44","startTime":"2017-05-17T23:08:00.000Z","endTime":"2017-05-19T01:13:00.000Z","allDay":false},{"title":"All Day - 45","startTime":"2017-04-13T00:00:00.000Z","endTime":"2017-04-14T00:00:00.000Z","allDay":true},{"title":"All Day - 46","startTime":"2017-06-04T00:00:00.000Z","endTime":"2017-06-05T00:00:00.000Z","allDay":true},{"title":"Event - 47","startTime":"2017-04-17T16:10:00.000Z","endTime":"2017-04-17T18:58:00.000Z","allDay":false},{"title":"Event - 48","startTime":"2017-04-15T00:35:00.000Z","endTime":"2017-04-15T02:24:00.000Z","allDay":false},{"title":"Event - 49","startTime":"2017-05-06T11:20:00.000Z","endTime":"2017-05-06T13:58:00.000Z","allDay":false}]
 
 
-   // this.eventSource = events;
-     return events;
+    // this.eventSource = events;
+    return events;
   }
 
   onRangeChanged(ev) {

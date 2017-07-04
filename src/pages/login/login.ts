@@ -63,7 +63,8 @@ export class LoginPage {
           return false;
         } else {
           res = data.json();
-          console.log("Logged in Response:"+JSON.stringify(res));
+          console.log("Logged in Response:" + JSON.stringify(res));
+          console.log("Logged Id:" + res['staffdetails'][0].staff_id);
           localStorage.setItem("userInfo", res['staffdetails'][0]);
           localStorage.setItem("userInfoId", res['staffdetails'][0].staff_id);
           localStorage.setItem("userInfoName", res['staffdetails'][0].firstname);
@@ -81,7 +82,7 @@ export class LoginPage {
           localStorage.setItem("atMentionedStorage", JSON.stringify(this.atMentionedInfo));
           this.http.get(url, options)
             .subscribe(data => {
-              resatmentioned = data.json();             
+              resatmentioned = data.json();
               if (resatmentioned.staffslist.length > 0) {
                 for (let userdata in resatmentioned.staffslist) {
                   let len = resatmentioned.staffslist[userdata].personalhashtag.length;
