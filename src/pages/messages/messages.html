@@ -81,7 +81,7 @@
   <input type="hidden" value="0" name="message_priority" id="message_priority"/>
   <input type="hidden" value="{{addedImgLists}}" name="attchedlist" id="attchedlist"/>
   <p><input type="text" name="to" id="to" placeholder="To Address" class="suggest" onkeyup="sptions(event)"  onblur="sptionshide()"/></p>
-   <span><input type="checkbox" name="cmail" value="1"/>&nbsp; Copy Mail</span><span><img src="assets/icon/m1.png" onclick="e('message_priority').value=1" hspace="10"/><img onclick="e('message_priority').value=2" src="assets/icon/m2.png" hspace="10"/><ion-icon (click)="fileChooser()" *ngIf="isUploaded" name="attach" style="color: black;
+   <span><input type="checkbox" name="cmail" value="1"/>&nbsp; Copy Mail</span><span><img src="assets/icon/m1.png" onclick="e('message_priority').value=1" hspace="10"/><img onclick="e('message_priority').value=2" src="assets/icon/m2.png" hspace="10"/><!--img onclick="e('message_priority').value=2" src="assets/icon/a.png" hspace="10"/--><ion-icon (click)="fileChooser()" *ngIf="isUploaded" name="attach" style="color: black;
     position: relative;
     top: 5px;
     left: 10px;

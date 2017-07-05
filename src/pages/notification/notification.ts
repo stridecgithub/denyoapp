@@ -111,21 +111,20 @@ export class NotificationPage {
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
       // url: any = this.apiServiceURL + "/reporttemplate?is_mobile=1";
-      url: any = this.apiServiceURL + "/reporttemplate?is_mobile=1&startindex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc;
+      url: any = this.apiServiceURL + "/getpushnotification_app?ses_login_id=" + this.userId;
     let res;
     console.log(url);
     this.http.get(url, options)
       .subscribe((data) => {
         res = data.json();
         console.log(JSON.stringify(res));
-        console.log("1" + res.availabletemp.length);
-        console.log("2" + res.availabletemp);
-        if (res.availabletemp.length > 0) {
-          for (let availabletemps in res.availabletemp) {
+        console.log("1" + res.notification.length);
+        console.log("2" + res.notification);
+        if (res.notification.length > 0) {
+          for (let notifications in res.notification) {
             this.reportAllLists.push({
-              id: res.availabletemp[availabletemps].id,
-              templatename: res.availabletemp[availabletemps].templatename,
-              availableheading: res.availabletemp[availabletemps].availableheading.split("#")
+              id: res.notification[notifications].id,
+              content: res.notification[notifications].content
             });
           }
           this.totalCount = res.totalCount;

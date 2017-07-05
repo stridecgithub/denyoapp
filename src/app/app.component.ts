@@ -90,22 +90,28 @@ export class MyApp {
 
 
   initializeApp() {
-    this.statusBar.styleDefault();
+
     this._platform.ready().then(() => {
       // do whatever you need to do here.
-     setTimeout(() => {
-         this._SplashScreen.hide();
-       }, 300);
+      /*setTimeout(() => {
+          this._SplashScreen.hide();
+        }, 300);
+        */
       //this._SplashScreen.hide();
+      this.hideSplashScreen();
+      this.statusBar.styleDefault();
+
     });
+
+  }
+
+  hideSplashScreen() {
+    if (this._SplashScreen) {
+      this._SplashScreen.hide();
+    }
   }
 
   openPage(page) {
-    console.log("page com:-" + page.component);
-    console.log("1" + page);
-    console.log("2" + JSON.stringify(page));
-    // page.component = 'UnitsPage';
-
     if (page.component == 'UnitsPage') {
       this.nav.setRoot(UnitsPage);
     } else if (page.component == 'UnitgroupPage') {
@@ -123,7 +129,7 @@ export class MyApp {
     } else if (page.component == 'OrgchartPage') {
       this.nav.setRoot(OrgchartPage);
     } else if (page.title == 'Message') {
-       this.menuCtrl.close();
+      this.menuCtrl.close();
       this.nav.setRoot(MessagesPage);
     } else if (page.title == 'Logout') {
       this.menuCtrl.close();

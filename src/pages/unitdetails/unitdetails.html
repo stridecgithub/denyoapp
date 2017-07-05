@@ -60,8 +60,11 @@
     <button ion-button icon-left (click)="servicingInfo()">
   <ion-icon name="information-circle"></ion-icon>
   Servicing Info
-<!--div class="serviceinfocount"> <ion-badge item-end class="notify-badge">{{serviceCount}}</ion-badge> </div-->
+
 </button>
+    <div class="serviceinfocount" *ngIf="serviceCount!=0">
+      <ion-badge item-end class="notify-badge">{{serviceCount}}</ion-badge>
+    </div>
   </ion-item>
 
   <ion-item>
@@ -72,8 +75,8 @@
     <button ion-button icon-left (click)="commentsInfo()">
   <ion-icon name="chatboxes"></ion-icon>
  Events / Comments 
- <!--div class="serviceinfocount"> <ion-badge item-end class="notify-badge">{{commentCount}}</ion-badge> </div-->
 </button>
+ <div class="commentinfocount"  *ngIf="commentCount!=0"> <ion-badge item-end class="notify-badge">{{commentCount}}</ion-badge> </div>
   </ion-item>
   <!--div [innerHTML]="iframeContent"></div-->
   <div [innerHTML]="sanitizer.bypassSecurityTrustHtml(iframeContent)"></div>

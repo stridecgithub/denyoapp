@@ -42,13 +42,13 @@
 
 
   <div class="error" *ngIf="reportAllLists.length==0">No entries found</div>
-  <ion-item style="width: 100%; margin: 0; padding-left: 10px;">
+  <!--ion-item style="width: 100%; margin: 0; padding-left: 10px;">
     <ion-label>Sort By</ion-label>
     <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="pet" (ionChange)="onSegmentChanged(pet)">
       <ion-option value="companygroup_name,asc" selected="true">Name Asc</ion-option>
       <ion-option value="companygroup_name,desc">Name Desc</ion-option>
     </ion-select>
-  </ion-item>
+  </ion-item-->
 
   <ion-refresher (ionRefresh)="doRefresh($event)" *ngIf="totalCount!=0">
     <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
@@ -60,7 +60,7 @@
       <ion-item>
 
         <div style="overflow: hidden; padding-left: .5em;">
-          <h2><b>{{item.templatename}}</b>
+          <h2><b>{{item.content}}</b>
           </h2>
 
 
