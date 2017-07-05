@@ -405,7 +405,7 @@ export class CalendarPage {
           var event_date_array = this.eventIdentify[i]['event_date'].split('-');
           var yearstr = event_date_array[0];
           var monthstr = parseInt(event_date_array[1], 10)-1;
-          var datestr =  parseInt(event_date_array[2], 10);;
+          var datestr =  parseInt(event_date_array[2], 10);
           var startMinute = Math.floor(Math.random() * 24 * 60);
           var endMinute = Math.floor(Math.random() * 180) + startMinute;
 
