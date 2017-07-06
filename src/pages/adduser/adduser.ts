@@ -60,9 +60,9 @@ export class AdduserPage {
     public NP: NavParams,
     public fb: FormBuilder,
     public toastCtrl: ToastController, public loadingCtrl: LoadingController, private camera: Camera,
-    private filechooser: FileChooser,
+   
     private transfer: Transfer,
-    private file: File, private ngZone: NgZone) {
+    private ngZone: NgZone) {
     this.loginas = localStorage.getItem("userInfoName");
     // Create form builder validation rules
     this.form = fb.group({

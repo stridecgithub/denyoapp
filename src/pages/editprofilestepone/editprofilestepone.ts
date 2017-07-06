@@ -61,8 +61,7 @@ export class EditprofilesteponePage {
     public http: Http,
     public NP: NavParams,
     public fb: FormBuilder,
-    public toastCtrl: ToastController, public loadingCtrl: LoadingController, private camera: Camera,
-    private ngZone: NgZone) {
+    public toastCtrl: ToastController, public loadingCtrl: LoadingController, private camera: Camera) {
     this.loginas = localStorage.getItem("userInfoName");
     // Create form builder validation rules
     this.form = fb.group({

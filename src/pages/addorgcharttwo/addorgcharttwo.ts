@@ -68,10 +68,9 @@ export class AddorgcharttwoPage {
     public http: Http,
     public NP: NavParams,
     public fb: FormBuilder,
-    public toastCtrl: ToastController,
-    private filechooser: FileChooser,
+    public toastCtrl: ToastController,   
     private transfer: Transfer,
-    private file: File, private ngZone: NgZone) {
+    private ngZone: NgZone) {
     this.loginas = localStorage.getItem("userInfoName");
     // Create form builder validation rules
     this.form = fb.group({

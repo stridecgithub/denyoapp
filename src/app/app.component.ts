@@ -12,22 +12,14 @@ import { UserPage } from '../pages/user/user';
 
 import { MyaccountPage } from '../pages/myaccount/myaccount';
 import { UnitgroupPage } from '../pages/unitgroup/unitgroup';
-//import { AddUnitPage } from '../pages/add-unit/add-unit';
-
 import { RolePage } from '../pages/role/role';
-//import { AddrolePage } from '../pages/addrole/addrole';
 import { ReporttemplatePage } from '../pages/reporttemplate/reporttemplate';
-//import { AddunitgroupPage } from '../pages/addunitgroup/addunitgroup';
-import { App } from 'ionic-angular';
-//import { AtmentionedPage } from '../pages/atmentioned/atmentioned';
 import { UnitsPage } from '../pages/units/units';
 import { OrgchartPage } from '../pages/orgchart/orgchart';
 import { AlarmPage } from '../pages/alarm/alarm';
 import { AlarmlogPage } from '../pages/alarmlog/alarmlog';
 import { AddalarmPage } from '../pages/addalarm/addalarm';
 import { MessagesPage } from '../pages/messages/messages';
-//import { AddorgcharttwoPage } from '../pages/addorgcharttwo/addorgcharttwo';
-//import { AddreporttemplatePage } from '../pages/addreporttemplate/addreporttemplate';
 import { CalendarPage } from '../pages/calendar/calendar';
 import { MapsPage } from '../pages/maps/maps';
 import { ReportsPage } from '../pages/reports/reports';

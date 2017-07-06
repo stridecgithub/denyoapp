@@ -5,7 +5,6 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { AddorgchartonePage } from '../addorgchartone/addorgchartone';
 import { LoadingController } from 'ionic-angular';
 import { HomePage } from '../home/home';
-import { DomSanitizer } from '@angular/platform-browser';
 //import * as $ from 'jquery';
 //import "slick-carousel";
 /**
@@ -39,7 +38,7 @@ export class OrgchartPage {
   public userId: any;
   public companyId: any;
   iframeContent: any;
-  constructor(private sanitizer: DomSanitizer,  public http: Http, public nav: NavController,
+  constructor( public http: Http, public nav: NavController,
     public toastCtrl: ToastController, public alertCtrl: AlertController, public navParams: NavParams, public loadingCtrl: LoadingController) {
     this.loginas = localStorage.getItem("userInfoName");
     this.userId = localStorage.getItem("userInfoId");

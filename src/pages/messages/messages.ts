@@ -1,13 +1,8 @@
 import { Component, NgZone } from '@angular/core';
 import { NavController, AlertController, ToastController } from 'ionic-angular';
 import { IonicApp } from 'ionic-angular/index'
-//import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 import { Http, Headers, RequestOptions } from "@angular/http";
-//import { HttpModule } from "@angular/http";
-//import { Sendmsg } from '../sendmsg/sendmsg';
-//import { Compose } from '../compose/compose';
-//import { TabsPage } from '../tabs/tabs';
 import { CompanygroupPage } from '../companygroup/companygroup';
 import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
@@ -24,8 +19,6 @@ import { File } from '@ionic-native/file';
     providers: [Camera, FileChooser, Transfer, File]
 })
 export class MessagesPage {
-    //sendmsg = Sendmsg;
-    //compose = Compose;
     app: IonicApp;
     data: any;
     public loginas: any;
@@ -40,7 +33,7 @@ export class MessagesPage {
     public isUploaded: boolean = true;
     public isUploadedProcessing: boolean = false;
     Catdata: any;
-    private baseURI: string = "";
+    private baseURI: string = "http://denyoappv2.stridecdev.com";
     constructor(app: IonicApp, public navCtrl: NavController, private alertCtrl: AlertController, private http: Http, private camera: Camera,
         private filechooser: FileChooser,
         private transfer: Transfer,
@@ -49,13 +42,7 @@ export class MessagesPage {
         this.loginas = localStorage.getItem("userInfoName");
         this.userId = localStorage.getItem("userInfoId");
         this.pageTitle = "Messages";
-
-    }
-
-    ionViewDidEnter() {
-        // this.presentAlert();
-
-    }
+    }    
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad MessagesPage');
@@ -74,9 +61,6 @@ export class MessagesPage {
         alert.present();
     }
     presentAlert1() {
-
-
-        //let text = "";
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
         let options = new RequestOptions({ headers: headers });
         let linker = "http://denyoappv2.stridecdev.com/denyo2.php?method=inbox&id=1";
@@ -87,7 +71,6 @@ export class MessagesPage {
                 element.setAttribute("type", "text");
                 element.setAttribute("value", data);
                 element.setAttribute("style", "color:Red");
-                // (document.getElementById('contentview') as HTMLDivElement).appendChild(element);
                 (document.getElementById('contentview') as HTMLDivElement).innerHTML = data;
 
             });
@@ -98,7 +81,6 @@ export class MessagesPage {
 
     }
     onPageDidEnter() {
-        // this.presentAlert()
     }
 
 
@@ -156,7 +138,7 @@ export class MessagesPage {
             mimeType: "text/plain",
         }
         fileTransfer.onProgress(this.onProgress);
-        fileTransfer.upload(path, this.baseURI + 'http://denyoappv2.stridecdev.com/api/upload_attach.php', options)
+        fileTransfer.upload(path, this.baseURI + '/api/upload_attach.php', options)
             .then((data) => {
                 console.log("UPLOAD SUCCESS:" + data.response);
                 let successData = JSON.parse(data.response);

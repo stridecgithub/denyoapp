@@ -9,7 +9,6 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import { FileChooser } from '@ionic-native/file-chooser';
 
 import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
-import { File } from '@ionic-native/file';
 
 import 'rxjs/add/operator/map';
 
@@ -23,7 +22,7 @@ import 'rxjs/add/operator/map';
 @Component({
   selector: 'page-addorgchartone',
   templateUrl: 'addorgchartone.html',
-   providers: [Camera, FileChooser, Transfer, File]
+   providers: [Camera, FileChooser, Transfer]
 })
 export class AddorgchartonePage {
  public loginas: any;
@@ -62,9 +61,7 @@ export class AddorgchartonePage {
     public toastCtrl: ToastController,
     public loadingCtrl: LoadingController,
     private camera: Camera,
-    private filechooser: FileChooser,
-    private transfer: Transfer,
-    private file: File,private ngZone: NgZone) {
+    private transfer: Transfer,private ngZone: NgZone) {
        this.loginas = localStorage.getItem("userInfoName");
     // Create form builder validation rules
     this.form = fb.group({

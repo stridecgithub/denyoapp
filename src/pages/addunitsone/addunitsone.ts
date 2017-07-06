@@ -49,8 +49,7 @@ export class AddunitsonePage {
   constructor(private nativeGeocoder: NativeGeocoder, public nav: NavController,
     public NP: NavParams,
     public fb: FormBuilder,
-    public toastCtrl: ToastController, public loadingCtrl: LoadingController,
-    private ngZone: NgZone) {
+    public toastCtrl: ToastController, public loadingCtrl: LoadingController,    ) {
     this.loginas = localStorage.getItem("userInfoName");
     // Create form builder validation rules
     this.form = fb.group({

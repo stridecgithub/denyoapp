@@ -295,7 +295,6 @@ export class AddcalendarPage {
   //http://denyoappv2.stridecdev.com/calendar/update?is_mobile=1&event_type=Event&event_title=sfd&event_location=london&event_date=2017-07-07&event_time=6:00 AM&ses_login_id=2&event_remark=@vignesh&id=1
 
   updateEntry(event_title, type_name, event_project, event_subject, event_unitid, event_time, event_location, service_remark, createdby) {
-    let updatedby = createdby;
     let body: string = "is_mobile=1&event_type="
       + type_name + "&event_title=" + event_title + "&event_subject=" + event_subject + "&event_date=" + this.event_date + "&event_time=" + event_time + "&event_location=" + event_location + "&event_remark=" + service_remark + "&ses_login_id=" + createdby + "&id=" + this.recordID,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
