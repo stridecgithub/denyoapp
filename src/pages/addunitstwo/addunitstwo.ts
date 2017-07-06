@@ -1,5 +1,5 @@
 import { Component, NgZone } from '@angular/core';
-import {  NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -34,6 +34,9 @@ export class AddunitstwoPage {
   public userId: any;
   public createdby: any;
   public location: any;
+  public latitude: any;
+  public longitude: any;
+
   public responseResultModel: any;
   progress: number;
   public isProgress = false;
@@ -43,7 +46,7 @@ export class AddunitstwoPage {
   public readOnly: boolean = false;
   public addedImgLists: any;
   public userInfo = [];
-  
+
   // Flag to hide the form upon successful completion of remote operation
   public hideForm: boolean = false;
   public hideActionButton = true;
@@ -130,12 +133,16 @@ export class AddunitstwoPage {
           console.log('Key' + key);
           this.location = info[key].location;
           this.createdby = info[key].createdby;
+          this.latitude = info[key].latitude;
+          this.longitude = info[key].longitude;
           console.log("Location for User Account:" + this.location);
           //console.log(JSON.stringify(this));
         } else {
           console.log('Key' + key);
           this.location = info[0].location;
           this.createdby = info[0].createdby;
+          this.latitude = info[0].latitude;
+          this.longitude = info[0].longitude;
           console.log("Location for User Account:" + this.location);
         }
         /* this.userInfo.push({
@@ -146,7 +153,7 @@ export class AddunitstwoPage {
       }
     }
 
-    
+
     //Static Storage
     /*let data = [
       { username: 'Krishanth', fullname: 'Kannan' },
@@ -209,7 +216,9 @@ export class AddunitstwoPage {
       models_id: models_id,
       neaplateno: neaplateno,
       createdby: createdby,
-      location: this.location
+      location: this.location,
+      latitude: this.latitude,
+      longitude: this.longitude
     });
     this.nav.setRoot(AddunitsthreePage, {
       accountInfo: this.userInfo,
@@ -232,7 +241,9 @@ export class AddunitstwoPage {
       models_id: models_id,
       neaplateno: neaplateno,
       createdby: createdby,
-      location: this.location
+      location: this.location,
+      latitude: this.latitude,
+      longitude: this.longitude
     });
     this.nav.setRoot(AddunitsthreePage, {
       accountInfo: this.userInfo,
@@ -341,7 +352,7 @@ export class AddunitstwoPage {
     }
   }
 
-  
+
 
 
   notification() {

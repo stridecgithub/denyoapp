@@ -194,3 +194,7 @@ font-size:32px
   @include margin($select-popover-list-margin-top, $select-popover-list-margin-end, $select-popover-list-margin-bottom, $select-popover-list-margin-start);
 }
 
+textarea {   
+    width: 100%;
+}
+

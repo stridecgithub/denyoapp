@@ -1,5 +1,5 @@
 import { Component, NgZone } from '@angular/core';
-import {  NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -41,6 +41,8 @@ export class AddunitsthreePage {
   public unitname: any;
   public createdby: any;
   public location: any;
+  public latitude: any;
+  public longitude: any;
   public projectname: any;
   public controllerid: any;
   public neaplateno: any;
@@ -184,7 +186,6 @@ export class AddunitsthreePage {
         }
 
         if (key == keyindex) {
-
           this.unitname = info[key].unitname;
           this.createdby = info[key].createdby;
           this.projectname = info[key].projectname;
@@ -192,12 +193,12 @@ export class AddunitsthreePage {
           this.neaplateno = info[key].neaplateno;
           this.models_id = info[key].models_id;
           this.location = info[key].location;
+          this.latitude = info[key].latitude;
+          this.longitude = info[key].longitude;
 
         } else {
-
           this.unitname = info[0].unitname;
           this.createdby = info[0].createdby;
-
           this.unitname = info[0].unitname;
           this.createdby = info[0].createdby;
           this.projectname = info[0].projectname;
@@ -205,6 +206,8 @@ export class AddunitsthreePage {
           this.neaplateno = info[0].neaplateno;
           this.models_id = info[0].models_id;
           this.location = info[0].location;
+          this.latitude = info[0].latitude;
+          this.longitude = info[0].longitude;
 
         }
 
@@ -213,7 +216,7 @@ export class AddunitsthreePage {
 
 
 
-    
+
   }
 
 
@@ -242,7 +245,9 @@ export class AddunitsthreePage {
       controllerid: this.controllerid,
       neaplateno: this.neaplateno,
       models_id: this.models_id,
-      location: this.location
+      location: this.location,
+      latitude: this.latitude,
+      longitude: this.longitude
     });
     this.nav.setRoot(AddunitsfourPage, {
       accountInfo: this.userInfo
@@ -267,7 +272,9 @@ export class AddunitsthreePage {
       controllerid: this.controllerid,
       neaplateno: this.neaplateno,
       models_id: this.models_id,
-      location: this.location
+      location: this.location,
+      latitude: this.latitude,
+      longitude: this.longitude
 
     });
     this.nav.setRoot(AddunitsfourPage, {

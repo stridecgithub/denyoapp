@@ -1,5 +1,5 @@
 import { Component, NgZone } from '@angular/core';
-import {  NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -39,6 +39,8 @@ export class AddunitsfourPage {
   public neaplateno: any;
   public models_id: any;
   public location: any;
+  public latitude: any;
+  public longitude: any;
   public contact_name: any;
   public alarmhashtags: any;
   public contact_number: any;
@@ -55,8 +57,6 @@ export class AddunitsfourPage {
   public hideActionButton = true;
   // Property to help ste the page title
   public pageTitle: string;
-  public latitude: any;
-  public longitude: any;
   // Property to store the recordID for when an existing entry is being edited
   public recordID: any = null;
   public isUploadedProcessing: boolean = false;
@@ -136,6 +136,8 @@ export class AddunitsfourPage {
           this.neaplateno = info[key].neaplateno;
           this.models_id = info[key].models_id;
           this.location = info[key].location;
+          this.latitude = info[key].latitude;
+          this.longitude = info[key].longitude;
           this.contact_name = info[key].contact_name;
           this.alarmhashtags = info[key].alarmhashtags;
           this.contact_number = info[key].contact_number;
@@ -155,6 +157,8 @@ export class AddunitsfourPage {
           this.neaplateno = info[0].neaplateno;
           this.models_id = info[0].models_id;
           this.location = info[0].location;
+          this.latitude = info[0].latitude;
+          this.longitude = info[0].longitude;
           this.contact_name = info[0].contact_name;
           this.alarmhashtags = info[0].alarmhashtags;
           this.contact_number = info[0].contact_number;
@@ -180,8 +184,8 @@ export class AddunitsfourPage {
   selectEntry(item) {
     this.unitgroups_id = item.unitgroups_id;
     this.companys_id = item.companys_id;
-    this.latitude=item.latitude;
-    this.longitude=item.longitude;
+    this.latitude = item.latitude;
+    this.longitude = item.longitude;
     this.recordID = item.unit_id;
 
   }
@@ -425,7 +429,7 @@ export class AddunitsfourPage {
       loader.dismiss();
     }
   }
-  
+
 
 
 

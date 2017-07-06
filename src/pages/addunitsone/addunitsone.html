@@ -41,16 +41,16 @@
           <ion-label stacked>Deployed Location<span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
           <ion-input type="text" [disabled]="readOnly" formControlName="location" [(ngModel)]="location"></ion-input>
         </ion-item>
-
-        <div>
-          <a href="#" (click)="getGps()">Use GPS Location</a>
-        </div>
-        <div>
-          <b>GPS Detected Location</b>
-        </div>
-
-        <div>
-          <b>Latitude:</b>{{lat}} <b>Longtitude:</b>{{lang}}
+        <div *ngIf="isEdited">
+          <div>
+            <p><a href="#" (click)="getGps()">Use GPS Location</a></p>
+          </div>
+          <div>
+            <p><b>GPS Detected Location</b></p>
+          </div>
+          <div>
+            <p><b>Latitude:</b>{{lat}} <b>Longtitude:</b>{{lang}}</p>
+          </div>
         </div>
 
         <ion-item *ngIf="hideActionButton">
