@@ -209,6 +209,14 @@ export class AddcompanygroupPage {
       address: string = this.form.controls["address"].value,
       country: string = this.form.controls["country"].value,
       contact: string = this.form.controls["contact"].value;
+      
+
+      if( companygroup_name.toLowerCase() == 'denyo' || companygroup_name.toLowerCase() == 'dum' || companygroup_name.toLowerCase() == 'dsg' || companygroup_name.toLowerCase() == 'denyo singapore' )
+      {
+        this.sendNotification("Given Company Name Not Acceptable....");
+      }
+      else
+      {
 
     if (this.isEdited) {
       this.updateEntry(companygroup_name, address, country, contact, this.userId);
@@ -216,6 +224,7 @@ export class AddcompanygroupPage {
     else {
       this.createEntry(companygroup_name, address, country, contact, this.userId);
     }
+  }
   }
 
 
