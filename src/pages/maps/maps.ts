@@ -1,6 +1,6 @@
 
 import { Component } from '@angular/core';
-import { IonicPage, NavController, ToastController, AlertController, NavParams } from 'ionic-angular';
+import {  NavController, ToastController, AlertController, NavParams } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { AddunitsonePage } from '../addunitsone/addunitsone';
@@ -15,7 +15,6 @@ import { UnitsPage } from '../units/units';
 import { UnitdetailsPage } from '../unitdetails/unitdetails';
 //declare var google;
 import { DomSanitizer } from '@angular/platform-browser';
-@IonicPage()
 @Component({
   selector: 'page-maps',
   templateUrl: 'maps.html',

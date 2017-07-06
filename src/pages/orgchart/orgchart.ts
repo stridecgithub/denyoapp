@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, ToastController, AlertController, NavParams } from 'ionic-angular';
+import {  NavController, ToastController, AlertController, NavParams } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { AddorgchartonePage } from '../addorgchartone/addorgchartone';
 import { LoadingController } from 'ionic-angular';
 import { HomePage } from '../home/home';
-import { HTTP } from '@ionic-native/http';
 import { DomSanitizer } from '@angular/platform-browser';
 //import * as $ from 'jquery';
 //import "slick-carousel";
@@ -15,11 +14,9 @@ import { DomSanitizer } from '@angular/platform-browser';
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-@IonicPage()
 @Component({
   selector: 'page-orgchart',
-  templateUrl: 'orgchart.html',
-  providers: [HTTP]
+  templateUrl: 'orgchart.html'
 })
 export class OrgchartPage {
 
@@ -42,7 +39,7 @@ export class OrgchartPage {
   public userId: any;
   public companyId: any;
   iframeContent: any;
-  constructor(private sanitizer: DomSanitizer, private httpdata: HTTP, public http: Http, public nav: NavController,
+  constructor(private sanitizer: DomSanitizer,  public http: Http, public nav: NavController,
     public toastCtrl: ToastController, public alertCtrl: AlertController, public navParams: NavParams, public loadingCtrl: LoadingController) {
     this.loginas = localStorage.getItem("userInfoName");
     this.userId = localStorage.getItem("userInfoId");
@@ -68,25 +65,7 @@ export class OrgchartPage {
     this.reportData.startindex = 0;
     this.reportData.sort = "unitgroup_id";
     this.dounitGroup();
-
-
-    let url;
-    // url = this.apiServiceURL + "/orgchart?company_id=7&is_mobile=1";
-    //url = "http://strtheme.stridecdev.com/ioncalendar/calendar.html";
-    //url = this.apiServiceURL + "/2/1/unitdetails";
-    //http://denyoappv2.stridecdev.com/2/1/unitdetails
-    url = this.apiServiceURL + "/api/webview/orgchart.html";
-    this.httpdata.get(url, {}, {})
-      .then(data => {
-        this.htmlContent = data.data;
-      })
-      .catch(error => {
-
-        console.log(error.status);
-        console.log(error.error); // error message as string
-        console.log(error.headers);
-
-      });
+    
     console.log(this.apiServiceURL + "/orgchart?company_id=" + this.companyId + "&is_mobile=1");
     this.iframeContent = "<iframe src=" + this.apiServiceURL + "/orgchart?company_id=" + this.companyId + "&is_mobile=1 height=350 frameborder=0></iframe>";
   }

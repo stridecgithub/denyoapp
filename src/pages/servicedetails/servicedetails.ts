@@ -1,5 +1,5 @@
 import { Component, NgZone } from '@angular/core';
-import { IonicPage, AlertController, NavController, NavParams, ViewController, ToastController } from 'ionic-angular';
+import { AlertController, NavController, NavParams, ViewController, ToastController } from 'ionic-angular';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Camera } from '@ionic-native/camera';
 import { FileChooser } from '@ionic-native/file-chooser';
@@ -12,8 +12,6 @@ import { UnitsPage } from '../units/units';
 import { RolePage } from '../role/role';
 import { CompanygroupPage } from '../companygroup/companygroup';
 import { DatePicker } from '@ionic-native/date-picker';
-//import * as $ from 'jquery'
-//import "slick-carousel";
 import 'rxjs/add/operator/map';
 //import { Http, Headers, RequestOptions } from '@angular/http';
 
@@ -23,7 +21,6 @@ import 'rxjs/add/operator/map';
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-@IonicPage()
 @Component({
   selector: 'page-servicedetails',
   templateUrl: 'servicedetails.html',

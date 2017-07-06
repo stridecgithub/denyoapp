@@ -2,13 +2,14 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform, MenuController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-//import { OtherPage } from '../pages/other/other';
-//import { TabsPage } from '../pages/tabs/tabs';
-import { CompanygroupPage } from '../pages/companygroup/companygroup';
-import { UserPage } from '../pages/user/user';
-import { LoginPage } from '../pages/login/login';
 
 import { HomePage } from '../pages/home/home';
+
+
+import { CompanygroupPage } from '../pages/companygroup/companygroup';
+import { UserPage } from '../pages/user/user';
+
+
 import { MyaccountPage } from '../pages/myaccount/myaccount';
 import { UnitgroupPage } from '../pages/unitgroup/unitgroup';
 //import { AddUnitPage } from '../pages/add-unit/add-unit';
@@ -24,11 +25,9 @@ import { OrgchartPage } from '../pages/orgchart/orgchart';
 import { AlarmPage } from '../pages/alarm/alarm';
 import { AlarmlogPage } from '../pages/alarmlog/alarmlog';
 import { AddalarmPage } from '../pages/addalarm/addalarm';
+import { MessagesPage } from '../pages/messages/messages';
 //import { AddorgcharttwoPage } from '../pages/addorgcharttwo/addorgcharttwo';
 //import { AddreporttemplatePage } from '../pages/addreporttemplate/addreporttemplate';
-import { LogoutPage } from '../pages/logout/logout';
-import { DataServiceProvider } from '../providers/data-service/data-service';
-import { MessagesPage } from '../pages/messages/messages';
 import { CalendarPage } from '../pages/calendar/calendar';
 import { MapsPage } from '../pages/maps/maps';
 import { ReportsPage } from '../pages/reports/reports';
@@ -36,30 +35,22 @@ import { ReportsPage } from '../pages/reports/reports';
 import { ServicedetailsPage } from '../pages/servicedetails/servicedetails';
 import { AlarmdetailsPage } from '../pages/alarmdetails/alarmdetails';
 import { CommentdetailsPage } from '../pages/commentdetails/commentdetails';
-
-//import { MapdemoPage } from '../pages/mapdemo/mapdemo';
-
+import { DataServiceProvider } from '../providers/data-service/data-service';
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-
-  rootPage: any = LoginPage;
+  rootPage: any = HomePage;
   pages: any;
   showLevel1 = null;
   showLevel2 = null;
-  constructor(public _platform: Platform, public statusBar: StatusBar, public _SplashScreen: SplashScreen,
-    public appCtrl: App, public dataService: DataServiceProvider, public menuCtrl: MenuController) {
-
-
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public dataService: DataServiceProvider, public menuCtrl: MenuController) {
     this.initializeApp();
     this.dataService.getMenus()
       .subscribe((response) => {
         this.pages = response;
       });
-
-    // used for an example of ngFor and navigation
     this.pages = [
 
       { title: 'Dashboard', component: HomePage },
@@ -71,7 +62,7 @@ export class MyApp {
       { title: 'My Account', component: MyaccountPage },
       { title: 'Report Template', component: ReporttemplatePage },
       { title: 'Org Chart', component: OrgchartPage },
-      { title: 'Message', component: MessagesPage },
+
       { title: 'Maps', component: MapsPage },
       { title: 'Calendar', component: CalendarPage },
       { title: 'Reports', component: ReportsPage },
@@ -83,33 +74,23 @@ export class MyApp {
       { title: 'Alarm Details', component: AlarmdetailsPage },
       // { title: 'Map Demo', component: MapdemoPage },
 
-      { title: 'Logout', component: LogoutPage }
+
     ];
 
-  }
 
+  }
 
   initializeApp() {
-
-    this._platform.ready().then(() => {
-      // do whatever you need to do here.
-      /*setTimeout(() => {
-          this._SplashScreen.hide();
-        }, 300);
-        */
-      //this._SplashScreen.hide();
-      this.hideSplashScreen();
+    this.platform.ready().then(() => {
+      // Okay, so the platform is ready and our plugins are available.
+      // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
-
+      setTimeout(() => {
+        this.splashScreen.hide();
+      }, 300);
     });
-
   }
 
-  hideSplashScreen() {
-    if (this._SplashScreen) {
-      this._SplashScreen.hide();
-    }
-  }
 
   openPage(page) {
     if (page.component == 'UnitsPage') {
@@ -132,8 +113,9 @@ export class MyApp {
       this.menuCtrl.close();
       this.nav.setRoot(MessagesPage);
     } else if (page.title == 'Logout') {
+      this.logout();
       this.menuCtrl.close();
-      this.nav.setRoot(LogoutPage);
+      //this.nav.setRoot(LogoutPage);
     } else if (page.title == 'Dashboard') {
       this.menuCtrl.close();
       this.nav.setRoot(HomePage);
@@ -184,5 +166,14 @@ export class MyApp {
   isLevel2Shown(idx) {
     return this.showLevel2 === idx;
   };
+  logout() {
+    localStorage.setItem("userInfo", "");
+    localStorage.setItem("userInfoId", "");
+    localStorage.setItem("userInfoName", "");
+    localStorage.setItem("userInfoEmail", "");
+    localStorage.setItem("userInfoCompanyId", "");
+    localStorage.setItem("atMentionedStorage", "");
+    this.nav.push(HomePage);
+  }
 }
 

@@ -1,6 +1,6 @@
 
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController, LoadingController } from 'ionic-angular';
+import { NavController, LoadingController, AlertController, ToastController } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 import { Http, Headers, RequestOptions } from "@angular/http";
 
@@ -52,7 +52,7 @@ export class CalendarPage {
   public eventIdentify = [];
   public companyId: any;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
-  constructor(public navCtrl: NavController, private datePicker: DatePicker, private http: Http, public loadingCtrl: LoadingController) {
+  constructor(public toastCtrl: ToastController, public alertCtrl: AlertController, public navCtrl: NavController, private datePicker: DatePicker, private http: Http, public loadingCtrl: LoadingController) {
     this.loginas = localStorage.getItem("userInfoName");
     this.userId = localStorage.getItem("userInfoId");
     this.userId = localStorage.getItem("userInfoId");
@@ -378,6 +378,71 @@ export class CalendarPage {
     event.setHours(0, 0, 0, 0);
     this.isToday = today.getTime() === event.getTime();
   }
+
+  doConfirm(id, item, type) {
+    console.log("Deleted Id" + id);
+    let confirm = this.alertCtrl.create({
+      message: 'Are you sure you want to delete this unit group?',
+      buttons: [{
+        text: 'Yes',
+        handler: () => {
+          this.deleteEntry(id, type);
+          for (let q: number = 0; q < this.calendarResultService.length; q++) {
+            if (this.calendarResultService[q] == item) {
+              this.calendarResultService.splice(q, 1);
+            }
+          }
+        }
+      },
+      {
+        text: 'No',
+        handler: () => { }
+      }]
+    });
+    confirm.present();
+  }
+
+  deleteEntry(recordID, deltype) {
+    let delactionurl;
+    if (deltype == 'Event') {
+      //http://denyoappv2.stridecdev.com/calendar/1/1/deleteevent
+      delactionurl = "/calendar/" + recordID + "/1/deleteevent";
+    } else if (deltype == 'Service') {
+
+      //http://denyoappv2.stridecdev.com/calendar/2/1/deleteservice
+      delactionurl = "/calendar/" + recordID + "/1/deleteservice";
+
+    } else if (deltype == 'Alarm') {
+      // http://denyoappv2.stridecdev.com/calendar/2/1/deletealarm
+      delactionurl = "/calendar/" + recordID + "/1/deletealarm";
+    }
+    let
+      //body: string = "key=delete&recordID=" + recordID,
+      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + delactionurl;
+    this.http.get(url, options)
+      .subscribe(data => {
+        // If the request was successful notify the user
+        if (data.status === 200) {
+
+          this.sendNotification(`Comments was successfully deleted`);
+        }
+        // Otherwise let 'em know anyway
+        else {
+          this.sendNotification('Something went wrong!');
+        }
+      });
+  }
+
+  sendNotification(message): void {
+    let notification = this.toastCtrl.create({
+      message: message,
+      duration: 3000
+    });
+    notification.present();
+  }
   createRandomEvents() {
     var events = [];
 
@@ -404,21 +469,21 @@ export class CalendarPage {
           var endTime;
           var event_date_array = this.eventIdentify[i]['event_date'].split('-');
           var yearstr = event_date_array[0];
-          var monthstr = parseInt(event_date_array[1], 10)-1;
-          var datestr =  parseInt(event_date_array[2], 10);
+          var monthstr = parseInt(event_date_array[1], 10) - 1;
+          var datestr = parseInt(event_date_array[2], 10);
           var startMinute = Math.floor(Math.random() * 24 * 60);
           var endMinute = Math.floor(Math.random() * 180) + startMinute;
 
           console.log("Get Full year" + yearstr);
           console.log("Get Month" + monthstr);
           console.log("Get Day" + datestr);
-          startTime = new Date(yearstr, monthstr, datestr , 0,0 + startMinute);
-          endTime = new Date(yearstr, monthstr, datestr , 0,0 + endMinute);
-          events.push({           
+          startTime = new Date(yearstr, monthstr, datestr, 0, 0 + startMinute);
+          endTime = new Date(yearstr, monthstr, datestr, 0, 0 + endMinute);
+          events.push({
             title: this.eventIdentify[i]['event_title'],
             startTime: startTime,
             endTime: endTime,
-            allDay: true           
+            allDay: true
           });
         }
         /*

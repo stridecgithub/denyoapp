@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import {  NavController, NavParams, ToastController } from 'ionic-angular';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 //import { PasswordValidator } from '../../validators/password';
 import { UserorgchartPage } from '../userorgchart/userorgchart';
@@ -11,7 +11,6 @@ import { AdduserPage } from '../adduser/adduser';
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-@IonicPage()
 @Component({
   selector: 'page-useraccount',
   templateUrl: 'useraccount.html',

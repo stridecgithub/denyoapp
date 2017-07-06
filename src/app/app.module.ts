@@ -3,10 +3,12 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import { HttpModule } from '@angular/http';
+import { NgCalendarModule } from 'ionic2-calendar';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { LoginPage } from '../pages/login/login';
-import { TabsPage } from '../pages/tabs/tabs';
+import { DashboardPage } from '../pages/dashboard/dashboard';
+import { CalendarPage } from '../pages/calendar/calendar';
 import { CompanygroupPage } from '../pages/companygroup/companygroup';
 import { AddcompanygroupPage } from '../pages/addcompanygroup/addcompanygroup';
 import { ViewcompanygroupPage } from '../pages/viewcompanygroup/viewcompanygroup';
@@ -15,14 +17,12 @@ import { AdduserPage } from '../pages/adduser/adduser';
 import { UseraccountPage } from '../pages/useraccount/useraccount';
 import { UserorgchartPage } from '../pages/userorgchart/userorgchart';
 import { MyaccountPage } from '../pages/myaccount/myaccount';
-import { LogoutPage } from '../pages/logout/logout';
 import { EditprofilesteponePage } from '../pages/editprofilestepone/editprofilestepone';
 import { EditprofilesteptwoPage } from '../pages/editprofilesteptwo/editprofilesteptwo';
 import { RolePage } from '../pages/role/role';
 import { AddrolePage } from '../pages/addrole/addrole';
 import { AddunitgroupPage } from '../pages/addunitgroup/addunitgroup';
 import { UnitgroupPage } from '../pages/unitgroup/unitgroup';
-import { AtmentionedPage } from '../pages/atmentioned/atmentioned';
 import { UnitsPage } from '../pages/units/units';
 import { AddunitsonePage } from '../pages/addunitsone/addunitsone';
 import { AddunitstwoPage } from '../pages/addunitstwo/addunitstwo';
@@ -39,9 +39,6 @@ import { AddreporttemplatePage } from '../pages/addreporttemplate/addreporttempl
 import { AddrequestsupportPage } from '../pages/addrequestsupport/addrequestsupport';
 import { CommentsinfoPage } from '../pages/commentsinfo/commentsinfo';
 import { AddcommentsinfoPage } from '../pages/addcommentsinfo/addcommentsinfo';
-import { DataServiceProvider } from '../providers/data-service/data-service';
-import { MessagesPage } from '../pages/messages/messages';
-import { CalendarPage } from '../pages/calendar/calendar';
 import { AddcalendarPage } from '../pages/addcalendar/addcalendar';
 import { AlarmPage } from '../pages/alarm/alarm';
 import { AlarmlogPage } from '../pages/alarmlog/alarmlog';
@@ -52,14 +49,15 @@ import { CommentdetailsPage } from '../pages/commentdetails/commentdetails';
 import { AlarmdetailsPage } from '../pages/alarmdetails/alarmdetails';
 import { NotificationPage } from '../pages/notification/notification';
 import { ReportsPage } from '../pages/reports/reports';
-import { NgCalendarModule } from 'ionic2-calendar';
-import { HttpModule } from '@angular/http';
+import { MessagesPage } from '../pages/messages/messages';
+import { DataServiceProvider } from '../providers/data-service/data-service';
+
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    LoginPage,
-    TabsPage,
+    DashboardPage,
+    CalendarPage,
     CompanygroupPage,
     AddcompanygroupPage,
     ViewcompanygroupPage,
@@ -67,7 +65,6 @@ import { HttpModule } from '@angular/http';
     AdduserPage,
     UseraccountPage,
     UserorgchartPage,
-    LogoutPage,
     MyaccountPage,
     UnitsPage,
     AddunitsonePage,
@@ -81,7 +78,7 @@ import { HttpModule } from '@angular/http';
     AddunitgroupPage,
     UnitgroupPage,
     ReporttemplatePage,
-    AtmentionedPage,
+    MessagesPage,
     AddorgchartonePage,
     AddorgcharttwoPage,
     OrgchartPage,
@@ -92,7 +89,7 @@ import { HttpModule } from '@angular/http';
     AddserviceinfoPage,
     AddreporttemplatePage,
     AddrequestsupportPage,
-    MessagesPage,
+   
     CalendarPage,
     AddcalendarPage,
     AlarmPage,
@@ -106,25 +103,17 @@ import { HttpModule } from '@angular/http';
     ReportsPage
   ],
   imports: [
-    NgCalendarModule,
     BrowserModule,
+    NgCalendarModule,
     HttpModule,
-    IonicModule.forRoot(MyApp, {
-      backButtonText: 'Go Back',
-      iconMode: 'ios',
-      modalEnter: 'modal-slide-in',
-      modalLeave: 'modal-slide-out',
-      tabsPlacement: 'bottom',
-      pageTransition: 'ios-transition',
-      tabSubPages: false
-    })
+    IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
-    LoginPage,
-    TabsPage,
+    DashboardPage,
+    CalendarPage,
     CompanygroupPage,
     AddcompanygroupPage,
     ViewcompanygroupPage,
@@ -132,14 +121,13 @@ import { HttpModule } from '@angular/http';
     AdduserPage,
     UseraccountPage,
     UserorgchartPage,
-    LogoutPage,
+    MessagesPage,
     MyaccountPage,
     UnitsPage,
     AddunitsonePage,
     AddunitstwoPage,
     AddunitsthreePage,
     AddunitsfourPage,
-    AddunitsonePage,
     EditprofilesteponePage,
     EditprofilesteptwoPage,
     RolePage,
@@ -147,7 +135,7 @@ import { HttpModule } from '@angular/http';
     AddunitgroupPage,
     UnitgroupPage,
     ReporttemplatePage,
-    AtmentionedPage,
+ 
     AddorgchartonePage,
     AddorgcharttwoPage,
     OrgchartPage,
@@ -158,16 +146,15 @@ import { HttpModule } from '@angular/http';
     AddserviceinfoPage,
     AddreporttemplatePage,
     AddrequestsupportPage,
-    MessagesPage,
     CalendarPage,
+    AddcalendarPage,
     AlarmPage,
     AddalarmPage,
-    AddcalendarPage,
     AlarmlogPage,
     MapsPage,
     ServicedetailsPage,
-    CommentdetailsPage,
     NotificationPage,
+    CommentdetailsPage,
     AlarmdetailsPage,
     ReportsPage
   ],

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { CompanygroupPage } from '../companygroup/companygroup';
@@ -17,7 +17,6 @@ import { NotificationPage } from '../notification/notification';
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-@IonicPage()
 @Component({
   selector: 'page-addcalendar',
   templateUrl: 'addcalendar.html',
@@ -34,7 +33,7 @@ export class AddcalendarPage {
   public event_unitid: any;
   public event_date: any;
   public event_title: any;
-  public service_remark: any;  
+  public service_remark: any;
   public userId: any;
   public responseResultType = [];
   public responseResultTime = [];
@@ -244,7 +243,7 @@ export class AddcalendarPage {
     this.event_project = item.event_project;
     this.event_subject = item.event_subject;
     this.event_unitid = item.event_unitid;
-    this.recordID = item.companygroup_id;
+    this.recordID = item.id;
   }
 
 
@@ -254,10 +253,10 @@ export class AddcalendarPage {
   // to our remote PHP script (note the body variable we have created which
   // supplies a variable of key with a value of create followed by the key/value pairs
   // for the record data
-  createEntry(event_title, type_name, event_project, event_subject, event_unitid, event_time, event_location,service_remark, createdby) {
+  createEntry(event_title, type_name, event_project, event_subject, event_unitid, event_time, event_location, service_remark, createdby) {
     //let updatedby = createdby;
     let body: string = "is_mobile=1&event_type="
-      + type_name + "&event_title=" + event_title + "&event_subject=" + event_subject + "&event_date=" + this.event_date + "&event_time=" + event_time + "&service_unitid=" + event_unitid + "&event_location=" + event_location+ "&service_remark=" + service_remark + "&event_added_by=" + createdby,
+      + type_name + "&event_title=" + event_title + "&event_subject=" + event_subject + "&event_date=" + this.event_date + "&event_time=" + event_time + "&service_unitid=" + event_unitid + "&event_location=" + event_location + "&service_remark=" + service_remark + "&event_added_by=" + createdby,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
@@ -292,13 +291,17 @@ export class AddcalendarPage {
   // to our remote PHP script (note the body variable we have created which
   // supplies a variable of key with a value of update followed by the key/value pairs
   // for the record data
-  updateEntry(event_title, type_name, event_project, event_subject, event_unitid, event_time, event_location,service_remark, createdby) {
+
+  //http://denyoappv2.stridecdev.com/calendar/update?is_mobile=1&event_type=Event&event_title=sfd&event_location=london&event_date=2017-07-07&event_time=6:00 AM&ses_login_id=2&event_remark=@vignesh&id=1
+
+  updateEntry(event_title, type_name, event_project, event_subject, event_unitid, event_time, event_location, service_remark, createdby) {
     let updatedby = createdby;
-    let body: string = "is_mobile=1&type_name=" + type_name + "&event_project=" + event_project + "&event_subject=" + event_subject + "&event_unitid=" + event_unitid + "&companygroup_id=" + this.recordID + "&createdby=" + createdby + "&updatedby=" + updatedby,
+    let body: string = "is_mobile=1&event_type="
+      + type_name + "&event_title=" + event_title + "&event_subject=" + event_subject + "&event_date=" + this.event_date + "&event_time=" + event_time + "&event_location=" + event_location + "&event_remark=" + service_remark + "&ses_login_id=" + createdby + "&id=" + this.recordID,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/services/update";
+      url: any = this.apiServiceURL + "/calendar/update";
     console.log(url);
     this.http.post(url, body, options)
       .subscribe(data => {
@@ -369,10 +372,10 @@ export class AddcalendarPage {
       service_remark: string = this.form.controls["event_notes"].value;
 
     if (this.isEdited) {
-      this.updateEntry(event_title, type_name, event_project, event_subject, event_unitid, event_time, event_location,service_remark, this.userId);
+      this.updateEntry(event_title, type_name, event_project, event_subject, event_unitid, event_time, event_location, service_remark, this.userId);
     }
     else {
-      this.createEntry(event_title, type_name, event_project, event_subject, event_unitid, event_time, event_location,service_remark, this.userId);
+      this.createEntry(event_title, type_name, event_project, event_subject, event_unitid, event_time, event_location, service_remark, this.userId);
     }
   }
 

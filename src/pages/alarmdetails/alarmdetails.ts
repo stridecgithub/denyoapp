@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, ToastController, AlertController, NavParams } from 'ionic-angular';
+import {  NavController, ToastController, AlertController, NavParams } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 
 import { AddalarmPage } from '../addalarm/addalarm'; 
@@ -10,7 +10,6 @@ import { AddalarmPage } from '../addalarm/addalarm';
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-@IonicPage()
 @Component({
   selector: 'page-alarmdetails',
   templateUrl: 'alarmdetails.html',

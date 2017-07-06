@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
+import {  NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
 import { CompanygroupPage } from '../companygroup/companygroup';
 import { UserPage } from '../user/user';
 import { LoadingController } from 'ionic-angular';
@@ -18,7 +18,6 @@ import { AddrequestsupportPage } from '../addrequestsupport/addrequestsupport';
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-@IonicPage()
 @Component({
   selector: 'page-notification',
   templateUrl: 'notification.html',

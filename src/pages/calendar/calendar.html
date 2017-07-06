@@ -52,10 +52,21 @@
     <button ion-button (click)="pre()" class="calendar_pre"><<</button>
     <button ion-button class="calendar_ttl">{{dateHeaderTitle}}</button>
     <button ion-button (click)="nex()" class="calendar_nex">>></button>
-    <calendar [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate" (onCurrentDateChanged)="onCurrentDateChanged($event)"
+    <!--calendar [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate" (onCurrentDateChanged)="onCurrentDateChanged($event)"
       (onEventSelected)="onEventSelected($event)" (showEventDetail)=true (onTitleChanged)="onViewTitleChanged($event)" (onTimeSelected)="onTimeSelected($event)"
       step="30">
-    </calendar>
+    </calendar-->
+
+    <calendar [eventSource]="eventSource"
+        [calendarMode]="calendar.mode"
+        [currentDate]="calendar.currentDate"
+        (onCurrentDateChanged)="onCurrentDateChanged($event)"
+        (onRangeChanged)="reloadSource(startTime, endTime)"
+        (onEventSelected)="onEventSelected($event)"
+        (onTitleChanged)="onViewTitleChanged($event)"
+        (onTimeSelected)="onTimeSelected($event)"
+        step="30">
+      </calendar>
   </ion-item>
 
   <div><b>Legend</b></div>

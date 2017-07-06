@@ -1,6 +1,16 @@
 // Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/v2/theming/
+
+// Font path is used to include ionicons,
+// roboto, and noto sans fonts
 $font-path: "../assets/fonts";
+
+
+// The app direction is used to include
+// rtl styles in your app. For more info, please see:
+// http://ionicframework.com/docs/theming/rtl-support/
+$app-direction: ltr;
+
 
 @import "ionic.globals";
 
@@ -28,7 +38,7 @@ $colors: (
   secondary:  #32db64,
   danger:     #f53d3d,
   light:      #f4f4f4,
-  dark:       #222,
+  dark:       #222 ,
   favorite:   #69BB7B,
   bluelight:  #0098D3,
   bluedark: #00569F,
@@ -45,7 +55,7 @@ $colors: (
   header : #071C89
 );
 
-//$select-popover-list-margin-end:$select-md-padding-right;
+
 // App iOS Variables
 // --------------------------------------------------
 // iOS only Sass variables can go here
@@ -90,6 +100,13 @@ $colors: (
 
 @import "roboto";
 @import "noto-sans";
+
+.ion-page{background:url(../img/background_1280x1920px.jpg) no-repeat scroll 0 0 / cover;}
+.app-root{
+  background:url(../img/background_1280x1920px.jpg) no-repeat scroll 0 0 / cover;
+}
+
+
 //@import "https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.css";
 // Select
 // --------------------------------------------------
@@ -177,10 +194,3 @@ font-size:32px
   @include margin($select-popover-list-margin-top, $select-popover-list-margin-end, $select-popover-list-margin-bottom, $select-popover-list-margin-start);
 }
 
-body{
-    background-color:transparent;
-    background-image: url(../img/body.png);
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;   
-}

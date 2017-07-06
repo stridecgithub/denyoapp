@@ -2,75 +2,53 @@
 <html lang="en" dir="ltr">
 
 <head>
-	<meta charset="UTF-8">
-	<title>Ionic App</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-	<meta name="format-detection" content="telephone=no">
-	<meta name="msapplication-tap-highlight" content="no">
+  <meta charset="UTF-8">
+  <title>Ionic App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="msapplication-tap-highlight" content="no">
 
-	<link rel="icon" type="image/x-icon" href="assets/icon/favicon.ico">
-	<link rel="manifest" href="manifest.json">
-	<meta name="theme-color" content="#4e8ef7">
+  <link rel="icon" type="image/x-icon" href="assets/icon/favicon.ico">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#4e8ef7">
 
-	<!-- cordova.js required for cordova apps -->
-	<script src="cordova.js"></script>
-	<!-- Messages-->
-	<script src="assets/scripts/ScriptGeneral.js"></script>
-	<script src="assets/scripts/SasiyaAjax.js"></script>
-	<script src="assets/scripts/message.js"></script>
-	<link href="assets/css/message.css" rel="stylesheet">
-	<!-- Messages-->
-	<!-- un-comment this code to enable service worker
+  <!-- cordova.js required for cordova apps -->
+  <script src="cordova.js"></script>
+  <!-- Messages-->
+  <script src="assets/scripts/ScriptGeneral.js"></script>
+  <script src="assets/scripts/SasiyaAjax.js"></script>
+  <script src="assets/scripts/message.js"></script>
+  <link href="assets/css/message.css" rel="stylesheet">
+  <!-- Messages-->
+  <!-- un-comment this code to enable service worker
   <script>
-    ifn ('serviceWorker' in navigator) {
+    if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('service-worker.js')
         .then(() => console.log('service worker installed'))
         .catch(err => console.error('Error', err));
     }
   </script>-->
 
-	<link href="build/main.css" rel="stylesheet">
+  <link href="build/main.css" rel="stylesheet">
 
 </head>
 
-<body style="background-image: url(assets/img/body.png)">
-	<script>
-		(function () {
-			if (e("contentview")) {
-				SasiyaAjax.setloadimage("contentview", "<img src='assets/icon/procs.gif'/>");
-				// SasiyaAjax.Connect_call_back("http://denyoappv2.stridecdev.com/denyo2.php?method=inbox&id=1",'get','',0,function(tx,n){e("contentview").innerHTML=tx;});
-			}
-		})();
-	</script>
+<body style="background: url('assets/img/body.png') no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;">
 
-	<!-- Ionic's root component and where the app will load -->
-	<ion-app></ion-app>
+  <!-- Ionic's root component and where the app will load -->
+  <ion-app style="background: url('assets/img/body.png') no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;"></ion-app>
 
-	<!-- The polyfills js is generated during the build process -->
-	<script src="build/polyfills.js"></script>
+  <!-- The polyfills js is generated during the build process -->
+  <script src="build/polyfills.js"></script>
 
-	<!-- The bundle js is generated during the build process -->
-	<script src="build/main.js"></script>
-	<!--link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
-  <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="http://strtheme.stridecdev.com/bootstrap-suggest.js"></script-->
-	<!--link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"-->
-	<!--link href="ext/css/atmentioned.css" rel="stylesheet" type="text/css"-->
-	<!--script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCz5E2s7v_ORGHJgENeAI82pHOful54Gjs"></script-->
-
-	<!--link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css"
-	/>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-	<script>
-		var $dialog = $('#dialog').dialog({
-			close: function () {
-				//USING NORMAL JS
-				document.getElementById('ifrmMsg').contentWindow.$('a:first').trigger('click');
-			}
-		});
-	</script-->
+  <!-- The bundle js is generated during the build process -->
+  <script src="build/main.js"></script>
 
 </body>
 

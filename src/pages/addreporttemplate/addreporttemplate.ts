@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, ToastController, NavParams } from 'ionic-angular';
+import {  NavController, ToastController, NavParams } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
@@ -14,7 +14,6 @@ import { ReporttemplatePage } from '../reporttemplate/reporttemplate';
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Io//nic pages and navigation.
  */
-@IonicPage()
 @Component({
   selector: 'page-addreporttemplate',
   templateUrl: 'addreporttemplate.html',

@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-buttons end>
+      <button ion-button (click)="notification()">
+  <ion-icon ios="ios-notifications-outline" md="md-notifications-outline"></ion-icon>
+</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content padding class="home-content">
+  <div class="dash">
+    <div class="title">
+      Welcome to Denyo<br> E-Management System<br><strong>Mr {{loginas}}</strong>
+    </div>
+    <div class="four-icons">
+      <div class="icon-top">
+        <div class="icon-left" (click)="goPage('MapsPage')">
+          <div class="maps" style="position:relative;margin-left:-38px;">
+            <span>maps</span>
+          </div>
+        </div>
+        <div class="icon-right" (click)="goPage('UnitsPage')">
+          <div class="units">
+            <span>units</span>
+          </div>
+        </div>
+      </div>
+      <div class="icon-bottom">
+        <div class="icon-left" (click)="goPage('ReportsPage')">
+          <div class="reports" style="position:relative;margin-left:-38px;">
+            <span>reports</span>
+          </div>
+        </div>
+        <div class="icon-right" (click)="goPage('CalendarPage')">
+          <div class="calendar">
+            <span>calendar</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
+<ion-footer color="bluedark">
+  <ion-toolbar color="bluedark">
+    <button ion-button icon-only clear>
+<ion-icon name="home" class="footer-icon"></ion-icon>
+</button>
+    <button ion-button icon-only (click)="redirectToUser()" clear>
+<ion-icon name="contacts" class="footer-icon"></ion-icon>
+</button>
+    <button ion-button icon-only (click)="redirectToUnitGroup()" clear>
+<ion-icon name="chatboxes" class="footer-icon"></ion-icon>
+</button>
+    <button ion-button icon-only (click)="redirectToUnits()" clear>
+<ion-icon name="camera" class="footer-icon"></ion-icon>
+</button>
+    <button ion-button icon-only (click)="redirectToRole()" clear>
+<ion-icon name="settings" class="footer-icon"></ion-icon>
+</button>
+  </ion-toolbar>
+</ion-footer>

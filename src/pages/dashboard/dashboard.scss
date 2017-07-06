@@ -1,0 +1,30 @@
+page-dashboard {   
+.home-content{
+background-color:red;
+}
+
+.footer-icon{
+    color:#fff;
+    font-size:30px;    
+}   
+.header-md::after,
+.tabs-md[tabsPlacement="top"] > .tabbar::after,
+.footer-md::before,
+.tabs-md[tabsPlacement="bottom"] > .tabbar::before{background-image:none;}
+.toolbar-background-md{background:none;}
+.content-md{background-color:transparent;}
+
+.dash{text-align:center;color:#fff;font-size:13px;}
+.title{margin:25px auto;font-size:22px;}
+.title strong{display:block;margin-top:10px;}
+.four-icons{text-align:center;color:#fff;display:table;margin:0 auto;text-transform:uppercase;font-weight:bold;min-width:32%;}
+.four-icons img{display:table;margin:0 auto 15px;}
+.icon-top{border-bottom:1px solid #fff;display:block;overflow:hidden;}
+.icon-bottom{display:block;overflow:hidden;}
+.icon-left{border-right:1px solid #fff;width:50%;float:left;padding:60px;}
+.icon-right{width:50%;float:left;padding:60px;}
+
+}
+
+
+ 

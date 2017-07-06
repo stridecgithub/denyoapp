@@ -1,5 +1,5 @@
 import { Component, NgZone } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
+import {  NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -10,8 +10,6 @@ import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
 import { UnitsPage } from '../units/units';
 import { RolePage } from '../role/role';
-import * as $ from 'jquery'
-import "slick-carousel";
 import { NotificationPage } from '../notification/notification';
 /**
  * Generated class for the AddcompanygroupPage page.
@@ -19,7 +17,6 @@ import { NotificationPage } from '../notification/notification';
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-@IonicPage()
 @Component({
   selector: 'page-addunitsthree',
   templateUrl: 'addunitsthree.html'
@@ -216,17 +213,7 @@ export class AddunitsthreePage {
 
 
 
-    let users = localStorage.getItem("atMentionedStorage");
-    $('#example1').suggest('@', {
-      data: JSON.parse(users),
-      map: function (user) {
-        return {
-          value: user.username,
-          text: '<strong>' + user.username + '</strong> <small>' + user.fullname + '</small>'
-        }
-      }
-    })
-
+    
   }
 
 

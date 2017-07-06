@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController } from 'ionic-angular';
+import {  NavController } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 
 import { MyaccountPage } from '../myaccount/myaccount';
@@ -8,7 +8,6 @@ import { CompanygroupPage } from '../companygroup/companygroup';
 import { RolePage } from '../role/role';
 import { HomePage } from '../home/home';
 import { UnitsPage } from '../units/units';
-@IonicPage()
 @Component({
   selector: 'page-reports',
   templateUrl: 'reports.html',

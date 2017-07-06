@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, ToastController, AlertController, NavParams } from 'ionic-angular';
+import {  NavController, ToastController, AlertController, NavParams } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 import { Http, Headers, RequestOptions } from '@angular/http';
 //import { AddunitgroupPage } from '../addunitgroup/addunitgroup';
@@ -14,7 +14,6 @@ import { AlarmdetailsPage } from '../alarmdetails/alarmdetails';
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-@IonicPage()
 @Component({
   selector: 'page-alarmlog',
   templateUrl: 'alarmlog.html',

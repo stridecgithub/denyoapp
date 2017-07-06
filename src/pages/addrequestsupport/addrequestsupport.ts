@@ -1,5 +1,5 @@
 import { Component, ViewChild, NgZone } from '@angular/core';
-import { IonicPage, AlertController, NavController, NavParams, ViewController, ToastController } from 'ionic-angular';
+import {  AlertController, NavController, NavParams, ViewController, ToastController } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { FileChooser } from '@ionic-native/file-chooser';
@@ -12,8 +12,6 @@ import { UnitgroupPage } from '../unitgroup/unitgroup';
 import { UnitsPage } from '../units/units';
 import { RolePage } from '../role/role';
 import { DatePicker } from '@ionic-native/date-picker';
-import * as $ from 'jquery'
-import "slick-carousel";
 import 'rxjs/add/operator/map';
 import { Http, Headers, RequestOptions } from '@angular/http';
 /**
@@ -22,7 +20,6 @@ import { Http, Headers, RequestOptions } from '@angular/http';
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-@IonicPage()
 @Component({
   selector: 'page-addrequestsupport',
   templateUrl: 'addrequestsupport.html',
@@ -118,15 +115,7 @@ export class AddrequestsupportPage {
       console.log("Service Unit Id:" + this.service_unitid);
     }
 
-    $('#example1').suggest('@', {
-      data: JSON.parse(users),
-      map: function (user) {
-        return {
-          value: user.username,
-          text: '<strong>' + user.username + '</strong> <small>' + user.fullname + '</small>'
-        }
-      }
-    })
+   
 
 
   }

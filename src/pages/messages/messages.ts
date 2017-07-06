@@ -5,8 +5,8 @@ import { IonicApp } from 'ionic-angular/index'
 import 'rxjs/add/operator/map';
 import { Http, Headers, RequestOptions } from "@angular/http";
 //import { HttpModule } from "@angular/http";
-import { Sendmsg } from '../sendmsg/sendmsg';
-import { Compose } from '../compose/compose';
+//import { Sendmsg } from '../sendmsg/sendmsg';
+//import { Compose } from '../compose/compose';
 //import { TabsPage } from '../tabs/tabs';
 import { CompanygroupPage } from '../companygroup/companygroup';
 import { MyaccountPage } from '../myaccount/myaccount';
@@ -24,8 +24,8 @@ import { File } from '@ionic-native/file';
     providers: [Camera, FileChooser, Transfer, File]
 })
 export class MessagesPage {
-    sendmsg = Sendmsg;
-    compose = Compose;
+    //sendmsg = Sendmsg;
+    //compose = Compose;
     app: IonicApp;
     data: any;
     public loginas: any;
