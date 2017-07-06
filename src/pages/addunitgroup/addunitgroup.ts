@@ -164,6 +164,12 @@ export class AddunitgroupPage {
     let cname: string = this.form.controls["cname"].value,
       remark: string = this.form.controls["remark"].value;
        console.log(cname,remark);
+        if( cname.toLowerCase() == 'denyo' || cname.toLowerCase() == 'dum' || cname.toLowerCase() == 'dsg' || cname.toLowerCase() == 'denyo singapore' )
+      {
+        this.sendNotification("Given Unit Group Name Not Acceptable....");
+      }
+      else
+      {
 
     if (this.isEdited) {
       
@@ -172,6 +178,7 @@ export class AddunitgroupPage {
     else {
       this.createEntry(cname, this.ccode, remark, this.userId,this.companyid);
     }
+      }
 
   }
   updateEntry(cname,ccode,remark,userid,companyid)
