@@ -180,7 +180,10 @@ export class AddunitsfourPage {
   selectEntry(item) {
     this.unitgroups_id = item.unitgroups_id;
     this.companys_id = item.companys_id;
+    this.latitude=item.latitude;
+    this.longitude=item.longitude;
     this.recordID = item.unit_id;
+
   }
 
 
@@ -196,8 +199,8 @@ export class AddunitsfourPage {
 
 
     this.timezone = '2017-06-15 00:00:00';
-    this.longitude = "9.918418";
-    this.latitude = "78.148566";
+    //this.longitude = "9.918418";
+    //this.latitude = "78.148566";
 
 
     console.log("Final User Info 1:" + this.userInfo);
@@ -263,8 +266,8 @@ export class AddunitsfourPage {
       createdby: createdby,
 
     });
-    this.longitude = "9.918418";
-    this.latitude = "78.148566";
+    //this.longitude = "9.918418";
+    //this.latitude = "78.148566";
 
     this.timezone = '2017-06-15 00:00:00';
     let body: string = "is_mobile=1&unit_id=" + this.recordID +

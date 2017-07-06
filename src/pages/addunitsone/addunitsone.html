@@ -36,12 +36,22 @@
   </div>
   <div>
     <form [formGroup]="form" (ngSubmit)="saveEntry()">
-      <ion-list>        
+      <ion-list>
         <ion-item>
           <ion-label stacked>Deployed Location<span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
           <ion-input type="text" [disabled]="readOnly" formControlName="location" [(ngModel)]="location"></ion-input>
-        </ion-item>           
+        </ion-item>
 
+        <div>
+          <a href="#" (click)="getGps()">Use GPS Location</a>
+        </div>
+        <div>
+          <b>GPS Detected Location</b>
+        </div>
+
+        <div>
+          <b>Latitude:</b>{{lat}} <b>Longtitude:</b>{{lang}}
+        </div>
 
         <ion-item *ngIf="hideActionButton">
           <button ion-button color="primary" text-center block [disabled]="!form.valid">Continue</button>
@@ -63,7 +73,7 @@
 </button>
     <button ion-button icon-only (click)="redirectToUnits()" clear>
 <ion-icon name="camera" class="footer-icon"></ion-icon>
-</button>   
+</button>
     <button ion-button icon-only (click)="redirectToRole()" clear>
 <ion-icon name="settings" class="footer-icon"></ion-icon>
 </button>

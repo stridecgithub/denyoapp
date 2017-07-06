@@ -1,5 +1,5 @@
 import { Component, NgZone } from '@angular/core';
-import {  NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import 'rxjs/add/operator/map';
 import { AddunitstwoPage } from '../addunitstwo/addunitstwo';
@@ -7,7 +7,8 @@ import { UserPage } from '../user/user';
 import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
 import { UnitsPage } from '../units/units';
-import { RolePage } from '../role/role'; 
+import { RolePage } from '../role/role';
+import { NativeGeocoder, NativeGeocoderForwardResult } from '@ionic-native/native-geocoder';
 /**
  * Generated class for the AddcompanygroupPage page.
  *
@@ -16,14 +17,17 @@ import { RolePage } from '../role/role';
  */
 @Component({
   selector: 'page-addunitsone',
-  templateUrl: 'addunitsone.html'
+  templateUrl: 'addunitsone.html',
+  providers: [NativeGeocoder]
 })
 export class AddunitsonePage {
   // Define FormBuilder /model properties
   public loginas: any;
   public form: FormGroup;
-  public location: any; 
+  public location: any;
   public userId: any;
+  public lat: any;
+  public lang: any;
   public responseResultCountry: any;
   progress: number;
   public isProgress = false;
@@ -42,7 +46,7 @@ export class AddunitsonePage {
   public recordID: any = null;
   public isUploadedProcessing: boolean = false;
   public uploadResultBase64Data;
-  constructor(public nav: NavController,   
+  constructor(private nativeGeocoder: NativeGeocoder, public nav: NavController,
     public NP: NavParams,
     public fb: FormBuilder,
     public toastCtrl: ToastController, public loadingCtrl: LoadingController,
@@ -50,7 +54,7 @@ export class AddunitsonePage {
     this.loginas = localStorage.getItem("userInfoName");
     // Create form builder validation rules
     this.form = fb.group({
-      "location": ["",  Validators.required]
+      "location": ["", Validators.required]
     });
     this.userId = localStorage.getItem("userInfoId");
   }
@@ -63,7 +67,7 @@ export class AddunitsonePage {
   // Determine whether we adding or editing a record
   // based on any supplied navigation parameters
   ionViewWillEnter() {
-    this.resetFields();    
+    this.resetFields();
     console.log(JSON.stringify(this.NP.get("record")));
     if (this.NP.get("record")) {
       console.log("Add User:" + JSON.stringify(this.NP.get("record")));
@@ -71,7 +75,7 @@ export class AddunitsonePage {
       this.selectEntry(this.NP.get("record"));
       this.pageTitle = 'Edit Units';
       this.readOnly = false;
-      this.hideActionButton = true;     
+      this.hideActionButton = true;
       let editItem = this.NP.get("record");
       this.location = editItem.location;
     }
@@ -88,6 +92,7 @@ export class AddunitsonePage {
   selectEntry(item) {
     this.location = item.location;
     this.recordID = item.userid;
+    this.getGps();
   }
 
 
@@ -98,13 +103,15 @@ export class AddunitsonePage {
   // supplies a variable of key with a value of create followed by the key/value pairs
   // for the record data
   createEntry(location, createdby) {
-    this.userInfo.push({    
+    this.userInfo.push({
       location: location,
-      createdby: createdby
+      createdby: createdby,
+      latitude: this.lat,
+      longitude: this.lang
     });
     this.nav.setRoot(AddunitstwoPage, {
       accountInfo: this.userInfo
-    });   
+    });
 
   }
 
@@ -118,7 +125,9 @@ export class AddunitsonePage {
   updateEntry(location, createdby) {
     this.userInfo.push({
       location: location,
-      createdby: createdby
+      createdby: createdby,
+      latitude: this.lat,
+      longitude: this.lang
     });
     this.nav.setRoot(AddunitstwoPage, {
       accountInfo: this.userInfo,
@@ -176,12 +185,12 @@ export class AddunitsonePage {
     } else {
       loader.dismiss();
     }
-  }  
+  }
   previous() {
     this.nav.setRoot(UnitsPage);
   }
-  
-redirectToUser() {
+
+  redirectToUser() {
     this.nav.setRoot(UserPage);
   }
   redirectToUnitGroup() {
@@ -195,6 +204,23 @@ redirectToUser() {
   }
   redirectToRole() {
     this.nav.setRoot(RolePage);
+  }
+
+  getGps() {
+    let locationSplit = this.location.split(",");
+    for (let i = 0; i < locationSplit.length; i++) {
+      if (i == 0) {
+        console.log(locationSplit[i]);
+        this.nativeGeocoder.forwardGeocode(locationSplit[i])
+          .then((coordinates: NativeGeocoderForwardResult) => {
+            console.log('The coordinates are latitude=' + coordinates.latitude + ' and longitude=' + coordinates.longitude)
+            this.lat = coordinates.latitude;
+            this.lang = coordinates.longitude;
+          }
+          )
+          .catch((error: any) => console.log(error));
+      }
+    }
   }
 }
 
