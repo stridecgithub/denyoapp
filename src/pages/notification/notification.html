@@ -68,17 +68,15 @@
 
 
       </ion-item>
-      <ion-item-options>
-        <!--button class="viewcolor" (click)="doEdit(item,'view')">
-                       <ion-icon name="eye" class="icon-size"></ion-icon>
-                    </button-->
+      <!--ion-item-options>
+       
         <button class="editcolor" (click)="doEdit(item,'edit',reporttemplate)">                      
                         <ion-icon name="create" class="icon-size"></ion-icon>
                     </button>
         <button class="trashcolor" (click)="doConfirm(item.id,item)">                        
                          <ion-icon name="trash" class="icon-size"></ion-icon>
                     </button>
-      </ion-item-options>
+      </ion-item-options-->
     </ion-item-sliding>
   </ion-list>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="totalCount!=0">
