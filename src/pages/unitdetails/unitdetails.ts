@@ -55,6 +55,8 @@ export class UnitdetailsPage {
 		userId: '',
 		loginas: '',
 		htmlContent: '',
+		lat:'',
+		lng:'',
 		iframeURL: ''
 
 	}
@@ -140,6 +142,8 @@ export class UnitdetailsPage {
 		this.unitDetailData.nextservicedate = editItem.nextservicedate;
 		this.unitDetailData.alarmnotificationto = editItem.nextservicedate;
 		this.unitDetailData.favoriteindication = favorite;
+		this.unitDetailData.lat=editItem.lat;
+		this.unitDetailData.lng=editItem.lng;
 		console.log(this.apiServiceURL + "/" + this.unitDetailData.unit_id + "/1/unitdetails");
 		this.iframeContent = "<iframe id='filecontainer' src=" + this.apiServiceURL + "/" + this.unitDetailData.unit_id + "/1/unitdetails height=350 width=100% frameborder=0></iframe>";
 
