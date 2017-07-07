@@ -44,7 +44,7 @@ export class MapsPage {
   }
   public reportAllLists = [];
   constructor(public http: Http, public navCtrl: NavController,
-    public toastCtrl: ToastController, public alertCtrl: AlertController, public navParams: NavParams, public loadingCtrl: LoadingController) {
+    public toastCtrl: ToastController,private sanitizer: DomSanitizer, public alertCtrl: AlertController, public navParams: NavParams, public loadingCtrl: LoadingController) {
     this.pageTitle = 'Maps';
     this.loginas = localStorage.getItem("userInfoName");
     this.userid = localStorage.getItem("userInfoId");
