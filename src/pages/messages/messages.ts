@@ -25,15 +25,18 @@ export class MessagesPage {
     public userId: any;
     public rootPage: any;
     public pageTitle: string;
+    public service_priority: any;
     progress: number;
     public isProgress = false;
     public addedImgLists = [];
     public base64Image: any;
     public addedAttachList;
+    micro_timestamp: any;
     public isUploaded: boolean = true;
     public isUploadedProcessing: boolean = false;
     Catdata: any;
     private baseURI: string = "http://denyoappv2.stridecdev.com";
+    private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
     constructor(app: IonicApp, public navCtrl: NavController, private alertCtrl: AlertController, private http: Http, private camera: Camera,
         private filechooser: FileChooser,
         private transfer: Transfer,
@@ -42,14 +45,33 @@ export class MessagesPage {
         this.loginas = localStorage.getItem("userInfoName");
         this.userId = localStorage.getItem("userInfoId");
         this.pageTitle = "Messages";
-    }    
+
+        let already = localStorage.getItem("microtime");
+        if (already != undefined && already != 'undefined' && already != '') {
+            this.micro_timestamp = already;
+        } else {
+            let dateStr = new Date();
+            let yearstr = dateStr.getFullYear();
+            let monthstr = dateStr.getMonth();
+            let datestr = dateStr.getDate();
+            let hrstr = dateStr.getHours();
+            let mnstr = dateStr.getMinutes();
+            let secstr = dateStr.getSeconds();
+            this.micro_timestamp = yearstr + "" + monthstr + "" + datestr + "" + hrstr + "" + mnstr + "" + secstr;
+
+        }
+        localStorage.setItem("microtime", this.micro_timestamp);
+    }
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad MessagesPage');
     }
     ionViewWillEnter() {
-
+        this.getPrority(1);
         this.presentAlert1();
+    }
+    getPrority(val) {
+        this.service_priority = val
     }
 
     presentAlert() {
@@ -106,13 +128,13 @@ export class MessagesPage {
         this.navCtrl.setRoot(HomePage);
     }
 
-    fileChooser() {
+    fileChooser(micro_timestamp) {
         this.isUploadedProcessing = true;
         this.filechooser.open()
             .then(
             uri => {
                 console.log(uri);
-                this.fileTrans(uri);
+                this.fileTrans(uri, micro_timestamp);
                 this.addedAttachList = uri;
             }
 
@@ -125,20 +147,35 @@ export class MessagesPage {
 
     }
 
-    fileTrans(path) {
+    fileTrans(path, micro_timestamp) {
         let fileName = path.substr(path.lastIndexOf('/') + 1);
         const fileTransfer: TransferObject = this.transfer.create();
         let currentName = path.replace(/^.*[\\\/]/, '');
         console.log("File Name is:" + currentName);
+
+        let dateStr = new Date();
+        let year = dateStr.getFullYear();
+        let month = dateStr.getMonth();
+        let date = dateStr.getDate();
+        let hr = dateStr.getHours();
+        let mn = dateStr.getMinutes();
+        let sec = dateStr.getSeconds();
+        let d = new Date(),
+            n = d.getTime(),
+            newFileName = year + "" + month + "" + date + "" + hr + "" + mn + "" + sec + "_123_" + n + ".jpg";
+
+
+
         let options: FileUploadOptions = {
             fileKey: 'file',
-            fileName: fileName,
+            fileName: newFileName,
             headers: {},
             chunkedMode: false,
             mimeType: "text/plain",
         }
         fileTransfer.onProgress(this.onProgress);
-        fileTransfer.upload(path, this.baseURI + '/api/upload_attach.php', options)
+        // fileTransfer.upload(path, this.baseURI + '/api/upload_attach.php', options)
+        fileTransfer.upload(path, this.apiServiceURL + '/attachments.php?micro_timestamp=' + micro_timestamp, options)
             .then((data) => {
                 console.log("UPLOAD SUCCESS:" + data.response);
                 let successData = JSON.parse(data.response);
@@ -149,9 +186,14 @@ export class MessagesPage {
                     //imgSrc = 'http://denyoappv2.stridecdev.com/api/uploads/' + successData.fileName;
                     //imgSrc = '<ion-icon name="image"></ion-icon>';
                     imgSrc = 'img/img.png';
+                    /* this.addedImgLists.push({
+                         imgSrc: imgSrc,
+                         file: successData.fileName
+                     });*/
                     this.addedImgLists.push({
                         imgSrc: imgSrc,
-                        file: successData.fileName
+                        imgDateTime: new Date(),
+                        fileName: newFileName
                     });
                 } else {
                     if (successData.ext == 'pdf') {

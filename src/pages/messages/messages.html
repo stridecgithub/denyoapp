@@ -78,10 +78,32 @@
   </p>
   <p id="compose" style="display:none">
     <span id="mwin">
-  <input type="hidden" value="0" name="message_priority" id="message_priority"/>
-  <input type="hidden" value="{{addedImgLists}}" name="attchedlist" id="attchedlist"/>
+  <input type="hidden" value="{{service_priority}}" name="important" id="important"/>
+  <input type="hidden" value="{{micro_timestamp}}" name="microtime" id="microtime"/>
+  <input type="hidden" value="1" name="is_mobile" id="is_mobile"/>
+  <input type="hidden" value="{{userId}}" name="loginid" id="loginid"/>
+  
+  <!--input type="hidden" value="{{addedImgLists}}" name="attchedlist" id="attchedlist"/-->
+<a href="http://denyoappv2.stridecdev.com/denyo2.php?method=download&file=mm.jpg">Download</a>
+ <ion-grid>
+  <ion-row>     
+  <ion-col>
+            <a href="#" (click)="getPrority(1)">
+              <ion-icon name="download{{service_priority_class1}}" style="color:aquamarine;font-size: 37px;"></ion-icon>
+            </a>
+          </ion-col>
+
+
+          <ion-col>
+            <a href="#" (click)="getPrority(2)">
+              <ion-icon name="alert{{service_priority_class2}}" style="color: brown;font-size: 37px;"></ion-icon>
+            </a>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
   <p><input type="text" name="to" id="to" placeholder="To Address" class="suggest" onkeyup="sptions(event)"  onblur="sptionshide()"/></p>
-   <span><input type="checkbox" name="cmail" value="1"/>&nbsp; Copy Mail</span><span><img src="assets/icon/m1.png" onclick="e('message_priority').value=1" hspace="10"/><img onclick="e('message_priority').value=2" src="assets/icon/m2.png" hspace="10"/><!--img onclick="e('message_priority').value=2" src="assets/icon/a.png" hspace="10"/--><ion-icon (click)="fileChooser()" *ngIf="isUploaded" name="attach" style="color: black;
+   <span><input type="checkbox" name="copytome" value="1"/>&nbsp; Copy Mail</span><span><img src="assets/icon/m1.png" onclick="e('message_priority').value=1" hspace="10"/><img onclick="e('message_priority').value=2" src="assets/icon/m2.png" hspace="10"/><!--img onclick="e('message_priority').value=2" src="assets/icon/a.png" hspace="10"/--><ion-icon (click)="fileChooser(micro_timestamp)" *ngIf="isUploaded" name="attach" style="color: black;
     position: relative;
     top: 5px;
     left: 10px;
@@ -92,7 +114,7 @@
     <div *ngIf="addedImgLists.length>0">Attached List:</div>
     <ion-grid>
       <ion-row>
-        <ion-col  col-auto *ngFor="let item of addedImgLists; let i = index" [attr.data-index]="i"><img src="{{addedImgLists[i].imgSrc}}" /></ion-col>
+        <ion-col col-auto *ngFor="let item of addedImgLists; let i = index" [attr.data-index]="i"><img src="{{addedImgLists[i].imgSrc}}" /></ion-col>
       </ion-row>
     </ion-grid>
     <!--div *ngFor="let item of addedImgLists; let i = index" [attr.data-index]="i">
@@ -100,7 +122,7 @@
     </div-->
 
     <p><input type="text" name="subject" id="subject" placeholder="Subject" /></p>
-    <p><textarea placeholder="Write Your Message" name="message" id="message"></textarea></p>
+    <p><textarea placeholder="Write Your Message" name="composemessagecontent" id="composemessagecontent"></textarea></p>
 
     </span>
   </p>

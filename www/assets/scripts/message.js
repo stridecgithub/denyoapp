@@ -105,8 +105,12 @@ function postmsg(obj) {
 		let files = localStorage.getItem('fileAttach');
 		postm = false;
 		var pos = SasiyaAjax.formData("mwin");
-		console.log("http://denyoappv2.stridecdev.com/denyo2.php?method=compose&id=" + id + "&file=" + files);
-		SasiyaAjax.Connect_call_back("http://denyoappv2.stridecdev.com/denyo2.php?method=compose&id=" + id + "&file=" + files, 'post', pos, 0, function (tx, n) {
+		//alert(pos);
+		//	return false;
+		//is_mobile=1&to=@bala balamurugan.sk@gmail.com @kannan&subject=Test Msg&composemessagecontent=lorem ipsum..&important=1&microtime=20170707102000
+		//console.log("http://denyoappv2.stridecdev.com/denyo2.php?method=compose&id=" + id + "&file=" + files);
+		console.log("http://denyoappv2.stridecdev.com/messages/store?" + pos);
+		SasiyaAjax.Connect_call_back("http://denyoappv2.stridecdev.com/messages/store", 'post', pos, 0, function (tx, n) {
 			showtabs(1); postm = true; sendmsg();
 			localStorage.setItem('fileAttach', '');
 		});
