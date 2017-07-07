@@ -23,10 +23,11 @@ import { MessagesPage } from '../pages/messages/messages';
 import { CalendarPage } from '../pages/calendar/calendar';
 import { MapsPage } from '../pages/maps/maps';
 import { ReportsPage } from '../pages/reports/reports';
-
+import { AddenginedetailPage } from '../pages/addenginedetail/addenginedetail';
 import { ServicedetailsPage } from '../pages/servicedetails/servicedetails';
 import { AlarmdetailsPage } from '../pages/alarmdetails/alarmdetails';
 import { CommentdetailsPage } from '../pages/commentdetails/commentdetails';
+import { EnginedetailPage } from '../pages/enginedetail/enginedetail';
 import { DataServiceProvider } from '../providers/data-service/data-service';
 @Component({
   templateUrl: 'app.html'
@@ -64,6 +65,8 @@ export class MyApp {
       { title: 'Service Details', component: ServicedetailsPage },
       { title: 'Comment Details', component: CommentdetailsPage },
       { title: 'Alarm Details', component: AlarmdetailsPage },
+      { title:  'Engine Details', Component: EnginedetailPage },
+      { title:  'Add Engine Details', Component: AddenginedetailPage },
       // { title: 'Map Demo', component: MapdemoPage },
 
 
@@ -130,6 +133,9 @@ export class MyApp {
     }
     else if (page.component == 'MapdemoPage') {
       //this.nav.setRoot(MapdemoPage);
+    }
+     else if (page.component == 'EnginedetailPage') {
+      this.nav.setRoot(EnginedetailPage);
     }
   }
 

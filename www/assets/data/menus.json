@@ -18,6 +18,10 @@
             {
                 "title": "Unit Group",
                 "component": "UnitgroupPage"
+            },
+             {
+                "title": "Engine Model",
+                "component": "EnginedetailPage"
             }
         ]
     },
