@@ -40,7 +40,8 @@ export class EmailPage {
   public pageTitle: any;
   pet: string = "inbox";
   public recordID: any;
-  public userId:any;
+  public userId: any;
+  public str: any;
   public service_id: any;
   public serviced_by: any;
   public serviced_datetime: any;
@@ -57,8 +58,9 @@ export class EmailPage {
   public isUploadedProcessing: boolean = false;
   public isProgress = false;
   public isUploaded: boolean = true;
-  
+  public selectedAction = [];
   item: any;
+
   public isEdited: boolean = false;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   form: FormGroup;
@@ -67,7 +69,7 @@ export class EmailPage {
   public inboxData: any =
   {
     status: '',
-    sort: 'companygroup_id',
+    sort: 'messages_id',
     sortascdesc: 'asc',
     startindex: 0,
     results: 8
@@ -78,8 +80,8 @@ export class EmailPage {
     private file: File, private ngZone: NgZone) {
     this.service_priority_class1 = "-outline";
     this.service_priority_class2 = "-outline";
- this.userId = localStorage.getItem("userInfoId");
-
+    this.userId = localStorage.getItem("userInfoId");
+    this.str = '';
     this.form = formBuilder.group({
       subject: ['', Validators.required],
       composemessagecontent: ['', Validators.required],
@@ -128,7 +130,7 @@ export class EmailPage {
   }
 
 
- /**********************/
+  /**********************/
   /* Infinite scrolling */
   /**********************/
   doInfinite(infiniteScroll) {
@@ -174,7 +176,7 @@ export class EmailPage {
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/messages?is_mobile=1&startindex=" + this.inboxData.startindex + "&results=" + this.inboxData.results + "&sort=" + this.inboxData.sort + "&dir=" + this.inboxData.sortascdesc+"&loginid="+this.userId;
+      url: any = this.apiServiceURL + "/messages?is_mobile=1&startindex=" + this.inboxData.startindex + "&results=" + this.inboxData.results + "&sort=" + this.inboxData.sort + "&dir=" + this.inboxData.sortascdesc + "&loginid=" + this.userId;
     let res;
     console.log(url);
     this.http.get(url, options)
@@ -197,7 +199,39 @@ export class EmailPage {
       });
     this.presentLoading(0);
   }
+  onSegmentChanged(val, item) {
+    let splitdata = val.split(",");
+    this.inboxData.sort = splitdata[0];
+    this.inboxData.sortascdesc = splitdata[1];
+    //this.inboxData.status = "ALL";
+    this.inboxData.startindex = 0;
+    console.log("listbox:" + JSON.stringify(this.inboxLists));
+    //for (let i = 0; i < this.inboxLists.length; i++) {
+    for (let unitgroup in item) {
+      if (item[unitgroup].messages_id == true) {
 
+      }
+    }
+    console.log(JSON.stringify(this.selectedAction));
+    //this.inboxLists = [];
+    this.doInbox();
+  }
+
+  getCheckBoxValue(name) {
+    /*console.log("Available data" + name);
+    this.selectedAction.push({
+      availabledata: name
+    })
+    console.log(JSON.stringify(this.selectedAction));*/
+    if (name != '') {
+      if (this.str == '') {
+        this.str = name;
+      } else {
+        this.str = this.str + "," + name;
+      }
+    }
+    console.log(this.str);
+  }
   ionViewWillEnter() {
     this.getPrority(1);
     let users = localStorage.getItem("atMentionedStorage");

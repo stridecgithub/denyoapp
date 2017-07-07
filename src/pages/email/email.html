@@ -50,9 +50,9 @@
 
       <ion-item>
         <ion-label>Sort By</ion-label>
-        <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="pet" (ionChange)="onSegmentChanged(pet)">
-          <ion-option value="companygroup_name,asc" selected="true">Group Name Asc</ion-option>
-          <ion-option value="companygroup_name,desc">Group Name Desc</ion-option>
+        <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="pet" (ionChange)="onSegmentChanged(pet,inboxLists)">
+          <ion-option value="messages_id,asc" selected="true">Group Name Asc</ion-option>
+          <ion-option value="messages_id,desc">Group Name Desc</ion-option>
         </ion-select>
       </ion-item>
       <ion-refresher (ionRefresh)="doRefresh($event)" *ngIf="totalCount!=0">
@@ -60,13 +60,12 @@
         </ion-refresher-content>
       </ion-refresher>
       <ion-list *ngIf="totalCount!=0">
-        <ion-item-sliding *ngFor="let item of inboxLists;">
-          <ion-item>
-            <h2>{{item.messages_subject}}</h2>
-
+        <ion-item-sliding>         
+          <ion-item  *ngFor="let item of inboxLists;">
+            <ion-label>{{item.subject}}</ion-label>
+             <ion-checkbox color="bluedark" (click)="getCheckBoxValue(item.message_id)" checked="false"></ion-checkbox>
           </ion-item>
           <ion-item-options>
-
             <button class="editcolor" (click)="doEdit(item,'edit')">                      
                         <ion-icon name="create" class="icon-size"></ion-icon>
                     </button>
@@ -80,7 +79,6 @@
         <ion-infinite-scroll-content loadingText="{{loadingMoreDataContent}}"></ion-infinite-scroll-content>
       </ion-infinite-scroll>
     </ion-list>
-
     <ion-list *ngSwitchCase="'send'">
       Send item goes here
     </ion-list>
@@ -90,9 +88,6 @@
         <input type="hidden" value="{{micro_timestamp}}" name="microtime" id="microtime" />
         <input type="hidden" value="1" name="is_mobile" id="is_mobile" />
         <input type="hidden" value="{{userId}}" name="loginid" id="loginid" />
-
-        <!--input type="hidden" value="{{addedImgLists}}" name="attchedlist" id="attchedlist"/-->
-        <!--a href="http://denyoappv2.stridecdev.com/denyo2.php?method=download&file=mm.jpg">Download</a-->
         <ion-grid>
           <ion-row>
             <ion-col>
@@ -113,11 +108,6 @@
           <ion-label stacked>To <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
           <ion-input type="text" [disabled]="readOnly" formControlName="to" [(ngModel)]="to"></ion-input>
         </ion-item>
-
-
-
-        <!--p><input type="text" name="to" id="to" placeholder="To Address" class="suggest" onkeyup="sptions(event)" onblur="sptionshide()"
-          /></p-->
         <span><input type="checkbox" name="copytome" value="1"/>&nbsp; Copy Mail</span><span><img src="assets/icon/m1.png" onclick="e('message_priority').value=1" hspace="10"/><img onclick="e('message_priority').value=2" src="assets/icon/m2.png" hspace="10"/><!--img onclick="e('message_priority').value=2" src="assets/icon/a.png" hspace="10"/--><ion-icon (click)="fileChooser(micro_timestamp)" *ngIf="isUploaded" name="attach" style="color: black;
     position: relative;
     top: 5px;
@@ -132,10 +122,6 @@
             <ion-col col-auto *ngFor="let item of addedImgLists; let i = index" [attr.data-index]="i"><img src="{{addedImgLists[i].imgSrc}}" /></ion-col>
           </ion-row>
         </ion-grid>
-        <!--div *ngFor="let item of addedImgLists; let i = index" [attr.data-index]="i">
-      <img src="{{addedImgLists[i].imgSrc}}" />
-    </div-->
-
 
         <ion-item>
           <ion-label stacked>Subject <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
