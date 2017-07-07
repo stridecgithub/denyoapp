@@ -50,6 +50,8 @@ import { AlarmdetailsPage } from '../pages/alarmdetails/alarmdetails';
 import { NotificationPage } from '../pages/notification/notification';
 import { ReportsPage } from '../pages/reports/reports';
 import { MessagesPage } from '../pages/messages/messages';
+import { EnginedetailPage } from '../pages/enginedetail/enginedetail';
+import { AddenginedetailPage } from '../pages/addenginedetail/addenginedetail';
 import { DataServiceProvider } from '../providers/data-service/data-service';
 
 @NgModule({
@@ -89,7 +91,7 @@ import { DataServiceProvider } from '../providers/data-service/data-service';
     AddserviceinfoPage,
     AddreporttemplatePage,
     AddrequestsupportPage,
-   
+    EnginedetailPage,
     CalendarPage,
     AddcalendarPage,
     AlarmPage,
@@ -100,6 +102,7 @@ import { DataServiceProvider } from '../providers/data-service/data-service';
     NotificationPage,
     CommentdetailsPage,
     AlarmdetailsPage,
+    AddenginedetailPage,
     ReportsPage
   ],
   imports: [
@@ -135,7 +138,7 @@ import { DataServiceProvider } from '../providers/data-service/data-service';
     AddunitgroupPage,
     UnitgroupPage,
     ReporttemplatePage,
- 
+    EnginedetailPage,
     AddorgchartonePage,
     AddorgcharttwoPage,
     OrgchartPage,
@@ -156,6 +159,7 @@ import { DataServiceProvider } from '../providers/data-service/data-service';
     NotificationPage,
     CommentdetailsPage,
     AlarmdetailsPage,
+    AddenginedetailPage,
     ReportsPage
   ],
   providers: [
