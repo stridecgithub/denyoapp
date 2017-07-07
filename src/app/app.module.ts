@@ -50,8 +50,9 @@ import { AlarmdetailsPage } from '../pages/alarmdetails/alarmdetails';
 import { NotificationPage } from '../pages/notification/notification';
 import { ReportsPage } from '../pages/reports/reports';
 import { MessagesPage } from '../pages/messages/messages';
-import { EnginedetailPage } from '../pages/enginedetail/enginedetail';
 import { AddenginedetailPage } from '../pages/addenginedetail/addenginedetail';
+import { EnginedetailPage } from '../pages/enginedetail/enginedetail';
+import { EmailPage } from '../pages/email/email';
 import { DataServiceProvider } from '../providers/data-service/data-service';
 
 @NgModule({
@@ -91,6 +92,7 @@ import { DataServiceProvider } from '../providers/data-service/data-service';
     AddserviceinfoPage,
     AddreporttemplatePage,
     AddrequestsupportPage,
+    AddenginedetailPage,
     EnginedetailPage,
     CalendarPage,
     AddcalendarPage,
@@ -102,8 +104,8 @@ import { DataServiceProvider } from '../providers/data-service/data-service';
     NotificationPage,
     CommentdetailsPage,
     AlarmdetailsPage,
-    AddenginedetailPage,
-    ReportsPage
+    ReportsPage,
+    EmailPage
   ],
   imports: [
     BrowserModule,
@@ -120,6 +122,8 @@ import { DataServiceProvider } from '../providers/data-service/data-service';
     CompanygroupPage,
     AddcompanygroupPage,
     ViewcompanygroupPage,
+    AddenginedetailPage,
+    EnginedetailPage,
     UserPage,
     AdduserPage,
     UseraccountPage,
@@ -138,7 +142,7 @@ import { DataServiceProvider } from '../providers/data-service/data-service';
     AddunitgroupPage,
     UnitgroupPage,
     ReporttemplatePage,
-    EnginedetailPage,
+
     AddorgchartonePage,
     AddorgcharttwoPage,
     OrgchartPage,
@@ -159,8 +163,8 @@ import { DataServiceProvider } from '../providers/data-service/data-service';
     NotificationPage,
     CommentdetailsPage,
     AlarmdetailsPage,
-    AddenginedetailPage,
-    ReportsPage
+    ReportsPage,
+    EmailPage
   ],
   providers: [
     StatusBar,

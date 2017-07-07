@@ -162,7 +162,7 @@ export class MessagesPage {
         let sec = dateStr.getSeconds();
         let d = new Date(),
             n = d.getTime(),
-            newFileName = year + "" + month + "" + date + "" + hr + "" + mn + "" + sec + "_123_" + n + ".jpg";
+            newFileName = year + "" + month + "" + date + "" + hr + "" + mn + "" + sec + "_123_" + n + currentName;
 
 
 
@@ -175,7 +175,7 @@ export class MessagesPage {
         }
         fileTransfer.onProgress(this.onProgress);
         // fileTransfer.upload(path, this.baseURI + '/api/upload_attach.php', options)
-        fileTransfer.upload(path, this.apiServiceURL + '/attachments.php?micro_timestamp=' + micro_timestamp, options)
+        fileTransfer.upload(path, this.apiServiceURL + '/api/upload_attach.php?micro_timestamp=' + micro_timestamp, options)
             .then((data) => {
                 console.log("UPLOAD SUCCESS:" + data.response);
                 let successData = JSON.parse(data.response);

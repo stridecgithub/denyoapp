@@ -28,6 +28,7 @@ import { ServicedetailsPage } from '../pages/servicedetails/servicedetails';
 import { AlarmdetailsPage } from '../pages/alarmdetails/alarmdetails';
 import { CommentdetailsPage } from '../pages/commentdetails/commentdetails';
 import { EnginedetailPage } from '../pages/enginedetail/enginedetail';
+import { EmailPage } from '../pages/email/email';
 import { DataServiceProvider } from '../providers/data-service/data-service';
 @Component({
   templateUrl: 'app.html'
@@ -106,7 +107,7 @@ export class MyApp {
       this.nav.setRoot(OrgchartPage);
     } else if (page.title == 'Message') {
       this.menuCtrl.close();
-      this.nav.setRoot(MessagesPage);
+      this.nav.setRoot(EmailPage);
     } else if (page.title == 'Logout') {
       this.logout();
       this.menuCtrl.close();

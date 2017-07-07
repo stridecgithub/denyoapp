@@ -1,0 +1,178 @@
+<!--
+  Generated template for the EmailPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="bluedark">
+    <ion-title class="page-title">Message</ion-title>
+    <ion-buttons start>
+      <button ion-button menuToggle class="menu-toggle">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button>
+ <ion-icon name="notifications-outline"></ion-icon>
+</button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-navbar class="backtoprevious-navbar">
+    <ion-buttons start class="backtoprevious-start">
+      <button ion-button icon-left class="backtoprevious-button" (click)="previous()">
+ <ion-icon name="arrow-back" class="backtoprevious-icon"></ion-icon>
+ Back to previous
+</button>
+    </ion-buttons>
+    <ion-buttons end>
+      Login As:{{loginas}}
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="pet">
+      <ion-segment-button value="inbox">
+        Inbox
+      </ion-segment-button>
+      <ion-segment-button value="send">
+        Sent
+      </ion-segment-button>
+      <ion-segment-button value="compose">
+        Compose
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+  <div [ngSwitch]="pet">
+    <ion-list *ngSwitchCase="'inbox'">
+      <div class="error" *ngIf="totalCount==0">No message entries found</div>
+
+      <ion-item>
+        <ion-label>Sort By</ion-label>
+        <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="pet" (ionChange)="onSegmentChanged(pet)">
+          <ion-option value="companygroup_name,asc" selected="true">Group Name Asc</ion-option>
+          <ion-option value="companygroup_name,desc">Group Name Desc</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-refresher (ionRefresh)="doRefresh($event)" *ngIf="totalCount!=0">
+        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
+        </ion-refresher-content>
+      </ion-refresher>
+      <ion-list *ngIf="totalCount!=0">
+        <ion-item-sliding *ngFor="let item of inboxLists;">
+          <ion-item>
+            <h2>{{item.messages_subject}}</h2>
+
+          </ion-item>
+          <ion-item-options>
+
+            <button class="editcolor" (click)="doEdit(item,'edit')">                      
+                        <ion-icon name="create" class="icon-size"></ion-icon>
+                    </button>
+            <button class="trashcolor" (click)="doConfirm(item.companygroup_id,item)">                        
+                         <ion-icon name="trash" class="icon-size"></ion-icon>
+                    </button>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+      <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="totalCount!=0">
+        <ion-infinite-scroll-content loadingText="{{loadingMoreDataContent}}"></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'send'">
+      Send item goes here
+    </ion-list>
+    <form [formGroup]="form" (ngSubmit)="saveEntry()" enctype='application/x-www-form-urlencoded' method="post">
+      <ion-list *ngSwitchCase="'compose'">
+        <input type="hidden" value="{{service_priority}}" name="important" id="important" />
+        <input type="hidden" value="{{micro_timestamp}}" name="microtime" id="microtime" />
+        <input type="hidden" value="1" name="is_mobile" id="is_mobile" />
+        <input type="hidden" value="{{userId}}" name="loginid" id="loginid" />
+
+        <!--input type="hidden" value="{{addedImgLists}}" name="attchedlist" id="attchedlist"/-->
+        <!--a href="http://denyoappv2.stridecdev.com/denyo2.php?method=download&file=mm.jpg">Download</a-->
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <a href="#" (click)="getPrority(1)">
+                <ion-icon name="download{{service_priority_class1}}" style="color:aquamarine;font-size: 37px;"></ion-icon>
+              </a>
+            </ion-col>
+
+
+            <ion-col>
+              <a href="#" (click)="getPrority(2)">
+                <ion-icon name="alert{{service_priority_class2}}" style="color: brown;font-size: 37px;"></ion-icon>
+              </a>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <ion-item>
+          <ion-label stacked>To <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
+          <ion-input type="text" [disabled]="readOnly" formControlName="to" [(ngModel)]="to"></ion-input>
+        </ion-item>
+
+
+
+        <!--p><input type="text" name="to" id="to" placeholder="To Address" class="suggest" onkeyup="sptions(event)" onblur="sptionshide()"
+          /></p-->
+        <span><input type="checkbox" name="copytome" value="1"/>&nbsp; Copy Mail</span><span><img src="assets/icon/m1.png" onclick="e('message_priority').value=1" hspace="10"/><img onclick="e('message_priority').value=2" src="assets/icon/m2.png" hspace="10"/><!--img onclick="e('message_priority').value=2" src="assets/icon/a.png" hspace="10"/--><ion-icon (click)="fileChooser(micro_timestamp)" *ngIf="isUploaded" name="attach" style="color: black;
+    position: relative;
+    top: 5px;
+    left: 10px;
+    font-size:20px"></ion-icon></span>
+
+        <progress value="{{progress}}" max="100" *ngIf="isProgress"> </progress>
+        <span *ngIf="isProgress" style="padding:2px">{{progress}}%</span>
+        <div *ngIf="addedImgLists.length>0">Attached List:</div>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-auto *ngFor="let item of addedImgLists; let i = index" [attr.data-index]="i"><img src="{{addedImgLists[i].imgSrc}}" /></ion-col>
+          </ion-row>
+        </ion-grid>
+        <!--div *ngFor="let item of addedImgLists; let i = index" [attr.data-index]="i">
+      <img src="{{addedImgLists[i].imgSrc}}" />
+    </div-->
+
+
+        <ion-item>
+          <ion-label stacked>Subject <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
+          <ion-input type="text" [disabled]="readOnly" formControlName="subject" [(ngModel)]="subject"></ion-input>
+        </ion-item>
+
+
+        <ion-item>
+          <ion-label stacked>Message <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
+          <ion-textarea [disabled]="readOnly" formControlName="composemessagecontent" [(ngModel)]="composemessagecontent"></ion-textarea>
+        </ion-item>
+
+
+        <ion-item *ngIf="hideActionButton">
+          <button ion-button color="primary" text-center block [disabled]="!form.valid">Send Message</button>
+        </ion-item>
+
+      </ion-list>
+    </form>
+  </div>
+</ion-content>
+<ion-footer color="bluedark">
+  <ion-toolbar color="bluedark">
+    <button ion-button icon-only clear>
+<ion-icon name="home" class="footer-icon"></ion-icon>
+</button>
+    <button ion-button icon-only (click)="redirectToUser()" clear>
+<ion-icon name="contacts" class="footer-icon"></ion-icon>
+</button>
+    <button ion-button icon-only (click)="redirectToUnitGroup()" clear>
+<ion-icon name="chatboxes" class="footer-icon"></ion-icon>
+</button>
+    <button ion-button icon-only (click)="redirectToUnits()" clear>
+<ion-icon name="camera" class="footer-icon"></ion-icon>
+</button>
+    <button ion-button icon-only (click)="redirectToRole()" clear>
+<ion-icon name="settings" class="footer-icon"></ion-icon>
+</button>
+  </ion-toolbar>
+</ion-footer>
