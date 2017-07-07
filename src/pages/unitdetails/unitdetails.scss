@@ -1,5 +1,18 @@
 page-unitdetails {
-
+.label-md {
+    margin:0px;
+}
+.item-md .item-button {
+    padding: 0;
+    height: inherit;
+	width:49%;
+}
+.item-md.item-block .item-inner {
+    padding-right: 0;
+    border-bottom: 0px solid #dedede;
+    margin-bottom: 5px;
+}
+	
 .notify-badge{
 color: #cccccc;
     background-color: #000000;
@@ -1385,3 +1398,7 @@ form[name="dashboard"]{margin-top:-60px;}
 
 */
 }
+.engine-detail{background:#21b09c url(../img/english_details.png) no-repeat 37% center;background-size: 3%;font-size: 17px !important;}
+.service-info{background:#3b5588 url(../img/info_circle.png) no-repeat 37% center;background-size: 3%;font-size: 17px !important;}
+.alarm-log{background:#ff7965 url(../img/event_log.png) no-repeat 40% center;background-size: 3%;font-size: 17px !important;}
+.event-comment{background:#ff9a3e url(../img/chat_vector.png) no-repeat 34% center;background-size: 3%;font-size: 17px !important;}
