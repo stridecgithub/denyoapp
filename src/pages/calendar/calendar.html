@@ -40,7 +40,7 @@
 
 </ion-header>
 
-<ion-content padding>
+<ion-content>
   <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="pet" (ionChange)="onSegmentChanged(pet)">
     <ion-option value="ALL" selected=true>All</ion-option>
     <ion-option value="SERVICE">Service</ion-option>
@@ -49,9 +49,11 @@
   </ion-select>
 
   <ion-item class="item-calendar">
+    <div class="cal-top"> 
     <button ion-button (click)="pre()" class="calendar_pre"><<</button>
     <button ion-button class="calendar_ttl">{{dateHeaderTitle}}</button>
     <button ion-button (click)="nex()" class="calendar_nex">>></button>
+    </div>
     <!--calendar [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate" (onCurrentDateChanged)="onCurrentDateChanged($event)"
       (onEventSelected)="onEventSelected($event)" (showEventDetail)=true (onTitleChanged)="onViewTitleChanged($event)" (onTimeSelected)="onTimeSelected($event)"
       step="30">
@@ -68,8 +70,8 @@
         step="30">
       </calendar>
   </ion-item>
-
-  <div><b>Legend</b></div>
+<div class="spacing">
+  <div class="list-title"><b>Legend</b></div>
   <div class="div-action">
     <button class="add-new-btn trippedcolor" small>
   Tripped
@@ -207,24 +209,24 @@
       <div class="error">{{noeventtitle}}</div>
     </ion-item>
   </div>
-
+</div>
 </ion-content>
 <ion-footer color="bluedark">
   <ion-toolbar color="bluedark">
     <button ion-button icon-only clear>
-<ion-icon name="home" class="footer-icon"></ion-icon>
+<ion-icon name="home" class="footer-icon">MAPS</ion-icon>
 </button>
     <button ion-button icon-only (click)="redirectToUser()" clear>
-<ion-icon name="contacts" class="footer-icon"></ion-icon>
+<ion-icon name="contacts" class="footer-icon">UNITS</ion-icon>
 </button>
     <button ion-button icon-only (click)="redirectToUnitGroup()" clear>
-<ion-icon name="chatboxes" class="footer-icon"></ion-icon>
+<ion-icon name="chatboxes" class="footer-icon">MESSAGE</ion-icon>
 </button>
     <button ion-button icon-only (click)="redirectToUnits()" clear>
-<ion-icon name="camera" class="footer-icon"></ion-icon>
+<ion-icon name="camera" class="footer-icon">CALENDAR</ion-icon>
 </button>
     <button ion-button icon-only (click)="redirectToRole()" clear>
-<ion-icon name="settings" class="footer-icon"></ion-icon>
+<ion-icon name="settings" class="footer-icon">SETTING</ion-icon>
 </button>
   </ion-toolbar>
 </ion-footer>

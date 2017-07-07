@@ -22,7 +22,14 @@ export class AddenginedetailPage {
   public loginas: any;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   public totalCount;
+  public recordID: any = null;
   pet: string = "ALL";
+    public isEdited: boolean = false;
+  public readOnly: boolean = false;
+
+  // Flag to hide the form upon successful completion of remote operation
+  public hideForm: boolean = false;
+  public hideActionButton = true;
   public reportData: any =
   {
     status: '',
@@ -34,7 +41,7 @@ export class AddenginedetailPage {
   public reportAllLists = [];
   public colorListArr: any;
   public userId: any;
-   public hideForm: boolean = false;
+  
   public enginemodel:any;
   public rawhtml:any;
   public companyId;
@@ -56,8 +63,63 @@ export class AddenginedetailPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddenginedetailPage');
   }
+  ionViewWillEnter() {
+   
+  
+    if (this.NP.get("record")) {
+       console.log(this.NP.get("act"));
+      this.isEdited = true;
+            this.selectEntry(this.NP.get("record"));
+
+     // this.pageTitle = 'Edit Company Group';
+      this.readOnly = false;
+      this.hideActionButton = true;
+    }
+    else {
+     
+      
+    }
+  }
+  selectEntry(item)
+  {
+    this.enginemodel = item.model;
+    this.rawhtml = item.rawhtml;
+    this.recordID=item.model_id;
+    console.log("ID"+this.recordID);
+  }
     saveEntry()
   {
+    if(this.isEdited)
+    {
+       let body: string = "is_mobile=1&model=" + this.enginemodel +
+      "&rawhtml=" + this.rawhtml+"&model_id="+this.recordID,
+      
+      
+      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/enginemodel/update";
+    console.log(url);
+    console.log(body);
+
+    this.http.post(url, body, options)
+      .subscribe((data) => {
+        //console.log("Response Success:" + JSON.stringify(data.json()));
+        // If the request was successful notify the user
+        if (data.status === 200) {
+          this.hideForm = true;
+          this.sendNotification(`successfully Updated`);
+          localStorage.setItem("userPhotoFile", "");
+          this.navCtrl.setRoot(EnginedetailPage);
+        }
+        // Otherwise let 'em know anyway
+        else {
+          this.sendNotification('Something went wrong!');
+        }
+      });
+    }
+    else
+    {
      let body: string = "is_mobile=1&model=" + this.enginemodel +
       "&rawhtml=" + this.rawhtml ,
       
@@ -84,6 +146,7 @@ export class AddenginedetailPage {
           this.sendNotification('Something went wrong!');
         }
       });
+    }
   }
    sendNotification(message): void {
     let notification = this.toastCtrl.create({

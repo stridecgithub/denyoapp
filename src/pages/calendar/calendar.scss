@@ -3,10 +3,7 @@ page-calendar {
     background-color:white;
 }
 
-.footer-icon{
-    color:#fff;
-    font-size:30px;    
-}
+
     #sortbar {
         width: 100%;
         min-height: 3.3rem;
@@ -33,7 +30,7 @@ page-calendar {
 		
     } 
 	
-	ion-navbar.toolbar{ background:#f0f0f0}
+	.backtoprevious-navbar{ background:#f0f0f0}
 	.bar-buttons-md {order: inherit;}
 	.bar-button-default-md, .bar-button-clear-md-default, .bar-button-md-default, .bar-button-default-md:hover:not(.disable-hover), .bar-button-clear-md-default:hover:not(.disable-hover), .bar-button-md-default:hover:not(.disable-hover), .backtoprevious-icon{color:#333;text-transform: capitalize;}
 	#sortbar{padding:0;margin:0;background:#f0f0f0}
@@ -56,4 +53,29 @@ ion-navbar ion-buttons{margin-right:15px;}
 .no-events-label[_ngcontent-c0] {
     display:none;
 }
+.item-md.item-block .item-inner{padding-right:0;}
+.label-md {margin: 13px 0px 13px 0;}
+ion-select{background:#f0f0f0;max-width:98%;margin:15px auto 0;border-radius:5px;padding:10px 15px!important;}
+.toolbar-md-bluedark .button-inner{height:inherit;}
 }
+.cal-top{background:#38b6ab;padding:5px 0 20px 0;text-align:center;}
+.cal-top button, .cal-top button:hover:not(.disable-hover){background-color:transparent;background:none;height:inherit!important;border:none;box-shadow:none;}
+.cal-top button span{height:inherit;}
+.item-calendar table th, .item-calendar table td{border:none!important;text-transform:uppercase;font-size:17px;}
+.item-calendar thead tr th:first-child, .item-calendar thead tr th:last-child, .item-calendar tbody tr td:first-child, .item-calendar tbody tr td:last-child{color:#38b6ab;}
+.monthview-selected[_ngcontent-c1]{background-color:#38b6ab!important;border-radius:20px;}
+.table-bordered[_ngcontent-c1]{border:0px solid #ddd;}
+.table[_ngcontent-c1] > thead[_ngcontent-c1] > tr[_ngcontent-c1] > th[_ngcontent-c1], .table[_ngcontent-c1] > tbody[_ngcontent-c1] > tr[_ngcontent-c1] > th[_ngcontent-c1], .table[_ngcontent-c1] > tfoot[_ngcontent-c1] > tr[_ngcontent-c1] > th[_ngcontent-c1], .table[_ngcontent-c1] > thead[_ngcontent-c1] > tr[_ngcontent-c1] > td[_ngcontent-c1], .table[_ngcontent-c1] > tbody[_ngcontent-c1] > tr[_ngcontent-c1] > td[_ngcontent-c1], .table[_ngcontent-c1] > tfoot[_ngcontent-c1] > tr[_ngcontent-c1] > td[_ngcontent-c1] {
+padding: 10px;}
+.event-detail-container[_ngcontent-c0]{border-top: 0px darkgrey solid!important;}
+.div-action button{border-radius:5px;margin-right:5px;}
+.table-bordered[_ngcontent-c1]{border:0px solid #ddd!important;}
+.calendar_pre{float:left;}
+.calendar_nex{float:right;}
+.calendar_pre span.button-inner{background:url(../img/left_arrow.png) no-repeat;width:32px;height:32px;font-size:0;}
+.calendar_nex span.button-inner{background:url(../img/right_arrow.png) no-repeat;width:32px;height:32px;font-size:0;}
+.calendar_ttl{margin-top:10px;padding-bottom:0;margin-bottom:0;}
+.calendar_ttl span{font-size:18px;}
+.list-title{margin:10px 0;}
+.spacing{padding:10px 15px;}
+ion-navbar.toolbar-md-bluedark .toolbar-background-md{background:transparent;}
