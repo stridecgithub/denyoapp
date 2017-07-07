@@ -45,12 +45,13 @@
       <h2><b>{{unitDetailData.projectname}}</b></h2>
     </div>
   </ion-item>
-  <ion-item>
-    <div style="overflow: hidden; padding-left: .5em;">
-      <h2><b>Gen Status:</b>{{unitDetailData.gen_status}}</h2>
-      <h2><b>Next Servicing:</b>{{unitDetailData.nextservicedate}}</h2>
-    </div>
-  </ion-item>
+ 
+  
+  
+  <div [innerHTML]="sanitizer.bypassSecurityTrustHtml(iframeContent)"></div>
+  
+
+
   <ion-item>
     <button ion-button icon-left>
   <ion-icon name="battery-charging"></ion-icon>
@@ -78,9 +79,6 @@
 </button>
  <div class="commentinfocount"  *ngIf="commentCount!=0"> <ion-badge item-end class="notify-badge">{{commentCount}}</ion-badge> </div>
   </ion-item>
-  <!--div [innerHTML]="iframeContent"></div-->
-  <div [innerHTML]="sanitizer.bypassSecurityTrustHtml(iframeContent)"></div>
-  <!--div [innerHTML]="unitDetailData.htmlContent"></div-->
 </ion-content>
 
 

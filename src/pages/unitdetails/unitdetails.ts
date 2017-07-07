@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {  NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { ServicinginfoPage } from '../servicinginfo/servicinginfo';
 import { CommentsinfoPage } from '../commentsinfo/commentsinfo';
 import { UserPage } from '../user/user';
@@ -14,6 +14,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { Http, Headers, RequestOptions } from '@angular/http';
 //import { Http, Headers, RequestOptions } from '@angular/http';
 //import { HTTP } from '@ionic-native/http';
+import * as $ from 'jquery';
 
 
 /**
@@ -60,6 +61,8 @@ export class UnitdetailsPage {
 	constructor(public http: Http, private sanitizer: DomSanitizer, public NP: NavParams, public navCtrl: NavController, public navParams: NavParams, public nav: NavController) {
 		this.unitDetailData.loginas = localStorage.getItem("userInfoName");
 		this.unitDetailData.userId = localStorage.getItem("userInfoId");
+
+
 	}
 
 
@@ -69,7 +72,30 @@ export class UnitdetailsPage {
 	}
 
 	ionViewWillEnter() {
+		$('#alarm').trigger("click");
+		$('#filecontainer').contents().find('#alarm').trigger("click");
+		$("#payment_status_div").hide();
+		var iframe = $('#filecontainer').contents();
+		iframe.find("#alarm").click(function () {
+			//$("#payment_status_div").show("slow");
+			alert('Kannan');
+		});
 
+/*
+		$('iframe#filecontainer').on('load', function () {   // 2. wait for the iframe to load
+			var $inner$ = $(this)[0].contentWindow.$;   // 3. get hold of the inner jQuery
+			$inner$(function () {   // 4. wait for the inner jQuery to be ready
+				$inner$.on('click', function () {   // Now I can intercept inner events.
+					// do something
+				});
+			});
+		});
+*/
+		/*
+		$("#filecontainer #alarm").click(function () {
+			console.log('Alarm button pressed');			// do something here
+			//this.baseURI.anchor.;
+		});*/
 
 		this.colorListArr = [
 			"FBE983",
@@ -115,7 +141,7 @@ export class UnitdetailsPage {
 		this.unitDetailData.alarmnotificationto = editItem.nextservicedate;
 		this.unitDetailData.favoriteindication = favorite;
 		console.log(this.apiServiceURL + "/" + this.unitDetailData.unit_id + "/1/unitdetails");
-		this.iframeContent = "<iframe id='ifrmMsg' src=" + this.apiServiceURL + "/" + this.unitDetailData.unit_id + "/1/unitdetails height=350 frameborder=0></iframe>";
+		this.iframeContent = "<iframe id='filecontainer' src=" + this.apiServiceURL + "/" + this.unitDetailData.unit_id + "/1/unitdetails height=350 width=100% frameborder=0></iframe>";
 
 		//http://denyoappv2.stridecdev.com/getcount?loginid=1&unitid=2
 
