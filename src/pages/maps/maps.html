@@ -41,7 +41,7 @@
   <ion-item style="width: 100%; margin: 0; padding-left: 10px;" *ngIf="totalCount!=0">
     <ion-label>Sort By</ion-label>
     <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="pet" (ionChange)="onSegmentChanged(pet)">
-      <ion-option value="unitname,desc">Favorite</ion-option>
+      <ion-option value="favorite,desc">Favorite</ion-option>
       <ion-option value="unitname,asc">Unit Name Ascending</ion-option>
       <ion-option value="unitname,desc">Unit Name Descending</ion-option>
       <ion-option value="companygroup_name,asc">Unit Group Ascending</ion-option>
@@ -64,7 +64,7 @@
         <button class="{{item.colorcodeindications}}" style="float: left ;width:8px;height:100px">
          
         </button>
-
+<button (click)="favorite(item.unit_id)" class="{{item.favoriteindication}}" style="float: right ;width:50px;height:50px;background-color:#ffffff"></button>
         <div style="overflow: hidden; padding-left: .5em;">
           <h2><b>{{item.unitname}}</b></h2>
           <h2><b>{{item.projectname}}</b></h2>
