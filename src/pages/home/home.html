@@ -9,7 +9,7 @@
       <ion-item>
         <ion-input type="password" placeholder="Password" formControlName="password" [(ngModel)]="passWrd"></ion-input>
       </ion-item>
-      <ion-item class="forgot">
+      <ion-item class="forgot" (click)="doMove()">
         <div>Forgot?</div>
       </ion-item>
 
