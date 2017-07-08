@@ -55,8 +55,8 @@ export class UnitdetailsPage {
 		userId: '',
 		loginas: '',
 		htmlContent: '',
-		lat:'',
-		lng:'',
+		lat: '',
+		lng: '',
 		iframeURL: ''
 
 	}

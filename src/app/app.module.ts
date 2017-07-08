@@ -52,6 +52,8 @@ import { ReportsPage } from '../pages/reports/reports';
 import { MessagesPage } from '../pages/messages/messages';
 import { AddenginedetailPage } from '../pages/addenginedetail/addenginedetail';
 import { EnginedetailPage } from '../pages/enginedetail/enginedetail';
+import { EngineviewPage } from '../pages/engineview/engineview';
+import { ForgotpasswordPage } from '../pages/forgotpassword/forgotpassword';
 import { EmailPage } from '../pages/email/email';
 import { DataServiceProvider } from '../providers/data-service/data-service';
 
@@ -105,6 +107,8 @@ import { DataServiceProvider } from '../providers/data-service/data-service';
     CommentdetailsPage,
     AlarmdetailsPage,
     ReportsPage,
+    EngineviewPage,
+    ForgotpasswordPage,
     EmailPage
   ],
   imports: [
@@ -164,6 +168,8 @@ import { DataServiceProvider } from '../providers/data-service/data-service';
     CommentdetailsPage,
     AlarmdetailsPage,
     ReportsPage,
+    EngineviewPage,
+    ForgotpasswordPage,
     EmailPage
   ],
   providers: [

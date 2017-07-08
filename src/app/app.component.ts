@@ -29,6 +29,8 @@ import { AlarmdetailsPage } from '../pages/alarmdetails/alarmdetails';
 import { CommentdetailsPage } from '../pages/commentdetails/commentdetails';
 import { EnginedetailPage } from '../pages/enginedetail/enginedetail';
 import { EmailPage } from '../pages/email/email';
+import { EngineviewPage } from '../pages/engineview/engineview';
+import { ForgotpasswordPage } from '../pages/forgotpassword/forgotpassword';
 import { DataServiceProvider } from '../providers/data-service/data-service';
 @Component({
   templateUrl: 'app.html'
@@ -68,6 +70,9 @@ export class MyApp {
       { title: 'Alarm Details', component: AlarmdetailsPage },
       { title:  'Engine Details', Component: EnginedetailPage },
       { title:  'Add Engine Details', Component: AddenginedetailPage },
+      { title:  'Engine Details', Component: EngineviewPage },
+      { title:  'ForgotPassword', Component: ForgotpasswordPage },
+
       // { title: 'Map Demo', component: MapdemoPage },
 
 
