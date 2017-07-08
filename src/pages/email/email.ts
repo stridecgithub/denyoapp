@@ -39,6 +39,7 @@ export class EmailPage {
   public addedImgListsArray = [];
   public addedImgLists = [];
   public attachedFileLists = [];
+  public composemessagecontent: any;
   progress: number;
   public personalhashtag;
   public receiver_id;
@@ -64,6 +65,7 @@ export class EmailPage {
   public isProgress = false;
   public isUploaded: boolean = true;
   public selectedAction = [];
+  public message_readstatus: any;
   item: any;
 
   public isEdited: boolean = false;
@@ -89,7 +91,7 @@ export class EmailPage {
     results: 8
   }
   public hideActionButton = true;
-  constructor(private file: File,public http: Http, public loadingCtrl: LoadingController, public alertCtrl: AlertController, public NP: NavParams, public nav: NavController, public toastCtrl: ToastController, public navParams: NavParams, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera, private filechooser: FileChooser,
+  constructor(private file: File, public http: Http, public loadingCtrl: LoadingController, public alertCtrl: AlertController, public NP: NavParams, public nav: NavController, public toastCtrl: ToastController, public navParams: NavParams, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera, private filechooser: FileChooser,
     private transfer: Transfer,
     private ngZone: NgZone) {
     this.message_priority_class1 = "-outline";
@@ -130,7 +132,9 @@ export class EmailPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddserviceinfoPage');
+
   }
+
 
   /*******************/
   /* Pull to Refresh */
@@ -586,6 +590,7 @@ export class EmailPage {
     this.messages_body = item.message_body;
     this.messages_body = item.message_body;
     this.personalhashtag = item.personalhashtag;
+    //this.message_readstatus=item.message_readstatus;
     this.receiver_id = item.receiver_id;
 
 
@@ -611,41 +616,36 @@ export class EmailPage {
       let hashhypenhash = this.service_resources.split("#");
       for (let i = 0; i < hashhypenhash.length; i++) {
         let imgDataArr = hashhypenhash[i];
-        console.log("1"+imgDataArr);
-        console.log("2"+JSON.stringify(imgDataArr));
+        console.log("1" + imgDataArr);
+        console.log("2" + JSON.stringify(imgDataArr));
         let filepath;
         filepath = this.apiServiceURL + "/attachments" + '/' + imgDataArr;
-       let ext = imgDataArr.split('.').pop();
-       
+        let ext = imgDataArr.split('.').pop();
+
         let imgSrc;
         if (ext == 'jpg') {
-
-          //imgSrc = 'http://denyoappv2.stridecdev.com/api/uploads/' + successData.fileName;
-          //imgSrc = '<ion-icon name="image"></ion-icon>';
           imgSrc = 'img/img.png';
-          /* this.addedImgLists.push({
-               imgSrc: imgSrc,
-               file: successData.fileName
-           });*/
-
-        } else {
-          if (ext == 'pdf') {
-            imgSrc = 'img/pdf.png';
-            // imgSrc = '<ion-icon name="document"></ion-icon>';
-          }
-          if (ext == 'doc' || ext == 'docx') {
-            imgSrc = 'img/doc.png';
-            //imgSrc = '<ion-icon name="document"></ion-icon>';
-          }
-          if (ext == 'xls' || ext == 'xlsx') {
-            imgSrc = 'img/xls.png';
-            //imgSrc = '<ion-icon name="document"></ion-icon>';
-          }
-          if (ext == 'ppt' || ext == 'pptx') {
-            imgSrc = 'img/ppt.png';
-            //imgSrc = '<ion-icon name="document"></ion-icon>';
-          }
         }
+        if (ext == 'png') {
+          imgSrc = 'img/img.png';
+        }
+        if (ext == 'pdf') {
+          imgSrc = 'img/pdf.png';
+          // imgSrc = '<ion-icon name="document"></ion-icon>';
+        }
+        if (ext == 'doc' || ext == 'docx') {
+          imgSrc = 'img/doc.png';
+          //imgSrc = '<ion-icon name="document"></ion-icon>';
+        }
+        if (ext == 'xls' || ext == 'xlsx') {
+          imgSrc = 'img/xls.png';
+          //imgSrc = '<ion-icon name="document"></ion-icon>';
+        }
+        if (ext == 'ppt' || ext == 'pptx') {
+          imgSrc = 'img/ppt.png';
+          //imgSrc = '<ion-icon name="document"></ion-icon>';
+        }
+
 
         //<ion-icon (click)="fileChooser(micro_timestamp)" *ngIf="isUploaded" name="attach" style="color: black;position: relative;top: 5px;left: 10px;font-size:20px"></ion-icon>'+'<a href="#" (click)=download('+filepath+')'
         this.attachedFileLists.push({
@@ -727,25 +727,51 @@ export class EmailPage {
   doDetails(item) {
     this.pet = 'details';
     this.selectEntry(item);
+    //http://denyoappv2.stridecdev.com/messages/changereadunread?is_mobile=1&ses_login_id=9&messages_id=44
+
+    let body: string = "is_mobile=1&ses_login_id=" + this.userId +
+      "&message_id=" + item.message_id,
+      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/messages/changereadunread";
+    console.log(url);
+    console.log(body);
+    this.http.post(url, body, options)
+      .subscribe((data) => {
+        console.log("Count Response Success:" + JSON.stringify(data.json()));
+        // If the request was successful notify the user
+        if (data.status === 200) {
+          //this.sendNotification(`Comment count successfully removed`);
+
+        }
+        // Otherwise let 'em know anyway
+        else {
+          // this.sendNotification('Something went wrong!');
+        }
+      });
+
   }
 
   reply() {
- this.pet = 'compose';
+    this.pet = 'compose';
   }
 
-  forward() {
- this.pet = 'compose';
+  forward(messages_body) {
+   // this.composemessagecontent = "-----Forward Message----- From: Super Admin Date: 2017-07-06 19:38:53 To: Bala <balamurugan@webneo.in> Vignesh <vignesh@webneo.in>" + messages_body;
+    this.pet = 'compose';
   }
 
   download(file) {
-        console.log("Download calling..." + file);
-        const fileTransfer: TransferObject = this.transfer.create();
-        const url = 'http://denyoappv2.stridecdev.com/api/uploads/' + file;
-        fileTransfer.download(url, this.file.dataDirectory + file).then((entry) => {
-            console.log('download complete: ' + entry.toURL());
-        }, (error) => {
-            // handle error
-        });
+    console.log("Download calling..." + file);
+    const fileTransfer: TransferObject = this.transfer.create();
+    const url = 'http://denyoappv2.stridecdev.com/api/uploads/' + file;
+    fileTransfer.download(url, this.file.dataDirectory + file).then((entry) => {
+      console.log('download complete: ' + entry.toURL());
+    }, (error) => {
+      // handle error
+      console.log('download error: ' + error);
+    });
 
-    }
+  }
 }
