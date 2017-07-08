@@ -1,11 +1,12 @@
 import { Component, ViewChild, NgZone } from '@angular/core';
 import { AlertController, NavController, NavParams, ViewController, ToastController, LoadingController } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { Camera, CameraOptions } from '@ionic-native/camera';
+import { Camera } from '@ionic-native/camera';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
 import { UserPage } from '../user/user';
+import { DashboardPage } from '../dashboard/dashboard';
 import { ServicinginfoPage } from '../servicinginfo/servicinginfo';
 import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
@@ -32,6 +33,7 @@ export class EmailPage {
   isReadyToSave: boolean;
   public photoInfo = [];
   public inboxLists = [];
+  public sendLists = [];
   public loginas: any;
   public hashtag;
   public addedImgListsArray = [];
@@ -45,15 +47,15 @@ export class EmailPage {
   public service_id: any;
   public serviced_by: any;
   public serviced_datetime: any;
-  public service_subject: any;
-  public service_remark: any;
+  public messages_subject: any;
+  public messages_body: any;
   public next_service_date: any;
-  public service_priority: any;
+  public message_priority: any;
   is_request: boolean
   public serviced_by_name: any;
   public service_resources: any;
-  public service_priority_class1: any;
-  public service_priority_class2: any;
+  public message_priority_class1: any;
+  public message_priority_class2: any;
   micro_timestamp: any;
   public isUploadedProcessing: boolean = false;
   public isProgress = false;
@@ -66,6 +68,7 @@ export class EmailPage {
   form: FormGroup;
   public addedAttachList;
   public totalCount;
+  public totalCountSend;
   public inboxData: any =
   {
     status: '',
@@ -74,21 +77,31 @@ export class EmailPage {
     startindex: 0,
     results: 8
   }
+  public sendData: any =
+  {
+    status: '',
+    sort: 'messages_id',
+    sortascdesc: 'asc',
+    startindex: 0,
+    results: 8
+  }
   public hideActionButton = true;
-  constructor(public http: Http, public loadingCtrl: LoadingController, public alertCtrl: AlertController, private datePicker: DatePicker, public NP: NavParams, public nav: NavController, public toastCtrl: ToastController, public navParams: NavParams, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera, private filechooser: FileChooser,
+  constructor(public http: Http, public loadingCtrl: LoadingController, public alertCtrl: AlertController, public NP: NavParams, public nav: NavController, public toastCtrl: ToastController, public navParams: NavParams, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera, private filechooser: FileChooser,
     private transfer: Transfer,
-    private file: File, private ngZone: NgZone) {
-    this.service_priority_class1 = "-outline";
-    this.service_priority_class2 = "-outline";
+    private ngZone: NgZone) {
+    this.message_priority_class1 = "-outline";
+    this.message_priority_class2 = "-outline";
+    this.loginas = localStorage.getItem("userInfoName");
     this.userId = localStorage.getItem("userInfoId");
     this.str = '';
     this.form = formBuilder.group({
       subject: ['', Validators.required],
       composemessagecontent: ['', Validators.required],
-      to: ['', Validators.required]
+      to: ['', Validators.required],
+      copytome: ['']
 
     });
-    this.service_priority = 0;
+    this.message_priority = 0;
     // Watch the form for changes, and
     this.form.valueChanges.subscribe((v) => {
       this.isReadyToSave = this.form.valid;
@@ -130,6 +143,17 @@ export class EmailPage {
   }
 
 
+  doSendRefresh(refresher) {
+    console.log('doRefresh function calling...');
+    this.sendData.startindex = 0;
+    this.sendLists = [];
+    this.doSend();
+    setTimeout(() => {
+      refresher.complete();
+    }, 2000);
+  }
+
+
   /**********************/
   /* Infinite scrolling */
   /**********************/
@@ -140,6 +164,23 @@ export class EmailPage {
     if (this.inboxData.startindex < this.totalCount && this.inboxData.startindex > 0) {
       console.log('B');
       this.doInbox();
+    }
+    console.log('C');
+    setTimeout(() => {
+      console.log('D');
+      infiniteScroll.complete();
+    }, 500);
+    console.log('E');
+  }
+
+
+  doSendInfinite(infiniteScroll) {
+    console.log('InfinitScroll function calling...');
+    console.log('A');
+    console.log("Total Count:" + this.totalCount)
+    if (this.sendData.startindex < this.totalCount && this.sendData.startindex > 0) {
+      console.log('B');
+      this.doSend();
     }
     console.log('C');
     setTimeout(() => {
@@ -165,7 +206,7 @@ export class EmailPage {
   /*@doCompanyGroup calling on report */
   /****************************/
   doInbox() {
-    this.presentLoading(1);
+    //this.presentLoading(1);
     if (this.inboxData.status == '') {
       this.inboxData.status = "messages_id";
     }
@@ -197,47 +238,68 @@ export class EmailPage {
         console.log("Total Record:" + this.totalCount);
 
       });
-    this.presentLoading(0);
+    // this.presentLoading(0);
   }
+
+
+  doSend() {
+    //this.presentLoading(1);
+    if (this.sendData.status == '') {
+      this.sendData.status = "messages_id";
+    }
+    if (this.sendData.sort == '') {
+      this.sendData.sort = "messages_id";
+    }
+    //http://denyoappv2.stridecdev.com/sentitems?is_mobile=1&sort=messages_id&dir=desc&startindex=0&results=8&loginid=1
+    let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/sentitems?is_mobile=1&startindex=" + this.sendData.startindex + "&results=" + this.sendData.results + "&sort=" + this.sendData.sort + "&dir=" + this.sendData.sortascdesc + "&loginid=" + this.userId;
+    let res;
+    console.log(url);
+    this.http.get(url, options)
+      .subscribe((data) => {
+        res = data.json();
+        console.log(JSON.stringify(res));
+        console.log("1" + res.messages.length);
+        console.log("2" + res.messages);
+        if (res.messages.length > 0) {
+          this.sendLists = res.messages;
+          this.totalCountSend = res.totalCount;
+          this.sendData.startindex += this.sendData.results;
+          //this.loadingMoreDataContent = 'Loading More Data';
+        } else {
+          this.totalCountSend = 0;
+          //this.loadingMoreDataContent = 'No More Data';
+        }
+        console.log("Total Record:" + this.totalCountSend);
+
+      });
+    //this.presentLoading(0);
+  }
+
+
+  onSendSegmentChanged(val, item) {
+    let splitdata = val.split(",");
+    this.sendData.sort = splitdata[0];
+    this.sendData.sortascdesc = splitdata[1];
+    this.sendData.startindex = 0;
+    this.doSend();
+  }
+
+
   onSegmentChanged(val, item) {
     let splitdata = val.split(",");
     this.inboxData.sort = splitdata[0];
     this.inboxData.sortascdesc = splitdata[1];
-    //this.inboxData.status = "ALL";
     this.inboxData.startindex = 0;
-    console.log("listbox:" + JSON.stringify(this.inboxLists));
-    //for (let i = 0; i < this.inboxLists.length; i++) {
-    for (let unitgroup in item) {
-      if (item[unitgroup].messages_id == true) {
-
-      }
-    }
-    console.log(JSON.stringify(this.selectedAction));
-    //this.inboxLists = [];
     this.doInbox();
   }
 
-  getCheckBoxValue(name) {
-    /*console.log("Available data" + name);
-    this.selectedAction.push({
-      availabledata: name
-    })
-    console.log(JSON.stringify(this.selectedAction));*/
-    if (name != '') {
-      if (this.str == '') {
-        this.str = name;
-      } else {
-        this.str = this.str + "," + name;
-      }
-    }
-    console.log(this.str);
-  }
   ionViewWillEnter() {
     this.getPrority(1);
-    let users = localStorage.getItem("atMentionedStorage");
     this.is_request = false;
     console.log(JSON.stringify(this.NP.get("record")));
-    let editItem = this.NP.get("record");
 
     if (this.NP.get("record")) {
       this.selectEntry(this.NP.get("record"));
@@ -259,28 +321,36 @@ export class EmailPage {
 
     this.inboxData.startindex = 0;
     this.inboxData.sort = "messages_id";
+    this.sendData.startindex = 0;
+    this.sendData.sort = "messages_id";
     this.doInbox();
+    this.doSend();
 
 
   }
 
 
 
-  takePictureURL(micro_timestamp) {
+
+  fileChooser(micro_timestamp) {
     this.isUploadedProcessing = true;
-    const options: CameraOptions = {
-      quality: 100,
-      destinationType: this.camera.DestinationType.FILE_URI
-    }
-    this.camera.getPicture(options).then((imageData) => {
-      console.log(imageData);
-      this.fileTrans(imageData, micro_timestamp);
-      this.addedAttachList = imageData;
-    }, (err) => {
-      // Handle error
-      this.sendNotification(err);
-    });
+    this.filechooser.open()
+      .then(
+      uri => {
+        console.log(uri);
+        this.fileTrans(uri, micro_timestamp);
+        this.addedAttachList = uri;
+      }
+
+      )
+      .catch(e => console.log(e));
+
+
+    return false;
+
+
   }
+
 
   sendNotification(message): void {
     let notification = this.toastCtrl.create({
@@ -291,11 +361,11 @@ export class EmailPage {
   }
 
   fileTrans(path, micro_timestamp) {
+    let fileName = path.substr(path.lastIndexOf('/') + 1);
     const fileTransfer: TransferObject = this.transfer.create();
     let currentName = path.replace(/^.*[\\\/]/, '');
     console.log("File Name is:" + currentName);
 
-    //YmdHis_123_filename
     let dateStr = new Date();
     let year = dateStr.getFullYear();
     let month = dateStr.getMonth();
@@ -305,7 +375,9 @@ export class EmailPage {
     let sec = dateStr.getSeconds();
     let d = new Date(),
       n = d.getTime(),
-      newFileName = year + "" + month + "" + date + "" + hr + "" + mn + "" + sec + "_123_" + n + ".jpg";
+      newFileName = year + "" + month + "" + date + "" + hr + "" + mn + "" + sec + "_123_" + n + currentName;
+
+
 
     let options: FileUploadOptions = {
       fileKey: 'file',
@@ -314,24 +386,51 @@ export class EmailPage {
       chunkedMode: false,
       mimeType: "text/plain",
     }
-
-
-
-
-    //  http://127.0.0.1/ionic/upload_attach.php
-    //http://amahr.stridecdev.com/getgpsvalue.php?key=create&lat=34&long=45
     fileTransfer.onProgress(this.onProgress);
-    fileTransfer.upload(path, this.apiServiceURL + '/fileupload.php?micro_timestamp=' + micro_timestamp, options)
+    // fileTransfer.upload(path, this.baseURI + '/api/upload_attach.php', options)
+    fileTransfer.upload(path, this.apiServiceURL + '/api/upload_attach.php?micro_timestamp=' + micro_timestamp, options)
       .then((data) => {
+        console.log("UPLOAD SUCCESS:" + data.response);
+        let successData = JSON.parse(data.response);
+        this.sendNotification("File attached successfully");
+        console.log('http:' + '//' + successData.baseURL + '/' + successData.target_dir + '/' + successData.fileName);
         let imgSrc;
-        imgSrc = this.apiServiceURL + "/serviceimages" + '/' + newFileName;
-        this.addedImgLists.push({
-          imgSrc: imgSrc,
-          imgDateTime: new Date(),
-          fileName: newFileName
-        });
-
-        //loading.dismiss();
+        if (successData.ext == 'jpg') {
+          //imgSrc = 'http://denyoappv2.stridecdev.com/api/uploads/' + successData.fileName;
+          //imgSrc = '<ion-icon name="image"></ion-icon>';
+          imgSrc = 'img/img.png';
+          /* this.addedImgLists.push({
+               imgSrc: imgSrc,
+               file: successData.fileName
+           });*/
+          this.addedImgLists.push({
+            imgSrc: imgSrc,
+            imgDateTime: new Date(),
+            fileName: newFileName
+          });
+        } else {
+          if (successData.ext == 'pdf') {
+            imgSrc = 'img/pdf.png';
+            // imgSrc = '<ion-icon name="document"></ion-icon>';
+          }
+          if (successData.ext == 'doc' || successData.ext == 'docx') {
+            imgSrc = 'img/doc.png';
+            //imgSrc = '<ion-icon name="document"></ion-icon>';
+          }
+          if (successData.ext == 'xls' || successData.ext == 'xlsx') {
+            imgSrc = 'img/xls.png';
+            //imgSrc = '<ion-icon name="document"></ion-icon>';
+          }
+          if (successData.ext == 'ppt' || successData.ext == 'pptx') {
+            imgSrc = 'img/ppt.png';
+            //imgSrc = '<ion-icon name="document"></ion-icon>';
+          }
+          this.addedImgLists.push({
+            imgSrc: imgSrc,
+            file: fileName
+          });
+        }
+        localStorage.setItem('fileAttach', JSON.stringify(this.addedImgLists));
         if (this.addedImgLists.length > 9) {
           this.isUploaded = false;
         }
@@ -339,14 +438,7 @@ export class EmailPage {
         this.isProgress = false;
         this.isUploadedProcessing = false;
         return false;
-
-
-
-        // Save in Backend and MysQL
-        //this.uploadToServer(data.response);
-        // Save in Backend and MysQL
       }, (err) => {
-        //loading.dismiss();
         console.log("Upload Error:" + JSON.stringify(err));
         this.sendNotification("Upload Error:" + JSON.stringify(err));
       })
@@ -372,25 +464,17 @@ export class EmailPage {
 
       let to: string = this.form.controls["to"].value,
         copytome: string = this.form.controls["copytome"].value,
-        next_service_date: string = this.form.controls["next_service_date"].value,
-        serviced_by: string = this.form.controls["serviced_by"].value,
-        is_request: string = this.form.controls["is_request"].value,
-        service_subject: string = this.form.controls["service_subject"].value;
+        composemessagecontent: string = this.form.controls["composemessagecontent"].value,
+        subject: string = this.form.controls["subject"].value;
       console.log("serviced_datetime:" + to);
-      console.log("service_remark:" + copytome);
-      console.log("serviced_by:" + serviced_by);
-      console.log("is_request:" + is_request);
-      console.log("service_subject:" + service_subject);
-
+      console.log("messages_body:" + copytome);
+      console.log("messages_subject:" + subject);
       console.log("Image Data" + JSON.stringify(this.addedImgLists));
       //let d = new Date();
       //let micro_timestamp = d.getFullYear() + "" + d.getMonth() + "" + d.getDate() + "" + d.getHours() + "" + d.getMinutes() + "" + d.getSeconds();
-      if (this.isEdited) {
-        this.updateEntry();
-      }
-      else {
-        this.createEntry(this.micro_timestamp, to, copytome);
-      }
+
+      this.createEntry(this.micro_timestamp, to, copytome, composemessagecontent, subject);
+
     }
   }
 
@@ -399,22 +483,25 @@ export class EmailPage {
   // to our remote PHP script (note the body variable we have created which
   // supplies a variable of key with a value of create followed by the key/value pairs
   // for the record data
-  createEntry(micro_timestamp, to, copytome) {
-
+  createEntry(micro_timestamp, to, copytome, composemessagecontent, subject) {
+    if (copytome == true) {
+      copytome = '1';
+    }
     let body: string = "is_mobile=1" +
-      "&important=" + this.service_priority +
-      "&important=" + this.service_priority +
+      "&important=" + this.message_priority +
+      "&microtime=" + micro_timestamp +
       "&loginid=" + this.userId +
-      "&to=" + this.userId +
+      "&to=" + to +
+      "&composemessagecontent=" + composemessagecontent +
       "&copytome=" + copytome +
-      "&uploadInfo=" + JSON.stringify(this.addedImgLists),
+      "&subject=" + subject,
       //"&contact_number=" + this.contact_number +
       //"&contact_name=" + this.contact_name +
       //"&nextServiceDate=" + nextServiceDate,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/services/store";
+      url: any = this.apiServiceURL + "/messages/store";
     console.log(url);
     console.log(body);
 
@@ -424,10 +511,12 @@ export class EmailPage {
         // If the request was successful notify the user
         if (data.status === 200) {
           localStorage.setItem("microtime", "");
-          this.sendNotification(`Servicing info was successfully added`);
-          this.nav.setRoot(ServicinginfoPage, {
-            record: this.NP.get("record")
-          });
+          this.sendNotification(`Message sending successfully`);
+          this.inboxData.startindex = 0;
+          this.inboxLists = [];
+          this.sendData.startindex = 0;
+          this.sendLists = [];
+          this.pet = 'inbox';
         }
         // Otherwise let 'em know anyway
         else {
@@ -438,47 +527,12 @@ export class EmailPage {
 
 
 
-  // Update an existing record that has been edited in the page's HTML form
-  // Use angular's http post method to submit the record data
-  // to our remote PHP script (note the body variable we have created which
-  // supplies a variable of key with a value of update followed by the key/value pairs
-  // for the record data
-  updateEntry() {
-    let body: string = "is_mobile=1&service_id=" + this.service_id +
 
-      "&is_denyo_support=0" +
-
-
-      "&uploadInfo=" + JSON.stringify(this.addedImgLists),
-
-      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
-      headers: any = new Headers({ 'Content-Type': type }),
-      options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/services/update";
-    console.log(url);
-    console.log(body);
-    this.http.post(url, body, options)
-      .subscribe(data => {
-        console.log(data);
-        // If the request was successful notify the user
-        if (data.status === 200) {
-          localStorage.setItem("microtime", "");
-          this.sendNotification(`Servicing info  was successfully updated`);
-          this.nav.setRoot(ServicinginfoPage, {
-            record: this.NP.get("record")
-          });
-        }
-        // Otherwise let 'em know anyway
-        else {
-          this.sendNotification('Something went wrong!');
-        }
-      });
-  }
 
 
 
   getPrority(val) {
-    this.service_priority = val
+    this.message_priority = val
   }
 
   addDays(days) {
@@ -497,9 +551,7 @@ export class EmailPage {
   }
 
   previous() {
-    this.nav.setRoot(ServicinginfoPage, {
-      record: this.NP.get("record")
-    });
+    this.nav.setRoot(DashboardPage);
   }
 
 
@@ -524,18 +576,19 @@ export class EmailPage {
     this.nav.setRoot(RolePage);
   }
   selectEntry(item) {
+    console.log(JSON.stringify(item));
     this.serviced_by = item.serviced_by;
     this.serviced_datetime = item.serviced_datetime;
-    this.service_subject = item.service_subject;
-    this.service_remark = item.service_remark;
+    this.messages_subject = item.messages_subject;
+    this.messages_body = item.message_body;
     //this.next_service_date = item.next_service_date;
-    this.service_priority = item.service_priority;
-    console.log("X" + this.service_priority);
-    if (this.service_priority == "1") {
-      this.service_priority_class1 = '';
+    this.message_priority = item.message_priority;
+    console.log("X" + this.message_priority);
+    if (this.message_priority == "1") {
+      this.message_priority_class1 = '';
       console.log("Y");
-    } else if (this.service_priority == "2") {
-      this.service_priority_class2 = '';
+    } else if (this.message_priority == "2") {
+      this.message_priority_class2 = '';
       console.log("Z");
     }
     if (item.is_request > 0) {
@@ -565,17 +618,22 @@ export class EmailPage {
       }
     }
   }
-  doRemoveResouce(id, item) {
+
+
+
+
+
+  doConfirm(id, item) {
     console.log("Deleted Id" + id);
     let confirm = this.alertCtrl.create({
-      message: 'Are you sure you want to delete this file?',
+      message: 'Are you sure you want to delete this message?',
       buttons: [{
         text: 'Yes',
         handler: () => {
           this.deleteEntry(id);
-          for (let q: number = 0; q < this.addedImgLists.length; q++) {
-            if (this.addedImgLists[q] == item) {
-              this.addedImgLists.splice(q, 1);
+          for (let q: number = 0; q < this.inboxLists.length; q++) {
+            if (this.inboxLists[q] == item) {
+              this.inboxLists.splice(q, 1);
             }
           }
         }
@@ -587,25 +645,19 @@ export class EmailPage {
     });
     confirm.present();
   }
-
-
-  // Remove an existing record that has been selected in the page's HTML form
-  // Use angular's http post method to submit the record data
-  // to our remote PHP script (note the body variable we have created which
-  // supplies a variable of key with a value of delete followed by the key/value pairs
-  // for the record ID we want to remove from the remote database
   deleteEntry(recordID) {
     let
       //body: string = "key=delete&recordID=" + recordID,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/" + recordID + "/removeresource";
+      url: any = this.apiServiceURL + "/message/" + recordID + "/1/delete";
     this.http.get(url, options)
       .subscribe(data => {
         // If the request was successful notify the user
         if (data.status === 200) {
-          this.sendNotification(`Congratulations file was successfully deleted`);
+
+          this.sendNotification(`messages was successfully deleted`);
         }
         // Otherwise let 'em know anyway
         else {
@@ -613,5 +665,16 @@ export class EmailPage {
         }
       });
   }
+  doDetails(item) {
+    this.pet = 'details';
+    this.selectEntry(item);
+  }
 
+  reply(){
+
+  }
+
+  forward(){
+
+  }
 }

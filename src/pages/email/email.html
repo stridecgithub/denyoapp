@@ -29,8 +29,7 @@
       Login As:{{loginas}}
     </ion-buttons>
   </ion-navbar>
-</ion-header>
-<ion-content>
+
   <ion-toolbar>
     <ion-segment [(ngModel)]="pet">
       <ion-segment-button value="inbox">
@@ -44,32 +43,45 @@
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content padding class="ion-content">
+
   <div [ngSwitch]="pet">
     <ion-list *ngSwitchCase="'inbox'">
       <div class="error" *ngIf="totalCount==0">No message entries found</div>
-
       <ion-item>
         <ion-label>Sort By</ion-label>
         <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="pet" (ionChange)="onSegmentChanged(pet,inboxLists)">
-          <ion-option value="messages_id,asc" selected="true">Group Name Asc</ion-option>
-          <ion-option value="messages_id,desc">Group Name Desc</ion-option>
+          <ion-option value="messages_id,asc" selected="true">Favorite Ascending</ion-option>
+          <ion-option value="messages_id,desc">Sender Descending</ion-option>
+          <ion-option value="messages_id,desc">Subject Descending</ion-option>
+          <ion-option value="messages_id,desc">Subject Descending</ion-option>
         </ion-select>
+
+        <ion-label>Action</ion-label>
+        <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="act" (ionChange)="onAction(act)">
+          <ion-option value="messages_id,asc" selected="true">Delete</ion-option>
+          <ion-option value="messages_id,desc">Favorite</ion-option>
+          <ion-option value="messages_id,desc">Unfavorite</ion-option>
+          <ion-option value="messages_id,desc">Mark as read</ion-option>
+          <ion-option value="messages_id,desc">Mark as Unread</ion-option>
+        </ion-select>
+
       </ion-item>
       <ion-refresher (ionRefresh)="doRefresh($event)" *ngIf="totalCount!=0">
         <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
         </ion-refresher-content>
       </ion-refresher>
       <ion-list *ngIf="totalCount!=0">
-        <ion-item-sliding>         
-          <ion-item  *ngFor="let item of inboxLists;">
-            <ion-label>{{item.subject}}</ion-label>
-             <ion-checkbox color="bluedark" (click)="getCheckBoxValue(item.message_id)" checked="false"></ion-checkbox>
+        <ion-item-sliding *ngFor="let item of inboxLists;">
+          <ion-item (click)="doDetails(item)">
+            <h2>{{item.messages_subject}}</h2>
           </ion-item>
           <ion-item-options>
-            <button class="editcolor" (click)="doEdit(item,'edit')">                      
-                        <ion-icon name="create" class="icon-size"></ion-icon>
-                    </button>
-            <button class="trashcolor" (click)="doConfirm(item.companygroup_id,item)">                        
+            <button class="trashcolor" (click)="doConfirm(item.messages_id,item)">                        
                          <ion-icon name="trash" class="icon-size"></ion-icon>
                     </button>
           </ion-item-options>
@@ -80,31 +92,61 @@
       </ion-infinite-scroll>
     </ion-list>
     <ion-list *ngSwitchCase="'send'">
-      Send item goes here
+      <div class="error" *ngIf="totalCountSend==0">No send itme entries found</div>
+      <ion-item>
+        <ion-label>Sort By</ion-label>
+        <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="pet" (ionChange)="onSendSegmentChanged(pet,inboxLists)">
+          <ion-option value="messages_id,asc" selected="true">Sender Ascending</ion-option>
+          <ion-option value="messages_id,desc">Sender Descending</ion-option>
+          <ion-option value="messages_id,asc">Subject Ascending</ion-option>
+          <ion-option value="messages_id,desc">Subject Descending</ion-option>
+        </ion-select>
+
+
+        <ion-label>Action</ion-label>
+        <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="pet" (ionChange)="onSendAction(pet,inboxLists)">
+          <ion-option value="messages_id,asc" selected="true">Delete</ion-option>
+        </ion-select>
+
+
+
+      </ion-item>
+      <ion-refresher (ionRefresh)="doSendRefresh($event)" *ngIf="totalCountSend!=0">
+        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
+        </ion-refresher-content>
+      </ion-refresher>
+      <ion-list *ngIf="totalCountSend!=0">
+        <ion-item-sliding *ngFor="let item of sendLists;">
+          <ion-item (click)="doDetails(item)">
+            <h2>{{item.messages_subject}}</h2>
+          </ion-item>
+          <ion-item-options>
+            <button class="trashcolor" (click)="doConfirmSend(item.messages_id,item)">                        
+                         <ion-icon name="trash" class="icon-size"></ion-icon>
+                    </button>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+      <ion-infinite-scroll (ionInfinite)="doSendInfinite($event)" *ngIf="totalCountSend!=0">
+        <ion-infinite-scroll-content loadingText="{{loadingMoreDataContent}}"></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
     </ion-list>
     <form [formGroup]="form" (ngSubmit)="saveEntry()" enctype='application/x-www-form-urlencoded' method="post">
-      <ion-list *ngSwitchCase="'compose'">              
-        <ion-grid>
-          <ion-row>
-            <ion-col>
-              <a href="#" (click)="getPrority(1)">
-                <ion-icon name="download{{service_priority_class1}}" style="color:aquamarine;font-size: 37px;"></ion-icon>
-              </a>
-            </ion-col>
-
-
-            <ion-col>
-              <a href="#" (click)="getPrority(2)">
-                <ion-icon name="alert{{service_priority_class2}}" style="color: brown;font-size: 37px;"></ion-icon>
-              </a>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
+      <ion-list *ngSwitchCase="'compose'">
         <ion-item>
-          <ion-label stacked>To <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
-          <ion-input type="text" [disabled]="readOnly" formControlName="to" [(ngModel)]="to"></ion-input>
+          <a href="#" (click)="getPrority(1)">
+            <ion-icon name="download{{message_priority_class1}}" style="color:aquamarine;font-size: 37px;"></ion-icon>
+          </a>
+
+          <a href="#" (click)="getPrority(2)">
+            <ion-icon name="alert{{message_priority_class2}}" style="color: brown;font-size: 37px;"></ion-icon>
+          </a>
         </ion-item>
-        <span><input type="checkbox" name="copytome" value="1"/>&nbsp; Copy Mail</span><span><img src="assets/icon/m1.png" onclick="e('message_priority').value=1" hspace="10"/><img onclick="e('message_priority').value=2" src="assets/icon/m2.png" hspace="10"/><!--img onclick="e('message_priority').value=2" src="assets/icon/a.png" hspace="10"/--><ion-icon (click)="fileChooser(micro_timestamp)" *ngIf="isUploaded" name="attach" style="color: black;
+        <b>To</b> <span class="mandatory" *ngIf="hideActionButton">*</span>
+        <input type="text" (keyup)=address1get($event.target.value); name="to" id="to" class="sugges" onkeyup="sptions(event)" onblur="sptionshide()"
+          class="form-control" rows="8" [disabled]="readOnly" formControlName="to" rows="6" [(ngModel)]="to">
+
+        <span><input type="checkbox" name="copytome" formControlName="copytome" value="1"/>&nbsp; Copy Mail</span><span><ion-icon (click)="fileChooser(micro_timestamp)" *ngIf="isUploaded" name="attach" style="color: black;
     position: relative;
     top: 5px;
     left: 10px;
@@ -137,7 +179,24 @@
 
       </ion-list>
     </form>
+
+
+    <ion-list *ngSwitchCase="'details'">
+      <div><b>Subject:</b>{{messages_subject}}</div>
+      <hr>
+      <div><b>From:</b></div>
+      <br>
+      <div><b>To:</b></div>
+      <br>
+      <div><b>Message:</b>{{messages_body}}</div>
+      <br>
+      <div><b>Attachments:</b></div>
+      <div><a href="#" (click)="reply()">Reply</a>&nbsp; &nbsp; &nbsp; &nbsp;<a href="#" (click)="forward()">Forward</a></div>
+    </ion-list>
+
   </div>
+
+
 </ion-content>
 <ion-footer color="bluedark">
   <ion-toolbar color="bluedark">
