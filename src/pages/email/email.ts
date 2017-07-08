@@ -7,7 +7,6 @@ import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/trans
 import { File } from '@ionic-native/file';
 import { UserPage } from '../user/user';
 import { DashboardPage } from '../dashboard/dashboard';
-import { ServicinginfoPage } from '../servicinginfo/servicinginfo';
 import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
 import { UnitsPage } from '../units/units';
@@ -16,6 +15,7 @@ import { DatePicker } from '@ionic-native/date-picker';
 import 'rxjs/add/operator/map';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { NotificationPage } from '../notification/notification';
+
 /**
  * Generated class for the AddserviceinfoPage page.
  *
@@ -38,7 +38,10 @@ export class EmailPage {
   public hashtag;
   public addedImgListsArray = [];
   public addedImgLists = [];
+  public attachedFileLists = [];
   progress: number;
+  public personalhashtag;
+  public receiver_id;
   public pageTitle: any;
   pet: string = "inbox";
   public recordID: any;
@@ -86,7 +89,7 @@ export class EmailPage {
     results: 8
   }
   public hideActionButton = true;
-  constructor(public http: Http, public loadingCtrl: LoadingController, public alertCtrl: AlertController, public NP: NavParams, public nav: NavController, public toastCtrl: ToastController, public navParams: NavParams, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera, private filechooser: FileChooser,
+  constructor(private file: File,public http: Http, public loadingCtrl: LoadingController, public alertCtrl: AlertController, public NP: NavParams, public nav: NavController, public toastCtrl: ToastController, public navParams: NavParams, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera, private filechooser: FileChooser,
     private transfer: Transfer,
     private ngZone: NgZone) {
     this.message_priority_class1 = "-outline";
@@ -516,7 +519,7 @@ export class EmailPage {
           this.inboxLists = [];
           this.sendData.startindex = 0;
           this.sendLists = [];
-          this.pet = 'inbox';
+          this.pet = 'send';
         }
         // Otherwise let 'em know anyway
         else {
@@ -581,6 +584,11 @@ export class EmailPage {
     this.serviced_datetime = item.serviced_datetime;
     this.messages_subject = item.messages_subject;
     this.messages_body = item.message_body;
+    this.messages_body = item.message_body;
+    this.personalhashtag = item.personalhashtag;
+    this.receiver_id = item.receiver_id;
+
+
     //this.next_service_date = item.next_service_date;
     this.message_priority = item.message_priority;
     console.log("X" + this.message_priority);
@@ -597,20 +605,56 @@ export class EmailPage {
     this.serviced_by_name = item.serviced_by_name;
     this.service_resources = item.service_resources;
 
-    this.service_resources = item.service_resources;
+    this.service_resources = item.attachments;
 
     if (this.service_resources != undefined && this.service_resources != 'undefined' && this.service_resources != '') {
-      let hashhypenhash = this.service_resources.split("#-#");
+      let hashhypenhash = this.service_resources.split("#");
       for (let i = 0; i < hashhypenhash.length; i++) {
-        let imgDataArr = hashhypenhash[i].split("|");
+        let imgDataArr = hashhypenhash[i];
+        console.log("1"+imgDataArr);
+        console.log("2"+JSON.stringify(imgDataArr));
+        let filepath;
+        filepath = this.apiServiceURL + "/attachments" + '/' + imgDataArr;
+       let ext = imgDataArr.split('.').pop();
+       
         let imgSrc;
-        imgSrc = this.apiServiceURL + "/serviceimages" + '/' + imgDataArr[1];
-        this.addedImgLists.push({
+        if (ext == 'jpg') {
+
+          //imgSrc = 'http://denyoappv2.stridecdev.com/api/uploads/' + successData.fileName;
+          //imgSrc = '<ion-icon name="image"></ion-icon>';
+          imgSrc = 'img/img.png';
+          /* this.addedImgLists.push({
+               imgSrc: imgSrc,
+               file: successData.fileName
+           });*/
+
+        } else {
+          if (ext == 'pdf') {
+            imgSrc = 'img/pdf.png';
+            // imgSrc = '<ion-icon name="document"></ion-icon>';
+          }
+          if (ext == 'doc' || ext == 'docx') {
+            imgSrc = 'img/doc.png';
+            //imgSrc = '<ion-icon name="document"></ion-icon>';
+          }
+          if (ext == 'xls' || ext == 'xlsx') {
+            imgSrc = 'img/xls.png';
+            //imgSrc = '<ion-icon name="document"></ion-icon>';
+          }
+          if (ext == 'ppt' || ext == 'pptx') {
+            imgSrc = 'img/ppt.png';
+            //imgSrc = '<ion-icon name="document"></ion-icon>';
+          }
+        }
+
+        //<ion-icon (click)="fileChooser(micro_timestamp)" *ngIf="isUploaded" name="attach" style="color: black;position: relative;top: 5px;left: 10px;font-size:20px"></ion-icon>'+'<a href="#" (click)=download('+filepath+')'
+        this.attachedFileLists.push({
           imgSrc: imgSrc,
-          imgDateTime: new Date(),
-          fileName: imgDataArr[1],
-          resouce_id: imgDataArr[0]
+          file: imgDataArr,
+          filepath: filepath
         });
+
+        console.log(JSON.stringify(this.attachedFileLists));
       }
 
       if (this.addedImgLists.length > 9) {
@@ -623,17 +667,25 @@ export class EmailPage {
 
 
 
-  doConfirm(id, item) {
+  doConfirm(id, item, type) {
     console.log("Deleted Id" + id);
     let confirm = this.alertCtrl.create({
       message: 'Are you sure you want to delete this message?',
       buttons: [{
         text: 'Yes',
         handler: () => {
-          this.deleteEntry(id);
-          for (let q: number = 0; q < this.inboxLists.length; q++) {
-            if (this.inboxLists[q] == item) {
-              this.inboxLists.splice(q, 1);
+          this.deleteEntry(id, type);
+          if (type == 'inbox') {
+            for (let q: number = 0; q < this.inboxLists.length; q++) {
+              if (this.inboxLists[q] == item) {
+                this.inboxLists.splice(q, 1);
+              }
+            }
+          } else {
+            for (let q: number = 0; q < this.sendLists.length; q++) {
+              if (this.sendLists[q] == item) {
+                this.sendLists.splice(q, 1);
+              }
             }
           }
         }
@@ -645,19 +697,26 @@ export class EmailPage {
     });
     confirm.present();
   }
-  deleteEntry(recordID) {
+  deleteEntry(recordID, typestr) {
+    let urlstr;
+    if (typestr == 'inbox') {
+      urlstr = this.apiServiceURL + "/messages/" + recordID + "/inbox/delete?is_mobile=1&ses_login_id=" + this.userId;
+    } else {
+      urlstr = this.apiServiceURL + "/messages/" + recordID + "/senditems/delete?is_mobile=1&ses_login_id=" + this.userId;
+    }
     let
-      //body: string = "key=delete&recordID=" + recordID,
+      // /messages/43/inbox/delete?is_mobile=1&ses_login_id=9
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/message/" + recordID + "/1/delete";
+      url: any = urlstr;
+    console.log("Delete Message URL:" + url);
     this.http.get(url, options)
       .subscribe(data => {
         // If the request was successful notify the user
         if (data.status === 200) {
 
-          this.sendNotification(`messages was successfully deleted`);
+          this.sendNotification(`Messages was successfully deleted`);
         }
         // Otherwise let 'em know anyway
         else {
@@ -670,11 +729,23 @@ export class EmailPage {
     this.selectEntry(item);
   }
 
-  reply(){
-
+  reply() {
+ this.pet = 'compose';
   }
 
-  forward(){
-
+  forward() {
+ this.pet = 'compose';
   }
+
+  download(file) {
+        console.log("Download calling..." + file);
+        const fileTransfer: TransferObject = this.transfer.create();
+        const url = 'http://denyoappv2.stridecdev.com/api/uploads/' + file;
+        fileTransfer.download(url, this.file.dataDirectory + file).then((entry) => {
+            console.log('download complete: ' + entry.toURL());
+        }, (error) => {
+            // handle error
+        });
+
+    }
 }
