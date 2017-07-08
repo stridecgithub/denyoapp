@@ -4,6 +4,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Device } from '@ionic-native/device';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { DashboardPage } from '../dashboard/dashboard';
+import { ForgotpasswordPage } from '../forgotpassword/forgotpassword';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
@@ -69,5 +70,9 @@ export class HomePage {
       duration: 3000
     });
     notification.present();
+  }
+  doMove()
+  {
+     this.navCtrl.setRoot(ForgotpasswordPage);
   }
 }

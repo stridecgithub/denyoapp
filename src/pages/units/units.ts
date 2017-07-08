@@ -138,6 +138,8 @@ export class UnitsPage {
               unitgroups_id: res.units[unit].unitgroups_id,
               models_id: res.units[unit].models_id,
               alarmnotificationto: res.units[unit].alarmnotificationto,
+              lat:res.units[unit].lat,
+              lng:res.units[unit].lng,
               favoriteindication: favorite
             });
           }

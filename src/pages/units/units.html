@@ -66,18 +66,23 @@
   </ion-refresher>
   <ion-list *ngIf="totalCount!=0">
     <ion-item-sliding *ngFor="let item of reportAllLists;">
+        
       <ion-item  (click)="doEdit(item,'detail')">
         <button class="{{item.colorcodeindications}}" style="float: left ;width:8px;height:100px">
          
         </button>
+       
         <button (click)="favorite(item.unit_id)" class="{{item.favoriteindication}}" style="float: right ;width:50px;height:50px;background-color:#ffffff"></button>
+       
         <div style="overflow: hidden; padding-left: .5em;">
           <h2><b>{{item.unitname}}</b></h2>
           <h2><b>{{item.projectname}}</b></h2>
           <h2><b>Gen Status:</b>{{item.gen_status}}</h2>
           <h2><b>Next Servicing:</b>{{item.nextservicedate}}</h2>
         </div>
+
       </ion-item>
+             
       <ion-item-options>
         <!--button class="viewcolor" (click)="doEdit(item,'view')">
                        <ion-icon name="eye" class="icon-size"></ion-icon>

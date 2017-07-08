@@ -44,7 +44,7 @@ export class MapsPage {
   }
   public reportAllLists = [];
   constructor(public http: Http, public navCtrl: NavController,
-    public toastCtrl: ToastController, public alertCtrl: AlertController, public navParams: NavParams, public loadingCtrl: LoadingController) {
+    public toastCtrl: ToastController,private sanitizer: DomSanitizer, public alertCtrl: AlertController, public navParams: NavParams, public loadingCtrl: LoadingController) {
     this.pageTitle = 'Maps';
     this.loginas = localStorage.getItem("userInfoName");
     this.userid = localStorage.getItem("userInfoId");
@@ -364,6 +364,80 @@ export class MapsPage {
   }
   previous() {
     this.navCtrl.setRoot(HomePage);
+  }
+  favorite(unit_id) {
+    this.reportData.startindex = 0;
+    this.reportAllLists = [];
+    let body: string = "unitid=" + unit_id + "&is_mobile=1",
+      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/setunitfavorite";
+    console.log(url);
+    console.log(body);
+    this.http.post(url, body, options)
+      .subscribe(data => {
+        console.log(data);
+        let res = data.json();
+        console.log(res.msg[0].Error);
+        console.log(res.msg[0].result);
+        if (res.msg[0] == 0) {
+          console.log("Favorite");
+        } else {
+          console.log("Un Favorite");
+        }
+
+        if (res.units.length > 0) {
+          for (let unit in res.units) {
+            let colorcode;
+            let favorite;
+            let index = this.colorListArr.indexOf(res.units[unit].colorcode); // 1
+            console.log("Color Index:" + index);
+            let colorvalincrmentone = index + 1;
+            colorcode = "button" + colorvalincrmentone;
+            console.log("Color is" + colorcode);
+            if (res.units[unit].favorite == 1) {
+              favorite = "favorite";
+            }
+            else {
+              favorite = "unfavorite";
+
+            }
+            this.reportAllLists.push({
+              unit_id: res.units[unit].unit_id,
+              unitname: res.units[unit].unitname,
+              location: res.units[unit].location,
+              contacts: res.units[unit].contacts,
+              projectname: res.units[unit].projectname,
+              colorcode: res.units[unit].colorcode,
+              nextservicedate: res.units[unit].nextservicedate,
+              colorcodeindications: colorcode,
+              controllerid: res.units[unit].controllerid,
+              neaplateno: res.units[unit].neaplateno,
+              companys_id: res.units[unit].companys_id,
+              unitgroups_id: res.units[unit].unitgroups_id,
+              models_id: res.units[unit].models_id,
+              alarmnotificationto: res.units[unit].alarmnotificationto,
+              favoriteindication: favorite
+            });
+          }
+          //this.reportAllLists = res.units;
+          this.totalCount = res.totalCount;
+          this.reportData.startindex += this.reportData.results;
+        } else {
+          this.totalCount = 0;
+        }
+
+        // If the request was successful notify the user
+        if (data.status === 200) {
+          this.sendNotification(res.msg[0].result);
+        }
+        // Otherwise let 'em know anyway
+        else {
+          this.sendNotification('Something went wrong!');
+        }
+      });
+    this.doUser();
   }
 }
 

@@ -44,6 +44,44 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding  class="ion-content">
+  <div class="error" *ngIf="totalCount==0">No entries found</div>
 
+  <ion-refresher (ionRefresh)="doRefresh($event)" *ngIf="totalCount!=0">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-list *ngIf="totalCount!=0">
+    <ion-item-sliding *ngFor="let item of reportAllLists;">
+
+      <ion-item (click)="doView(item,'detail')">
+       
+         
+       
+        
+        <div style="overflow: hidden; padding-left: .5em;">
+          <h2><b>Model Name:</b>{{item.model}}
+          </h2>
+         
+
+        </div>
+
+
+      </ion-item>
+      <ion-item-options>
+        <!--button class="viewcolor" (click)="doEdit(item,'view')">
+                       <ion-icon name="eye" class="icon-size"></ion-icon>
+                    </button-->
+        <button class="editcolor" (click)="doEdit(item,'edit')">                      
+                        <ion-icon name="create" class="icon-size"></ion-icon>
+                    </button>
+        <button class="trashcolor" (click)="doConfirm(item.unitgroup_id,item)">                        
+                         <ion-icon name="trash" class="icon-size"></ion-icon>
+                    </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="totalCount!=0">
+    <ion-infinite-scroll-content loadingText="Loading More Data"></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
