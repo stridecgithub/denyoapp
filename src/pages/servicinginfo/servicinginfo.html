@@ -34,13 +34,13 @@
       Login As:{{loginas}}
     </ion-buttons>
   </ion-navbar>
-  <button class="add-new-btn" ion-button small (click)="doAdd()">
+  <button class="add-new-btn" ion-button (click)="doAdd()">
   	<div class="algn-cent">
     	<ion-icon name="ios-add-circle-outline"></ion-icon>
         <span>Servicing Action</span>
     </div>
  </button>
-  <button class="add-new-btn"  ion-button small (click)="doRequest()">
+  <button class="add-new-btn"  ion-button (click)="doRequest()">
   	<div class="algn-cent">
     	<ion-icon name="paper-plane"></ion-icon>
         <span>Request Support</span>
@@ -51,8 +51,6 @@
 
 
 <ion-content padding class="ion-content">
-
- 
 
  <div class="error" *ngIf="totalCount==0">No entries found</div>
   <ion-item style="width: 100%; margin: 0; padding-left: 10px;">
@@ -90,24 +88,39 @@
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="totalCount!=0">
     <ion-infinite-scroll-content loadingText="{{loadingMoreDataContent}}"></ion-infinite-scroll-content>
   </ion-infinite-scroll>
+ 
+
 </ion-content>
 
 <ion-footer color="bluedark">
   <ion-toolbar color="bluedark">
+<ul class="quick-list">
+<li>
     <button ion-button icon-only clear>
-<ion-icon name="home" class="footer-icon"></ion-icon>
-</button>
+    	<ion-icon name="home" class="footer-icon">MAPS</ion-icon>
+    </button>
+</li>  
+<li>  
     <button ion-button icon-only (click)="redirectToUser()" clear>
-<ion-icon name="contacts" class="footer-icon"></ion-icon>
-</button>
+    	<ion-icon name="contacts" class="footer-icon">UNITS</ion-icon>
+    </button>
+</li>     
+<li>    
     <button ion-button icon-only (click)="redirectToUnitGroup()" clear>
-<ion-icon name="chatboxes" class="footer-icon"></ion-icon>
-</button>
+    	<ion-icon name="chatboxes" class="footer-icon">MESSAGE</ion-icon>
+    </button>
+</li>     
+<li>    
     <button ion-button icon-only (click)="redirectToUnits()" clear>
-<ion-icon name="camera" class="footer-icon"></ion-icon>
-</button>
+    	<ion-icon name="camera" class="footer-icon">CALENDAR</ion-icon>
+    </button>
+</li>     
+<li>    
     <button ion-button icon-only (click)="redirectToRole()" clear>
-<ion-icon name="settings" class="footer-icon"></ion-icon>
-</button>
+    	<ion-icon name="settings" class="footer-icon">SETTING</ion-icon>
+    </button>
+</li>    
+</ul>
+
   </ion-toolbar>
 </ion-footer>
