@@ -47,3 +47,35 @@
 <ion-content padding>
  <div [innerHTML]="sanitizer.bypassSecurityTrustHtml(iframeContent)"></div>
 </ion-content>
+<ion-footer color="bluedark">
+  <ion-toolbar color="bluedark">
+<ul class="quick-list">
+<li>
+    <button ion-button icon-only clear>
+    	<ion-icon name="home" class="footer-icon">MAPS</ion-icon>
+    </button>
+</li>  
+<li>  
+    <button ion-button icon-only (click)="redirectToUser()" clear>
+    	<ion-icon name="contacts" class="footer-icon">UNITS</ion-icon>
+    </button>
+</li>     
+<li>    
+    <button ion-button icon-only (click)="redirectToUnitGroup()" clear>
+    	<ion-icon name="chatboxes" class="footer-icon">MESSAGE</ion-icon>
+    </button>
+</li>     
+<li>    
+    <button ion-button icon-only (click)="redirectToUnits()" clear>
+    	<ion-icon name="camera" class="footer-icon">CALENDAR</ion-icon>
+    </button>
+</li>     
+<li>    
+    <button ion-button icon-only (click)="redirectToRole()" clear>
+    	<ion-icon name="settings" class="footer-icon">SETTING</ion-icon>
+    </button>
+</li>    
+</ul>
+
+  </ion-toolbar>
+</ion-footer>

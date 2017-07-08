@@ -9,6 +9,7 @@ import { NotificationPage } from '../notification/notification';
 import { MapsPage } from '../maps/maps';
 import { ReportsPage } from '../reports/reports';
 import { CalendarPage } from '../calendar/calendar';
+import { EmailPage } from '../email/email';
 @Component({
   selector: 'page-dashboard',
   templateUrl: 'dashboard.html'
@@ -37,18 +38,18 @@ export class DashboardPage {
     this.nav.setRoot(NotificationPage);
   }
   redirectToUser() {
-    this.nav.setRoot(UserPage);
-  }
-  redirectToUnitGroup() {
-    this.nav.setRoot(UnitgroupPage);
-  }
-  redirectToUnits() {
     this.nav.setRoot(UnitsPage);
   }
-  redirectToMyAccount() {
-    this.nav.setRoot(MyaccountPage);
+  redirectToUnitGroup() {
+    this.nav.setRoot(EmailPage);
+  }
+  redirectToUnits() {
+    this.nav.setRoot(CalendarPage);
+  }
+  redirectToMaps() {
+    this.nav.setRoot(MapsPage);
   }
   redirectToRole() {
-    this.nav.setRoot(RolePage);
+    this.nav.setRoot(MyaccountPage);
   }  
 }
