@@ -55,13 +55,12 @@
   <ion-item>
   
     <button ion-button icon-left class="engine-detail">
-  Engine Details
-</button>
+      <div class="btn-align"><span class="eng-icon"></span>Engine Details</div>
+    </button>
 
     <button ion-button icon-left (click)="servicingInfo()" class="service-info">
-  Servicing Info
-
-</button>
+      <div class="btn-align"><span class="ser-icon"></span>Servicing Info</div>
+    </button>
 
 
     <div class="serviceinfocount" *ngIf="serviceCount!=0">
@@ -71,12 +70,12 @@
 
   <ion-item>
     <button ion-button icon-left (click)="alarm()" class="alarm-log">
- Alarm Log
-</button>
+     <div class="btn-align"><span class="ala-icon"></span>Alarm Log</div>
+    </button>
 
     <button ion-button icon-left (click)="commentsInfo()" class="event-comment">
- Events / Comments 
-</button>
+     <div class="btn-align"><span class="eve-icon"></span>Events / Comments </div>
+    </button>
 
 
  <div class="commentinfocount"  *ngIf="commentCount!=0"> <ion-badge item-end class="notify-badge">{{commentCount}}</ion-badge> </div>

@@ -5,7 +5,7 @@ page-unitdetails {
 .item-md .item-button {
     padding: 0;
     height: inherit;
-	width:49%;
+	width:48%;
 }
 .item-md.item-block .item-inner {
     padding-right: 0;
@@ -1398,7 +1398,12 @@ form[name="dashboard"]{margin-top:-60px;}
 
 */
 }
-.engine-detail{background:#21b09c url(../img/english_details.png) no-repeat 37% center;background-size: 3%;font-size: 17px !important;}
-.service-info{background:#3b5588 url(../img/info_circle.png) no-repeat 37% center;background-size: 3%;font-size: 17px !important;}
-.alarm-log{background:#ff7965 url(../img/event_log.png) no-repeat 40% center;background-size: 3%;font-size: 17px !important;}
-.event-comment{background:#ff9a3e url(../img/chat_vector.png) no-repeat 34% center;background-size: 3%;font-size: 17px !important;}
+.btn-align{margin:0 auto;text-align:center;line-height:26px;font-size:11px;}
+.engine-detail{background:#21b09c;float:left;}
+.eng-icon{background:url(../img/event_detail_icon.png) no-repeat center center;width:19px;height:25px;margin-right:10px;float:left;}
+.service-info{background:#3b5588;float:right;}
+.ser-icon{background:url(../img/service_info_icon.png) no-repeat center center;width:25px;height:25px;margin-right:10px;float:left;}
+.alarm-log{background:#ff7965;float:left;}
+.ala-icon{background:url(../img/alarm_log_icon.png) no-repeat center center;width:20px;height:25px;margin-right:10px;float:left;}
+.event-comment{background:#ff9a3e;float:right;}
+.eve-icon{background:url(../img/event_comment_icon.png) no-repeat center center;width:25px;height:21px;margin-right:10px;float:left;}

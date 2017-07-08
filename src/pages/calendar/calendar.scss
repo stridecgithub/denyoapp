@@ -56,14 +56,14 @@ ion-navbar ion-buttons{margin-right:15px;}
 .item-md.item-block .item-inner{padding-right:0;}
 .label-md {margin: 13px 0px 13px 0;}
 ion-select{background:#f0f0f0;max-width:98%;margin:15px auto 0;border-radius:5px;padding:10px 15px!important;}
-.toolbar-md-bluedark .button-inner{height:inherit;}
+
 }
 .cal-top{background:#38b6ab;padding:5px 0 20px 0;text-align:center;}
 .cal-top button, .cal-top button:hover:not(.disable-hover){background-color:transparent;background:none;height:inherit!important;border:none;box-shadow:none;}
 .cal-top button span{height:inherit;}
 .item-calendar table th, .item-calendar table td{border:none!important;text-transform:uppercase;font-size:17px;}
 .item-calendar thead tr th:first-child, .item-calendar thead tr th:last-child, .item-calendar tbody tr td:first-child, .item-calendar tbody tr td:last-child{color:#38b6ab;}
-.monthview-selected[_ngcontent-c1]{background-color:#38b6ab!important;border-radius:20px;}
+.monthview-selected[_ngcontent-c1]{background-color:#38b6ab!important;border-radius:20px;color:#fff!important;}
 .table-bordered[_ngcontent-c1]{border:0px solid #ddd;}
 .table[_ngcontent-c1] > thead[_ngcontent-c1] > tr[_ngcontent-c1] > th[_ngcontent-c1], .table[_ngcontent-c1] > tbody[_ngcontent-c1] > tr[_ngcontent-c1] > th[_ngcontent-c1], .table[_ngcontent-c1] > tfoot[_ngcontent-c1] > tr[_ngcontent-c1] > th[_ngcontent-c1], .table[_ngcontent-c1] > thead[_ngcontent-c1] > tr[_ngcontent-c1] > td[_ngcontent-c1], .table[_ngcontent-c1] > tbody[_ngcontent-c1] > tr[_ngcontent-c1] > td[_ngcontent-c1], .table[_ngcontent-c1] > tfoot[_ngcontent-c1] > tr[_ngcontent-c1] > td[_ngcontent-c1] {
 padding: 10px;}
@@ -78,4 +78,8 @@ padding: 10px;}
 .calendar_ttl span{font-size:18px;}
 .list-title{margin:10px 0;}
 .spacing{padding:10px 15px;}
-ion-navbar.toolbar-md-bluedark .toolbar-background-md{background:transparent;}
+ion-navbar.toolbar-md-bluedark .toolbar-background-md{background:#00569F;}
+.toolbar-md-bluedark .button-inner{height:inherit!important;}
+.button-clear-md:hover:not(.disable-hover){background-color:transparent!important;}
+.bar-button-menutoggle-md .button-inner, .bar-button .button-inner{height:inherit!important;}
+.footer-md-bluedark .toolbar-md-bluedark .button[icon-only]{height:75px;}

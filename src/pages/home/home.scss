@@ -1,7 +1,7 @@
 page-home {
 .ion-page, .ion-content, form, ion-list{height:100%;}
-.scroll-content{padding:16px 0!important;}
-.login-content{background-color:transparent;-webkit-background-size: cover;-moz-background-size: cover;background-size: cover;}
+.scroll-content{padding:16px 0!important;overflow: hidden;}
+.login-content{background-color:transparent;-webkit-background-size: cover;-moz-background-size: cover;background-size: cover;overflow: hidden;}
 .logo{width:270px;}
 ion-navbar.toolbar{display:none;}	
 .item-md{background-color:transparent;padding:0 25px;}
@@ -22,6 +22,7 @@ ion-item.item-input{margin-top:50px;}
 .checkbox-md.checkbox-disabled, .item-md.item-checkbox-disabled ion-label{opacity:1;}
 .list-md{margin:0;}
 .button-block-md{bottom:0;left:0;margin-bottom:0;margin-left:0;margin-right:0;position:absolute;}
+.login-btn button{min-height:48px;}
 }
 
 
