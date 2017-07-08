@@ -54,7 +54,7 @@
   <ion-list *ngIf="totalCount!=0">
     <ion-item-sliding *ngFor="let item of reportAllLists;">
 
-      <ion-item>
+      <ion-item (click)="doView(item,'detail')">
        
          
        

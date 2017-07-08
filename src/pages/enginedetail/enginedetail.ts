@@ -5,6 +5,7 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { LoadingController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { AddenginedetailPage } from '../addenginedetail/addenginedetail';
+import { EngineviewPage} from '../engineview/engineview';
 /**
  * Generated class for the EnginedetailPage page.
  *
@@ -190,6 +191,15 @@ doEdit(item, act) {
         record: item,
         act: act
       });
+    }
+  }
+  doView(item,act)
+  {
+     if (act == 'detail') {
+      this.nav.setRoot(EngineviewPage, {
+        record: item
+      });
+      return false;
     }
   }
 }
