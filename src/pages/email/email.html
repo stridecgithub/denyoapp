@@ -83,11 +83,7 @@
       Send item goes here
     </ion-list>
     <form [formGroup]="form" (ngSubmit)="saveEntry()" enctype='application/x-www-form-urlencoded' method="post">
-      <ion-list *ngSwitchCase="'compose'">
-        <input type="hidden" value="{{service_priority}}" name="important" id="important" />
-        <input type="hidden" value="{{micro_timestamp}}" name="microtime" id="microtime" />
-        <input type="hidden" value="1" name="is_mobile" id="is_mobile" />
-        <input type="hidden" value="{{userId}}" name="loginid" id="loginid" />
+      <ion-list *ngSwitchCase="'compose'">              
         <ion-grid>
           <ion-row>
             <ion-col>

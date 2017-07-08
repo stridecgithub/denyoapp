@@ -370,14 +370,14 @@ export class EmailPage {
          photos: object = this.addedImgLists;*/
 
 
-      let serviced_datetime: string = this.form.controls["serviced_datetime"].value,
-        service_remark: string = this.form.controls["service_remark"].value,
+      let to: string = this.form.controls["to"].value,
+        copytome: string = this.form.controls["copytome"].value,
         next_service_date: string = this.form.controls["next_service_date"].value,
         serviced_by: string = this.form.controls["serviced_by"].value,
         is_request: string = this.form.controls["is_request"].value,
         service_subject: string = this.form.controls["service_subject"].value;
-      console.log("serviced_datetime:" + serviced_datetime);
-      console.log("service_remark:" + service_remark);
+      console.log("serviced_datetime:" + to);
+      console.log("service_remark:" + copytome);
       console.log("serviced_by:" + serviced_by);
       console.log("is_request:" + is_request);
       console.log("service_subject:" + service_subject);
@@ -389,7 +389,7 @@ export class EmailPage {
         this.updateEntry();
       }
       else {
-        this.createEntry();
+        this.createEntry(this.micro_timestamp, to, copytome);
       }
     }
   }
@@ -399,11 +399,14 @@ export class EmailPage {
   // to our remote PHP script (note the body variable we have created which
   // supplies a variable of key with a value of create followed by the key/value pairs
   // for the record data
-  createEntry() {
+  createEntry(micro_timestamp, to, copytome) {
 
     let body: string = "is_mobile=1" +
-      "&service_priority=" + this.service_priority +
-
+      "&important=" + this.service_priority +
+      "&important=" + this.service_priority +
+      "&loginid=" + this.userId +
+      "&to=" + this.userId +
+      "&copytome=" + copytome +
       "&uploadInfo=" + JSON.stringify(this.addedImgLists),
       //"&contact_number=" + this.contact_number +
       //"&contact_name=" + this.contact_name +
