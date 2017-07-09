@@ -55,7 +55,7 @@ export class EmailPage {
   public messages_body: any;
   public next_service_date: any;
   public message_priority: any;
-  is_request: boolean
+  copytome: boolean
   public serviced_by_name: any;
   public service_resources: any;
   public message_priority_class1: any;
@@ -94,6 +94,7 @@ export class EmailPage {
   constructor(private file: File, public http: Http, public loadingCtrl: LoadingController, public alertCtrl: AlertController, public NP: NavParams, public nav: NavController, public toastCtrl: ToastController, public navParams: NavParams, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera, private filechooser: FileChooser,
     private transfer: Transfer,
     private ngZone: NgZone) {
+      this.copytome=false;
     this.message_priority_class1 = "-outline";
     this.message_priority_class2 = "-outline";
     this.loginas = localStorage.getItem("userInfoName");
@@ -305,7 +306,7 @@ export class EmailPage {
 
   ionViewWillEnter() {
     this.getPrority(1);
-    this.is_request = false;
+   
     console.log(JSON.stringify(this.NP.get("record")));
 
     if (this.NP.get("record")) {
@@ -474,7 +475,7 @@ export class EmailPage {
         composemessagecontent: string = this.form.controls["composemessagecontent"].value,
         subject: string = this.form.controls["subject"].value;
       console.log("serviced_datetime:" + to);
-      console.log("messages_body:" + copytome);
+      console.log("copytome:" + copytome);
       console.log("messages_subject:" + subject);
       console.log("Image Data" + JSON.stringify(this.addedImgLists));
       //let d = new Date();
@@ -539,6 +540,7 @@ export class EmailPage {
 
 
   getPrority(val) {
+    console.log(val);
     this.message_priority = val
   }
 
@@ -553,9 +555,7 @@ export class EmailPage {
     this.hashtag = hashtag;
   }
 
-  updateIsRequest(val) {
-    console.log('Is Request:' + this.is_request);
-  }
+
 
   previous() {
     this.nav.setRoot(DashboardPage);
@@ -604,9 +604,7 @@ export class EmailPage {
       this.message_priority_class2 = '';
       console.log("Z");
     }
-    if (item.is_request > 0) {
-      this.is_request = true;
-    }
+   
     this.serviced_by_name = item.serviced_by_name;
     this.service_resources = item.service_resources;
 

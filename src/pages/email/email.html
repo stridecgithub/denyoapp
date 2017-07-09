@@ -51,16 +51,22 @@
 
   <div [ngSwitch]="pet">
     <ion-list *ngSwitchCase="'inbox'">
-      <div class="error" *ngIf="totalCount==0">No message entries found</div>
-      <ion-item>
-        <ion-label>Sort By</ion-label>
-        <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="pet" (ionChange)="onSegmentChanged(pet,inboxLists)">
+     
+
+
+      <ion-item style="width: 100%; margin: 0; padding-left: 10px;">
+    <ion-label>Sort By</ion-label>
+     <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="pet" (ionChange)="onSegmentChanged(pet,inboxLists)">
           <ion-option value="messages_isfavorite,asc" selected="true">Favorite Ascending</ion-option>
           <ion-option value="sendername,desc">Sender Descending</ion-option>
           <ion-option value="messages_subject,desc">Subject Descending</ion-option>
           <ion-option value="messages_subject,desc">Subject Descending</ion-option>
         </ion-select>
-      </ion-item>
+  </ion-item>
+  <div class="separator-line" *ngIf="totalCount!=0">&nbsp;</div>
+ <div class="error" *ngIf="totalCount==0">No message entries found</div>
+
+     
       <!--ion-item>
             <ion-label>Action</ion-label>
             <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="act" (ionChange)="onAction(act)">
@@ -138,17 +144,25 @@
         <b>To</b> <span class="mandatory" *ngIf="hideActionButton">*</span>
         <input type="text" (keyup)=address1get($event.target.value); name="to" id="to" class="sugges" onkeyup="sptions(event)" onblur="sptionshide()"
           class="form-control" rows="8" [disabled]="readOnly" formControlName="to" rows="6" [(ngModel)]="to">
-        <span><input type="checkbox" name="copytome" formControlName="copytome" value="1"/>&nbsp; Copy Mail</span><span> 
-            <ion-icon (click)="getPrority(1)" name="download{{message_priority_class1}}" style="color:aquamarine;font-size: 37px;"></ion-icon>
-          
-         
-            <ion-icon  (click)="getPrority(2)" name="alert{{message_priority_class2}}" style="color: brown;font-size: 37px;"></ion-icon>
-          <ion-icon (click)="fileChooser(micro_timestamp)" *ngIf="isUploaded" name="attach" style="color: black;
+        <div style="position: relative;top: 12px;">
+          <span><ion-checkbox type="checkbox" name="copytome" formControlName="copytome"  [(ngModel)]="copytome"></ion-checkbox>&nbsp; Copy Mail</span>
+          <span> 
+            <ion-icon (click)="fileChooser(micro_timestamp)" *ngIf="isUploaded" name="attach" style="color: black;
     position: relative;
-    top: 5px;
+   
     left: 10px;
-    font-size:20px"></ion-icon></span>
-
+    font-size:20px"></ion-icon>
+           <img  (click)="getPrority(1)"  src="img/low_priority.png" style="width: 16px;
+    height: 16px;
+    position: absolute;
+    margin-left: 40%;"><img  (click)="getPrority(2)"  src="img/high_priority.png"  style="width: 16px;
+    height: 16px;
+    position: absolute;
+    margin-left: 50%;">
+           
+    </span>
+        </div>
+        <div><br></div>
         <progress value="{{progress}}" max="100" *ngIf="isProgress"> </progress>
         <span *ngIf="isProgress" style="padding:2px">{{progress}}%</span>
         <div *ngIf="addedImgLists.length>0">Attached List:</div>
@@ -210,7 +224,7 @@
   <ion-toolbar color="bluedark">
     <ul class="quick-list">
       <li>
-        <button ion-button icon-only clear>
+        <button ion-button icon-only clear (click)="redirectToMaps()">
     	<ion-icon name="home" class="footer-icon">MAPS</ion-icon>
     </button>
       </li>

@@ -55,6 +55,7 @@ import { EnginedetailPage } from '../pages/enginedetail/enginedetail';
 import { EngineviewPage } from '../pages/engineview/engineview';
 import { ForgotpasswordPage } from '../pages/forgotpassword/forgotpassword';
 import { EmailPage } from '../pages/email/email';
+import { TrendlinePage } from '../pages/trendline/trendline';
 import { DataServiceProvider } from '../providers/data-service/data-service';
 
 @NgModule({
@@ -109,7 +110,8 @@ import { DataServiceProvider } from '../providers/data-service/data-service';
     ReportsPage,
     EngineviewPage,
     ForgotpasswordPage,
-    EmailPage
+    EmailPage,
+    TrendlinePage
   ],
   imports: [
     BrowserModule,
@@ -170,7 +172,8 @@ import { DataServiceProvider } from '../providers/data-service/data-service';
     ReportsPage,
     EngineviewPage,
     ForgotpasswordPage,
-    EmailPage
+    EmailPage,
+    TrendlinePage
   ],
   providers: [
     StatusBar,

@@ -31,13 +31,14 @@ import { EnginedetailPage } from '../pages/enginedetail/enginedetail';
 import { EmailPage } from '../pages/email/email';
 import { EngineviewPage } from '../pages/engineview/engineview';
 import { ForgotpasswordPage } from '../pages/forgotpassword/forgotpassword';
+import { TrendlinePage } from '../pages/trendline/trendline';
 import { DataServiceProvider } from '../providers/data-service/data-service';
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-  rootPage: any = HomePage;
+  rootPage: any = TrendlinePage;
   pages: any;
   showLevel1 = null;
   showLevel2 = null;

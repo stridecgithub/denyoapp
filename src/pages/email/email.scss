@@ -1,5 +1,19 @@
 page-email {
-    
+
+    .button-inner{
+  position:relative;
+  bottom:12px;
+}
+    .segment-md .segment-button {
+  background-color: #488aff;
+    color: #ffffff;
+}
+
+.segment-button segment-activated {
+  background-color: #00569F;
+   color: #ffffff;
+}
+
     
 .ion-content{
     background-color:white;
