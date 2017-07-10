@@ -33,6 +33,7 @@ export class UnitsPage {
   pet: string = "ALL";
   public userId: any;
   public sortby = 2;
+  public detailvalue:any;
   public vendorsort = "asc";
   public ascending = true;
   public colorListArr: any;
@@ -186,7 +187,7 @@ export class UnitsPage {
   doAdd() {
     this.nav.setRoot(AddunitsonePage);
   }
-  getCheckBoxValue(val) {
+  getCheckBoxValue(item,val) {
     /*console.log("Available data" + val);
     this.getCheckboxData.push({
       availabledata: val
@@ -205,10 +206,12 @@ console.log(JSON.stringify(this.selectedAction));*/
         this.str = this.str + "," + val;
       }
     }
-    console.log(this.str);
+    this.detailvalue=item;
+    console.log(this.str+"//"+JSON.stringify(this.detailvalue));
+    localStorage.setItem("viewlist", this.str);
   }
 
-  onAction(item,actpet) {
+  onAction(actpet) {
     console.log('Your act pet is:' + actpet);
     console.log(JSON.stringify(this.str));
     let urlstr;
@@ -220,14 +223,12 @@ console.log(JSON.stringify(this.selectedAction));*/
     }
     if(actpet=='view')
     {
-      localStorage.setItem("viewid", this.str);
-      console.log("UD"+this.str);
-       this.nav.setRoot(UnitdetailsPage, {
-        record: item
+      this.nav.setRoot(UnitdetailsPage, {
+        record: this.detailvalue
       });
       return false;
-
     }
+   
     //http://denyoappv2.stridecdev.com/unitlistaction/4,6/1/delete
     //http://denyoappv2.stridecdev.com/unitlistaction/4,6/1/dashboard?ses_login_id=2
     // let body: string = "ses_login_id=" + this.userId,

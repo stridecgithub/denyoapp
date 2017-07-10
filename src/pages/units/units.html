@@ -62,7 +62,7 @@
 
   <ion-item style="width: 100%; margin: 0; padding-left: 10px;" *ngIf="totalCount!=0">
     <ion-label>Select Action</ion-label>
-    <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="actpet" (ionChange)="onAction(actpet)">
+    <ion-select style="padding: 1px 1px 6px 1px;"  [(ngModel)]="actpet" (ionChange)="onAction(actpet)">
       <ion-option value="view">View</ion-option>
       <ion-option value="delete">Delete</ion-option>
       <ion-option value="viewdashboard">View on Dashboard</ion-option>

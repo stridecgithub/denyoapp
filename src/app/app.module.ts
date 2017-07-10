@@ -57,6 +57,7 @@ import { ForgotpasswordPage } from '../pages/forgotpassword/forgotpassword';
 import { EmailPage } from '../pages/email/email';
 import { TrendlinePage } from '../pages/trendline/trendline';
 import { DataServiceProvider } from '../providers/data-service/data-service';
+import { ViewunitsPage } from '../pages/viewunits/viewunits';
 
 @NgModule({
   declarations: [
@@ -111,6 +112,7 @@ import { DataServiceProvider } from '../providers/data-service/data-service';
     EngineviewPage,
     ForgotpasswordPage,
     EmailPage,
+    ViewunitsPage,
     TrendlinePage
   ],
   imports: [
@@ -173,6 +175,7 @@ import { DataServiceProvider } from '../providers/data-service/data-service';
     EngineviewPage,
     ForgotpasswordPage,
     EmailPage,
+    ViewunitsPage,
     TrendlinePage
   ],
   providers: [

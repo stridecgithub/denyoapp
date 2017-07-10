@@ -7,6 +7,7 @@ import { CompanygroupPage } from '../companygroup/companygroup';
 import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitsPage } from '../units/units';
 import { RolePage } from '../role/role';
+import { ViewunitsPage } from '../viewunits/viewunits';
 //import { AlarmPage } from '../alarm/alarm';
 import { AlarmlogPage } from '../alarmlog/alarmlog';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
@@ -215,5 +216,11 @@ export class UnitdetailsPage {
 
 	redirectToRole() {
 		this.nav.setRoot(RolePage);
+	}
+	viewunit()
+	{
+		this.nav.setRoot(ViewunitsPage, {
+			record: this.NP.get("record")
+		});
 	}
 }

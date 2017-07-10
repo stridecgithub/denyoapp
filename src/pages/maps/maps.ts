@@ -462,6 +462,10 @@ console.log(JSON.stringify(this.selectedAction));*/
     }
     console.log(this.str);
   }
+  onAction(act)
+  {
+    
+  }
 }
 
 
