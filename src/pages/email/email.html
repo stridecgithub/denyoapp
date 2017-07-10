@@ -83,9 +83,13 @@
       </ion-refresher>
       <ion-list *ngIf="totalCount!=0">
         <ion-item-sliding *ngFor="let item of inboxLists;">
-          <ion-item (click)="doDetails(item)">
-            <h2 *ngIf="item.message_readstatus==1"><b>{{item.messages_subject}}</b></h2>
-            <h2 *ngIf="item.message_readstatus==0">{{item.messages_subject}}</h2>
+          <ion-item >
+             <button (click)="favorite(item.message_id)" *ngIf="item.is_favorite==1"  class="favorite" style="float: right ;width:50px;height:50px;background-color:#ffffff"></button>
+             <button (click)="favorite(item.message_id)"  *ngIf="item.is_favorite==0" class="unfavorite" style="float: right ;width:50px;height:50px;background-color:#ffffff"></button>
+            <div style="overflow: hidden; padding-left: .5em;">
+            <h2 *ngIf="item.message_readstatus==1"(click)="doDetails(item)"><b>{{item.messages_subject}}</b></h2>
+            <h2 *ngIf="item.message_readstatus==0"(click)="doDetails(item)">{{item.messages_subject}}</h2>
+            </div>
 
 
           </ion-item>

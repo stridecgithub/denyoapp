@@ -98,4 +98,12 @@ ion-navbar ion-buttons{margin-right:15px;}
 .algn-cent .ios-add-circle-outline{float:left;}
 .algn-cent span{float:right;font-size: 15px;margin: 6px 10px;}
 .toolbar-title-md{padding:0;}
+ .unfavorite
+ {
+     background-image:url('../img/unfav.png');background-size:cover;
+ }
+ .favorite
+ {
+     background-image:url('../img/fr.png');background-size:cover;
+ }
 }

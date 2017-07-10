@@ -768,8 +768,40 @@ export class EmailPage {
       console.log('download complete: ' + entry.toURL());
     }, (error) => {
       // handle error
-      console.log('download error: ' + error);
+      console.log('download error: ' + error); 
     });
 
+  }
+  favorite(messageid)
+  {
+     
+    let body: string = "loginid=" + this.userId + "&is_mobile=1&messageid="+messageid,
+      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/messages/setfavorite";
+    console.log(url);
+    console.log(body);
+    this.http.post(url, body, options)
+      .subscribe(data => {
+        console.log(data);
+        let res = data.json();
+       
+
+     
+        
+
+        // If the request was successful notify the user
+        if (data.status === 200) {
+           this.inboxData.startindex=0;
+           this.doInbox();
+        }
+        // Otherwise let 'em know anyway
+        else {
+          this.sendNotification('Something went wrong!');
+        }
+      });
+  
+    
   }
 }
