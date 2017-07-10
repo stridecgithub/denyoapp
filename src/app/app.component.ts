@@ -38,7 +38,7 @@ import { DataServiceProvider } from '../providers/data-service/data-service';
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-  rootPage: any = TrendlinePage;
+  rootPage: any = HomePage;
   pages: any;
   showLevel1 = null;
   showLevel2 = null;
