@@ -87,8 +87,8 @@
              <button (click)="favorite(item.message_id)" *ngIf="item.is_favorite==1"  class="favorite" style="float: right ;width:50px;height:50px;background-color:#ffffff"></button>
              <button (click)="favorite(item.message_id)"  *ngIf="item.is_favorite==0" class="unfavorite" style="float: right ;width:50px;height:50px;background-color:#ffffff"></button>
             <div style="overflow: hidden; padding-left: .5em;">
-            <h2 *ngIf="item.message_readstatus==1"(click)="doDetails(item)"><b>{{item.messages_subject}}</b></h2>
-            <h2 *ngIf="item.message_readstatus==0"(click)="doDetails(item)">{{item.messages_subject}}</h2>
+            <h2 *ngIf="item.message_readstatus==0"(click)="doDetails(item)"><b>{{item.messages_subject}}</b></h2>
+            <h2 *ngIf="item.message_readstatus==1"(click)="doDetails(item)">{{item.messages_subject}}</h2>
             </div>
 
 
@@ -109,7 +109,7 @@
       <ion-item>
         <ion-label>Sort By</ion-label>
         <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="pet" (ionChange)="onSendSegmentChanged(pet,inboxLists)">
-          <ion-option value="sendername,asc" selected="true">Sender Ascending</ion-option>
+          <ion-option value="sendername,asc">Sender Ascending</ion-option>
           <ion-option value="sendername,desc">Sender Descending</ion-option>
           <ion-option value="messages_subject,asc">Subject Ascending</ion-option>
           <ion-option value="messages_subject,desc">Subject Descending</ion-option>

@@ -67,7 +67,8 @@ export class EmailPage {
   public selectedAction = [];
   public message_readstatus: any;
   item: any;
-
+  public to: any;
+  public subject: any;
   public isEdited: boolean = false;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   form: FormGroup;
@@ -94,7 +95,7 @@ export class EmailPage {
   constructor(private file: File, public http: Http, public loadingCtrl: LoadingController, public alertCtrl: AlertController, public NP: NavParams, public nav: NavController, public toastCtrl: ToastController, public navParams: NavParams, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera, private filechooser: FileChooser,
     private transfer: Transfer,
     private ngZone: NgZone) {
-      this.copytome=false;
+    this.copytome = false;
     this.message_priority_class1 = "-outline";
     this.message_priority_class2 = "-outline";
     this.loginas = localStorage.getItem("userInfoName");
@@ -306,7 +307,7 @@ export class EmailPage {
 
   ionViewWillEnter() {
     this.getPrority(1);
-   
+
     console.log(JSON.stringify(this.NP.get("record")));
 
     if (this.NP.get("record")) {
@@ -524,7 +525,14 @@ export class EmailPage {
           this.inboxLists = [];
           this.sendData.startindex = 0;
           this.sendLists = [];
+
+          this.to = '';
+          this.copytome = false;
+          this.getPrority(1);
+          this.subject = '';
           this.pet = 'send';
+          this.doSend();
+          this.doInbox();
         }
         // Otherwise let 'em know anyway
         else {
@@ -604,7 +612,7 @@ export class EmailPage {
       this.message_priority_class2 = '';
       console.log("Z");
     }
-   
+
     this.serviced_by_name = item.serviced_by_name;
     this.service_resources = item.service_resources;
 
@@ -752,11 +760,19 @@ export class EmailPage {
   }
 
   reply() {
+    this.to = '';
+    this.copytome = false;
+    this.getPrority(1);
+    this.subject = '';
     this.pet = 'compose';
   }
 
   forward(messages_body) {
-   // this.composemessagecontent = "-----Forward Message----- From: Super Admin Date: 2017-07-06 19:38:53 To: Bala <balamurugan@webneo.in> Vignesh <vignesh@webneo.in>" + messages_body;
+    this.to = '';
+    this.copytome = false;
+    this.getPrority(1);
+    this.subject = '';
+    // this.composemessagecontent = "-----Forward Message----- From: Super Admin Date: 2017-07-06 19:38:53 To: Bala <balamurugan@webneo.in> Vignesh <vignesh@webneo.in>" + messages_body;
     this.pet = 'compose';
   }
 
@@ -768,14 +784,13 @@ export class EmailPage {
       console.log('download complete: ' + entry.toURL());
     }, (error) => {
       // handle error
-      console.log('download error: ' + error); 
+      console.log('download error: ' + error);
     });
 
   }
-  favorite(messageid)
-  {
-     
-    let body: string = "loginid=" + this.userId + "&is_mobile=1&messageid="+messageid,
+  favorite(messageid) {
+
+    let body: string = "loginid=" + this.userId + "&is_mobile=1&messageid=" + messageid,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
@@ -786,22 +801,22 @@ export class EmailPage {
       .subscribe(data => {
         console.log(data);
         let res = data.json();
-       
 
-     
-        
+
+
+
 
         // If the request was successful notify the user
         if (data.status === 200) {
-           this.inboxData.startindex=0;
-           this.doInbox();
+          this.inboxData.startindex = 0;
+          this.doInbox();
         }
         // Otherwise let 'em know anyway
         else {
           this.sendNotification('Something went wrong!');
         }
       });
-  
-    
+
+
   }
 }
