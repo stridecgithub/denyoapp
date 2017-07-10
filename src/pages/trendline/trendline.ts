@@ -52,7 +52,7 @@ export class TrendlinePage {
 
 $.ajax({
   dataType:'html',
-  url:'http://denyoappv2.stridecdev.com/2/1/unitdetails',
+  url:'http://denyoappv2.stridecdev.com/2/FUELLEVEL/1/showgraph',
   success:function(data) {
     $('#ajax').html(data);   
   }

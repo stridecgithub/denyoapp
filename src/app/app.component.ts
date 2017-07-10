@@ -4,7 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
-import { DashboardPage } from '../pages/dashboard/dashboard';
+//import { DashboardPage } from '../pages/dashboard/dashboard';
 
 import { CompanygroupPage } from '../pages/companygroup/companygroup';
 import { UserPage } from '../pages/user/user';
@@ -19,7 +19,7 @@ import { OrgchartPage } from '../pages/orgchart/orgchart';
 import { AlarmPage } from '../pages/alarm/alarm';
 import { AlarmlogPage } from '../pages/alarmlog/alarmlog';
 import { AddalarmPage } from '../pages/addalarm/addalarm';
-import { MessagesPage } from '../pages/messages/messages';
+//import { MessagesPage } from '../pages/messages/messages';
 import { CalendarPage } from '../pages/calendar/calendar';
 import { MapsPage } from '../pages/maps/maps';
 import { ReportsPage } from '../pages/reports/reports';
@@ -31,7 +31,7 @@ import { EnginedetailPage } from '../pages/enginedetail/enginedetail';
 import { EmailPage } from '../pages/email/email';
 import { EngineviewPage } from '../pages/engineview/engineview';
 import { ForgotpasswordPage } from '../pages/forgotpassword/forgotpassword';
-import { TrendlinePage } from '../pages/trendline/trendline';
+//import { TrendlinePage } from '../pages/trendline/trendline';
 import { DataServiceProvider } from '../providers/data-service/data-service';
 @Component({
   templateUrl: 'app.html'
