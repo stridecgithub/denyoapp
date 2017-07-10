@@ -30,6 +30,7 @@ export class MapsPage {
   public totalCount;
   pet: string = "ALL";
   public sortby = 2;
+  public str:any;
   public vendorsort = "asc";
   public ascending = true;
   public colorListArr: any;
@@ -46,6 +47,7 @@ export class MapsPage {
   constructor(public http: Http, public navCtrl: NavController,
     public toastCtrl: ToastController,private sanitizer: DomSanitizer, public alertCtrl: AlertController, public navParams: NavParams, public loadingCtrl: LoadingController) {
     this.pageTitle = 'Maps';
+    this.str = '';
     this.loginas = localStorage.getItem("userInfoName");
     this.userid = localStorage.getItem("userInfoId");
     this.companyid = localStorage.getItem("userInfoCompanyId");
@@ -438,6 +440,27 @@ export class MapsPage {
         }
       });
     this.doUser();
+  }
+   getCheckBoxValue(val) {
+    /*console.log("Available data" + val);
+    this.getCheckboxData.push({
+      availabledata: val
+    })*/
+
+
+    /*console.log("Available data" + name);
+this.selectedAction.push({
+  availabledata: name
+})
+console.log(JSON.stringify(this.selectedAction));*/
+    if (val != '') {
+      if (this.str == '') {
+        this.str = val;
+      } else {
+        this.str = this.str + "," + val;
+      }
+    }
+    console.log(this.str);
   }
 }
 

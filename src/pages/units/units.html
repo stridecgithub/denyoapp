@@ -86,7 +86,7 @@
     height: 20px;
     position: absolute;
     top: 51px;
-    left: 0px;" (click)="getCheckBoxValue(item.unit_id)" value="1">
+    left: 0px;" (click)="getCheckBoxValue(item,item.unit_id)" value="1">
                 </label>
         </div>
         <button class="{{item.colorcodeindications}}" style="float: left ;width:8px;height:100px">
@@ -94,12 +94,12 @@
         </button>
 
         <button (click)="favorite(item.unit_id)" class="{{item.favoriteindication}}" style="float: right ;width:50px;height:50px;background-color:#ffffff"></button>
-        <button (click)="doEdit(item,'detail')" class="viewicon" style="float: right ;width:50px;height:50px;background-color:#ffffff"></button>
+        
         <div style="overflow: hidden; padding-left: .5em;">
-          <h2><b>{{item.unitname}}</b></h2>
-          <h2><b>{{item.projectname}}</b></h2>
-          <h2><b>Gen Status:</b>{{item.gen_status}}</h2>
-          <h2><b>Next Servicing:</b>{{item.nextservicedate}}</h2>
+          <h2 (click)="doEdit(item,'detail')"><b>{{item.unitname}}</b></h2>
+          <h2 (click)="doEdit(item,'detail')"><b>{{item.projectname}}</b></h2>
+          <h2 (click)="doEdit(item,'detail')"><b>Gen Status:</b>{{item.gen_status}}</h2>
+          <h2 (click)="doEdit(item,'detail')"><b>Next Servicing:</b>{{item.nextservicedate}}</h2>
         </div>
       </ion-item>
 

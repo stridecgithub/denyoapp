@@ -208,7 +208,7 @@ console.log(JSON.stringify(this.selectedAction));*/
     console.log(this.str);
   }
 
-  onAction(actpet) {
+  onAction(item,actpet) {
     console.log('Your act pet is:' + actpet);
     console.log(JSON.stringify(this.str));
     let urlstr;
@@ -217,6 +217,16 @@ console.log(JSON.stringify(this.selectedAction));*/
     }
     if (actpet == 'viewdashboard') {
       urlstr = "/unitlistaction/" + this.str + "/1/dashboard?ses_login_id=" + this.userId;
+    }
+    if(actpet=='view')
+    {
+      localStorage.setItem("viewid", this.str);
+      console.log("UD"+this.str);
+       this.nav.setRoot(UnitdetailsPage, {
+        record: item
+      });
+      return false;
+
     }
     //http://denyoappv2.stridecdev.com/unitlistaction/4,6/1/delete
     //http://denyoappv2.stridecdev.com/unitlistaction/4,6/1/dashboard?ses_login_id=2
