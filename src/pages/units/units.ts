@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {  NavController, ToastController, AlertController, NavParams } from 'ionic-angular';
+import { NavController, ToastController, AlertController, NavParams } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { AddunitsonePage } from '../addunitsone/addunitsone';
@@ -31,11 +31,13 @@ export class UnitsPage {
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   public totalCount;
   pet: string = "ALL";
+  public userId: any;
   public sortby = 2;
   public vendorsort = "asc";
   public ascending = true;
   public colorListArr: any;
   public companyId: any;
+  public str: any;
   public reportData: any =
   {
     status: '',
@@ -48,8 +50,10 @@ export class UnitsPage {
   constructor(public http: Http, public nav: NavController,
     public toastCtrl: ToastController, public alertCtrl: AlertController, public navParams: NavParams, public loadingCtrl: LoadingController) {
     this.pageTitle = 'Units';
+    this.str = '';
     this.loginas = localStorage.getItem("userInfoName");
     this.companyId = localStorage.getItem("userInfoCompanyId");
+    this.userId = localStorage.getItem("userInfoId");
   }
 
   ionViewDidLoad() {
@@ -63,7 +67,7 @@ export class UnitsPage {
     console.log('doRefresh function calling...');
     this.reportData.startindex = 0;
     this.reportAllLists = [];
-    this.doUser();
+    this.doUnit();
     setTimeout(() => {
       refresher.complete();
     }, 2000);
@@ -71,9 +75,9 @@ export class UnitsPage {
 
 
   /****************************/
-  /*@doUser calling on report */
+  /*@doUnit calling on report */
   /****************************/
-  doUser() {
+  doUnit() {
     this.colorListArr = [
       "FBE983",
       "5584EE",
@@ -138,8 +142,8 @@ export class UnitsPage {
               unitgroups_id: res.units[unit].unitgroups_id,
               models_id: res.units[unit].models_id,
               alarmnotificationto: res.units[unit].alarmnotificationto,
-              lat:res.units[unit].lat,
-              lng:res.units[unit].lng,
+              lat: res.units[unit].lat,
+              lng: res.units[unit].lng,
               favoriteindication: favorite
             });
           }
@@ -164,7 +168,7 @@ export class UnitsPage {
     console.log("Total Count:" + this.totalCount)
     if (this.reportData.startindex < this.totalCount && this.reportData.startindex > 0) {
       console.log('B');
-      this.doUser();
+      this.doUnit();
     }
     console.log('C');
     setTimeout(() => {
@@ -176,11 +180,68 @@ export class UnitsPage {
   ionViewWillEnter() {
     this.reportData.startindex = 0;
     this.reportData.sort = "unit_id";
-    this.doUser();
+    this.doUnit();
   }
 
   doAdd() {
     this.nav.setRoot(AddunitsonePage);
+  }
+  getCheckBoxValue(val) {
+    /*console.log("Available data" + val);
+    this.getCheckboxData.push({
+      availabledata: val
+    })*/
+
+
+    /*console.log("Available data" + name);
+this.selectedAction.push({
+  availabledata: name
+})
+console.log(JSON.stringify(this.selectedAction));*/
+    if (val != '') {
+      if (this.str == '') {
+        this.str = val;
+      } else {
+        this.str = this.str + "," + val;
+      }
+    }
+    console.log(this.str);
+  }
+
+  onAction(actpet) {
+    console.log('Your act pet is:' + actpet);
+    console.log(JSON.stringify(this.str));
+    let urlstr;
+    if (actpet == 'delete') {
+      urlstr = "/unitlistaction/" + this.str + "/1/delete";
+    }
+    if (actpet == 'viewdashboard') {
+      urlstr = "/unitlistaction/" + this.str + "/1/dashboard?ses_login_id=" + this.userId;
+    }
+    //http://denyoappv2.stridecdev.com/unitlistaction/4,6/1/delete
+    //http://denyoappv2.stridecdev.com/unitlistaction/4,6/1/dashboard?ses_login_id=2
+    // let body: string = "ses_login_id=" + this.userId,
+    let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + urlstr;
+    console.log(url);
+
+    this.http.get(url, options)
+      .subscribe((data) => {
+        console.log("Count Response Success:" + JSON.stringify(data.json()));
+        // If the request was successful notify the user
+        if (data.status === 200) {
+          //this.sendNotification(`Comment count successfully removed`);
+          this.reportData.startindex = 0;
+          this.reportData.sort = "unit_id";
+          this.doUnit();
+        }
+        // Otherwise let 'em know anyway
+        else {
+          // this.sendNotification('Something went wrong!');
+        }
+      });
   }
   doEdit(item, act) {
     if (act == 'edit') {
@@ -279,7 +340,7 @@ export class UnitsPage {
     //this.reportData.status = "ALL";
     this.reportData.startindex = 0;
     this.reportAllLists = [];
-    this.doUser();
+    this.doUnit();
   }
 
   /********************/
@@ -305,7 +366,7 @@ export class UnitsPage {
     }
     console.log('5');
     this.reportData.sort = val;
-    this.doUser();
+    this.doUnit();
     console.log('6');
   }
   presentLoading(parm) {
@@ -396,7 +457,7 @@ export class UnitsPage {
           this.sendNotification('Something went wrong!');
         }
       });
-    this.doUser();
+    this.doUnit();
   }
 
   notification() {
@@ -422,4 +483,5 @@ export class UnitsPage {
   redirectToRole() {
     this.nav.setRoot(RolePage);
   }
+
 }

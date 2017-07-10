@@ -18,7 +18,7 @@
         </button>
     </ion-buttons-->
     <ion-buttons end>
-      <button ion-button  (click)="notification()">
+      <button ion-button (click)="notification()">
   <ion-icon ios="ios-notifications-outline" md="md-notifications-outline"></ion-icon>
 </button>
     </ion-buttons>
@@ -43,7 +43,7 @@
 </ion-header>
 
 <ion-content padding class="ion-content">
- 
+
   <ion-item style="width: 100%; margin: 0; padding-left: 10px;" *ngIf="totalCount!=0">
     <ion-label>Sort By</ion-label>
     <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="pet" (ionChange)="onSegmentChanged(pet)">
@@ -58,7 +58,19 @@
       <ion-option value="offline,desc">Offline</ion-option>
     </ion-select>
   </ion-item>
-   <div class="error" *ngIf="totalCount==0">No users entries found</div>
+
+
+  <ion-item style="width: 100%; margin: 0; padding-left: 10px;" *ngIf="totalCount!=0">
+    <ion-label>Select Action</ion-label>
+    <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="actpet" (ionChange)="onAction(actpet)">
+      <ion-option value="view">View</ion-option>
+      <ion-option value="delete">Delete</ion-option>
+      <ion-option value="viewdashboard">View on Dashboard</ion-option>
+    </ion-select>
+  </ion-item>
+
+
+  <div class="error" *ngIf="totalCount==0">No users entries found</div>
   <div class="separator-line" *ngIf="totalCount!=0">&nbsp;</div>
   <ion-refresher (ionRefresh)="doRefresh($event)" *ngIf="totalCount!=0">
     <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
@@ -66,27 +78,33 @@
   </ion-refresher>
   <ion-list *ngIf="totalCount!=0">
     <ion-item-sliding *ngFor="let item of reportAllLists;">
-        
-      <ion-item  (click)="doEdit(item,'detail')">
+
+      <ion-item>
+        <div class="item-checkbox">
+          <label class="checkbox">
+                    <input type="checkbox" style="width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 51px;
+    left: 0px;" (click)="getCheckBoxValue(item.unit_id)" value="1">
+                </label>
+        </div>
         <button class="{{item.colorcodeindications}}" style="float: left ;width:8px;height:100px">
          
         </button>
-       
+
         <button (click)="favorite(item.unit_id)" class="{{item.favoriteindication}}" style="float: right ;width:50px;height:50px;background-color:#ffffff"></button>
-       
+        <button (click)="doEdit(item,'detail')" class="viewicon" style="float: right ;width:50px;height:50px;background-color:#ffffff"></button>
         <div style="overflow: hidden; padding-left: .5em;">
           <h2><b>{{item.unitname}}</b></h2>
           <h2><b>{{item.projectname}}</b></h2>
           <h2><b>Gen Status:</b>{{item.gen_status}}</h2>
           <h2><b>Next Servicing:</b>{{item.nextservicedate}}</h2>
         </div>
-
       </ion-item>
-             
+
+
       <ion-item-options>
-        <!--button class="viewcolor" (click)="doEdit(item,'view')">
-                       <ion-icon name="eye" class="icon-size"></ion-icon>
-                    </button-->
         <button class="editcolor" (click)="doEdit(item,'edit')">                      
                         <ion-icon name="create" class="icon-size"></ion-icon>
                     </button>
@@ -102,33 +120,33 @@
 </ion-content>
 <ion-footer color="bluedark">
   <ion-toolbar color="bluedark">
-<ul class="quick-list">
-<li>
-    <button ion-button icon-only clear>
+    <ul class="quick-list">
+      <li>
+        <button ion-button icon-only clear>
     	<ion-icon name="home" class="footer-icon">MAPS</ion-icon>
     </button>
-</li>  
-<li>  
-    <button ion-button icon-only (click)="redirectToUser()" clear>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectToUser()" clear>
     	<ion-icon name="contacts" class="footer-icon">UNITS</ion-icon>
     </button>
-</li>     
-<li>    
-    <button ion-button icon-only (click)="redirectToUnitGroup()" clear>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectToUnitGroup()" clear>
     	<ion-icon name="chatboxes" class="footer-icon">MESSAGE</ion-icon>
     </button>
-</li>     
-<li>    
-    <button ion-button icon-only (click)="redirectToUnits()" clear>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectToUnits()" clear>
     	<ion-icon name="camera" class="footer-icon">CALENDAR</ion-icon>
     </button>
-</li>     
-<li>    
-    <button ion-button icon-only (click)="redirectToRole()" clear>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectToRole()" clear>
     	<ion-icon name="settings" class="footer-icon">SETTING</ion-icon>
     </button>
-</li>    
-</ul>
+      </li>
+    </ul>
 
   </ion-toolbar>
 </ion-footer>
