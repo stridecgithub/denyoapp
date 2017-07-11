@@ -14,7 +14,7 @@ import { RolePage } from '../role/role';
 import { DatePicker } from '@ionic-native/date-picker';
 import 'rxjs/add/operator/map';
 import { Http, Headers, RequestOptions } from '@angular/http';
- import { NotificationPage } from '../notification/notification';
+import { NotificationPage } from '../notification/notification';
 /**
  * Generated class for the AddserviceinfoPage page.
  *
@@ -143,7 +143,7 @@ export class AddserviceinfoPage {
       console.log("Service Unit Id:" + this.service_unitid);
     }
 
-  
+
 
 
   }
@@ -284,7 +284,19 @@ export class AddserviceinfoPage {
   // supplies a variable of key with a value of create followed by the key/value pairs
   // for the record data
   createEntry(serviced_datetime, service_remark, next_service_date, serviced_by, is_request, service_subject, addedImgLists, remarkget, nextServiceDate, micro_timestamp) {
+    if (this.service_priority == undefined) {
+      this.service_priority = 1;
+    }
+    if (this.service_priority == 'undefined') {
+      this.service_priority = 1;
+    }
 
+    if (this.next_service_date == 'undefined') {
+      this.next_service_date = next_service_date;
+    }
+    if (this.next_service_date == undefined) {
+      this.next_service_date = next_service_date;
+    }
     let body: string = "is_mobile=1" +
       "&service_priority=" + this.service_priority +
       "&service_unitid=" + this.service_unitid +
@@ -333,6 +345,18 @@ export class AddserviceinfoPage {
   // supplies a variable of key with a value of update followed by the key/value pairs
   // for the record data
   updateEntry(serviced_datetime, service_remark, next_service_date, serviced_by, is_request, service_subject, addedImgLists, remarkget, nextServiceDate, micro_timestamp) {
+    if (this.service_priority == undefined) {
+      this.service_priority = 1;
+    }
+    if (this.service_priority == 'undefined') {
+      this.service_priority = 1;
+    }
+    if (this.next_service_date == 'undefined') {
+      this.next_service_date = next_service_date;
+    }
+    if (this.next_service_date == undefined) {
+      this.next_service_date = next_service_date;
+    }
     let body: string = "is_mobile=1&service_id=" + this.service_id +
       "&serviced_datetime=" + serviced_datetime +
       "&service_priority=" + this.service_priority +
@@ -421,7 +445,7 @@ export class AddserviceinfoPage {
       record: this.NP.get("record")
     });
   }
- 
+
 
 
 

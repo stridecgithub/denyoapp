@@ -46,7 +46,7 @@
             <p><b>Running Hours :</b> 0.743</p>
           </ion-col>
 
-          <ion-col>
+          <!--ion-col>
             <a href="#" (click)="getPrority(1)">
               <ion-icon name="download{{service_priority_class1}}" style="color:aquamarine;font-size: 37px;"></ion-icon>
             </a>
@@ -57,7 +57,15 @@
             <a href="#" (click)="getPrority(2)">
               <ion-icon name="alert{{service_priority_class2}}" style="color: brown;font-size: 37px;"></ion-icon>
             </a>
-          </ion-col>
+          </ion-col-->
+
+           <img  (click)="getPrority(1)"  src="img/low_priority.png" style="width: 16px;
+    height: 16px;
+    position: absolute;
+    margin-left: 40%;"><img  (click)="getPrority(2)"  src="img/high_priority.png"  style="width: 16px;
+    height: 16px;
+    position: absolute;
+    margin-left: 50%;">
         </ion-row>
       </ion-grid>
 

@@ -1,9 +1,14 @@
 import { Component } from '@angular/core';
-import {  NavController, NavParams, ToastController } from 'ionic-angular';
+import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { AlarmlogPage } from '../alarmlog/alarmlog';
-
+import { NotificationPage } from '../notification/notification';
+import { MyaccountPage } from '../myaccount/myaccount';
+import { UnitgroupPage } from '../unitgroup/unitgroup';
+import { UnitsPage } from '../units/units';
+import { RolePage } from '../role/role';
+import { AlarmPage } from '../alarm/alarm';
 /**
  * Generated class for the AddalarmPage page.
  *
@@ -17,18 +22,18 @@ import { AlarmlogPage } from '../alarmlog/alarmlog';
 export class AddalarmPage {
 
   public loginas: any;
-   public companyid: any;
-     public form: FormGroup;
+  public companyid: any;
+  public form: FormGroup;
   public assigned_to: any;
   public remark: any;
   public userdata = [];
   public subject: any;
   public uname: any;
-  public assignedby:any;
+  public assignedby: any;
   micro_timestamp: any;
   public userId: any;
   public responseResultCountry: any;
- public responseResultReportTo: any;
+  public responseResultReportTo: any;
   // Flag to be used for checking whether we are adding/editing an entry
   public isEdited: boolean = false;
   public readOnly: boolean = false;
@@ -36,14 +41,14 @@ export class AddalarmPage {
   // Flag to hide the form upon successful completion of remote operation
   public hideForm: boolean = false;
   public hideActionButton = true;
- // public isUploadedProcessing: boolean = false;
+  // public isUploadedProcessing: boolean = false;
   // Property to help ste the page title
   public pageTitle: string;
   // Property to store the recordID for when an existing entry is being edited
   public recordID: any = null;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
 
-    constructor(public navCtrl: NavController,
+  constructor(public nav: NavController,
     public http: Http,
     public NP: NavParams,
     public fb: FormBuilder,
@@ -53,10 +58,10 @@ export class AddalarmPage {
     this.form = fb.group({
       "assigned_to": ["", Validators.required],
       "remark": ["", Validators.required],
-         "subject": ["", Validators.required],
-            "assignedby": ["", Validators.required]
+      "subject": ["", Validators.required],
+      "assignedby": ["", Validators.required]
     });
-     let already = localStorage.getItem("microtime");
+    let already = localStorage.getItem("microtime");
     if (already != undefined && already != 'undefined' && already != '') {
       this.micro_timestamp = already;
     } else {
@@ -71,7 +76,7 @@ export class AddalarmPage {
 
     }
     localStorage.setItem("microtime", this.micro_timestamp);
-    this.uname= localStorage.getItem("userInfoName");
+    this.uname = localStorage.getItem("userInfoName");
     this.userId = localStorage.getItem("userInfoId");
     this.companyid = localStorage.getItem("userInfoCompanyId");
   }
@@ -82,12 +87,12 @@ export class AddalarmPage {
   }
   ionViewWillEnter() {
     this.getUserListData();
-    
-   if (this.NP.get("record")) {
-       console.log(this.NP.get("act"));
+
+    if (this.NP.get("record")) {
+      console.log(this.NP.get("act"));
       this.isEdited = true;
       this.selectEntry(this.NP.get("record"));
-     // this.pageTitle = 'Edit Company Group';
+      // this.pageTitle = 'Edit Company Group';
       this.readOnly = false;
       this.hideActionButton = true;
     }
@@ -96,13 +101,13 @@ export class AddalarmPage {
       //this.pageTitle = 'New  Org Chart';
     }
   }
-   selectEntry(item) {
+  selectEntry(item) {
     this.subject = item.alarm_name;
-    this.assignedby=this.uname;
+    this.assignedby = this.uname;
     this.assigned_to = item.assigned_to;
-     this.recordID = item.alarm_id;
-    
-    
+    this.recordID = item.alarm_id;
+
+
   }
   getUserListData() {
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
@@ -114,19 +119,18 @@ export class AddalarmPage {
     this.http.get(url, options)
       .subscribe(data => {
         res = data.json();
-       // console.log(data.json);
+        // console.log(data.json);
         this.responseResultReportTo = res.staffslist;
       });
 
   }
-  saveEntry()
-  {
-     let body: string = "is_mobile=1&alarmid=" + this.recordID +
+  saveEntry() {
+    let body: string = "is_mobile=1&alarmid=" + this.recordID +
       "&alarm_assigned_by=" + this.userId +
       "&alarm_assigned_to=" + this.assigned_to +
       "&alarm_remark=" + this.remark +
-      "&alarm_assigned_date=" + this.micro_timestamp  ,
-      
+      "&alarm_assigned_date=" + this.micro_timestamp,
+
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
@@ -142,7 +146,7 @@ export class AddalarmPage {
           this.hideForm = true;
           this.sendNotification(`successfully Assigned`);
           localStorage.setItem("userPhotoFile", "");
-          this.navCtrl.setRoot(AlarmlogPage);
+          this.nav.setRoot(AlarmlogPage);
         }
         // Otherwise let 'em know anyway
         else {
@@ -150,11 +154,30 @@ export class AddalarmPage {
         }
       });
   }
-   sendNotification(message): void {
+  sendNotification(message): void {
     let notification = this.toastCtrl.create({
       message: message,
       duration: 3000
     });
     notification.present();
+  }
+
+  notification() {
+    this.nav.setRoot(NotificationPage);
+  }
+  previous() {
+    this.nav.setRoot(AlarmPage);
+  } 
+  redirectToUnitGroup() {
+    this.nav.setRoot(UnitgroupPage);
+  }
+  redirectToUnits() {
+    this.nav.setRoot(UnitsPage);
+  }
+  redirectToMyAccount() {
+    this.nav.setRoot(MyaccountPage);
+  }
+  redirectToRole() {
+    this.nav.setRoot(RolePage);
   }
 }

@@ -35,7 +35,7 @@
     <ion-list>
 
 
-      <ion-grid>
+      <!--ion-grid>
         <ion-row>
           <ion-col>
             <p><b>{{unitDetailData.unitname}}</b></p>
@@ -60,7 +60,18 @@
             </a>
           </ion-col>
         </ion-row>
-      </ion-grid>
+      </ion-grid-->
+
+
+
+      <img  (click)="getPrority(1)"  src="img/low_priority.png" style="width: 16px;
+    height: 16px;
+    position: absolute;
+    margin-left: 40%;"><img  (click)="getPrority(2)"  src="img/high_priority.png"  style="width: 16px;
+    height: 16px;
+    position: absolute;
+    margin-left: 50%;">
+    
 
       <ion-item>
         <ion-label stacked>Servicing Date <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
@@ -136,7 +147,7 @@
       <div style="clear:both"><br></div>
       <div>Next Service Date:{{unitDetailData.nextServiceDate}}</div>
       <ion-item>
-        <ion-label stacked>Request Denyo Service Support <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
+        <ion-label stacked>Request Denyo Service Support</ion-label>
         <ion-checkbox [disabled]="readOnly" formControlName="is_request" [(ngModel)]="is_request" (ionChange)="updateIsRequest()"></ion-checkbox>
       </ion-item>
 

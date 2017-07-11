@@ -16,7 +16,7 @@ import { RolePage } from '../pages/role/role';
 import { ReporttemplatePage } from '../pages/reporttemplate/reporttemplate';
 import { UnitsPage } from '../pages/units/units';
 import { OrgchartPage } from '../pages/orgchart/orgchart';
-import { AlarmPage } from '../pages/alarm/alarm';
+//import { AlarmPage } from '../pages/alarm/alarm';
 import { AlarmlogPage } from '../pages/alarmlog/alarmlog';
 import { AddalarmPage } from '../pages/addalarm/addalarm';
 //import { MessagesPage } from '../pages/messages/messages';
@@ -65,7 +65,7 @@ export class MyApp {
       { title: 'Maps', component: MapsPage },
       { title: 'Calendar', component: CalendarPage },
       { title: 'Reports', component: ReportsPage },
-      { title: 'Alarm List', component: AlarmPage },
+     // { title: 'Alarm List', component: AlarmPage },
       { title: 'Alarm', component: AddalarmPage },
       { title: 'Alarm Log', component: AlarmlogPage },
       { title: 'Service Details', component: ServicedetailsPage },
@@ -135,7 +135,7 @@ export class MyApp {
     }
     else if (page.title == 'Alarm') {
       this.menuCtrl.close();
-      this.nav.setRoot(AlarmPage);
+      //this.nav.setRoot(AlarmPage);
     }
     else if (page.component == 'AddalarmPage') {
       this.nav.setRoot(AddalarmPage);

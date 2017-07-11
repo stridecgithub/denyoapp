@@ -85181,6 +85181,11 @@ page-calendar .ion-content {
   background-color: white;
 }
 
+page-calendar .add-calendar-button-inner {
+  height: 50px;
+  margin-top: 13px;
+}
+
 page-calendar #sortbar {
   width: 100%;
   min-height: 3.3rem;
@@ -86151,7 +86156,10 @@ page-dashboard .icon-right {
 .quick-list li button ion-icon {
   font-family: "Roboto", "Helvetica Neue", sans-serif;
   font-style: normal;
-  font-size: 10px !important;
+  font-size: 0px !important;
+  width: 32px;
+  height: 32px;
+  margin-top: 10px;
 }
 
 .maps, .units, .reports, .calendar {
@@ -86161,6 +86169,14 @@ page-dashboard .icon-right {
 
 .icon-left span, .icon-right span {
   margin-top: 80px !important;
+}
+
+ion-footer .toolbar-md-bluedark {
+  min-height: auto;
+}
+
+.footer-md-bluedark .toolbar-md-bluedark .button[icon-only] {
+  height: auto;
 }
 
 page-editprofilestepone .ion-content {

@@ -5,16 +5,18 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
-import { UserPage } from '../user/user';
+
 import { CommentsinfoPage } from '../commentsinfo/commentsinfo';
-import { MyaccountPage } from '../myaccount/myaccount';
-import { UnitgroupPage } from '../unitgroup/unitgroup';
-import { UnitsPage } from '../units/units';
-import { RolePage } from '../role/role';
 import { DatePicker } from '@ionic-native/date-picker';
 import 'rxjs/add/operator/map';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { NotificationPage } from '../notification/notification';
+import { MyaccountPage } from '../myaccount/myaccount';
+import { UnitgroupPage } from '../unitgroup/unitgroup';
+import { UnitsPage } from '../units/units';
+import { RolePage } from '../role/role';
+import { UserPage } from '../user/user';
+import { AlarmPage } from '../alarm/alarm';
 /**
  * Generated class for the AddserviceinfoPage page.
  *
@@ -258,7 +260,12 @@ export class AddcommentsinfoPage {
   // supplies a variable of key with a value of create followed by the key/value pairs
   // for the record data
   createEntry(comments, service_subject, addedImgLists, remarkget, micro_timestamp) {
-
+ if (this.service_priority == undefined) {
+      this.service_priority = 1;
+    }
+    if (this.service_priority == 'undefined') {
+      this.service_priority = 1;
+    }
     let body: string = "is_mobile=1" +
       "&comment_unit_id=" + this.service_unitid +
       "&comment_priority=" + this.service_priority +
@@ -305,6 +312,13 @@ export class AddcommentsinfoPage {
   // supplies a variable of key with a value of update followed by the key/value pairs
   // for the record data
   updateEntry(comments, service_subject, addedImgLists, remarkget, micro_timestamp) {
+
+     if (this.service_priority == undefined) {
+      this.service_priority = 1;
+    }
+    if (this.service_priority == 'undefined') {
+      this.service_priority = 1;
+    }
     let body: string = "is_mobile=1&service_id=" + this.service_id +
       "&comments=" + comments +
       "&comment_priority=" + this.service_priority +
@@ -385,9 +399,7 @@ export class AddcommentsinfoPage {
     this.nav.setRoot(NotificationPage);
   }
   previous() {
-    this.nav.setRoot(CommentsinfoPage, {
-      record: this.NP.get("record")
-    });
+    this.nav.setRoot(AlarmPage);
   }
   redirectToUser() {
     this.nav.setRoot(UserPage);
@@ -402,7 +414,7 @@ export class AddcommentsinfoPage {
     this.nav.setRoot(MyaccountPage);
   }
   redirectToRole() {
-    this.nav.setRoot(RolePage);
+    this.nav.setRoot(MyaccountPage);
   }
   selectEntry(item) {
 

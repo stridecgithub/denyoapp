@@ -56,7 +56,7 @@ export class NotificationPage {
     }
     this.reportData.startindex = 0;
     this.reportData.sort = "service_id";
-    this.doService();
+    this.doNotification();
 
     // Atmentioned Tag Storage
   }
@@ -76,7 +76,7 @@ export class NotificationPage {
     console.log('doRefresh function calling...');
     this.reportData.startindex = 0;
     this.reportAllLists = [];
-    this.doService();
+    this.doNotification();
     setTimeout(() => {
       refresher.complete();
     }, 2000);
@@ -87,7 +87,7 @@ export class NotificationPage {
     console.log("Total Count:" + this.totalCount)
     if (this.reportData.startindex < this.totalCount && this.reportData.startindex > 0) {
       console.log('B');
-      this.doService();
+      this.doNotification();
     }
     console.log('C');
     setTimeout(() => {
@@ -96,7 +96,7 @@ export class NotificationPage {
     }, 500);
     console.log('E');
   }
-  doService() {
+  doNotification() {
     this.presentLoading(1);
     if (this.reportData.status == '') {
       this.reportData.status = "DRAFT";
@@ -116,9 +116,6 @@ export class NotificationPage {
     this.http.get(url, options)
       .subscribe((data) => {
         res = data.json();
-        console.log(JSON.stringify(res));
-        console.log("1" + res.notification.length);
-        console.log("2" + res.notification);
         if (res.notification.length > 0) {
           for (let notifications in res.notification) {
             this.reportAllLists.push({

@@ -15,13 +15,14 @@ export class HomePage {
   public userId: any;
   public passWrd: any;
   public userInf: any;
+  header_data: any;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   constructor(public navCtrl: NavController, public fb: FormBuilder, public device: Device, private http: Http, public toastCtrl: ToastController) {
     this.form = fb.group({
       "userid": ["", Validators.required],
       "password": ["", Validators.required]
     });
-
+    this.header_data = { ismenu: true, ishome: false, title: "Home" };
     this.userInf = localStorage.getItem("userInfoId");
     console.log("UserId Localtorage" + this.userInf);
     if (this.userInf != 'null' && this.userInf != null && this.userInf != '') {
@@ -71,8 +72,7 @@ export class HomePage {
     });
     notification.present();
   }
-  doMove()
-  {
-     this.navCtrl.setRoot(ForgotpasswordPage);
+  doMove() {
+    this.navCtrl.setRoot(ForgotpasswordPage);
   }
 }
