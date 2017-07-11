@@ -25,12 +25,14 @@ export class MapsPage {
   public loginas: any;
   public userid: any;
   public companyid:any;
+  public detailvalue:any;
   public pageTitle: string;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   public totalCount;
   pet: string = "ALL";
   public sortby = 2;
   public str:any;
+  public str1:any;
   public vendorsort = "asc";
   public ascending = true;
   public colorListArr: any;
@@ -48,6 +50,7 @@ export class MapsPage {
     public toastCtrl: ToastController,private sanitizer: DomSanitizer, public alertCtrl: AlertController, public navParams: NavParams, public loadingCtrl: LoadingController) {
     this.pageTitle = 'Maps';
     this.str = '';
+    this.str1 = '';
     this.loginas = localStorage.getItem("userInfoName");
     this.userid = localStorage.getItem("userInfoId");
     this.companyid = localStorage.getItem("userInfoCompanyId");
@@ -140,6 +143,7 @@ export class MapsPage {
               runninghr: res.units[unit].runninghr,
               models_id: res.units[unit].models_id,
               alarmnotificationto: res.units[unit].alarmnotificationto,
+              viewonid: res.units[unit].viewonid,
               favoriteindication: favorite
             });
           }
@@ -420,6 +424,7 @@ export class MapsPage {
               unitgroups_id: res.units[unit].unitgroups_id,
               models_id: res.units[unit].models_id,
               alarmnotificationto: res.units[unit].alarmnotificationto,
+               viewonid: res.units[unit].viewonid,
               favoriteindication: favorite
             });
           }
@@ -441,7 +446,7 @@ export class MapsPage {
       });
     this.doUser();
   }
-   getCheckBoxValue(val) {
+   getCheckBoxValue(item,val,val1) {
     /*console.log("Available data" + val);
     this.getCheckboxData.push({
       availabledata: val
@@ -460,10 +465,57 @@ console.log(JSON.stringify(this.selectedAction));*/
         this.str = this.str + "," + val;
       }
     }
-    console.log(this.str);
+      if (val1 != '') {
+      if (this.str1 == '') {
+        this.str1 = val1;
+      } else {
+        this.str1 = this.str1 + "," + val1;
+      }
+    }
+    console.log(this.str+"//"+this.str1);
+    this.detailvalue=item;
+    console.log(this.str+"//"+JSON.stringify(this.detailvalue));
+    localStorage.setItem("viewlist", this.str);
+   
   }
   onAction(act)
   {
+    let urlstr;
+    if(act=='view')
+    {
+      this.navCtrl.setRoot(UnitdetailsPage, {
+        record: this.detailvalue
+      });
+      return false;
+    }
+    if(act=='hide')
+    {
+        urlstr = "/dashboardaction?id="+this.str1+"&action=hide&is_mobile=1&loginid="+this.userid;
+
+    }
+    let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + urlstr;
+    console.log(url);
+
+    this.http.get(url, options)
+      .subscribe((data) => {
+        console.log("Count Response Success:" + JSON.stringify(data.json()));
+        // If the request was successful notify the user
+        if (data.status === 200) {
+          //this.sendNotification(`Comment count successfully removed`);
+          this.reportData.startindex = 0;
+          this.reportData.sort = "unit_id";
+          this.doUser();
+          
+        }
+        // Otherwise let 'em know anyway
+        else {
+          // this.sendNotification('Something went wrong!');
+        }
+      });
+    
     
   }
 }

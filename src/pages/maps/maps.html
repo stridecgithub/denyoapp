@@ -56,7 +56,7 @@
     <ion-label>Select Action</ion-label>
     <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="actpet" (ionChange)="onAction(actpet)">
       <ion-option value="view">View</ion-option>
-      <ion-option value="hidedashboard">Hide on Dashboard</ion-option>
+      <ion-option value="hide">Hide on Dashboard</ion-option>
     </ion-select>
   </ion-item>
   <div class="error" *ngIf="totalCount==0">No unit entries found</div>
@@ -74,7 +74,7 @@
     height: 20px;
     position: absolute;
     top: 51px;
-    left: 0px;" (click)="getCheckBoxValue(item.unit_id)" value="1">
+    left: 0px;" (click)="getCheckBoxValue(item,item.unit_id,item.viewonid)" value="1">
                 </label>
         </div>
         <button class="{{item.colorcodeindications}}" style="float: left ;width:8px;height:100px">
