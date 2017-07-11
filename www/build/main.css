@@ -3901,6 +3901,18 @@ textarea {
   height: 30px;
 }
 
+.quick-list {
+  background-color: #F2F2F2;
+}
+
+.footer-icon {
+  color: #CDCDCD;
+}
+
+body.keyboard-open .has-footer {
+  bottom: 0;
+}
+
 ion-action-sheet {
   left: 0;
   top: 0;
@@ -81441,9 +81453,9 @@ page-addalarm .ion-content {
   background-color: white;
 }
 
-page-addalarm .footer-icon {
-  color: #fff;
-  font-size: 30px;
+page-addalarm .button-inner {
+  position: relative;
+  bottom: 12px;
 }
 
 page-addalarm ion-navbar.toolbar {
@@ -81625,9 +81637,9 @@ page-addcalendar .ion-content {
   background-color: white;
 }
 
-page-addcalendar .footer-icon {
-  color: #fff;
-  font-size: 30px;
+page-addcalendar .button-inner {
+  position: relative;
+  bottom: 12px;
 }
 
 page-addcalendar ion-navbar.toolbar {
@@ -81804,6 +81816,11 @@ page-addcalendar .toolbar-title-md {
   padding: 0;
 }
 
+page-addcommentsinfo .button-inner {
+  position: relative;
+  bottom: 12px;
+}
+
 page-addcommentsinfo .ion-content {
   background-color: white;
 }
@@ -81814,11 +81831,6 @@ page-addcommentsinfo .priority-one-highlight {
 
 page-addcommentsinfo .priority-two-highlight {
   border: 1px solid #000;
-}
-
-page-addcommentsinfo .footer-icon {
-  color: #fff;
-  font-size: 30px;
 }
 
 page-addcommentsinfo #sortbar {
@@ -82065,9 +82077,9 @@ page-addcompanygroup .ion-content {
   background-color: white;
 }
 
-page-addcompanygroup .footer-icon {
-  color: #fff;
-  font-size: 30px;
+page-addcompanygroup .button-inner {
+  position: relative;
+  bottom: 12px;
 }
 
 page-addcompanygroup ion-navbar.toolbar {
@@ -82260,9 +82272,9 @@ page-addenginedetail .ion-content {
   background-color: white;
 }
 
-page-addenginedetail .footer-icon {
-  color: #fff;
-  font-size: 30px;
+page-addenginedetail .button-inner {
+  position: relative;
+  bottom: 12px;
 }
 
 page-addenginedetail ion-navbar.toolbar {
@@ -82444,9 +82456,9 @@ page-addorgchartone .ion-content {
   background-color: white;
 }
 
-page-addorgchartone .footer-icon {
-  color: #fff;
-  font-size: 30px;
+page-addorgchartone .button-inner {
+  position: relative;
+  bottom: 12px;
 }
 
 page-addorgchartone ion-navbar.toolbar {
@@ -82628,9 +82640,9 @@ page-addorgcharttwo .ion-content {
   background-color: white;
 }
 
-page-addorgcharttwo .footer-icon {
-  color: #fff;
-  font-size: 30px;
+page-addorgcharttwo .button-inner {
+  position: relative;
+  bottom: 12px;
 }
 
 page-addorgcharttwo ion-navbar.toolbar {
@@ -82812,9 +82824,9 @@ page-addreporttemplate .ion-content {
   background-color: white;
 }
 
-page-addreporttemplate .footer-icon {
-  color: #fff;
-  font-size: 30px;
+page-addreporttemplate .button-inner {
+  position: relative;
+  bottom: 12px;
 }
 
 page-addreporttemplate ion-navbar.toolbar {
@@ -82993,17 +83005,17 @@ page-addrequestsupport .ion-content {
   background-color: white;
 }
 
+page-addrequestsupport .button-inner {
+  position: relative;
+  bottom: 12px;
+}
+
 page-addrequestsupport .priority-one-highlight {
   border: 1px solid #000;
 }
 
 page-addrequestsupport .priority-two-highlight {
   border: 1px solid #000;
-}
-
-page-addrequestsupport .footer-icon {
-  color: #fff;
-  font-size: 30px;
 }
 
 page-addrequestsupport #sortbar {
@@ -83234,6 +83246,11 @@ page-addrequestsupport .profile-image-wrapper .profile-image-placeholder ion-ico
   margin-top: 10px;
 }
 
+page-addrole .button-inner {
+  position: relative;
+  bottom: 12px;
+}
+
 page-addrole .label-md[stacked] {
   font-size: 14px;
   color: black;
@@ -83247,11 +83264,6 @@ page-addrole .item-button {
 
 page-addrole .ion-content {
   background-color: white;
-}
-
-page-addrole .footer-icon {
-  color: #fff;
-  font-size: 30px;
 }
 
 page-addrole .item-md .toggle-md {
@@ -83408,17 +83420,17 @@ page-addserviceinfo .ion-content {
   background-color: white;
 }
 
+page-addserviceinfo .button-inner {
+  position: relative;
+  bottom: 12px;
+}
+
 page-addserviceinfo .priority-one-highlight {
   border: 1px solid #000;
 }
 
 page-addserviceinfo .priority-two-highlight {
   border: 1px solid #000;
-}
-
-page-addserviceinfo .footer-icon {
-  color: #fff;
-  font-size: 30px;
 }
 
 page-addserviceinfo #sortbar {
@@ -83663,12 +83675,8 @@ page-addunitgroup .ion-content {
   background-color: white;
 }
 
-page-addunitgroup .footer-icon {
-  color: #fff;
-  font-size: 30px;
-}
-
-page-addunitgroup .text-input-md, page-addunitgroup .text-input {
+page-addunitgroup v
+.text-input-md, page-addunitgroup .text-input {
   border: 1px solid #f2f2f2;
   margin: 10px 0 20px;
   min-height: 35px;
@@ -83800,9 +83808,9 @@ page-addunitsfour .ion-content {
   background-color: white;
 }
 
-page-addunitsfour .footer-icon {
-  color: #fff;
-  font-size: 30px;
+page-addunitsfour .button-inner {
+  position: relative;
+  bottom: 12px;
 }
 
 page-addunitsfour .text-input-md, page-addunitsfour .text-input {
@@ -83995,9 +84003,14 @@ page-addunitsone .ion-content {
   background-color: white;
 }
 
-page-addunitsone .footer-icon {
-  color: #fff;
-  font-size: 30px;
+page-addunitsone .button-inner {
+  position: relative;
+  bottom: 12px;
+}
+
+page-addunitsone .button-inner {
+  position: relative;
+  bottom: 12px;
 }
 
 page-addunitsone .text-input-md, page-addunitsone .text-input {
@@ -84194,9 +84207,9 @@ page-addunitsthree .ion-content {
   background-color: white;
 }
 
-page-addunitsthree .footer-icon {
-  color: #fff;
-  font-size: 30px;
+page-addunitsthree .button-inner {
+  position: relative;
+  bottom: 12px;
 }
 
 page-addunitsthree .text-input-md, page-addunitsthree .text-input {
@@ -84389,9 +84402,9 @@ page-addunitstwo .ion-content {
   background-color: white;
 }
 
-page-addunitstwo .footer-icon {
-  color: #fff;
-  font-size: 30px;
+page-addunitstwo .button-inner {
+  position: relative;
+  bottom: 12px;
 }
 
 page-addunitstwo .text-input-md, page-addunitstwo .text-input {
@@ -84596,9 +84609,9 @@ page-adduser .ion-content {
   background-color: white;
 }
 
-page-adduser .footer-icon {
-  color: #fff;
-  font-size: 30px;
+page-adduser .button-inner {
+  position: relative;
+  bottom: 12px;
 }
 
 page-adduser ion-navbar.toolbar {
@@ -84768,11 +84781,6 @@ page-alarm .ion-content {
   background-color: white;
 }
 
-page-alarm .footer-icon {
-  color: #fff;
-  font-size: 30px;
-}
-
 page-alarm ion-navbar.toolbar {
   background: #f0f0f0;
 }
@@ -84875,11 +84883,6 @@ page-alarm .toolbar-title-md {
 
 page-alarmdetails .ion-content {
   background-color: white;
-}
-
-page-alarmdetails .footer-icon {
-  color: #fff;
-  font-size: 30px;
 }
 
 page-alarmdetails ion-navbar.toolbar {
@@ -85072,11 +85075,6 @@ page-alarmdetails .edit {
 
 page-alarmlog .ion-content {
   background-color: white;
-}
-
-page-alarmlog .footer-icon {
-  color: #fff;
-  font-size: 30px;
 }
 
 page-alarmlog ion-navbar.toolbar {
@@ -85461,11 +85459,6 @@ page-commentdetails .priority-two-highlight {
   border: 1px solid #000;
 }
 
-page-commentdetails .footer-icon {
-  color: #fff;
-  font-size: 30px;
-}
-
 page-commentdetails #sortbar {
   width: 100%;
   min-height: 3.3rem;
@@ -85702,11 +85695,6 @@ page-commentsinfo .ion-content {
   background-color: white;
 }
 
-page-commentsinfo .footer-icon {
-  color: #fff;
-  font-size: 30px;
-}
-
 page-commentsinfo #sortbar {
   width: 100%;
   min-height: 3.3rem;
@@ -85842,11 +85830,6 @@ page-commentsinfo .toolbar-title-md {
 
 page-companygroup .ion-content {
   background-color: white;
-}
-
-page-companygroup .footer-icon {
-  color: #fff;
-  font-size: 30px;
 }
 
 page-companygroup #sortbar {
@@ -86168,7 +86151,7 @@ page-dashboard .icon-right {
 .quick-list li button ion-icon {
   font-family: "Roboto", "Helvetica Neue", sans-serif;
   font-style: normal;
-  font-size: 15px !important;
+  font-size: 10px !important;
 }
 
 .maps, .units, .reports, .calendar {
@@ -86184,9 +86167,9 @@ page-editprofilestepone .ion-content {
   background-color: white;
 }
 
-page-editprofilestepone .footer-icon {
-  color: #fff;
-  font-size: 30px;
+page-editprofilestepone .button-inner {
+  position: relative;
+  bottom: 12px;
 }
 
 page-editprofilestepone .text-input-md, page-editprofilestepone .text-input {
@@ -86377,9 +86360,9 @@ page-editprofilesteptwo .ion-content {
   background-color: white;
 }
 
-page-editprofilesteptwo .footer-icon {
-  color: #fff;
-  font-size: 30px;
+page-editprofilesteptwo .button-inner {
+  position: relative;
+  bottom: 12px;
 }
 
 page-editprofilesteptwo .label-md[stacked] {
@@ -86543,11 +86526,6 @@ page-email .segment-button segment-activated {
 
 page-email .ion-content {
   background-color: white;
-}
-
-page-email .footer-icon {
-  color: #fff;
-  font-size: 30px;
 }
 
 page-email .text-input-md, page-email .text-input {
@@ -86750,11 +86728,6 @@ page-enginedetail .ion-content {
   background-color: white;
 }
 
-page-enginedetail .footer-icon {
-  color: #fff;
-  font-size: 30px;
-}
-
 page-enginedetail .sheader1 {
   color: #000000;
 }
@@ -86879,11 +86852,6 @@ page-enginedetail .toolbar-title-md {
 
 page-engineview .ion-content {
   background-color: white;
-}
-
-page-engineview .footer-icon {
-  color: #fff;
-  font-size: 30px;
 }
 
 page-engineview .sheader1 {
@@ -87024,9 +86992,9 @@ page-forgotpassword .ion-content {
   background-color: white;
 }
 
-page-forgotpassword .footer-icon {
-  color: #fff;
-  font-size: 30px;
+page-forgotpassword .button-inner {
+  position: relative;
+  bottom: 12px;
 }
 
 page-forgotpassword ion-navbar.toolbar {
@@ -87496,11 +87464,6 @@ page-maps .ion-content {
   background-color: white;
 }
 
-page-maps .footer-icon {
-  color: #fff;
-  font-size: 30px;
-}
-
 page-maps #sortbar {
   width: 100%;
   min-height: 3.3rem;
@@ -87636,11 +87599,6 @@ page-maps .toolbar-title-md {
 
 page-maps .ion-content {
   background-color: white;
-}
-
-page-maps .footer-icon {
-  color: #fff;
-  font-size: 30px;
 }
 
 page-maps ion-navbar.toolbar {
@@ -87847,11 +87805,6 @@ page-messages .ion-content {
   background-color: white;
 }
 
-page-messages .footer-icon {
-  color: #fff;
-  font-size: 30px;
-}
-
 page-messages ion-navbar.toolbar {
   background: #f0f0f0;
 }
@@ -88032,11 +87985,6 @@ page-myaccount .item-md.item-block .item-inner {
 
 page-myaccount .ion-content {
   background-color: white;
-}
-
-page-myaccount .footer-icon {
-  color: #fff;
-  font-size: 30px;
 }
 
 page-myaccount .text-input-md, page-myaccount .text-input {
@@ -88240,11 +88188,6 @@ page-notification .ion-content {
 
 page-notification .ion-content {
   background-color: white;
-}
-
-page-notification .footer-icon {
-  color: #fff;
-  font-size: 30px;
 }
 
 page-notification #sortbar {
@@ -88819,11 +88762,6 @@ page-reports .ion-content {
   background-color: white;
 }
 
-page-reports .footer-icon {
-  color: #fff;
-  font-size: 30px;
-}
-
 page-reports #sortbar {
   width: 100%;
   min-height: 3.3rem;
@@ -88959,11 +88897,6 @@ page-reports .toolbar-title-md {
 
 page-reports .ion-content {
   background-color: white;
-}
-
-page-reports .footer-icon {
-  color: #fff;
-  font-size: 30px;
 }
 
 page-reports ion-navbar.toolbar {
@@ -89377,11 +89310,6 @@ page-role .ion-content {
   background-color: white;
 }
 
-page-role .footer-icon {
-  color: #fff;
-  font-size: 30px;
-}
-
 page-role ion-navbar.toolbar {
   background: #f0f0f0;
 }
@@ -89492,11 +89420,6 @@ page-servicedetails .priority-one-highlight {
 
 page-servicedetails .priority-two-highlight {
   border: 1px solid #000;
-}
-
-page-servicedetails .footer-icon {
-  color: #fff;
-  font-size: 30px;
 }
 
 page-servicedetails #sortbar {
@@ -89733,11 +89656,6 @@ page-servicinginfo .ion-content {
 
 page-servicinginfo .ion-content {
   background-color: white;
-}
-
-page-servicinginfo .footer-icon {
-  color: #fff;
-  font-size: 30px;
 }
 
 page-servicinginfo #sortbar {
@@ -91181,11 +91099,6 @@ page-unitdetails .item-md [item-end] {
   margin: 0px 0px 0px 9px;
 }
 
-page-unitdetails .footer-icon {
-  color: #fff;
-  font-size: 30px;
-}
-
 page-unitdetails ion-navbar.toolbar {
   background: #f0f0f0;
 }
@@ -91437,11 +91350,6 @@ page-unitgroup .ion-content {
   background-color: white;
 }
 
-page-unitgroup .footer-icon {
-  color: #fff;
-  font-size: 30px;
-}
-
 page-unitgroup .sheader1 {
   color: #000000;
 }
@@ -91661,11 +91569,6 @@ page-units .ion-content {
   background-color: white;
 }
 
-page-units .footer-icon {
-  color: #fff;
-  font-size: 30px;
-}
-
 page-units ion-navbar.toolbar {
   background: #f0f0f0;
 }
@@ -91861,11 +91764,6 @@ page-units .favorite {
 
 page-user .ion-content {
   background-color: white;
-}
-
-page-user .footer-icon {
-  color: #fff;
-  font-size: 30px;
 }
 
 page-user .user-name {

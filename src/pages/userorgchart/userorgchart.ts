@@ -336,7 +336,7 @@ export class UserorgchartPage {
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/getcompanies";
+      url: any = this.apiServiceURL + "/getcompanies?loginid="+this.userId;
     let res;
     this.http.get(url, options)
       .subscribe(data => {
