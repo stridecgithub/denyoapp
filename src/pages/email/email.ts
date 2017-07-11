@@ -44,7 +44,8 @@ export class EmailPage {
   public personalhashtag;
   public receiver_id;
   public pageTitle: any;
-  pet: string = "inbox";
+  pet: string = "";
+  choice:string="inbox";
   public recordID: any;
   public userId: any;
   public str: any;
@@ -289,6 +290,14 @@ export class EmailPage {
 
 
   onSendSegmentChanged(val, item) {
+    if (this.sendData.status == '') {
+      this.sendData.status = "messages_id";
+    }
+    if (this.sendData.sort == '') {
+      this.sendData.sort = "messages_id";
+    }
+
+    console.log('Send Item segment calling....');
     let splitdata = val.split(",");
     this.sendData.sort = splitdata[0];
     this.sendData.sortascdesc = splitdata[1];
@@ -297,7 +306,14 @@ export class EmailPage {
   }
 
 
-  onSegmentChanged(val, item) {
+  onSegmentChanged(val) {
+    if (this.inboxData.status == '') {
+      this.inboxData.status = "messages_id";
+    }
+    if (this.inboxData.sort == '') {
+      this.inboxData.sort = "messages_id";
+    }
+    console.log('Inobox segment calling....');
     let splitdata = val.split(",");
     this.inboxData.sort = splitdata[0];
     this.inboxData.sortascdesc = splitdata[1];
@@ -530,7 +546,7 @@ export class EmailPage {
           this.copytome = false;
           this.getPrority(1);
           this.subject = '';
-          this.pet = 'send';
+          this.choice = 'send';
           this.doSend();
           this.doInbox();
         }
@@ -731,7 +747,7 @@ export class EmailPage {
       });
   }
   doDetails(item) {
-    this.pet = 'details';
+    this.choice = 'details';
     this.selectEntry(item);
     //http://denyoappv2.stridecdev.com/messages/changereadunread?is_mobile=1&ses_login_id=9&messages_id=44
 
@@ -764,7 +780,7 @@ export class EmailPage {
     this.copytome = false;
     this.getPrority(1);
     this.subject = '';
-    this.pet = 'compose';
+    this.choice = 'compose';
   }
 
   forward(messages_body) {
@@ -772,8 +788,8 @@ export class EmailPage {
     this.copytome = false;
     this.getPrority(1);
     this.subject = '';
-    // this.composemessagecontent = "-----Forward Message----- From: Super Admin Date: 2017-07-06 19:38:53 To: Bala <balamurugan@webneo.in> Vignesh <vignesh@webneo.in>" + messages_body;
-    this.pet = 'compose';
+    this.composemessagecontent = "-----Forward Message-----" +"\n"+ messages_body;
+    this.choice = 'compose';
   }
 
   download(file) {
@@ -789,7 +805,6 @@ export class EmailPage {
 
   }
   favorite(messageid) {
-
     let body: string = "loginid=" + this.userId + "&is_mobile=1&messageid=" + messageid,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
@@ -800,12 +815,6 @@ export class EmailPage {
     this.http.post(url, body, options)
       .subscribe(data => {
         console.log(data);
-        let res = data.json();
-
-
-
-
-
         // If the request was successful notify the user
         if (data.status === 200) {
           this.inboxData.startindex = 0;

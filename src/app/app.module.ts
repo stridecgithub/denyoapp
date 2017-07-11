@@ -58,6 +58,7 @@ import { EmailPage } from '../pages/email/email';
 import { TrendlinePage } from '../pages/trendline/trendline';
 import { DataServiceProvider } from '../providers/data-service/data-service';
 import { ViewunitsPage } from '../pages/viewunits/viewunits';
+import { NavbarComponent } from '../components/navbar/navbar';
 
 @NgModule({
   declarations: [
@@ -113,7 +114,8 @@ import { ViewunitsPage } from '../pages/viewunits/viewunits';
     ForgotpasswordPage,
     EmailPage,
     ViewunitsPage,
-    TrendlinePage
+    TrendlinePage,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

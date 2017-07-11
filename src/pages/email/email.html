@@ -31,7 +31,7 @@
   </ion-navbar>
 
   <ion-toolbar>
-    <ion-segment [(ngModel)]="pet">
+    <ion-segment [(ngModel)]="choice">
       <ion-segment-button value="inbox">
         Inbox
       </ion-segment-button>
@@ -49,24 +49,21 @@
 
 <ion-content padding class="ion-content">
 
-  <div [ngSwitch]="pet">
+  <div [ngSwitch]="choice">
     <ion-list *ngSwitchCase="'inbox'">
-     
-
-
       <ion-item style="width: 100%; margin: 0; padding-left: 10px;">
-    <ion-label>Sort By</ion-label>
-     <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="pet" (ionChange)="onSegmentChanged(pet,inboxLists)">
-          <ion-option value="messages_isfavorite,asc" selected="true">Favorite Ascending</ion-option>
+        <ion-label>Sort By</ion-label>
+        <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="pet" (ionChange)="onSegmentChanged(pet)">
+          <ion-option value="messagesinbox_isfavaurite,asc">Favorite Ascending</ion-option>
           <ion-option value="sendername,desc">Sender Descending</ion-option>
           <ion-option value="messages_subject,desc">Subject Descending</ion-option>
           <ion-option value="messages_subject,desc">Subject Descending</ion-option>
         </ion-select>
-  </ion-item>
-  <div class="separator-line" *ngIf="totalCount!=0">&nbsp;</div>
- <div class="error" *ngIf="totalCount==0">No message entries found</div>
+      </ion-item>
+      <div class="separator-line" *ngIf="totalCount!=0">&nbsp;</div>
+      <div class="error" *ngIf="totalCount==0">No message entries found</div>
 
-     
+
       <!--ion-item>
             <ion-label>Action</ion-label>
             <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="act" (ionChange)="onAction(act)">
@@ -83,18 +80,18 @@
       </ion-refresher>
       <ion-list *ngIf="totalCount!=0">
         <ion-item-sliding *ngFor="let item of inboxLists;">
-          <ion-item >
-             <button (click)="favorite(item.message_id)" *ngIf="item.is_favorite==1"  class="favorite" style="float: right ;width:50px;height:50px;background-color:#ffffff"></button>
-             <button (click)="favorite(item.message_id)"  *ngIf="item.is_favorite==0" class="unfavorite" style="float: right ;width:50px;height:50px;background-color:#ffffff"></button>
+          <ion-item>
+            <button (click)="favorite(item.message_id)" *ngIf="item.is_favorite==1" class="favorite" style="float: right ;width:50px;height:50px;background-color:#ffffff"></button>
+            <button (click)="favorite(item.message_id)" *ngIf="item.is_favorite==0" class="unfavorite" style="float: right ;width:50px;height:50px;background-color:#ffffff"></button>
             <div style="overflow: hidden; padding-left: .5em;">
-            <h2 *ngIf="item.message_readstatus==0"(click)="doDetails(item)"><b>{{item.messages_subject}}</b></h2>
-            <h2 *ngIf="item.message_readstatus==1"(click)="doDetails(item)">{{item.messages_subject}}</h2>
+              <h2 *ngIf="item.message_readstatus==0" (click)="doDetails(item)"><b>{{item.messages_subject}}</b></h2>
+              <h2 *ngIf="item.message_readstatus==1" (click)="doDetails(item)">{{item.messages_subject}}</h2>
             </div>
 
 
           </ion-item>
           <ion-item-options>
-            <button class="trashcolor" (click)="doConfirm(item.messages_id,item,'inbox')">                        
+            <button class="trashcolor" (click)="doConfirm(item.message_id,item,'inbox')">                        
                          <ion-icon name="trash" class="icon-size"></ion-icon>
                     </button>
           </ion-item-options>
@@ -108,7 +105,7 @@
       <div class="error" *ngIf="totalCountSend==0">No send itme entries found</div>
       <ion-item>
         <ion-label>Sort By</ion-label>
-        <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="pet" (ionChange)="onSendSegmentChanged(pet,inboxLists)">
+        <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="pet" (ionChange)="onSendSegmentChanged(pet)">
           <ion-option value="sendername,asc">Sender Ascending</ion-option>
           <ion-option value="sendername,desc">Sender Descending</ion-option>
           <ion-option value="messages_subject,asc">Subject Ascending</ion-option>
@@ -132,7 +129,7 @@
             <h2 *ngIf="item.message_readstatus==1">{{item.messages_subject}}</h2>
           </ion-item>
           <ion-item-options>
-            <button class="trashcolor" (click)="doConfirm(item.messages_id,item,'send')">                        
+            <button class="trashcolor" (click)="doConfirm(item.message_id,item,'send')">                        
                          <ion-icon name="trash" class="icon-size"></ion-icon>
                     </button>
           </ion-item-options>
@@ -184,7 +181,7 @@
 
         <ion-item>
           <ion-label stacked>Message <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
-          <ion-textarea [disabled]="readOnly" formControlName="composemessagecontent" [(ngModel)]="composemessagecontent"></ion-textarea>
+          <ion-textarea rows="10" [disabled]="readOnly" formControlName="composemessagecontent" [(ngModel)]="composemessagecontent"></ion-textarea>
         </ion-item>
 
 

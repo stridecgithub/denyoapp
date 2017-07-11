@@ -31,3 +31,14 @@ Add Calendar:-
 2  in service type unit/project/location based on filter exampe if pass the unit id related data assigne the text field project and location in textfield
 3 Save the calendar event details based on Service/Event selected type
 
+
+Header & Footer Common call - Keyword ionic header and footer calling one
+ionic generate component navbar
+https://stackoverflow.com/questions/38889380/including-the-common-header-bar-for-ionic-2-angular-2
+https://stackoverflow.com/questions/35936198/ionic-2-global-navbar-for-the-app
+
+Footer hide on when keyboard opend;
+https://forum.ionicframework.com/t/hide-footer-when-keyboard-appear/9254/9
+https://stackoverflow.com/questions/36630543/hide-footer-when-keyboard-appear-ionic
+https://stackoverflow.com/questions/42716744/hide-footer-when-keyboard-appears-ionic2
+

@@ -1,5 +1,8 @@
 page-addrole {
-
+.button-inner{
+  position:relative;
+  bottom:12px;
+}
      .label-md[stacked]{
         font-size: 14px;
         color:black;
@@ -15,10 +18,6 @@ page-addrole {
     background-color:white;
 }
 
-.footer-icon{
-    color:#fff;
-    font-size:30px;    
-}
 .item-md .toggle-md {
     cursor: pointer;
     margin: 0;

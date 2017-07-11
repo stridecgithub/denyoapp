@@ -1,5 +1,5 @@
 import { Component, NgZone } from '@angular/core';
-import { NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, ToastController, LoadingController,Keyboard } from 'ionic-angular';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import 'rxjs/add/operator/map';
 import { AddunitstwoPage } from '../addunitstwo/addunitstwo';
@@ -46,16 +46,25 @@ export class AddunitsonePage {
   public recordID: any = null;
   public isUploadedProcessing: boolean = false;
   public uploadResultBase64Data;
-  constructor(private nativeGeocoder: NativeGeocoder, public nav: NavController,
+  showFooter: boolean = true;
+  constructor(public keyboard: Keyboard, private nativeGeocoder: NativeGeocoder, public nav: NavController,
     public NP: NavParams,
     public fb: FormBuilder,
-    public toastCtrl: ToastController, public loadingCtrl: LoadingController,    ) {
+    public toastCtrl: ToastController, public loadingCtrl: LoadingController, ) {
     this.loginas = localStorage.getItem("userInfoName");
     // Create form builder validation rules
     this.form = fb.group({
       "location": ["", Validators.required]
     });
     this.userId = localStorage.getItem("userInfoId");
+    this.keyboardCheck();
+  }
+
+  keyboardCheck() {
+    if (this.keyboard.isOpen()) {
+      // You logic goes here
+      this.showFooter = false;
+    }
   }
 
   ionViewDidLoad() {

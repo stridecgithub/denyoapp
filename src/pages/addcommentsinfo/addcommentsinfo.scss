@@ -1,5 +1,8 @@
 page-addcommentsinfo {
-
+.button-inner{
+  position:relative;
+  bottom:12px;
+}
  
        .ion-content{
     background-color:white;
@@ -13,10 +16,7 @@ page-addcommentsinfo {
 {
     border:1px solid #000;
 }
-.footer-icon{
-    color:#fff;
-    font-size:30px;    
-}
+
     #sortbar {
         width: 100%;
         min-height: 3.3rem;
