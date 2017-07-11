@@ -34,6 +34,7 @@ import { ForgotpasswordPage } from '../pages/forgotpassword/forgotpassword';
 //import { TrendlinePage } from '../pages/trendline/trendline';
 import { DataServiceProvider } from '../providers/data-service/data-service';
 import { ViewunitsPage } from '../pages/viewunits/viewunits';
+
 @Component({
   templateUrl: 'app.html'
 })

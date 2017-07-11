@@ -59,7 +59,7 @@ import { TrendlinePage } from '../pages/trendline/trendline';
 import { DataServiceProvider } from '../providers/data-service/data-service';
 import { ViewunitsPage } from '../pages/viewunits/viewunits';
 import { NavbarComponent } from '../components/navbar/navbar';
-
+import { CustomHeaderComponent } from '../pages/custom-header-component';
 @NgModule({
   declarations: [
     MyApp,
@@ -115,7 +115,8 @@ import { NavbarComponent } from '../components/navbar/navbar';
     EmailPage,
     ViewunitsPage,
     TrendlinePage,
-    NavbarComponent
+    NavbarComponent,
+    CustomHeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -178,7 +179,8 @@ import { NavbarComponent } from '../components/navbar/navbar';
     ForgotpasswordPage,
     EmailPage,
     ViewunitsPage,
-    TrendlinePage
+    TrendlinePage,
+    CustomHeaderComponent
   ],
   providers: [
     StatusBar,
