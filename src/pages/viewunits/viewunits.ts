@@ -27,6 +27,7 @@ export class ViewunitsPage {
   pet: string = "ALL";
   public userId: any;
   public sortby = 2;
+  public ulist:any;
   public detailvalue:any;
   public vendorsort = "asc";
   public ascending = true;
@@ -49,6 +50,7 @@ export class ViewunitsPage {
     this.loginas = localStorage.getItem("userInfoName");
     this.companyId = localStorage.getItem("userInfoCompanyId");
     this.userId = localStorage.getItem("userInfoId");
+    this.ulist = localStorage.getItem("viewlist");
   }
  ionViewWillEnter() {
    this.doUnit();
@@ -90,25 +92,25 @@ exit()
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/units?is_mobile=1&startindex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc + "&company_id=" + this.companyId;
+      url: any = this.apiServiceURL + "/unitlistaction/"+this.ulist+"/1/view";
     let res;
     console.log(url);
     this.http.get(url, options)
       .subscribe((data) => {
         res = data.json();
         console.log(JSON.stringify(res));
-        console.log("1" + res.units.length);
-        console.log("2" + res.units);
-        if (res.units.length > 0) {
-          for (let unit in res.units) {
+        console.log("1" + res.unitdetails.length);
+        console.log("2" + res.unitdetails);
+        if (res.unitdetails.length > 0) {
+          for (let unit in res.unitdetails) {
             let colorcode;
             let favorite;
-            let index = this.colorListArr.indexOf(res.units[unit].colorcode); // 1
+            let index = this.colorListArr.indexOf(res.unitdetails[unit].colorcode); // 1
             console.log("Color Index:" + index);
             let colorvalincrmentone = index + 1;
             colorcode = "button" + colorvalincrmentone;
             console.log("Color is" + colorcode);
-            if (res.units[unit].favorite == 1) {
+            if (res.unitdetails[unit].favorite == 1) {
               favorite = "favorite";
             }
             else {
@@ -116,22 +118,22 @@ exit()
 
             }
             this.reportAllLists.push({
-              unit_id: res.units[unit].unit_id,
-              unitname: res.units[unit].unitname,
-              location: res.units[unit].location,
-              projectname: res.units[unit].projectname,
-              colorcode: res.units[unit].colorcode,
-              contacts: res.units[unit].contacts,
-              nextservicedate: res.units[unit].nextservicedate,
+              unit_id: res.unitdetails[unit].unit_id,
+              unitname: res.unitdetails[unit].unitname,
+              location: res.unitdetails[unit].location,
+              projectname: res.unitdetails[unit].projectname,
+              colorcode: res.unitdetails[unit].colorcode,
+              contacts: res.unitdetails[unit].contacts,
+              nextservicedate: res.unitdetails[unit].nextservicedate,
               colorcodeindications: colorcode,
-              controllerid: res.units[unit].controllerid,
-              neaplateno: res.units[unit].neaplateno,
-              companys_id: res.units[unit].companys_id,
-              unitgroups_id: res.units[unit].unitgroups_id,
-              models_id: res.units[unit].models_id,
-              alarmnotificationto: res.units[unit].alarmnotificationto,
-              lat: res.units[unit].lat,
-              lng: res.units[unit].lng,
+              controllerid: res.unitdetails[unit].controllerid,
+              neaplateno: res.unitdetails[unit].neaplateno,
+              companys_id: res.unitdetails[unit].companys_id,
+              unitgroups_id: res.unitdetails[unit].unitgroups_id,
+              models_id: res.unitdetails[unit].models_id,
+              alarmnotificationto: res.unitdetails[unit].alarmnotificationto,
+              lat: res.unitdetails[unit].lat,
+              lng: res.unitdetails[unit].lng,
               favoriteindication: favorite
             });
           }
