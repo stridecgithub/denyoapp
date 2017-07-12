@@ -38,6 +38,7 @@ export class CommentsinfoPage {
   public userId: any;
   public reportAllLists = [];
   public loginas: any;
+  public udetails:any;
   public loadingMoreDataContent: string;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   public totalCount;
@@ -46,12 +47,14 @@ export class CommentsinfoPage {
     this.pageTitle = 'Comments';
     this.loginas = localStorage.getItem("userInfoName");
     this.userId = localStorage.getItem("userInfoId");
+    this.udetails = localStorage.getItem("unitdetails");
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoadCommentsinfoPage');
   }
   ionViewWillEnter() {
+    console.log("NUD"+localStorage.getItem("unitdetails"));
 
     if (this.NP.get("record")) {
       console.log("Service Info Record Param Value:" + JSON.stringify(this.NP.get("record")));
@@ -61,7 +64,7 @@ export class CommentsinfoPage {
     this.doService();
     this.unit_id = this.NP.get("record").unit_id;
     let body: string = "is_mobile=1&userid=" + this.userId +
-      "&unitid=" + this.unit_id,
+      "&unitid=" + localStorage.getItem("unitId"),
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
@@ -143,7 +146,7 @@ export class CommentsinfoPage {
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/comments?is_mobile=1&startindex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc + "&unitid=" + this.unit_id;
+      url: any = this.apiServiceURL + "/comments?is_mobile=1&startindex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc + "&unitid=" +  localStorage.getItem("unitId");
     let res;
     console.log(url);
     this.http.get(url, options)

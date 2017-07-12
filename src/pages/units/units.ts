@@ -263,6 +263,7 @@ console.log(JSON.stringify(this.selectedAction));*/
       return false;
     } else if (act == 'detail') {
       localStorage.setItem("unitId", unitId);
+      
       this.nav.setRoot(UnitdetailsPage, {
         record: item
       });
