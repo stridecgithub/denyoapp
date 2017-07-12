@@ -1,15 +1,18 @@
 import { Component } from '@angular/core';
-import {  NavController, NavParams, ToastController } from 'ionic-angular';
+import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { UserPage } from '../user/user';
-import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
-import { UnitsPage } from '../units/units';
-import { RolePage } from '../role/role'; 
+import { RolePage } from '../role/role';
 import 'rxjs/add/operator/map';
+import { MyaccountPage } from '../myaccount/myaccount';
+import { UnitsPage } from '../units/units';
 import { NotificationPage } from '../notification/notification';
-
+import { MapsPage } from '../maps/maps';
+import { ReportsPage } from '../reports/reports';
+import { CalendarPage } from '../calendar/calendar';
+import { EmailPage } from '../email/email';
 
 /**
  * Generated class for the AddunitgroupPage page.
@@ -22,9 +25,9 @@ import { NotificationPage } from '../notification/notification';
   templateUrl: 'addunitgroup.html',
 })
 export class AddunitgroupPage {
-   public loginas: any;
-   public companyid: any;
-     public form: FormGroup;
+  public loginas: any;
+  public companyid: any;
+  public form: FormGroup;
   public cname: any;
   public remark: any;
   public ccode: any;
@@ -39,14 +42,14 @@ export class AddunitgroupPage {
   // Flag to hide the form upon successful completion of remote operation
   public hideForm: boolean = false;
   public hideActionButton = true;
- // public isUploadedProcessing: boolean = false;
+  // public isUploadedProcessing: boolean = false;
   // Property to help ste the page title
   public pageTitle: string;
   // Property to store the recordID for when an existing entry is being edited
   public recordID: any = null;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
 
-    constructor(public nav: NavController,
+  constructor(public nav: NavController,
     public http: Http,
     public NP: NavParams,
     public fb: FormBuilder,
@@ -65,127 +68,112 @@ export class AddunitgroupPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddunitgroupPage');
   }
-   ionViewWillEnter() {
+  ionViewWillEnter() {
     this.resetFields();
-  
+
     if (this.NP.get("record")) {
-       console.log(this.NP.get("act"));
+      console.log(this.NP.get("act"));
       this.isEdited = true;
       this.selectEntry(this.NP.get("record"));
-     // this.pageTitle = 'Edit Company Group';
+      // this.pageTitle = 'Edit Company Group';
       this.readOnly = false;
       this.hideActionButton = true;
     }
     else {
       this.isEdited = false;
-      
+
     }
   }
-    selectEntry(item) {
+  selectEntry(item) {
     this.cname = item.unitgroup_name;
     this.remark = item.remark;
     this.ccode = item.colorcode;
-    this.nccode=this.ccode;
-    if(this.ccode == "DAADFE")
-    {
+    this.nccode = this.ccode;
+    if (this.ccode == "DAADFE") {
       document.getElementById("DAADFE").classList.add("border-need");
-     // console.log("Hi");
-     this.ccode="DAADFE";
+      // console.log("Hi");
+      this.ccode = "DAADFE";
     }
-    if(this.ccode == "FBE983")
-    {
+    if (this.ccode == "FBE983") {
       document.getElementById("FBE983").classList.add("border-need");
-     // console.log("Hi");
-     this.ccode="FBE983";
+      // console.log("Hi");
+      this.ccode = "FBE983";
     }
-    if(this.ccode == "5584EE")
-    {
+    if (this.ccode == "5584EE") {
       document.getElementById("5584EE").classList.add("border-need");
-     // console.log("Hi");
-     this.ccode="5584EE";
+      // console.log("Hi");
+      this.ccode = "5584EE";
     }
-    if(this.ccode == "A4BDFD")
-    {
+    if (this.ccode == "A4BDFD") {
       document.getElementById("A4BDFD").classList.add("border-need");
-     // console.log("Hi");
-     this.ccode="A4BDFD";
+      // console.log("Hi");
+      this.ccode = "A4BDFD";
     }
-    if(this.ccode == "47D6DC")
-    {
+    if (this.ccode == "47D6DC") {
       document.getElementById("47D6DC").classList.add("border-need");
-     // console.log("Hi");
-     this.ccode="47D6DC";
+      // console.log("Hi");
+      this.ccode = "47D6DC";
     }
-    if(this.ccode == "7AE7BE")
-    {
+    if (this.ccode == "7AE7BE") {
       document.getElementById("7AE7BE").classList.add("border-need");
-     // console.log("Hi");
-     this.ccode="7AE7BE";
+      // console.log("Hi");
+      this.ccode = "7AE7BE";
     }
-    if(this.ccode == "FBD75C")
-    {
+    if (this.ccode == "FBD75C") {
       document.getElementById("FBD75C").classList.add("border-need");
-      this.ccode="FBD75C";
-     // console.log("Hi");
+      this.ccode = "FBD75C";
+      // console.log("Hi");
     }
-    if(this.ccode == "FFB878")
-    {
+    if (this.ccode == "FFB878") {
       document.getElementById("FFB878").classList.add("border-need");
-     // console.log("Hi");
-     this.ccode="FFB878";
+      // console.log("Hi");
+      this.ccode = "FFB878";
     }
-    if(this.ccode == "FF877C")
-    {
+    if (this.ccode == "FF877C") {
       document.getElementById("FF877C").classList.add("border-need");
-     // console.log("Hi");
-     this.ccode="FF877C";
+      // console.log("Hi");
+      this.ccode = "FF877C";
     }
-    if(this.ccode == "DC2128")
-    {
+    if (this.ccode == "DC2128") {
       document.getElementById("DC2128").classList.add("border-need");
-     // console.log("Hi");
-     this.ccode="DC2128";
+      // console.log("Hi");
+      this.ccode = "DC2128";
     }
-    if(this.ccode == "E1E1E1")
-    {
+    if (this.ccode == "E1E1E1") {
       document.getElementById("E1E1E1").classList.add("border-need");
-     // console.log("Hi");
-     this.ccode="E1E1E1";
+      // console.log("Hi");
+      this.ccode = "E1E1E1";
     }
-    if(this.ccode == "51B749")
-    {
+    if (this.ccode == "51B749") {
       document.getElementById("51B749").classList.add("border-need");
-     // console.log("Hi");
-     this.ccode="51B749";
+      // console.log("Hi");
+      this.ccode = "51B749";
     }
     this.recordID = item.unitgroup_id;
   }
   saveEntry() {
     let cname: string = this.form.controls["cname"].value,
       remark: string = this.form.controls["remark"].value;
-       console.log(cname,remark);
-        if( cname.toLowerCase() == 'denyo' || cname.toLowerCase() == 'dum' || cname.toLowerCase() == 'dsg' || cname.toLowerCase() == 'denyo singapore' )
-      {
-        this.sendNotification("Given Unit Group Name Not Acceptable....");
-      }
-      else
-      {
-
-    if (this.isEdited) {
-      
-    this.updateEntry(cname, this.ccode, remark,this.userId,this.companyid);
+    console.log(cname, remark);
+    if (cname.toLowerCase() == 'denyo' || cname.toLowerCase() == 'dum' || cname.toLowerCase() == 'dsg' || cname.toLowerCase() == 'denyo singapore') {
+      this.sendNotification("Given Unit Group Name Not Acceptable....");
     }
     else {
-      this.createEntry(cname, this.ccode, remark, this.userId,this.companyid);
-    }
+
+      if (this.isEdited) {
+
+        this.updateEntry(cname, this.ccode, remark, this.userId, this.companyid);
       }
+      else {
+        this.createEntry(cname, this.ccode, remark, this.userId, this.companyid);
+      }
+    }
 
   }
-  updateEntry(cname,ccode,remark,userid,companyid)
-  {
-    console.log(cname,ccode,remark,userid,companyid);
-    
-    let body: string = "is_mobile=1&unitgroup_name=" + cname + "&colorcode=" + this.ccode + "&remark=" + remark + "&createdby=" + userid + "&updatedby=" + userid +"&company_id="+companyid+"&unitgroup_id="+this.recordID,
+  updateEntry(cname, ccode, remark, userid, companyid) {
+    console.log(cname, ccode, remark, userid, companyid);
+
+    let body: string = "is_mobile=1&unitgroup_name=" + cname + "&colorcode=" + this.ccode + "&remark=" + remark + "&createdby=" + userid + "&updatedby=" + userid + "&company_id=" + companyid + "&unitgroup_id=" + this.recordID,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
@@ -212,11 +200,11 @@ export class AddunitgroupPage {
         }
       });
   }
-  createEntry(cname, ccode, remark, createdby,companyid) {
-   // this.isUploadedProcessing = true;
+  createEntry(cname, ccode, remark, createdby, companyid) {
+    // this.isUploadedProcessing = true;
     let updatedby = createdby;
-    console.log(cname,ccode,remark,companyid);
-    let body: string = "is_mobile=1&unitgroup_name=" + cname + "&colorcode=" + ccode + "&remark=" + remark + "&createdby=" + createdby + "&updatedby=" + updatedby +"&company_id="+companyid,
+    console.log(cname, ccode, remark, companyid);
+    let body: string = "is_mobile=1&unitgroup_name=" + cname + "&colorcode=" + ccode + "&remark=" + remark + "&createdby=" + createdby + "&updatedby=" + updatedby + "&company_id=" + companyid,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
@@ -249,10 +237,10 @@ export class AddunitgroupPage {
   resetFields(): void {
     this.cname = "";
     this.remark = "";
-  
+
   }
-    sendNotification(message): void {
-     // this.isUploadedProcessing = false;
+  sendNotification(message): void {
+    // this.isUploadedProcessing = false;
     let notification = this.toastCtrl.create({
       message: message,
       duration: 3000
@@ -262,36 +250,37 @@ export class AddunitgroupPage {
 
 
   getColor(colorCodeValue) {
-    if(this.nccode != colorCodeValue)
-    {
+    if (this.nccode != colorCodeValue) {
       document.getElementById(this.nccode);
     }
     console.log(colorCodeValue);
-    this.ccode=colorCodeValue;
-   // document.getElementById("colorcode").classList.remove("border-need");
+    this.ccode = colorCodeValue;
+    // document.getElementById("colorcode").classList.remove("border-need");
   }
-  
 
+
+
+
+  previous() {
+    this.nav.setRoot(UnitgroupPage);
+  }
 
   notification() {
     this.nav.setRoot(NotificationPage);
   }
-   previous() {
-    this.nav.setRoot(UnitgroupPage);
-  }
   redirectToUser() {
-    this.nav.setRoot(UserPage);
-  }
-  redirectToUnitGroup() {
-    this.nav.setRoot(UnitgroupPage);
-  }
-  redirectToUnits() {
     this.nav.setRoot(UnitsPage);
   }
-  redirectToMyAccount() {
-    this.nav.setRoot(MyaccountPage);
+  redirectToMessage() {
+    this.nav.setRoot(EmailPage);
   }
-  redirectToRole() {
-    this.nav.setRoot(RolePage);
+  redirectCalendar() {
+    this.nav.setRoot(CalendarPage);
+  }
+  redirectToMaps() {
+    this.nav.setRoot(MapsPage);
+  }
+  redirectToSettings() {
+    this.nav.setRoot(MyaccountPage);
   }
 }

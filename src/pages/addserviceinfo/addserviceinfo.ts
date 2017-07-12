@@ -7,14 +7,18 @@ import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/trans
 import { File } from '@ionic-native/file';
 import { UserPage } from '../user/user';
 import { ServicinginfoPage } from '../servicinginfo/servicinginfo';
-import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
-import { UnitsPage } from '../units/units';
 import { RolePage } from '../role/role';
 import { DatePicker } from '@ionic-native/date-picker';
 import 'rxjs/add/operator/map';
 import { Http, Headers, RequestOptions } from '@angular/http';
+import { MyaccountPage } from '../myaccount/myaccount';
+import { UnitsPage } from '../units/units';
 import { NotificationPage } from '../notification/notification';
+import { MapsPage } from '../maps/maps';
+import { ReportsPage } from '../reports/reports';
+import { CalendarPage } from '../calendar/calendar';
+import { EmailPage } from '../email/email';
 /**
  * Generated class for the AddserviceinfoPage page.
  *
@@ -449,24 +453,8 @@ export class AddserviceinfoPage {
 
 
 
-  notification() {
-    this.nav.setRoot(NotificationPage);
-  }
-  redirectToUser() {
-    this.nav.setRoot(UserPage);
-  }
-  redirectToUnitGroup() {
-    this.nav.setRoot(UnitgroupPage);
-  }
-  redirectToUnits() {
-    this.nav.setRoot(UnitsPage);
-  }
-  redirectToMyAccount() {
-    this.nav.setRoot(MyaccountPage);
-  }
-  redirectToRole() {
-    this.nav.setRoot(RolePage);
-  }
+ 
+ 
   selectEntry(item) {
     this.serviced_by = item.serviced_by;
     this.serviced_datetime = item.serviced_datetime;
@@ -557,5 +545,25 @@ export class AddserviceinfoPage {
         }
       });
   }
+
+
+ notification() {
+    this.nav.setRoot(NotificationPage);
+  }
+  redirectToUser() {
+    this.nav.setRoot(UnitsPage);
+  }
+  redirectToMessage() {
+    this.nav.setRoot(EmailPage);
+  }
+  redirectCalendar() {
+    this.nav.setRoot(CalendarPage);
+  }
+  redirectToMaps() {
+    this.nav.setRoot(MapsPage);
+  }
+  redirectToSettings() {
+    this.nav.setRoot(MyaccountPage);
+  }  
 
 }

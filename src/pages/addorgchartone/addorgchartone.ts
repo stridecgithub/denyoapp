@@ -1,5 +1,5 @@
-import { Component,NgZone} from '@angular/core';
-import {  NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
+import { Component, NgZone } from '@angular/core';
+import { NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
 
@@ -9,7 +9,13 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import { FileChooser } from '@ionic-native/file-chooser';
 
 import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
-
+import { MyaccountPage } from '../myaccount/myaccount';
+import { UnitsPage } from '../units/units';
+import { NotificationPage } from '../notification/notification';
+import { MapsPage } from '../maps/maps';
+import { ReportsPage } from '../reports/reports';
+import { CalendarPage } from '../calendar/calendar';
+import { EmailPage } from '../email/email';
 import 'rxjs/add/operator/map';
 
 
@@ -22,10 +28,10 @@ import 'rxjs/add/operator/map';
 @Component({
   selector: 'page-addorgchartone',
   templateUrl: 'addorgchartone.html',
-   providers: [Camera, FileChooser, Transfer]
+  providers: [Camera, FileChooser, Transfer]
 })
 export class AddorgchartonePage {
- public loginas: any;
+  public loginas: any;
   public form: FormGroup;
   public first_name: any;
   public last_name: any;
@@ -53,7 +59,7 @@ export class AddorgchartonePage {
   public isUploadedProcessing: boolean = false;
   public uploadResultBase64Data;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
- 
+
   constructor(public nav: NavController,
     public http: Http,
     public NP: NavParams,
@@ -61,8 +67,8 @@ export class AddorgchartonePage {
     public toastCtrl: ToastController,
     public loadingCtrl: LoadingController,
     private camera: Camera,
-    private transfer: Transfer,private ngZone: NgZone) {
-       this.loginas = localStorage.getItem("userInfoName");
+    private transfer: Transfer, private ngZone: NgZone) {
+    this.loginas = localStorage.getItem("userInfoName");
     // Create form builder validation rules
     this.form = fb.group({
       //"first_name": ["", Validators.required],
@@ -80,7 +86,7 @@ export class AddorgchartonePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddorgchartonePage');
   }
-    ionViewWillEnter() {
+  ionViewWillEnter() {
     this.resetFields();
     this.getJsonCountryListData();
     console.log(JSON.stringify(this.NP.get("record")));
@@ -112,7 +118,7 @@ export class AddorgchartonePage {
     this.country = "238";
     this.contact = "9443976954";*/
   }
- selectEntry(item) {
+  selectEntry(item) {
     this.first_name = item.first_name;
     this.last_name = item.last_name;
     this.email = item.email;
@@ -128,7 +134,7 @@ export class AddorgchartonePage {
     this.country = "";
     this.contact = "";
   }
-   createEntry(first_name, last_name, email, country, contact, createdby) {
+  createEntry(first_name, last_name, email, country, contact, createdby) {
     this.userInfo.push({
       photo: this.photo,
       first_name: first_name,
@@ -142,13 +148,13 @@ export class AddorgchartonePage {
     this.nav.setRoot(AddorgcharttwoPage, {
       accountInfo: this.userInfo
     });
-   }
+  }
   getJsonCountryListData() {
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
       url: any = this.apiServiceURL + "/getCountries";
-      console.log(url);
+    console.log(url);
     let res;
     this.http.get(url, options)
       .subscribe(data => {
@@ -157,7 +163,7 @@ export class AddorgchartonePage {
       });
 
   }
-    saveEntry() {
+  saveEntry() {
     let first_name: string = this.form.controls["first_name"].value,
       last_name: string = this.form.controls["last_name"].value,
       email: string = this.form.controls["email"].value,
@@ -172,11 +178,11 @@ export class AddorgchartonePage {
         //this.updateEntry(first_name, last_name, email, country, contact, this.userId);
       }
       else {
-       this.createEntry(first_name, last_name, email, country, contact, this.userId);
+        this.createEntry(first_name, last_name, email, country, contact, this.userId);
       }
     }
   }
-    presentLoading(parm) {
+  presentLoading(parm) {
     let loader;
     loader = this.loadingCtrl.create({
       content: "Please wait...",
@@ -270,15 +276,33 @@ export class AddorgchartonePage {
       }
     });
   }
-    sendNotification(message): void {
+  sendNotification(message): void {
     let notification = this.toastCtrl.create({
       message: message,
       duration: 3000
     });
     notification.present();
   }
-  previous()
-  {
-      this.nav.setRoot(OrgchartPage);
+  previous() {
+    this.nav.setRoot(OrgchartPage);
   }
+  notification() {
+    this.nav.setRoot(NotificationPage);
+  }
+  redirectToUser() {
+    this.nav.setRoot(UnitsPage);
+  }
+  redirectToMessage() {
+    this.nav.setRoot(EmailPage);
+  }
+  redirectCalendar() {
+    this.nav.setRoot(CalendarPage);
+  }
+  redirectToMaps() {
+    this.nav.setRoot(MapsPage);
+  }
+  redirectToSettings() {
+    this.nav.setRoot(MyaccountPage);
+  }
+
 }

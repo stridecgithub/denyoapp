@@ -1,5 +1,5 @@
 import { Component, NgZone } from '@angular/core';
-import {  NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { UseraccountPage } from '../useraccount/useraccount';
@@ -9,11 +9,16 @@ import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/trans
 import { File } from '@ionic-native/file';
 import 'rxjs/add/operator/map';
 import { UserPage } from '../user/user';
-import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
+import { RolePage } from '../role/role';
+
+import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitsPage } from '../units/units';
-import { RolePage } from '../role/role'; 
 import { NotificationPage } from '../notification/notification';
+import { MapsPage } from '../maps/maps';
+import { ReportsPage } from '../reports/reports';
+import { CalendarPage } from '../calendar/calendar';
+import { EmailPage } from '../email/email';
 /**
  * Generated class for the AddcompanygroupPage page.
  *
@@ -60,7 +65,7 @@ export class AdduserPage {
     public NP: NavParams,
     public fb: FormBuilder,
     public toastCtrl: ToastController, public loadingCtrl: LoadingController, private camera: Camera,
-   
+
     private transfer: Transfer,
     private ngZone: NgZone) {
     this.loginas = localStorage.getItem("userInfoName");
@@ -275,7 +280,7 @@ export class AdduserPage {
     this.contact = "";
   }
 
- 
+
 
 
   // Manage notifying the user of the outcome
@@ -395,7 +400,7 @@ export class AdduserPage {
       }
     });
   }
-  
+
 
 
   notification() {
@@ -404,20 +409,21 @@ export class AdduserPage {
   previous() {
     this.nav.setRoot(UserPage);
   }
+
   redirectToUser() {
-    this.nav.setRoot(UserPage);
-  }
-  redirectToUnitGroup() {
-    this.nav.setRoot(UnitgroupPage);
-  }
-  redirectToUnits() {
     this.nav.setRoot(UnitsPage);
   }
-  redirectToMyAccount() {
-    this.nav.setRoot(MyaccountPage);
+  redirectToMessage() {
+    this.nav.setRoot(EmailPage);
   }
-  redirectToRole() {
-    this.nav.setRoot(RolePage);
+  redirectCalendar() {
+    this.nav.setRoot(CalendarPage);
+  }
+  redirectToMaps() {
+    this.nav.setRoot(MapsPage);
+  }
+  redirectToSettings() {
+    this.nav.setRoot(MyaccountPage);
   }
 
 }

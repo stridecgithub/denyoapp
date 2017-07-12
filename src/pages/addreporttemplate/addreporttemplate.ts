@@ -6,6 +6,13 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
 //import { AddunitgroupPage } from '../addunitgroup/addunitgroup';
 import { ReporttemplatePage } from '../reporttemplate/reporttemplate';
+import { MyaccountPage } from '../myaccount/myaccount';
+import { UnitsPage } from '../units/units';
+import { NotificationPage } from '../notification/notification';
+import { MapsPage } from '../maps/maps';
+import { ReportsPage } from '../reports/reports';
+import { CalendarPage } from '../calendar/calendar';
+import { EmailPage } from '../email/email';
 ///import { LoadingController } from 'ionic-angular';
 
 /**
@@ -281,4 +288,22 @@ export class AddreporttemplatePage {
   previous() {
     this.nav.setRoot(ReporttemplatePage);
   }
+   notification() {
+    this.nav.setRoot(NotificationPage);
+  }
+  redirectToUser() {
+    this.nav.setRoot(UnitsPage);
+  }
+  redirectToMessage() {
+    this.nav.setRoot(EmailPage);
+  }
+  redirectCalendar() {
+    this.nav.setRoot(CalendarPage);
+  }
+  redirectToMaps() {
+    this.nav.setRoot(MapsPage);
+  }
+  redirectToSettings() {
+    this.nav.setRoot(MyaccountPage);
+  }  
 }

@@ -6,11 +6,15 @@ import 'rxjs/add/operator/map';
 import { AddunitsfourPage } from '../addunitsfour/addunitsfour';
 import { AddunitstwoPage } from '../addunitstwo/addunitstwo';
 import { UserPage } from '../user/user';
-import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
-import { UnitsPage } from '../units/units';
 import { RolePage } from '../role/role';
+import { MyaccountPage } from '../myaccount/myaccount';
+import { UnitsPage } from '../units/units';
 import { NotificationPage } from '../notification/notification';
+import { MapsPage } from '../maps/maps';
+import { ReportsPage } from '../reports/reports';
+import { CalendarPage } from '../calendar/calendar';
+import { EmailPage } from '../email/email';
 /**
  * Generated class for the AddcompanygroupPage page.
  *
@@ -473,21 +477,20 @@ export class AddunitsthreePage {
   notification() {
     this.nav.setRoot(NotificationPage);
   }
-
   redirectToUser() {
-    this.nav.setRoot(UserPage);
-  }
-  redirectToUnitGroup() {
-    this.nav.setRoot(UnitgroupPage);
-  }
-  redirectToUnits() {
     this.nav.setRoot(UnitsPage);
   }
-  redirectToMyAccount() {
-    this.nav.setRoot(MyaccountPage);
+  redirectToMessage() {
+    this.nav.setRoot(EmailPage);
   }
-  redirectToRole() {
-    this.nav.setRoot(RolePage);
+  redirectCalendar() {
+    this.nav.setRoot(CalendarPage);
+  }
+  redirectToMaps() {
+    this.nav.setRoot(MapsPage);
+  }
+  redirectToSettings() {
+    this.nav.setRoot(MyaccountPage);
   }
 }
 

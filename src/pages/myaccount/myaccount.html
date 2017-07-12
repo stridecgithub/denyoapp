@@ -47,107 +47,6 @@
   <div class="div-alignmnt"> <b>Country:</b> {{country}}</div>
 
   <div class="div-alignmnt"> <b>Job Position:</b> {{job_position}}</div>
-
-
-
-  <!--ion-list>
-    <ion-item>
-      <ion-avatar item-start>
-        <img src="{{photo}}">
-      </ion-avatar>
-      <ion-grid>
-        <ion-row>
-          <ion-col col-auto>
-            <b>User Id</b>
-          </ion-col>
-          <ion-col col-auto>
-            {{userid}}
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-
-      <ion-grid>
-        <ion-row>
-          <ion-col col-auto>
-            <b>Password</b>
-          </ion-col>
-          <ion-col col-auto>
-            *********
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-
-      <ion-grid>
-        <ion-row>
-          <ion-col col-auto>
-            <b>Personal Hash Tag</b>
-          </ion-col>
-          <ion-col col-auto>
-            {{hashtag}}
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-item>
-  </ion-list>
-
-  <ion-list>
-    <ion-item>
-      <ion-row>
-        <ion-col col-auto>
-          <b>Role</b>
-        </ion-col>
-        <ion-col col-auto>
-          {{role}}
-        </ion-col>
-      </ion-row>
-    </ion-item>
-
-    <ion-item>
-      <ion-row>
-        <ion-col col-auto>
-          <b>Email</b>
-        </ion-col>
-        <ion-col col-auto>
-          {{email}}
-        </ion-col>
-      </ion-row>
-    </ion-item>
-
-    <ion-item>
-      <ion-row>
-        <ion-col col-auto>
-          <b>Country</b>
-        </ion-col>
-        <ion-col col-auto>
-          {{country}}
-        </ion-col>
-      </ion-row>
-    </ion-item>
-
-
-    <ion-item>
-      <ion-row>
-        <ion-col col-auto>
-          <b>Job Position</b>
-        </ion-col>
-        <ion-col col-auto>
-          {{job_position}}
-        </ion-col>
-      </ion-row>
-    </ion-item>
-
-    <ion-item>
-      <ion-row>
-        <ion-col col-auto>
-          <b>Account Created</b>
-        </ion-col>
-        <ion-col col-auto>
-          {{accountcreatedby}}
-        </ion-col>
-      </ion-row>
-    </ion-item>
-
-  </ion-list-->
   <button ion-button color="greenm" text-center block (click)="doEdit(userId)">Edit Profile</button>
 </ion-content>
 
@@ -155,7 +54,7 @@
   <ion-toolbar color="bluedark">
 <ul class="quick-list">
 <li>
-    <button ion-button icon-only clear>
+    <button ion-button icon-only clear (click)="redirectToMaps()">
     	<ion-icon name="home" class="footer-icon">MAPS</ion-icon>
     </button>
 </li>  
@@ -165,17 +64,17 @@
     </button>
 </li>     
 <li>    
-    <button ion-button icon-only (click)="redirectToUnitGroup()" clear>
+    <button ion-button icon-only (click)="redirectToMessage()" clear>
     	<ion-icon name="chatboxes" class="footer-icon">MESSAGE</ion-icon>
     </button>
 </li>     
 <li>    
-    <button ion-button icon-only (click)="redirectToUnits()" clear>
+    <button ion-button icon-only (click)="redirectCalendar()" clear>
     	<ion-icon name="camera" class="footer-icon">CALENDAR</ion-icon>
     </button>
 </li>     
 <li>    
-    <button ion-button icon-only (click)="redirectToRole()" clear>
+    <button ion-button icon-only (click)="redirectToSettings()" clear>
     	<ion-icon name="settings" class="footer-icon">SETTING</ion-icon>
     </button>
 </li>    

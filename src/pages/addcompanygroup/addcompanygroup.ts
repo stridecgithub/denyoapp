@@ -5,11 +5,15 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { CompanygroupPage } from '../companygroup/companygroup';
 import 'rxjs/add/operator/map';
 import { UserPage } from '../user/user';
-import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
+import { RolePage } from '../role/role';
+import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitsPage } from '../units/units';
-import { RolePage } from '../role/role'; 
 import { NotificationPage } from '../notification/notification';
+import { MapsPage } from '../maps/maps';
+import { ReportsPage } from '../reports/reports';
+import { CalendarPage } from '../calendar/calendar';
+import { EmailPage } from '../email/email';
 /**
  * Generated class for the AddcompanygroupPage page.
  *
@@ -53,7 +57,7 @@ export class AddcompanygroupPage {
     this.form = fb.group({
       "companygroup_name": ["", Validators.required],
       "country": ["", Validators.required],
-      "contact": ["",  Validators.compose([Validators.pattern('[0-9 ]*'), Validators.required])],
+      "contact": ["", Validators.compose([Validators.pattern('[0-9 ]*'), Validators.required])],
       "address": [""]
     });
 
@@ -209,22 +213,20 @@ export class AddcompanygroupPage {
       address: string = this.form.controls["address"].value,
       country: string = this.form.controls["country"].value,
       contact: string = this.form.controls["contact"].value;
-      
 
-      if( companygroup_name.toLowerCase() == 'denyo' || companygroup_name.toLowerCase() == 'dum' || companygroup_name.toLowerCase() == 'dsg' || companygroup_name.toLowerCase() == 'denyo singapore' )
-      {
-        this.sendNotification("Given Company Name Not Acceptable....");
-      }
-      else
-      {
 
-    if (this.isEdited) {
-      this.updateEntry(companygroup_name, address, country, contact, this.userId);
+    if (companygroup_name.toLowerCase() == 'denyo' || companygroup_name.toLowerCase() == 'dum' || companygroup_name.toLowerCase() == 'dsg' || companygroup_name.toLowerCase() == 'denyo singapore') {
+      this.sendNotification("Given Company Name Not Acceptable....");
     }
     else {
-      this.createEntry(companygroup_name, address, country, contact, this.userId);
+
+      if (this.isEdited) {
+        this.updateEntry(companygroup_name, address, country, contact, this.userId);
+      }
+      else {
+        this.createEntry(companygroup_name, address, country, contact, this.userId);
+      }
     }
-  }
   }
 
 
@@ -261,26 +263,27 @@ export class AddcompanygroupPage {
         this.responseResultCountry = res.countries;
       });
 
-  }
-    notification() {
-    this.nav.setRoot(NotificationPage);
-  }
+  } 
   previous() {
     this.nav.setRoot(CompanygroupPage);
   }
+  notification() {
+    this.nav.setRoot(NotificationPage);
+  }
   redirectToUser() {
-    this.nav.setRoot(UserPage);
-  }
-  redirectToUnitGroup() {
-    this.nav.setRoot(UnitgroupPage);
-  }
-  redirectToUnits() {
     this.nav.setRoot(UnitsPage);
   }
-  redirectToMyAccount() {
+  redirectToMessage() {
+    this.nav.setRoot(EmailPage);
+  }
+  redirectCalendar() {
+    this.nav.setRoot(CalendarPage);
+  }
+  redirectToMaps() {
+    this.nav.setRoot(MapsPage);
+  }
+  redirectToSettings() {
     this.nav.setRoot(MyaccountPage);
-  }
-  redirectToRole() {
-    this.nav.setRoot(RolePage);
-  }
+  }  
+
 }

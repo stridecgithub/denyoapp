@@ -1,5 +1,5 @@
 import { Component, ViewChild, NgZone } from '@angular/core';
-import {  AlertController, NavController, NavParams, ViewController, ToastController } from 'ionic-angular';
+import { AlertController, NavController, NavParams, ViewController, ToastController } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { FileChooser } from '@ionic-native/file-chooser';
@@ -10,13 +10,18 @@ import { CommentsinfoPage } from '../commentsinfo/commentsinfo';
 import { DatePicker } from '@ionic-native/date-picker';
 import 'rxjs/add/operator/map';
 import { Http, Headers, RequestOptions } from '@angular/http';
-import { NotificationPage } from '../notification/notification';
-import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
-import { UnitsPage } from '../units/units';
 import { RolePage } from '../role/role';
 import { UserPage } from '../user/user';
 import { AlarmPage } from '../alarm/alarm';
+
+import { MyaccountPage } from '../myaccount/myaccount';
+import { UnitsPage } from '../units/units';
+import { NotificationPage } from '../notification/notification';
+import { MapsPage } from '../maps/maps';
+import { ReportsPage } from '../reports/reports';
+import { CalendarPage } from '../calendar/calendar';
+import { EmailPage } from '../email/email';
 /**
  * Generated class for the AddserviceinfoPage page.
  *
@@ -38,8 +43,8 @@ export class AddcommentsinfoPage {
   public addedImgLists = [];
   progress: number;
   public recordID: any;
-  public service_unitid: any;
-  public service_id: any;
+  public comment_unitid: any;
+  public comment_id: any;
   public comments: any;
   public service_subject: any;
   public service_priority: any;
@@ -74,7 +79,7 @@ export class AddcommentsinfoPage {
     this.unitDetailData.loginas = localStorage.getItem("userInfoName");
     this.unitDetailData.userId = localStorage.getItem("userInfoId");
     this.unitDetailData.serviced_by = localStorage.getItem("userInfoName");
-
+this.comment_unitid = localStorage.getItem("unitId");
     this.form = formBuilder.group({
       profilePic: [''],
       comments: ['', Validators.required],
@@ -111,21 +116,21 @@ export class AddcommentsinfoPage {
     let users = localStorage.getItem("atMentionedStorage");
     if (this.NP.get("record")) {
       this.selectEntry(this.NP.get("record"));
-      this.service_id = this.NP.get("record").service_id;
+      this.comment_id = this.NP.get("record").comment_id;
       if (this.NP.get("act") == 'Add') {
         this.isEdited = false;
         this.unitDetailData.pageTitle = 'Add Comments';
-        this.service_unitid = this.NP.get("unit_id");
+       // this.comment_unitid = this.NP.get("unit_id");
       } else {
-        this.service_unitid = this.NP.get("record").service_unitid;
+        //this.comment_unitid = this.NP.get("record").comment_unitid;
         this.unitDetailData.pageTitle = 'Edit Comments';
         this.isEdited = true;
       }
-      console.log("Service Id:" + this.service_id);
-      console.log("Service Unit Id:" + this.service_unitid);
+      console.log("Comment Id:" + this.comment_id);
+      console.log("Comment Unit Id:" + this.comment_unitid);
     }
 
- 
+
 
 
   }
@@ -260,14 +265,14 @@ export class AddcommentsinfoPage {
   // supplies a variable of key with a value of create followed by the key/value pairs
   // for the record data
   createEntry(comments, service_subject, addedImgLists, remarkget, micro_timestamp) {
- if (this.service_priority == undefined) {
+    if (this.service_priority == undefined) {
       this.service_priority = 1;
     }
     if (this.service_priority == 'undefined') {
       this.service_priority = 1;
     }
     let body: string = "is_mobile=1" +
-      "&comment_unit_id=" + this.service_unitid +
+      "&comment_unit_id=" + this.comment_unitid +
       "&comment_priority=" + this.service_priority +
       "&comments=" + comments +
       "&comment_by=" + this.unitDetailData.userId +
@@ -281,10 +286,10 @@ export class AddcommentsinfoPage {
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
       url: any = this.apiServiceURL + "/comments/store";
-      console.log(body);
-      console.log("Hello");
+    console.log(body);
+    console.log("Hello");
     console.log(url);
-    
+
 
     this.http.post(url, body, options)
       .subscribe((data) => {
@@ -313,16 +318,17 @@ export class AddcommentsinfoPage {
   // for the record data
   updateEntry(comments, service_subject, addedImgLists, remarkget, micro_timestamp) {
 
-     if (this.service_priority == undefined) {
+    if (this.service_priority == undefined) {
       this.service_priority = 1;
     }
     if (this.service_priority == 'undefined') {
       this.service_priority = 1;
     }
-    let body: string = "is_mobile=1"+
+    let body: string = "is_mobile=1" +
       "&comments=" + comments +
+      "&comment_id=" + this.recordID +
       "&comment_priority=" + this.service_priority +
-      "&comment_unit_id=" + this.service_unitid +
+      "&comment_unit_id=" + this.comment_unitid +
       "&comment_by=" + this.unitDetailData.userId +
       "&comment_subject=" + service_subject +
       "&micro_timestamp=" + micro_timestamp +
@@ -395,28 +401,31 @@ export class AddcommentsinfoPage {
   }
 
 
-  notification() {
-    this.nav.setRoot(NotificationPage);
-  }
+  
   previous() {
     this.nav.setRoot(AlarmPage);
   }
+   notification() {
+    this.nav.setRoot(NotificationPage);
+  }
   redirectToUser() {
-    this.nav.setRoot(UserPage);
-  }
-  redirectToUnitGroup() {
-    this.nav.setRoot(UnitgroupPage);
-  }
-  redirectToUnits() {
     this.nav.setRoot(UnitsPage);
   }
-  redirectToMyAccount() {
-    this.nav.setRoot(MyaccountPage);
+  redirectToMessage() {
+    this.nav.setRoot(EmailPage);
   }
-  redirectToRole() {
-    this.nav.setRoot(MyaccountPage);
+  redirectCalendar() {
+    this.nav.setRoot(CalendarPage);
   }
+  redirectToMaps() {
+    this.nav.setRoot(MapsPage);
+  }
+  redirectToSettings() {
+    this.nav.setRoot(MyaccountPage);
+  }  
+
   selectEntry(item) {
+    console.log("Comment Information Item Object:"+JSON.stringify(item));
 
     this.comments = item.comment_remark;
     this.service_subject = item.comment_subject;
@@ -454,6 +463,7 @@ export class AddcommentsinfoPage {
         this.isUploaded = false;
       }
     }
+    this.recordID = item.comment_id;
   }
   doRemoveResouce(id, item) {
     console.log("Deleted Id" + id);

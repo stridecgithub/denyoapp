@@ -1,10 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { UserPage } from '../user/user';
 import { MyaccountPage } from '../myaccount/myaccount';
-import { UnitgroupPage } from '../unitgroup/unitgroup';
 import { UnitsPage } from '../units/units';
-import { RolePage } from '../role/role';
 import { NotificationPage } from '../notification/notification';
 import { MapsPage } from '../maps/maps';
 import { ReportsPage } from '../reports/reports';
@@ -40,16 +37,16 @@ export class DashboardPage {
   redirectToUser() {
     this.nav.setRoot(UnitsPage);
   }
-  redirectToUnitGroup() {
+  redirectToMessage() {
     this.nav.setRoot(EmailPage);
   }
-  redirectToUnits() {
+  redirectCalendar() {
     this.nav.setRoot(CalendarPage);
   }
   redirectToMaps() {
     this.nav.setRoot(MapsPage);
   }
-  redirectToRole() {
+  redirectToSettings() {
     this.nav.setRoot(MyaccountPage);
   }  
 }

@@ -76,7 +76,7 @@
   <ion-toolbar color="bluedark">
 <ul class="quick-list">
 <li>
-    <button ion-button icon-only clear>
+    <button ion-button icon-only clear (click)="redirectToMaps()">
     	<ion-icon name="home" class="footer-icon">MAPS</ion-icon>
     </button>
 </li>  
@@ -86,17 +86,17 @@
     </button>
 </li>     
 <li>    
-    <button ion-button icon-only (click)="redirectToUnitGroup()" clear>
+    <button ion-button icon-only (click)="redirectToMessage()" clear>
     	<ion-icon name="chatboxes" class="footer-icon">MESSAGE</ion-icon>
     </button>
 </li>     
 <li>    
-    <button ion-button icon-only (click)="redirectToUnits()" clear>
+    <button ion-button icon-only (click)="redirectCalendar()" clear>
     	<ion-icon name="camera" class="footer-icon">CALENDAR</ion-icon>
     </button>
 </li>     
 <li>    
-    <button ion-button icon-only (click)="redirectToRole()" clear>
+    <button ion-button icon-only (click)="redirectToSettings()" clear>
     	<ion-icon name="settings" class="footer-icon">SETTING</ion-icon>
     </button>
 </li>    

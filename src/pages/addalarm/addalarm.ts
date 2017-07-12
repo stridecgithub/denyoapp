@@ -3,12 +3,17 @@ import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { AlarmlogPage } from '../alarmlog/alarmlog';
-import { NotificationPage } from '../notification/notification';
-import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
-import { UnitsPage } from '../units/units';
 import { RolePage } from '../role/role';
 import { AlarmPage } from '../alarm/alarm';
+import { MyaccountPage } from '../myaccount/myaccount';
+import { UnitsPage } from '../units/units';
+import { NotificationPage } from '../notification/notification';
+import { MapsPage } from '../maps/maps';
+import { ReportsPage } from '../reports/reports';
+import { CalendarPage } from '../calendar/calendar';
+import { EmailPage } from '../email/email';
+
 /**
  * Generated class for the AddalarmPage page.
  *
@@ -161,23 +166,25 @@ export class AddalarmPage {
     });
     notification.present();
   }
-
+  previous() {
+    this.nav.setRoot(AlarmPage);
+  }
   notification() {
     this.nav.setRoot(NotificationPage);
   }
-  previous() {
-    this.nav.setRoot(AlarmPage);
-  } 
-  redirectToUnitGroup() {
-    this.nav.setRoot(UnitgroupPage);
-  }
-  redirectToUnits() {
+  redirectToUser() {
     this.nav.setRoot(UnitsPage);
   }
-  redirectToMyAccount() {
-    this.nav.setRoot(MyaccountPage);
+  redirectToMessage() {
+    this.nav.setRoot(EmailPage);
   }
-  redirectToRole() {
-    this.nav.setRoot(RolePage);
+  redirectCalendar() {
+    this.nav.setRoot(CalendarPage);
+  }
+  redirectToMaps() {
+    this.nav.setRoot(MapsPage);
+  }
+  redirectToSettings() {
+    this.nav.setRoot(MyaccountPage);
   }
 }

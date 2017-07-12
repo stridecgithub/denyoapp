@@ -4,6 +4,13 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { RolePage } from '../role/role';
 import 'rxjs/add/operator/map';
+import { MyaccountPage } from '../myaccount/myaccount';
+import { UnitsPage } from '../units/units';
+import { NotificationPage } from '../notification/notification';
+import { MapsPage } from '../maps/maps';
+import { ReportsPage } from '../reports/reports';
+import { CalendarPage } from '../calendar/calendar';
+import { EmailPage } from '../email/email';
 /**
  * Generated class for the AddRolePage page.
  *
@@ -1576,6 +1583,26 @@ previous()
 {
    this.navCtrl.setRoot(RolePage);
 }
+
+
+ notification() {
+    this.navCtrl.setRoot(NotificationPage);
+  }
+  redirectToUser() {
+    this.navCtrl.setRoot(UnitsPage);
+  }
+  redirectToMessage() {
+    this.navCtrl.setRoot(EmailPage);
+  }
+  redirectCalendar() {
+    this.navCtrl.setRoot(CalendarPage);
+  }
+  redirectToMaps() {
+    this.navCtrl.setRoot(MapsPage);
+  }
+  redirectToSettings() {
+    this.navCtrl.setRoot(MyaccountPage);
+  }  
 
 }
 

@@ -1,17 +1,22 @@
 import { Component, ViewChild, NgZone } from '@angular/core';
-import {  AlertController, NavController, NavParams, ViewController, ToastController } from 'ionic-angular';
+import { AlertController, NavController, NavParams, ViewController, ToastController } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
 import { UserPage } from '../user/user';
 import { ServicinginfoPage } from '../servicinginfo/servicinginfo';
-import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
-import { UnitsPage } from '../units/units';
 import { RolePage } from '../role/role';
 import { DatePicker } from '@ionic-native/date-picker';
 import 'rxjs/add/operator/map';
 import { Http, Headers, RequestOptions } from '@angular/http';
+import { MyaccountPage } from '../myaccount/myaccount';
+import { UnitsPage } from '../units/units';
+import { NotificationPage } from '../notification/notification';
+import { MapsPage } from '../maps/maps';
+import { ReportsPage } from '../reports/reports';
+import { CalendarPage } from '../calendar/calendar';
+import { EmailPage } from '../email/email';
 /**
  * Generated class for the AddserviceinfoPage page.
  *
@@ -21,7 +26,7 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 @Component({
   selector: 'page-addrequestsupport',
   templateUrl: 'addrequestsupport.html',
-  providers: [Camera, Transfer,  DatePicker]
+  providers: [Camera, Transfer, DatePicker]
 })
 export class AddrequestsupportPage {
   @ViewChild('fileInput') fileInput;
@@ -55,8 +60,8 @@ export class AddrequestsupportPage {
     addedImgLists2: ''
   }
   public hideActionButton = true;
-  constructor(public http: Http, public alertCtrl: AlertController, private datePicker: DatePicker, public NP: NavParams, public nav: NavController, public toastCtrl: ToastController, public navParams: NavParams, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera,private transfer: Transfer,
-   private ngZone: NgZone) {
+  constructor(public http: Http, public alertCtrl: AlertController, private datePicker: DatePicker, public NP: NavParams, public nav: NavController, public toastCtrl: ToastController, public navParams: NavParams, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera, private transfer: Transfer,
+    private ngZone: NgZone) {
     this.unitDetailData.loginas = localStorage.getItem("userInfoName");
     this.unitDetailData.userId = localStorage.getItem("userInfoId");
     this.unitDetailData.serviced_by = localStorage.getItem("userInfoName");
@@ -94,7 +99,7 @@ export class AddrequestsupportPage {
     console.log('ionViewDidLoad AddrequestsupportPage');
   }
   ionViewWillEnter() {
-   
+
     if (this.NP.get("record")) {
       this.selectEntry(this.NP.get("record"));
 
@@ -111,7 +116,7 @@ export class AddrequestsupportPage {
       console.log("Service Unit Id:" + this.service_unitid);
     }
 
-   
+
 
 
   }
@@ -363,26 +368,8 @@ export class AddrequestsupportPage {
 
 
 
-  previous() {
-    this.nav.setRoot(ServicinginfoPage, {
-      record: this.NP.get("record")
-    });
-  }
-  redirectToUser() {
-    this.nav.setRoot(UserPage);
-  }
-  redirectToUnitGroup() {
-    this.nav.setRoot(UnitgroupPage);
-  }
-  redirectToUnits() {
-    this.nav.setRoot(UnitsPage);
-  }
-  redirectToMyAccount() {
-    this.nav.setRoot(MyaccountPage);
-  }
-  redirectToRole() {
-    this.nav.setRoot(RolePage);
-  }
+
+
   selectEntry(item) {
 
     this.service_subject = item.service_subject;
@@ -457,6 +444,29 @@ export class AddrequestsupportPage {
           this.sendNotification('Something went wrong!');
         }
       });
+  }
+  previous() {
+    this.nav.setRoot(ServicinginfoPage, {
+      record: this.NP.get("record")
+    });
+  }
+  notification() {
+    this.nav.setRoot(NotificationPage);
+  }
+  redirectToUser() {
+    this.nav.setRoot(UnitsPage);
+  }
+  redirectToMessage() {
+    this.nav.setRoot(EmailPage);
+  }
+  redirectCalendar() {
+    this.nav.setRoot(CalendarPage);
+  }
+  redirectToMaps() {
+    this.nav.setRoot(MapsPage);
+  }
+  redirectToSettings() {
+    this.nav.setRoot(MyaccountPage);
   }
 
 }
