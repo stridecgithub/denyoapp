@@ -60,6 +60,7 @@ import { DataServiceProvider } from '../providers/data-service/data-service';
 import { ViewunitsPage } from '../pages/viewunits/viewunits';
 import { NavbarComponent } from '../components/navbar/navbar';
 import { CustomHeaderComponent } from '../pages/custom-header-component';
+import { CustomFooterComponent } from '../pages/custom-footer-component';
 @NgModule({
   declarations: [
     MyApp,
@@ -116,7 +117,8 @@ import { CustomHeaderComponent } from '../pages/custom-header-component';
     ViewunitsPage,
     TrendlinePage,
     NavbarComponent,
-    CustomHeaderComponent
+    CustomHeaderComponent,
+    CustomFooterComponent
   ],
   imports: [
     BrowserModule,
@@ -180,7 +182,8 @@ import { CustomHeaderComponent } from '../pages/custom-header-component';
     EmailPage,
     ViewunitsPage,
     TrendlinePage,
-    CustomHeaderComponent
+    CustomHeaderComponent,
+    CustomFooterComponent
   ],
   providers: [
     StatusBar,

@@ -47,6 +47,7 @@ export class ReporttemplatePage {
     public toastCtrl: ToastController, public alertCtrl: AlertController, public navParams: NavParams, public loadingCtrl: LoadingController) {
     this.loginas = localStorage.getItem("userInfoName");
     this.userId = localStorage.getItem("userInfoId");
+     this.pageTitle = 'Report Template';
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad ReporttemplatePage');

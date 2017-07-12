@@ -1,10 +1,6 @@
-import { Component,  NgZone } from '@angular/core';
+import { Component } from '@angular/core';
 import {  AlertController, NavController, NavParams, ViewController, ToastController } from 'ionic-angular';
 import {  FormBuilder, FormGroup } from '@angular/forms';
-import { Camera} from '@ionic-native/camera';
-import { FileChooser } from '@ionic-native/file-chooser';
-
-import { File } from '@ionic-native/file';
 import { UserPage } from '../user/user';
 import { CommentsinfoPage } from '../commentsinfo/commentsinfo';
 import { MyaccountPage } from '../myaccount/myaccount';
@@ -23,8 +19,7 @@ import 'rxjs/add/operator/map';
  */
 @Component({
   selector: 'page-commentdetails',
-  templateUrl: 'commentdetails.html',
-  providers: [Camera, FileChooser, File]
+  templateUrl: 'commentdetails.html'
 
 })
 export class CommentdetailsPage {
@@ -64,9 +59,9 @@ export class CommentdetailsPage {
     addedImgLists2: ''
   }
   public hideActionButton = true;
-  constructor(public alertCtrl: AlertController, public NP: NavParams, public nav: NavController, public toastCtrl: ToastController, public navParams: NavParams, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera, private filechooser: FileChooser,
+  constructor(public alertCtrl: AlertController, public NP: NavParams, public nav: NavController, public toastCtrl: ToastController, public navParams: NavParams, public viewCtrl: ViewController, formBuilder: FormBuilder
    
-    private file: File, private ngZone: NgZone) {
+   ) {
     this.service_priority_class1 = "-outline";
     this.service_priority_class2 = "-outline";
     this.unitDetailData.loginas = localStorage.getItem("userInfoName");

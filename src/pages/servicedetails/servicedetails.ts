@@ -1,9 +1,7 @@
-import { Component, NgZone } from '@angular/core';
+import { Component } from '@angular/core';
 import { AlertController, NavController, NavParams, ViewController, ToastController } from 'ionic-angular';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Camera } from '@ionic-native/camera';
-import { FileChooser } from '@ionic-native/file-chooser';
-import { File } from '@ionic-native/file';
 import { UserPage } from '../user/user';
 import { ServicinginfoPage } from '../servicinginfo/servicinginfo';
 import { MyaccountPage } from '../myaccount/myaccount';
@@ -11,7 +9,6 @@ import { UnitgroupPage } from '../unitgroup/unitgroup';
 import { UnitsPage } from '../units/units';
 import { RolePage } from '../role/role';
 import { CompanygroupPage } from '../companygroup/companygroup';
-import { DatePicker } from '@ionic-native/date-picker';
 import 'rxjs/add/operator/map';
 //import { Http, Headers, RequestOptions } from '@angular/http';
 
@@ -24,7 +21,7 @@ import 'rxjs/add/operator/map';
 @Component({
   selector: 'page-servicedetails',
   templateUrl: 'servicedetails.html',
-   providers: [Camera, FileChooser, File, DatePicker]
+   providers: [Camera,]
 })
 export class ServicedetailsPage {
  isReadyToSave: boolean;
@@ -69,9 +66,7 @@ export class ServicedetailsPage {
     addedImgLists2: ''
   }
   public hideActionButton = true;
-  constructor( public alertCtrl: AlertController, private datePicker: DatePicker, public NP: NavParams, public nav: NavController, public toastCtrl: ToastController, public navParams: NavParams, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera, private filechooser: FileChooser,
-  
-    private file: File, private ngZone: NgZone) {
+  constructor( public alertCtrl: AlertController,  public NP: NavParams, public nav: NavController, public toastCtrl: ToastController, public navParams: NavParams, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera) {
     this.service_priority_class1 = "-outline";
     this.service_priority_class2 = "-outline";
     this.unitDetailData.loginas = localStorage.getItem("userInfoName");

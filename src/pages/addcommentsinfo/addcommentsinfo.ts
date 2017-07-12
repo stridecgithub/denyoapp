@@ -319,7 +319,7 @@ export class AddcommentsinfoPage {
     if (this.service_priority == 'undefined') {
       this.service_priority = 1;
     }
-    let body: string = "is_mobile=1&service_id=" + this.service_id +
+    let body: string = "is_mobile=1"+
       "&comments=" + comments +
       "&comment_priority=" + this.service_priority +
       "&comment_unit_id=" + this.service_unitid +

@@ -2,9 +2,7 @@ import { Component, ViewChild, NgZone } from '@angular/core';
 import {  AlertController, NavController, NavParams, ViewController, ToastController } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Camera, CameraOptions } from '@ionic-native/camera';
-import { FileChooser } from '@ionic-native/file-chooser';
 import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
-import { File } from '@ionic-native/file';
 import { UserPage } from '../user/user';
 import { ServicinginfoPage } from '../servicinginfo/servicinginfo';
 import { MyaccountPage } from '../myaccount/myaccount';
@@ -23,7 +21,7 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 @Component({
   selector: 'page-addrequestsupport',
   templateUrl: 'addrequestsupport.html',
-  providers: [Camera, FileChooser, Transfer, File, DatePicker]
+  providers: [Camera, Transfer,  DatePicker]
 })
 export class AddrequestsupportPage {
   @ViewChild('fileInput') fileInput;
@@ -57,9 +55,8 @@ export class AddrequestsupportPage {
     addedImgLists2: ''
   }
   public hideActionButton = true;
-  constructor(public http: Http, public alertCtrl: AlertController, private datePicker: DatePicker, public NP: NavParams, public nav: NavController, public toastCtrl: ToastController, public navParams: NavParams, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera, private filechooser: FileChooser,
-    private transfer: Transfer,
-    private file: File, private ngZone: NgZone) {
+  constructor(public http: Http, public alertCtrl: AlertController, private datePicker: DatePicker, public NP: NavParams, public nav: NavController, public toastCtrl: ToastController, public navParams: NavParams, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera,private transfer: Transfer,
+   private ngZone: NgZone) {
     this.unitDetailData.loginas = localStorage.getItem("userInfoName");
     this.unitDetailData.userId = localStorage.getItem("userInfoId");
     this.unitDetailData.serviced_by = localStorage.getItem("userInfoName");
@@ -97,8 +94,7 @@ export class AddrequestsupportPage {
     console.log('ionViewDidLoad AddrequestsupportPage');
   }
   ionViewWillEnter() {
-    let users = localStorage.getItem("atMentionedStorage");
-
+   
     if (this.NP.get("record")) {
       this.selectEntry(this.NP.get("record"));
 

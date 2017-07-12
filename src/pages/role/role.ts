@@ -92,7 +92,7 @@ export class RolePage {
         } else {
           this.totalCount = 0;
         }
-        console.log("Total Record:" + this.totalCount);
+        
 
       });
     this.presentLoading(0);

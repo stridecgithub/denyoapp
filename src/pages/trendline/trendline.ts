@@ -1,20 +1,13 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { ServicinginfoPage } from '../servicinginfo/servicinginfo';
-import { CommentsinfoPage } from '../commentsinfo/commentsinfo';
 import { UserPage } from '../user/user';
 import { CompanygroupPage } from '../companygroup/companygroup';
 import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitsPage } from '../units/units';
 import { RolePage } from '../role/role';
-//import { AlarmPage } from '../alarm/alarm';
-import { AlarmlogPage } from '../alarmlog/alarmlog';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Http, Headers, RequestOptions } from '@angular/http';
-//import { Http, Headers, RequestOptions } from '@angular/http';
-//import { HTTP } from '@ionic-native/http';
-import * as $ from 'jquery';
+
 
 
 /**
@@ -34,7 +27,7 @@ export class TrendlinePage {
 	private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
 
 	
-	constructor(public http: Http, private sanitizer: DomSanitizer, public NP: NavParams, public navCtrl: NavController, public navParams: NavParams, public nav: NavController) {
+	constructor( private sanitizer: DomSanitizer, public NP: NavParams, public navCtrl: NavController, public navParams: NavParams, public nav: NavController) {
 	
 
 

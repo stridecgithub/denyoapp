@@ -32,6 +32,7 @@ export class UserPage {
   public sortby = 2;
   public vendorsort = "asc";
   public ascending = true;
+  public companyId:any;
   public reportData: any =
   {
     status: '',
@@ -44,11 +45,12 @@ export class UserPage {
   constructor(public http: Http, public nav: NavController,
     public toastCtrl: ToastController, public alertCtrl: AlertController, public navParams: NavParams, public loadingCtrl: LoadingController) {
     this.pageTitle = 'Users';
+    this.companyId = localStorage.getItem("userInfoCompanyId");
     this.loginas = localStorage.getItem("userInfoName");
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad CompanygroupPage');
+    console.log('ionViewDidLoad UserPage');
   }
 
   /*******************/
@@ -79,7 +81,7 @@ export class UserPage {
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/staff?is_mobile=1&startindex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc;
+      url: any = this.apiServiceURL + "/staff?is_mobile=1&startindex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc+"&companyid="+this.companyId;
     let res;
     console.log(url);
     this.http.get(url, options)
