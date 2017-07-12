@@ -242,10 +242,11 @@ console.log(JSON.stringify(this.selectedAction));*/
         console.log("Count Response Success:" + JSON.stringify(data.json()));
         // If the request was successful notify the user
         if (data.status === 200) {
-          //this.sendNotification(`Comment count successfully removed`);
+          this.sendNotification(`successfully Added`);
           this.reportData.startindex = 0;
           this.reportData.sort = "unit_id";
-          this.doUnit();
+         /// this.doUnit();
+         this.nav.setRoot(this.nav.getActive().component);
         }
         // Otherwise let 'em know anyway
         else {

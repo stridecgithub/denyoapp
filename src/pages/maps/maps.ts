@@ -507,7 +507,9 @@ console.log(JSON.stringify(this.selectedAction));*/
           //this.sendNotification(`Comment count successfully removed`);
           this.reportData.startindex = 0;
           this.reportData.sort = "unit_id";
-          this.doUser();
+          //this.doUser();
+          this.navCtrl.setRoot(this.navCtrl.getActive().component);
+          
           
         }
         // Otherwise let 'em know anyway
