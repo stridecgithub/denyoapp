@@ -5,6 +5,7 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { AddorgchartonePage } from '../addorgchartone/addorgchartone';
 import { LoadingController } from 'ionic-angular';
 import { HomePage } from '../home/home';
+import { DomSanitizer } from '@angular/platform-browser';
 //import * as $ from 'jquery';
 //import "slick-carousel";
 /**
@@ -38,7 +39,7 @@ export class OrgchartPage {
   public userId: any;
   public companyId: any;
   iframeContent: any;
-  constructor( public http: Http, public nav: NavController,
+  constructor( public http: Http, public nav: NavController, private sanitizer: DomSanitizer,
     public toastCtrl: ToastController, public alertCtrl: AlertController, public navParams: NavParams, public loadingCtrl: LoadingController) {
     this.loginas = localStorage.getItem("userInfoName");
     this.userId = localStorage.getItem("userInfoId");
@@ -60,13 +61,14 @@ export class OrgchartPage {
 
 
   ionViewWillEnter() {
+   // this.iframeContent =  "<iframe id='filecontainer' src=" + "http://denyoappv2.stridecdev.com/orgchart?company_id="+this.companyId+"&is_mobile=1&id="+this.userId+" height=350 width=100% frameborder=0></iframe>";
     this.pageTitle = "Org Chart";
     this.reportData.startindex = 0;
     this.reportData.sort = "unitgroup_id";
     this.dounitGroup();
     
     console.log(this.apiServiceURL + "/orgchart?company_id=" + this.companyId + "&is_mobile=1");
-    this.iframeContent = "<iframe src=" + this.apiServiceURL + "/orgchart?company_id=" + this.companyId + "&is_mobile=1 height=350 frameborder=0></iframe>";
+    this.iframeContent = "<iframe src=" + "http://denyoappv2.stridecdev.com/orgchart?company_id="+this.companyId+"&is_mobile=1&id="+this.userId+ "height=350 frameborder=0></iframe>";
   }
   dounitGroup() {
     this.colorListArr = [
