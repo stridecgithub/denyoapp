@@ -96,16 +96,16 @@
         <button (click)="favorite(item.unit_id)" class="{{item.favoriteindication}}" style="float: right ;width:50px;height:50px;background-color:#ffffff"></button>
         
         <div style="overflow: hidden; padding-left: .5em;">
-          <h2 (click)="doEdit(item,'detail')"><b>{{item.unitname}}</b></h2>
-          <h2 (click)="doEdit(item,'detail')"><b>{{item.projectname}}</b></h2>
-          <h2 (click)="doEdit(item,'detail')"><b>Gen Status:</b>{{item.gen_status}}</h2>
-          <h2 (click)="doEdit(item,'detail')"><b>Next Servicing:</b>{{item.nextservicedate}}</h2>
+          <h2 (click)="doEdit(item,'detail',item.unit_id)"><b>{{item.unitname}}</b></h2>
+          <h2 (click)="doEdit(item,'detail',item.unit_id)"><b>{{item.projectname}}</b></h2>
+          <h2 (click)="doEdit(item,'detail',item.unit_id)"><b>Gen Status:</b>{{item.gen_status}}</h2>
+          <h2 (click)="doEdit(item,'detail',item.unit_id)"><b>Next Servicing:</b>{{item.nextservicedate}}</h2>
         </div>
       </ion-item>
 
 
       <ion-item-options>
-        <button class="editcolor" (click)="doEdit(item,'edit')">                      
+        <button class="editcolor" (click)="doEdit(item,'edit',item.unit_id)">                      
                         <ion-icon name="create" class="icon-size"></ion-icon>
                     </button>
         <button class="trashcolor" (click)="doConfirm(item.unit_id,item)">                        

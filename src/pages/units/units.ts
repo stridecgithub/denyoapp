@@ -33,7 +33,7 @@ export class UnitsPage {
   pet: string = "ALL";
   public userId: any;
   public sortby = 2;
-  public detailvalue:any;
+  public detailvalue: any;
   public vendorsort = "asc";
   public ascending = true;
   public colorListArr: any;
@@ -187,7 +187,7 @@ export class UnitsPage {
   doAdd() {
     this.nav.setRoot(AddunitsonePage);
   }
-  getCheckBoxValue(item,val) {
+  getCheckBoxValue(item, val) {
     /*console.log("Available data" + val);
     this.getCheckboxData.push({
       availabledata: val
@@ -206,8 +206,8 @@ console.log(JSON.stringify(this.selectedAction));*/
         this.str = this.str + "," + val;
       }
     }
-    this.detailvalue=item;
-    console.log(this.str+"//"+JSON.stringify(this.detailvalue));
+    this.detailvalue = item;
+    console.log(this.str + "//" + JSON.stringify(this.detailvalue));
     localStorage.setItem("viewlist", this.str);
   }
 
@@ -221,14 +221,13 @@ console.log(JSON.stringify(this.selectedAction));*/
     if (actpet == 'viewdashboard') {
       urlstr = "/unitlistaction/" + this.str + "/1/dashboard?ses_login_id=" + this.userId;
     }
-    if(actpet=='view')
-    {
+    if (actpet == 'view') {
       this.nav.setRoot(UnitdetailsPage, {
         record: this.detailvalue
       });
       return false;
     }
-   
+
     //http://denyoappv2.stridecdev.com/unitlistaction/4,6/1/delete
     //http://denyoappv2.stridecdev.com/unitlistaction/4,6/1/dashboard?ses_login_id=2
     // let body: string = "ses_login_id=" + this.userId,
@@ -254,7 +253,7 @@ console.log(JSON.stringify(this.selectedAction));*/
         }
       });
   }
-  doEdit(item, act) {
+  doEdit(item, act, unitId) {
     if (act == 'edit') {
       this.nav.setRoot(AddunitsonePage, {
         record: item,
@@ -262,6 +261,7 @@ console.log(JSON.stringify(this.selectedAction));*/
       });
       return false;
     } else if (act == 'detail') {
+      localStorage.setItem("unitId", unitId);
       this.nav.setRoot(UnitdetailsPage, {
         record: item
       });
