@@ -34,9 +34,10 @@ import { ForgotpasswordPage } from '../pages/forgotpassword/forgotpassword';
 //import { TrendlinePage } from '../pages/trendline/trendline';
 import { DataServiceProvider } from '../providers/data-service/data-service';
 import { ViewunitsPage } from '../pages/viewunits/viewunits';
-//import { Push, PushObject, PushOptions } from '@ionic-native/push';
+import { Push, PushObject, PushOptions } from '@ionic-native/push';
 @Component({
-  templateUrl: 'app.html'
+  templateUrl: 'app.html',
+  providers: [Push]
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
@@ -45,7 +46,7 @@ export class MyApp {
   showLevel1 = null;
   showLevel2 = null;
   ///private push: Push,
-  constructor( public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public dataService: DataServiceProvider, public menuCtrl: MenuController) {
+  constructor(private push: Push, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public dataService: DataServiceProvider, public menuCtrl: MenuController) {
     this.initializeApp();
     this.dataService.getMenus()
       .subscribe((response) => {
@@ -87,47 +88,48 @@ export class MyApp {
 
   initializeApp() {
     this.platform.ready().then(() => {
+      this.initPushNotification();
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       setTimeout(() => {
         this.splashScreen.hide();
       }, 300);
-/*
-      // to check if we have permission
-      this.push.hasPermission()
-        .then((res: any) => {
-
-          if (res.isEnabled) {
-            console.log('We have permission to send push notifications');
-          } else {
-            console.log('We do not have permission to send push notifications');
-          }
-
-        });
-
-      // to initialize push notifications
-
-      const options: PushOptions = {
-        android: {
-          senderID: '85075801930'
-        },
-        ios: {
-          alert: 'true',
-          badge: true,
-          sound: 'false'
-        },
-        windows: {}
-      };
-
-      const pushObject: PushObject = this.push.init(options);
-
-      pushObject.on('notification').subscribe((notification: any) => console.log('Received a notification', notification));
-
-      pushObject.on('registration').subscribe((registration: any) => console.log('Device registered', registration));
-
-      pushObject.on('error').subscribe(error => console.error('Error with Push plugin', error));
-*/
+      /*
+            // to check if we have permission
+            this.push.hasPermission()
+              .then((res: any) => {
+      
+                if (res.isEnabled) {
+                  console.log('We have permission to send push notifications');
+                } else {
+                  console.log('We do not have permission to send push notifications');
+                }
+      
+              });
+      
+            // to initialize push notifications
+      
+            const options: PushOptions = {
+              android: {
+                senderID: '85075801930'
+              },
+              ios: {
+                alert: 'true',
+                badge: true,
+                sound: 'false'
+              },
+              windows: {}
+            };
+      
+            const pushObject: PushObject = this.push.init(options);
+      
+            pushObject.on('notification').subscribe((notification: any) => console.log('Received a notification', notification));
+      
+            pushObject.on('registration').subscribe((registration: any) => console.log('Device registered', registration));
+      
+            pushObject.on('error').subscribe(error => console.error('Error with Push plugin', error));
+      */
     });
   }
 
@@ -217,6 +219,50 @@ export class MyApp {
     localStorage.setItem("userInfoCompanyId", "");
     localStorage.setItem("atMentionedStorage", "");
     this.nav.push(HomePage);
+  }
+  initPushNotification() {
+    // to check if we have permission
+    this.push.hasPermission()
+      .then((res: any) => {
+
+        if (res.isEnabled) {
+          console.log('We have permission to send push notifications');
+        } else {
+          console.log('We do not have permission to send push notifications');
+        }
+
+      });
+
+    // to initialize push notifications
+
+    const options: PushOptions = {
+      android: {
+        senderID: '218019355699'
+      },
+      ios: {
+        alert: 'true',
+        badge: true,
+        sound: 'false'
+      },
+      windows: {}
+    };
+
+
+    const pushObject: PushObject = this.push.init(options);
+
+    pushObject.on('notification').subscribe((notification: any) => console.log('Received a notification', notification));
+
+    pushObject.on('registration').subscribe((registration: any) => {
+
+      console.log('Device registered', registration);
+      console.log('Device Json registered', JSON.stringify(registration));
+      localStorage.setItem("deviceTokenForPushNotification", registration.registrationId);
+    }
+    );
+
+    pushObject.on('error').subscribe(error => console.error('Error with Push plugin', error));
+
+
   }
 }
 

@@ -1,27 +1,27 @@
 {
   "project_info": {
-    "project_number": "535051099117",
-    "firebase_url": "https://denyoprod.firebaseio.com",
-    "project_id": "denyoprod",
-    "storage_bucket": "denyoprod.appspot.com"
+    "project_number": "218019355699",
+    "firebase_url": "https://myproj-11f11.firebaseio.com",
+    "project_id": "myproj-11f11",
+    "storage_bucket": "myproj-11f11.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:535051099117:android:f181602c0867927e",
+        "mobilesdk_app_id": "1:218019355699:android:764d2cb7da3280eb",
         "android_client_info": {
-          "package_name": "io.ionic.denyofinal"
+          "package_name": "io.ionic.starter"
         }
       },
       "oauth_client": [
         {
-          "client_id": "535051099117-pevrr2eflqfbcprqbdutgc60amo3ce4r.apps.googleusercontent.com",
+          "client_id": "218019355699-bo2se6qu0srfdikd60slam01l083u0a6.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyD4FgzcXPUHL7D-bG8NRVsWT0cPuNqXOKQ"
+          "current_key": "AIzaSyB9QtOns1jeSAR6nFILijyUDqUUe0W_wjw"
         }
       ],
       "services": {

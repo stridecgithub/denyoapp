@@ -36,15 +36,17 @@ export class HomePage {
   }
 
   loginEntry(username, password) {
+    let device_token = localStorage.getItem("deviceTokenForPushNotification");
     let res;
     let body: string = "username=" + username +
       "&password=" + password +
-      "&device_token=" + this.device.uuid +
+      "&device_token=" + device_token +
       "&isapp=1",
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
       url: any = this.apiServiceURL + "/checklogin";
+    console.log(url + '?' + body);
     this.http.post(url, body, options)
       .subscribe(data => {
         res = data.json();
