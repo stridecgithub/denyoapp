@@ -34,6 +34,7 @@ export class AddcalendarPage {
   public event_location: any;
   public gethashtag: any;
   public event_unitid: any;
+  public companyId:any;
   public event_date: any;
   public event_title: any;
   public service_remark: any;
@@ -77,6 +78,7 @@ export class AddcalendarPage {
     });
     this.disunit = false;
     this.userId = localStorage.getItem("userInfoId");
+    this.companyId = localStorage.getItem("userInfoCompanyId");
     this.responseResultType.push({
       id: '1',
       type_name: 'Service',
@@ -395,14 +397,14 @@ export class AddcalendarPage {
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/getcompanies";
+      url: any = this.apiServiceURL + "/units?is_mobile=1&startindex=0&results=30&sort=unit_id&dir=asc&company_id=" + this.companyId;
     let res;
     console.log("URL" + url);
     this.http.get(url, options)
       .subscribe(data => {
         res = data.json();
         console.log(JSON.stringify(res));
-        this.responseResultCompany = res.companies;
+        this.responseResultCompany = res.units;
       });
 
   }
