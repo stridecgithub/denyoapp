@@ -4,8 +4,6 @@ import { ServicinginfoPage } from '../servicinginfo/servicinginfo';
 import { CommentsinfoPage } from '../commentsinfo/commentsinfo';
 import { UserPage } from '../user/user';
 import { CompanygroupPage } from '../companygroup/companygroup';
-import { MyaccountPage } from '../myaccount/myaccount';
-import { UnitsPage } from '../units/units';
 import { RolePage } from '../role/role';
 import { ViewunitsPage } from '../viewunits/viewunits';
 //import { AlarmPage } from '../alarm/alarm';
@@ -16,6 +14,13 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 //import { Http, Headers, RequestOptions } from '@angular/http';
 //import { HTTP } from '@ionic-native/http';
 import * as $ from 'jquery';
+import { MyaccountPage } from '../myaccount/myaccount';
+import { UnitsPage } from '../units/units';
+import { NotificationPage } from '../notification/notification';
+import { MapsPage } from '../maps/maps';
+import { ReportsPage } from '../reports/reports';
+import { CalendarPage } from '../calendar/calendar';
+import { EmailPage } from '../email/email';
 
 
 /**
@@ -200,26 +205,24 @@ export class UnitdetailsPage {
 	previous() {
 		this.nav.setRoot(UnitsPage);
 	}
-	redirectToUser() {
-		this.nav.setRoot(UserPage);
-	}
-
-	redirectToUnitGroup() {
-		this.nav.setRoot(UnitgroupPage);
-	}
-	redirectToCompanyGroup() {
-		this.nav.setRoot(CompanygroupPage);
-	}
-	redirectToUnits() {
-		this.nav.setRoot(UnitsPage);
-	}
-	redirectToMyAccount() {
-		this.nav.setRoot(MyaccountPage);
-	}
-
-	redirectToRole() {
-		this.nav.setRoot(RolePage);
-	}
+	 notification() {
+    this.nav.setRoot(NotificationPage);
+  }
+  redirectToUser() {
+    this.nav.setRoot(UnitsPage);
+  }
+  redirectToMessage() {
+    this.nav.setRoot(EmailPage);
+  }
+  redirectCalendar() {
+    this.nav.setRoot(CalendarPage);
+  }
+  redirectToMaps() {
+    this.nav.setRoot(MapsPage);
+  }
+  redirectToSettings() {
+    this.nav.setRoot(MyaccountPage);
+  }
 	viewunit()
 	{
 		this.nav.setRoot(ViewunitsPage, {

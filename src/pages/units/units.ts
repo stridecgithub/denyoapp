@@ -13,6 +13,10 @@ import { CompanygroupPage } from '../companygroup/companygroup';
 import { RolePage } from '../role/role';
 import { UnitdetailsPage } from '../unitdetails/unitdetails';
 import { NotificationPage } from '../notification/notification';
+import { ReportsPage } from '../reports/reports';
+import { CalendarPage } from '../calendar/calendar';
+import { EmailPage } from '../email/email';
+import { MapsPage } from '../maps/maps';
 /**
  * Generated class for the UserPage page.
  *
@@ -473,28 +477,22 @@ console.log(JSON.stringify(this.selectedAction));*/
     this.doUnit();
   }
 
-  notification() {
+ notification() {
     this.nav.setRoot(NotificationPage);
   }
   redirectToUser() {
-    this.nav.setRoot(UserPage);
-  }
-
-  redirectToUnitGroup() {
-    this.nav.setRoot(UnitgroupPage);
-  }
-
-  redirectToUnits() {
     this.nav.setRoot(UnitsPage);
   }
-  redirectToMyAccount() {
+  redirectToMessage() {
+    this.nav.setRoot(EmailPage);
+  }
+  redirectCalendar() {
+    this.nav.setRoot(CalendarPage);
+  }
+  redirectToMaps() {
+    this.nav.setRoot(MapsPage);
+  }
+  redirectToSettings() {
     this.nav.setRoot(MyaccountPage);
   }
-  redirectToCompanyGroup() {
-    this.nav.setRoot(CompanygroupPage);
-  }
-  redirectToRole() {
-    this.nav.setRoot(RolePage);
-  }
-
 }

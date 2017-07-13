@@ -8,6 +8,10 @@ import { CompanygroupPage } from '../companygroup/companygroup';
 import { RolePage } from '../role/role';
 import { HomePage } from '../home/home';
 import { UnitsPage } from '../units/units';
+import { NotificationPage } from '../notification/notification';
+import { MapsPage } from '../maps/maps';
+import { CalendarPage } from '../calendar/calendar';
+import { EmailPage } from '../email/email';
 @Component({
   selector: 'page-reports',
   templateUrl: 'reports.html',
@@ -32,22 +36,23 @@ export class ReportsPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ReportsPage');
   }
-  redirectToUnitGroup() {
-    this.navCtrl.setRoot(UnitgroupPage);
+  notification() {
+    this.navCtrl.setRoot(NotificationPage);
   }
-  redirectToCompanyGroup() {
-    this.navCtrl.setRoot(CompanygroupPage);
-  }
-
-  redirectToUnits() {
+  redirectToUser() {
     this.navCtrl.setRoot(UnitsPage);
   }
-  redirectToMyAccount() {
-    this.navCtrl.setRoot(MyaccountPage);
+  redirectToMessage() {
+    this.navCtrl.setRoot(EmailPage);
   }
-
-  redirectToRole() {
-    this.navCtrl.setRoot(RolePage);
+  redirectCalendar() {
+    this.navCtrl.setRoot(CalendarPage);
+  }
+  redirectToMaps() {
+    this.navCtrl.setRoot(MapsPage);
+  }
+  redirectToSettings() {
+    this.navCtrl.setRoot(MyaccountPage);
   }
   previous() {
     this.navCtrl.setRoot(HomePage);
