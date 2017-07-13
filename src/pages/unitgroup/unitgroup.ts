@@ -11,6 +11,10 @@ import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitsPage } from '../units/units';
 import { RolePage } from '../role/role';
 import { NotificationPage } from '../notification/notification';
+import { MapsPage } from '../maps/maps';
+import { ReportsPage } from '../reports/reports';
+import { CalendarPage } from '../calendar/calendar';
+import { EmailPage } from '../email/email';
 
 /**
  * Generated class for the UnitgroupPage page.
@@ -334,27 +338,22 @@ export class UnitgroupPage {
     //this.dounitGroup();
   }
 
-  notification() {
+   notification() {
     this.nav.setRoot(NotificationPage);
   }
   redirectToUser() {
-    this.nav.setRoot(UserPage);
-  }
-
-  redirectToUnitGroup() {
-    this.nav.setRoot(UnitgroupPage);
-  }
-  redirectToCompanyGroup() {
-    this.nav.setRoot(CompanygroupPage);
-  }
-  redirectToUnits() {
     this.nav.setRoot(UnitsPage);
   }
-  redirectToMyAccount() {
-    this.nav.setRoot(MyaccountPage);
+  redirectToMessage() {
+    this.nav.setRoot(EmailPage);
   }
-
-  redirectToRole() {
-    this.nav.setRoot(RolePage);
+  redirectCalendar() {
+    this.nav.setRoot(CalendarPage);
+  }
+  redirectToMaps() {
+    this.nav.setRoot(MapsPage);
+  }
+  redirectToSettings() {
+    this.nav.setRoot(MyaccountPage);
   }
 }

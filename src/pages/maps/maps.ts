@@ -6,15 +6,22 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { AddunitsonePage } from '../addunitsone/addunitsone';
 import { ViewcompanygroupPage } from '../viewcompanygroup/viewcompanygroup';
 import { LoadingController } from 'ionic-angular';
-import { MyaccountPage } from '../myaccount/myaccount';
+
 import { UnitgroupPage } from '../unitgroup/unitgroup';
 import { CompanygroupPage } from '../companygroup/companygroup';
 import { RolePage } from '../role/role';
 import { HomePage } from '../home/home';
-import { UnitsPage } from '../units/units';
+
 import { UnitdetailsPage } from '../unitdetails/unitdetails';
 //declare var google;
 import { DomSanitizer } from '@angular/platform-browser';
+import { MyaccountPage } from '../myaccount/myaccount';
+import { UnitsPage } from '../units/units';
+import { NotificationPage } from '../notification/notification';
+
+import { ReportsPage } from '../reports/reports';
+import { CalendarPage } from '../calendar/calendar';
+import { EmailPage } from '../email/email';
 @Component({
   selector: 'page-maps',
   templateUrl: 'maps.html',
@@ -519,6 +526,24 @@ console.log(JSON.stringify(this.selectedAction));*/
       });
     
     
+  }
+   notification() {
+    this.navCtrl.setRoot(NotificationPage);
+  }
+  redirectToUser() {
+    this.navCtrl.setRoot(UnitsPage);
+  }
+  redirectToMessage() {
+    this.navCtrl.setRoot(EmailPage);
+  }
+  redirectCalendar() {
+    this.navCtrl.setRoot(CalendarPage);
+  }
+  redirectToMaps() {
+    this.navCtrl.setRoot(MapsPage);
+  }
+  redirectToSettings() {
+    this.navCtrl.setRoot(MyaccountPage);
   }
 }
 

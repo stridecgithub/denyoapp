@@ -5,6 +5,14 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { UserorgchartPage } from '../userorgchart/userorgchart';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { AdduserPage } from '../adduser/adduser';
+import { MyaccountPage } from '../myaccount/myaccount';
+import { UnitsPage } from '../units/units';
+import { NotificationPage } from '../notification/notification';
+import { MapsPage } from '../maps/maps';
+import { ReportsPage } from '../reports/reports';
+import { CalendarPage } from '../calendar/calendar';
+import { EmailPage } from '../email/email';
+
 /**
  * Generated class for the UseraccountPage page.
  *
@@ -308,5 +316,23 @@ export class UseraccountPage {
 
   addhashtag(val) {
     this.hashtag = "@" + val;
+  }
+   notification() {
+    this.navCtrl.setRoot(NotificationPage);
+  }
+  redirectToUser() {
+    this.navCtrl.setRoot(UnitsPage);
+  }
+  redirectToMessage() {
+    this.navCtrl.setRoot(EmailPage);
+  }
+  redirectCalendar() {
+    this.navCtrl.setRoot(CalendarPage);
+  }
+  redirectToMaps() {
+    this.navCtrl.setRoot(MapsPage);
+  }
+  redirectToSettings() {
+    this.navCtrl.setRoot(MyaccountPage);
   }
 }
