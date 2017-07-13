@@ -36,6 +36,7 @@ export class CommentdetailsPage {
   public recordID: any;
   public comment_unitid: any;
   public comment_id: any;
+  public udetails:any;
   public comments: any;
   public comment_by_name: any;
   public comment_remark: any;
@@ -71,6 +72,8 @@ export class CommentdetailsPage {
     this.service_priority_class2 = "-outline";
     this.unitDetailData.loginas = localStorage.getItem("userInfoName");
     this.unitDetailData.userId = localStorage.getItem("userInfoId");
+    this.udetails = localStorage.getItem("unitdetails");
+    console.log(JSON.stringify(this.udetails));
 
 
 
@@ -101,7 +104,8 @@ export class CommentdetailsPage {
   }
   ionViewWillEnter() {
     this.getPrority(1);
-
+ this.udetails = localStorage.getItem("unitdetails");
+    console.log("UD"+JSON.stringify(this.udetails));
     console.log("comment:" + JSON.stringify(this.NP.get("record")));
     if (this.NP.get("record")) {
       this.selectEntry(this.NP.get("record"));
@@ -168,7 +172,7 @@ export class CommentdetailsPage {
   }
   previous() {
     this.nav.setRoot(CommentsinfoPage, {
-      record: this.NP.get("record")
+      record: this.udetails
     });
   }
 

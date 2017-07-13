@@ -114,7 +114,10 @@ export class UnitdetailsPage {
 			"DAADFE",
 			"E1E1E1"
 		];
+		localStorage.setItem("unitdetails", JSON.stringify(this.NP.get("record")));
+		console.log("UD",JSON.stringify(this.NP.get("record")));
 		this.pageTitle = 'Unit Details';
+		let nud=localStorage.getItem("unitdetails");
 		console.log(JSON.stringify(this.NP.get("record")));
 		let editItem = this.NP.get("record");
 		let colorcode;
@@ -145,8 +148,8 @@ export class UnitdetailsPage {
 		this.unitDetailData.favoriteindication = favorite;
 		this.unitDetailData.lat=editItem.lat;
 		this.unitDetailData.lng=editItem.lng;
-		console.log(this.apiServiceURL + "/" + this.unitDetailData.unit_id + "/1/unitdetails");
-		this.iframeContent = "<iframe id='filecontainer' src=" + this.apiServiceURL + "/" + this.unitDetailData.unit_id + "/1/unitdetails height=350 width=100% frameborder=0></iframe>";
+		console.log(this.apiServiceURL + "/" + localStorage.getItem("unitId")+ "/1/unitdetails");
+		this.iframeContent = "<iframe id='filecontainer' src=" + this.apiServiceURL + "/" + localStorage.getItem("unitId") + "/1/unitdetails height=350 width=100% frameborder=0></iframe>";
 
 		//http://denyoappv2.stridecdev.com/getcount?loginid=1&unitid=2
 
