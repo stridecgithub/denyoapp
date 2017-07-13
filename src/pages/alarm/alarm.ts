@@ -1,9 +1,17 @@
 import { Component } from '@angular/core';
-import {  NavController, ToastController, AlertController, NavParams } from 'ionic-angular';
+import { NavController, ToastController, AlertController, NavParams } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { LoadingController } from 'ionic-angular';
 import { UnitdetailsPage } from '../unitdetails/unitdetails';
+import { MyaccountPage } from '../myaccount/myaccount';
+import { UnitsPage } from '../units/units';
+import { NotificationPage } from '../notification/notification';
+import { MapsPage } from '../maps/maps';
+import { ReportsPage } from '../reports/reports';
+import { CalendarPage } from '../calendar/calendar';
+import { EmailPage } from '../email/email';
+
 //import { TabsPage } from '../tabs/tabs';
 //import { UserPage } from '../user/user';
 ////import { CompanygroupPage } from '../companygroup/companygroup';
@@ -23,7 +31,7 @@ import { UnitdetailsPage } from '../unitdetails/unitdetails';
   templateUrl: 'alarm.html',
 })
 export class AlarmPage {
- public pageTitle: string;
+  public pageTitle: string;
   public loginas: any;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   public totalCount;
@@ -39,16 +47,16 @@ export class AlarmPage {
   public reportAllLists = [];
   public colorListArr: any;
   public userId: any;
-  public unit_id:any;
+  public unit_id: any;
   constructor(public http: Http, public nav: NavController,
-    public toastCtrl: ToastController, public alertCtrl: AlertController,public NP: NavParams, public navParams: NavParams, public loadingCtrl: LoadingController) {
+    public toastCtrl: ToastController, public alertCtrl: AlertController, public NP: NavParams, public navParams: NavParams, public loadingCtrl: LoadingController) {
     this.loginas = localStorage.getItem("userInfoName");
     this.userId = localStorage.getItem("userInfoId");
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad AlarmPage');
   }
- doRefresh(refresher) {
+  doRefresh(refresher) {
     console.log('doRefresh function calling...');
     this.reportData.startindex = 0;
     this.reportAllLists = [];
@@ -57,10 +65,9 @@ export class AlarmPage {
       refresher.complete();
     }, 2000);
   }
-  doAlarm()
-  {
-     let editItem = this.NP.get("record");
- if (this.NP.get("record").unit_id != undefined && this.NP.get("record").unit_id != 'undefined') {
+  doAlarm() {
+    let editItem = this.NP.get("record");
+    if (this.NP.get("record").unit_id != undefined && this.NP.get("record").unit_id != 'undefined') {
       this.unit_id = editItem.unit_id;
     }
     this.presentLoading(1);
@@ -74,7 +81,7 @@ export class AlarmPage {
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/alarms?is_mobile=1&startindex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc+"&unitid="+this.unit_id;
+      url: any = this.apiServiceURL + "/alarms?is_mobile=1&startindex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc + "&unitid=" + this.unit_id;
     let res;
     console.log(url);
     this.http.get(url, options)
@@ -83,19 +90,19 @@ export class AlarmPage {
         console.log(JSON.stringify(res));
         console.log("1" + res.alarms.length);
         console.log("2" + res.alarms);
-      
+
         if (res.alarms.length > 0) {
 
           for (let alarm in res.alarms) {
-           
-           
-           
+
+
+
             this.reportAllLists.push({
               alarm_name: res.alarms[alarm].alarm_name,
               alarm_assigned_by: res.alarms[alarm].alarm_assigned_by,
               alarm_assigned_to: res.alarms[alarm].alarm_assigned_to
-             
-              
+
+
             });
           }
           //"unitgroup_id":1,"unitgroup_name":"demo unit","colorcode":"FBD75C","remark":"nice","favorite":1,"totalunits":5
@@ -113,8 +120,8 @@ export class AlarmPage {
       });
     this.presentLoading(0);
   }
-   ionViewWillEnter() {
-      if (this.NP.get("record")) {
+  ionViewWillEnter() {
+    if (this.NP.get("record")) {
       console.log("Service Info Record Param Value:" + JSON.stringify(this.NP.get("record")));
     }
     this.pageTitle = "Alarm";
@@ -150,9 +157,28 @@ export class AlarmPage {
       loader.dismiss();
     }
   }
-   previous() {
+  previous() {
     this.nav.setRoot(UnitdetailsPage, {
       record: this.NP.get("record")
     });
+  }
+
+  notification() {
+    this.nav.setRoot(NotificationPage);
+  }
+  redirectToUser() {
+    this.nav.setRoot(UnitsPage);
+  }
+  redirectToMessage() {
+    this.nav.setRoot(EmailPage);
+  }
+  redirectCalendar() {
+    this.nav.setRoot(CalendarPage);
+  }
+  redirectToMaps() {
+    this.nav.setRoot(MapsPage);
+  }
+  redirectToSettings() {
+    this.nav.setRoot(MyaccountPage);
   }
 }

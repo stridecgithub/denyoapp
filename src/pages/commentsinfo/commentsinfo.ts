@@ -3,16 +3,20 @@ import {  NavController, NavParams, ToastController, AlertController } from 'ion
 import { CompanygroupPage } from '../companygroup/companygroup';
 import { UserPage } from '../user/user';
 import { LoadingController } from 'ionic-angular';
-import { MyaccountPage } from '../myaccount/myaccount';
 import { AddcommentsinfoPage } from '../addcommentsinfo/addcommentsinfo';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
-import { UnitsPage } from '../units/units';
 import { UnitdetailsPage } from '../unitdetails/unitdetails';
 import { CommentdetailsPage } from '../commentdetails/commentdetails';
 import { RolePage } from '../role/role';
 import 'rxjs/add/operator/map';
 import { Http, Headers, RequestOptions } from '@angular/http';
+import { MyaccountPage } from '../myaccount/myaccount';
+import { UnitsPage } from '../units/units';
 import { NotificationPage } from '../notification/notification';
+import { MapsPage } from '../maps/maps';
+import { ReportsPage } from '../reports/reports';
+import { CalendarPage } from '../calendar/calendar';
+import { EmailPage } from '../email/email';
 /**
  * Generated class for the ServicinginfoPage page.
  *
@@ -38,6 +42,7 @@ export class CommentsinfoPage {
   public userId: any;
   public reportAllLists = [];
   public loginas: any;
+  public udetails:any;
   public loadingMoreDataContent: string;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   public totalCount;
@@ -46,12 +51,14 @@ export class CommentsinfoPage {
     this.pageTitle = 'Comments';
     this.loginas = localStorage.getItem("userInfoName");
     this.userId = localStorage.getItem("userInfoId");
+    this.udetails = localStorage.getItem("unitdetails");
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoadCommentsinfoPage');
   }
   ionViewWillEnter() {
+    console.log("NUD"+localStorage.getItem("unitdetails"));
 
     if (this.NP.get("record")) {
       console.log("Service Info Record Param Value:" + JSON.stringify(this.NP.get("record")));
@@ -61,7 +68,7 @@ export class CommentsinfoPage {
     this.doService();
     this.unit_id = this.NP.get("record").unit_id;
     let body: string = "is_mobile=1&userid=" + this.userId +
-      "&unitid=" + this.unit_id,
+      "&unitid=" + localStorage.getItem("unitId"),
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
@@ -143,7 +150,7 @@ export class CommentsinfoPage {
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/comments?is_mobile=1&startindex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc + "&unitid=" + this.unit_id;
+      url: any = this.apiServiceURL + "/comments?is_mobile=1&startindex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc + "&unitid=" +  localStorage.getItem("unitId");
     let res;
     console.log(url);
     this.http.get(url, options)
@@ -174,26 +181,7 @@ export class CommentsinfoPage {
       record: this.NP.get("record")
     });
   }
-  redirectToUser() {
-    this.nav.setRoot(UserPage);
-  }
-
-  redirectToUnitGroup() {
-    this.nav.setRoot(UnitgroupPage);
-  }
-  redirectToCompanyGroup() {
-    this.nav.setRoot(CompanygroupPage);
-  }
-  redirectToUnits() {
-    this.nav.setRoot(UnitsPage);
-  }
-  redirectToMyAccount() {
-    this.nav.setRoot(MyaccountPage);
-  }
-
-  redirectToRole() {
-    this.nav.setRoot(RolePage);
-  }
+  
   doAdd() {
     localStorage.setItem("microtime", "");
     this.nav.setRoot(AddcommentsinfoPage, {
@@ -271,4 +259,22 @@ export class CommentsinfoPage {
     });
     notification.present();
   }
+
+
+ 
+  redirectToUser() {
+    this.nav.setRoot(UnitsPage);
+  }
+  redirectToMessage() {
+    this.nav.setRoot(EmailPage);
+  }
+  redirectCalendar() {
+    this.nav.setRoot(CalendarPage);
+  }
+  redirectToMaps() {
+    this.nav.setRoot(MapsPage);
+  }
+  redirectToSettings() {
+    this.nav.setRoot(MyaccountPage);
+  }   
 }

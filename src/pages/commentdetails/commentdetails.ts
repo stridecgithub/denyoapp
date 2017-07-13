@@ -3,11 +3,16 @@ import {  AlertController, NavController, NavParams, ViewController, ToastContro
 import {  FormBuilder, FormGroup } from '@angular/forms';
 import { UserPage } from '../user/user';
 import { CommentsinfoPage } from '../commentsinfo/commentsinfo';
-import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
-import { UnitsPage } from '../units/units';
 import { RolePage } from '../role/role';
 import { CompanygroupPage } from '../companygroup/companygroup';
+import { MyaccountPage } from '../myaccount/myaccount';
+import { UnitsPage } from '../units/units';
+import { NotificationPage } from '../notification/notification';
+import { MapsPage } from '../maps/maps';
+import { ReportsPage } from '../reports/reports';
+import { CalendarPage } from '../calendar/calendar';
+import { EmailPage } from '../email/email';
 
 import 'rxjs/add/operator/map';
 
@@ -31,6 +36,7 @@ export class CommentdetailsPage {
   public recordID: any;
   public comment_unitid: any;
   public comment_id: any;
+  public udetails:any;
   public comments: any;
   public comment_by_name: any;
   public comment_remark: any;
@@ -66,6 +72,8 @@ export class CommentdetailsPage {
     this.service_priority_class2 = "-outline";
     this.unitDetailData.loginas = localStorage.getItem("userInfoName");
     this.unitDetailData.userId = localStorage.getItem("userInfoId");
+    this.udetails = localStorage.getItem("unitdetails");
+    console.log(JSON.stringify(this.udetails));
 
 
 
@@ -96,7 +104,8 @@ export class CommentdetailsPage {
   }
   ionViewWillEnter() {
     this.getPrority(1);
-
+ this.udetails = localStorage.getItem("unitdetails");
+    console.log("UD"+JSON.stringify(this.udetails));
     console.log("comment:" + JSON.stringify(this.NP.get("record")));
     if (this.NP.get("record")) {
       this.selectEntry(this.NP.get("record"));
@@ -163,24 +172,25 @@ export class CommentdetailsPage {
   }
   previous() {
     this.nav.setRoot(CommentsinfoPage, {
-      record: this.NP.get("record")
+      record: this.udetails
     });
   }
 
-  redirectToUser() {
-    this.nav.setRoot(UserPage);
-  }
+  
 
-  redirectToUnitGroup() {
-    this.nav.setRoot(UnitgroupPage);
-  }
-  redirectToCompanyGroup() {
-    this.nav.setRoot(CompanygroupPage);
-  }
-  redirectToUnits() {
+    redirectToUser() {
     this.nav.setRoot(UnitsPage);
   }
-  redirectToMyAccount() {
+  redirectToMessage() {
+    this.nav.setRoot(EmailPage);
+  }
+  redirectCalendar() {
+    this.nav.setRoot(CalendarPage);
+  }
+  redirectToMaps() {
+    this.nav.setRoot(MapsPage);
+  }
+  redirectToSettings() {
     this.nav.setRoot(MyaccountPage);
   }
 
