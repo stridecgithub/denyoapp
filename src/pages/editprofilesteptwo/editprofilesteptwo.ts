@@ -4,16 +4,20 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
 //import { UserPage } from '../user/user';
 import { UserPage } from '../user/user';
-import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
-import { UnitsPage } from '../units/units';
 import { RolePage } from '../role/role';
 import { EditprofilesteponePage } from '../editprofilestepone/editprofilestepone';
 import 'rxjs/add/operator/map';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
+import { MyaccountPage } from '../myaccount/myaccount';
+import { UnitsPage } from '../units/units';
 import { NotificationPage } from '../notification/notification';
+import { MapsPage } from '../maps/maps';
+import { ReportsPage } from '../reports/reports';
+import { CalendarPage } from '../calendar/calendar';
+import { EmailPage } from '../email/email';
 
 /**
  * Generated class for the AddcompanygroupPage page.
@@ -331,27 +335,28 @@ export class EditprofilesteptwoPage {
   //main.js:61622 File Name is:1497379310688.jpg
 
 
-  notification() {
-    this.nav.setRoot(NotificationPage);
-  }
+ 
   previous() {
     this.nav.setRoot(EditprofilesteponePage);
   }
 
+ notification() {
+    this.nav.setRoot(NotificationPage);
+  }
   redirectToUser() {
-    this.nav.setRoot(UserPage);
-  }
-  redirectToUnitGroup() {
-    this.nav.setRoot(UnitgroupPage);
-  }
-  redirectToUnits() {
     this.nav.setRoot(UnitsPage);
   }
-  redirectToMyAccount() {
+  redirectToMessage() {
+    this.nav.setRoot(EmailPage);
+  }
+  redirectCalendar() {
+    this.nav.setRoot(CalendarPage);
+  }
+  redirectToMaps() {
+    this.nav.setRoot(MapsPage);
+  }
+  redirectToSettings() {
     this.nav.setRoot(MyaccountPage);
-  }
-  redirectToRole() {
-    this.nav.setRoot(RolePage);
-  }
+  }  
 }
 

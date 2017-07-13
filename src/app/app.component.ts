@@ -34,7 +34,7 @@ import { ForgotpasswordPage } from '../pages/forgotpassword/forgotpassword';
 //import { TrendlinePage } from '../pages/trendline/trendline';
 import { DataServiceProvider } from '../providers/data-service/data-service';
 import { ViewunitsPage } from '../pages/viewunits/viewunits';
-
+//import { Push, PushObject, PushOptions } from '@ionic-native/push';
 @Component({
   templateUrl: 'app.html'
 })
@@ -44,7 +44,8 @@ export class MyApp {
   pages: any;
   showLevel1 = null;
   showLevel2 = null;
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public dataService: DataServiceProvider, public menuCtrl: MenuController) {
+  ///private push: Push,
+  constructor( public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public dataService: DataServiceProvider, public menuCtrl: MenuController) {
     this.initializeApp();
     this.dataService.getMenus()
       .subscribe((response) => {
@@ -65,16 +66,16 @@ export class MyApp {
       { title: 'Maps', component: MapsPage },
       { title: 'Calendar', component: CalendarPage },
       { title: 'Reports', component: ReportsPage },
-     // { title: 'Alarm List', component: AlarmPage },
+      // { title: 'Alarm List', component: AlarmPage },
       { title: 'Alarm', component: AddalarmPage },
       { title: 'Alarm Log', component: AlarmlogPage },
       { title: 'Service Details', component: ServicedetailsPage },
       { title: 'Comment Details', component: CommentdetailsPage },
       { title: 'Alarm Details', component: AlarmdetailsPage },
-      { title:  'Engine Details', Component: EnginedetailPage },
-      { title:  'Add Engine Details', Component: AddenginedetailPage },
-      { title:  'Engine Details', Component: EngineviewPage },
-      { title:  'ForgotPassword', Component: ForgotpasswordPage },
+      { title: 'Engine Details', Component: EnginedetailPage },
+      { title: 'Add Engine Details', Component: AddenginedetailPage },
+      { title: 'Engine Details', Component: EngineviewPage },
+      { title: 'ForgotPassword', Component: ForgotpasswordPage },
 
       // { title: 'Map Demo', component: MapdemoPage },
 
@@ -92,6 +93,41 @@ export class MyApp {
       setTimeout(() => {
         this.splashScreen.hide();
       }, 300);
+/*
+      // to check if we have permission
+      this.push.hasPermission()
+        .then((res: any) => {
+
+          if (res.isEnabled) {
+            console.log('We have permission to send push notifications');
+          } else {
+            console.log('We do not have permission to send push notifications');
+          }
+
+        });
+
+      // to initialize push notifications
+
+      const options: PushOptions = {
+        android: {
+          senderID: '85075801930'
+        },
+        ios: {
+          alert: 'true',
+          badge: true,
+          sound: 'false'
+        },
+        windows: {}
+      };
+
+      const pushObject: PushObject = this.push.init(options);
+
+      pushObject.on('notification').subscribe((notification: any) => console.log('Received a notification', notification));
+
+      pushObject.on('registration').subscribe((registration: any) => console.log('Device registered', registration));
+
+      pushObject.on('error').subscribe(error => console.error('Error with Push plugin', error));
+*/
     });
   }
 
@@ -143,7 +179,7 @@ export class MyApp {
     else if (page.component == 'MapdemoPage') {
       //this.nav.setRoot(MapdemoPage);
     }
-     else if (page.component == 'EnginedetailPage') {
+    else if (page.component == 'EnginedetailPage') {
       this.nav.setRoot(EnginedetailPage);
     }
   }

@@ -3,11 +3,16 @@ import {  AlertController, NavController, NavParams, ViewController, ToastContro
 import {  FormBuilder, FormGroup } from '@angular/forms';
 import { UserPage } from '../user/user';
 import { CommentsinfoPage } from '../commentsinfo/commentsinfo';
-import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
-import { UnitsPage } from '../units/units';
 import { RolePage } from '../role/role';
 import { CompanygroupPage } from '../companygroup/companygroup';
+import { MyaccountPage } from '../myaccount/myaccount';
+import { UnitsPage } from '../units/units';
+import { NotificationPage } from '../notification/notification';
+import { MapsPage } from '../maps/maps';
+import { ReportsPage } from '../reports/reports';
+import { CalendarPage } from '../calendar/calendar';
+import { EmailPage } from '../email/email';
 
 import 'rxjs/add/operator/map';
 
@@ -167,20 +172,21 @@ export class CommentdetailsPage {
     });
   }
 
-  redirectToUser() {
-    this.nav.setRoot(UserPage);
-  }
+  
 
-  redirectToUnitGroup() {
-    this.nav.setRoot(UnitgroupPage);
-  }
-  redirectToCompanyGroup() {
-    this.nav.setRoot(CompanygroupPage);
-  }
-  redirectToUnits() {
+    redirectToUser() {
     this.nav.setRoot(UnitsPage);
   }
-  redirectToMyAccount() {
+  redirectToMessage() {
+    this.nav.setRoot(EmailPage);
+  }
+  redirectCalendar() {
+    this.nav.setRoot(CalendarPage);
+  }
+  redirectToMaps() {
+    this.nav.setRoot(MapsPage);
+  }
+  redirectToSettings() {
     this.nav.setRoot(MyaccountPage);
   }
 

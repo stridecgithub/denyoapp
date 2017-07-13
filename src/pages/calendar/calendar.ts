@@ -4,17 +4,23 @@ import { NavController, LoadingController, AlertController, ToastController } fr
 import 'rxjs/add/operator/map';
 import { Http, Headers, RequestOptions } from "@angular/http";
 
-import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
-import { UnitsPage } from '../units/units';
 import { RolePage } from '../role/role';
 import { HomePage } from '../home/home';
 import { UserPage } from '../user/user';
-import { NotificationPage } from '../notification/notification';
 
 import { AddcalendarPage } from '../addcalendar/addcalendar';
 
 import { DatePicker } from '@ionic-native/date-picker';
+
+import { MyaccountPage } from '../myaccount/myaccount';
+import { UnitsPage } from '../units/units';
+import { NotificationPage } from '../notification/notification';
+import { MapsPage } from '../maps/maps';
+import { ReportsPage } from '../reports/reports';
+import { EmailPage } from '../email/email';
+
+
 import 'intl';
 import 'intl/locale-data/jsonp/en';
 @Component({
@@ -637,26 +643,27 @@ export class CalendarPage {
     }
   }
 
-  notification() {
-    this.navCtrl.setRoot(NotificationPage);
-  }
+  
   previous() {
     this.navCtrl.setRoot(HomePage);
   }
+  notification() {
+    this.navCtrl.setRoot(NotificationPage);
+  }
   redirectToUser() {
-    this.navCtrl.setRoot(UserPage);
-  }
-  redirectToUnitGroup() {
-    this.navCtrl.setRoot(UnitgroupPage);
-  }
-  redirectToUnits() {
     this.navCtrl.setRoot(UnitsPage);
   }
-  redirectToMyAccount() {
-    this.navCtrl.setRoot(MyaccountPage);
+  redirectToMessage() {
+    this.navCtrl.setRoot(EmailPage);
   }
-  redirectToRole() {
-    this.navCtrl.setRoot(RolePage);
+  redirectCalendar() {
+    this.navCtrl.setRoot(CalendarPage);
+  }
+  redirectToMaps() {
+    this.navCtrl.setRoot(MapsPage);
+  }
+  redirectToSettings() {
+    this.navCtrl.setRoot(MyaccountPage);
   }
 
   doAdd() {

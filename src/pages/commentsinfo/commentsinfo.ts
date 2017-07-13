@@ -3,16 +3,20 @@ import {  NavController, NavParams, ToastController, AlertController } from 'ion
 import { CompanygroupPage } from '../companygroup/companygroup';
 import { UserPage } from '../user/user';
 import { LoadingController } from 'ionic-angular';
-import { MyaccountPage } from '../myaccount/myaccount';
 import { AddcommentsinfoPage } from '../addcommentsinfo/addcommentsinfo';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
-import { UnitsPage } from '../units/units';
 import { UnitdetailsPage } from '../unitdetails/unitdetails';
 import { CommentdetailsPage } from '../commentdetails/commentdetails';
 import { RolePage } from '../role/role';
 import 'rxjs/add/operator/map';
 import { Http, Headers, RequestOptions } from '@angular/http';
+import { MyaccountPage } from '../myaccount/myaccount';
+import { UnitsPage } from '../units/units';
 import { NotificationPage } from '../notification/notification';
+import { MapsPage } from '../maps/maps';
+import { ReportsPage } from '../reports/reports';
+import { CalendarPage } from '../calendar/calendar';
+import { EmailPage } from '../email/email';
 /**
  * Generated class for the ServicinginfoPage page.
  *
@@ -174,26 +178,7 @@ export class CommentsinfoPage {
       record: this.NP.get("record")
     });
   }
-  redirectToUser() {
-    this.nav.setRoot(UserPage);
-  }
-
-  redirectToUnitGroup() {
-    this.nav.setRoot(UnitgroupPage);
-  }
-  redirectToCompanyGroup() {
-    this.nav.setRoot(CompanygroupPage);
-  }
-  redirectToUnits() {
-    this.nav.setRoot(UnitsPage);
-  }
-  redirectToMyAccount() {
-    this.nav.setRoot(MyaccountPage);
-  }
-
-  redirectToRole() {
-    this.nav.setRoot(RolePage);
-  }
+  
   doAdd() {
     localStorage.setItem("microtime", "");
     this.nav.setRoot(AddcommentsinfoPage, {
@@ -271,4 +256,22 @@ export class CommentsinfoPage {
     });
     notification.present();
   }
+
+
+ 
+  redirectToUser() {
+    this.nav.setRoot(UnitsPage);
+  }
+  redirectToMessage() {
+    this.nav.setRoot(EmailPage);
+  }
+  redirectCalendar() {
+    this.nav.setRoot(CalendarPage);
+  }
+  redirectToMaps() {
+    this.nav.setRoot(MapsPage);
+  }
+  redirectToSettings() {
+    this.nav.setRoot(MyaccountPage);
+  }   
 }

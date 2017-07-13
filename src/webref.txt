@@ -42,3 +42,10 @@ https://forum.ionicframework.com/t/hide-footer-when-keyboard-appear/9254/9
 https://stackoverflow.com/questions/36630543/hide-footer-when-keyboard-appear-ionic
 https://stackoverflow.com/questions/42716744/hide-footer-when-keyboard-appears-ionic2
 
+
+
+
+Push Notification:-
+
+http://tphangout.com/ionic-2-push-notifications-2/
+

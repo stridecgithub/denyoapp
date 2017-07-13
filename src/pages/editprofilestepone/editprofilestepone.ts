@@ -5,10 +5,15 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { EditprofilesteptwoPage } from '../editprofilesteptwo/editprofilesteptwo';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { UserPage } from '../user/user';
-import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
-import { UnitsPage } from '../units/units';
 import { RolePage } from '../role/role';
+import { MyaccountPage } from '../myaccount/myaccount';
+import { UnitsPage } from '../units/units';
+import { NotificationPage } from '../notification/notification';
+import { MapsPage } from '../maps/maps';
+import { ReportsPage } from '../reports/reports';
+import { CalendarPage } from '../calendar/calendar';
+import { EmailPage } from '../email/email';
 import 'rxjs/add/operator/map';
 /**
  * Generated class for the AddcompanygroupPage page.
@@ -255,21 +260,23 @@ export class EditprofilesteponePage {
   previous() {
     this.nav.setRoot(MyaccountPage);
   }
-  
-redirectToUser() {
-    this.nav.setRoot(UserPage);
+  notification() {
+    this.nav.setRoot(NotificationPage);
   }
-  redirectToUnitGroup() {
-    this.nav.setRoot(UnitgroupPage);
-  }
-  redirectToUnits() {
+  redirectToUser() {
     this.nav.setRoot(UnitsPage);
   }
-  redirectToMyAccount() {
+  redirectToMessage() {
+    this.nav.setRoot(EmailPage);
+  }
+  redirectCalendar() {
+    this.nav.setRoot(CalendarPage);
+  }
+  redirectToMaps() {
+    this.nav.setRoot(MapsPage);
+  }
+  redirectToSettings() {
     this.nav.setRoot(MyaccountPage);
-  }
-  redirectToRole() {
-    this.nav.setRoot(RolePage);
-  }
+  }  
 }
 

@@ -1,9 +1,14 @@
 import { Component } from '@angular/core';
 import {  NavController, ToastController, AlertController, NavParams } from 'ionic-angular';
 import 'rxjs/add/operator/map';
-
+import { MyaccountPage } from '../myaccount/myaccount';
+import { UnitsPage } from '../units/units';
+import { NotificationPage } from '../notification/notification';
+import { MapsPage } from '../maps/maps';
+import { ReportsPage } from '../reports/reports';
+import { CalendarPage } from '../calendar/calendar';
+import { EmailPage } from '../email/email';
 import { AddalarmPage } from '../addalarm/addalarm'; 
-
 /**
  * Generated class for the AlarmdetailsPage page.
  *
@@ -74,4 +79,22 @@ export class AlarmdetailsPage {
   {
      this.nav.setRoot(AddalarmPage);
   }
+   notification() {
+    this.nav.setRoot(NotificationPage);
+  }
+  redirectToUser() {
+    this.nav.setRoot(UnitsPage);
+  }
+  redirectToMessage() {
+    this.nav.setRoot(EmailPage);
+  }
+  redirectCalendar() {
+    this.nav.setRoot(CalendarPage);
+  }
+  redirectToMaps() {
+    this.nav.setRoot(MapsPage);
+  }
+  redirectToSettings() {
+    this.nav.setRoot(MyaccountPage);
+  } 
 }
