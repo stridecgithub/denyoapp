@@ -3,7 +3,10 @@ page-addunitgroup {
     background-color:white;
 }
 
-v
+.button-inner{
+  position:relative;
+  bottom:12px;
+}
 .text-input-md, .text-input{border:1px solid #f2f2f2;margin: 10px 0 20px;min-height: 35px;padding: 0 10px; width: 100%;}
 .label-md[stacked] {
     font-size: 14px;
@@ -14,7 +17,26 @@ ion-navbar.toolbar {
 ion-navbar ion-buttons {
     margin-right: 15px;
 }
-.button-md-primary{width:100%;padding: 14px 1.1em;height:inherit;font-size: 16px;}
+.button-md-primary{padding: 14px 1.1em;height:inherit;font-size: 16px;}
+.scroll-content{background:#fff;}
+.bar-buttons-md{order:inherit}
+ion-navbar.toolbar{background:#f0f0f0;}
+   .label-md[stacked]{
+        font-size: 14px;
+        color:black;
+        font-weight:bold;
+
+    }
+
+   .item-button{
+       background-color:#009ACD;
+       text-transform:capitalize;
+   }
+
+   ion-input, ion-textarea,ion-select {    
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
 .scroll-content{background:#fff;}
     .header{
  color : #071C89;

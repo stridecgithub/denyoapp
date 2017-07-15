@@ -38,7 +38,7 @@ export class AddreporttemplatePage {
   public availableheading = [];
   public availableheadingitem = [];
   pageTitle: string;
-
+  public selecteddata: any;
   public recordID: any = null;
   public isEdited: boolean = false;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
@@ -50,7 +50,9 @@ export class AddreporttemplatePage {
     this.loginas = localStorage.getItem("userInfoName");
     // Create form builder validation rules
     this.form = fb.group({
-      "templatename": ["", Validators.required]
+      "templatename": ["", Validators.required],
+        "selecteddata": [""]
+      
     });
 
     this.userId = localStorage.getItem("userInfoId");
@@ -199,8 +201,9 @@ export class AddreporttemplatePage {
 
   }
   updateEntry() {
-    console.log("Edit");
-    console.log(JSON.stringify(this.getCheckboxData));
+    console.log("1");
+    console.log("2"+JSON.stringify(this.selecteddata));
+    console.log("2"+this.form.controls["selecteddata"].value);
     let templatename: string = this.form.controls["templatename"].value
     let body: string = "is_mobile=1&templatename=" + templatename + "&data=" + JSON.stringify(this.getCheckboxData) + "&id=" + this.recordID + "&ses_login_id=" + this.userId,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
@@ -240,7 +243,7 @@ export class AddreporttemplatePage {
     console.log(item.availableheading);
     for (let ava = 0; ava < item.availableheading; ava++) {
       console.log(item.availableheading[ava]);
-      this.getCheckBoxValue(item.availableheading[ava]);
+      //this.getCheckBoxValue(item.availableheading[ava]);
     }
 
   }
@@ -288,7 +291,7 @@ export class AddreporttemplatePage {
   previous() {
     this.nav.setRoot(ReporttemplatePage);
   }
-   notification() {
+  notification() {
     this.nav.setRoot(NotificationPage);
   }
   redirectToUser() {
@@ -305,5 +308,5 @@ export class AddreporttemplatePage {
   }
   redirectToSettings() {
     this.nav.setRoot(MyaccountPage);
-  }  
+  }
 }

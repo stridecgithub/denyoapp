@@ -72,7 +72,9 @@ export class MyaccountPage {
           this.country = res.settings[0].country_name;
           this.job_position = res.settings[0].job_position;
           this.accountcreatedby = res.settings[0].report_to;
-          if (res.settings[0].photo_filename == 'undefined' && res.settings[0].photo_filename == undefined) {
+          console.log("A"+res.settings[0].photo_filename);
+          if (res.settings[0].photo_filename != 'undefined' && res.settings[0].photo_filename != undefined) {
+             console.log("B");
             this.photo = this.apiServiceURL + "/staffphotos/" + res.settings[0].photo_filename;
           }else{
             console.log('No photo available');            

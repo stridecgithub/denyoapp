@@ -1,5 +1,5 @@
 import { Component, NgZone } from '@angular/core';
-import {  NavController, NavParams, ToastController } from 'ionic-angular';
+import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { UserPage } from '../user/user';
@@ -35,6 +35,8 @@ export class UserorgchartPage {
   public last_name: any;
   public email: any;
   public userId: any;
+  public roleId: any;
+  public companyId:any;
   public country: any;
   public contact: any;
   public createdby: any;
@@ -77,6 +79,7 @@ export class UserorgchartPage {
     private transfer: Transfer,
     private file: File, private ngZone: NgZone) {
     this.loginas = localStorage.getItem("userInfoName");
+    this.roleId = localStorage.getItem("userInfoRoleId");
     // Create form builder validation rules
     this.form = fb.group({
       "job_position": ["", Validators.required],
@@ -85,6 +88,7 @@ export class UserorgchartPage {
     });
 
     this.userId = localStorage.getItem("userInfoId");
+     this.companyId = localStorage.getItem("userInfoCompanyId");
   }
 
   ionViewDidLoad() {
@@ -343,7 +347,7 @@ export class UserorgchartPage {
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/getcompanies?loginid="+this.userId;
+      url: any = this.apiServiceURL + "/getcompanies?loginid=" + this.userId;
     let res;
     this.http.get(url, options)
       .subscribe(data => {
@@ -357,12 +361,13 @@ export class UserorgchartPage {
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/getstaffs";
+      url: any = this.apiServiceURL + "/getstaffs?loginid="+this.userId+"&company_id="+this.companyId;
     let res;
+    console.log("Report To API:" + url)
     this.http.get(url, options)
       .subscribe(data => {
         res = data.json();
-       // this.responseResultReportTo="N/A";
+        // this.responseResultReportTo="N/A";
         this.responseResultReportTo = res.staffslist;
       });
 
@@ -432,7 +437,7 @@ export class UserorgchartPage {
   //http://denyoappv2.stridecdev.com/staff/store
   //main.js:61474 firstname=Kannan&lastname=Naga&photo=undefined&email=kn@gmail.com&country_id=4&contact_number=123456789&createdby=1&updatedby=1&username=nk&password=nk&role_id=1&personalhashtag=@nk&report_to=3&company_id=13&job_position=At prg
   //main.js:61622 File Name is:1497379310688.jpg
-   notification() {
+  notification() {
     this.navCtrl.setRoot(NotificationPage);
   }
   redirectToUser() {

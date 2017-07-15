@@ -58,6 +58,7 @@ export class CommentsinfoPage {
     console.log('ionViewDidLoadCommentsinfoPage');
   }
   ionViewWillEnter() {
+     this.unit_id =  localStorage.getItem("unitId");
     console.log("NUD"+localStorage.getItem("unitdetails"));
 
     if (this.NP.get("record")) {
@@ -66,7 +67,8 @@ export class CommentsinfoPage {
     this.reportData.startindex = 0;
     this.reportData.sort = "comment_id";
     this.doService();
-    this.unit_id = this.NP.get("record").unit_id;
+    //this.unit_id = this.NP.get("record").unit_id;
+   
     let body: string = "is_mobile=1&userid=" + this.userId +
       "&unitid=" + localStorage.getItem("unitId"),
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",

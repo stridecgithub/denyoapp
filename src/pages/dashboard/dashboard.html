@@ -6,6 +6,7 @@
     <ion-buttons end>
       <button ion-button (click)="notification()">
   <ion-icon ios="ios-notifications-outline" md="md-notifications-outline"></ion-icon>
+  <ion-badge item-end class="notificationcount" *ngIf="msgcount>0">{{this.msgcount}}</ion-badge>
 </button>
     </ion-buttons>
   </ion-navbar>
@@ -59,13 +60,15 @@
 <li>    
     <button ion-button icon-only (click)="redirectToMessage()" clear>
     	<ion-icon name="chatboxes" class="footer-icon">MESSAGE</ion-icon>
+      <ion-badge item-end class="messagecount">{{this.msgcount}}</ion-badge>
     </button>
+    <ion-badge color="danger"></ion-badge>
 </li>     
 <li>    
     <button ion-button icon-only (click)="redirectCalendar()" clear>
-    	<ion-icon name="camera" class="footer-icon">CALENDAR</ion-icon>
+    	<ion-icon name="bicycle" class="footer-icon">CALENDAR</ion-icon>
     </button>
-</li>     
+</li>      
 <li>    
     <button ion-button icon-only (click)="redirectToSettings()" clear>
     	<ion-icon name="settings" class="footer-icon">SETTING</ion-icon>

@@ -88,7 +88,7 @@
         <!--textarea (keyup)=address1get($event.target.value); id="example1" class="form-control" rows="8" [disabled]="readOnly" formControlName="alarmhashtags"
           rows="6" [(ngModel)]="alarmhashtags"></textarea-->
 <div>
-         <textarea (keyup)=address1get($event.target.value); name="to" id="to"  class="suggest form-control" onkeyup="sptions(event)" onblur="sptionshide()" rows="8" [disabled]="readOnly" formControlName="event_notes"
+         <textarea (keyup)=address1get($event.target.value); name="to" id="to"  class="suggest form-control" onkeyup="sptions(event,'')" onblur="sptionshide()" rows="8" [disabled]="readOnly" formControlName="event_notes"
           cols="62" [(ngModel)]="event_notes"></textarea>
 </div>
         <ion-item *ngIf="hideActionButton">
@@ -119,9 +119,9 @@
 </li>     
 <li>    
     <button ion-button icon-only (click)="redirectCalendar()" clear>
-    	<ion-icon name="camera" class="footer-icon">CALENDAR</ion-icon>
+    	<ion-icon name="bicycle" class="footer-icon">CALENDAR</ion-icon>
     </button>
-</li>     
+</li>      
 <li>    
     <button ion-button icon-only (click)="redirectToSettings()" clear>
     	<ion-icon name="settings" class="footer-icon">SETTING</ion-icon>

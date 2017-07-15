@@ -33,31 +33,22 @@
 <ion-content padding>
   <form [formGroup]="form" (ngSubmit)="saveEntry()" enctype='application/x-www-form-urlencoded' method="post">
     <ion-list>
-
+ <ion-item>
+    <button class="{{unitDetailData.colorcodeindications}}" style="float: left ;width:8px;height:100px">         
+        </button>
+        <button class="dot" (click)="viewunit()" style="float: right ;width:50px;height:50px;background-color:#ffffff"></button>
+    <button class="{{unitDetailData.favoriteindication}}" style="float: right ;width:50px;height:50px;background-color:#ffffff"></button>
+    <div style="overflow: hidden; padding-left: .5em;">
+      <h2><b>{{unitDetailData.unitname}}</b></h2>
+      <h2>Project Name:{{unitDetailData.projectname}}</h2>
+      <h2>Location:{{unitDetailData.location}}</h2>
+      <h2  *ngIf="unitDetailData.lat!=''">({{unitDetailData.lat}},{{unitDetailData.lng}})</h2>
+      
+    </div>
+  </ion-item>
 
       <ion-grid>
-        <ion-row>
-          <ion-col>
-            <p><b>Project Name :</b> Dum</p>
-            <p><b>Location :</b> Boonlay, Singapor
-              <br>(1.31425556,103.7093099)
-            </p>
-            <p><b>Next Servicing Date :</b> 2017 05 June</p>
-            <p><b>Running Hours :</b> 0.743</p>
-          </ion-col>
-
-          <!--ion-col>
-            <a href="#" (click)="getPrority(1)">
-              <ion-icon name="download{{service_priority_class1}}" style="color:aquamarine;font-size: 37px;"></ion-icon>
-            </a>
-          </ion-col>
-
-
-          <ion-col>
-            <a href="#" (click)="getPrority(2)">
-              <ion-icon name="alert{{service_priority_class2}}" style="color: brown;font-size: 37px;"></ion-icon>
-            </a>
-          </ion-col-->
+        <ion-row>      
 
            <img  (click)="getPrority(1)"  src="img/low_priority.png" style="width: 16px;
     height: 16px;
@@ -73,17 +64,18 @@
         <ion-label stacked>Subject <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
         <ion-input type="text" [disabled]="readOnly" formControlName="service_subject" [(ngModel)]="service_subject"></ion-input>
       </ion-item>
+     
 
-      <ion-item>
-        <ion-label stacked>Comments <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
-        <ion-textarea class="form-control" rows="8" [disabled]="readOnly" formControlName="comments" rows="6" [(ngModel)]="comments"></ion-textarea>
-      </ion-item>
+       <b>Comments</b> <span class="mandatory" *ngIf="hideActionButton">*</span>
+      <textarea  (keyup)=address1get($event.target.value); name="to" id="to"  class="sugges" onkeyup="sptions(event,'')" onblur="sptionshide()" class="form-control" rows="8" [disabled]="readOnly"
+        formControlName="comments" rows="10" [(ngModel)]="comments"></textarea>
+
+
 
       <p><b>Upload Images</b></p>
       <p>Maximum Number of upload photos:10</p>
 
-      <!--button (click)="takePictureURL()" *ngIf="isUploaded" ion-button color="primary" text-center block>Upload Photos</button-->
-
+     
       <div class="profile-image-wrapper" (click)="takePictureURL(micro_timestamp)" *ngIf="isUploaded">
         <div class="profile-image-placeholder">
           <ion-icon name="add" style="color: blue;
@@ -148,7 +140,7 @@
 </li>     
 <li>    
     <button ion-button icon-only (click)="redirectCalendar()" clear>
-    	<ion-icon name="camera" class="footer-icon">CALENDAR</ion-icon>
+    	<ion-icon name="bicycle" class="footer-icon">CALENDAR</ion-icon>
     </button>
 </li>     
 <li>    

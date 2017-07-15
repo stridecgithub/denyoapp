@@ -12,7 +12,7 @@ import { MapsPage } from '../maps/maps';
 import { ReportsPage } from '../reports/reports';
 import { CalendarPage } from '../calendar/calendar';
 import { EmailPage } from '../email/email';
-
+import { EnginedetailPage } from '../enginedetail/enginedetail';
 
 
 @Component({
@@ -74,5 +74,9 @@ model_id: '',
   }
   redirectToSettings() {
     this.nav.setRoot(MyaccountPage);
+  }
+
+   previous() {
+    this.navCtrl.setRoot(EnginedetailPage);
   }
 }

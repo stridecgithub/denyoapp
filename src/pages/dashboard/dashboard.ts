@@ -7,14 +7,19 @@ import { MapsPage } from '../maps/maps';
 import { ReportsPage } from '../reports/reports';
 import { CalendarPage } from '../calendar/calendar';
 import { EmailPage } from '../email/email';
+import { Http, Headers, RequestOptions } from '@angular/http';
 @Component({
   selector: 'page-dashboard',
   templateUrl: 'dashboard.html'
 })
 export class DashboardPage {
- public loginas: any;
-  constructor(public navCtrl: NavController,public nav: NavController) {
- this.loginas = localStorage.getItem("userInfoName");
+  public loginas: any;
+  public userId:any;
+  public msgcount:any;
+  private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
+  constructor(public http: Http,public navCtrl: NavController, public nav: NavController) {
+    this.loginas = localStorage.getItem("userInfoName");
+    this.userId = localStorage.getItem("userInfoId");
   }
 
   goPage(page) {
@@ -25,11 +30,11 @@ export class DashboardPage {
       this.nav.setRoot(ReportsPage);
     } else if (page == 'CalendarPage') {
       this.nav.setRoot(CalendarPage);
-    }else if (page == 'UnitsPage') {
+    } else if (page == 'UnitsPage') {
       this.nav.setRoot(UnitsPage);
     }
 
-  }  
+  }
 
   notification() {
     this.nav.setRoot(NotificationPage);
@@ -48,5 +53,22 @@ export class DashboardPage {
   }
   redirectToSettings() {
     this.nav.setRoot(MyaccountPage);
-  }  
+  }
+
+  ionViewWillEnter() {
+    let //body: string = "loginid=" + this.userId,
+      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/msgnotifycount?loginid=" + this.userId;
+    console.log(url);
+   // console.log(body);
+
+    this.http.get(url, options)
+      .subscribe((data) => {
+        console.log("Count Response Success:" + JSON.stringify(data.json()));
+       this.msgcount=data.json().msgcount;
+      });
+  }
+
 }

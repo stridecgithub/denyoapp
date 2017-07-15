@@ -62,6 +62,7 @@ export class HomePage {
           localStorage.setItem("userInfoName", res['staffdetails'][0].firstname);
           localStorage.setItem("userInfoEmail", res['staffdetails'][0].email);
           localStorage.setItem("userInfoCompanyId", res['staffdetails'][0].company_id);
+          localStorage.setItem("userInfoRoleId", res['staffdetails'][0].role_id);
           this.navCtrl.setRoot(DashboardPage);
         }
 

@@ -41,6 +41,7 @@ export class AddorgcharttwoPage {
   public country: any;
   public contact: any;
   public createdby: any;
+  public companyId:any;
   public photo: any;
   public username: any;
   public password: any;
@@ -79,6 +80,7 @@ export class AddorgcharttwoPage {
     private transfer: Transfer,
     private ngZone: NgZone) {
     this.loginas = localStorage.getItem("userInfoName");
+    this.companyId = localStorage.getItem("userInfoCompanyId");
     // Create form builder validation rules
     this.form = fb.group({
       "job_position": ["", Validators.required],
@@ -348,7 +350,7 @@ export class AddorgcharttwoPage {
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/getstaffs";
+     url: any = this.apiServiceURL + "/getstaffs?loginid="+this.userId+"&company_id="+this.companyId;
     let res;
     this.http.get(url, options)
       .subscribe(data => {

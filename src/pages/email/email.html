@@ -124,9 +124,8 @@
       </ion-refresher>
       <ion-list *ngIf="totalCountSend!=0">
         <ion-item-sliding *ngFor="let item of sendLists;">
-          <ion-item (click)="doDetails(item)">
-            <h2 *ngIf="item.message_readstatus!=1"><b>{{item.messages_subject}}</b></h2>
-            <h2 *ngIf="item.message_readstatus==1">{{item.messages_subject}}</h2>
+          <ion-item (click)="doDetails(item)">           
+            <h2>{{item.messages_subject}}</h2>
           </ion-item>
           <ion-item-options>
             <button class="trashcolor" (click)="doConfirm(item.message_id,item,'send')">                        
@@ -143,8 +142,8 @@
       <ion-list *ngSwitchCase="'compose'">
 
         <b>To</b> <span class="mandatory" *ngIf="hideActionButton">*</span>
-        <input type="text" (keyup)=address1get($event.target.value); name="to" id="to" class="sugges" onkeyup="sptions(event)" onblur="sptionshide()"
-          class="form-control" rows="8" [disabled]="readOnly" formControlName="to" rows="6" [(ngModel)]="to">
+        <input type="text" (keyup)=address1get($event.target.value); name="to" id="to" class="sugges" onkeyup="sptions(event,'message')" onblur="sptionshide()"
+          class="form-control" rows="10" [disabled]="readOnly" formControlName="to" [(ngModel)]="to">
         <div style="position: relative;top: 12px;">
           <span><ion-checkbox type="checkbox" name="copytome" formControlName="copytome"  [(ngModel)]="copytome"></ion-checkbox>&nbsp; Copy Mail</span>
           <span> 
@@ -241,7 +240,7 @@
 </li>     
 <li>    
     <button ion-button icon-only (click)="redirectCalendar()" clear>
-    	<ion-icon name="camera" class="footer-icon">CALENDAR</ion-icon>
+    	<ion-icon name="bicycle" class="footer-icon">CALENDAR</ion-icon>
     </button>
 </li>     
 <li>    

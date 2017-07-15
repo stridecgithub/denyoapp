@@ -75,13 +75,13 @@ export class AddunitgroupPage {
       console.log(this.NP.get("act"));
       this.isEdited = true;
       this.selectEntry(this.NP.get("record"));
-      // this.pageTitle = 'Edit Company Group';
+      this.pageTitle = 'Edit Unit Group';
       this.readOnly = false;
       this.hideActionButton = true;
     }
     else {
       this.isEdited = false;
-
+      this.pageTitle = 'Add Unit Group';
     }
   }
   selectEntry(item) {

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {  NavController, NavParams, ToastController } from 'ionic-angular';
+import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 //import { PasswordValidator } from '../../validators/password';
 import { UserorgchartPage } from '../userorgchart/userorgchart';
@@ -38,6 +38,7 @@ export class UseraccountPage {
   public re_password: any;
   public hashtag: any;
   public role: any;
+  public roleId: any;
   public form: FormGroup;
   public hideActionButton = true;
   public pageTitle: string;
@@ -45,11 +46,13 @@ export class UseraccountPage {
   public readOnly: boolean = false;
   public recordID: any = null;
   public responseResultRole;
+  public responseResultRoleDropDown = [];
   public loginas: any;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
 
   constructor(public http: Http, public navCtrl: NavController, public NP: NavParams, public fb: FormBuilder, public toastCtrl: ToastController) {
     this.loginas = localStorage.getItem("userInfoName");
+    this.roleId = localStorage.getItem("userInfoRoleId");
     this.form = fb.group({
       // "username": ["", Validators.required],
       "username": ["", Validators.compose([Validators.maxLength(30), Validators.required])],
@@ -297,8 +300,28 @@ export class UseraccountPage {
       .subscribe(data => {
         res = data.json();
         this.responseResultRole = res.roles;
-      });
+        console.log(JSON.stringify(this.responseResultRole));
+        if (this.responseResultRole.length > 0) {
+          for (let role in this.responseResultRole) {
 
+            if (this.roleId == '1') {
+              this.responseResultRoleDropDown.push({
+                role_id: this.responseResultRole[role].role_id,
+                role_name: this.responseResultRole[role].role_name
+              });
+            } else {
+              if (this.responseResultRole[role].role_id != '1') {
+                this.responseResultRoleDropDown.push({
+                  role_id: this.responseResultRole[role].role_id,
+                  role_name: this.responseResultRole[role].role_name
+                });
+              }
+
+            }
+
+          }
+        }
+      });
   }
 
   // Manage notifying the user of the outcome
@@ -317,7 +340,7 @@ export class UseraccountPage {
   addhashtag(val) {
     this.hashtag = "@" + val;
   }
-   notification() {
+  notification() {
     this.navCtrl.setRoot(NotificationPage);
   }
   redirectToUser() {

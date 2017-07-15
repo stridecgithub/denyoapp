@@ -49,9 +49,10 @@ export class EmailPage {
   public receiver_id;
   public pageTitle: any;
   pet: string = "";
-  choice:string="inbox";
+  choice: string = "inbox";
   public recordID: any;
   public userId: any;
+  public companyId: any;
   public str: any;
   public service_id: any;
   public serviced_by: any;
@@ -60,7 +61,7 @@ export class EmailPage {
   public messages_body: any;
   public next_service_date: any;
   public message_priority: any;
-  copytome: boolean
+  copytome: any;
   public serviced_by_name: any;
   public service_resources: any;
   public message_priority_class1: any;
@@ -100,11 +101,12 @@ export class EmailPage {
   constructor(private file: File, public http: Http, public loadingCtrl: LoadingController, public alertCtrl: AlertController, public NP: NavParams, public nav: NavController, public toastCtrl: ToastController, public navParams: NavParams, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera, private filechooser: FileChooser,
     private transfer: Transfer,
     private ngZone: NgZone) {
-    this.copytome = false;
+
     this.message_priority_class1 = "-outline";
     this.message_priority_class2 = "-outline";
     this.loginas = localStorage.getItem("userInfoName");
     this.userId = localStorage.getItem("userInfoId");
+    this.companyId = localStorage.getItem("userInfoCompanyId");
     this.str = '';
     this.form = formBuilder.group({
       subject: ['', Validators.required],
@@ -191,8 +193,8 @@ export class EmailPage {
   doSendInfinite(infiniteScroll) {
     console.log('InfinitScroll function calling...');
     console.log('A');
-    console.log("Total Count:" + this.totalCount)
-    if (this.sendData.startindex < this.totalCount && this.sendData.startindex > 0) {
+    console.log("Total Count:" + this.totalCountSend)
+    if (this.sendData.startindex < this.totalCountSend && this.sendData.startindex > 0) {
       console.log('B');
       this.doSend();
     }
@@ -327,7 +329,7 @@ export class EmailPage {
 
   ionViewWillEnter() {
     this.getPrority(1);
-
+    this.copytome = 0;
     console.log(JSON.stringify(this.NP.get("record")));
 
     if (this.NP.get("record")) {
@@ -501,6 +503,13 @@ export class EmailPage {
       console.log("Image Data" + JSON.stringify(this.addedImgLists));
       //let d = new Date();
       //let micro_timestamp = d.getFullYear() + "" + d.getMonth() + "" + d.getDate() + "" + d.getHours() + "" + d.getMinutes() + "" + d.getSeconds();
+/*
+      let tolocalstorage = localStorage.getItem('mentionedSelection');
+      console.log("Local Storage To:"+tolocalstorage)
+      if (tolocalstorage != '') {
+        to = localStorage.getItem('mentionedSelection');
+      }*/
+      console.log("To Final:" + to);
 
       this.createEntry(this.micro_timestamp, to, copytome, composemessagecontent, subject);
 
@@ -547,7 +556,7 @@ export class EmailPage {
           this.sendLists = [];
 
           this.to = '';
-          this.copytome = false;
+          this.copytome = 0;
           this.getPrority(1);
           this.subject = '';
           this.choice = 'send';
@@ -781,7 +790,7 @@ export class EmailPage {
 
   reply() {
     this.to = '';
-    this.copytome = false;
+    this.copytome = 0;
     this.getPrority(1);
     this.subject = '';
     this.choice = 'compose';
@@ -789,10 +798,10 @@ export class EmailPage {
 
   forward(messages_body) {
     this.to = '';
-    this.copytome = false;
+    this.copytome = 0;
     this.getPrority(1);
     this.subject = '';
-    this.composemessagecontent = "-----Forward Message-----" +"\n"+ messages_body;
+    this.composemessagecontent = "-----Forward Message-----" + "\n" + messages_body;
     this.choice = 'compose';
   }
 
@@ -832,6 +841,6 @@ export class EmailPage {
 
 
   }
-  
+
 
 }

@@ -124,13 +124,23 @@ export class AddserviceinfoPage {
     this.is_request = false;
     console.log(JSON.stringify(this.NP.get("record")));
     let editItem = this.NP.get("record");
-    this.unitDetailData.unit_id = editItem.unit_id;
-    this.unitDetailData.unitname = editItem.unitname;
-    this.unitDetailData.location = editItem.location;
-    this.unitDetailData.projectname = editItem.projectname;
+    //this.unitDetailData.unit_id = editItem.unit_id;
+    //this.unitDetailData.unitname = editItem.unitname;
+    //this.unitDetailData.location = editItem.location;
+    //this.unitDetailData.projectname = editItem.projectname;
     this.unitDetailData.runninghr = editItem.runninghr;
     this.unitDetailData.gen_status = editItem.gen_status;
     this.unitDetailData.nextservicedate = editItem.nextservicedate;
+
+
+    this.unitDetailData.unit_id = localStorage.getItem("unitId");
+    this.unitDetailData.unitname = localStorage.getItem("unitunitname");
+    this.unitDetailData.location = localStorage.getItem("unitlocation");
+    this.unitDetailData.projectname = localStorage.getItem("unitprojectname");
+    this.unitDetailData.colorcodeindications = localStorage.getItem("unitcolorcode");
+    this.unitDetailData.lat = localStorage.getItem("unitlat");
+    this.unitDetailData.lng = localStorage.getItem("unitlng");
+
     if (this.NP.get("record")) {
       this.selectEntry(this.NP.get("record"));
       this.service_id = this.NP.get("record").service_id;
@@ -453,8 +463,8 @@ export class AddserviceinfoPage {
 
 
 
- 
- 
+
+
   selectEntry(item) {
     this.serviced_by = item.serviced_by;
     this.serviced_datetime = item.serviced_datetime;
@@ -547,7 +557,7 @@ export class AddserviceinfoPage {
   }
 
 
- notification() {
+  notification() {
     this.nav.setRoot(NotificationPage);
   }
   redirectToUser() {
@@ -564,6 +574,6 @@ export class AddserviceinfoPage {
   }
   redirectToSettings() {
     this.nav.setRoot(MyaccountPage);
-  }  
+  }
 
 }

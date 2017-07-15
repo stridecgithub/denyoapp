@@ -91,10 +91,10 @@ export class RolePage {
         res = data.json();
         if (res.roles.length > 0) {
           this.reportAllLists = res.roles;
-          this.totalCount = res[0].totalCount;
+         // this.totalCount = res[0].totalCount;
           this.reportData.startindex += this.reportData.results;
         } else {
-          this.totalCount = 0;
+          //this.totalCount = 0;
         }
         
 

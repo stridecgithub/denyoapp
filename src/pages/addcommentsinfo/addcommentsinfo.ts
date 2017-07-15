@@ -79,7 +79,7 @@ export class AddcommentsinfoPage {
     this.unitDetailData.loginas = localStorage.getItem("userInfoName");
     this.unitDetailData.userId = localStorage.getItem("userInfoId");
     this.unitDetailData.serviced_by = localStorage.getItem("userInfoName");
-this.comment_unitid = localStorage.getItem("unitId");
+    this.comment_unitid = localStorage.getItem("unitId");
     this.form = formBuilder.group({
       profilePic: [''],
       comments: ['', Validators.required],
@@ -120,7 +120,7 @@ this.comment_unitid = localStorage.getItem("unitId");
       if (this.NP.get("act") == 'Add') {
         this.isEdited = false;
         this.unitDetailData.pageTitle = 'Add Comments';
-       // this.comment_unitid = this.NP.get("unit_id");
+        // this.comment_unitid = this.NP.get("unit_id");
       } else {
         //this.comment_unitid = this.NP.get("record").comment_unitid;
         this.unitDetailData.pageTitle = 'Edit Comments';
@@ -130,7 +130,13 @@ this.comment_unitid = localStorage.getItem("unitId");
       console.log("Comment Unit Id:" + this.comment_unitid);
     }
 
-
+    this.unitDetailData.unit_id = localStorage.getItem("unitId");
+    this.unitDetailData.unitname = localStorage.getItem("unitunitname");
+    this.unitDetailData.location = localStorage.getItem("unitlocation");
+    this.unitDetailData.projectname = localStorage.getItem("unitprojectname");
+    this.unitDetailData.colorcodeindications = localStorage.getItem("unitcolorcode");
+    this.unitDetailData.lat = localStorage.getItem("unitlat");
+    this.unitDetailData.lng = localStorage.getItem("unitlng");
 
 
   }
@@ -401,11 +407,13 @@ this.comment_unitid = localStorage.getItem("unitId");
   }
 
 
-  
+
   previous() {
-    this.nav.setRoot(AlarmPage);
+    this.nav.setRoot(CommentsinfoPage, {
+      record: this.NP.get("record")
+    });
   }
-   notification() {
+  notification() {
     this.nav.setRoot(NotificationPage);
   }
   redirectToUser() {
@@ -422,10 +430,10 @@ this.comment_unitid = localStorage.getItem("unitId");
   }
   redirectToSettings() {
     this.nav.setRoot(MyaccountPage);
-  }  
+  }
 
   selectEntry(item) {
-    console.log("Comment Information Item Object:"+JSON.stringify(item));
+    console.log("Comment Information Item Object:" + JSON.stringify(item));
 
     this.comments = item.comment_remark;
     this.service_subject = item.comment_subject;

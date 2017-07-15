@@ -52,10 +52,9 @@
         </p>
 
         <div><b>Select Notification List</b> <span class="mandatory" *ngIf="hideActionButton">*</span></div>
-        <!--textarea (keyup)=address1get($event.target.value); id="example1" class="form-control" rows="8" [disabled]="readOnly" formControlName="alarmhashtags"
-          rows="6" [(ngModel)]="alarmhashtags"></textarea-->
+        
 
-        <textarea (keyup)=address1get($event.target.value); name="to" id="to"  class="suggest form-control" onkeyup="sptions(event)" onblur="sptionshide()" rows="8" [disabled]="readOnly" formControlName="alarmhashtags"
+        <textarea (keyup)=address1get($event.target.value); name="to" id="to"  class="suggest form-control" onkeyup="sptions(event,'')" onblur="sptionshide()" rows="8" [disabled]="readOnly" formControlName="alarmhashtags"
           rows="6" [(ngModel)]="alarmhashtags"></textarea>
 
 
@@ -67,10 +66,7 @@
         </ion-item>
 
 
-        <!--ion-item *ngFor="let contactnameData of contactnameArray;let i = index;">         
-          <ion-input type="text" placeholder="{{contactnameData.placeholder}}" [disabled]="readOnly" formControlName="{{contactnameData.name}}"
-            [(ngModel)]="contactnameData.name"></ion-input>
-        </ion-item-->
+        
 
 
         <ion-input *ngIf="cont2" type="text" placeholder="Name" [disabled]="readOnly" formControlName="contact_name_2" [(ngModel)]="contact_name_2"></ion-input>
@@ -124,9 +120,9 @@
 </li>     
 <li>    
     <button ion-button icon-only (click)="redirectCalendar()" clear>
-    	<ion-icon name="camera" class="footer-icon">CALENDAR</ion-icon>
+    	<ion-icon name="bicycle" class="footer-icon">CALENDAR</ion-icon>
     </button>
-</li>     
+</li>    
 <li>    
     <button ion-button icon-only (click)="redirectToSettings()" clear>
     	<ion-icon name="settings" class="footer-icon">SETTING</ion-icon>

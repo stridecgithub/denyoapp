@@ -66,7 +66,9 @@ function sendmsg() {
 	SasiyaAjax.setloadimage("contentview2", "<img src='assets/icon/procs.gif'/>");
 	SasiyaAjax.Connect_call_back("http://denyoappv2.stridecdev.com/denyo2.php?method=sent&id=1", 'get', '', 0, function (tx, n) { e("contentview2").innerHTML = tx; });
 }
-function sptions(ev) {
+function sptions(ev, action) {
+	var userId = localStorage.getItem("userInfoId");
+	var companyId = localStorage.getItem("userInfoCompanyId");
 	var evt = ev || window.event || {}; var code = ev.charCode || ev.keyCode || ev.which;
 	var kCd = ev.keyCode || ev.charCode; var obj = evt.target;
 	//var code = (e.keyCode ? e.keyCode : e.which);
@@ -79,12 +81,12 @@ function sptions(ev) {
 		//e('pol').innerHTML=obj.offsetWidth+"=="+obj.offsetHeight;	 
 		var strkeys = front.substring(atpos + 1, atpos.length);
 		//alert(strkeys);
-		if (strkeys.length >= 1) {
-			SasiyaAjax.Connect_call_back("http://denyoappv2.stridecdev.com/denyo2.php?method=atmention&id=" + id + "&tem=" + strkeys, 'get', '', 0, function (tx, n) {
+		//if (strkeys.length >= 1) {
+			SasiyaAjax.Connect_call_back("http://denyoappv2.stridecdev.com/api/atmentioned.php?method=atmention&id=" + id + "&tem=" + strkeys + "&act=" + action + "&companyId=" + companyId + "&userId=" + userId, 'get', '', 0, function (tx, n) {
 				if (!e("suschoise")) { var el = document.createElement("div"); el.className = "subx"; el.id = "suschoise"; document.body.appendChild(el); }
 				var tmp = e("suschoise"); tmp.innerHTML = tx; tmp.style.display = "block";
 				tmp.style.width = obj.offsetWidth + "px";
-				var searchbox = obj; // add that id, not just class name to html
+				var searchbox = obj; // add that id, not just class name to html				
 				var pos = getPosition(searchbox);
 				tmp.style.left = obj.offsetLeft + "px";
 				// tmp.style.left = pos[0] + "px";
@@ -92,10 +94,10 @@ function sptions(ev) {
 				tmp.style.visibility = "visible";
 
 			});
-		}
+		//}
 	}
 }
-function setct(obj) { insertAtCaret("to", obj.innerHTML); if (e("suschoise")) { e("suschoise").style.display = "none"; } }
+function setct(obj) { insertAtCaret("to", obj.innerHTML);  if (e("suschoise")) { e("suschoise").style.display = "none"; }  localStorage.setItem('mentionedSelection',obj.innerHTML); }
 function sptionshide() { setTimeout(function () { if (e("suschoise")) { e("suschoise").style.display = "none"; } }, 150); }
 function postmsg(obj) {
 

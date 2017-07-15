@@ -267,6 +267,12 @@ console.log(JSON.stringify(this.selectedAction));*/
       return false;
     } else if (act == 'detail') {
       localStorage.setItem("unitId", unitId);
+      localStorage.setItem("unitunitname", item.unitname);
+      localStorage.setItem("unitlocation", item.location);
+      localStorage.setItem("unitprojectname", item.projectname);
+      localStorage.setItem("unitcolorcode", item.colorcode);
+      localStorage.setItem("unitlat", item.lat);
+      localStorage.setItem("unitlng", item.lng);
       
       this.nav.setRoot(UnitdetailsPage, {
         record: item

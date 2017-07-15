@@ -24,11 +24,11 @@ background-color:red;
 .toolbar-md-bluedark{min-height:80px;}
 .toolbar-md-bluedark .toolbar-background-md{background:#f2f2f2;}
 
-.ion-md-home:before, .ion-md-contacts:before, .ion-md-chatboxes:before, .ion-md-camera:before, .ion-md-settings:before{display:none;}
+.ion-md-home:before, .ion-md-contacts:before, .ion-md-chatboxes:before, .ion-md-bicycle:before, .ion-md-settings:before{display:none;}
 .ion-md-home{background:url(../img/map_icon.png) no-repeat center top;}
 .ion-md-contacts{background:url(../img/units_icon.png) no-repeat center top;}
 .ion-md-chatboxes{background:url(../img/msg_icon.png) no-repeat center top;}
-.ion-md-camera{background:url(../img/calendar_icon.png) no-repeat center top;}
+.ion-md-bicycle{background:url(../img/calendar_icon.png) no-repeat center top;}
 .ion-md-settings{background:url(../img/setting_icon.png) no-repeat center top;}
 .footer-icon{color:#888888;font-size:18px!important;text-align:center;padding:42px 0 0 0!important;}
 .toolbar-md-bluedark .button[icon-only]{height:inherit;margin:0;}
@@ -37,7 +37,7 @@ background-color:red;
 .quick-list{margin:0 auto;display:table;padding:0;width:100%;}
 .quick-list li{display: inline;margin:0 10px;list-style:none;font-family: "Roboto", "Helvetica Neue", sans-serif;font-style:normal;}
 .quick-list li button ion-icon{font-family: "Roboto", "Helvetica Neue", sans-serif;font-style:normal;font-size:0px!important;width:32px;height:32px;margin-top:10px;}
-.maps, .units, .reports, .calendar{display: table;background-position:center top!important;}
+.maps, .units, .reports, .bicycle{display: table;background-position:center top!important;}
 .icon-left span, .icon-right span{margin-top: 80px!important;}
 ion-footer .toolbar-md-bluedark{min-height:auto;}
 .footer-md-bluedark .toolbar-md-bluedark .button[icon-only]{height:auto;}

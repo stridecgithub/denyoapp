@@ -142,19 +142,19 @@ export class UnitdetailsPage {
 		}
 
 
-		this.unitDetailData.unit_id = editItem.unit_id;
-		this.unitDetailData.unitname = editItem.unitname;
-		this.unitDetailData.location = editItem.location;
-		this.unitDetailData.projectname = editItem.projectname;
-		this.unitDetailData.colorcodeindications = colorcode;
+		this.unitDetailData.unit_id =  localStorage.getItem("unitId");
+		this.unitDetailData.unitname = localStorage.getItem("unitunitname"); 
+		this.unitDetailData.location =localStorage.getItem("unitlocation"); 
+		this.unitDetailData.projectname = localStorage.getItem("unitprojectname"); 
+		this.unitDetailData.colorcodeindications = localStorage.getItem("unitcolorcode");
 		this.unitDetailData.gen_status = editItem.gen_status;
 		this.unitDetailData.nextservicedate = editItem.nextservicedate;
 		this.unitDetailData.alarmnotificationto = editItem.nextservicedate;
 		this.unitDetailData.favoriteindication = favorite;
-		this.unitDetailData.lat=editItem.lat;
-		this.unitDetailData.lng=editItem.lng;
+		this.unitDetailData.lat=localStorage.getItem("unitlat");
+		this.unitDetailData.lng=localStorage.getItem("unitlng");
 		console.log(this.apiServiceURL + "/" + localStorage.getItem("unitId")+ "/1/unitdetails");
-		this.iframeContent = "<iframe id='filecontainer' src=" + this.apiServiceURL + "/" + localStorage.getItem("unitId") + "/1/unitdetails height=350 width=100% frameborder=0></iframe>";
+		this.iframeContent = "<iframe id='filecontainer' src=" + this.apiServiceURL + "/" + this.unitDetailData.unit_id + "/1/unitdetails height=350 width=100% frameborder=0></iframe>";
 
 		//http://denyoappv2.stridecdev.com/getcount?loginid=1&unitid=2
 
