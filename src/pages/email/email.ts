@@ -18,7 +18,7 @@ import { NotificationPage } from '../notification/notification';
 import { MapsPage } from '../maps/maps';
 import { ReportsPage } from '../reports/reports';
 import { CalendarPage } from '../calendar/calendar';
-
+import { Keyboard } from '@ionic-native/keyboard';
 
 /**
  * Generated class for the AddserviceinfoPage page.
@@ -29,7 +29,7 @@ import { CalendarPage } from '../calendar/calendar';
 @Component({
   selector: 'page-email',
   templateUrl: 'email.html',
-  providers: [Camera, FileChooser, Transfer, File, DatePicker]
+  providers: [Camera, FileChooser, Transfer, File, DatePicker,Keyboard]
 })
 export class EmailPage {
   @ViewChild('fileInput') fileInput;
@@ -81,6 +81,7 @@ export class EmailPage {
   public addedAttachList;
   public totalCount;
   public totalCountSend;
+  valueforngif = true;
   public inboxData: any =
   {
     status: '',
@@ -98,7 +99,7 @@ export class EmailPage {
     results: 8
   }
   public hideActionButton = true;
-  constructor(private file: File, public http: Http, public loadingCtrl: LoadingController, public alertCtrl: AlertController, public NP: NavParams, public nav: NavController, public toastCtrl: ToastController, public navParams: NavParams, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera, private filechooser: FileChooser,
+  constructor(public keyboard: Keyboard, private file: File, public http: Http, public loadingCtrl: LoadingController, public alertCtrl: AlertController, public NP: NavParams, public nav: NavController, public toastCtrl: ToastController, public navParams: NavParams, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera, private filechooser: FileChooser,
     private transfer: Transfer,
     private ngZone: NgZone) {
 
@@ -143,7 +144,10 @@ export class EmailPage {
     console.log('ionViewDidLoad AddserviceinfoPage');
 
   }
-
+  ionViewDidEnter() {
+    this.keyboard.onKeyboardShow().subscribe(() => { this.valueforngif = false })
+    this.keyboard.onKeyboardHide().subscribe(() => { this.valueforngif = true })
+  }
 
   /*******************/
   /* Pull to Refresh */
@@ -503,12 +507,12 @@ export class EmailPage {
       console.log("Image Data" + JSON.stringify(this.addedImgLists));
       //let d = new Date();
       //let micro_timestamp = d.getFullYear() + "" + d.getMonth() + "" + d.getDate() + "" + d.getHours() + "" + d.getMinutes() + "" + d.getSeconds();
-/*
-      let tolocalstorage = localStorage.getItem('mentionedSelection');
-      console.log("Local Storage To:"+tolocalstorage)
-      if (tolocalstorage != '') {
-        to = localStorage.getItem('mentionedSelection');
-      }*/
+      /*
+            let tolocalstorage = localStorage.getItem('mentionedSelection');
+            console.log("Local Storage To:"+tolocalstorage)
+            if (tolocalstorage != '') {
+              to = localStorage.getItem('mentionedSelection');
+            }*/
       console.log("To Final:" + to);
 
       this.createEntry(this.micro_timestamp, to, copytome, composemessagecontent, subject);
