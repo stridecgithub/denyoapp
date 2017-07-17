@@ -144,22 +144,22 @@ export class AddunitsthreePage {
             this.contact_name_1 = contactName;
             this.contact_number_1 = contactNumber;
           }
-          if (i == 1) {
+          if (i == 1 && contactName!='') {
             this.cont2 = true;
             this.contact_name_2 = contactName;
             this.contact_number_2 = contactNumber;
           }
-          if (i == 2) {
+          if (i == 2 && contactName!='') {
             this.cont3 = true;
             this.contact_name_3 = contactName;
             this.contact_number_3 = contactNumber;
           }
-          if (i == 3) {
+          if (i == 3 && contactName!='') {
             this.cont4 = true;
             this.contact_name_4 = contactName;
             this.contact_number_4 = contactNumber;
           }
-          if (i == 4) {
+          if (i == 4 && contactName!='') {
             this.cont5 = true;
             this.contact_name_5 = contactName;
             this.contact_number_5 = contactNumber;
