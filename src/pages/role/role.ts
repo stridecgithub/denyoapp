@@ -271,7 +271,11 @@ export class RolePage {
   redirectToSettings() {
     this.nav.setRoot(MyaccountPage);
   }
-
+ previous() {
+    this.nav.setRoot(MyaccountPage);
+     
+    
+  }
    
 }
 
