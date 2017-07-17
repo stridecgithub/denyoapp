@@ -56,8 +56,8 @@ export class CalendarPage {
   alarmselected: any;
   eventsselected: any;
   public eventIdentify = [];
-  public serviceIdentify = [];  
-  public alarmIdentity = [];  
+  public serviceIdentify = [];
+  public alarmIdentity = [];
   public companyId: any;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   constructor(public toastCtrl: ToastController, public alertCtrl: AlertController, public navCtrl: NavController, private datePicker: DatePicker, private http: Http, public loadingCtrl: LoadingController) {
@@ -181,6 +181,10 @@ export class CalendarPage {
     let monthYear = monthNames[curdate.getMonth()] + " " + curdate.getUTCFullYear();
     return monthYear;
   }
+
+  getlength(number) {
+    return number.toString().length;
+  }
   onTimeSelected(ev) {
     this.calendarResultAll = [];
     this.calendarResultService = [];
@@ -213,14 +217,16 @@ export class CalendarPage {
         year = ev.selectedTime.getFullYear();
         date = ev.selectedTime.getDate();
       }
-
-      if (month.length == 1) {
+      console.log("Month Vlue" + month);
+      console.log("Month Length" + month.length);
+      if (this.getlength(month) == 1) {
         month = '0' + month;
       } else {
         month = month;
       }
 
-      if (date.length == 1) {
+      console.log("Date Length" + date.length);
+      if (this.getlength(date) == 1) {
         date = '0' + date
       } else {
         date = date;
@@ -230,7 +236,7 @@ export class CalendarPage {
     } else {
       dateStr = "";
     }
-
+    console.log("Date Selection:" + dateStr);
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
@@ -318,20 +324,85 @@ export class CalendarPage {
           }
         } else {
 
-          console.log("All Events:"+data.json().allevents.length);
-           console.log("All Service:"+data.json().allservices.length);
-            console.log("All Alarms:"+data.json().allalarms.length);
-          /*
+          console.log("All Events:" + data.json().allevents.length);
+          console.log("All Service:" + data.json().allservices.length);
+          console.log("All Alarms:" + data.json().allalarms.length);
+
           if (ev != '') {
-            if (data.json().events.length > 0) {
+           console.log('ev'+ev);
+           console.log(dtstr);
+            /* if (data.json().events.length > 0) {
               this.calendarResultEvent = data.json().events;
               this.totalCountEvent = data.json().events.length;
             } else {
               this.calendarResultEvent = [];
               this.totalCountEvent = 0;
               this.noeventtitle = 'There is No Event';
+            }*/
+            if (dtstr == '') {
+              this.eventIdentify = data.json().allevents;
+              for (var i = 0; i < this.eventIdentify.length; i += 1) {
+                this.calendarResultEvent.push({
+                  event_title: this.eventIdentify[i]['event_title'],
+                  event_date: this.eventIdentify[i]['event_date'],
+                  event_location: this.eventIdentify[i]['event_location'],
+                  event_remark: this.eventIdentify[i]['event_remark'],
+                  event_addedby_name: this.eventIdentify[i]['event_addedby_name'],
+                  event_type: 'E'
+                });
+              }
+
+
+              this.serviceIdentify = data.json().allservices;
+              for (var j = 0; j < this.serviceIdentify.length; j += 1) {
+                this.calendarResultEvent.push({
+                  event_title: this.serviceIdentify[j]['service_subject'],
+                  event_date: this.serviceIdentify[j]['serviced_datetime'],
+                  event_remark: this.serviceIdentify[j]['service_remark'],
+                  event_location: this.serviceIdentify[j]['service_location'],
+                  event_addedby_name: this.serviceIdentify[j]['serviced_by_name'],
+                  event_type: 'S'
+                });
+
+              }
+
+
+              this.alarmIdentity = data.json().allalarms;
+              for (var k = 0; k < this.alarmIdentity.length; k += 1) {
+                this.calendarResultEvent.push({
+                  event_title: this.alarmIdentity[k]['alarm_name'],
+                  event_date: this.alarmIdentity[k]['alarm_received_date'],
+                  event_remark: this.alarmIdentity[k]['alarm_remark'],
+                  event_location: this.alarmIdentity[k]['alarm_location'],
+                  event_addedby_name: this.alarmIdentity[k]['alarm_assginedby_name'],
+                  event_type: 'A'
+                });
+
+              }
+            } else {
+              if (data.json().events.length > 0) {
+                this.eventIdentify = data.json().events;
+                for (var i = 0; i < this.eventIdentify.length; i += 1) {
+                  this.calendarResultEvent.push({
+                    event_title: this.eventIdentify[i]['event_title'],
+                    event_date: this.eventIdentify[i]['event_date'],
+                    event_location: this.eventIdentify[i]['event_location'],
+                    event_remark: this.eventIdentify[i]['event_remark'],
+                    event_addedby_name: this.eventIdentify[i]['event_addedby_name']
+                  });
+                }
+
+               // this.calendarResultEvent = data.json().events;
+                this.totalCountEvent = this.eventIdentify.length;
+              } else {
+                this.calendarResultEvent = [];
+                this.totalCountEvent = 0;
+                this.noeventtitle = 'There is No Event';
+              }
             }
+            console.log("Date wise selection calendar response:" + JSON.stringify(this.calendarResultEvent));
           } else {
+            console.log('not ev');
             if (data.json().allevents.length > 0) {
               this.calendarResultEvent = data.json().allevents;
               this.totalCountEvent = data.json().allevents.length;
@@ -341,7 +412,7 @@ export class CalendarPage {
               this.noeventtitle = 'There is No Event';
             }
           }
-          */
+
         }
 
       });
@@ -432,7 +503,7 @@ export class CalendarPage {
 
     this.http.get(url, options)
       .subscribe((data) => {
-        let res = data.json();       
+        let res = data.json();
         this.eventIdentify = res.allevents;
         for (var i = 0; i < this.eventIdentify.length; i += 1) {
           var startTime;
@@ -480,17 +551,17 @@ export class CalendarPage {
             endTime: endTime,
             allDay: true
           });
-         
+
         }
 
 
-         this.alarmIdentity = res.allalarms;
+        this.alarmIdentity = res.allalarms;
         for (var k = 0; k < this.alarmIdentity.length; k += 1) {
           var startTime;
           var endTime;
-          var substrdt=this.alarmIdentity[k]['alarm_received_date'];//.substring(0, 10)
-          console.log("Date Substr result"+substrdt);
-          var service_date_array =substrdt.split('-');
+          var substrdt = this.alarmIdentity[k]['alarm_received_date'];//.substring(0, 10)
+          console.log("Date Substr result" + substrdt);
+          var service_date_array = substrdt.split('-');
           var yearstr = service_date_array[0];
           var monthstr = parseInt(service_date_array[1], 10) - 1;
           var datestr = parseInt(service_date_array[2], 10);
@@ -508,21 +579,21 @@ export class CalendarPage {
             endTime: endTime,
             allDay: true
           });
-         
+
         }
 
 
         // If the request was successful notify the user
         if (data.status === 200) {
-        
+
 
         }
         // Otherwise let 'em know anyway
         else {
-         
+
         }
 
-    
+
 
         this.eventSource = events;
 
@@ -546,7 +617,7 @@ export class CalendarPage {
       let yrstr = dateStr[0];
       let mnstr = dateStr[1];
       let dtstr = dateStr[2];
-
+  
       var date = new Date();
       // var eventType = Math.floor(Math.random() * 2);
       var startDay = Math.floor(Math.random() * 90) - 45;
@@ -557,7 +628,7 @@ export class CalendarPage {
       var endMinute = Math.floor(Math.random() * 180) + startMinute;
       startTime = new Date(yrstr, mnstr, dtstr + startDay, 0, date.getMinutes() + startMinute);
       endTime = new Date(yrstr, mnstr, dtstr + endDay, 0, date.getMinutes() + endMinute);
-
+  
       //[{"event_id":"9","event_title":"Evt","event_date":"2017-06-29","event_time":"6.45AM","event_location":"Thiruppalai","event_remark":"","event_added_by":"1","event_addedby_name":"Super Admin"},
       events.push({
         title: dynamicEventData[dynData].event_title,
@@ -632,7 +703,7 @@ export class CalendarPage {
     }
   }
 
-  
+
   previous() {
     this.navCtrl.setRoot(HomePage);
   }

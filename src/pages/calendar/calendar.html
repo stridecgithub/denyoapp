@@ -89,7 +89,7 @@
     <div [ngSwitch]="pet">
       <ion-list class="eventlist-grid" *ngSwitchCase="'ALL'">
 
-        <ion-item *ngFor="let item of calendarResultEvent; let i = index" [attr.data-index]="i">
+        <!--ion-item *ngFor="let item of calendarResultEvent; let i = index" [attr.data-index]="i">
           <div>
             <h2 clear item-right><b>Event:{{item.event_title}}  </b></h2>
           </div>
@@ -97,7 +97,43 @@
           <div>Location:{{item.event_location}}</div>
           <div>Notes:{{item.event_remark}}</div>
           <div>Event By:{{item.event_addedby_name}}</div>
+        </ion-item-->
+
+
+        <ion-item *ngFor="let item of calendarResultEvent">
+          <div *ngIf="item.event_type=='E'">
+            <div>
+              <h2 clear item-right><b>Event:{{item.event_title}}  </b></h2>
+            </div>
+            <div>Date & Time:{{item.event_date}}</div>
+            <div>Location:{{item.event_location}}</div>
+            <div>Notes:{{item.event_remark}}</div>
+            <div>Event By:{{item.event_addedby_name}}</div>
+          </div>
+
+          <div *ngIf="item.event_type=='S'">
+            <div>
+              <h2 clear item-right><b>Service:{{item.event_title}}  </b></h2>
+            </div>
+            <div>Date & Time:{{item.event_date}}</div>
+            <div>Location:{{item.event_location}}</div>
+            <div>Notes:{{item.event_remark}}</div>
+            <div>Serviced By:{{item.event_addedby_name}}</div>
+          </div>
+
+          <div *ngIf="item.event_type=='A'">
+            <div>
+              <h2 clear item-right><b>Alarm:{{item.event_title}}  </b></h2>
+            </div>
+            <div>Date & Time:{{item.event_date}}</div>
+            <div>Location:{{item.event_location}}</div>
+            <div>Notes:{{item.event_remark}}</div>
+            <div>Alarm Assigned By:{{item.event_addedby_name}}</div>
+          </div>
         </ion-item>
+
+
+
 
         <ion-item *ngFor="let item of calendarResultService; let i = index" [attr.data-index]="i">
           <div>
@@ -115,7 +151,7 @@
 
             <h2 clear item-right><b>Alarm:{{item.alarm_name}}  </b></h2>
           </div>
-          <div>Date & Time:{{item.alarm_assigned_date}}</div>
+          <div>Date & Time:{{item.alarm_received_date}}</div>
           <div>Location:{{item.alarm_location}}</div>
           <div>Notes:{{item.alarm_remark}}</div>
           <div>Alarm Assigned By:{{item.alarm_assginedby_name}}</div>
@@ -134,14 +170,14 @@
             <div>Notes:{{item.event_remark}}</div>
             <div>Event By:{{item.event_addedby_name}}</div>
           </ion-item>
-          <ion-item-options>
+          <!--ion-item-options>
             <button class="editcolor" (click)="doEdit(item,'edit')">                      
                         <ion-icon name="create" class="icon-size"></ion-icon>
                     </button>
             <button class="trashcolor" (click)="doConfirm(item.service_id,item)">                        
                          <ion-icon name="trash" class="icon-size"></ion-icon>
                     </button>
-          </ion-item-options>
+          </ion-item-options-->
         </ion-item-sliding>
         <ion-item *ngIf="totalCount==0">
           <div class="error">There is No Event</div>
@@ -173,7 +209,7 @@
           <div>
             <h2 clear item-right><b>Alarm:{{item.alarm_name}}  </b></h2>
           </div>
-          <div>Date & Time:{{item.alarm_assigned_date}}</div>
+          <div>Date & Time:{{item.alarm_received_date}}</div>
           <div>Location:{{item.alarm_location}}</div>
           <div>Notes:{{item.alarm_remark}}</div>
           <div>Alarm Assigned By:{{item.alarm_assginedby_name}}</div>
@@ -187,14 +223,45 @@
     </div>
 
     <div [ngSwitch]="!pet">
-      <ion-item *ngFor="let item of calendarResultEvent; let i = index" [attr.data-index]="i">
-        <div>
-          <h2 clear item-right><b>Event:{{item.event_title}}  </b></h2>
+      <ion-item *ngFor="let item of calendarResultEvent">
+        <!--div>
+          <h2 clear item-right><b>Event111:{{item.event_title}}  </b></h2>
         </div>
         <div>Date & Time:{{item.event_date}}</div>
         <div>Location:{{item.event_location}}</div>
         <div>Notes:{{item.event_remark}}</div>
-        <div>Event By:{{item.event_by_name}}</div>
+        <div>Event By:{{item.event_by_name}}</div-->
+
+         <div *ngIf="item.event_type=='E'">
+            <div>
+              <h2 clear item-right><b>Event:{{item.event_title}}  </b></h2>
+            </div>
+            <div>Date & Time:{{item.event_date}}</div>
+            <div>Location:{{item.event_location}}</div>
+            <div>Notes:{{item.event_remark}}</div>
+            <div>Event By:{{item.event_addedby_name}}</div>
+          </div>
+
+          <div *ngIf="item.event_type=='S'">
+            <div>
+              <h2 clear item-right><b>Service:{{item.event_title}}  </b></h2>
+            </div>
+            <div>Date & Time:{{item.event_date}}</div>
+            <div>Location:{{item.event_location}}</div>
+            <div>Notes:{{item.event_remark}}</div>
+            <div>Serviced By:{{item.event_addedby_name}}</div>
+          </div>
+
+          <div *ngIf="item.event_type=='A'">
+            <div>
+              <h2 clear item-right><b>Alarm:{{item.event_title}}  </b></h2>
+            </div>
+            <div>Date & Time:{{item.event_date}}</div>
+            <div>Location:{{item.event_location}}</div>
+            <div>Notes:{{item.event_remark}}</div>
+            <div>Alarm Assigned By:{{item.event_addedby_name}}</div>
+          </div>
+          
       </ion-item>
       <ion-item *ngIf="totalCountEvent==0">
         <div class="error">{{noeventtitle}}</div>
@@ -204,33 +271,33 @@
 </ion-content>
 <ion-footer color="bluedark">
   <ion-toolbar color="bluedark">
-<ul class="quick-list">
-<li>
-    <button ion-button icon-only clear (click)="redirectToMaps()">
+    <ul class="quick-list">
+      <li>
+        <button ion-button icon-only clear (click)="redirectToMaps()">
     	<ion-icon name="home" class="footer-icon">MAPS</ion-icon>
     </button>
-</li>  
-<li>  
-    <button ion-button icon-only (click)="redirectToUser()" clear>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectToUser()" clear>
     	<ion-icon name="contacts" class="footer-icon">UNITS</ion-icon>
     </button>
-</li>     
-<li>    
-    <button ion-button icon-only (click)="redirectToMessage()" clear>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectToMessage()" clear>
     	<ion-icon name="chatboxes" class="footer-icon">MESSAGE</ion-icon>
     </button>
-</li>     
-<li>    
-    <button ion-button icon-only clear>
+      </li>
+      <li>
+        <button ion-button icon-only clear>
     	<ion-icon name="bicycle" class="footer-icon">CALENDAR</ion-icon>
     </button>
-</li>     
-<li>    
-    <button ion-button icon-only (click)="redirectToSettings()" clear>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectToSettings()" clear>
     	<ion-icon name="settings" class="footer-icon">SETTING</ion-icon>
     </button>
-</li>    
-</ul>
+      </li>
+    </ul>
 
   </ion-toolbar>
 </ion-footer>
