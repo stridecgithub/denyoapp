@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {  NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
+import { NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
 import { CompanygroupPage } from '../companygroup/companygroup';
 import { UserPage } from '../user/user';
 import { LoadingController } from 'ionic-angular';
@@ -23,7 +23,7 @@ import { AddrequestsupportPage } from '../addrequestsupport/addrequestsupport';
   templateUrl: 'notification.html',
 })
 export class NotificationPage {
-  public pageTitle: string; 
+  public pageTitle: string;
   public atMentionedInfo = [];
   public reportData: any =
   {
@@ -104,9 +104,9 @@ export class NotificationPage {
     if (this.reportData.sort == '') {
       this.reportData.sort = "comapny";
     }
-   // let editItem = this.NP.get("record");
+    // let editItem = this.NP.get("record");
 
-   let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+    let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
       // url: any = this.apiServiceURL + "/reporttemplate?is_mobile=1";
@@ -116,17 +116,19 @@ export class NotificationPage {
     this.http.get(url, options)
       .subscribe((data) => {
         res = data.json();
-        if (res.notification.length > 0) {
-          for (let notifications in res.notification) {
-            this.reportAllLists.push({
-              id: res.notification[notifications].id,
-              content: res.notification[notifications].content
-            });
+        if (res.notification != undefined) {
+          if (res.notification.length > 0) {
+            for (let notifications in res.notification) {
+              this.reportAllLists.push({
+                id: res.notification[notifications].id,
+                content: res.notification[notifications].content
+              });
+            }
+            this.totalCount = res.totalCount;
+            this.reportData.startindex += this.reportData.results;
+          } else {
+            //this.totalCount = 0;
           }
-          this.totalCount = res.totalCount;
-          this.reportData.startindex += this.reportData.results;
-        } else {
-          //this.totalCount = 0;
         }
         // console.log("Total Record:2" + this.totalCount);
 
