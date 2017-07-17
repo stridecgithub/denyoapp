@@ -38,7 +38,6 @@ export class AddreporttemplatePage {
   public availableheading = [];
   public availableheadingitem = [];
   pageTitle: string;
-  public selecteddata: any;
   public recordID: any = null;
   public isEdited: boolean = false;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
@@ -50,9 +49,8 @@ export class AddreporttemplatePage {
     this.loginas = localStorage.getItem("userInfoName");
     // Create form builder validation rules
     this.form = fb.group({
-      "templatename": ["", Validators.required],
-        "selecteddata": [""]
-      
+      "templatename": ["", Validators.required]
+
     });
 
     this.userId = localStorage.getItem("userInfoId");
@@ -67,66 +65,13 @@ export class AddreporttemplatePage {
       this.pageTitle = "Edit Template";
       console.log(this.NP.get("record"));
       this.isEdited = true;
-      //this.selectoption=true;
-
       this.selectEntry(this.NP.get("record"));
-      // this.pageTitle = 'Edit Company Group';
-      //this.readOnly = false;
-      //this.hideActionButton = true;
     }
     else {
       this.pageTitle = "Add Template";
       this.isEdited = false;
-      /*let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
-        headers: any = new Headers({ 'Content-Type': type }),
-        options: any = new RequestOptions({ headers: headers }),
-        url: any = this.apiServiceURL + "/getavailableheading";
-      let res;
-      console.log(url);
-      this.http.get(url, options)
-        .subscribe((data) => {
-          res = data.json();
 
-          console.log(JSON.stringify(res));
-          console.log("2" + res.comm_datas);
-          for (let comm_data in res.comm_datas) {
-            this.template_data = res.comm_datas[comm_data].dates.split(",");
-            for (var i = 0; i < this.template_data.length; i++) {
-              this.items.push({ id: i, name: this.template_data[i] });
-
-            }
-          }
-        });
-        */
-      //  this.selectoption=true;
     }
-
-    /*if (this.NP.get("availableheading")) {
-      let getavailableheading = this.NP.get("availableheading");
-     
-        this.availableheading = getavailableheading.split(",");
-        console.log("Length" + this.availableheading.length);
-        let checkvalue = false;
-        for (let i = 0; i < this.availableheading.length; i++) {
-          if (this.NP.get("record")) {
-            let a = this.NP.get("record").availableheading.indexOf(this.availableheading[i]);
-            if (a > 0) {
-              checkvalue = true;
-              console.log(this.availableheading[i] + ":" + checkvalue);
-            } else {
-              checkvalue = false;
-              console.log(this.availableheading[i] + ":" + checkvalue);
-            }
-          }
-          this.availableheadingitem.push(
-            {
-              val: this.availableheading[i],
-              check: checkvalue
-            }
-          )
-        }
-      
-    }*/
 
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
@@ -137,25 +82,19 @@ export class AddreporttemplatePage {
     this.http.get(url, options)
       .subscribe((data) => {
         res = data.json();
-        //this.availableheadingitem = res.templatedata;
         let checkvalue = false;
         if (res.templatedata.length > 0) {
 
           for (let tempdata in res.templatedata) {
 
             if (this.NP.get("record")) {
-              /*let a = this.NP.get("record").availableheading.indexOf(res.templatedata[tempdata].availabledata);
-              if (a > 0) {
-                checkvalue = true;
-                console.log(res.templatedata[tempdata].availabledata + ":" + checkvalue);
-              } else {
-                checkvalue = false;
-                console.log(res.templatedata[tempdata].availabledata + ":" + checkvalue);
-              }
-              */
               if (this.in_array(res.templatedata[tempdata].availabledata, this.NP.get("record").availableheading) != -1) {
                 //is in array
                 checkvalue = true;
+
+                this.getCheckboxData.push({
+                  availabledata: res.templatedata[tempdata].availabledata
+                });
               } else {
                 checkvalue = false;
               }
@@ -201,9 +140,6 @@ export class AddreporttemplatePage {
 
   }
   updateEntry() {
-    console.log("1");
-    console.log("2"+JSON.stringify(this.selecteddata));
-    console.log("2"+this.form.controls["selecteddata"].value);
     let templatename: string = this.form.controls["templatename"].value
     let body: string = "is_mobile=1&templatename=" + templatename + "&data=" + JSON.stringify(this.getCheckboxData) + "&id=" + this.recordID + "&ses_login_id=" + this.userId,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
@@ -219,7 +155,6 @@ export class AddreporttemplatePage {
         // If the request was successful notify the user
         if (data.status === 200) {
           console.log("Msg Results:-" + res.msg[0].result);
-          // this.hideForm = true;
           if (res.msg[0].result > 0) {
             this.sendNotification(res.msg[0].result);
             this.nav.setRoot(ReporttemplatePage);
@@ -243,7 +178,6 @@ export class AddreporttemplatePage {
     console.log(item.availableheading);
     for (let ava = 0; ava < item.availableheading; ava++) {
       console.log(item.availableheading[ava]);
-      //this.getCheckBoxValue(item.availableheading[ava]);
     }
 
   }
@@ -265,7 +199,6 @@ export class AddreporttemplatePage {
         // If the request was successful notify the user
         if (data.status === 200) {
           console.log("Msg Results:-" + res.msg[0].result);
-          // this.hideForm = true;
           if (res.msg[0].result > 0) {
             this.sendNotification(res.msg[0].result);
             this.nav.setRoot(ReporttemplatePage);
@@ -281,7 +214,6 @@ export class AddreporttemplatePage {
       });
   }
   sendNotification(message): void {
-    // this.isUploadedProcessing = false;
     let notification = this.toastCtrl.create({
       message: message,
       duration: 3000
