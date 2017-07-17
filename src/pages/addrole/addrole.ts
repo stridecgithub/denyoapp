@@ -1168,7 +1168,7 @@ if(res.roledata[11].view_action==1 )
         // this.rolepermissionData.setdeleteorg = res[19].setdeleteorg;
         
 
-        console.log("dashboardviewmap:" + res[1].dashboardviewunits);
+      //  console.log("dashboardviewmap:" + res[1].dashboardviewunits);
 
         console.log("Role Permission Data Response:" + JSON.stringify(data.json()));
 
