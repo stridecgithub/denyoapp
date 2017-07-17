@@ -16,6 +16,7 @@ export class DashboardPage {
   public loginas: any;
   public userId:any;
   public msgcount:any;
+  public notcount:any;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   constructor(public http: Http,public navCtrl: NavController, public nav: NavController) {
     this.loginas = localStorage.getItem("userInfoName");
@@ -68,6 +69,7 @@ export class DashboardPage {
       .subscribe((data) => {
         console.log("Count Response Success:" + JSON.stringify(data.json()));
        this.msgcount=data.json().msgcount;
+        this.notcount=0;
       });
   }
 

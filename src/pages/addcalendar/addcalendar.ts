@@ -14,6 +14,7 @@ import { MapsPage } from '../maps/maps';
 import { ReportsPage } from '../reports/reports';
 import { CalendarPage } from '../calendar/calendar';
 import { EmailPage } from '../email/email';
+import { DatePicker } from '@ionic-native/date-picker';
 /**
  * Generated class for the AddcompanygroupPage page.
  *
@@ -23,6 +24,7 @@ import { EmailPage } from '../email/email';
 @Component({
   selector: 'page-addcalendar',
   templateUrl: 'addcalendar.html',
+  providers: [DatePicker]
 })
 export class AddcalendarPage {
   // Define FormBuilder /model properties
@@ -34,7 +36,7 @@ export class AddcalendarPage {
   public event_location: any;
   public gethashtag: any;
   public event_unitid: any;
-  public companyId:any;
+  public companyId: any;
   public event_date: any;
   public event_title: any;
   public service_remark: any;
@@ -58,11 +60,16 @@ export class AddcalendarPage {
   // Property to store the recordID for when an existing entry is being edited
   public recordID: any = null;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
-  constructor(public nav: NavController,
+  constructor(private datePicker: DatePicker, public nav: NavController,
     public http: Http,
     public NP: NavParams,
     public fb: FormBuilder,
     public toastCtrl: ToastController) {
+    let curDateStr = new Date();
+    this.event_date =  curDateStr.getMonth() + "/" + curDateStr.getDate() + "/" + curDateStr.getFullYear();
+    // this.event_date ="07/17/2017";
+     this.event_date ="2017-07-17";
+    console.log("Current Date is:" + this.event_date);
     this.loginas = localStorage.getItem("userInfoName");
     // Create form builder validation rules
     this.form = fb.group({
@@ -438,7 +445,21 @@ export class AddcalendarPage {
     notification.present();
   }
 
- 
+
+
+  showDatePicker() {
+    this.datePicker.show({
+      date: new Date(),
+      mode: 'date',
+      androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
+    }).then(
+      date => {
+        this.event_date = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
+        console.log('Got date: ', date)
+      },
+      err => console.log('Error occurred while getting date: ', err)
+      );
+  }
   previous() {
     this.nav.setRoot(CalendarPage);
   }
@@ -459,7 +480,7 @@ export class AddcalendarPage {
   }
   redirectToSettings() {
     this.nav.setRoot(MyaccountPage);
-  }  
+  }
 
 }
 

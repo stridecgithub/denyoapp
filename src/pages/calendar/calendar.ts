@@ -317,11 +317,14 @@ export class CalendarPage {
             this.totalCount = 0;
           }
         } else {
-          //this.onSegmentChanged('EVENT');
+
+          console.log("All Events:"+data.json().allevents.length);
+           console.log("All Service:"+data.json().allservices.length);
+            console.log("All Alarms:"+data.json().allalarms.length);
+          /*
           if (ev != '') {
             if (data.json().events.length > 0) {
               this.calendarResultEvent = data.json().events;
-              //this.createRandomEventsDynamic(this.calendarResultEvent);
               this.totalCountEvent = data.json().events.length;
             } else {
               this.calendarResultEvent = [];
@@ -331,7 +334,6 @@ export class CalendarPage {
           } else {
             if (data.json().allevents.length > 0) {
               this.calendarResultEvent = data.json().allevents;
-              // this.createRandomEventsDynamic(this.calendarResultEvent);
               this.totalCountEvent = data.json().allevents.length;
             } else {
               this.calendarResultEvent = [];
@@ -339,6 +341,7 @@ export class CalendarPage {
               this.noeventtitle = 'There is No Event';
             }
           }
+          */
         }
 
       });
