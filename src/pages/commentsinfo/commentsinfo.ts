@@ -4,9 +4,11 @@ import { CompanygroupPage } from '../companygroup/companygroup';
 import { UserPage } from '../user/user';
 import { LoadingController } from 'ionic-angular';
 import { AddcommentsinfoPage } from '../addcommentsinfo/addcommentsinfo';
+import { AddserviceinfoPage } from '../addserviceinfo/addserviceinfo';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
 import { UnitdetailsPage } from '../unitdetails/unitdetails';
 import { CommentdetailsPage } from '../commentdetails/commentdetails';
+import { ServicedetailsPage } from '../servicedetails/servicedetails';
 import { RolePage } from '../role/role';
 import 'rxjs/add/operator/map';
 import { Http, Headers, RequestOptions } from '@angular/http';
@@ -196,19 +198,44 @@ export class CommentsinfoPage {
 
 
 
-  doEdit(item, act) {
-    localStorage.setItem("microtime", "");
+  doEdit(item, act,type) {
+    if(type.toLowerCase() == 'c')
+    {
+      console.log("comment")
+        localStorage.setItem("microtime", "");
     this.nav.setRoot(AddcommentsinfoPage, {
       record: item,
       act: 'Edit'
     });
+    }
+    if(type.toLowerCase() == 's')
+    {
+      console.log("service")
+       localStorage.setItem("microtime", "");
+    this.nav.setRoot(AddserviceinfoPage, {
+      record: item,
+      act: 'Edit'
+    });
+    }
+
+  
   }
-   details(item, act) {
+   details(item, act,type) {
+      if(type.toLowerCase() == 'c'){
     localStorage.setItem("microtime", "");
     this.nav.setRoot(CommentdetailsPage, {
       record: item,
       act: 'Edit'
     });
+      }
+ if(type.toLowerCase() == 's')
+ {
+    localStorage.setItem("microtime", "");
+    this.nav.setRoot(ServicedetailsPage, {
+      record: item,
+      act: 'Edit'
+    });
+ }
   }
 
   doConfirm(id, item) {

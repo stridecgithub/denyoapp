@@ -356,8 +356,10 @@ export class EmailPage {
 
     this.inboxData.startindex = 0;
     this.inboxData.sort = "messages_id";
+    this.inboxData.sortascdesc ="desc"
     this.sendData.startindex = 0;
     this.sendData.sort = "messages_id";
+    this.inboxData.sortascdesc ="desc"
     this.doInbox();
     this.doSend();
 
