@@ -568,6 +568,7 @@ export class EmailPage {
           this.choice = 'send';
           this.doSend();
           this.doInbox();
+          this.composemessagecontent="";
         }
         // Otherwise let 'em know anyway
         else {
