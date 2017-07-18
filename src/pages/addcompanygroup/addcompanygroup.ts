@@ -119,14 +119,21 @@ export class AddcompanygroupPage {
         console.log(JSON.stringify(data.json()));
         // If the request was successful notify the user
         if (data.status === 200) {
-          console.log("Msg Results:-" + res.msg[0].result);
+          console.log("Msg Results:-" + res.msg[0].Error);
           this.hideForm = true;
+          if(res.msg[0].Error == '1')
+          {
+ this.sendNotification(res.msg[0].result);
+          }
+          else
+          {
           if (res.msg[0].result > 0) {
             this.sendNotification(res.msg[0].result);
           } else {
             this.sendNotification(res.msg[0].result);
             this.nav.setRoot(CompanygroupPage);
           }
+        }
         }
         // Otherwise let 'em know anyway
         else {

@@ -167,7 +167,7 @@ export class ReporttemplatePage {
   doConfirm(id, item) {
     console.log("Deleted Id" + id);
     let confirm = this.alertCtrl.create({
-      message: 'Are you sure you want to delete this unit group?',
+      message: 'Are you sure you want to delete this report template?',
       buttons: [{
         text: 'Yes',
         handler: () => {
