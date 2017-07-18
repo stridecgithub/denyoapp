@@ -226,10 +226,17 @@ console.log(JSON.stringify(this.selectedAction));*/
       urlstr = "/unitlistaction/" + this.str + "/1/dashboard?ses_login_id=" + this.userId;
     }
     if (actpet == 'view') {
+      if(this.str=='')
+      {
+         this.sendNotification("Please select Atleast One Unit")
+      }
+      else
+      {
       this.nav.setRoot(UnitdetailsPage, {
         record: this.detailvalue
       });
       return false;
+      }
     }
 
     //http://denyoappv2.stridecdev.com/unitlistaction/4,6/1/delete
@@ -297,7 +304,7 @@ console.log(JSON.stringify(this.selectedAction));*/
   doConfirm(id, item) {
     console.log("Deleted Id" + id);
     let confirm = this.alertCtrl.create({
-      message: 'Are you sure you want to delete this user?',
+      message: 'Are you sure you want to delete this unit?',
       buttons: [{
         text: 'Yes',
         handler: () => {

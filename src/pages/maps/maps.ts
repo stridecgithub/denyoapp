@@ -490,10 +490,17 @@ console.log(JSON.stringify(this.selectedAction));*/
     let urlstr;
     if(act=='view')
     {
+      if(this.str=='')
+      {
+         this.sendNotification("Please select Atleast One Unit")
+      }
+      else
+      {
       this.navCtrl.setRoot(UnitdetailsPage, {
         record: this.detailvalue
       });
       return false;
+      }
     }
     if(act=='hide')
     {
