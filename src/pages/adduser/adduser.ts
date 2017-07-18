@@ -116,6 +116,53 @@ export class AdduserPage {
       this.isEdited = false;
       this.pageTitle = 'New User';
     }
+    if(this.NP.get("uservalue"))
+    {
+       let info = this.NP.get("uservalue");
+
+      //var objects = JSON.parse(info);
+      console.log("JSON.stringify:" + JSON.stringify(info));
+      console.log("Length:" + info.length);
+      console.log('A');
+      for (var key in info) {
+        console.log('B');
+        let keyindex;
+        if (this.NP.get("record")) {
+          keyindex = 0;
+        } else {
+          keyindex = 1;
+        }
+        console.log("Key:" + key);
+        console.log("Key Index:" + keyindex);
+        if (key == keyindex) {
+          console.log('Key' + key);
+          this.first_name = info[key].first_name;
+          this.last_name = info[key].last_name;
+          this.email = info[key].email;
+          this.country = info[key].country;
+          this.contact = info[key].contact;
+          this.photo = info[key].photo;
+        
+          console.log("First Name for User Account:" + this.first_name);
+          //console.log(JSON.stringify(this));
+        } else {
+          console.log('Key' + key);
+          this.first_name = info[0].first_name;
+          this.last_name = info[0].last_name;
+          this.email = info[0].email;
+          this.country = info[0].country;
+          this.contact = info[0].contact;
+          this.photo = info[0].photo;
+        
+          console.log("First Name for User Account:" + this.first_name);
+        }
+        /* this.userInfo.push({
+           info
+         });
+         console.log("User Information:" + JSON.stringify(this.userInfo));
+         */
+      }
+    }
     /*this.first_name = "Kannan";
     this.last_name = "Nagarathinam";
     this.email = "kannanrathvalli@gmail.com";

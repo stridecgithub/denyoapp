@@ -153,12 +153,29 @@ export class UseraccountPage {
           this.createdby = info[0].createdby;
           console.log("First Name for User Account:" + this.first_name);
         }
+
         /* this.userInfo.push({
            info
          });
          console.log("User Information:" + JSON.stringify(this.userInfo));
          */
       }
+    }
+      if(this.NP.get("uservalue"))
+    {
+       let info = this.NP.get("uservalue");
+        let keyindex = info.length - 1;
+         this.first_name = info[keyindex]['first_name'];
+          this.last_name = info[keyindex]['last_name'];
+          this.email = info[keyindex]['email'];
+          this.country = info[keyindex]['country'];
+          this.contact = info[keyindex]['contact'];
+          this.photo = info[keyindex]['photo'];
+         this.username = info[keyindex]['username'];
+      this.password = info[keyindex]['password'];
+      this.hashtag = info[keyindex]['hashtag'];
+      this.re_password=info[keyindex]['password'];
+      this.role = info[keyindex]['role'];
     }
 
 
@@ -334,7 +351,19 @@ export class UseraccountPage {
     notification.present();
   }
   previous() {
-    this.navCtrl.setRoot(AdduserPage);
+     this.userInfo.push({
+      photo: this.photo,
+      first_name: this.first_name,
+      last_name: this.last_name,
+      email: this.email,
+      country: this.country,
+      contact: this.contact,
+      createdby: this.createdby,
+
+    });
+    this.navCtrl.setRoot(AdduserPage, {
+      uservalue: this.userInfo
+    });
   }
 
   addhashtag(val) {

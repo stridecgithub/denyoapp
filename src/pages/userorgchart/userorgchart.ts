@@ -139,6 +139,7 @@ export class UserorgchartPage {
       this.hashtag = info[keyindex]['hashtag'];
       this.role = info[keyindex]['role'];
     }
+    
   }
 
 
@@ -374,7 +375,22 @@ export class UserorgchartPage {
   }
 
   previous() {
-    this.navCtrl.setRoot(UseraccountPage);
+     this.userInfo.push({
+      photo: this.photo,
+      first_name: this.first_name,
+      last_name: this.last_name,
+      email: this.email,
+      country: this.country,
+      contact: this.contact,
+      createdby: this.createdby,
+      username: this.username,
+      password: this.password,
+      hashtag: this.hashtag,
+      role: this.role
+    });
+   this.navCtrl.setRoot(UseraccountPage, {
+      uservalue: this.userInfo
+    });
   }
   fileTrans(path) {
     let fileName = path.substr(path.lastIndexOf('/') + 1);
