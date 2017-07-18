@@ -223,20 +223,18 @@ export class AddunitstwoPage {
 
     this.http.post(url, body, options)
       .subscribe(data => {
+        let res = data.json();
         // If the request was successful notify the user
         if (data.status === 200) {
-          console.log(JSON.stringify(data));
+          console.log(JSON.stringify(data.json()));
           this.hideForm = true;
+          if(res.msg[0].Error == '1')
+          {
           this.sendNotification(JSON.stringify(data));
         }
-        // Otherwise let 'em know anyway
-        else {
-          this.sendNotification('Something went wrong!');
-        }
-      });
-    // If Controller Id Check Unique
-
-    this.userInfo.push({
+        else
+        {
+ this.userInfo.push({
       unitname: unitname,
       projectname: projectname,
       controllerid: controllerid,
@@ -251,6 +249,16 @@ export class AddunitstwoPage {
       accountInfo: this.userInfo,
       record: this.NP.get("record")
     });
+        }
+        }
+        // Otherwise let 'em know anyway
+        else {
+          this.sendNotification('Something went wrong!');
+        }
+      });
+    // If Controller Id Check Unique
+
+   
   }
 
 
@@ -273,19 +281,18 @@ export class AddunitstwoPage {
     this.http.post(url, body, options)
       .subscribe(data => {
         // If the request was successful notify the user
+        let res = data.json();
+        // If the request was successful notify the user
         if (data.status === 200) {
-          console.log(JSON.stringify(data));
+          console.log(JSON.stringify(data.json()));
           this.hideForm = true;
-          this.sendNotification(JSON.stringify(data));
+          if(res.msg[0].Error == '1')
+          {
+          this.sendNotification(res.msg[0].result);
         }
-        // Otherwise let 'em know anyway
-        else {
-          this.sendNotification('Something went wrong!');
-        }
-      });
-    // If Controller Id Check Unique
-
-    this.userInfo.push({
+        else
+        {
+ this.userInfo.push({
       unitname: unitname,
       projectname: projectname,
       controllerid: controllerid,
@@ -300,6 +307,16 @@ export class AddunitstwoPage {
       accountInfo: this.userInfo,
       record: this.NP.get("record")
     });
+        }
+        }
+        // Otherwise let 'em know anyway
+        else {
+          this.sendNotification('Something went wrong!');
+        }
+      });
+    // If Controller Id Check Unique
+
+   
   }
 
   // Remove an existing record that has been selected in the page's HTML form
