@@ -139,7 +139,24 @@ export class AddreporttemplatePage {
 
 
   }
+  remove_duplicates(arr) {
+    // var obj = {};
+    // var ret_arr = [];
+    // for (var i = 0; i < arr.length; i++) {
+    //     obj[arr[i]] = true;
+    // }
+    // for (var key in obj) {
+    //     ret_arr.push(key);
+    //     console.log(key);
+    // }
+    // return ret_arr;
+    var uniqueArray = arr.filter(function(elem, pos) {
+    return arr.indexOf(elem) == pos;
+});
+}
   updateEntry() {
+    let getCheckbox=this.remove_duplicates(this.getCheckboxData);
+    console.log("Check"+getCheckbox);
     let templatename: string = this.form.controls["templatename"].value
     let body: string = "is_mobile=1&templatename=" + templatename + "&data=" + JSON.stringify(this.getCheckboxData) + "&id=" + this.recordID + "&ses_login_id=" + this.userId,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",

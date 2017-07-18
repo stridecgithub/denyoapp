@@ -145,6 +145,10 @@ export class AddserviceinfoPage {
       this.selectEntry(this.NP.get("record"));
       this.service_id = this.NP.get("record").service_id;
       if (this.NP.get("act") == 'Add') {
+        this.serviced_datetime="";
+      this.service_remark="";
+      this.service_subject="";
+      this.next_service_date="";
         this.isEdited = false;
         this.unitDetailData.pageTitle = 'Servicing Info Add';
         this.service_unitid = this.NP.get("unit_id");
@@ -267,7 +271,7 @@ export class AddserviceinfoPage {
          description: string = this.form.controls["long"].value,
          photos: object = this.addedImgLists;*/
 
-
+      
       let serviced_datetime: string = this.form.controls["serviced_datetime"].value,
         service_remark: string = this.form.controls["service_remark"].value,
         next_service_date: string = this.form.controls["next_service_date"].value,
@@ -311,6 +315,7 @@ export class AddserviceinfoPage {
     if (this.next_service_date == undefined) {
       this.next_service_date = next_service_date;
     }
+   
     let body: string = "is_mobile=1" +
       "&service_priority=" + this.service_priority +
       "&service_unitid=" + this.service_unitid +

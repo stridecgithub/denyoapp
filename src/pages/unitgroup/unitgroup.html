@@ -43,8 +43,8 @@
   <ion-item style="width: 100%; margin: 0; padding-left: 10px; background-color:#ffffff">
     <ion-label>Sort By</ion-label>
     <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="pet" (ionChange)="onSegmentChanged(pet)">
-      <ion-option value="unitgroup_id,asc" selected="true">Unit Group Ascending</ion-option>
-      <ion-option value="unitgroup_id,desc">Unit Group Descending</ion-option>
+      <ion-option value="unitgroup_id,desc" selected="true">Unit Group Ascending</ion-option>
+      <ion-option value="unitgroup_id,asc">Unit Group Descending</ion-option>
       <ion-option value="favorite,desc">Favorite</ion-option>
     </ion-select>
   </ion-item>
