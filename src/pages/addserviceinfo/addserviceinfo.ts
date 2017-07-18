@@ -417,9 +417,9 @@ export class AddserviceinfoPage {
       this.showDatePicker();
     }
     if (field == '1') {
-      this.serviced_datetime = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
+      this.serviced_datetime = date.getFullYear() + "-" + parseInt(date.getMonth()+1) + "-" + date.getDate();
     } else {
-      this.unitDetailData.nextServiceDate = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
+      this.unitDetailData.nextServiceDate = date.getFullYear() + "-" + parseInt(date.getMonth()+1) + "-" + date.getDate();
     }
   }
 

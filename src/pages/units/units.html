@@ -70,7 +70,7 @@
   </ion-item>
 
 
-  <div class="error" *ngIf="totalCount==0">No users entries found</div>
+  <div class="error" *ngIf="totalCount==0">No unit entries found</div>
   <div class="separator-line" *ngIf="totalCount!=0">&nbsp;</div>
   <ion-refresher (ionRefresh)="doRefresh($event)" *ngIf="totalCount!=0">
     <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
