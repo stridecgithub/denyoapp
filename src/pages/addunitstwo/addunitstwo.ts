@@ -212,6 +212,30 @@ export class AddunitstwoPage {
   // supplies a variable of key with a value of create followed by the key/value pairs
   // for the record data
   createEntry(unitname, projectname, controllerid, models_id, neaplateno, createdby) {
+
+    // If Controller Id Check Unique
+    let
+      body: string = "unit_id=0&controllerid=" + controllerid,
+      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/checkcontrollerid";
+
+    this.http.post(url, body, options)
+      .subscribe(data => {
+        // If the request was successful notify the user
+        if (data.status === 200) {
+          console.log(JSON.stringify(data));
+          this.hideForm = true;
+          this.sendNotification(JSON.stringify(data));
+        }
+        // Otherwise let 'em know anyway
+        else {
+          this.sendNotification('Something went wrong!');
+        }
+      });
+    // If Controller Id Check Unique
+
     this.userInfo.push({
       unitname: unitname,
       projectname: projectname,
@@ -237,6 +261,30 @@ export class AddunitstwoPage {
   // supplies a variable of key with a value of update followed by the key/value pairs
   // for the record data
   updateEntry(unitname, projectname, controllerid, models_id, neaplateno, createdby) {
+
+    // If Controller Id Check Unique
+    let
+      body: string = "unit_id="+this.NP.get("record").unit_id+"&controllerid=" + controllerid,
+      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/checkcontrollerid";
+
+    this.http.post(url, body, options)
+      .subscribe(data => {
+        // If the request was successful notify the user
+        if (data.status === 200) {
+          console.log(JSON.stringify(data));
+          this.hideForm = true;
+          this.sendNotification(JSON.stringify(data));
+        }
+        // Otherwise let 'em know anyway
+        else {
+          this.sendNotification('Something went wrong!');
+        }
+      });
+    // If Controller Id Check Unique
+
     this.userInfo.push({
       unitname: unitname,
       projectname: projectname,
@@ -293,9 +341,7 @@ export class AddunitstwoPage {
       models_id: string = this.form.controls["models_id"].value,
       neaplateno: string = this.form.controls["neaplateno"].value;
     console.log(this.form.controls);
-    /*if (this.addedImgLists) {
-      this.isUploadedProcessing = true;
-    }*/
+    
     if (this.isUploadedProcessing == false) {
       if (this.isEdited) {
         this.updateEntry(unitname, projectname, controllerid, models_id, neaplateno, this.userId);
@@ -370,7 +416,7 @@ export class AddunitstwoPage {
 
 
 
- 
+
   redirectToUser() {
     this.nav.setRoot(UnitsPage);
   }
@@ -385,7 +431,7 @@ export class AddunitstwoPage {
   }
   redirectToSettings() {
     this.nav.setRoot(MyaccountPage);
-  }  
+  }
 
 
 
