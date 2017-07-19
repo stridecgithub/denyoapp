@@ -5,6 +5,7 @@ import { CommentsinfoPage } from '../commentsinfo/commentsinfo';
 import { UserPage } from '../user/user';
 import { CompanygroupPage } from '../companygroup/companygroup';
 import { RolePage } from '../role/role';
+import { EnginedetailviewPage } from '../enginedetailview/enginedetailview';
 import { ViewunitsPage } from '../viewunits/viewunits';
 //import { AlarmPage } from '../alarm/alarm';
 import { AlarmlogPage } from '../alarmlog/alarmlog';
@@ -199,6 +200,12 @@ export class UnitdetailsPage {
 	}
 	alarm() {
 		this.nav.setRoot(AlarmlogPage, {
+			record: this.NP.get("record")
+		});
+	}
+	enginedetail()
+	{
+		this.nav.setRoot(EnginedetailviewPage, {
 			record: this.NP.get("record")
 		});
 	}
