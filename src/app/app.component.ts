@@ -8,6 +8,7 @@ import { HomePage } from '../pages/home/home';
 
 import { CompanygroupPage } from '../pages/companygroup/companygroup';
 import { UserPage } from '../pages/user/user';
+import { EnginedetailviewPage } from '../pages/enginedetailview/enginedetailview';
 
 
 import { MyaccountPage } from '../pages/myaccount/myaccount';

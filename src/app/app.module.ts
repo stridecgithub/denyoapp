@@ -52,6 +52,7 @@ import { ReportsPage } from '../pages/reports/reports';
 import { MessagesPage } from '../pages/messages/messages';
 import { AddenginedetailPage } from '../pages/addenginedetail/addenginedetail';
 import { EnginedetailPage } from '../pages/enginedetail/enginedetail';
+import { EnginedetailviewPage } from '../pages/enginedetailview/enginedetailview';
 import { EngineviewPage } from '../pages/engineview/engineview';
 import { ForgotpasswordPage } from '../pages/forgotpassword/forgotpassword';
 import { EmailPage } from '../pages/email/email';
@@ -118,6 +119,7 @@ import { CustomFooterComponent } from '../pages/custom-footer-component';
     TrendlinePage,
     NavbarComponent,
     CustomHeaderComponent,
+    EnginedetailviewPage,
     CustomFooterComponent
   ],
   imports: [
@@ -155,7 +157,7 @@ import { CustomFooterComponent } from '../pages/custom-footer-component';
     AddunitgroupPage,
     UnitgroupPage,
     ReporttemplatePage,
-
+EnginedetailviewPage,
     AddorgchartonePage,
     AddorgcharttwoPage,
     OrgchartPage,
