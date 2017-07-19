@@ -142,7 +142,7 @@
       <ion-list *ngSwitchCase="'compose'">
 
         <b>To</b> <span class="mandatory" *ngIf="hideActionButton">*</span>
-        <input type="text" (keyup)=address1get($event.target.value); name="to" id="to" class="sugges" onkeyup="sptions(event,'message')" onblur="sptionshide()"
+        <input type="text" (keyup)=address1get($event.target.value); name="to" id="to" class="sugges" onkeyup="message(event)" onblur="sptionshide()"
           class="form-control" rows="10" [disabled]="readOnly" formControlName="to" [(ngModel)]="to">
         <div style="position: relative;top: 12px;">
           <span><ion-checkbox type="checkbox" name="copytome" formControlName="copytome"  [(ngModel)]="copytome"></ion-checkbox>&nbsp; Copy Mail</span>

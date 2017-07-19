@@ -100,7 +100,7 @@
       </ion-item>
 
       <b>Remark</b> <span class="mandatory" *ngIf="hideActionButton">*</span>
-      <textarea type="text" (keyup)=address1get($event.target.value); name="to" id="to"  class="sugges" onkeyup="sptions(event,'')" onblur="sptionshide()" class="form-control" rows="8" [disabled]="readOnly"
+      <textarea type="text" (keyup)=address1get($event.target.value); name="to" id="to"  class="sugges" onkeyup="sptions(event)" onblur="sptionshide()" class="form-control" rows="8" [disabled]="readOnly"
         formControlName="service_remark" [(ngModel)]="service_remark" ></textarea>
 
 

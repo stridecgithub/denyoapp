@@ -86,6 +86,8 @@
                 "SENDER_ID": "XXXXXXXXX"
             }
         },
-        "platforms": []
+        "platforms": [
+            "android"
+        ]
     }
 }

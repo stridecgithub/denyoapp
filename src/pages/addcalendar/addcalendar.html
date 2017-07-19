@@ -96,7 +96,7 @@
         <!--textarea (keyup)=address1get($event.target.value); id="example1" class="form-control" rows="8" [disabled]="readOnly" formControlName="alarmhashtags"
           rows="6" [(ngModel)]="alarmhashtags"></textarea-->
 <div>
-         <textarea (keyup)=address1get($event.target.value); name="to" id="to"  class="suggest form-control" onkeyup="sptions(event,'')" onblur="sptionshide()" rows="8" [disabled]="readOnly" formControlName="event_notes"
+         <textarea (keyup)=address1get($event.target.value); name="to" id="to"  class="suggest form-control" onkeyup="sptions(event)" onblur="sptionshide()" rows="8" [disabled]="readOnly" formControlName="event_notes"
           cols="62" [(ngModel)]="event_notes"></textarea>
 </div>
         <ion-item *ngIf="hideActionButton">
