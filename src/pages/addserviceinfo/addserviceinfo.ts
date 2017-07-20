@@ -465,7 +465,8 @@ export class AddserviceinfoPage {
       androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
     }).then(
       date => {
-        this.unitDetailData.nextServiceDate = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
+        let monthstr=date.getMonth()+parseInt("1");
+        this.unitDetailData.nextServiceDate = date.getFullYear() + "-" + monthstr + "-" + date.getDate();
         console.log('Got date: ', date)
       },
       err => console.log('Error occurred while getting date: ', err)

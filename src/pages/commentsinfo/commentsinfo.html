@@ -69,18 +69,18 @@
         <h2><b>Comment By:</b>{{item.comment_by_name}}</h2>
         <h2><b>Remark:</b>{{item.comment_remark}}</h2>      
          <img *ngIf="item.comment_resources" src="img/attach.png" hspace="10"/>
-        <img src="img/high_priority.png" hspace="10" *ngIf="item.comment_priority=='1'" />
-        <img src="img/low_priority.png" hspace="10" *ngIf="item.comment_priority=='2'" />
+        <span style="float:right"> <img src="img/low_priority.png" hspace="10" *ngIf="item.comment_priority=='1' || item.comment_priority=='0'" />
+        <img src="img/high_priority.png" hspace="10" *ngIf="item.comment_priority=='2'" /></span>
       </ion-item>
       <ion-item (click)="details(item,'edit',item.event_type)" *ngIf="item.event_type=='S'">
         <h2><b>{{item.service_subject}}</b></h2>
         <h2><b>Service Date:</b>{{item.serviced_datetime}} <span style="float:right"> <img *ngIf="item.service_resources" src="img/attach.png" hspace="10"/>
-        <img src="img/high_priority.png" hspace="10" *ngIf="item.service_priority=='1'" />
-        <img src="img/low_priority.png" hspace="10" *ngIf="item.service_priority=='2'" /></span></h2>       
+        <img src="img/low_priority.png" hspace="10" *ngIf="item.service_priority=='1' || item.service_priority=='0'" />
+        <img src="img/high_priority.png" hspace="10" *ngIf="item.service_priority=='2'" /></span></h2>       
       
       </ion-item>
-      <ion-item (click)="details(item,'edit')" *ngIf="item.event_type=='A'">
-        <img src="img/alarm.png" hspace="10" />Alarm goes here
+      <ion-item (click)="details(item,'edit',item.event_type)" *ngIf="item.event_type=='A'">
+        <img src="img/alarm.png" hspace="10" />
       </ion-item>
       <ion-item-options>
         <!--button class="viewcolor" (click)="doEdit(item,'view')">

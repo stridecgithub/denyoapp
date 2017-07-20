@@ -225,12 +225,13 @@ export class AddcalendarPage {
       this.disunit = true;
     } else {
       this.unitfield = false;
+       this.disunit = false;
     }
   }
   // Determine whether we adding or editing a record
   // based on any supplied navigation parameters
   ionViewWillEnter() {
-    this.getCompanyListData();
+    this.getUnitListData();
     this.resetFields();
     if (this.NP.get("record")) {
       console.log(this.NP.get("act"));
@@ -267,6 +268,7 @@ export class AddcalendarPage {
   // for the record data
   createEntry(event_title, type_name, event_project, event_subject, event_unitid, event_time, event_location, service_remark, createdby) {
     //let updatedby = createdby;
+     service_remark=localStorage.getItem("atMentionResult");
     let body: string = "is_mobile=1&event_type="
       + type_name + "&event_title=" + event_title + "&event_subject=" + event_subject + "&event_date=" + this.event_date + "&event_time=" + event_time + "&service_unitid=" + event_unitid + "&event_location=" + event_location + "&service_remark=" + service_remark + "&event_added_by=" + createdby+"&serviced_by="+createdby,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
@@ -286,6 +288,7 @@ export class AddcalendarPage {
             this.sendNotification(res.msg[0].result);
           } else {
             this.sendNotification(res.msg[0].result);
+             localStorage.setItem("atMentionResult", '');
             this.nav.setRoot(CalendarPage);
           }
         }
@@ -307,6 +310,10 @@ export class AddcalendarPage {
   //http://denyoappv2.stridecdev.com/calendar/update?is_mobile=1&event_type=Event&event_title=sfd&event_location=london&event_date=2017-07-07&event_time=6:00 AM&ses_login_id=2&event_remark=@vignesh&id=1
 
   updateEntry(event_title, type_name, event_project, event_subject, event_unitid, event_time, event_location, service_remark, createdby) {
+   if (localStorage.getItem("atMentionResult") != '') {
+      service_remark = localStorage.getItem("atMentionResult");
+    }
+   
     let body: string = "is_mobile=1&event_type="
       + type_name + "&event_title=" + event_title + "&event_subject=" + event_subject + "&event_date=" + this.event_date + "&event_time=" + event_time + "&event_location=" + event_location + "&event_remark=" + service_remark + "&ses_login_id=" + createdby + "&id=" + this.recordID,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
@@ -324,6 +331,7 @@ export class AddcalendarPage {
           this.hideForm = true;
           if (res.msg[0].result > 0) {
             this.sendNotification(res.msg[0].result);
+             localStorage.setItem("atMentionResult", '');
           } else {
             this.sendNotification(res.msg[0].result);
             this.nav.setRoot(CompanygroupPage);
@@ -400,11 +408,11 @@ export class AddcalendarPage {
     this.event_unitid = "";
   }
 
-  getCompanyListData() {
+  getUnitListData() {
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/units?is_mobile=1&startindex=0&results=30&sort=unit_id&dir=asc&company_id=" + this.companyId;
+      url: any = this.apiServiceURL + "/units?is_mobile=1&startindex=0&results=30&sort=unit_id&dir=asc&company_id=" + this.companyId+"&loginid="+this.userId;
     let res;
     console.log("URL" + url);
     this.http.get(url, options)
