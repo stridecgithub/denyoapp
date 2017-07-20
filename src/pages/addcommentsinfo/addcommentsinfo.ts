@@ -41,6 +41,8 @@ export class AddcommentsinfoPage {
   public photoInfo = [];
   public addedImgListsArray = [];
   public addedImgLists = [];
+  public priority_lowclass: any;
+  public priority_highclass: any;
   progress: number;
   public recordID: any;
   public comment_unitid: any;
@@ -49,8 +51,6 @@ export class AddcommentsinfoPage {
   public service_subject: any;
   public service_priority: any;
   public service_resources: any;
-  public service_priority_class1: any;
-  public service_priority_class2: any;
   micro_timestamp: any;
   public isUploadedProcessing: boolean = false;
   public isProgress = false;
@@ -74,8 +74,8 @@ export class AddcommentsinfoPage {
   constructor(public http: Http, public alertCtrl: AlertController, private datePicker: DatePicker, public NP: NavParams, public nav: NavController, public toastCtrl: ToastController, public navParams: NavParams, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera, private filechooser: FileChooser,
     private transfer: Transfer,
     private file: File, private ngZone: NgZone) {
-    this.service_priority_class1 = "-outline";
-    this.service_priority_class2 = "-outline";
+    this.priority_highclass = '';
+    this.priority_lowclass = '';
     this.unitDetailData.loginas = localStorage.getItem("userInfoName");
     this.unitDetailData.userId = localStorage.getItem("userInfoId");
     this.unitDetailData.serviced_by = localStorage.getItem("userInfoName");
@@ -271,6 +271,7 @@ export class AddcommentsinfoPage {
   // supplies a variable of key with a value of create followed by the key/value pairs
   // for the record data
   createEntry(comments, service_subject, addedImgLists, remarkget, micro_timestamp) {
+    comments = localStorage.getItem("atMentionResult");
     if (this.service_priority == undefined) {
       this.service_priority = 1;
     }
@@ -304,6 +305,7 @@ export class AddcommentsinfoPage {
         if (data.status === 200) {
           localStorage.setItem("microtime", "");
           this.sendNotification(`Comments was successfully added`);
+           localStorage.setItem("atMentionResult", '');
           this.nav.setRoot(CommentsinfoPage, {
             record: this.NP.get("record")
           });
@@ -323,7 +325,9 @@ export class AddcommentsinfoPage {
   // supplies a variable of key with a value of update followed by the key/value pairs
   // for the record data
   updateEntry(comments, service_subject, addedImgLists, remarkget, micro_timestamp) {
-
+    if (localStorage.getItem("atMentionResult") != '') {
+      comments = localStorage.getItem("atMentionResult");
+    }
     if (this.service_priority == undefined) {
       this.service_priority = 1;
     }
@@ -331,7 +335,7 @@ export class AddcommentsinfoPage {
       this.service_priority = 1;
     }
     let body: string = "is_mobile=1" +
-      "&comments=" + comments +
+      "&comment_remark=" + comments +
       "&comment_id=" + this.recordID +
       "&comment_priority=" + this.service_priority +
       "&comment_unit_id=" + this.comment_unitid +
@@ -353,6 +357,7 @@ export class AddcommentsinfoPage {
         if (data.status === 200) {
           localStorage.setItem("microtime", "");
           this.sendNotification(`Comments was successfully updated`);
+           localStorage.setItem("atMentionResult", '');
           this.nav.setRoot(CommentsinfoPage, {
             record: this.NP.get("record")
           });
@@ -380,6 +385,14 @@ export class AddcommentsinfoPage {
   }
 
   getPrority(val) {
+
+    this.priority_highclass = '';
+    this.priority_lowclass = '';
+    if (val == "2") {
+      this.priority_highclass = "border_high";
+    } else {
+      this.priority_lowclass = "border_low";
+    }
     this.service_priority = val
   }
 
@@ -440,13 +453,14 @@ export class AddcommentsinfoPage {
 
     //this.next_service_date = item.next_service_date;
     this.service_priority = item.comment_priority;
-    console.log("X" + this.service_priority);
     if (this.service_priority == "1") {
-      this.service_priority_class1 = '';
-      console.log("Y");
+      this.priority_lowclass = "border_low";
+
+    } else if (this.service_priority == "0") {
+      this.priority_lowclass = "border_low";
+
     } else if (this.service_priority == "2") {
-      this.service_priority_class2 = '';
-      console.log("Z");
+      this.priority_highclass = "border_high";
     }
 
     this.service_resources = item.comment_resources;

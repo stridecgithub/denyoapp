@@ -60,7 +60,7 @@
 <li>    
     <button ion-button icon-only (click)="redirectToMessage()" clear>
     	<ion-icon name="chatboxes" class="footer-icon">MESSAGE</ion-icon>
-      <ion-badge item-end class="messagecount">{{this.msgcount}}</ion-badge>
+      <ion-badge item-end class="messagecount"  *ngIf="msgcount>0">{{this.msgcount}}</ion-badge>
     </button>
     <ion-badge color="danger"></ion-badge>
 </li>     

@@ -12,6 +12,7 @@ import { RolePage } from '../role/role';
 import 'rxjs/add/operator/map';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { AddrequestsupportPage } from '../addrequestsupport/addrequestsupport';
+import { HomePage } from '../home/home'; 
 /**
  * Generated class for the ServicinginfoPage page.
  *
@@ -136,9 +137,7 @@ export class NotificationPage {
     this.presentLoading(0);
   }
   previous() {
-    this.nav.setRoot(UnitdetailsPage, {
-      record: this.NP.get("record")
-    });
+    this.nav.setRoot(HomePage);
   }
   redirectToUser() {
     this.nav.setRoot(UserPage);

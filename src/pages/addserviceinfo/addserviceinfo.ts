@@ -38,7 +38,8 @@ export class AddserviceinfoPage {
   public addedImgListsArray = [];
   public addedImgLists = [];
   progress: number;
-
+  public priority_lowclass: any;
+  public priority_highclass: any;
   public recordID: any;
   public service_unitid: any;
   public service_id: any;
@@ -51,8 +52,6 @@ export class AddserviceinfoPage {
   is_request: boolean
   public serviced_by_name: any;
   public service_resources: any;
-  public service_priority_class1: any;
-  public service_priority_class2: any;
   micro_timestamp: any;
   public isUploadedProcessing: boolean = false;
   public isProgress = false;
@@ -76,8 +75,8 @@ export class AddserviceinfoPage {
   constructor(public http: Http, public alertCtrl: AlertController, private datePicker: DatePicker, public NP: NavParams, public nav: NavController, public toastCtrl: ToastController, public navParams: NavParams, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera, private filechooser: FileChooser,
     private transfer: Transfer,
     private file: File, private ngZone: NgZone) {
-    this.service_priority_class1 = "-outline";
-    this.service_priority_class2 = "-outline";
+    this.priority_highclass = '';
+    this.priority_lowclass = '';
     this.unitDetailData.loginas = localStorage.getItem("userInfoName");
     this.unitDetailData.userId = localStorage.getItem("userInfoId");
     this.unitDetailData.serviced_by = localStorage.getItem("userInfoName");
@@ -145,10 +144,10 @@ export class AddserviceinfoPage {
       this.selectEntry(this.NP.get("record"));
       this.service_id = this.NP.get("record").service_id;
       if (this.NP.get("act") == 'Add') {
-        this.serviced_datetime="";
-      this.service_remark="";
-      this.service_subject="";
-      this.next_service_date="";
+        this.serviced_datetime = "";
+        this.service_remark = "";
+        this.service_subject = "";
+        this.next_service_date = "";
         this.isEdited = false;
         this.unitDetailData.pageTitle = 'Servicing Info Add';
         this.service_unitid = this.NP.get("unit_id");
@@ -157,6 +156,8 @@ export class AddserviceinfoPage {
         this.unitDetailData.pageTitle = 'Servicing Info Edit';
         this.isEdited = true;
       }
+
+
       console.log("Service Id:" + this.service_id);
       console.log("Service Unit Id:" + this.service_unitid);
     }
@@ -271,7 +272,7 @@ export class AddserviceinfoPage {
          description: string = this.form.controls["long"].value,
          photos: object = this.addedImgLists;*/
 
-      
+
       let serviced_datetime: string = this.form.controls["serviced_datetime"].value,
         service_remark: string = this.form.controls["service_remark"].value,
         next_service_date: string = this.form.controls["next_service_date"].value,
@@ -302,6 +303,10 @@ export class AddserviceinfoPage {
   // supplies a variable of key with a value of create followed by the key/value pairs
   // for the record data
   createEntry(serviced_datetime, service_remark, next_service_date, serviced_by, is_request, service_subject, addedImgLists, remarkget, nextServiceDate, micro_timestamp) {
+
+    service_remark = localStorage.getItem("atMentionResult");
+
+
     if (this.service_priority == undefined) {
       this.service_priority = 1;
     }
@@ -315,7 +320,7 @@ export class AddserviceinfoPage {
     if (this.next_service_date == undefined) {
       this.next_service_date = next_service_date;
     }
-   
+
     let body: string = "is_mobile=1" +
       "&service_priority=" + this.service_priority +
       "&service_unitid=" + this.service_unitid +
@@ -345,6 +350,7 @@ export class AddserviceinfoPage {
         if (data.status === 200) {
           localStorage.setItem("microtime", "");
           this.sendNotification(`Servicing info was successfully added`);
+           localStorage.setItem("atMentionResult", '');
           this.nav.setRoot(ServicinginfoPage, {
             record: this.NP.get("record")
           });
@@ -364,6 +370,9 @@ export class AddserviceinfoPage {
   // supplies a variable of key with a value of update followed by the key/value pairs
   // for the record data
   updateEntry(serviced_datetime, service_remark, next_service_date, serviced_by, is_request, service_subject, addedImgLists, remarkget, nextServiceDate, micro_timestamp) {
+    if (localStorage.getItem("atMentionResult") != '') {
+      service_remark = localStorage.getItem("atMentionResult");
+    }
     if (this.service_priority == undefined) {
       this.service_priority = 1;
     }
@@ -402,6 +411,7 @@ export class AddserviceinfoPage {
         if (data.status === 200) {
           localStorage.setItem("microtime", "");
           this.sendNotification(`Servicing info  was successfully updated`);
+           localStorage.setItem("atMentionResult", '');
           this.nav.setRoot(ServicinginfoPage, {
             record: this.NP.get("record")
           });
@@ -422,13 +432,24 @@ export class AddserviceinfoPage {
       this.showDatePicker();
     }
     if (field == '1') {
-      this.serviced_datetime = date.getFullYear() + "-" + parseInt(date.getMonth()+1) + "-" + date.getDate();
+      this.serviced_datetime = date.getFullYear() + "-" + parseInt(date.getMonth() + 1) + "-" + date.getDate();
     } else {
-      this.unitDetailData.nextServiceDate = date.getFullYear() + "-" + parseInt(date.getMonth()+1) + "-" + date.getDate();
+      console.log("date.getMonth()" + date.getMonth());
+      console.log("date.getMonth()+1" + date.getMonth() + 1);
+      console.log("date.month" + date.month);
+      console.log("date.monthstr" + date.monthstr);
+      this.unitDetailData.nextServiceDate = date.getFullYear() + "-" + parseInt(date.getMonth() + 1) + "-" + date.getDate();
     }
   }
 
   getPrority(val) {
+    this.priority_highclass = '';
+    this.priority_lowclass = '';
+    if (val == "2") {
+      this.priority_highclass = "border_high";
+    } else {
+      this.priority_lowclass = "border_low";
+    }
     this.service_priority = val
   }
 
@@ -479,11 +500,14 @@ export class AddserviceinfoPage {
     this.service_priority = item.service_priority;
     console.log("X" + this.service_priority);
     if (this.service_priority == "1") {
-      this.service_priority_class1 = '';
-      console.log("Y");
+      this.priority_lowclass = "border_low";
+
+    } else if (this.service_priority == "0") {
+      this.priority_lowclass = "border_low";
+
     } else if (this.service_priority == "2") {
-      this.service_priority_class2 = '';
-      console.log("Z");
+
+      this.priority_highclass = "border_high";
     }
     if (item.is_request > 0) {
       this.is_request = true;

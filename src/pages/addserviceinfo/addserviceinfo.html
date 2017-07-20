@@ -76,14 +76,14 @@
 
 
 
-      <img  (click)="getPrority(1)"  src="img/low_priority.png" style="width: 16px;
+      <p><a  (click)="getPrority(1)" href="#"><img src="img/low_priority.png" style="width: 16px;
     height: 16px;
     position: absolute;
-    margin-left: 40%;"><img  (click)="getPrority(2)"  src="img/high_priority.png"  style="width: 16px;
+    margin-left: 40%;" class="{{priority_lowclass}}"></a><a  (click)="getPrority(2)" href="#"><img  src="img/high_priority.png"  style="width: 16px;
     height: 16px;
     position: absolute;
-    margin-left: 50%;">
-    
+    margin-left: 50%;" class="{{priority_highclass}}"></a>
+    </p>
 
       <ion-item>
         <ion-label stacked>Servicing Date <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
@@ -100,7 +100,7 @@
       </ion-item>
 
       <b>Remark</b> <span class="mandatory" *ngIf="hideActionButton">*</span>
-      <textarea type="text" (keyup)=address1get($event.target.value); name="to" id="to"  class="sugges" onkeyup="sptions(event)" onblur="sptionshide()" class="form-control" rows="8" [disabled]="readOnly"
+      <textarea type="text" (keyup)=address1get($event.target.value); name="to" id="to"  class="sugges" onkeyup="sptions(event);address1get(this.value)" onblur="sptionshide();address1get(this.value)" class="form-control" rows="8" [disabled]="readOnly"
         formControlName="service_remark" [(ngModel)]="service_remark" ></textarea>
 
 

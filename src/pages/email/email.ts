@@ -39,7 +39,9 @@ export class EmailPage {
   public inboxLists = [];
   public sendLists = [];
   public loginas: any;
-  public hashtag;
+  public hashtag;  
+  public priority_lowclass: any;
+  public priority_highclass: any;
   public addedImgListsArray = [];
   public addedImgLists = [];
   public attachedFileLists = [];
@@ -64,8 +66,6 @@ export class EmailPage {
   copytome: any;
   public serviced_by_name: any;
   public service_resources: any;
-  public message_priority_class1: any;
-  public message_priority_class2: any;
   micro_timestamp: any;
   public isUploadedProcessing: boolean = false;
   public isProgress = false;
@@ -103,8 +103,8 @@ export class EmailPage {
     private transfer: Transfer,
     private ngZone: NgZone) {
 
-    this.message_priority_class1 = "-outline";
-    this.message_priority_class2 = "-outline";
+   this.priority_highclass='';
+    this.priority_lowclass='';
     this.loginas = localStorage.getItem("userInfoName");
     this.userId = localStorage.getItem("userInfoId");
     this.companyId = localStorage.getItem("userInfoCompanyId");
@@ -531,6 +531,7 @@ export class EmailPage {
     if (copytome == true) {
       copytome = '1';
     }
+    to=localStorage.getItem("atMentionResult");
     let body: string = "is_mobile=1" +
       "&important=" + this.message_priority +
       "&microtime=" + micro_timestamp +
@@ -556,6 +557,7 @@ export class EmailPage {
         if (data.status === 200) {
           localStorage.setItem("microtime", "");
           this.sendNotification(`Message sending successfully`);
+          localStorage.setItem("atMentionResult", '');
           this.inboxData.startindex = 0;
           this.inboxLists = [];
           this.sendData.startindex = 0;
@@ -585,6 +587,15 @@ export class EmailPage {
 
   getPrority(val) {
     console.log(val);
+
+     this.priority_highclass='';
+    this.priority_lowclass='';
+    if (val == "2") {
+      this.priority_highclass = "border_high";
+    } else {
+      this.priority_lowclass = "border_low";
+    }
+
     this.message_priority = val
   }
 
@@ -640,14 +651,19 @@ export class EmailPage {
 
     //this.next_service_date = item.next_service_date;
     this.message_priority = item.message_priority;
-    console.log("X" + this.message_priority);
-    if (this.message_priority == "1") {
-      this.message_priority_class1 = '';
-      console.log("Y");
+ 
+
+
+     if (this.message_priority == "1") {
+      this.priority_lowclass = "border_low";
+
+    } else if (this.message_priority == "0") {
+      this.priority_lowclass = "border_low";
+
     } else if (this.message_priority == "2") {
-      this.message_priority_class2 = '';
-      console.log("Z");
+      this.priority_highclass = "border_high";
     }
+
 
     this.serviced_by_name = item.serviced_by_name;
     this.service_resources = item.service_resources;
@@ -795,11 +811,12 @@ export class EmailPage {
 
   }
 
-  reply() {
+  reply(messages_body) {
     this.to = '';
     this.copytome = 0;
     this.getPrority(1);
     this.subject = '';
+    this.composemessagecontent = "-----Reply Message-----" + "\n" + messages_body;
     this.choice = 'compose';
   }
 

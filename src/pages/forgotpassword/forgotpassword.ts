@@ -51,7 +51,7 @@ export class ForgotpasswordPage {
       "uname": ["", Validators.required],
       "email": ["", Validators.required]
     });
-
+ this.pageTitle="Forgot Password";
     this.userId = localStorage.getItem("userInfoId");
     this.companyid = localStorage.getItem("userInfoCompanyId");
   }
@@ -98,5 +98,8 @@ saveEntry()
       duration: 3000
     });
     notification.present();
+  }
+    previous() {
+    this.nav.setRoot(HomePage);
   }
 }

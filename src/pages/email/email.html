@@ -142,7 +142,7 @@
       <ion-list *ngSwitchCase="'compose'">
 
         <b>To</b> <span class="mandatory" *ngIf="hideActionButton">*</span>
-        <input type="text" (keyup)=address1get($event.target.value); name="to" id="to" class="sugges" onkeyup="message(event)" onblur="sptionshide()"
+        <input type="text" (keyup)=address1get($event.target.value); name="to" id="to" class="sugges" onkeyup="message(event);address1get(this.value)" onblur="sptionshide();address1get(this.value)"
           class="form-control" rows="10" [disabled]="readOnly" formControlName="to" [(ngModel)]="to">
         <div style="position: relative;top: 12px;">
           <span><ion-checkbox type="checkbox" name="copytome" formControlName="copytome"  [(ngModel)]="copytome"></ion-checkbox>&nbsp; Copy Mail</span>
@@ -155,10 +155,10 @@
            <img  (click)="getPrority(1)"  src="img/low_priority.png" style="width: 16px;
     height: 16px;
     position: absolute;
-    margin-left: 40%;"><img  (click)="getPrority(2)"  src="img/high_priority.png"  style="width: 16px;
+    margin-left: 40%;"  class="{{priority_lowclass}}"><img  (click)="getPrority(2)"  src="img/high_priority.png"  style="width: 16px;
     height: 16px;
     position: absolute;
-    margin-left: 50%;">
+    margin-left: 50%;"  class="{{priority_highclass}}">
            
     </span>
         </div>
@@ -213,7 +213,7 @@
 
         </ion-row>
       </ion-grid>
-      <div><a href="#" (click)="reply()">Reply</a>&nbsp; &nbsp; &nbsp; &nbsp;<a href="#" (click)="forward(messages_body)">Forward</a></div>
+      <div><a href="#" (click)="reply(messages_body)">Reply</a>&nbsp; &nbsp; &nbsp; &nbsp;<a href="#" (click)="forward(messages_body)">Forward</a></div>
     </ion-list>
 
   </div>

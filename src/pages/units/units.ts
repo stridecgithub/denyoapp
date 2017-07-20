@@ -419,7 +419,7 @@ console.log(JSON.stringify(this.selectedAction));*/
   favorite(unit_id) {
     this.reportData.startindex = 0;
     this.reportAllLists = [];
-    let body: string = "unitid=" + unit_id + "&is_mobile=1",
+    let body: string = "unitid=" + unit_id + "&is_mobile=1"+"&loginid="+this.userId,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),

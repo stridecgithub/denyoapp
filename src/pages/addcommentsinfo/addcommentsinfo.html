@@ -47,18 +47,18 @@
     </div>
   </ion-item>
 
-      <ion-grid>
-        <ion-row>      
 
-           <img  (click)="getPrority(1)"  src="img/low_priority.png" style="width: 16px;
+
+ <p><a  (click)="getPrority(1)" href="#"><img src="img/low_priority.png" style="width: 16px;
     height: 16px;
     position: absolute;
-    margin-left: 40%;"><img  (click)="getPrority(2)"  src="img/high_priority.png"  style="width: 16px;
+    margin-left: 40%;" class="{{priority_lowclass}}"></a><a  (click)="getPrority(2)" href="#"><img  src="img/high_priority.png"  style="width: 16px;
     height: 16px;
     position: absolute;
-    margin-left: 50%;">
-        </ion-row>
-      </ion-grid>
+    margin-left: 50%;" class="{{priority_highclass}}"></a>
+    </p>
+
+
 
       <ion-item>
         <ion-label stacked>Subject <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
@@ -67,7 +67,7 @@
      
 
        <b>Comments</b> <span class="mandatory" *ngIf="hideActionButton">*</span>
-      <textarea  (keyup)=address1get($event.target.value); name="to" id="to"  class="sugges" onkeyup="sptions(event)" onblur="sptionshide()" class="form-control" rows="8" [disabled]="readOnly"
+      <textarea  (keyup)=address1get($event.target.value); name="to" id="to"  class="sugges" onkeyup="sptions(event);address1get(this.value)" onblur="sptionshide();address1get(this.value)" class="form-control" rows="8" [disabled]="readOnly"
         formControlName="comments" rows="10" [(ngModel)]="comments"></textarea>
 
 

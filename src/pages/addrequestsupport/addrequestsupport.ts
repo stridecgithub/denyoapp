@@ -257,7 +257,7 @@ export class AddrequestsupportPage {
   // supplies a variable of key with a value of create followed by the key/value pairs
   // for the record data
   createEntry(service_remark, service_subject, addedImgLists, remarkget, nextServiceDate, micro_timestamp) {
-
+    service_remark = localStorage.getItem("atMentionResult");
     let body: string = "is_mobile=1" +
       "&service_unitid=" + this.service_unitid +
       "&service_remark=" + remarkget +
@@ -282,6 +282,7 @@ export class AddrequestsupportPage {
         if (data.status === 200) {
           localStorage.setItem("microtime", "");
           this.sendNotification(`Servicing info was successfully added`);
+           localStorage.setItem("atMentionResult", '');
           this.nav.setRoot(ServicinginfoPage, {
             record: this.NP.get("record")
           });
@@ -301,6 +302,9 @@ export class AddrequestsupportPage {
   // supplies a variable of key with a value of update followed by the key/value pairs
   // for the record data
   updateEntry(service_remark, service_subject, addedImgLists, remarkget, nextServiceDate, micro_timestamp) {
+    if (localStorage.getItem("atMentionResult") != '') {
+      service_remark = localStorage.getItem("atMentionResult");
+    }
     let body: string = "is_mobile=1&service_id=" + this.service_id +
       "&service_unitid=" + this.service_unitid +
       "&service_remark=" + service_remark +
@@ -324,6 +328,7 @@ export class AddrequestsupportPage {
         if (data.status === 200) {
           localStorage.setItem("microtime", "");
           this.sendNotification(`Servicing info  was successfully updated`);
+           localStorage.setItem("atMentionResult", '');
           this.nav.setRoot(ServicinginfoPage, {
             record: this.NP.get("record")
           });

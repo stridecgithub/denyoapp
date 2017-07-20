@@ -268,7 +268,7 @@ export class AddcalendarPage {
   createEntry(event_title, type_name, event_project, event_subject, event_unitid, event_time, event_location, service_remark, createdby) {
     //let updatedby = createdby;
     let body: string = "is_mobile=1&event_type="
-      + type_name + "&event_title=" + event_title + "&event_subject=" + event_subject + "&event_date=" + this.event_date + "&event_time=" + event_time + "&service_unitid=" + event_unitid + "&event_location=" + event_location + "&service_remark=" + service_remark + "&event_added_by=" + createdby,
+      + type_name + "&event_title=" + event_title + "&event_subject=" + event_subject + "&event_date=" + this.event_date + "&event_time=" + event_time + "&service_unitid=" + event_unitid + "&event_location=" + event_location + "&service_remark=" + service_remark + "&event_added_by=" + createdby+"&serviced_by="+createdby,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),

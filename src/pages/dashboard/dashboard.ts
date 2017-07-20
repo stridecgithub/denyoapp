@@ -69,7 +69,7 @@ export class DashboardPage {
       .subscribe((data) => {
         console.log("Count Response Success:" + JSON.stringify(data.json()));
        this.msgcount=data.json().msgcount;
-        this.notcount=0;
+        this.notcount=data.json().notifycount;
       });
   }
 
