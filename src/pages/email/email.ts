@@ -865,6 +865,13 @@ export class EmailPage {
 
 
   }
+  com()
+
+  {
+    this.to="";
+    this.subject="";
+    this.composemessagecontent="";
+  }
 
 
 }
