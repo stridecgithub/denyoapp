@@ -61,6 +61,7 @@ export class UserorgchartPage {
   // Flag to be used for checking whether we are adding/editing an entry
   public isEdited: boolean = false;
   public readOnly: boolean = false;
+  public len=0;
 
   // Flag to hide the form upon successful completion of remote operation
   public hideForm: boolean = false;
@@ -100,7 +101,7 @@ export class UserorgchartPage {
   ionViewWillEnter() {
     this.resetFields();
     this.getCompanyGroupListData();
-    this.getUserListData();
+   
     if (this.NP.get("record")) {
       console.log("User Org Chart:" + JSON.stringify(this.NP.get("record")));
       this.isEdited = true;
@@ -111,6 +112,8 @@ export class UserorgchartPage {
       let editItem = this.NP.get("record");
       this.job_position = editItem.job_position;
       this.company_group = editItem.company_id;
+      console.log("EDIT"+this.company_group);
+      this.getUserListData();
       this.report_to = editItem.report_to;
     }
     else {
@@ -362,13 +365,15 @@ export class UserorgchartPage {
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/getstaffs?loginid="+this.userId+"&company_id="+this.companyId;
+      url: any = this.apiServiceURL + "/getstaffs?loginid="+this.userId+"&company_id="+this.company_group;
     let res;
     console.log("Report To API:" + url)
     this.http.get(url, options)
       .subscribe(data => {
         res = data.json();
         // this.responseResultReportTo="N/A";
+        this.len=res.TotalCount;
+        console.log("length"+res.TotalCount);
         this.responseResultReportTo = res.staffslist;
       });
 
@@ -470,6 +475,11 @@ export class UserorgchartPage {
   }
   redirectToSettings() {
     this.navCtrl.setRoot(MyaccountPage);
+  }
+  onSegmentChanged()
+  {
+    console.log("ID"+this.company_group);
+     this.getUserListData();
   }
 }
 
