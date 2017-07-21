@@ -204,39 +204,39 @@
 
     <div [ngSwitch]="!pet">
       <ion-item *ngFor="let item of calendarResultEvent">
-              <div *ngIf="item.event_type=='E'">
-            <div>
-              Events
-              <h2 clear item-right><b>Event:{{item.event_title}}  </b></h2>
-            </div>
-            <div>Date & Time:{{item.event_date}}</div>
-            <div>Location:{{item.event_location}}</div>
-            <div>Notes:{{item.event_remark}}</div>
-            <div>Event By:{{item.event_addedby_name}}</div>
-          </div>
+        <div *ngIf="item.event_type=='E'">
+          <div>
 
-          <div *ngIf="item.event_type=='S'">
-            <div>
-              Services
-              <h2 clear item-right><b>Service:{{item.event_title}}  </b></h2>
-            </div>
-            <div>Date & Time:{{item.event_date}}</div>
-            <div>Location:{{item.event_location}}</div>
-            <div>Notes:{{item.event_remark}}</div>
-            <div>Serviced By:{{item.event_addedby_name}}</div>
+            <h2 clear item-right><b>{{item.event_title}}  </b></h2>
           </div>
+          <div>Date & Time:{{item.event_date}}</div>
+          <div>Location:{{item.event_location}}</div>
+          <div>Remarks:{{item.event_remark}}</div>
+          <!--div>Event By:{{item.event_addedby_name}}</div-->
+        </div>
 
-          <div *ngIf="item.event_type=='A'">
-            <div>
-              Alarms
-              <h2 clear item-right><b>Alarm:{{item.event_title}}  </b></h2>
-            </div>
-            <div>Date & Time:{{item.event_date}}</div>
-            <div>Location:{{item.event_location}}</div>
-            <div>Notes:{{item.event_remark}}</div>
-            <div>Alarm Assigned By:{{item.event_addedby_name}}</div>
+        <div *ngIf="item.event_type=='S'">
+          <div>
+
+            <h2 clear item-right><b>Subject:{{item.event_title}}  </b></h2>
           </div>
-          
+          <div>Date & Time:{{item.event_date}}</div>
+          <div>Location:{{item.event_location}}</div>
+          <div>Remarks:{{item.event_remark}}</div>
+          <!--div>Serviced By:{{item.event_addedby_name}}</div-->
+        </div>
+
+        <div *ngIf="item.event_type=='A'">
+          <div>
+
+            <h2 clear item-right><b>Alarm:{{item.event_title}}  </b></h2>
+          </div>
+          <div>Date & Time:{{item.event_date}}</div>
+          <div>Location:{{item.event_location}}</div>
+          <div>Notes:{{item.event_remark}}</div>
+          <div>Alarm Assigned By:{{item.event_addedby_name}}</div>
+        </div>
+
       </ion-item>
       <ion-item *ngIf="totalCountEvent==0">
         <div class="error">{{noeventtitle}}</div>

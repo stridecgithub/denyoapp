@@ -343,9 +343,10 @@ export class CalendarPage {
             //   if (dateStr == '') {
             this.eventIdentify = data.json().events;
             for (var i = 0; i < this.eventIdentify.length; i += 1) {
+              let eventdate=this.eventIdentify[i]['event_date']+" "+this.eventIdentify[i]['event_time'];
               this.calendarResultEvent.push({
                 event_title: this.eventIdentify[i]['event_title'],
-                event_date: this.eventIdentify[i]['event_date'],
+                event_date: eventdate,
                 event_location: this.eventIdentify[i]['event_location'],
                 event_remark: this.eventIdentify[i]['event_remark'],
                 event_addedby_name: this.eventIdentify[i]['event_addedby_name'],
@@ -356,9 +357,11 @@ export class CalendarPage {
 
             this.serviceIdentify = data.json().services;
             for (var j = 0; j < this.serviceIdentify.length; j += 1) {
+              
+              let eventdate=this.serviceIdentify[j]['next_service_date']+" "+this.serviceIdentify[j]['serviced_time'];
               this.calendarResultEvent.push({
                 event_title: this.serviceIdentify[j]['service_subject'],
-                event_date: this.serviceIdentify[j]['next_service_date'],
+                event_date: eventdate,
                 event_remark: this.serviceIdentify[j]['service_remark'],
                 event_location: this.serviceIdentify[j]['service_location'],
                 event_addedby_name: this.serviceIdentify[j]['serviced_by_name'],
