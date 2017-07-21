@@ -38,36 +38,75 @@
 
 
 <ion-content padding class="ion-content">
-
-
-
-  <div class="error" *ngIf="reportAllLists.length==0">No entries found</div>
-  <!--ion-item style="width: 100%; margin: 0; padding-left: 10px;">
-    <ion-label>Sort By</ion-label>
-    <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="pet" (ionChange)="onSegmentChanged(pet)">
-      <ion-option value="companygroup_name,asc" selected="true">Name Asc</ion-option>
-      <ion-option value="companygroup_name,desc">Name Desc</ion-option>
-    </ion-select>
-  </ion-item-->
+  <div class="error" *ngIf="notificationAllLists.length==0">No entries found</div>
 
   <ion-refresher (ionRefresh)="doRefresh($event)" *ngIf="totalCount!=0">
     <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
     </ion-refresher-content>
   </ion-refresher>
   <ion-list *ngIf="totalCount!=0">
-    <ion-item-sliding *ngFor="let item of reportAllLists;">
-
-      <ion-item>
-
+    <ion-item-sliding *ngFor="let item of notificationAllLists;">
+      <ion-item (click)="notificationdetails(item,item.notify_type)" *ngIf="item.notify_type=='M'">
+        <ion-avatar item-start *ngIf="item.photo!=''">
+          <img src="{{item.photo}}">
+        </ion-avatar>
         <div style="overflow: hidden; padding-left: .5em;">
-          <h2><b>{{item.content}}</b>
+          <h2> <b><div [innerHTML]="sanitizer.bypassSecurityTrustHtml(item.content)"></div>
+           </b>
           </h2>
-
-
         </div>
-
-
       </ion-item>
+
+
+      <ion-item (click)="notificationdetails(item,item.notify_type)" *ngIf="item.notify_type=='OA'">
+        <ion-avatar item-start *ngIf="isphoto>0">
+           <img src="img/alarm.png" hspace="10" />
+        </ion-avatar>
+        <div style="overflow: hidden; padding-left: .5em;">
+          <h2> <b><div [innerHTML]="sanitizer.bypassSecurityTrustHtml(item.content)"></div>
+           </b>
+          </h2>
+        </div>
+      </ion-item>
+
+
+
+      <ion-item (click)="notificationdetails(item,item.notify_type)" *ngIf="item.notify_type=='C'">
+        <ion-avatar item-start *ngIf="isphoto>0">
+          <img src="{{item.photo}}">
+        </ion-avatar>
+        <div style="overflow: hidden; padding-left: .5em;">
+          <h2> <b><div [innerHTML]="sanitizer.bypassSecurityTrustHtml(item.content)"></div>
+           </b>
+          </h2>
+        </div>
+      </ion-item>
+
+
+
+      <ion-item (click)="notificationdetails(item,item.notify_type)" *ngIf="item.notify_type=='S'">
+        <ion-avatar item-start *ngIf="isphoto>0">
+          <img src="{{item.photo}}">
+        </ion-avatar>
+        <div style="overflow: hidden; padding-left: .5em;">
+          <h2> <b><div [innerHTML]="sanitizer.bypassSecurityTrustHtml(item.content)"></div>
+           </b>
+          </h2>
+        </div>
+      </ion-item>
+
+
+      <ion-item (click)="notificationdetails(item,item.notify_type)" *ngIf="item.notify_type=='E'">
+        <ion-avatar item-start *ngIf="isphoto>0">
+          <img src="{{item.photo}}">
+        </ion-avatar>
+        <div style="overflow: hidden; padding-left: .5em;">
+          <h2> <b><div [innerHTML]="sanitizer.bypassSecurityTrustHtml(item.content)"></div>
+           </b>
+          </h2>
+        </div>
+      </ion-item>
+
       <!--ion-item-options>
        
         <button class="editcolor" (click)="doEdit(item,'edit',reporttemplate)">                      
@@ -86,33 +125,33 @@
 
 <ion-footer color="bluedark">
   <ion-toolbar color="bluedark">
-<ul class="quick-list">
-<li>
-    <button ion-button icon-only clear (click)="redirectToMaps()">
+    <ul class="quick-list">
+      <li>
+        <button ion-button icon-only clear (click)="redirectToMaps()">
     	<ion-icon name="home" class="footer-icon">MAPS</ion-icon>
     </button>
-</li>  
-<li>  
-    <button ion-button icon-only (click)="redirectToUser()" clear>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectToUser()" clear>
     	<ion-icon name="contacts" class="footer-icon">UNITS</ion-icon>
     </button>
-</li>     
-<li>    
-    <button ion-button icon-only (click)="redirectToMessage()" clear>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectToMessage()" clear>
     	<ion-icon name="chatboxes" class="footer-icon">MESSAGE</ion-icon>
     </button>
-</li>     
-<li>    
-    <button ion-button icon-only (click)="redirectCalendar()" clear>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectCalendar()" clear>
     	<ion-icon name="bicycle" class="footer-icon">CALENDAR</ion-icon>
     </button>
-</li>    
-<li>    
-    <button ion-button icon-only (click)="redirectToSettings()" clear>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectToSettings()" clear>
     	<ion-icon name="settings" class="footer-icon">SETTING</ion-icon>
     </button>
-</li>    
-</ul>
+      </li>
+    </ul>
 
   </ion-toolbar>
 </ion-footer>

@@ -39,7 +39,7 @@ import { Push, PushObject, PushOptions } from '@ionic-native/push';
 import { Network } from '@ionic-native/network';
 @Component({
   templateUrl: 'app.html',
-  providers: [Push,Network]
+  providers: [Push, Network]
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
@@ -48,7 +48,7 @@ export class MyApp {
   showLevel1 = null;
   showLevel2 = null;
   ///private push: Push,
-  constructor(private network: Network,private push: Push, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public dataService: DataServiceProvider, public menuCtrl: MenuController,
+  constructor(private network: Network, private push: Push, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public dataService: DataServiceProvider, public menuCtrl: MenuController,
     public toastCtrl: ToastController) {
     this.initializeApp();
     this.dataService.getMenus()
@@ -104,8 +104,8 @@ export class MyApp {
 
     // watch network for a disconnect
     let disconnectSubscription = this.network.onDisconnect().subscribe(() => {
-      console.log('network was disconnected :-(');      
-       this.sendNotification('network was disconnected :-(');
+      console.log('network was disconnected :-(');
+      this.sendNotification('network was disconnected :-(');
     });
 
     // stop disconnect watch
@@ -115,14 +115,14 @@ export class MyApp {
     // watch network for a connection
     let connectSubscription = this.network.onConnect().subscribe(() => {
       console.log('network connected!');
-       this.sendNotification('network connected!');
+      this.sendNotification('network connected!');
       // We just got a connection but we need to wait briefly
       // before we determine the connection type. Might need to wait.
       // prior to doing any api requests as well.
       setTimeout(() => {
         if (this.network.type === 'wifi') {
           console.log('we got a wifi connection, woohoo!');
-           this.sendNotification('we got a wifi connection, woohoo!');
+          this.sendNotification('we got a wifi connection, woohoo!');
         }
       }, 3000);
     });
@@ -243,7 +243,10 @@ export class MyApp {
 
     const options: PushOptions = {
       android: {
-        senderID: '218019355699'
+        senderID: '218019355699',
+        forceShow: false,
+        vibrate: true,
+        sound: 'true'
       },
       ios: {
         alert: 'true',

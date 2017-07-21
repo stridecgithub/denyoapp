@@ -245,15 +245,15 @@ export class CalendarPage {
         console.log("cmonth.toLocaleString.length" + cmonth.toLocaleString.length);
         console.log("cmonth" + cmonth)
         if (cmonth > 9) {
-         cmonth = cmonth;
+          cmonth = cmonth;
           mnstr = '';
           console.log("Less than 9 below 10")
 
         } else {
-            console.log("Greater than 9 reach 10")
+          console.log("Greater than 9 reach 10")
           cmonth = cmonth;
           mnstr = '0';
-         
+
         }
 
         if (currentDateArr.getDate().toLocaleString.length == 1) {
@@ -341,9 +341,14 @@ export class CalendarPage {
               this.noeventtitle = 'There is No Event';
             }*/
             //   if (dateStr == '') {
-            this.eventIdentify = data.json().events;
+              console.log(this.petselection);
+            if (dateStr != '') {
+              this.eventIdentify = data.json().events;
+            } else {
+              this.eventIdentify = data.json().allevents;
+            }
             for (var i = 0; i < this.eventIdentify.length; i += 1) {
-              let eventdate=this.eventIdentify[i]['event_date']+" "+this.eventIdentify[i]['event_time'];
+              let eventdate = this.eventIdentify[i]['event_date'] + " " + this.eventIdentify[i]['event_time'];
               this.calendarResultEvent.push({
                 event_title: this.eventIdentify[i]['event_title'],
                 event_date: eventdate,
@@ -354,11 +359,14 @@ export class CalendarPage {
               });
             }
 
-
-            this.serviceIdentify = data.json().services;
+            if (dateStr != '') {
+              this.serviceIdentify = data.json().services;
+            } else {
+              this.serviceIdentify = data.json().allservices;
+            }
             for (var j = 0; j < this.serviceIdentify.length; j += 1) {
-              
-              let eventdate=this.serviceIdentify[j]['next_service_date']+" "+this.serviceIdentify[j]['serviced_time'];
+
+              let eventdate = this.serviceIdentify[j]['next_service_date'] + " " + this.serviceIdentify[j]['serviced_time'];
               this.calendarResultEvent.push({
                 event_title: this.serviceIdentify[j]['service_subject'],
                 event_date: eventdate,
@@ -370,8 +378,11 @@ export class CalendarPage {
 
             }
 
-
-            this.alarmIdentity = data.json().alarms;
+            if (dateStr != '') {
+              this.alarmIdentity = data.json().alarms;
+            } else {
+              this.alarmIdentity = data.json().allalarms;
+            }
             for (var k = 0; k < this.alarmIdentity.length; k += 1) {
               this.calendarResultEvent.push({
                 event_title: this.alarmIdentity[k]['alarm_name'],

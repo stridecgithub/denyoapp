@@ -9,10 +9,14 @@ import { UnitgroupPage } from '../unitgroup/unitgroup';
 import { UnitsPage } from '../units/units';
 import { UnitdetailsPage } from '../unitdetails/unitdetails';
 import { RolePage } from '../role/role';
+import { CalendarPage } from '../calendar/calendar';
+import { EmailPage } from '../email/email';
+import { MapsPage } from '../maps/maps';
 import 'rxjs/add/operator/map';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { AddrequestsupportPage } from '../addrequestsupport/addrequestsupport';
-import { HomePage } from '../home/home'; 
+import { HomePage } from '../home/home';
+import { DomSanitizer } from '@angular/platform-browser';
 /**
  * Generated class for the ServicinginfoPage page.
  *
@@ -35,12 +39,12 @@ export class NotificationPage {
     results: 8
   }
   public userId: any;
-  public reportAllLists = [];
+  public notificationAllLists = [];
   public loginas: any;
   public loadingMoreDataContent: string;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   public totalCount;
-  constructor(public http: Http,
+  constructor(private sanitizer: DomSanitizer, public http: Http,
     public toastCtrl: ToastController, public alertCtrl: AlertController, public NP: NavParams, public navParams: NavParams, public nav: NavController, public loadingCtrl: LoadingController) {
     this.pageTitle = 'Notifications';
     this.loginas = localStorage.getItem("userInfoName");
@@ -49,6 +53,36 @@ export class NotificationPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad NotificationPage');
+  }
+  notificationdetails(item, nottype) {
+    console.log(nottype);
+    console.log(JSON.stringify(item));
+
+//http://denyoappv2.stridecdev.com/changestatusapibell_list?table_id=25&loginid=5
+  let body: string = "is_mobile=1&loginid=" + this.userId +
+			"&table_id=" + item.table_id,
+			type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+			headers: any = new Headers({ 'Content-Type': type }),
+			options: any = new RequestOptions({ headers: headers }),
+			url: any = this.apiServiceURL + "/changestatusapibell_list";
+		console.log(url);
+		console.log(body);
+
+		this.http.post(url, body, options)
+			.subscribe((data) => {
+				console.log("Count Response Success:" + JSON.stringify(data.json()));
+			
+				// If the request was successful notify the user
+				if (data.status === 200) {
+					//this.sendNotification(`Comment count successfully removed`);
+
+				}
+				// Otherwise let 'em know anyway
+				else {
+					// this.sendNotification('Something went wrong!');
+				}
+			});
+
   }
   ionViewWillEnter() {
 
@@ -76,7 +110,7 @@ export class NotificationPage {
   doRefresh(refresher) {
     console.log('doRefresh function calling...');
     this.reportData.startindex = 0;
-    this.reportAllLists = [];
+    this.notificationAllLists = [];
     this.doNotification();
     setTimeout(() => {
       refresher.complete();
@@ -120,10 +154,29 @@ export class NotificationPage {
         if (res.notification != undefined) {
           if (res.notification.length > 0) {
             for (let notifications in res.notification) {
-              this.reportAllLists.push({
-                id: res.notification[notifications].id,
+              let isphoto = 0;
+              if (res.notification[notifications].id != 'null') {
+                isphoto = 1;
+              }
+              if (res.notification[notifications].id != null) {
+                isphoto = 1;
+              }
+              if (res.notification[notifications].id != '') {
+                isphoto = 1;
+              }
+              let usericon
+              if (isphoto > 0) {
+                usericon = this.apiServiceURL + "/staffphotos/" + res.notification[notifications].usericon;
+              } else {
+                usericon = '';
+              }
+              this.notificationAllLists.push({
+                table_id: res.notification[notifications].table_id,
+                photo: usericon,
+                notify_type: res.notification[notifications].notify_type,
                 content: res.notification[notifications].content
               });
+              console.log(JSON.stringify(this.notificationAllLists));
             }
             this.totalCount = res.totalCount;
             this.reportData.startindex += this.reportData.results;
@@ -136,29 +189,7 @@ export class NotificationPage {
       });
     this.presentLoading(0);
   }
-  previous() {
-    this.nav.setRoot(HomePage);
-  }
-  redirectToUser() {
-    this.nav.setRoot(UserPage);
-  }
 
-  redirectToUnitGroup() {
-    this.nav.setRoot(UnitgroupPage);
-  }
-  redirectToCompanyGroup() {
-    this.nav.setRoot(CompanygroupPage);
-  }
-  redirectToUnits() {
-    this.nav.setRoot(UnitsPage);
-  }
-  redirectToMyAccount() {
-    this.nav.setRoot(MyaccountPage);
-  }
-
-  redirectToRole() {
-    this.nav.setRoot(RolePage);
-  }
   doAdd() {
     localStorage.setItem("microtime", "");
     this.nav.setRoot(AddserviceinfoPage, {
@@ -194,9 +225,9 @@ export class NotificationPage {
         text: 'Yes',
         handler: () => {
           this.deleteEntry(id);
-          for (let q: number = 0; q < this.reportAllLists.length; q++) {
-            if (this.reportAllLists[q] == item) {
-              this.reportAllLists.splice(q, 1);
+          for (let q: number = 0; q < this.notificationAllLists.length; q++) {
+            if (this.notificationAllLists[q] == item) {
+              this.notificationAllLists.splice(q, 1);
             }
           }
         }
@@ -235,6 +266,31 @@ export class NotificationPage {
       duration: 3000
     });
     notification.present();
+  }
+  notification() {
+    this.nav.setRoot(NotificationPage);
+  }
+
+
+  previous() {
+    this.nav.setRoot(HomePage);
+  }
+
+
+  redirectToUser() {
+    this.nav.setRoot(UnitsPage);
+  }
+  redirectToMessage() {
+    this.nav.setRoot(EmailPage);
+  }
+  redirectCalendar() {
+    this.nav.setRoot(CalendarPage);
+  }
+  redirectToMaps() {
+    this.nav.setRoot(MapsPage);
+  }
+  redirectToSettings() {
+    this.nav.setRoot(MyaccountPage);
   }
 }
 

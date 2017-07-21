@@ -29,7 +29,7 @@ import { Keyboard } from '@ionic-native/keyboard';
 @Component({
   selector: 'page-email',
   templateUrl: 'email.html',
-  providers: [Camera, FileChooser, Transfer, File, DatePicker,Keyboard]
+  providers: [Camera, FileChooser, Transfer, File, DatePicker, Keyboard]
 })
 export class EmailPage {
   @ViewChild('fileInput') fileInput;
@@ -39,7 +39,7 @@ export class EmailPage {
   public inboxLists = [];
   public sendLists = [];
   public loginas: any;
-  public hashtag;  
+  public hashtag;
   public priority_lowclass: any;
   public priority_highclass: any;
   public addedImgListsArray = [];
@@ -103,8 +103,8 @@ export class EmailPage {
     private transfer: Transfer,
     private ngZone: NgZone) {
 
-   this.priority_highclass='';
-    this.priority_lowclass='';
+    this.priority_highclass = '';
+    this.priority_lowclass = '';
     this.loginas = localStorage.getItem("userInfoName");
     this.userId = localStorage.getItem("userInfoId");
     this.companyId = localStorage.getItem("userInfoCompanyId");
@@ -356,10 +356,10 @@ export class EmailPage {
 
     this.inboxData.startindex = 0;
     this.inboxData.sort = "messages_id";
-    this.inboxData.sortascdesc ="desc"
+    this.inboxData.sortascdesc = "desc"
     this.sendData.startindex = 0;
     this.sendData.sort = "messages_id";
-    this.inboxData.sortascdesc ="desc"
+    this.inboxData.sortascdesc = "desc"
     this.doInbox();
     this.doSend();
 
@@ -531,7 +531,7 @@ export class EmailPage {
     if (copytome == true) {
       copytome = '1';
     }
-    to=localStorage.getItem("atMentionResult");
+    to = localStorage.getItem("atMentionResult");
     let body: string = "is_mobile=1" +
       "&important=" + this.message_priority +
       "&microtime=" + micro_timestamp +
@@ -562,7 +562,7 @@ export class EmailPage {
           this.inboxLists = [];
           this.sendData.startindex = 0;
           this.sendLists = [];
-
+          this.addedImgLists = [];
           this.to = '';
           this.copytome = 0;
           this.getPrority(1);
@@ -570,7 +570,7 @@ export class EmailPage {
           this.choice = 'send';
           this.doSend();
           this.doInbox();
-          this.composemessagecontent="";
+          this.composemessagecontent = "";
         }
         // Otherwise let 'em know anyway
         else {
@@ -588,8 +588,8 @@ export class EmailPage {
   getPrority(val) {
     console.log(val);
 
-     this.priority_highclass='';
-    this.priority_lowclass='';
+    this.priority_highclass = '';
+    this.priority_lowclass = '';
     if (val == "2") {
       this.priority_highclass = "border_high";
     } else {
@@ -651,10 +651,10 @@ export class EmailPage {
 
     //this.next_service_date = item.next_service_date;
     this.message_priority = item.message_priority;
- 
 
 
-     if (this.message_priority == "1") {
+
+    if (this.message_priority == "1") {
       this.priority_lowclass = "border_low";
 
     } else if (this.message_priority == "0") {
@@ -813,6 +813,7 @@ export class EmailPage {
 
   reply(messages_body) {
     this.to = '';
+    this.addedImgLists = [];
     this.copytome = 0;
     this.getPrority(1);
     this.subject = '';
@@ -822,6 +823,7 @@ export class EmailPage {
 
   forward(messages_body) {
     this.to = '';
+    this.addedImgLists = [];
     this.copytome = 0;
     this.getPrority(1);
     this.subject = '';
@@ -865,12 +867,10 @@ export class EmailPage {
 
 
   }
-  com()
-
-  {
-    this.to="";
-    this.subject="";
-    this.composemessagecontent="";
+  com() {
+    this.to = "";
+    this.subject = "";
+    this.composemessagecontent = "";
   }
 
 

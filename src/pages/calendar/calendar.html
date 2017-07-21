@@ -203,8 +203,9 @@
     </div-->
 
     <div [ngSwitch]="!pet">
-      <ion-item *ngFor="let item of calendarResultEvent">
-        <div *ngIf="item.event_type=='E'">
+      <ion-item-sliding *ngFor="let item of calendarResultEvent;">
+        <ion-item *ngIf="item.event_type=='E'">
+
           <div>
 
             <h2 clear item-right><b>{{item.event_title}}  </b></h2>
@@ -213,9 +214,23 @@
           <div>Location:{{item.event_location}}</div>
           <div>Remarks:{{item.event_remark}}</div>
           <!--div>Event By:{{item.event_addedby_name}}</div-->
-        </div>
 
-        <div *ngIf="item.event_type=='S'">
+
+        </ion-item>
+        <ion-item-options>
+          <!--button class="viewcolor" (click)="doEdit(item,'view')">
+                       <ion-icon name="eye" class="icon-size"></ion-icon>
+                    </button-->
+          <button class="editcolor" (click)="doEdit(item,'edit')">                      
+                        <ion-icon name="create" class="icon-size"></ion-icon>
+                    </button>
+          <button class="trashcolor" (click)="doConfirm(item.event_id,item)">                        
+                         <ion-icon name="trash" class="icon-size"></ion-icon>
+                    </button>
+        </ion-item-options>
+
+        <ion-item *ngIf="item.event_type=='S'">
+
           <div>
 
             <h2 clear item-right><b>Subject:{{item.event_title}}  </b></h2>
@@ -224,20 +239,39 @@
           <div>Location:{{item.event_location}}</div>
           <div>Remarks:{{item.event_remark}}</div>
           <!--div>Serviced By:{{item.event_addedby_name}}</div-->
-        </div>
+        </ion-item>
+        <ion-item-options>
+          <!--button class="viewcolor" (click)="doEdit(item,'view')">
+                       <ion-icon name="eye" class="icon-size"></ion-icon>
+                    </button-->
+          <button class="editcolor" (click)="doEdit(item,'edit')">                      
+                        <ion-icon name="create" class="icon-size"></ion-icon>
+                    </button>
+          <button class="trashcolor" (click)="doConfirm(item.service_id,item)">                        
+                         <ion-icon name="trash" class="icon-size"></ion-icon>
+                    </button>
+        </ion-item-options>
 
-        <div *ngIf="item.event_type=='A'">
+        <ion-item *ngIf="item.event_type=='A'">
           <div>
+
 
             <h2 clear item-right><b>Alarm:{{item.event_title}}  </b></h2>
           </div>
           <div>Date & Time:{{item.event_date}}</div>
           <div>Location:{{item.event_location}}</div>
-          <div>Notes:{{item.event_remark}}</div>
-          <div>Alarm Assigned By:{{item.event_addedby_name}}</div>
-        </div>
+          <div>Remarks:{{item.event_remark}}</div>
+          <!--div>Alarm Assigned By:{{item.event_addedby_name}}</div-->
 
-      </ion-item>
+
+        </ion-item>
+        <ion-item-options>
+          <button class="editcolor" (click)="doEdit(item,'edit')">                      
+                        <ion-icon name="create" class="icon-size"></ion-icon>
+                    </button>
+
+        </ion-item-options>
+      </ion-item-sliding>
       <ion-item *ngIf="totalCountEvent==0">
         <div class="error">{{noeventtitle}}</div>
       </ion-item>
