@@ -172,6 +172,7 @@ export class NotificationPage {
               }
               this.notificationAllLists.push({
                 table_id: res.notification[notifications].table_id,
+                notify_to_readstatus: res.notification[notifications].notify_to_readstatus,
                 photo: usericon,
                 notify_type: res.notification[notifications].notify_type,
                 content: res.notification[notifications].content

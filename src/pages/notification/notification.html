@@ -51,20 +51,33 @@
           <img src="{{item.photo}}">
         </ion-avatar>
         <div style="overflow: hidden; padding-left: .5em;">
-          <h2> <b><div [innerHTML]="sanitizer.bypassSecurityTrustHtml(item.content)"></div>
-           </b>
+          
+
+          <h2 *ngIf="item.notify_to_readstatus=='0'">
+             <b><div [innerHTML]="sanitizer.bypassSecurityTrustHtml(item.content)"></div></b>
           </h2>
+
+           <h2 *ngIf="item.notify_to_readstatus=='1'">
+           <div [innerHTML]="sanitizer.bypassSecurityTrustHtml(item.content)"></div>
+          </h2>
+
+
         </div>
       </ion-item>
 
 
       <ion-item (click)="notificationdetails(item,item.notify_type)" *ngIf="item.notify_type=='OA'">
-        <ion-avatar item-start *ngIf="isphoto>0">
+        <ion-avatar item-start  *ngIf="item.photo!=''">
            <img src="img/alarm.png" hspace="10" />
         </ion-avatar>
         <div style="overflow: hidden; padding-left: .5em;">
-          <h2> <b><div [innerHTML]="sanitizer.bypassSecurityTrustHtml(item.content)"></div>
-           </b>
+         
+          <h2 *ngIf="item.notify_to_readstatus=='0'">
+             <b><div [innerHTML]="sanitizer.bypassSecurityTrustHtml(item.content)"></div></b>
+          </h2>
+
+           <h2 *ngIf="item.notify_to_readstatus=='1'">
+           <div [innerHTML]="sanitizer.bypassSecurityTrustHtml(item.content)"></div>
           </h2>
         </div>
       </ion-item>
@@ -72,12 +85,17 @@
 
 
       <ion-item (click)="notificationdetails(item,item.notify_type)" *ngIf="item.notify_type=='C'">
-        <ion-avatar item-start *ngIf="isphoto>0">
+        <ion-avatar item-start  *ngIf="item.photo!=''">
           <img src="{{item.photo}}">
         </ion-avatar>
         <div style="overflow: hidden; padding-left: .5em;">
-          <h2> <b><div [innerHTML]="sanitizer.bypassSecurityTrustHtml(item.content)"></div>
-           </b>
+         
+          <h2 *ngIf="item.notify_to_readstatus=='0'">
+             <b><div [innerHTML]="sanitizer.bypassSecurityTrustHtml(item.content)"></div></b>
+          </h2>
+
+           <h2 *ngIf="item.notify_to_readstatus=='1'">
+           <div [innerHTML]="sanitizer.bypassSecurityTrustHtml(item.content)"></div>
           </h2>
         </div>
       </ion-item>
@@ -85,24 +103,34 @@
 
 
       <ion-item (click)="notificationdetails(item,item.notify_type)" *ngIf="item.notify_type=='S'">
-        <ion-avatar item-start *ngIf="isphoto>0">
+        <ion-avatar item-start  *ngIf="item.photo!=''">
           <img src="{{item.photo}}">
         </ion-avatar>
         <div style="overflow: hidden; padding-left: .5em;">
-          <h2> <b><div [innerHTML]="sanitizer.bypassSecurityTrustHtml(item.content)"></div>
-           </b>
+        
+          <h2 *ngIf="item.notify_to_readstatus=='0'">
+             <b><div [innerHTML]="sanitizer.bypassSecurityTrustHtml(item.content)"></div></b>
+          </h2>
+
+           <h2 *ngIf="item.notify_to_readstatus=='1'">
+           <div [innerHTML]="sanitizer.bypassSecurityTrustHtml(item.content)"></div>
           </h2>
         </div>
       </ion-item>
 
 
       <ion-item (click)="notificationdetails(item,item.notify_type)" *ngIf="item.notify_type=='E'">
-        <ion-avatar item-start *ngIf="isphoto>0">
+        <ion-avatar item-start  *ngIf="item.photo!=''">
           <img src="{{item.photo}}">
         </ion-avatar>
         <div style="overflow: hidden; padding-left: .5em;">
-          <h2> <b><div [innerHTML]="sanitizer.bypassSecurityTrustHtml(item.content)"></div>
-           </b>
+         
+          <h2 *ngIf="item.notify_to_readstatus=='0'">
+             <b><div [innerHTML]="sanitizer.bypassSecurityTrustHtml(item.content)"></div></b>
+          </h2>
+
+           <h2 *ngIf="item.notify_to_readstatus=='1'">
+           <div [innerHTML]="sanitizer.bypassSecurityTrustHtml(item.content)"></div>
           </h2>
         </div>
       </ion-item>
