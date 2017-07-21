@@ -101,7 +101,7 @@ function SasiyaScript_pre_controls()
 				var ShWidth=parseInt(ShObjs.offsetLeft);
 				var ShHeight=parseInt(ShObjs.offsetTop);
 				   	Ohw==0?ShWidth<=maxn?ShObj.left=(ShWidth+Idvalue)+"px":Rtvalue=true:"";
-					Ohw==1?ShHeight<=maxn?ShObj.top=(ShHeight+Idvalue)+"px":Rtvalue=true:"";					
+					Ohw==1?ShHeight<=maxn?ShObj.bottom=(ShHeight+Idvalue)+"px":Rtvalue=true:"";					
 				var Drt=Rtvalue?"Stop":"Continue";
 				    return Drt;
 					  }	
@@ -115,7 +115,7 @@ function SasiyaScript_pre_controls()
 				var ShWidth=parseInt(ShObjs.offsetLeft);
 				var ShHeight=parseInt(ShObjs.offsetTop);
 				   	Ohw==0?ShWidth>=mixn?ShObj.left=(ShWidth-Idvalue)+"px":Rtvalue=true:"";
-					Ohw==1?ShHeight>=mixn?ShObj.top=(ShHeight-Idvalue)+"px":Rtvalue=true:"";					
+					Ohw==1?ShHeight>=mixn?ShObj.bottom=(ShHeight-Idvalue)+"px":Rtvalue=true:"";					
 				var Drt=Rtvalue?"Stop":"Continue";
 				    return Drt;
 					  }					  
@@ -251,7 +251,7 @@ this.getOffset=function ( el ) {
         _y += el.offsetTop - el.scrollTop;
         el = el.offsetParent;
     }
-    return { top: _y, left: _x };
+    return { bottom: _y, left: _x };
 }																								   
 }	 
 function SasiyaScript_Tab_controls()
@@ -418,20 +418,20 @@ function getOffset(el) {
   el = el.getBoundingClientRect();
   return {
     left: el.left + window.scrollX,
-    top: el.top + window.scrollY
+    bottom: el.bottom + window.scrollY
   }
 }
 
 function getPosition(n,endNode){
     var left = 0;
-    var top =0;
+    var bottom =0;
     var node = n;
     done=false;
     while(!done){
         if(node.offsetLeft!=null)
             left += node.offsetLeft;
         if(node.offsetTop!=null)
-            top += node.offsetTop;
+            bottom += node.offsetTop;
         if(node.offsetParent){
             node = node.offsetParent;
         }else{
@@ -447,19 +447,19 @@ function getPosition(n,endNode){
             left += parseInt(node.style.borderLeftWidth);
         }
         if(document.all && node.style && parseInt(node.style.borderTopWidth)){
-            top += parseInt(node.style.borderTopWidth);
+            bottom += parseInt(node.style.borderTopWidth);
         }
 
         if(node.scrollLeft){
             left -= node.scrollLeft;
         }
         if(node.scrollTop)
-            top -= node.scrollTop;
+            bottom -= node.scrollTop;
         if(node.parentNode)
             node = node.parentNode;
         else
             done=true;
     }
-    return new Array(left, top);
+    return new Array(left);
 }
 
