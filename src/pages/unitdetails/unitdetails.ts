@@ -22,6 +22,7 @@ import { MapsPage } from '../maps/maps';
 import { ReportsPage } from '../reports/reports';
 import { CalendarPage } from '../calendar/calendar';
 import { EmailPage } from '../email/email';
+import { AlarmPage } from '../alarm/alarm';
 
 
 /**
@@ -190,6 +191,11 @@ export class UnitdetailsPage {
 	}
 	servicingInfo() {
 		this.nav.setRoot(ServicinginfoPage, {
+			record: this.NP.get("record")
+		});
+	}
+	alamInfo(){
+		this.nav.setRoot(AlarmPage, {
 			record: this.NP.get("record")
 		});
 	}

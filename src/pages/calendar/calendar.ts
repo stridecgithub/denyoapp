@@ -29,6 +29,9 @@ import 'intl/locale-data/jsonp/en';
   providers: [DatePicker]
 })
 export class CalendarPage {
+   public msgcount:any;
+  public notcount:any;
+
   @ViewChild('postcontent') postcontent: ElementRef;
   myVal: any;
   viewLink: any;
@@ -47,6 +50,7 @@ export class CalendarPage {
   daySession: any;
   totalCount: any;
   totalCountEvent: any;
+  totalCountEventDateWise: any;
   curDate: any;
   public pageTitle: string;
   public loginas: any;
@@ -80,6 +84,7 @@ export class CalendarPage {
 
 
   ionViewWillEnter() {
+    this.totalCountEventDateWise = 0;
     this.eventsselected = true;
     this.allselected = false;
     this.serviceselected = false;
@@ -94,6 +99,17 @@ export class CalendarPage {
     this.onTimeSelected(this.curDate);
 
     this.createRandomEvents();
+
+    let //body: string = "loginid=" + this.userId,
+      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/msgnotifycount?loginid=" + this.userId;
+    this.http.get(url, options)
+      .subscribe((data) => {
+        this.msgcount = data.json().msgcount;
+        this.notcount = data.json().notifycount;
+      });
   }
 
 
@@ -277,162 +293,132 @@ export class CalendarPage {
         } else {
           this.daySession = "";
         }
-        //console.log("All Response:" +JSON.stringify(data.json()));
-        //console.log("Calendar Response:" +JSON.stringify(data.json().services));
-
+        console.log("Pet:======>" + this.petselection);
+        this.calendarResultEvent = [];
         if (this.petselection == 'ALL') {
-          if (data.json().allservices.length > 0) {
-            this.calendarResultService = data.json().allservices;
-            // this.createRandomEventsDynamic(this.calendarResultService);
-            this.totalCount = data.json().allservices.length;
-          }
-          if (data.json().allevents.length > 0) {
-            this.calendarResultEvent = data.json().allevents;
-            //this.createRandomEventsDynamic(this.calendarResultEvent);
-            this.totalCount = data.json().allevents.length;
-          }
-          if (data.json().allalarms.length > 0) {
-            this.calendarResultAlarm = data.json().allalarms;
-            // this.createRandomEventsDynamic(this.calendarResultAlarm);
-            this.totalCount = data.json().allalarms.length;
-          }
+          console.log('ALL');
+          this.doCalendarResult(data, 0, 0, 0, 'all')
         } else if (this.petselection == 'SERVICE') {
-          if (data.json().allservices.length > 0) {
-            this.calendarResultService = data.json().allservices;
-            //this.createRandomEventsDynamic(this.calendarResultService);
-            this.totalCount = data.json().allservices.length;
-          } else {
-            this.calendarResultService = [];
-            this.totalCount = 0;
-          }
+          console.log('SERVICE');
+          this.doCalendarResult(data, 0, 0, 0, 'service');//JsonData,Event,Service,Alarm
         } else if (this.petselection == 'EVENT') {
-          if (data.json().allevents.length > 0) {
-            this.calendarResultEvent = data.json().allevents;
-            //this.createRandomEventsDynamic(this.calendarResultEvent);
-            this.totalCount = data.json().allevents.length;
-          } else {
-            this.calendarResultEvent = [];
-            this.totalCount = 0;
-          }
+          console.log('EVENT');
+          this.doCalendarResult(data, 0, 0, 0, 'event');//JsonData,Event,Service,Alarm
         } else if (this.petselection == 'ALARM') {
-          if (data.json().allalarms.length > 0) {
-            this.calendarResultAlarm = data.json().allalarms;
-            // this.createRandomEventsDynamic(this.calendarResultAlarm);
-            this.totalCount = data.json().allalarms.length;
-          } else {
-            this.calendarResultAlarm = [];
-            this.totalCount = 0;
-          }
+          console.log('ALARM');
+          this.doCalendarResult(data, 0, 0, 0, 'alarm');//JsonData,Event,Service,Alarm
         } else {
-
-          console.log("All Events:" + data.json().allevents.length);
-          console.log("All Service:" + data.json().allservices.length);
-          console.log("All Alarms:" + data.json().allalarms.length);
-
+          console.log('EV' + ev);
           if (ev != '') {
-            console.log('ev:' + JSON.stringify(ev));
-            console.log("dateStr:" + dateStr);
-            /* if (data.json().events.length > 0) {
-              this.calendarResultEvent = data.json().events;
-              this.totalCountEvent = data.json().events.length;
-            } else {
-              this.calendarResultEvent = [];
-              this.totalCountEvent = 0;
-              this.noeventtitle = 'There is No Event';
-            }*/
-            //   if (dateStr == '') {
-              console.log(this.petselection);
-            if (dateStr != '') {
-              this.eventIdentify = data.json().events;
-            } else {
-              this.eventIdentify = data.json().allevents;
-            }
-            for (var i = 0; i < this.eventIdentify.length; i += 1) {
-              let eventdate = this.eventIdentify[i]['event_date'] + " " + this.eventIdentify[i]['event_time'];
-              this.calendarResultEvent.push({
-                event_title: this.eventIdentify[i]['event_title'],
-                event_date: eventdate,
-                event_location: this.eventIdentify[i]['event_location'],
-                event_remark: this.eventIdentify[i]['event_remark'],
-                event_addedby_name: this.eventIdentify[i]['event_addedby_name'],
-                event_type: 'E'
-              });
-            }
-
-            if (dateStr != '') {
-              this.serviceIdentify = data.json().services;
-            } else {
-              this.serviceIdentify = data.json().allservices;
-            }
-            for (var j = 0; j < this.serviceIdentify.length; j += 1) {
-
-              let eventdate = this.serviceIdentify[j]['next_service_date'] + " " + this.serviceIdentify[j]['serviced_time'];
-              this.calendarResultEvent.push({
-                event_title: this.serviceIdentify[j]['service_subject'],
-                event_date: eventdate,
-                event_remark: this.serviceIdentify[j]['service_remark'],
-                event_location: this.serviceIdentify[j]['service_location'],
-                event_addedby_name: this.serviceIdentify[j]['serviced_by_name'],
-                event_type: 'S'
-              });
-
-            }
-
-            if (dateStr != '') {
-              this.alarmIdentity = data.json().alarms;
-            } else {
-              this.alarmIdentity = data.json().allalarms;
-            }
-            for (var k = 0; k < this.alarmIdentity.length; k += 1) {
-              this.calendarResultEvent.push({
-                event_title: this.alarmIdentity[k]['alarm_name'],
-                event_date: this.alarmIdentity[k]['alarm_received_date'],
-                event_remark: this.alarmIdentity[k]['alarm_remark'],
-                event_location: this.alarmIdentity[k]['alarm_location'],
-                event_addedby_name: this.alarmIdentity[k]['alarm_assginedby_name'],
-                event_type: 'A'
-              });
-
-            }
-            /* } else {
-               if (data.json().events.length > 0) {
-                 this.eventIdentify = data.json().events;
-                 for (var i = 0; i < this.eventIdentify.length; i += 1) {
-                   this.calendarResultEvent.push({
-                     event_title: this.eventIdentify[i]['event_title'],
-                     event_date: this.eventIdentify[i]['event_date'],
-                     event_location: this.eventIdentify[i]['event_location'],
-                     event_remark: this.eventIdentify[i]['event_remark'],
-                     event_addedby_name: this.eventIdentify[i]['event_addedby_name']
-                   });
-                 }
- 
-                // this.calendarResultEvent = data.json().events;
-                 this.totalCountEvent = this.eventIdentify.length;
-               } else {
-                 this.calendarResultEvent = [];
-                 this.totalCountEvent = 0;
-                 this.noeventtitle = 'There is No Event';
-               }
-             }*/
-            console.log("Date wise selection calendar response:" + JSON.stringify(this.calendarResultEvent));
-          } /*else {
-            console.log('not ev');
-            if (data.json().allevents.length > 0) {
-              this.calendarResultEvent = data.json().allevents;
-              this.totalCountEvent = data.json().allevents.length;
-            } else {
-              this.calendarResultEvent = [];
-              this.totalCountEvent = 0;
-              this.noeventtitle = 'There is No Event';
-            }
-          }*/
+            this.doCalendarResult(data, 1, 1, 1, '')//JsonData,Event,Service,Alarm
+          }
 
         }
 
       });
 
 
+  }
+  doCalendarResult(data, event, service, alarm, type) {//JsonData,Event,Service,Alarm
+    this.serviceIdentify = [];
+    this.eventIdentify = [];
+    this.alarmIdentity = [];
+    if (event > 0 && type == '') {
+      console.log("A");
+      this.eventIdentify = data.json().events;
+    } else {
+      console.log("B");
+      if (type == 'event') {
+        console.log("C");
+        this.eventIdentify = data.json().allevents;
+      }
+      if (type == 'all') {
+        console.log("D");
+        this.eventIdentify = data.json().allevents;
+      }
+    }
+    for (var i = 0; i < this.eventIdentify.length; i += 1) {
+
+      let eventdate = this.eventIdentify[i]['event_date'] + " " + this.eventIdentify[i]['event_time'];
+      this.calendarResultEvent.push({
+        event_id: this.eventIdentify[i]['event_id'],
+        event_title: this.eventIdentify[i]['event_title'],
+        event_date: eventdate,
+        event_time: this.eventIdentify[i]['event_time'],
+        event_location: this.eventIdentify[i]['event_location'],
+        event_remark: this.eventIdentify[i]['event_remark'],
+        event_addedby_name: this.eventIdentify[i]['event_addedby_name'],
+        event_type: 'E'
+      });
+    }
+
+    if (service > 0 && type == '') {
+      console.log("E");
+      this.serviceIdentify = data.json().services;
+    } else {
+      console.log("F");
+      if (type == 'service') {
+        console.log("G");
+        this.serviceIdentify = data.json().allservices;
+      }
+      if (type == 'all') {
+        console.log("H");
+        this.serviceIdentify = data.json().allservices;
+      }
+    }
+    for (var j = 0; j < this.serviceIdentify.length; j += 1) {
+
+      let eventdate = this.serviceIdentify[j]['next_service_date'] + " " + this.serviceIdentify[j]['serviced_time'];
+      this.calendarResultEvent.push({
+        event_id: this.serviceIdentify[j]['service_id'],
+        event_title: this.serviceIdentify[j]['service_subject'],
+        event_unitid: this.serviceIdentify[j]['service_unitid'],
+        event_date: eventdate,
+        event_time: this.serviceIdentify[j]['serviced_time'],
+        event_remark: this.serviceIdentify[j]['service_remark'],
+        event_location: this.serviceIdentify[j]['service_location'],
+        event_addedby_name: this.serviceIdentify[j]['serviced_by_name'],
+        event_type: 'S'
+      });
+
+    }
+
+    if (alarm > 0 && type == '') {
+      console.log("I");
+      this.alarmIdentity = data.json().alarms;
+    } else {
+      console.log("J");
+      if (type == 'alarm') {
+        console.log("K");
+        this.alarmIdentity = data.json().allalarms;
+      }
+      if (type == 'all') {
+        console.log("L");
+        this.alarmIdentity = data.json().allalarms;
+      }
+    }
+    for (var k = 0; k < this.alarmIdentity.length; k += 1) {
+
+      this.calendarResultEvent.push({
+
+        event_id: this.alarmIdentity[k]['alarm_id'],
+        event_title: this.alarmIdentity[k]['alarm_name'],
+        event_unitid: this.alarmIdentity[k]['alarm_unit_id'],
+        event_date: this.alarmIdentity[k]['alarm_received_date'],
+        event_remark: this.alarmIdentity[k]['alarm_remark'],
+        event_location: this.alarmIdentity[k]['alarm_location'],
+        event_addedby_name: this.alarmIdentity[k]['alarm_assginedby_name'],
+        event_type: 'A'
+      });
+
+
+    }
+    this.totalCountEventDateWise = this.calendarResultEvent.length;
+    console.log("Date wise selection calendar response:" + JSON.stringify(this.calendarResultEvent));
+    console.log("totalCountEventDateWise++" + this.totalCountEventDateWise);
+    if (this.totalCountEventDateWise == 0) {
+      this.noeventtitle = 'There is no events';
+    }
   }
   onCurrentDateChanged(event: Date) {
     var today = new Date();
@@ -441,17 +427,17 @@ export class CalendarPage {
     this.isToday = today.getTime() === event.getTime();
   }
 
-  doConfirm(id, item, type) {
-    console.log("Deleted Id" + id);
+  doCalendarDelete(item, action) {
+    console.log("Deleted Id" + item.event_id);
     let confirm = this.alertCtrl.create({
-      message: 'Are you sure you want to delete this unit group?',
+      message: 'Are you sure you want to delete?',
       buttons: [{
         text: 'Yes',
         handler: () => {
-          this.deleteEntry(id, type);
-          for (let q: number = 0; q < this.calendarResultService.length; q++) {
-            if (this.calendarResultService[q] == item) {
-              this.calendarResultService.splice(q, 1);
+          this.deleteEntry(item.event_id, action);
+          for (let q: number = 0; q < this.calendarResultEvent.length; q++) {
+            if (this.calendarResultEvent[q] == item) {
+              this.calendarResultEvent.splice(q, 1);
             }
           }
         }
@@ -463,7 +449,12 @@ export class CalendarPage {
     });
     confirm.present();
   }
-
+  doCalendarEdit(item, type) {
+    this.navCtrl.setRoot(AddcalendarPage, {
+      item: item,
+      type: type
+    });
+  }
   deleteEntry(recordID, deltype) {
     let delactionurl;
     if (deltype == 'Event') {
@@ -484,12 +475,20 @@ export class CalendarPage {
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
       url: any = this.apiServiceURL + delactionurl;
+    console.log("Event Deleted API Url:" + url);
     this.http.get(url, options)
       .subscribe(data => {
         // If the request was successful notify the user
         if (data.status === 200) {
-
-          this.sendNotification(`Comments was successfully deleted`);
+          if (deltype == 'Event') {
+            this.sendNotification(`Event was successfully deleted`);
+          }
+          if (deltype == 'Service') {
+            this.sendNotification(`Service was successfully deleted`);
+          }
+          if (deltype == 'Alarm') {
+            this.sendNotification(`Alarm was successfully deleted`);
+          }
         }
         // Otherwise let 'em know anyway
         else {

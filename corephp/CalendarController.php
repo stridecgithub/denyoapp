@@ -30,12 +30,31 @@ class CalendarController extends Controller
 			$staff = Staff::where('staff_id', $loginid)->select('personalhashtag')->get();
 			$hashtag = $staff[0]->personalhashtag;		
 			//$eventslist = DB::table('events')->where('event_added_by', $loginid)->orWhere('event_remark', 'LIKE', "% $hashtag %")->get();
-			$eventslist = DB::select('SELECT * FROM events WHERE event_deletestatus=\'0\' AND event_added_by = "'.$loginid.'" OR event_remark LIKE "%'.$hashtag.'%"');
-			$allevents = DB::select('SELECT * FROM events WHERE event_date = "'.$date.'" AND (event_added_by = "'.$loginid.'" OR event_remark LIKE "%'.$hashtag.'%")');
+			$eventslist_qry = DB::select('SELECT * FROM events WHERE event_deletestatus=\'0\' AND event_added_by = "'.$loginid.'" OR event_remark LIKE "%'.$hashtag.'%"');
+			$allevents = DB::select('SELECT * FROM events WHERE  event_deletestatus=\'0\' AND event_date = "'.$date.'" AND (event_added_by = "'.$loginid.'" OR event_remark LIKE "%'.$hashtag.'%")');
 				
+			if(count($eventslist_qry) > 0) {
+				$i = 0;			
+				foreach($eventslist_qry as $event)
+				{
+					$eventslist[$i]['event_id'] = $event->event_id;
+					$eventslist[$i]['event_title'] = $event->event_title;
+					$eventslist[$i]['event_date'] = $event->event_date;
+					$eventslist[$i]['event_time'] = $event->event_time;
+					$eventslist[$i]['event_location'] = $event->event_location;
+					$eventslist[$i]['event_remark'] = $event->event_remark;
+					$eventslist[$i]['event_added_by'] = $event->event_added_by;
+					$addedby = Staff::where('staff_id', $event->event_added_by)->select('firstname')->get();
+					if($addedby)
+						$eventslist[$i]['event_addedby_name'] = $addedby[0]->firstname;
+					else
+						$eventslist[$i]['event_addedby_name'] = '';
+					++$i;
+				}
+			}	
 			if($loginid == 1)
 			{
-				$serviceslist = Service::where('deletestatus', '0')->get();
+				//$serviceslist = Service::where('deletestatus', '0')->get();
 				$allservices = Service::where('deletestatus', '0')->where('next_service_date', $date)->get();		
 				$allalarms = $alarmslist = Alarm::select('*')->where('alarm_received_date', 'LIKE', "%$date%")->get();
 			}
@@ -51,7 +70,7 @@ class CalendarController extends Controller
 					}
 					$unitids = @implode(",", $unitids);
 					//echo $unitids; die;
-					$serviceslist = Service::where('deletestatus', '0')->get();
+					
 					if($unitids) {
 					$allservices = Service::where('deletestatus', '0')->where('next_service_date', $date)->whereIn('service_unitid', [$unitids])->get();
 					$alarmslist = Alarm::whereIn('alarm_unit_id', [$unitids])->get();
@@ -61,7 +80,15 @@ class CalendarController extends Controller
 					
 				}
 			}
-			
+			$serviceslist_qry = Service::where('services.deletestatus', '0')->join('units','units.unit_id','=','services.service_unitid')
+			->select('units.location as service_location','services.*','staffs.firstname as serviced_by_name')->join('staffs','staffs.staff_id','=','services.serviced_by')->get();
+			if(count($serviceslist_qry) > 0) {
+				
+				//$unit_data = DB::table('units')->where('unit_id',$serviceslist_qry[0]->service_unitid)->get();
+				
+				$serviceslist = $serviceslist_qry;
+				
+			}
 			if($allevents)
 			{	
 				$i = 0;			
@@ -119,6 +146,10 @@ class CalendarController extends Controller
 				{
 					$alarms[$i]['alarm_id'] = $alarm->alarm_id;
 					$alarms[$i]['alarm_unit_id'] = $alarm->alarm_unit_id;
+					$unitdata = DB::table('units')->where('unit_id',$alarm->alarm_unit_id)->get();
+					if($unitdata) {
+						$alarms[$i]['alarm_location'] = $unitdata[0]->location;
+					}
 					$alarms[$i]['alarm_name'] = $alarm->alarm_name;
 					$alarms[$i]['alarm_assgined_by'] = $alarm->alarm_assigned_by;
 					if($alarm->alarm_assigned_by > 0)
@@ -136,8 +167,9 @@ class CalendarController extends Controller
 					}
 					else
 						$alarms[$i]['alarm_assginedto_name'] = '';
+										
 					$alarms[$i]['alarm_assigned_date'] = $alarm->alarm_assigned_date;
-					$alarms[$i]['alarm_received_date'] = $alarm->alarm_received_date;
+					$alarms[$i]['alarm_received_date'] =  date("Y-m-d", strtotime($alarm->alarm_received_date)) . ', ' . date("H:i A",strtotime($alarm->alarm_received_date));
 					$alarms[$i]['alarm_status'] = $alarm->alarm_status;
 					$alarms[$i]['alarm_priority'] = $alarm->alarm_priority;
 					$alarms[$i]['alarm_remark'] = $alarm->alarm_remark;

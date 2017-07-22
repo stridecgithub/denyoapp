@@ -38,7 +38,10 @@ export class AddcalendarPage {
   public event_unitid: any;
   public companyId: any;
   public event_date: any;
+  public event_time: any;
   public event_title: any;
+  public event_type: any;
+  public event_notes: any;
   public service_remark: any;
   public userId: any;
   public responseResultType = [];
@@ -66,9 +69,9 @@ export class AddcalendarPage {
     public fb: FormBuilder,
     public toastCtrl: ToastController) {
     let curDateStr = new Date();
-    this.event_date =  curDateStr.getMonth() + "/" + curDateStr.getDate() + "/" + curDateStr.getFullYear();
+    this.event_date = curDateStr.getMonth() + "/" + curDateStr.getDate() + "/" + curDateStr.getFullYear();
     // this.event_date ="07/17/2017";
-     this.event_date ="2017-07-17";
+    this.event_date = "2017-07-17";
     console.log("Current Date is:" + this.event_date);
     this.loginas = localStorage.getItem("userInfoName");
     // Create form builder validation rules
@@ -76,7 +79,7 @@ export class AddcalendarPage {
       "event_location": ["", Validators.required],
       "event_subject": ["", Validators.required],
       "event_unitid": [""],
-      "event_title": ["", Validators.required],
+      //  "event_title": ["", Validators.required],
       "event_project": [""],
       "event_date": [""],
       "event_type": [""],
@@ -214,18 +217,19 @@ export class AddcalendarPage {
     console.log('ionViewDidLoad  AddcalendarPage');
   }
 
+
   address1get(hashtag) {
     console.log(hashtag);
     this.gethashtag = hashtag;
   }
   getType(type) {
-    console.log(type);
+    console.log("Event Type:" + type);
     if (type == "Service") {
       this.unitfield = true;
       this.disunit = true;
     } else {
       this.unitfield = false;
-       this.disunit = false;
+      this.disunit = false;
     }
   }
   // Determine whether we adding or editing a record
@@ -233,10 +237,10 @@ export class AddcalendarPage {
   ionViewWillEnter() {
     this.getUnitListData();
     this.resetFields();
-    if (this.NP.get("record")) {
-      console.log(this.NP.get("act"));
+    if (this.NP.get("item")) {
+      console.log(this.NP.get("type"));
       this.isEdited = true;
-      this.selectEntry(this.NP.get("record"));
+      this.selectEntry(this.NP.get("item"));
       this.pageTitle = 'Edit Calendar';
       this.readOnly = false;
       this.hideActionButton = true;
@@ -252,11 +256,34 @@ export class AddcalendarPage {
   // Assign the navigation retrieved data to properties
   // used as models on the page's HTML form
   selectEntry(item) {
-    this.type_name = item.type_name;
-    this.event_project = item.event_project;
-    this.event_subject = item.event_subject;
+    console.log("Edit Select Entry Response" + JSON.stringify(item));
+    this.event_subject = item.event_title;
+    console.log("Event Date:" + item.event_date);
+    console.log("Event Date Substr:" + item.event_date.substr(0, 10));
+    /*console.log("Event Date Split:" + item.event_date.split("-"));
+    console.log("Event Date Split:" + item.event_date.split("-"));*/
+    //this.event_date = item.event_date;
+    this.event_date =item.event_date.substr(0, 10);
+    this.event_time = item.event_time;
+    this.event_location = item.event_location
+    this.event_notes = item.event_remark;
+    if (item.event_type == 'S') {
+      this.type_name = "Service";
+      this.event_type = 'Service';
+    }
+    if (item.event_type == 'E') {
+      this.type_name = "Event";
+      this.event_type = 'Event';
+    }
+
+    ///this.event_subject = item.event_subject;
     this.event_unitid = item.event_unitid;
-    this.recordID = item.id;
+    this.recordID = item.event_id;
+    this.getType(this.type_name);
+    if (this.event_unitid > 0) {
+      this.getProjectLocation(this.event_unitid)
+    }
+    this.address1get(this.event_notes);
   }
 
 
@@ -266,11 +293,17 @@ export class AddcalendarPage {
   // to our remote PHP script (note the body variable we have created which
   // supplies a variable of key with a value of create followed by the key/value pairs
   // for the record data
-  createEntry(event_title, type_name, event_project, event_subject, event_unitid, event_time, event_location, service_remark, createdby) {
+  createEntry(type_name, event_project, event_subject, event_unitid, event_time, event_location, service_remark, createdby) {
     //let updatedby = createdby;
-     service_remark=localStorage.getItem("atMentionResult");
+    service_remark = localStorage.getItem("atMentionResult");
+    let field;
+    if (type_name == 'Service') {
+      field = "&event_title=" + event_subject;
+    } else {
+      field = "&event_title=" + event_subject;
+    }
     let body: string = "is_mobile=1&event_type="
-      + type_name + "&event_title=" + event_title + "&event_subject=" + event_subject + "&event_date=" + this.event_date + "&event_time=" + event_time + "&service_unitid=" + event_unitid + "&event_location=" + event_location + "&service_remark=" + service_remark + "&event_added_by=" + createdby+"&serviced_by="+createdby,
+      + type_name + field + "&event_date=" + this.event_date + "&event_time=" + event_time + "&service_unitid=" + event_unitid + "&event_location=" + event_location + "&service_remark=" + service_remark + "&event_added_by=" + createdby + "&serviced_by=" + createdby,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
@@ -288,7 +321,7 @@ export class AddcalendarPage {
             this.sendNotification(res.msg[0].result);
           } else {
             this.sendNotification(res.msg[0].result);
-             localStorage.setItem("atMentionResult", '');
+            localStorage.setItem("atMentionResult", '');
             this.nav.setRoot(CalendarPage);
           }
         }
@@ -309,18 +342,23 @@ export class AddcalendarPage {
 
   //http://denyoappv2.stridecdev.com/calendar/update?is_mobile=1&event_type=Event&event_title=sfd&event_location=london&event_date=2017-07-07&event_time=6:00 AM&ses_login_id=2&event_remark=@vignesh&id=1
 
-  updateEntry(event_title, type_name, event_project, event_subject, event_unitid, event_time, event_location, service_remark, createdby) {
-   if (localStorage.getItem("atMentionResult") != '') {
+  updateEntry(type_name, event_project, event_subject, event_unitid, event_time, event_location, service_remark, createdby) {
+    if (localStorage.getItem("atMentionResult") != '') {
       service_remark = localStorage.getItem("atMentionResult");
     }
-   
+    let field;
+    if (type_name == 'Service') {
+      field = "&event_title=" + event_subject;
+    } else {
+      field = "&event_title=" + event_subject;
+    }
     let body: string = "is_mobile=1&event_type="
-      + type_name + "&event_title=" + event_title + "&event_subject=" + event_subject + "&event_date=" + this.event_date + "&event_time=" + event_time + "&event_location=" + event_location + "&event_remark=" + service_remark + "&ses_login_id=" + createdby + "&id=" + this.recordID,
+      + type_name + field + "&event_date=" + this.event_date + "&event_time=" + event_time +"&service_unitid=" + event_unitid + "&event_location=" + event_location + "&event_remark=" + service_remark + "&ses_login_id=" + createdby + "&id=" + this.recordID,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
       url: any = this.apiServiceURL + "/calendar/update";
-    console.log(url);
+    console.log(url + "?" + body);
     this.http.post(url, body, options)
       .subscribe(data => {
         let res = data.json();
@@ -331,10 +369,10 @@ export class AddcalendarPage {
           this.hideForm = true;
           if (res.msg[0].result > 0) {
             this.sendNotification(res.msg[0].result);
-             localStorage.setItem("atMentionResult", '');
+            localStorage.setItem("atMentionResult", '');
           } else {
             this.sendNotification(res.msg[0].result);
-            this.nav.setRoot(CompanygroupPage);
+            this.nav.setRoot(CalendarPage);
           }
         }
         // Otherwise let 'em know anyway
@@ -385,16 +423,16 @@ export class AddcalendarPage {
       event_project: string = this.form.controls["event_project"].value,
       event_subject: string = this.form.controls["event_subject"].value,
       event_unitid: string = this.form.controls["event_unitid"].value,
-      event_title: string = this.form.controls["event_title"].value,
+      // event_title: string = this.form.controls["event_title"].value,
       event_time: string = this.form.controls["event_time"].value,
       event_location: string = this.form.controls["event_location"].value,
       service_remark: string = this.form.controls["event_notes"].value;
 
     if (this.isEdited) {
-      this.updateEntry(event_title, type_name, event_project, event_subject, event_unitid, event_time, event_location, service_remark, this.userId);
+      this.updateEntry(type_name, event_project, event_subject, event_unitid, event_time, event_location, service_remark, this.userId);
     }
     else {
-      this.createEntry(event_title, type_name, event_project, event_subject, event_unitid, event_time, event_location, service_remark, this.userId);
+      this.createEntry(type_name, event_project, event_subject, event_unitid, event_time, event_location, service_remark, this.userId);
     }
   }
 
@@ -412,7 +450,7 @@ export class AddcalendarPage {
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/units?is_mobile=1&startindex=0&results=30&sort=unit_id&dir=asc&company_id=" + this.companyId+"&loginid="+this.userId;
+      url: any = this.apiServiceURL + "/units?is_mobile=1&startindex=0&results=30&sort=unit_id&dir=asc&company_id=" + this.companyId + "&loginid=" + this.userId;
     let res;
     console.log("URL" + url);
     this.http.get(url, options)

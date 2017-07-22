@@ -13,14 +13,10 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     </ion-buttons>
-    <!--ion-buttons end>
-      <button (click)="doAdd()" style="background-color:transparent">
-            <ion-icon name="ios-add-circle-outline"></ion-icon>           
-        </button>
-    </ion-buttons-->
     <ion-buttons end>
       <button ion-button (click)="notification()">
   <ion-icon ios="ios-notifications-outline" md="md-notifications-outline"></ion-icon>
+   <ion-badge item-end class="notificationcount" *ngIf="notcount>0">{{this.notcount}}</ion-badge>
 </button>
     </ion-buttons>
   </ion-navbar>
@@ -37,15 +33,13 @@
   </ion-navbar>
 
 
-
 </ion-header>
-
 <ion-content>
   <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="pet" (ionChange)="onSegmentChanged(pet)">
     <ion-option value="ALL" selected=true>All</ion-option>
     <ion-option value="SERVICE">Service</ion-option>
-    <ion-option value="ALARM">Alarm</ion-option>
     <ion-option value="EVENT">Event</ion-option>
+    <ion-option value="ALARM">Alarm</ion-option>
   </ion-select>
 
   <ion-item class="item-calendar">
@@ -54,11 +48,6 @@
       <button ion-button class="calendar_ttl">{{dateHeaderTitle}}</button>
       <button ion-button (click)="nex()" class="calendar_nex">>></button>
     </div>
-    <!--calendar [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate" (onCurrentDateChanged)="onCurrentDateChanged($event)"
-      (onEventSelected)="onEventSelected($event)" (showEventDetail)=true (onTitleChanged)="onViewTitleChanged($event)" (onTimeSelected)="onTimeSelected($event)"
-      step="30">
-    </calendar-->
-
     <calendar [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate" (onCurrentDateChanged)="onCurrentDateChanged($event)"
       (onRangeChanged)="reloadSource(startTime, endTime)" (onEventSelected)="onEventSelected($event)" (onTitleChanged)="onViewTitleChanged($event)"
       (onTimeSelected)="onTimeSelected($event)" step="30">
@@ -85,127 +74,10 @@
     <span class="add-calendar-button-inner">
   +</span>
  </button>
-
-    <!--div [ngSwitch]="pet">
-      <ion-list class="eventlist-grid" *ngSwitchCase="'ALL'">
-        <ion-item *ngFor="let item of calendarResultEvent">
-          <div *ngIf="item.event_type=='E'">
-            <div>
-              <h2 clear item-right><b>Event:{{item.event_title}}  </b></h2>
-            </div>
-            <div>Date & Time:{{item.event_date}}</div>
-            <div>Location:{{item.event_location}}</div>
-            <div>Notes:{{item.event_remark}}</div>
-            <div>Event By:{{item.event_addedby_name}}</div>
-          </div>
-
-          <div *ngIf="item.event_type=='S'">
-            <div>
-              <h2 clear item-right><b>Service:{{item.event_title}}  </b></h2>
-            </div>
-            <div>Date & Time:{{item.event_date}}</div>
-            <div>Location:{{item.event_location}}</div>
-            <div>Notes:{{item.event_remark}}</div>
-            <div>Serviced By:{{item.event_addedby_name}}</div>
-          </div>
-
-          <div *ngIf="item.event_type=='A'">
-            <div>
-              <h2 clear item-right><b>Alarm:{{item.event_title}}  </b></h2>
-            </div>
-            <div>Date & Time:{{item.event_date}}</div>
-            <div>Location:{{item.event_location}}</div>
-            <div>Notes:{{item.event_remark}}</div>
-            <div>Alarm Assigned By:{{item.event_addedby_name}}</div>
-          </div>
-        </ion-item>
-
-
-
-
-        <ion-item *ngFor="let item of calendarResultService; let i = index" [attr.data-index]="i">
-          <div>
-
-            <h2 clear item-right><b>Service:{{item.service_subject}}  </b></h2>
-          </div>
-          <div>Date & Time:{{item.serviced_datetime}}</div>
-          <div>Location:{{item.service_location}}</div>
-          <div>Notes:{{item.service_remark}}</div>
-          <div>Serviced By:{{item.serviced_by_name}}</div>
-        </ion-item>
-
-        <ion-item *ngFor="let item of calendarResultAlarm; let i = index" [attr.data-index]="i">
-          <div>
-
-            <h2 clear item-right><b>Alarm:{{item.alarm_name}}  </b></h2>
-          </div>
-          <div>Date & Time:{{item.alarm_received_date}}</div>
-          <div>Location:{{item.alarm_location}}</div>
-          <div>Notes:{{item.alarm_remark}}</div>
-          <div>Alarm Assigned By:{{item.alarm_assginedby_name}}</div>
-        </ion-item>
-
-      </ion-list>
-
-      <ion-list class="eventlist-grid" *ngSwitchCase="'EVENT'">
-        <ion-item-sliding *ngFor="let item of calendarResultEvent;">
-          <ion-item>
-            <div>
-              <h2 clear item-right><b>Event:{{item.event_title}}  </b></h2>
-            </div>
-            <div>Date & Time:{{item.event_date}} {{item.event_time}}</div>
-            <div>Location:{{item.event_location}}</div>
-            <div>Notes:{{item.event_remark}}</div>
-            <div>Event By:{{item.event_addedby_name}}</div>
-          </ion-item>
-        </ion-item-sliding>
-        <ion-item *ngIf="totalCount==0">
-          <div class="error">There is No Event</div>
-        </ion-item>
-      </ion-list>
-
-
-      <ion-list class="eventlist-grid" *ngSwitchCase="'SERVICE'">
-
-        <ion-item *ngFor="let item of calendarResultService; let i = index" [attr.data-index]="i">
-          <div>
-            <h2 clear item-right><b>Service:{{item.service_subject}}  </b></h2>
-          </div>
-          <div>Date & Time:{{item.serviced_datetime}}</div>
-          <div>Location:{{item.service_location}}</div>
-          <div>Notes:{{item.service_remark}}</div>
-          <div>Serviced By:{{item.serviced_by_name}}</div>
-        </ion-item>
-        <ion-item *ngIf="totalCount==0">
-          <div class="error">There is No Service</div>
-        </ion-item>
-      </ion-list>
-
-
-
-      <ion-list class="eventlist-grid" *ngSwitchCase="'ALARM'">
-
-        <ion-item *ngFor="let item of calendarResultAlarm; let i = index" [attr.data-index]="i">
-          <div>
-            <h2 clear item-right><b>Alarm:{{item.alarm_name}}  </b></h2>
-          </div>
-          <div>Date & Time:{{item.alarm_received_date}}</div>
-          <div>Location:{{item.alarm_location}}</div>
-          <div>Notes:{{item.alarm_remark}}</div>
-          <div>Alarm Assigned By:{{item.alarm_assginedby_name}}</div>
-        </ion-item>
-        <ion-item *ngIf="totalCount==0">
-          <div class="error">There is No Alarm</div>
-        </ion-item>
-      </ion-list>
-
-
-    </div-->
-
-    <div [ngSwitch]="!pet">
+    <ion-list *ngIf="totalCountEventDateWise!=0">
       <ion-item-sliding *ngFor="let item of calendarResultEvent;">
         <ion-item *ngIf="item.event_type=='E'">
-
+          Event
           <div>
 
             <h2 clear item-right><b>{{item.event_title}}  </b></h2>
@@ -213,24 +85,18 @@
           <div>Date & Time:{{item.event_date}}</div>
           <div>Location:{{item.event_location}}</div>
           <div>Remarks:{{item.event_remark}}</div>
-          <!--div>Event By:{{item.event_addedby_name}}</div-->
-
-
         </ion-item>
-        <ion-item-options>
-          <!--button class="viewcolor" (click)="doEdit(item,'view')">
-                       <ion-icon name="eye" class="icon-size"></ion-icon>
-                    </button-->
-          <button class="editcolor" (click)="doEdit(item,'edit')">                      
+        <!--ion-item-options>
+        <button class="editcolor" (click)="doEdit(item,'edit')">                      
                         <ion-icon name="create" class="icon-size"></ion-icon>
                     </button>
-          <button class="trashcolor" (click)="doConfirm(item.event_id,item)">                        
+        <button class="trashcolor" (click)="doConfirm(item.event_id,item)">                        
                          <ion-icon name="trash" class="icon-size"></ion-icon>
                     </button>
-        </ion-item-options>
+      </ion-item-options-->
 
         <ion-item *ngIf="item.event_type=='S'">
-
+          Service
           <div>
 
             <h2 clear item-right><b>Subject:{{item.event_title}}  </b></h2>
@@ -238,44 +104,58 @@
           <div>Date & Time:{{item.event_date}}</div>
           <div>Location:{{item.event_location}}</div>
           <div>Remarks:{{item.event_remark}}</div>
-          <!--div>Serviced By:{{item.event_addedby_name}}</div-->
         </ion-item>
-        <ion-item-options>
-          <!--button class="viewcolor" (click)="doEdit(item,'view')">
-                       <ion-icon name="eye" class="icon-size"></ion-icon>
-                    </button-->
-          <button class="editcolor" (click)="doEdit(item,'edit')">                      
+        <!--ion-item-options>
+        <button class="editcolor" (click)="doEdit(item,'edit')">                      
                         <ion-icon name="create" class="icon-size"></ion-icon>
                     </button>
-          <button class="trashcolor" (click)="doConfirm(item.service_id,item)">                        
+        <button class="trashcolor" (click)="doConfirm(item.service_id,item)">                        
                          <ion-icon name="trash" class="icon-size"></ion-icon>
                     </button>
-        </ion-item-options>
+      </ion-item-options-->
 
         <ion-item *ngIf="item.event_type=='A'">
+          Alarm
           <div>
-
-
             <h2 clear item-right><b>Alarm:{{item.event_title}}  </b></h2>
           </div>
           <div>Date & Time:{{item.event_date}}</div>
           <div>Location:{{item.event_location}}</div>
           <div>Remarks:{{item.event_remark}}</div>
-          <!--div>Alarm Assigned By:{{item.event_addedby_name}}</div-->
-
-
         </ion-item>
         <ion-item-options>
-          <button class="editcolor" (click)="doEdit(item,'edit')">                      
+
+          <button class="editcolor" (click)="doCalendarEdit(item,'Service')" *ngIf="item.event_type=='S'">                      
                         <ion-icon name="create" class="icon-size"></ion-icon>
+                    </button>
+          <button class="trashcolor" (click)="doCalendarDelete(item,'Service')" *ngIf="item.event_type=='S'">                        
+                         <ion-icon name="trash" class="icon-size"></ion-icon>
+                    </button>
+
+
+
+
+          <button class="editcolor" (click)="doCalendarEdit(item,'Event')" *ngIf="item.event_type=='E'">                      
+                        <ion-icon name="create" class="icon-size"></ion-icon>
+                    </button>
+          <button class="trashcolor" (click)="doCalendarDelete(item,'Event')" *ngIf="item.event_type=='E'">                        
+                         <ion-icon name="trash" class="icon-size"></ion-icon>
+                    </button>
+
+
+
+          <button class="trashcolor" (click)="doCalendarDelete(item,'Alarm')"  *ngIf="item.event_type=='A'">                        
+                         <ion-icon name="trash" class="icon-size"></ion-icon>
                     </button>
 
         </ion-item-options>
       </ion-item-sliding>
-      <ion-item *ngIf="totalCountEvent==0">
+    </ion-list>
+    <ion-list>
+      <ion-item *ngIf="totalCountEventDateWise==0">
         <div class="error">{{noeventtitle}}</div>
       </ion-item>
-    </div>
+    </ion-list>
   </div>
 </ion-content>
 <ion-footer color="bluedark">
