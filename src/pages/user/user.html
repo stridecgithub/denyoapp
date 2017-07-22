@@ -88,10 +88,10 @@
   <ion-list *ngIf="totalCount!=0">
     <ion-item-sliding *ngFor="let item of reportAllLists;">
       <ion-item>
-        <h2><b>User ID:</b>{{item.username}}</h2>
-        <h2><b>Name:</b>{{item.firstname}} {{item.lastname}}</h2>
-        <h2><b>Email:</b>{{item.email}}</h2>
-        <h2><b>Group:</b>{{item.companygroup_name}}</h2>
+        <h5><b>User ID:</b>{{item.username}}</h5>
+        <h5><b>Name:</b>{{item.firstname}} {{item.lastname}}</h5>
+        <h5><b>Email:</b>{{item.email}}</h5>
+        <h5><b>Group:</b>{{item.companygroup_name}}</h5>
       </ion-item>
       <ion-item-options>
         <!--button class="viewcolor" (click)="doEdit(item,'view')">

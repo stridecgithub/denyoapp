@@ -261,7 +261,7 @@ background-color:red;
 
 }
 .toolbar-md{text-align:center;}
-.toolbar-md-bluedark{min-height:80px;}
+.toolbar-md-bluedark{min-height:52px!important;}
 .toolbar-md-bluedark .toolbar-background-md{background:#f2f2f2;}
 
 .ion-md-home:before, .ion-md-contacts:before, .ion-md-chatboxes:before, .ion-md-bicycle:before, .ion-md-settings:before{display:none;}
@@ -631,9 +631,17 @@ page-addcompanygroup {
     background-color:white;
 }
 
+.toolbar-title-md {
+    padding: 0 12px;
+    font-size: 18px;
+    margin-right: 44px;
+    margin-left: 10px;
+    font-weight: 500;
+    color: #424242;
+}
 .button-inner{
   position:relative;
-  bottom:12px;
+  bottom:-2px;
 }
 ion-navbar.toolbar {
     background: #f0f0f0;
@@ -1081,7 +1089,7 @@ page-addrequestsupport {
 }
 .button-inner{
   position:relative;
-  bottom:12px;
+  bottom:-2px;
 }
 
 .priority-one-highlight
@@ -1323,6 +1331,20 @@ page-addserviceinfo {
  .border_low{
 border:2px solid #009ACD;
  }
+ .ion-md-calendar:before {
+    content: "\f2ab";
+    width: 40px;
+    height: 27px;
+    margin-top: 11px;
+    /* margin-bottom: -11px; */
+    padding: 2px;
+}
+
+.item-md .item-button {
+    
+    height: 45px;
+   
+}
 .ion-badge-container{
     ion-badge {
         a{
@@ -1457,7 +1479,12 @@ line-height: 37px;}
 .algn-cent span{float:right;font-size: 15px;margin: 0 10px;}
 .toolbar-title-md{padding:0;}
 
-
+.badge-md {
+    border-radius: 4px;
+    color: #fff;
+    background-color: #488aff;
+    height: 54px;
+}
   .profile-image-wrapper {
     //text-align: center;
     //margin: 20px 0;
@@ -1894,12 +1921,16 @@ ion-navbar ion-buttons{margin-right:15px;}
 
 //addunitstwo
 page-addunitstwo {
-    
+    .item-md .item-button {
+   // padding: 0 7.6em;
+    height: 45px;
+   // font-size: 1.2rem;
+}
 .ion-content{
     background-color:white;
 }.button-inner{
   position:relative;
-  bottom:18px;
+  bottom:9px;
 }
 
 	 .text-input-md, .text-input{border:0px solid #f2f2f2;margin: 10px 0 20px;min-height: 35px;padding: 0 10px; width: 100%;}
@@ -2494,6 +2525,15 @@ page-commentsinfo {
     .ion-content{
     background-color:white;
 }
+.priorityicon
+{
+    position:absolute;
+    right: 0;
+    top:10px;
+}
+.priorityicon img {
+    margin:0;
+}
  .ion-content{
     background-color:white;
 }
@@ -2539,7 +2579,7 @@ ion-item-sliding{border-bottom: 1px solid #ccc;}
 .item-md h2{margin:10px 0;}
 .label-md b{width:40%;display:inline-block;}
 ion-navbar ion-buttons{margin-right:15px;}
-.add-new-btn{background: #333;color: #fff;padding:0px 10px;text-align: center;height: 45px;
+.add-new-btn{background: #333;color: #fff;padding:0px 10px;text-align: center;height: 45px;width: 100%;
 line-height: 37px;}
 .algn-cent{margin:0 auto;display:table;}
 .algn-cent .ios-add-circle-outline{float:left;}
@@ -2598,7 +2638,7 @@ ion-item-sliding{border-bottom: 1px solid #ccc;}
 .item-md h2{margin:10px 0;}
 .label-md b{width:40%;display:inline-block;}
 ion-navbar ion-buttons{margin-right:15px;}
-.add-new-btn{background: #333;color: #fff;padding: 10px;text-align: center;width: 100%;}
+.add-new-btn{background: #333;color: #fff;padding: 15px;text-align: center;width: 100%;    line-height: 0;}
 .algn-cent{margin:0 auto;display:table;}
 .algn-cent .ios-add-circle-outline{float:left;}
 .algn-cent span{float:right;font-size: 15px;margin: 6px 10px;}
@@ -6222,7 +6262,7 @@ ion-item-sliding{border-bottom: 1px solid #ccc;}
 .item-md h2{margin:10px 0;}
 .label-md b{width:40%;display:inline-block;}
 ion-navbar ion-buttons{margin-right:15px;}
-.add-new-btn{background: #333;color: #fff;padding: 10px;text-align: center;width: 100%;}
+.add-new-btn{background: #333;color: #fff;padding: 15px;text-align: center;width: 100%;    line-height: 0;}
 .algn-cent{margin:0 auto;display:table;}
 .algn-cent .ios-add-circle-outline{float:left;}
 .algn-cent span{float:right;font-size: 15px;margin: 6px 10px;}
