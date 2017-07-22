@@ -66,7 +66,7 @@
       </ion-item>
 
 
-      <ion-item (click)="notificationdetails(item,item.notify_type)" *ngIf="item.notify_type=='OA'">
+      <ion-item (click)="notificationdetails(item,'Alarm')" *ngIf="item.notify_type=='OA'">
         <ion-avatar item-start  *ngIf="item.photo!=''">
            <img src="img/alarm.png" hspace="10" />
         </ion-avatar>
@@ -84,7 +84,7 @@
 
 
 
-      <ion-item (click)="notificationdetails(item,item.notify_type)" *ngIf="item.notify_type=='C'">
+      <ion-item (click)="notificationdetails(item,'Comments')" *ngIf="item.notify_type=='C'">
         <ion-avatar item-start  *ngIf="item.photo!=''">
           <img src="{{item.photo}}">
         </ion-avatar>
@@ -102,7 +102,7 @@
 
 
 
-      <ion-item (click)="notificationdetails(item,item.notify_type)" *ngIf="item.notify_type=='S'">
+      <ion-item (click)="notificationdetails(item,,'Service')" *ngIf="item.notify_type=='S'">
         <ion-avatar item-start  *ngIf="item.photo!=''">
           <img src="{{item.photo}}">
         </ion-avatar>
@@ -119,7 +119,7 @@
       </ion-item>
 
 
-      <ion-item (click)="notificationdetails(item,item.notify_type)" *ngIf="item.notify_type=='E'">
+      <ion-item *ngIf="item.notify_type=='E'">
         <ion-avatar item-start  *ngIf="item.photo!=''">
           <img src="{{item.photo}}">
         </ion-avatar>

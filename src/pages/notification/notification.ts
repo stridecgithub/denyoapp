@@ -10,6 +10,9 @@ import { UnitsPage } from '../units/units';
 import { UnitdetailsPage } from '../unitdetails/unitdetails';
 import { RolePage } from '../role/role';
 import { CalendarPage } from '../calendar/calendar';
+import { AlarmdetailsPage } from '../alarmdetails/alarmdetails';
+import { ServicedetailsPage } from '../servicedetails/servicedetails';
+import { CommentdetailsPage } from '../commentdetails/commentdetails';
 import { EmailPage } from '../email/email';
 import { MapsPage } from '../maps/maps';
 import 'rxjs/add/operator/map';
@@ -58,30 +61,47 @@ export class NotificationPage {
     console.log(nottype);
     console.log(JSON.stringify(item));
 
-//http://denyoappv2.stridecdev.com/changestatusapibell_list?table_id=25&loginid=5
-  let body: string = "is_mobile=1&loginid=" + this.userId +
-			"&table_id=" + item.table_id,
-			type: string = "application/x-www-form-urlencoded; charset=UTF-8",
-			headers: any = new Headers({ 'Content-Type': type }),
-			options: any = new RequestOptions({ headers: headers }),
-			url: any = this.apiServiceURL + "/changestatusapibell_list";
-		console.log(url);
-		console.log(body);
+    //http://denyoappv2.stridecdev.com/changestatusapibell_list?table_id=25&loginid=5
+    let body: string = "is_mobile=1&loginid=" + this.userId +
+      "&table_id=" + item.table_id,
+      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/changestatusapibell_list";
+    console.log(url);
+    console.log(body);
 
-		this.http.post(url, body, options)
-			.subscribe((data) => {
-				console.log("Count Response Success:" + JSON.stringify(data.json()));
-			
-				// If the request was successful notify the user
-				if (data.status === 200) {
-					//this.sendNotification(`Comment count successfully removed`);
+    this.http.post(url, body, options)
+      .subscribe((data) => {
+        console.log("Count Response Success:" + JSON.stringify(data.json()));
 
-				}
-				// Otherwise let 'em know anyway
-				else {
-					// this.sendNotification('Something went wrong!');
-				}
-			});
+        // If the request was successful notify the user
+        if (data.status === 200) {
+          //this.sendNotification(`Comment count successfully removed`);
+
+        }
+        // Otherwise let 'em know anyway
+        else {
+          // this.sendNotification('Something went wrong!');
+        }
+      });
+
+    if (nottype == 'Alarm') {
+      this.nav.setRoot(AlarmdetailsPage, {
+        record: item
+      });
+    }
+  
+    if (nottype == 'Service') {
+      this.nav.setRoot(ServicedetailsPage, {
+        record: item
+      });
+    }
+    if (nottype == 'Comment') {
+      this.nav.setRoot(CommentdetailsPage, {
+        record: item
+      });
+    }
 
   }
   ionViewWillEnter() {
