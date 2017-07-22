@@ -34,28 +34,28 @@
   <form [formGroup]="form" (ngSubmit)="saveEntry()" enctype='application/x-www-form-urlencoded' method="post">
     <ion-list>
  <ion-item>
-    <button class="{{unitDetailData.colorcodeindications}}" style="float: left ;width:8px;height:100px">         
+    <button class="{{unitDetailData.colorcodeindications}}" style="float: left ;width:8px;height:70px">         
         </button>
-        <button class="dot" (click)="viewunit()" style="float: right ;width:50px;height:50px;background-color:#ffffff"></button>
+       
     <button class="{{unitDetailData.favoriteindication}}" style="float: right ;width:50px;height:50px;background-color:#ffffff"></button>
-    <div style="overflow: hidden; padding-left: .5em;">
-      <h2><b>{{unitDetailData.unitname}}</b></h2>
-      <h2>Project Name:{{unitDetailData.projectname}}</h2>
-      <h2>Location:{{unitDetailData.location}}</h2>
-      <h2  *ngIf="unitDetailData.lat!=''">({{unitDetailData.lat}},{{unitDetailData.lng}})</h2>
+    <div style="overflow: hidden; padding-left: 0.5em;">
+      <h5><b>{{unitDetailData.unitname}}</b></h5>
+      <h5>Project Name:{{unitDetailData.projectname}}</h5>
+      <h5>Location:{{unitDetailData.location}}</h5>
+      <h5  *ngIf="unitDetailData.lat!=''">({{unitDetailData.lat}},{{unitDetailData.lng}})</h5>
       
     </div>
   </ion-item>
 
 
 
- <p><a  (click)="getPrority(1)" href="#"><img src="img/low_priority.png" style="width: 16px;
-    height: 16px;
+ <p><a  (click)="getPrority(1)" href="#"><img src="img/low_priority.png" style="width: 30px;
+    height: 30px;
     position: absolute;
-    margin-left: 40%;" class="{{priority_lowclass}}"></a><a  (click)="getPrority(2)" href="#"><img  src="img/high_priority.png"  style="width: 16px;
-    height: 16px;
+    margin-left: 70%;" class="{{priority_lowclass}}"></a><a  (click)="getPrority(2)" href="#"><img  src="img/high_priority.png"  style="width: 30px;
+    height: 30px;
     position: absolute;
-    margin-left: 50%;" class="{{priority_highclass}}"></a>
+    margin-left: 75%;" class="{{priority_highclass}}"></a>
     </p>
 
 
