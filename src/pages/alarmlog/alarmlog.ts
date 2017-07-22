@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {  NavController, ToastController, AlertController, NavParams } from 'ionic-angular';
+import { NavController, ToastController, AlertController, NavParams } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 import { Http, Headers, RequestOptions } from '@angular/http';
 //import { AddunitgroupPage } from '../addunitgroup/addunitgroup';
@@ -25,7 +25,7 @@ import { EmailPage } from '../email/email';
   templateUrl: 'alarmlog.html',
 })
 export class AlarmlogPage {
- public pageTitle: string;
+  public pageTitle: string;
   public loginas: any;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   public totalCount;
@@ -41,9 +41,12 @@ export class AlarmlogPage {
   public reportAllLists = [];
   public colorListArr: any;
   public userId: any;
-  public unit_id:any;
+  public unit_id: any;
+
+  public msgcount: any;
+  public notcount: any;
   constructor(public http: Http, public nav: NavController,
-    public toastCtrl: ToastController, public alertCtrl: AlertController,public NP: NavParams, public navParams: NavParams, public loadingCtrl: LoadingController) {
+    public toastCtrl: ToastController, public alertCtrl: AlertController, public NP: NavParams, public navParams: NavParams, public loadingCtrl: LoadingController) {
     this.loginas = localStorage.getItem("userInfoName");
     this.userId = localStorage.getItem("userInfoId");
   }
@@ -51,7 +54,7 @@ export class AlarmlogPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad AlarmlogPage');
   }
-doRefresh(refresher) {
+  doRefresh(refresher) {
     console.log('doRefresh function calling...');
     this.reportData.startindex = 0;
     this.reportAllLists = [];
@@ -60,10 +63,9 @@ doRefresh(refresher) {
       refresher.complete();
     }, 2000);
   }
-  doAlarm()
-  {
-     let editItem = this.NP.get("record");
- if (this.NP.get("record").unit_id != undefined && this.NP.get("record").unit_id != 'undefined') {
+  doAlarm() {
+    let editItem = this.NP.get("record");
+    if (this.NP.get("record").unit_id != undefined && this.NP.get("record").unit_id != 'undefined') {
       this.unit_id = editItem.unit_id;
     }
     this.presentLoading(1);
@@ -77,7 +79,7 @@ doRefresh(refresher) {
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/alarms?is_mobile=1&startindex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc+"&unitid="+this.unit_id;
+      url: any = this.apiServiceURL + "/alarms?is_mobile=1&startindex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc + "&unitid=" + this.unit_id;
     let res;
     console.log(url);
     this.http.get(url, options)
@@ -86,20 +88,20 @@ doRefresh(refresher) {
         console.log(JSON.stringify(res));
         console.log("1" + res.alarms.length);
         console.log("2" + res.alarms);
-      
+
         if (res.alarms.length > 0) {
 
           for (let alarm in res.alarms) {
-           
-           
-           
+
+
+
             this.reportAllLists.push({
-              alarm_id:res.alarms[alarm].alarm_id,
+              alarm_id: res.alarms[alarm].alarm_id,
               alarm_name: res.alarms[alarm].alarm_name,
               alarm_assginedby_name: res.alarms[alarm].alarm_assginedby_name,
               alarm_assginedto_name: res.alarms[alarm].alarm_assginedto_name
-             
-              
+
+
             });
           }
           //"unitgroup_id":1,"unitgroup_name":"demo unit","colorcode":"FBD75C","remark":"nice","favorite":1,"totalunits":5
@@ -117,14 +119,24 @@ doRefresh(refresher) {
       });
     this.presentLoading(0);
   }
-   ionViewWillEnter() {
-      if (this.NP.get("record")) {
+  ionViewWillEnter() {
+    if (this.NP.get("record")) {
       console.log("Service Info Record Param Value:" + JSON.stringify(this.NP.get("record")));
     }
     this.pageTitle = "Alarm";
     this.reportData.startindex = 0;
     this.reportData.sort = "alarm_id";
     this.doAlarm();
+    let //body: string = "loginid=" + this.userId,
+      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/msgnotifycount?loginid=" + this.userId;
+    this.http.get(url, options)
+      .subscribe((data) => {
+        this.msgcount = data.json().msgcount;
+        this.notcount = data.json().notifycount;
+      });
   }
   doInfinite(infiniteScroll) {
     console.log('InfinitScroll function calling...');
@@ -154,12 +166,12 @@ doRefresh(refresher) {
       loader.dismiss();
     }
   }
-   previous() {
+  previous() {
     this.nav.setRoot(UnitdetailsPage, {
       record: this.NP.get("record")
     });
   }
-      doEdit(item, act) {
+  doEdit(item, act) {
     if (act == 'edit') {
       this.nav.setRoot(AddalarmPage, {
         record: item,
@@ -167,17 +179,16 @@ doRefresh(refresher) {
       });
     }
   }
-   details(item,act)
-   {
-      if (act == 'edit') {
+  details(item, act) {
+    if (act == 'edit') {
       this.nav.setRoot(AlarmdetailsPage, {
         record: item,
         act: act
       });
       return false;
     }
-   }
-   notification() {
+  }
+  notification() {
     this.nav.setRoot(NotificationPage);
   }
   redirectToUser() {

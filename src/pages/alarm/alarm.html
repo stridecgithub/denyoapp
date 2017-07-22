@@ -18,8 +18,9 @@
         </button>
     </ion-buttons-->
     <ion-buttons end>
-      <button ion-button  (click)="notification()">
+      <button ion-button (click)="notification()">
   <ion-icon ios="ios-notifications-outline" md="md-notifications-outline"></ion-icon>
+  <ion-badge item-end class="notificationcount" *ngIf="notcount>0">{{this.notcount}}</ion-badge>
 </button>
     </ion-buttons>
   </ion-navbar>
@@ -34,7 +35,7 @@
       Login As:{{loginas}}
     </ion-buttons>
   </ion-navbar>
-  
+
   <ion-item style="width: 100%; margin: 0; padding-left: 10px; background-color:#ffffff">
     <ion-label>Sort By</ion-label>
     <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="pet" (ionChange)="onSegmentChanged(pet)">
@@ -46,7 +47,7 @@
 </ion-header>
 
 
-<ion-content padding  class="ion-content">
+<ion-content padding class="ion-content">
   <div class="error" *ngIf="reportAllLists.length==0">No entries found</div>
 
   <ion-refresher (ionRefresh)="doRefresh($event)" *ngIf="totalCount!=0">
@@ -57,13 +58,13 @@
     <ion-item-sliding *ngFor="let item of reportAllLists;">
 
       <ion-item>
-        
-        
+
+
         <div style="overflow: hidden; padding-left: .5em;">
           <h2><b>Fault Code:{{item.alarm_name}}</b>
           </h2>
           <h2><b>Assigned by:{{item.alarm_assigned_by}}</b></h2>
-           <h2><b>Assigned to:{{item.alarm_assigned_to}}</b></h2>
+          <h2><b>Assigned to:{{item.alarm_assigned_to}}</b></h2>
 
         </div>
 
@@ -76,7 +77,7 @@
         <button class="editcolor" (click)="doEdit(item,'edit')">                      
                         <ion-icon name="create" class="icon-size"></ion-icon>
                     </button>
-      
+
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
@@ -87,33 +88,35 @@
 
 <ion-footer color="bluedark">
   <ion-toolbar color="bluedark">
-<ul class="quick-list">
-<li>
-    <button ion-button icon-only clear (click)="redirectToMaps()">
+    <ul class="quick-list">
+      <li>
+        <button ion-button icon-only clear (click)="redirectToMaps()">
     	<ion-icon name="home" class="footer-icon">MAPS</ion-icon>
     </button>
-</li>  
-<li>  
-    <button ion-button icon-only (click)="redirectToUser()" clear>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectToUser()" clear>
     	<ion-icon name="contacts" class="footer-icon">UNITS</ion-icon>
     </button>
-</li>     
-<li>    
-    <button ion-button icon-only (click)="redirectToMessage()" clear>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectToMessage()" clear>
     	<ion-icon name="chatboxes" class="footer-icon">MESSAGE</ion-icon>
-    </button>
-</li>     
-<li>    
-    <button ion-button icon-only (click)="redirectCalendar()" clear>
+       <ion-badge item-end class="messagecount"  *ngIf="msgcount>0">{{this.msgcount}}</ion-badge>    
+       </button>
+        <ion-badge color="danger"></ion-badge>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectCalendar()" clear>
     	<ion-icon name="bicycle" class="footer-icon">CALENDAR</ion-icon>
     </button>
-</li>      
-<li>    
-    <button ion-button icon-only (click)="redirectToSettings()" clear>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectToSettings()" clear>
     	<ion-icon name="settings" class="footer-icon">SETTING</ion-icon>
     </button>
-</li>    
-</ul>
+      </li>
+    </ul>
 
   </ion-toolbar>
 </ion-footer>

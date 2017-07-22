@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import {  AlertController, NavController, NavParams, ViewController, ToastController } from 'ionic-angular';
-import {  FormBuilder, FormGroup } from '@angular/forms';
+import { AlertController, NavController, NavParams, ViewController, ToastController } from 'ionic-angular';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { UserPage } from '../user/user';
 import { CommentsinfoPage } from '../commentsinfo/commentsinfo';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
@@ -13,7 +13,7 @@ import { MapsPage } from '../maps/maps';
 import { ReportsPage } from '../reports/reports';
 import { CalendarPage } from '../calendar/calendar';
 import { EmailPage } from '../email/email';
-
+import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 /**
@@ -28,6 +28,8 @@ import 'rxjs/add/operator/map';
 
 })
 export class CommentdetailsPage {
+  public msgcount: any;
+  public notcount: any;
   isReadyToSave: boolean;
   public photoInfo = [];
   public addedImgListsArray = [];
@@ -36,7 +38,7 @@ export class CommentdetailsPage {
   public recordID: any;
   public comment_unitid: any;
   public comment_id: any;
-  public udetails:any;
+  public udetails: any;
   public comments: any;
   public comment_by_name: any;
   public comment_remark: any;
@@ -50,6 +52,7 @@ export class CommentdetailsPage {
   public isProgress = false;
   public isUploaded: boolean = true;
   item: any;
+   public userId: any;
   public isEdited: boolean = false;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   form: FormGroup;
@@ -65,9 +68,10 @@ export class CommentdetailsPage {
     addedImgLists2: ''
   }
   public hideActionButton = true;
-  constructor(public alertCtrl: AlertController, public NP: NavParams, public nav: NavController, public toastCtrl: ToastController, public navParams: NavParams, public viewCtrl: ViewController, formBuilder: FormBuilder
-   
-   ) {
+  constructor(public http: Http,public alertCtrl: AlertController, public NP: NavParams, public nav: NavController, public toastCtrl: ToastController, public navParams: NavParams, public viewCtrl: ViewController, formBuilder: FormBuilder
+
+  ) {
+     this.userId = localStorage.getItem("userInfoId");
     this.service_priority_class1 = "-outline";
     this.service_priority_class2 = "-outline";
     this.unitDetailData.loginas = localStorage.getItem("userInfoName");
@@ -104,8 +108,8 @@ export class CommentdetailsPage {
   }
   ionViewWillEnter() {
     this.getPrority(1);
- this.udetails = localStorage.getItem("unitdetails");
-    console.log("UD"+JSON.stringify(this.udetails));
+    this.udetails = localStorage.getItem("unitdetails");
+    console.log("UD" + JSON.stringify(this.udetails));
     console.log("comment:" + JSON.stringify(this.NP.get("record")));
     if (this.NP.get("record")) {
       this.selectEntry(this.NP.get("record"));
@@ -124,6 +128,16 @@ export class CommentdetailsPage {
     }
 
 
+    let //body: string = "loginid=" + this.userId,
+      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/msgnotifycount?loginid=" + this.userId;
+    this.http.get(url, options)
+      .subscribe((data) => {
+        this.msgcount = data.json().msgcount;
+        this.notcount = data.json().notifycount;
+      });
 
 
   }
@@ -176,9 +190,9 @@ export class CommentdetailsPage {
     });
   }
 
-  
 
-    redirectToUser() {
+
+  redirectToUser() {
     this.nav.setRoot(UnitsPage);
   }
   redirectToMessage() {

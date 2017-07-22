@@ -25,7 +25,8 @@ import { EmailPage } from '../email/email';
   templateUrl: 'addalarm.html',
 })
 export class AddalarmPage {
-
+  public msgcount: any;
+  public notcount: any;
   public loginas: any;
   public companyid: any;
   public form: FormGroup;
@@ -105,6 +106,17 @@ export class AddalarmPage {
       this.isEdited = false;
       //this.pageTitle = 'New  Org Chart';
     }
+
+    let //body: string = "loginid=" + this.userId,
+      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/msgnotifycount?loginid=" + this.userId;
+    this.http.get(url, options)
+      .subscribe((data) => {
+        this.msgcount = data.json().msgcount;
+        this.notcount = data.json().notifycount;
+      });
   }
   selectEntry(item) {
     this.subject = item.alarm_name;

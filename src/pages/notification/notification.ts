@@ -85,24 +85,24 @@ export class NotificationPage {
           // this.sendNotification('Something went wrong!');
         }
       });
-
-    if (nottype == 'Alarm') {
-      this.nav.setRoot(AlarmdetailsPage, {
-        record: item
-      });
-    }
-  
-    if (nottype == 'Service') {
-      this.nav.setRoot(ServicedetailsPage, {
-        record: item
-      });
-    }
-    if (nottype == 'Comment') {
-      this.nav.setRoot(CommentdetailsPage, {
-        record: item
-      });
-    }
-
+    /*
+        if (nottype == 'Alarm') {
+          this.nav.setRoot(AlarmdetailsPage, {
+            record: item
+          });
+        }
+      
+        if (nottype == 'Service') {
+          this.nav.setRoot(ServicedetailsPage, {
+            record: item
+          });
+        }
+        if (nottype == 'Comment') {
+          this.nav.setRoot(CommentdetailsPage, {
+            record: item
+          });
+        }
+    */
   }
   ionViewWillEnter() {
 

@@ -31,6 +31,8 @@ import { EmailPage } from '../email/email';
   templateUrl: 'alarm.html',
 })
 export class AlarmPage {
+  public msgcount:any;
+  public notcount:any;
   public pageTitle: string;
   public loginas: any;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
@@ -128,6 +130,18 @@ export class AlarmPage {
     this.reportData.startindex = 0;
     this.reportData.sort = "alarm_id";
     this.doAlarm();
+
+    let //body: string = "loginid=" + this.userId,
+      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/msgnotifycount?loginid=" + this.userId;
+    this.http.get(url, options)
+      .subscribe((data) => {
+       this.msgcount=data.json().msgcount;
+        this.notcount=data.json().notifycount;
+      });
+
   }
   doInfinite(infiniteScroll) {
     console.log('InfinitScroll function calling...');

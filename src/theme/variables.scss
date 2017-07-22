@@ -217,27 +217,30 @@ bottom: 0;
 
 page-dashboard {  
 
-    .notificationcount{
-    color:white; 
-    border-radius: 80px;
-   
-    position: relative;
-    margin-right: 5px;
-    border: 1px solid;
+   /* Badge Count for Notification and Message */
+
+ .notificationcount{
+  color: white;
+    border-radius: 50px;
+    position: absolute;
+    right: -5px;
+    top: -5px;
+    /* border: 1px solid; */
+    background-color: gray;
 } 
 
 
 
     .messagecount{
-    color: red;
-    border-radius: 70px;
-   
+   color: white;
+    border-radius: 50px;
     position: absolute;
     right: 1px;
     top: 3px;
-    border: 1px solid;
-    background-color: transparent;
+    /* border: 1px solid; */
+    background-color: gray;
 }
+/* Badge Count for Notification and Message */
 
 .home-content{
 background-color:red;
@@ -2263,6 +2266,31 @@ ion-navbar ion-buttons{margin-right:15px;}
 //calendar
 
 page-calendar {
+
+    /* Badge Count for Notification and Message */
+
+ .notificationcount{
+  color: white;
+    border-radius: 50px;
+    position: absolute;
+    right: -5px;
+    top: -5px;
+    /* border: 1px solid; */
+    background-color: gray;
+} 
+
+
+
+    .messagecount{
+   color: white;
+    border-radius: 50px;
+    position: absolute;
+    right: 1px;
+    top: 3px;
+    /* border: 1px solid; */
+    background-color: gray;
+}
+/* Badge Count for Notification and Message */
     .monthview-eventdetail-timecolumn[_ngcontent-c0] {   
     display: none;
 }
@@ -6544,6 +6572,7 @@ background-color: #FBE983;
      background-image:url('../img/cross.png');background-size:cover;
  }
 }
+
 
 
 
