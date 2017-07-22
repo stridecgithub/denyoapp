@@ -174,7 +174,9 @@
       <li>
         <button ion-button icon-only (click)="redirectToMessage()" clear>
     	<ion-icon name="chatboxes" class="footer-icon">MESSAGE</ion-icon>
-    </button>
+       <ion-badge item-end class="messagecount"  *ngIf="msgcount>0">{{this.msgcount}}</ion-badge>    
+       </button>
+       <ion-badge color="danger"></ion-badge>
       </li>
       <li>
         <button ion-button icon-only clear>

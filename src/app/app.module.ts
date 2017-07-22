@@ -49,7 +49,6 @@ import { CommentdetailsPage } from '../pages/commentdetails/commentdetails';
 import { AlarmdetailsPage } from '../pages/alarmdetails/alarmdetails';
 import { NotificationPage } from '../pages/notification/notification';
 import { ReportsPage } from '../pages/reports/reports';
-import { MessagesPage } from '../pages/messages/messages';
 import { AddenginedetailPage } from '../pages/addenginedetail/addenginedetail';
 import { EnginedetailPage } from '../pages/enginedetail/enginedetail';
 import { EnginedetailviewPage } from '../pages/enginedetailview/enginedetailview';
@@ -88,7 +87,6 @@ import { CustomFooterComponent } from '../pages/custom-footer-component';
     AddunitgroupPage,
     UnitgroupPage,
     ReporttemplatePage,
-    MessagesPage,
     AddorgchartonePage,
     AddorgcharttwoPage,
     OrgchartPage,
@@ -143,7 +141,6 @@ import { CustomFooterComponent } from '../pages/custom-footer-component';
     AdduserPage,
     UseraccountPage,
     UserorgchartPage,
-    MessagesPage,
     MyaccountPage,
     UnitsPage,
     AddunitsonePage,

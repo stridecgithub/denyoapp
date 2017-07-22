@@ -18,7 +18,7 @@
         </button>
     </ion-buttons-->
     <ion-buttons end>
-      <button ion-button  (click)="notification()">
+      <button ion-button (click)="notification()">
   <ion-icon ios="ios-notifications-outline" md="md-notifications-outline"></ion-icon>
 </button>
     </ion-buttons>
@@ -47,41 +47,83 @@
     </div>
   </button>
   </div>
-  <div>
+  <!--div>
     <div [innerHTML]="htmlContent"></div>
-    <!--<iframe src="http://denyoappv2.stridecdev.com/orgchart?company_id="+{{companyId}}+"&is_mobile=1&id="+{{userId}}></iframe>-->
-     <div [innerHTML]="sanitizer.bypassSecurityTrustHtml(iframeContent)"></div>
+      <div [innerHTML]="sanitizer.bypassSecurityTrustHtml(iframeContent)"></div>
+  </div-->
+
+
+  <div style="overflow-x:scroll; overflow:auto">
+    <div class="tree-overflow">
+      <div id="treehtml">
+        <div class="tree">
+          <ul>
+            <!-- ngfor1 start-->
+            <li>
+              <img src="http://denyoappv2.stridecdev.com/staffphotos" onclick="pushimage()">
+              <img src="http://denyoappv2.stridecdev.com/images/default.png" onclick="pushimage()">
+              <h3>Krishanth</h3>
+              <h3>Kannan</h3>
+              <h4>Student</h4>
+              <ul>
+                <!-- ngfor2 start-->
+                <li>
+                  <img src="http://denyoappv2.stridecdev.com/images/default.png" onclick="pushimage()">
+                  <h3>Naga</h3>
+                  <h3>Kannan</h3>
+                  <h4>Sr Programmer</h4>
+                  <ul>
+                    <!-- ngfor3 start-->
+                    <li>
+                      <img src="http://denyoappv2.stridecdev.com/images/default.png" onclick="pushimage()">
+                      <h3>Thibishanth</h3>
+                      <h3>Kannan</h3>
+                      <h4>Child</h4>
+                    </li>
+                    <!-- ngfor3 end-->
+                  </ul>
+                </li>
+                <!-- ngfor2 end-->
+              </ul>
+              <!-- remove this two -->
+            </li>
+            <!-- remove this two -->
+            <!-- ngfor1 end-->
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
 </ion-content>
 <ion-footer color="bluedark">
   <ion-toolbar color="bluedark">
-<ul class="quick-list">
-<li>
-    <button ion-button icon-only clear>
+    <ul class="quick-list">
+      <li>
+        <button ion-button icon-only clear>
     	<ion-icon name="home" class="footer-icon">MAPS</ion-icon>
     </button>
-</li>  
-<li>  
-    <button ion-button icon-only (click)="redirectToUser()" clear>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectToUser()" clear>
     	<ion-icon name="contacts" class="footer-icon">UNITS</ion-icon>
     </button>
-</li>     
-<li>    
-    <button ion-button icon-only (click)="redirectToUnitGroup()" clear>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectToUnitGroup()" clear>
     	<ion-icon name="chatboxes" class="footer-icon">MESSAGE</ion-icon>
     </button>
-</li>     
-<li>    
-    <button ion-button icon-only (click)="redirectCalendar()" clear>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectCalendar()" clear>
     	<ion-icon name="bicycle" class="footer-icon">CALENDAR</ion-icon>
     </button>
-</li>     
-<li>    
-    <button ion-button icon-only (click)="redirectToRole()" clear>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectToRole()" clear>
     	<ion-icon name="settings" class="footer-icon">SETTING</ion-icon>
     </button>
-</li>    
-</ul>
+      </li>
+    </ul>
 
   </ion-toolbar>
 </ion-footer>
