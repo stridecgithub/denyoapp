@@ -36,14 +36,14 @@
     </ion-buttons>
   </ion-navbar>
 </ion-header>
-<ion-content padding class="ion-content" *ngIf="DASHBOARD_MAP_VIEW==0">
+<ion-content padding class="ion-content" *ngIf="VIEWACCESS==0">
   <p style="color: red;
     position: relative;
     margin-top: 50%;
    text-align:center;
-    font-size: 12pt;">Permission denied for access this page. Please contact your administrator</p>
+    font-size: 12pt;">{{permissionMessage}}</p>
 </ion-content>
-<ion-content padding class="ion-content" *ngIf="DASHBOARD_MAP_VIEW==1">
+<ion-content padding class="ion-content" *ngIf="VIEWACCESS==1">
   <div [innerHTML]="sanitizer.bypassSecurityTrustHtml(iframeContent)"></div>
   <ion-item style="width: 100%; margin: 0; padding-left: 10px;" *ngIf="totalCount!=0">
     <ion-label>Sort By</ion-label>
@@ -125,13 +125,13 @@
     	<ion-icon name="contacts" class="footer-icon">UNITS</ion-icon>
     </button>
       </li>
-   <li>    
-    <button ion-button icon-only (click)="redirectToMessage()" clear>
+      <li>
+        <button ion-button icon-only (click)="redirectToMessage()" clear>
     	<ion-icon name="chatboxes" class="footer-icon">MESSAGE</ion-icon>
       <ion-badge item-end class="messagecount"  *ngIf="msgcount>0">{{this.msgcount}}</ion-badge>
     </button>
-    <ion-badge color="danger"></ion-badge>
-</li>
+        <ion-badge color="danger"></ion-badge>
+      </li>
       <li>
         <button ion-button icon-only (click)="redirectCalendar()" clear>
     	<ion-icon name="bicycle" class="footer-icon">CALENDAR</ion-icon>

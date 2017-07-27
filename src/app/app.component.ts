@@ -49,8 +49,8 @@ export class MyApp {
   showLevel2 = null;
   ///private push: Push,
   constructor(private network: Network, private push: Push, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public dataService: DataServiceProvider, public menuCtrl: MenuController,
-    public toastCtrl: ToastController) { 
-   
+    public toastCtrl: ToastController) {
+
     this.initializeApp();
     this.dataService.getMenus()
       .subscribe((response) => {
@@ -233,6 +233,14 @@ export class MyApp {
     localStorage.setItem("DASHBOARD_MAP_EDIT", '');
     localStorage.setItem("DASHBOARD_MAP_DELETE", '');
     localStorage.setItem("DASHBOARD_MAP_HIDE", '');
+
+
+    localStorage.setItem("DASHBOARD_UNITS_VIEW",'');
+    localStorage.setItem("DASHBOARD_UNITS_CREATE", '');
+    localStorage.setItem("DASHBOARD_UNITS_EDIT", '');
+    localStorage.setItem("DASHBOARD_UNITS_DELETE",'');
+    localStorage.setItem("DASHBOARD_UNITS_HIDE", '');
+
 
     this.nav.push(HomePage);
   }

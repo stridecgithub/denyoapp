@@ -74,13 +74,13 @@ export class OrgchartPage {
     });
   }
   doDelete(item) {
-    console.log("Deleted Id" + item.staff_id);
+    console.log("Deleted Id" + item[0].staff_id);
     let confirm = this.alertCtrl.create({
       message: 'Are you sure you want to delete?',
       buttons: [{
         text: 'Yes',
         handler: () => {
-          this.deleteEntry(item.staff_id);
+          this.deleteEntry( item[0].staff_id);
         }
       },
       {
@@ -104,7 +104,7 @@ export class OrgchartPage {
         // If the request was successful notify the user
         if (data.status === 200) {
 
-          this.sendNotification(`Report Template was successfully deleted`);
+          this.sendNotification(`Orgchart was successfully deleted`);
         }
         // Otherwise let 'em know anyway
         else {

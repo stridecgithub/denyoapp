@@ -13,7 +13,7 @@
     </button>
     </ion-buttons>
     <ion-buttons end>
-   <button ion-button (click)="notification()">
+      <button ion-button (click)="notification()">
   <ion-icon ios="ios-notifications-outline" md="md-notifications-outline"></ion-icon>
   <ion-badge item-end class="notificationcount" *ngIf="notcount>0">{{this.notcount}}</ion-badge>
 </button>
@@ -54,6 +54,29 @@
           <ion-label stacked>Company Contact <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
           <ion-input [disabled]="readOnly" type="text" formControlName="contact" [(ngModel)]="contact"></ion-input>
         </ion-item>
+
+
+        <!--div class="list">
+
+          <div class="item item-input item-select">
+            <div class="input-label">
+              Select Country
+            </div>
+            <select ng-model="country" ng-init="country=countries[0]" ng-options="country.name for country in countries"></select></div>
+          <div class="item item-input item-input">
+            <span class="input-label">Number</span>
+            <input type="text" ng-model="country.dial_code">
+          </div>
+
+          <p> {{ country | json}} </p>
+        </div-->
+        <ion-item>
+          <ion-select>
+            <ion-option *ngFor="let cc of currencyList" value="{{ cc }}">
+              <span class='flag-icon flag-icon-{{ cc.slice(0, -1) }}'></span> {{ cc }}
+            </ion-option>
+          </ion-select>
+        </ion-item>
         <ion-item *ngIf="hideActionButton">
           <button ion-button color="primary" text-center block [disabled]="!form.valid">Complete and Save</button>
         </ion-item>
@@ -64,35 +87,35 @@
 
 <ion-footer color="bluedark">
   <ion-toolbar color="bluedark">
-<ul class="quick-list">
-<li>
-    <button ion-button icon-only clear (click)="redirectToMaps()">
+    <ul class="quick-list">
+      <li>
+        <button ion-button icon-only clear (click)="redirectToMaps()">
     	<ion-icon name="home" class="footer-icon">MAPS</ion-icon>
     </button>
-</li>  
-<li>  
-    <button ion-button icon-only (click)="redirectToUser()" clear>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectToUser()" clear>
     	<ion-icon name="contacts" class="footer-icon">UNITS</ion-icon>
     </button>
-</li>     
-<li>    
-    <button ion-button icon-only (click)="redirectToMessage()" clear>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectToMessage()" clear>
     	<ion-icon name="chatboxes" class="footer-icon">MESSAGE</ion-icon>
       <ion-badge item-end class="messagecount"  *ngIf="msgcount>0">{{this.msgcount}}</ion-badge>
     </button>
-    <ion-badge color="danger"></ion-badge>
-</li>    
-<li>    
-    <button ion-button icon-only (click)="redirectCalendar()" clear>
+        <ion-badge color="danger"></ion-badge>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectCalendar()" clear>
     	<ion-icon name="bicycle" class="footer-icon">CALENDAR</ion-icon>
     </button>
-</li>      
-<li>    
-    <button ion-button icon-only (click)="redirectToSettings()" clear>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectToSettings()" clear>
     	<ion-icon name="settings" class="footer-icon">SETTING</ion-icon>
     </button>
-</li>    
-</ul>
+      </li>
+    </ul>
 
   </ion-toolbar>
 </ion-footer>

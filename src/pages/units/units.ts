@@ -33,6 +33,7 @@ export class UnitsPage {
   public loginas: any;
   public pageTitle: string;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
+  private permissionMessage: string = "Permission denied for access this page. Please contact your administrator";
   public totalCount;
   pet: string = "ALL";
   public userId: any;
@@ -43,8 +44,14 @@ export class UnitsPage {
   public colorListArr: any;
   public companyId: any;
   public str: any;
-  public msgcount:any;
-  public notcount:any;
+  public msgcount: any;
+  public notcount: any;
+  //Authorization Declaration
+  public VIEWACCESS: any;
+  public CREATEACCESS: any;
+  public EDITACCESS: any;
+  public DELETEACCESS: any;
+  //Authorization Declaration
   public reportData: any =
   {
     status: '',
@@ -61,6 +68,16 @@ export class UnitsPage {
     this.loginas = localStorage.getItem("userInfoName");
     this.companyId = localStorage.getItem("userInfoCompanyId");
     this.userId = localStorage.getItem("userInfoId");
+    //Authorization Get Value
+    this.VIEWACCESS = localStorage.getItem("UNITS_LISTING_VIEW");
+    console.log(this.VIEWACCESS );
+    this.CREATEACCESS = localStorage.getItem("UNITS_LISTING_CREATE");
+    console.log(this.CREATEACCESS );
+    this.EDITACCESS = localStorage.getItem("UNITS_LISTING_EDIT");
+    console.log(this.EDITACCESS )
+    this.DELETEACCESS = localStorage.getItem("UNITS_LISTING_DELETE");
+    console.log(this.DELETEACCESS )
+    //Authorization Get Value
   }
 
   ionViewDidLoad() {
@@ -186,23 +203,25 @@ export class UnitsPage {
     console.log('E');
   }
   ionViewWillEnter() {
-     let //body: string = "loginid=" + this.userId,
+    let //body: string = "loginid=" + this.userId,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
       url: any = this.apiServiceURL + "/msgnotifycount?loginid=" + this.userId;
     console.log(url);
-   // console.log(body);
+    // console.log(body);
 
     this.http.get(url, options)
       .subscribe((data) => {
         console.log("Count Response Success:" + JSON.stringify(data.json()));
-       this.msgcount=data.json().msgcount;
-        this.notcount=data.json().notifycount;
+        this.msgcount = data.json().msgcount;
+        this.notcount = data.json().notifycount;
       });
-    this.reportData.startindex = 0;
-    this.reportData.sort = "unit_id";
-    this.doUnit();
+    if (this.VIEWACCESS > 0) {
+      this.reportData.startindex = 0;
+      this.reportData.sort = "unit_id";
+      this.doUnit();
+    }
   }
 
   doAdd() {

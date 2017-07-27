@@ -35,15 +35,21 @@
       Login As:{{loginas}}
     </ion-buttons>
   </ion-navbar>
-  <button class="add-new-btn" (click)="doAdd()">
+  <button class="add-new-btn" (click)="doAdd()"  *ngIf="CREATEACCESS==1">
   	<div class="algn-cent">
     	<ion-icon name="ios-add-circle-outline"></ion-icon>
         <span>Add New Units</span>
     </div>
   </button>
 </ion-header>
-
-<ion-content padding class="ion-content">
+<ion-content padding class="ion-content" *ngIf="VIEWACCESS==0">
+  <p style="color: red;
+    position: relative;
+    margin-top: 50%;
+   text-align:center;
+    font-size: 12pt;">{{permissionMessage}}</p>
+</ion-content>
+<ion-content padding class="ion-content"  *ngIf="VIEWACCESS==1">
 
   <ion-item style="width: 100%; margin: 0; padding-left: 10px;" *ngIf="totalCount!=0">
     <ion-label>Sort By</ion-label>
@@ -106,10 +112,10 @@
 
 
       <ion-item-options>
-        <button class="editcolor" (click)="doEdit(item,'edit',item.unit_id)">                      
+        <button class="editcolor" (click)="doEdit(item,'edit',item.unit_id)"   *ngIf="EDITACCESS==1">                      
                         <ion-icon name="create" class="icon-size"></ion-icon>
                     </button>
-        <button class="trashcolor" (click)="doConfirm(item.unit_id,item)">                        
+        <button class="trashcolor" (click)="doConfirm(item.unit_id,item)"   *ngIf="DELETEACCESS==1">                        
                          <ion-icon name="trash" class="icon-size"></ion-icon>
                     </button>
       </ion-item-options>

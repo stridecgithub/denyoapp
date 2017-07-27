@@ -18,10 +18,11 @@ export class PopoverPage {
   public lastname: any;
   public job_position: any;
   public itemData: any;
-  public itemDataDelete: any;
+  public itemDataDelete = [];
   constructor(public viewCtrl: ViewController, public navParams: NavParams) {
     this.itemData = this.navParams.get("item");
-    this.itemDataDelete = this.itemDataDelete.push({ staff_id: this.itemData.staff_id });
+    console.log(JSON.stringify(this.itemData));
+    this.itemDataDelete.push({ staff_id: this.itemData.staff_id });
     this.photo = this.itemData.photo;
     this.firstname = this.itemData.firstname;
     this.lastname = this.itemData.lastname;

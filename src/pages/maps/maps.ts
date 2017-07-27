@@ -35,18 +35,20 @@ export class MapsPage {
   public detailvalue: any;
   public pageTitle: string;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
+  private permissionMessage: string = "Permission denied for access this page. Please contact your administrator";
   public totalCount;
   pet: string = "ALL";
   public sortby = 2;
   public str: any;
   public str1: any;
-   public msgcount:any;
-  public notcount:any;
+  public msgcount: any;
+  public notcount: any;
   public vendorsort = "asc";
   public ascending = true;
   public colorListArr: any;
   iframeContent: any;
-  public DASHBOARD_MAP_VIEW:any;
+  public VIEWACCESS: any;
+  public HIDEACCESS: any;
   public reportData: any =
   {
     status: '',
@@ -59,11 +61,11 @@ export class MapsPage {
   constructor(public http: Http, public navCtrl: NavController,
     public toastCtrl: ToastController, private sanitizer: DomSanitizer, public alertCtrl: AlertController, public navParams: NavParams, public loadingCtrl: LoadingController) {
     /* Role Authority Start */
-    this.DASHBOARD_MAP_VIEW=localStorage.getItem("DASHBOARD_MAP_VIEW");
-    let DASHBOARD_MAP_HIDE=localStorage.getItem("DASHBOARD_MAP_HIDE");
-    console.log("Role Authority for Map View"+ this.DASHBOARD_MAP_VIEW);
-  
-     console.log("Role Authority for Map Hide"+DASHBOARD_MAP_HIDE);
+    this.VIEWACCESS = localStorage.getItem("VIEWACCESS");
+    this.HIDEACCESS = localStorage.getItem("HIDEACCESS");
+    console.log("Role Authority for Map View" + this.VIEWACCESS);
+
+    console.log("Role Authority for Map Hide" + this.HIDEACCESS);
     /* Role Authority End */
 
     this.pageTitle = 'Maps';
@@ -83,12 +85,14 @@ export class MapsPage {
 
   doRefresh(refresher) {
     console.log('doRefresh function calling...');
+
     this.reportData.startindex = 0;
     this.reportAllLists = [];
     this.doUser();
     setTimeout(() => {
       refresher.complete();
     }, 2000);
+
   }
 
 
@@ -198,23 +202,25 @@ export class MapsPage {
   ionViewWillEnter() {
     //this.displayGoogleMap();
     //this.getMarkers();
-     let //body: string = "loginid=" + this.userId,
+    let //body: string = "loginid=" + this.userId,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
       url: any = this.apiServiceURL + "/msgnotifycount?loginid=" + this.userid;
     console.log(url);
-   // console.log(body);
+    // console.log(body);
 
     this.http.get(url, options)
       .subscribe((data) => {
         console.log("Count Response Success:" + JSON.stringify(data.json()));
-       this.msgcount=data.json().msgcount;
-        this.notcount=data.json().notifycount;
+        this.msgcount = data.json().msgcount;
+        this.notcount = data.json().notifycount;
       });
-    this.reportData.startindex = 0;
-    this.reportData.sort = "unit_id";
-    this.doUser();
+    if (this.VIEWACCESS > 0) {
+      this.reportData.startindex = 0;
+      this.reportData.sort = "unit_id";
+      this.doUser();
+    }
     console.log(this.apiServiceURL + "/api/webview/map.php?is_mobile=1&loginid=1&startindex=0&results=8&sort=unit_id&dir=desc");
     //this.iframeContent = "<iframe src=" + this.apiServiceURL + "/api/webview/map.php?is_mobile=1&loginid=1&startindex=0&results=8&sort=unit_id&dir=desc height=350 frameborder=0></iframe>";
 

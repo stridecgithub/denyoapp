@@ -139,7 +139,7 @@ export class HomePage {
               localStorage.setItem("UNITS_LISTING_VIEW", roleparseData[rle]['view_action']);
               localStorage.setItem("UNITS_LISTING_CREATE", roleparseData[rle]['create_action']);
               localStorage.setItem("UNITS_LISTING_EDIT", roleparseData[rle]['edit_action']);
-              localStorage.setItem("UNITS_LISTING_DELETE", roleparseData[rle]['delete_action']);
+              localStorage.setItem("UNITS_LISTING_DELETE", roleparseData[rle]['delete_action']);  // Implementation Done by Kannan.N
             }
             if (roleparseData[rle]['page_name'] == '13' && roleparseData[rle]['module_name'] == '3') {
               localStorage.setItem("UNITS_ALARM_VIEW", roleparseData[rle]['view_action']);
