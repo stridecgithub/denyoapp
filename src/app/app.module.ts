@@ -55,6 +55,7 @@ import { EnginedetailviewPage } from '../pages/enginedetailview/enginedetailview
 import { EngineviewPage } from '../pages/engineview/engineview';
 import { ForgotpasswordPage } from '../pages/forgotpassword/forgotpassword';
 import { EmailPage } from '../pages/email/email';
+import { PopoverPage } from '../pages/popover/popover';
 import { TrendlinePage } from '../pages/trendline/trendline';
 import { DataServiceProvider } from '../providers/data-service/data-service';
 import { ViewunitsPage } from '../pages/viewunits/viewunits';
@@ -113,6 +114,7 @@ import { CustomFooterComponent } from '../pages/custom-footer-component';
     EngineviewPage,
     ForgotpasswordPage,
     EmailPage,
+    PopoverPage,
     ViewunitsPage,
     TrendlinePage,
     NavbarComponent,
@@ -154,7 +156,7 @@ import { CustomFooterComponent } from '../pages/custom-footer-component';
     AddunitgroupPage,
     UnitgroupPage,
     ReporttemplatePage,
-EnginedetailviewPage,
+    EnginedetailviewPage,
     AddorgchartonePage,
     AddorgcharttwoPage,
     OrgchartPage,
@@ -179,6 +181,7 @@ EnginedetailviewPage,
     EngineviewPage,
     ForgotpasswordPage,
     EmailPage,
+    PopoverPage,
     ViewunitsPage,
     TrendlinePage,
     CustomHeaderComponent,

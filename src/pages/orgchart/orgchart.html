@@ -18,7 +18,7 @@
         </button>
     </ion-buttons-->
     <ion-buttons end>
-    <button ion-button (click)="notification()">
+      <button ion-button (click)="notification()">
   <ion-icon ios="ios-notifications-outline" md="md-notifications-outline"></ion-icon>
   <ion-badge item-end class="notificationcount" *ngIf="notcount>0">{{this.notcount}}</ion-badge>
 </button>
@@ -36,7 +36,13 @@
     </ion-buttons>
   </ion-navbar>
 
+  <ion-item style="width: 100%; margin: 0; padding-left: 10px; background-color:#ffffff">
+    <ion-label>Sort By Company</ion-label>
+    <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="pet" (ionChange)="onSegmentChanged(pet)">
+      <ion-option *ngFor="let companyData of responseResultCompany" value="{{companyData.companygroup_id}}">{{companyData.companygroup_name}}</ion-option>
 
+    </ion-select>
+  </ion-item>
 </ion-header>
 
 <ion-content padding>
@@ -50,51 +56,43 @@
   </div>
   <div>
     <!--div [innerHTML]="htmlContent"></div-->
-      <div [innerHTML]="sanitizer.bypassSecurityTrustHtml(iframeContent)"></div>
+    <!--div [innerHTML]="sanitizer.bypassSecurityTrustHtml(iframeContent)"></div-->
   </div>
-
-
-  <!--div style="overflow-x:scroll; overflow:auto">
+  <div style="overflow-x:scroll; overflow:auto">
     <div class="tree-overflow">
       <div id="treehtml">
         <div class="tree">
           <ul>
-           ngfor1 start
-            <li>
-              <img src="http://denyoappv2.stridecdev.com/staffphotos" onclick="pushimage()">
-              <img src="http://denyoappv2.stridecdev.com/images/default.png" onclick="pushimage()">
-              <h3>Krishanth</h3>
-              <h3>Kannan</h3>
-              <h4>Student</h4>
+            <li *ngFor="let parent of parents; let i=index">
+              <img src="{{apiServiceURL}}/staffphotos/{{parent.photo}}" (click)="presentPopover($event,parent)" *ngIf="parent.photo!=''">
+              <img src="{{apiServiceURL}}/images/default.png" (click)="presentPopover($event,parent)" *ngIf="parent.photo==''">
+              <h3>{{parent.firstname}}</h3>
+              <h3>{{parent.lastname}}</h3>
+              <h4>{{parent.job_position}}</h4>
               <ul>
-                ngfor2 start
-                <li>
-                  <img src="http://denyoappv2.stridecdev.com/images/default.png" onclick="pushimage()">
-                  <h3>Naga</h3>
-                  <h3>Kannan</h3>
-                  <h4>Sr Programmer</h4>
+                <li *ngFor="let child of parent.childs; let i=index">
+                  <img src="{{apiServiceURL}}/staffphotos/{{child.photo}}" (click)="presentPopover($event,child)" *ngIf="child.photo!=''">
+                  <img src="{{apiServiceURL}}/images/default.png" (click)="presentPopover($event,child)" *ngIf="child.photo==''">
+                  <h3>{{child.firstname}}</h3>
+                  <h3>{{child.lastname}}</h3>
+                  <h4>{{child.job_position}}</h4>
                   <ul>
-                   ngfor3 start
-                    <li>
-                      <img src="http://denyoappv2.stridecdev.com/images/default.png" onclick="pushimage()">
-                      <h3>Thibishanth</h3>
-                      <h3>Kannan</h3>
-                      <h4>Child</h4>
+                    <li *ngFor="let gchild of child.grandchilds; let i=index">
+                      <img src="{{apiServiceURL}}/staffphotos/{{gchild.photo}}" (click)="presentPopover($event,gchild)" *ngIf="gchild.photo!=''">
+                      <img src="{{apiServiceURL}}/images/default.png" (click)="presentPopover($event,gchild)" *ngIf="gchild.photo==''">
+                      <h3>{{gchild.firstname}}</h3>
+                      <h3>{{gchild.lastname}}</h3>
+                      <h4>{{gchild.job_position}}</h4>
                     </li>
-                   ngfor3 end
                   </ul>
                 </li>
-                ngfor2 end
               </ul>
-            
             </li>
-          
-            ngfor1 end
           </ul>
         </div>
       </div>
     </div>
-  </div-->
+  </div>
 </ion-content>
 <ion-footer color="bluedark">
   <ion-toolbar color="bluedark">
@@ -109,13 +107,13 @@
     	<ion-icon name="contacts" class="footer-icon">UNITS</ion-icon>
     </button>
       </li>
-      <li>    
-    <button ion-button icon-only (click)="redirectToMessage()" clear>
+      <li>
+        <button ion-button icon-only (click)="redirectToMessage()" clear>
     	<ion-icon name="chatboxes" class="footer-icon">MESSAGE</ion-icon>
       <ion-badge item-end class="messagecount"  *ngIf="msgcount>0">{{this.msgcount}}</ion-badge>
     </button>
-    <ion-badge color="danger"></ion-badge>
-</li>
+        <ion-badge color="danger"></ion-badge>
+      </li>
       <li>
         <button ion-button icon-only (click)="redirectCalendar()" clear>
     	<ion-icon name="bicycle" class="footer-icon">CALENDAR</ion-icon>

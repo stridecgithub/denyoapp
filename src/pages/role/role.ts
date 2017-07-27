@@ -6,6 +6,7 @@ import { AddrolePage } from '../addrole/addrole';
 import { LoadingController } from 'ionic-angular';
 import { UserPage } from '../user/user';
 import { MyaccountPage } from '../myaccount/myaccount';
+import { HomePage } from '../home/home';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
 import { UnitsPage } from '../units/units';
 import { CompanygroupPage } from '../companygroup/companygroup';
@@ -272,7 +273,7 @@ export class RolePage {
     this.nav.setRoot(MyaccountPage);
   }
  previous() {
-    this.nav.setRoot(MyaccountPage);
+    this.nav.setRoot(HomePage);
      
     
   }

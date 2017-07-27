@@ -28,19 +28,16 @@ try {
    // echo "select username from users where username like '$tem%'";
 if($act=='message'){
   if($userId!='1'){
-$queryStr="select s.personalhashtag as username from staffs as s,users as u where  s.company_id in (1, $companyId) and s.staff_id!=".$userId.  " and u.username like '$tem%' and u.user_id=s.staff_id and u.deletestatus=0";
+$queryStr="select s.personalhashtag as username from staffs as s,users as u where  s.company_id in (1, $companyId) and s.staff_id!=".$userId.  " and u.username like '$tem%' and u.user_id=s.staff_id and s.status=0";
   }else{
-    $queryStr="select s.personalhashtag as username from staffs as s,users as u where  u.username like '$tem%' and u.user_id=s.staff_id  and u.deletestatus=0";
-
-  }
-  
+    $queryStr="select s.personalhashtag as username from staffs as s,users as u where  u.username like '$tem%' and u.user_id=s.staff_id  and s.status=0";
+  }  
 }else{
    if($userId!='1'){
-     $queryStr="select s.personalhashtag as username from staffs as s,users as u where  s.company_id=".$companyId." and s.staff_id!=".$userId.  " and u.username like '$tem%'  and u.user_id=s.staff_id  and u.deletestatus=0";
+     $queryStr="select s.personalhashtag as username from staffs as s,users as u where  s.company_id=".$companyId." and s.staff_id!=".$userId.  " and u.username like '$tem%'  and u.user_id=s.staff_id  and s.status=0";
    }else{
- $queryStr="select s.personalhashtag as username from staffs as s,users as u where  s.company_id=".$companyId." and u.username like '$tem%'  and u.user_id=s.staff_id  and u.deletestatus=0";
-  
-   }
+ $queryStr="select s.personalhashtag as username from staffs as s,users as u where  s.company_id=".$companyId." and u.username like '$tem%'  and u.user_id=s.staff_id  and s.status=0";
+     }
 }
  
 
