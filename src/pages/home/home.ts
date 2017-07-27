@@ -107,11 +107,83 @@ export class HomePage {
               localStorage.setItem("SETTINGS_USERLIST_EDIT", roleparseData[rle]['edit_action']);
               localStorage.setItem("SETTINGS_USERLIST_DELETE", roleparseData[rle]['delete_action']);
             }
-
-
-
-
-
+             if (roleparseData[rle]['page_name'] == '3' && roleparseData[rle]['module_name'] == '6') {
+              localStorage.setItem("SETTINGS_COMPANYGROUP_VIEW", roleparseData[rle]['view_action']);
+              localStorage.setItem("SETTINGS_COMPANYGROUP_CREATE", roleparseData[rle]['create_action']);
+              localStorage.setItem("SETTINGS_COMPANYGROUP_EDIT", roleparseData[rle]['edit_action']);
+              localStorage.setItem("SETTINGS_COMPANYGROUP_DELETE", roleparseData[rle]['delete_action']);
+            }
+             if (roleparseData[rle]['page_name'] == '4' && roleparseData[rle]['module_name'] == '6') {
+              localStorage.setItem("SETTINGS_USERROLE_VIEW", roleparseData[rle]['view_action']);
+              localStorage.setItem("SETTINGS_USERROLE_CREATE", roleparseData[rle]['create_action']);
+              localStorage.setItem("SETTINGS_USERROLE_EDIT", roleparseData[rle]['edit_action']);
+              localStorage.setItem("SETTINGS_USERROLE_DELETE", roleparseData[rle]['delete_action']);
+            }
+             if (roleparseData[rle]['page_name'] == '5' && roleparseData[rle]['module_name'] == '6') {
+              localStorage.setItem("SETTINGS_REPORTTEMPLATE_VIEW", roleparseData[rle]['view_action']);
+              localStorage.setItem("SETTINGS_REPORTTEMPLATE_CREATE", roleparseData[rle]['create_action']);
+              localStorage.setItem("SETTINGS_REPORTTEMPLATE_EDIT", roleparseData[rle]['edit_action']);
+              localStorage.setItem("SETTINGS_REPORTTEMPLATE_DELETE", roleparseData[rle]['delete_action']);
+            }
+             if (roleparseData[rle]['page_name'] == '6' && roleparseData[rle]['module_name'] == '6') {
+              localStorage.setItem("SETTINGS_ORGCHART_VIEW", roleparseData[rle]['view_action']);
+              localStorage.setItem("SETTINGS_ORGCHART_CREATE", roleparseData[rle]['create_action']);
+              localStorage.setItem("SETTINGS_ORGCHART_EDIT", roleparseData[rle]['edit_action']);
+              localStorage.setItem("SETTINGS_ORGCHART_DELETE", roleparseData[rle]['delete_action']);
+            }
+ if (roleparseData[rle]['page_name'] == '7' && roleparseData[rle]['module_name'] == '2') {
+              localStorage.setItem("CALENDAR_EVENTS_VIEW", roleparseData[rle]['view_action']);
+              localStorage.setItem("CALENDAR_EVENTS_CREATE", roleparseData[rle]['create_action']);
+              localStorage.setItem("CALENDAR_EVENTS_EDIT", roleparseData[rle]['edit_action']);
+              localStorage.setItem("CALENDAR_EVENTS_DELETE", roleparseData[rle]['delete_action']);
+            }
+            if (roleparseData[rle]['page_name'] == '9' && roleparseData[rle]['module_name'] == '3') {
+              localStorage.setItem("UNITS_LISTING_VIEW", roleparseData[rle]['view_action']);
+              localStorage.setItem("UNITS_LISTING_CREATE", roleparseData[rle]['create_action']);
+              localStorage.setItem("UNITS_LISTING_EDIT", roleparseData[rle]['edit_action']);
+              localStorage.setItem("UNITS_LISTING_DELETE", roleparseData[rle]['delete_action']);
+            }
+             if (roleparseData[rle]['page_name'] == '13' && roleparseData[rle]['module_name'] == '3') {
+              localStorage.setItem("UNITS_ALARM_VIEW", roleparseData[rle]['view_action']);
+              localStorage.setItem("UNITS_ALARM_CREATE", roleparseData[rle]['create_action']);
+              localStorage.setItem("UNITS_ALARM_EDIT", roleparseData[rle]['edit_action']);
+              localStorage.setItem("UNITS_ALARM_DELETE", roleparseData[rle]['delete_action']);
+            }
+             if (roleparseData[rle]['page_name'] == '14' && roleparseData[rle]['module_name'] == '3') {
+              localStorage.setItem("UNITS_SERVICINGINFO_VIEW", roleparseData[rle]['view_action']);
+              localStorage.setItem("UNITS_SERVICINGINFO_CREATE", roleparseData[rle]['create_action']);
+              localStorage.setItem("UNITS_SERVICINGINFO_EDIT", roleparseData[rle]['edit_action']);
+              localStorage.setItem("UNITS_SERVICINGINFO_DELETE", roleparseData[rle]['delete_action']);
+            }
+ if (roleparseData[rle]['page_name'] == '15' && roleparseData[rle]['module_name'] == '3') {
+              localStorage.setItem("UNITS_COMMENTS_VIEW", roleparseData[rle]['view_action']);
+              localStorage.setItem("UNITS_COMMENTS_CREATE", roleparseData[rle]['create_action']);
+              localStorage.setItem("UNITS_COMMENTS_EDIT", roleparseData[rle]['edit_action']);
+              localStorage.setItem("UNITS_COMMENTS_DELETE", roleparseData[rle]['delete_action']);
+            }
+ if (roleparseData[rle]['page_name'] == '16' && roleparseData[rle]['module_name'] == '3') {
+              localStorage.setItem("UNITS_UNITGROUP_VIEW", roleparseData[rle]['view_action']);
+              localStorage.setItem("UNITS_UNITGROUP_CREATE", roleparseData[rle]['create_action']);
+              localStorage.setItem("UNITS_UNITGROUP_EDIT", roleparseData[rle]['edit_action']);
+              localStorage.setItem("UNITS_UNITGROUP_DELETE", roleparseData[rle]['delete_action']);
+            }
+ if (roleparseData[rle]['page_name'] == '10' && roleparseData[rle]['module_name'] == '4') {
+              localStorage.setItem("REPORTS_VIEW", roleparseData[rle]['view_action']);
+              localStorage.setItem("REPORTS_CREATE", roleparseData[rle]['create_action']);
+             
+            }
+ if (roleparseData[rle]['page_name'] == '11' && roleparseData[rle]['module_name'] == '5') {
+              localStorage.setItem("MESSAGE_INBOX_VIEW", roleparseData[rle]['view_action']);
+              localStorage.setItem("MESSAGE_INBOX_CREATE", roleparseData[rle]['create_action']);
+              localStorage.setItem("MESSAGE_INBOX_EDIT", roleparseData[rle]['edit_action']);
+              localStorage.setItem("MESSAGE_INBOX_DELETE", roleparseData[rle]['delete_action']);
+            }
+            if (roleparseData[rle]['page_name'] == '17' && roleparseData[rle]['module_name'] == '5') {
+              localStorage.setItem("MESSAGE_SENT_VIEW", roleparseData[rle]['view_action']);
+              localStorage.setItem("MESSAGE_SENT_CREATE", roleparseData[rle]['create_action']);
+              localStorage.setItem("MESSAGE_SENT_EDIT", roleparseData[rle]['edit_action']);
+              localStorage.setItem("MESSAGE_SENT_DELETE", roleparseData[rle]['delete_action']);
+            }
           }
 
           // Get Role Permission Data API Calling
