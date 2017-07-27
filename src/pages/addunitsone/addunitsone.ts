@@ -13,6 +13,7 @@ import { MapsPage } from '../maps/maps';
 import { ReportsPage } from '../reports/reports';
 import { CalendarPage } from '../calendar/calendar';
 import { EmailPage } from '../email/email';
+import { Http, Headers, RequestOptions } from '@angular/http';
 import { NativeGeocoder, NativeGeocoderForwardResult } from '@ionic-native/native-geocoder';
 /**
  * Generated class for the AddcompanygroupPage page.
@@ -32,6 +33,8 @@ export class AddunitsonePage {
   public location: any;
   public userId: any;
   public lat: any;
+   public msgcount:any;
+  public notcount:any;
   public lang: any;
   public responseResultCountry: any;
   progress: number;
@@ -45,6 +48,7 @@ export class AddunitsonePage {
   // Flag to hide the form upon successful completion of remote operation
   public hideForm: boolean = false;
   public hideActionButton = true;
+  private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   // Property to help ste the page title
   public pageTitle: string;
   // Property to store the recordID for when an existing entry is being edited
@@ -52,7 +56,7 @@ export class AddunitsonePage {
   public isUploadedProcessing: boolean = false;
   public uploadResultBase64Data;
   showFooter: boolean = true;
-  constructor(public keyboard: Keyboard, private nativeGeocoder: NativeGeocoder, public nav: NavController,
+  constructor(public http: Http,public keyboard: Keyboard, private nativeGeocoder: NativeGeocoder, public nav: NavController,
     public NP: NavParams,
     public fb: FormBuilder,
     public toastCtrl: ToastController, public loadingCtrl: LoadingController, ) {
@@ -80,6 +84,20 @@ export class AddunitsonePage {
   // Determine whether we adding or editing a record
   // based on any supplied navigation parameters
   ionViewWillEnter() {
+     let //body: string = "loginid=" + this.userId,
+      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/msgnotifycount?loginid=" + this.userId;
+    console.log(url);
+   // console.log(body);
+
+    this.http.get(url, options)
+      .subscribe((data) => {
+        console.log("Count Response Success:" + JSON.stringify(data.json()));
+       this.msgcount=data.json().msgcount;
+        this.notcount=data.json().notifycount;
+      });
     this.resetFields();
     console.log(JSON.stringify(this.NP.get("record")));
     if (this.NP.get("record")) {

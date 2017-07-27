@@ -73,6 +73,8 @@ export class EmailPage {
   public selectedAction = [];
   public message_readstatus: any;
   item: any;
+   public msgcount:any;
+  public notcount:any;
   public to: any;
   public subject: any;
   public isEdited: boolean = false;
@@ -145,6 +147,20 @@ export class EmailPage {
 
   }
   ionViewDidEnter() {
+    let //body: string = "loginid=" + this.userId,
+      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/msgnotifycount?loginid=" + this.userId;
+    console.log(url);
+   // console.log(body);
+
+    this.http.get(url, options)
+      .subscribe((data) => {
+        console.log("Count Response Success:" + JSON.stringify(data.json()));
+       this.msgcount=data.json().msgcount;
+        this.notcount=data.json().notifycount;
+      });
     this.keyboard.onKeyboardShow().subscribe(() => { this.valueforngif = false })
     this.keyboard.onKeyboardHide().subscribe(() => { this.valueforngif = true })
   }

@@ -39,6 +39,8 @@ export class AdduserPage {
   public email: any;
   public photo: any;
   public country: any;
+  public msgcount:any;
+  public notcount:any;
   public contact: any;
   public userId: any;
   public responseResultCountry: any;
@@ -91,6 +93,20 @@ export class AdduserPage {
   // Determine whether we adding or editing a record
   // based on any supplied navigation parameters
   ionViewWillEnter() {
+    let //body: string = "loginid=" + this.userId,
+      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/msgnotifycount?loginid=" + this.userId;
+    console.log(url);
+   // console.log(body);
+
+    this.http.get(url, options)
+      .subscribe((data) => {
+        console.log("Count Response Success:" + JSON.stringify(data.json()));
+       this.msgcount=data.json().msgcount;
+        this.notcount=data.json().notifycount;
+      });
     this.resetFields();
     this.getJsonCountryListData();
     console.log(JSON.stringify(this.NP.get("record")));

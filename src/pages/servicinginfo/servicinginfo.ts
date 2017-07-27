@@ -35,7 +35,8 @@ export class ServicinginfoPage {
   public atMentionedInfo = [];
   public service_subject:any;
   public service_remark:any;
-
+public msgcount:any;
+  public notcount:any;
   public reportData: any =
   {
     status: '',
@@ -61,6 +62,20 @@ export class ServicinginfoPage {
     console.log('ionViewDidLoad ServicinginfoPage');
   }
   ionViewWillEnter() {
+     let //body: string = "loginid=" + this.userId,
+      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/msgnotifycount?loginid=" + this.userId;
+    console.log(url);
+   // console.log(body);
+
+    this.http.get(url, options)
+      .subscribe((data) => {
+        console.log("Count Response Success:" + JSON.stringify(data.json()));
+       this.msgcount=data.json().msgcount;
+        this.notcount=data.json().notifycount;
+      });
 
     if (this.NP.get("record")) {
       console.log("Service Info Record Param Value:" + JSON.stringify(this.NP.get("record")));

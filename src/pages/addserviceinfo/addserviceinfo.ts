@@ -47,6 +47,8 @@ export class AddserviceinfoPage {
   public serviced_datetime: any;
   public service_subject: any;
   public service_remark: any;
+   public msgcount:any;
+  public notcount:any;
   public next_service_date: any;
   public service_priority: any;
   is_request: boolean
@@ -118,6 +120,20 @@ export class AddserviceinfoPage {
     console.log('ionViewDidLoad AddserviceinfoPage');
   }
   ionViewWillEnter() {
+     let //body: string = "loginid=" + this.userId,
+      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/msgnotifycount?loginid=" + localStorage.getItem("userInfoId");
+    console.log(url);
+   // console.log(body);
+
+    this.http.get(url, options)
+      .subscribe((data) => {
+        console.log("Count Response Success:" + JSON.stringify(data.json()));
+       this.msgcount=data.json().msgcount;
+        this.notcount=data.json().notifycount;
+      });
     this.getPrority(1);
     let users = localStorage.getItem("atMentionedStorage");
     this.is_request = false;

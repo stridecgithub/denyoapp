@@ -38,6 +38,8 @@ export class CompanygroupPage {
   public sortby = 2;
   public vendorsort = "asc";
   public ascending = true;
+   public msgcount:any;
+  public notcount:any;
   public reportData: any =
   {
     status: '',
@@ -142,6 +144,20 @@ export class CompanygroupPage {
     console.log('E');
   }
   ionViewWillEnter() {
+    let //body: string = "loginid=" + this.userId,
+      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/msgnotifycount?loginid=" + localStorage.getItem("userInfoId");
+    console.log(url);
+   // console.log(body);
+
+    this.http.get(url, options)
+      .subscribe((data) => {
+        console.log("Count Response Success:" + JSON.stringify(data.json()));
+       this.msgcount=data.json().msgcount;
+        this.notcount=data.json().notifycount;
+      });
     this.reportData.startindex = 0;
     this.reportData.sort = "companygroup_id";
     this.doCompanyGroup();

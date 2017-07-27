@@ -43,6 +43,8 @@ export class AddrequestsupportPage {
   public service_resources: any;
   public service_id: any;
   micro_timestamp: any;
+  public msgcount:any;
+  public notcount:any;
   public isUploadedProcessing: boolean = false;
   public isProgress = false;
   public isUploaded: boolean = true;
@@ -99,6 +101,20 @@ export class AddrequestsupportPage {
     console.log('ionViewDidLoad AddrequestsupportPage');
   }
   ionViewWillEnter() {
+     let //body: string = "loginid=" + this.userId,
+      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/msgnotifycount?loginid=" + localStorage.getItem("userInfoId");
+    console.log(url);
+   // console.log(body);
+
+    this.http.get(url, options)
+      .subscribe((data) => {
+        console.log("Count Response Success:" + JSON.stringify(data.json()));
+       this.msgcount=data.json().msgcount;
+        this.notcount=data.json().notifycount;
+      });
  this.unitDetailData.unit_id = localStorage.getItem("unitId");
   if (this.unitDetailData.unit_id == undefined) {
       this.unitDetailData.unit_id = this.NP.get("record").unit_id;

@@ -46,7 +46,8 @@ export class UnitdetailsPage {
 
 	public serviceCount;
 	public commentCount;
-
+public msgcount:any;
+  public notcount:any;
 
 
 
@@ -82,6 +83,7 @@ export class UnitdetailsPage {
 	}
 
 	ionViewWillEnter() {
+		
 		$('#alarm').trigger("click");
 		$('#filecontainer').contents().find('#alarm').trigger("click");
 		$("#payment_status_div").hide();
@@ -188,7 +190,20 @@ export class UnitdetailsPage {
 					// this.sendNotification('Something went wrong!');
 				}
 			});
+let //body: string = "loginid=" + this.userId,
+      type1: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers1: any = new Headers({ 'Content-Type': type1 }),
+      options1: any = new RequestOptions({ headers: headers1 }),
+      url1: any = this.apiServiceURL + "/msgnotifycount?loginid=" + this.userId;
+    console.log(url1);
+   // console.log(body);
 
+    this.http.get(url1, options1)
+      .subscribe((data) => {
+        console.log("Count Response Success:" + JSON.stringify(data.json()));
+       this.msgcount=data.json().msgcount;
+        this.notcount=data.json().notifycount;
+      });
 	}
 	servicingInfo(unitId) {
 		let body: string = "is_mobile=1&userid=" + this.unitDetailData.userId +

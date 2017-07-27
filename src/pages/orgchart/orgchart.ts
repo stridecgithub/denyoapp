@@ -34,6 +34,8 @@ export class OrgchartPage {
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   public totalCount;
   pet: string = "ALL";
+  public msgcount:any;
+  public notcount:any;
   public reportData: any =
   {
     status: '',
@@ -69,6 +71,20 @@ export class OrgchartPage {
 
 
   ionViewWillEnter() {
+     let //body: string = "loginid=" + this.userId,
+      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/msgnotifycount?loginid=" + this.userId;
+    console.log(url);
+   // console.log(body);
+
+    this.http.get(url, options)
+      .subscribe((data) => {
+        console.log("Count Response Success:" + JSON.stringify(data.json()));
+       this.msgcount=data.json().msgcount;
+        this.notcount=data.json().notifycount;
+      });
    // this.iframeContent =  "<iframe id='filecontainer' src=" + "http://denyoappv2.stridecdev.com/orgchart?company_id="+this.companyId+"&is_mobile=1&id="+this.userId+" height=350 width=100% frameborder=0></iframe>";
     this.pageTitle = "Org Chart";
     this.reportData.startindex = 0;

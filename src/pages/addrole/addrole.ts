@@ -27,7 +27,8 @@ export class AddrolePage {
   public form: FormGroup;
   public role_name: any;
   public userId: any;
-
+public msgcount:any;
+  public notcount:any;
   public roleperMissionData = [];
   // Flag to be used for checking whether we are adding/editing an entry
   public isEdited: boolean = false;
@@ -274,6 +275,20 @@ export class AddrolePage {
   // Determine whether we adding or editing a record
   // based on any supplied navigation parameters
   ionViewWillEnter() {
+     let //body: string = "loginid=" + this.userId,
+      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/msgnotifycount?loginid=" + this.userId;
+    console.log(url);
+   // console.log(body);
+
+    this.http.get(url, options)
+      .subscribe((data) => {
+        console.log("Count Response Success:" + JSON.stringify(data.json()));
+       this.msgcount=data.json().msgcount;
+        this.notcount=data.json().notifycount;
+      });
     this.resetFields();
     if (this.NP.get("record")) {
       console.log(this.NP.get("act"));

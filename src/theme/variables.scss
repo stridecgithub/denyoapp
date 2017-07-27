@@ -3930,6 +3930,27 @@ body{
 
 
 page-maps {
+    .notificationcount{
+  color: white;
+    border-radius: 50px;
+    position: absolute;
+    right: -5px;
+    top: -5px;
+    /* border: 1px solid; */
+    background-color: gray;
+} 
+
+
+
+    .messagecount{
+   color: white;
+    border-radius: 50px;
+    position: absolute;
+    right: 1px;
+    top: 3px;
+    /* border: 1px solid; */
+    background-color: gray;
+}
 
 .ion-content{
     background-color:white;

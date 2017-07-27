@@ -30,6 +30,8 @@ export class UnitgroupPage {
 
   public pageTitle: string;
   public loginas: any;
+  public msgcount:any;
+  public notcount:any;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   public totalCount;
   pet: string = "ALL";
@@ -67,6 +69,20 @@ export class UnitgroupPage {
 
 
   ionViewWillEnter() {
+    let //body: string = "loginid=" + this.userId,
+      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/msgnotifycount?loginid=" + this.userId;
+    console.log(url);
+   // console.log(body);
+
+    this.http.get(url, options)
+      .subscribe((data) => {
+        console.log("Count Response Success:" + JSON.stringify(data.json()));
+       this.msgcount=data.json().msgcount;
+        this.notcount=data.json().notifycount;
+      });
     this.pageTitle = "Unit Groups";
     this.reportData.startindex = 0;
     this.reportData.sort = "unitgroup_id";

@@ -44,6 +44,8 @@ export class AddcommentsinfoPage {
   public priority_lowclass: any;
   public priority_highclass: any;
   progress: number;
+   public msgcount:any;
+  public notcount:any;
   public recordID: any;
   public comment_unitid: any;
   public comment_id: any;
@@ -113,6 +115,20 @@ export class AddcommentsinfoPage {
     console.log('ionViewDidLoad AddcommentsinfoPage');
   }
   ionViewWillEnter() {
+     let //body: string = "loginid=" + this.userId,
+      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/msgnotifycount?loginid=" + localStorage.getItem("userInfoId");
+    console.log(url);
+   // console.log(body);
+
+    this.http.get(url, options)
+      .subscribe((data) => {
+        console.log("Count Response Success:" + JSON.stringify(data.json()));
+       this.msgcount=data.json().msgcount;
+        this.notcount=data.json().notifycount;
+      });
     let users = localStorage.getItem("atMentionedStorage");
     if (this.NP.get("record")) {
       this.selectEntry(this.NP.get("record"));

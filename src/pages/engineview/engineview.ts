@@ -23,6 +23,8 @@ export class EngineviewPage {
 public pageTitle: string;
 
 	public item = [];
+  public msgcount:any;
+  public notcount:any;
 	public colorListArr = [];
 	iframeContent: any;
 	//private _inputpdf: string = '<iframe src="http://denyoappv2.stridecdev.com/2/1/unitdetails" height="350" frameborder="0"></iframe>';
@@ -53,6 +55,20 @@ model_id: '',
     console.log('ionViewDidLoad EngineviewPage');
   }
   ionViewWillEnter() {
+     let //body: string = "loginid=" + this.userId,
+      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/msgnotifycount?loginid=" + localStorage.getItem("userInfoId");
+    console.log(url);
+   // console.log(body);
+
+    this.http.get(url, options)
+      .subscribe((data) => {
+        console.log("Count Response Success:" + JSON.stringify(data.json()));
+       this.msgcount=data.json().msgcount;
+        this.notcount=data.json().notifycount;
+      });
     console.log(JSON.stringify(this.NP.get("record")));
 		let editItem = this.NP.get("record");
     this.iframeContent = "<iframe id='filecontainer' src=" + this.apiServiceURL + "/webview_enginedetails/"+editItem.model_id + " height=500px width=100% frameborder=0></iframe>";
