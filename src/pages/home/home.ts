@@ -64,25 +64,54 @@ export class HomePage {
           localStorage.setItem("userInfoRoleId", res['staffdetails'][0].role_id);
           console.log("Role Permssion Array:" + JSON.stringify(res['roledata']));
           localStorage.setItem("RolePermissionData", JSON.stringify(res['roledata']));
-
-
           let roleData = localStorage.getItem("RolePermissionData");
           let roleparseData = JSON.parse(roleData);
           for (let rle = 0; rle < roleparseData.length; rle++) {
-            console.log(roleparseData[rle]['module_name']);
-            if (roleparseData[rle]['module_name'] == '1' && roleparseData[rle]['page_name'] == '8') {
+
+
+            // 8 - Child Module Map
+            // 1 - Parent Module Dashboard
+            if (roleparseData[rle]['page_name'] == '8' && roleparseData[rle]['module_name'] == '1') {
               localStorage.setItem("DASHBOARD_MAP_VIEW", roleparseData[rle]['view_action']);
               localStorage.setItem("DASHBOARD_MAP_CREATE", roleparseData[rle]['create_action']);
               localStorage.setItem("DASHBOARD_MAP_EDIT", roleparseData[rle]['edit_action']);
               localStorage.setItem("DASHBOARD_MAP_DELETE", roleparseData[rle]['delete_action']);
               localStorage.setItem("DASHBOARD_MAP_HIDE", roleparseData[rle]['hide_action']);
             }
-            /* if(roleparseData[rle]['page_name']=='8'){
-               
-             }*/
 
-            console.log(roleparseData[rle]['page_name']);
-            console.log(roleparseData[rle]['view_action']);
+            // 12 - Child Module Unit
+            // 1 - Parent Module Dashboard
+            if (roleparseData[rle]['page_name'] == '12' && roleparseData[rle]['module_name'] == '1') {
+              localStorage.setItem("DASHBOARD_UNITS_VIEW", roleparseData[rle]['view_action']);
+              localStorage.setItem("DASHBOARD_UNITS_CREATE", roleparseData[rle]['create_action']);
+              localStorage.setItem("DASHBOARD_UNITS_EDIT", roleparseData[rle]['edit_action']);
+              localStorage.setItem("DASHBOARD_UNITS_DELETE", roleparseData[rle]['delete_action']);
+              localStorage.setItem("DASHBOARD_UNITS_HIDE", roleparseData[rle]['hide_action']);
+            }
+
+            // 1 - Child Module My Account
+            // 6 - Parent Module Settings
+            if (roleparseData[rle]['page_name'] == '1' && roleparseData[rle]['module_name'] == '6') {
+              localStorage.setItem("SETTINGS_MYACCOUN_VIEW", roleparseData[rle]['view_action']);
+              localStorage.setItem("SETTINGS_MYACCOUNT_CREATE", roleparseData[rle]['create_action']);
+              localStorage.setItem("SETTINGS_MYACCOUNT_EDIT", roleparseData[rle]['edit_action']);
+              localStorage.setItem("SETTINGS_MYACCOUNT_DELETE", roleparseData[rle]['delete_action']);
+            }
+
+
+            // 2 - Child Module User List
+            // 6 - Parent Module Settings
+            if (roleparseData[rle]['page_name'] == '2' && roleparseData[rle]['module_name'] == '6') {
+              localStorage.setItem("SETTINGS_USERLIST_VIEW", roleparseData[rle]['view_action']);
+              localStorage.setItem("SETTINGS_USERLIST_CREATE", roleparseData[rle]['create_action']);
+              localStorage.setItem("SETTINGS_USERLIST_EDIT", roleparseData[rle]['edit_action']);
+              localStorage.setItem("SETTINGS_USERLIST_DELETE", roleparseData[rle]['delete_action']);
+            }
+
+
+
+
+
           }
 
           // Get Role Permission Data API Calling

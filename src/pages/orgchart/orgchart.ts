@@ -13,7 +13,7 @@ import { MapsPage } from '../maps/maps';
 import { ReportsPage } from '../reports/reports';
 import { CalendarPage } from '../calendar/calendar';
 import { EmailPage } from '../email/email';
-
+import { MdlPopoverModule } from '@angular-mdl/popover';
 //import * as $ from 'jquery';
 //import "slick-carousel";
 /**
