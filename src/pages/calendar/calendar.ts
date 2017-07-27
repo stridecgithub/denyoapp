@@ -29,8 +29,8 @@ import 'intl/locale-data/jsonp/en';
   providers: [DatePicker]
 })
 export class CalendarPage {
-   public msgcount:any;
-  public notcount:any;
+  public msgcount: any;
+  public notcount: any;
 
   @ViewChild('postcontent') postcontent: ElementRef;
   myVal: any;
@@ -95,7 +95,7 @@ export class CalendarPage {
     this.curDate = new Date();
     console.log('1' + this.curDate);
     let yearMonth = this.splitDate(this.curDate)
-    this.dateHeaderTitle = yearMonth;
+    //this.dateHeaderTitle = yearMonth;
     this.onTimeSelected(this.curDate);
 
     this.createRandomEvents();
@@ -110,6 +110,8 @@ export class CalendarPage {
         this.msgcount = data.json().msgcount;
         this.notcount = data.json().notifycount;
       });
+
+
   }
 
 
@@ -162,7 +164,7 @@ export class CalendarPage {
     //console.log("nextmonth:" + prevmonth);
     this.calendar.currentDate = prevmonth;
     let yearMonth = this.splitDate(this.calendar.currentDate)
-    this.dateHeaderTitle = yearMonth;
+    //this.dateHeaderTitle = yearMonth;
     //this.dateHeaderTitle = this.calendar.currentDate;
     this.calendarResultAll = [];
     this.curDate = this.calendar.currentDate;
@@ -177,7 +179,7 @@ export class CalendarPage {
     //console.log("nextmonth:" + nextmonth);
     this.calendar.currentDate = nextmonth;
     let yearMonth = this.splitDate(this.calendar.currentDate)
-    this.dateHeaderTitle = yearMonth;
+    //this.dateHeaderTitle = yearMonth;
     //this.dateHeaderTitle = this.calendar.currentDate;
     this.calendarResultAll = [];
     this.curDate = this.calendar.currentDate;
@@ -279,8 +281,12 @@ export class CalendarPage {
 
         }
         let curDate = currentDateArr.getFullYear() + "-" + mnstr + cmonth + "-" + dtstr + currentDateArr.getDate();
+
+        let months = { '01': 'January', '02': 'February', '03': 'March', '04': 'April', '05': 'May', '06': 'June', '07': 'July', '08': 'August', '09': 'September', '10': 'October', '11': 'November', '12': 'December' };
+
         let selDate = year + "-" + month + "-" + date;
 
+        this.dateHeaderTitle = months[month] +" "+ year;
         if (ev != '') {
           console.log("curDate:" + curDate);
           console.log("selDate:" + selDate);
