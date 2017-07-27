@@ -37,7 +37,7 @@ import { AlarmPage } from '../alarm/alarm';
 })
 export class UnitdetailsPage {
 	public pageTitle: string;
-
+	public userId: any;
 	public item = [];
 	public colorListArr = [];
 	iframeContent: any;
@@ -91,16 +91,16 @@ export class UnitdetailsPage {
 			alert('Kannan');
 		});
 
-/*
-		$('iframe#filecontainer').on('load', function () {   // 2. wait for the iframe to load
-			var $inner$ = $(this)[0].contentWindow.$;   // 3. get hold of the inner jQuery
-			$inner$(function () {   // 4. wait for the inner jQuery to be ready
-				$inner$.on('click', function () {   // Now I can intercept inner events.
-					// do something
+		/*
+				$('iframe#filecontainer').on('load', function () {   // 2. wait for the iframe to load
+					var $inner$ = $(this)[0].contentWindow.$;   // 3. get hold of the inner jQuery
+					$inner$(function () {   // 4. wait for the inner jQuery to be ready
+						$inner$.on('click', function () {   // Now I can intercept inner events.
+							// do something
+						});
+					});
 				});
-			});
-		});
-*/
+		*/
 		/*
 		$("#filecontainer #alarm").click(function () {
 			console.log('Alarm button pressed');			// do something here
@@ -122,9 +122,9 @@ export class UnitdetailsPage {
 			"E1E1E1"
 		];
 		localStorage.setItem("unitdetails", JSON.stringify(this.NP.get("record")));
-		console.log("UD",JSON.stringify(this.NP.get("record")));
+		console.log("UD", JSON.stringify(this.NP.get("record")));
 		this.pageTitle = 'Unit Details';
-		let nud=localStorage.getItem("unitdetails");
+		let nud = localStorage.getItem("unitdetails");
 		console.log(JSON.stringify(this.NP.get("record")));
 		let editItem = this.NP.get("record");
 		let colorcode;
@@ -144,18 +144,19 @@ export class UnitdetailsPage {
 		}
 
 
-		this.unitDetailData.unit_id =  localStorage.getItem("unitId");
-		this.unitDetailData.unitname = localStorage.getItem("unitunitname"); 
-		this.unitDetailData.location =localStorage.getItem("unitlocation"); 
-		this.unitDetailData.projectname = localStorage.getItem("unitprojectname"); 
+		this.unitDetailData.unit_id = localStorage.getItem("unitId");
+		this.unitDetailData.unitname = localStorage.getItem("unitunitname");
+		this.unitDetailData.location = localStorage.getItem("unitlocation");
+		this.unitDetailData.projectname = localStorage.getItem("unitprojectname");
 		this.unitDetailData.colorcodeindications = localStorage.getItem("unitcolorcode");
+		console.log("Unit Details Color Code:" + this.unitDetailData.colorcodeindications);
 		this.unitDetailData.gen_status = editItem.gen_status;
 		this.unitDetailData.nextservicedate = editItem.nextservicedate;
 		this.unitDetailData.alarmnotificationto = editItem.nextservicedate;
 		this.unitDetailData.favoriteindication = favorite;
-		this.unitDetailData.lat=localStorage.getItem("unitlat");
-		this.unitDetailData.lng=localStorage.getItem("unitlng");
-		console.log(this.apiServiceURL + "/" + localStorage.getItem("unitId")+ "/1/unitdetails");
+		this.unitDetailData.lat = localStorage.getItem("unitlat");
+		this.unitDetailData.lng = localStorage.getItem("unitlng");
+		console.log(this.apiServiceURL + "/" + localStorage.getItem("unitId") + "/1/unitdetails");
 		this.iframeContent = "<iframe id='filecontainer' src=" + this.apiServiceURL + "/" + this.unitDetailData.unit_id + "/1/unitdetails height=350 width=100% frameborder=0></iframe>";
 
 		//http://denyoappv2.stridecdev.com/getcount?loginid=1&unitid=2
@@ -189,17 +190,61 @@ export class UnitdetailsPage {
 			});
 
 	}
-	servicingInfo() {
+	servicingInfo(unitId) {
+		let body: string = "is_mobile=1&userid=" + this.unitDetailData.userId +
+			"&unitid=" + unitId,
+			type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+			headers: any = new Headers({ 'Content-Type': type }),
+			options: any = new RequestOptions({ headers: headers }),
+			url: any = this.apiServiceURL + "/removeservicecount";
+		console.log(url);
+		console.log(body);
+
+		this.http.post(url, body, options)
+			.subscribe((data) => {
+				console.log("Response Success:" + JSON.stringify(data.json()));
+				if (data.status === 200) {
+					console.log("Service count successfully removed");
+				}
+				// Otherwise let 'em know anyway
+				else {
+					console.log("Something went wrong!");
+				}
+			});
 		this.nav.setRoot(ServicinginfoPage, {
 			record: this.NP.get("record")
 		});
 	}
-	alamInfo(){
+	alamInfo() {
 		this.nav.setRoot(AlarmPage, {
 			record: this.NP.get("record")
 		});
 	}
-	commentsInfo() {
+	commentsInfo(unitId) {
+
+		let body: string = "is_mobile=1&userid=" + this.unitDetailData.userId +
+			"&unitid=" + unitId,
+			type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+			headers: any = new Headers({ 'Content-Type': type }),
+			options: any = new RequestOptions({ headers: headers }),
+			url: any = this.apiServiceURL + "/removecommentcount";
+		console.log(url);
+		console.log(body);
+		
+				this.http.post(url, body, options)
+					.subscribe((data) => {
+					
+						// If the request was successful notify the user
+						if (data.status === 200) {
+							console.log("Comment count successfully removed");
+		
+						}
+						// Otherwise let 'em know anyway
+						else {
+							console.log("Something went wrong!");
+						}
+					});
+	
 		this.nav.setRoot(CommentsinfoPage, {
 			record: this.NP.get("record")
 		});
@@ -209,8 +254,7 @@ export class UnitdetailsPage {
 			record: this.NP.get("record")
 		});
 	}
-	enginedetail()
-	{
+	enginedetail() {
 		this.nav.setRoot(EnginedetailviewPage, {
 			record: this.NP.get("record")
 		});
@@ -218,26 +262,25 @@ export class UnitdetailsPage {
 	previous() {
 		this.nav.setRoot(UnitsPage);
 	}
-	 notification() {
-    this.nav.setRoot(NotificationPage);
-  }
-  redirectToUser() {
-    this.nav.setRoot(UnitsPage);
-  }
-  redirectToMessage() {
-    this.nav.setRoot(EmailPage);
-  }
-  redirectCalendar() {
-    this.nav.setRoot(CalendarPage);
-  }
-  redirectToMaps() {
-    this.nav.setRoot(MapsPage);
-  }
-  redirectToSettings() {
-    this.nav.setRoot(MyaccountPage);
-  }
-	viewunit()
-	{
+	notification() {
+		this.nav.setRoot(NotificationPage);
+	}
+	redirectToUser() {
+		this.nav.setRoot(UnitsPage);
+	}
+	redirectToMessage() {
+		this.nav.setRoot(EmailPage);
+	}
+	redirectCalendar() {
+		this.nav.setRoot(CalendarPage);
+	}
+	redirectToMaps() {
+		this.nav.setRoot(MapsPage);
+	}
+	redirectToSettings() {
+		this.nav.setRoot(MyaccountPage);
+	}
+	viewunit() {
 		this.nav.setRoot(ViewunitsPage, {
 			record: this.NP.get("record")
 		});

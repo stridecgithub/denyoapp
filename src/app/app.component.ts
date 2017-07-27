@@ -49,10 +49,12 @@ export class MyApp {
   showLevel2 = null;
   ///private push: Push,
   constructor(private network: Network, private push: Push, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public dataService: DataServiceProvider, public menuCtrl: MenuController,
-    public toastCtrl: ToastController) {
+    public toastCtrl: ToastController) { 
+   
     this.initializeApp();
     this.dataService.getMenus()
       .subscribe((response) => {
+
         this.pages = response;
       });
     this.pages = [
@@ -224,6 +226,14 @@ export class MyApp {
     localStorage.setItem("userInfoEmail", "");
     localStorage.setItem("userInfoCompanyId", "");
     localStorage.setItem("atMentionedStorage", "");
+    localStorage.setItem("userPhotoFile", "");
+
+    localStorage.setItem("DASHBOARD_MAP_VIEW", '');
+    localStorage.setItem("DASHBOARD_MAP_CREATE", '');
+    localStorage.setItem("DASHBOARD_MAP_EDIT", '');
+    localStorage.setItem("DASHBOARD_MAP_DELETE", '');
+    localStorage.setItem("DASHBOARD_MAP_HIDE", '');
+
     this.nav.push(HomePage);
   }
   initPushNotification() {

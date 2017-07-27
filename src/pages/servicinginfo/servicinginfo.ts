@@ -33,6 +33,9 @@ export class ServicinginfoPage {
   public pageTitle: string;
   public unit_id: any;
   public atMentionedInfo = [];
+  public service_subject:any;
+  public service_remark:any;
+
   public reportData: any =
   {
     status: '',
@@ -66,29 +69,7 @@ export class ServicinginfoPage {
     this.reportData.sort = "service_id";
     this.doService();
 
-    this.unit_id = this.NP.get("record").unit_id;
-    let body: string = "is_mobile=1&userid=" + this.userId +
-      "&unitid=" + localStorage.getItem("unitId"),
-      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
-      headers: any = new Headers({ 'Content-Type': type }),
-      options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/removeservicecount";
-    console.log(url);
-    console.log(body);
-
-    this.http.post(url, body, options)
-      .subscribe((data) => {
-        //console.log("Response Success:" + JSON.stringify(data.json()));
-        // If the request was successful notify the user
-        if (data.status === 200) {
-          // this.sendNotification(`Service count successfully removed`);
-
-        }
-        // Otherwise let 'em know anyway
-        else {
-          this.sendNotification('Something went wrong!');
-        }
-      });
+    
     // Atmentioned Tag Storage
   }
   presentLoading(parm) {
@@ -200,6 +181,8 @@ export class ServicinginfoPage {
     this.nav.setRoot(RolePage);
   }
   doAdd() {
+     this.service_subject='';
+    this.service_remark='';
     localStorage.setItem("microtime", "");
     this.nav.setRoot(AddserviceinfoPage, {
       record: this.NP.get("record"),
@@ -210,6 +193,8 @@ export class ServicinginfoPage {
 
 
   doRequest() {
+    this.service_subject='';
+    this.service_remark='';
     localStorage.setItem("microtime", "");
     this.nav.setRoot(AddrequestsupportPage, {
       record: this.NP.get("record"),

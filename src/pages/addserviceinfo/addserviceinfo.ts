@@ -36,7 +36,7 @@ export class AddserviceinfoPage {
   isReadyToSave: boolean;
   public photoInfo = [];
   public addedImgListsArray = [];
-  public addedImgLists = [];
+  public addedServiceImgLists = [];
   progress: number;
   public priority_lowclass: any;
   public priority_highclass: any;
@@ -133,10 +133,17 @@ export class AddserviceinfoPage {
 
 
     this.unitDetailData.unit_id = localStorage.getItem("unitId");
+    if (this.unitDetailData.unit_id == undefined) {
+      this.unitDetailData.unit_id = editItem.unit_id;
+    }
+    if (this.unitDetailData.unit_id == 'undefined') {
+      this.unitDetailData.unit_id = editItem.unit_id;
+    }
     this.unitDetailData.unitname = localStorage.getItem("unitunitname");
     this.unitDetailData.location = localStorage.getItem("unitlocation");
     this.unitDetailData.projectname = localStorage.getItem("unitprojectname");
     this.unitDetailData.colorcodeindications = localStorage.getItem("unitcolorcode");
+    console.log("Unit Details Color Code:"+this.unitDetailData.colorcodeindications);
     this.unitDetailData.lat = localStorage.getItem("unitlat");
     this.unitDetailData.lng = localStorage.getItem("unitlng");
 
@@ -228,14 +235,14 @@ export class AddserviceinfoPage {
       .then((data) => {
         let imgSrc;
         imgSrc = this.apiServiceURL + "/serviceimages" + '/' + newFileName;
-        this.addedImgLists.push({
+        this.addedServiceImgLists.push({
           imgSrc: imgSrc,
           imgDateTime: new Date(),
           fileName: newFileName
         });
 
         //loading.dismiss();
-        if (this.addedImgLists.length > 9) {
+        if (this.addedServiceImgLists.length > 9) {
           this.isUploaded = false;
         }
         this.progress += 5;
@@ -285,14 +292,14 @@ export class AddserviceinfoPage {
       console.log("is_request:" + is_request);
       console.log("service_subject:" + service_subject);
       console.log("nextServiceDate:" + this.unitDetailData.nextServiceDate);
-      console.log("Image Data" + JSON.stringify(this.addedImgLists));
+     
       //let d = new Date();
       //let micro_timestamp = d.getFullYear() + "" + d.getMonth() + "" + d.getDate() + "" + d.getHours() + "" + d.getMinutes() + "" + d.getSeconds();
       if (this.isEdited) {
-        this.updateEntry(serviced_datetime, service_remark, next_service_date, serviced_by, this.is_request, service_subject, this.addedImgLists, this.unitDetailData.hashtag, this.unitDetailData.nextServiceDate, this.micro_timestamp);
+        this.updateEntry(serviced_datetime, service_remark, next_service_date, serviced_by, this.is_request, service_subject, this.addedServiceImgLists, this.unitDetailData.hashtag, this.unitDetailData.nextServiceDate, this.micro_timestamp);
       }
       else {
-        this.createEntry(serviced_datetime, service_remark, next_service_date, serviced_by, this.is_request, service_subject, this.addedImgLists, this.unitDetailData.hashtag, this.unitDetailData.nextServiceDate, this.micro_timestamp);
+        this.createEntry(serviced_datetime, service_remark, next_service_date, serviced_by, this.is_request, service_subject, this.addedServiceImgLists, this.unitDetailData.hashtag, this.unitDetailData.nextServiceDate, this.micro_timestamp);
       }
     }
   }
@@ -325,14 +332,14 @@ export class AddserviceinfoPage {
       "&service_priority=" + this.service_priority +
       "&service_unitid=" + this.service_unitid +
       "&serviced_datetime=" + serviced_datetime +
-      "&service_remark=" + remarkget +
+      "&service_remark=" + service_remark +
       "&next_service_date=" + nextServiceDate +
       "&is_denyo_support=0" +
       "&serviced_by=" + this.unitDetailData.userId +
       "&is_request=" + is_request +
       "&service_subject=" + service_subject +
       "&micro_timestamp=" + micro_timestamp +
-      "&uploadInfo=" + JSON.stringify(this.addedImgLists),
+      "&uploadInfo=" + JSON.stringify(this.addedServiceImgLists),
       //"&contact_number=" + this.contact_number +
       //"&contact_name=" + this.contact_name +
       //"&nextServiceDate=" + nextServiceDate,
@@ -350,7 +357,7 @@ export class AddserviceinfoPage {
         if (data.status === 200) {
           localStorage.setItem("microtime", "");
           this.sendNotification(`Servicing info was successfully added`);
-           localStorage.setItem("atMentionResult", '');
+          localStorage.setItem("atMentionResult", '');
           this.nav.setRoot(ServicinginfoPage, {
             record: this.NP.get("record")
           });
@@ -396,7 +403,7 @@ export class AddserviceinfoPage {
       "&is_request=" + is_request +
       "&service_subject=" + service_subject +
       "&micro_timestamp=" + micro_timestamp +
-      "&uploadInfo=" + JSON.stringify(this.addedImgLists),
+      "&uploadInfo=" + JSON.stringify(this.addedServiceImgLists),
 
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
@@ -411,7 +418,7 @@ export class AddserviceinfoPage {
         if (data.status === 200) {
           localStorage.setItem("microtime", "");
           this.sendNotification(`Servicing info  was successfully updated`);
-           localStorage.setItem("atMentionResult", '');
+          localStorage.setItem("atMentionResult", '');
           this.nav.setRoot(ServicinginfoPage, {
             record: this.NP.get("record")
           });
@@ -465,7 +472,7 @@ export class AddserviceinfoPage {
       androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
     }).then(
       date => {
-        let monthstr=date.getMonth()+parseInt("1");
+        let monthstr = date.getMonth() + parseInt("1");
         this.unitDetailData.nextServiceDate = date.getFullYear() + "-" + monthstr + "-" + date.getDate();
         console.log('Got date: ', date)
       },
@@ -524,7 +531,7 @@ export class AddserviceinfoPage {
         let imgDataArr = hashhypenhash[i].split("|");
         let imgSrc;
         imgSrc = this.apiServiceURL + "/serviceimages" + '/' + imgDataArr[1];
-        this.addedImgLists.push({
+        this.addedServiceImgLists.push({
           imgSrc: imgSrc,
           imgDateTime: new Date(),
           fileName: imgDataArr[1],
@@ -532,7 +539,7 @@ export class AddserviceinfoPage {
         });
       }
 
-      if (this.addedImgLists.length > 9) {
+      if (this.addedServiceImgLists.length > 9) {
         this.isUploaded = false;
       }
     }
@@ -545,9 +552,9 @@ export class AddserviceinfoPage {
         text: 'Yes',
         handler: () => {
           this.deleteEntry(id);
-          for (let q: number = 0; q < this.addedImgLists.length; q++) {
-            if (this.addedImgLists[q] == item) {
-              this.addedImgLists.splice(q, 1);
+          for (let q: number = 0; q < this.addedServiceImgLists.length; q++) {
+            if (this.addedServiceImgLists[q] == item) {
+              this.addedServiceImgLists.splice(q, 1);
             }
           }
         }

@@ -40,7 +40,7 @@
                   <ion-col>
             <p><b>Subject:</b>{{service_subject}}</p>
             <p><b>Serviced Date:</b>{{serviced_datetime}}</p>
-            <p><b>Serviced By:</b>{{serviced_by_name}}
+            <p  *ngIf="serviced_by_name!=''"><b>Serviced By:</b>{{serviced_by_name}}
         
             </p>
   

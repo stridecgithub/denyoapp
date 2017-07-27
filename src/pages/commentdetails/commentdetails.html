@@ -30,90 +30,69 @@
       Login As:{{unitDetailData.loginas}}
     </ion-buttons>
   </ion-navbar>
-  
+
 </ion-header>
 
 
 <ion-content padding>
-   
- <ion-grid>
-        <ion-row>
-          <ion-col>
-            <p><b>Subject:</b>{{comment_subject}}</p>
-            <p><b>Commented By:</b>{{comment_by_name}}
-        
-            </p>
-  
-          </ion-col>
-
-          <ion-col>
-            <a href="#" >
-              <ion-icon name="download{{service_priority_class1}}" style="color:aquamarine;font-size: 37px;"></ion-icon>
-            </a>
-          </ion-col>
 
 
-          <ion-col>
-            <a href="#">
-              <ion-icon name="alert{{service_priority_class2}}" style="color: brown;font-size: 37px;"></ion-icon>
-            </a>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-      <div>
-        <p><b>Remark:</b>
-        <br>{{comment_remark}}</p>
-        </div>
-        <div>
-         <ion-row>
-          <ion-col col-auto *ngFor="let item of addedImgLists; let i = index" [attr.data-index]="i">
-            <ion-item>
-              <img src="{{addedImgLists[i].imgSrc}}" width=100% height=100% /> 
-            </ion-item>
-       
-          </ion-col>
+  <div>
+    <p><b>Subject:</b>
+      <br>{{comment_subject}}</p>
+    <p><b>Remark:</b>
+      <br>{{comment_remark}}</p>
+  </div>
+  <div>
+    <ion-row>
+      <ion-col col-auto *ngFor="let item of addedImgLists; let i = index" [attr.data-index]="i">
+        <ion-item>
+          <img src="{{addedImgLists[i].imgSrc}}" width=100% height=100% />
+        </ion-item>
 
-        </ion-row>
-        </div>
-        
-        <div *ngIf="requestbutton==1" width=100%>
-          <button ion-button icon-start width=100%>
+      </ion-col>
+
+    </ion-row>
+  </div>
+
+  <div *ngIf="requestbutton==1" width=100%>
+    <button ion-button icon-start width=100%>
   <ion-icon name="md-checkmark"></ion-icon>
   Request Denyo Support
 </button>
-        </div>
+  </div>
 </ion-content>
 <ion-footer color="bluedark">
   <ion-toolbar color="bluedark">
-<ul class="quick-list">
-<li>
-    <button ion-button icon-only clear (click)="redirectToMaps()">
+    <ul class="quick-list">
+      <li>
+        <button ion-button icon-only clear (click)="redirectToMaps()">
     	<ion-icon name="home" class="footer-icon">MAPS</ion-icon>
     </button>
-</li>  
-<li>  
-    <button ion-button icon-only (click)="redirectToUser()" clear>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectToUser()" clear>
     	<ion-icon name="contacts" class="footer-icon">UNITS</ion-icon>
     </button>
-</li>     
-  <li>
+      </li>
+      <li>
         <button ion-button icon-only (click)="redirectToMessage()" clear>
     	<ion-icon name="chatboxes" class="footer-icon">MESSAGE</ion-icon>
        <ion-badge item-end class="messagecount"  *ngIf="msgcount>0">{{this.msgcount}}</ion-badge>    
        </button>
-       <ion-badge color="danger"></ion-badge>
-      </li>    
-<li>    
-    <button ion-button icon-only (click)="redirectCalendar()" clear>
+        <ion-badge color="danger"></ion-badge>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectCalendar()" clear>
     	<ion-icon name="bicycle" class="footer-icon">CALENDAR</ion-icon>
     </button>
-</li>       
-<li>    
-    <button ion-button icon-only (click)="redirectToSettings()" clear>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectToSettings()" clear>
     	<ion-icon name="settings" class="footer-icon">SETTING</ion-icon>
     </button>
-</li>    
-</ul>
+      </li>
+    </ul>
 
   </ion-toolbar>
 </ion-footer>

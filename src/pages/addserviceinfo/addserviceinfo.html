@@ -124,14 +124,14 @@
       <progress value="{{progress}}" max="100" *ngIf="isProgress"> </progress>
       <span *ngIf="isProgress" style="padding:2px">{{progress}}%</span>
 
-      <div *ngIf="addedImgLists.length>0"></div>
+      <div *ngIf="addedServiceImgLists.length>0"></div>
       <ion-grid>
         <ion-row>
-          <ion-col col-auto *ngFor="let item of addedImgLists; let i = index" [attr.data-index]="i">
+          <ion-col col-auto *ngFor="let item of addedServiceImgLists; let i = index" [attr.data-index]="i">
             <ion-item>
-              <ion-avatar item-start><img src="{{addedImgLists[i].imgSrc}}" width="100" height="50" /> </ion-avatar>
+              <ion-avatar item-start><img src="{{addedServiceImgLists[i].imgSrc}}" width="100" height="50" /> </ion-avatar>
             </ion-item>
-            <a href="#" (click)="doRemoveResouce(addedImgLists[i].resouce_id,item)">
+            <a href="#" (click)="doRemoveResouce(addedServiceImgLists[i].resouce_id,item)">
               <ion-icon name="backspace" style="color: brown;
     font-size: 20px;
     position: relative;

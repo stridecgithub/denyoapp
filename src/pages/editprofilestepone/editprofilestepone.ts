@@ -121,6 +121,7 @@ export class EditprofilesteponePage {
         console.log(res.settings[0].country_name);
         if (res.settings[0].photo_filename != '' && res.settings[0].photo_filename != 'undefined' && res.settings[0].photo_filename != undefined) {
           this.addedImgLists = this.apiServiceURL + "/staffphotos/" + res.settings[0].photo_filename;
+           this.photo=res.settings[0].photo_filename;
         }
       });
   }

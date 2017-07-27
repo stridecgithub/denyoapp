@@ -52,28 +52,32 @@
         </p>
 
         <div><b>Select Notification List</b> <span class="mandatory" *ngIf="hideActionButton">*</span></div>
-        
 
-        <textarea (keyup)=address1get($event.target.value); name="to" id="to"  class="suggest form-control" onkeyup="sptions(event);address1get(this.value)" onblur="sptionshide();address1get(this.value)"  rows="8" [disabled]="readOnly" formControlName="alarmhashtags"
-          rows="6" [(ngModel)]="alarmhashtags"></textarea>
+
+        <textarea (keyup)=address1get($event.target.value); name="to" id="to" class="suggest form-control" onkeyup="sptions(event);address1get(this.value)"
+          onblur="sptionshide();address1get(this.value)" rows="8" [disabled]="readOnly" formControlName="alarmhashtags" rows="6"
+          [(ngModel)]="alarmhashtags"></textarea>
 
 
 
         <div><b>Contact Person</b> <span class="mandatory" *ngIf="hideActionButton">*</span></div>
         <ion-item>
           <ion-label stacked>Name<span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
-          <ion-input type="text" (keyup)=address1get(alarmhashtags); [disabled]="readOnly" formControlName="contact_name_1" [(ngModel)]="contact_name_1"></ion-input>
+          <ion-input type="text" [disabled]="readOnly" formControlName="contact_name_1" [(ngModel)]="contact_name_1"></ion-input>
         </ion-item>
 
 
-        
+
 
 
         <ion-input *ngIf="cont2" type="text" placeholder="Name" [disabled]="readOnly" formControlName="contact_name_2" [(ngModel)]="contact_name_2"></ion-input>
+        <!--a href="#"  *ngIf="cont2" (click)="remove(2)" style="color:brown">Remove</a-->
         <ion-input *ngIf="cont3" type="text" placeholder="Name" [disabled]="readOnly" formControlName="contact_name_3" [(ngModel)]="contact_name_3"></ion-input>
-        <ion-input *ngIf="cont4" type="text" placeholder="Name" [disabled]="readOnly" formControlName="contact_name_4" [(ngModel)]="contact_name_4"></ion-input>
+        <!--a href="#"  *ngIf="cont3" (click)="remove(3)" style="color:brown">Remove</a-->
+        <ion-input  *ngIf="cont4" type="text" placeholder="Name" [disabled]="readOnly" formControlName="contact_name_4" [(ngModel)]="contact_name_4"></ion-input>
+        <!--a href="#"  *ngIf="cont4" (click)="remove(4)" style="color:brown">Remove</a-->
         <ion-input *ngIf="cont5" type="text" placeholder="Name" [disabled]="readOnly" formControlName="contact_name_5" [(ngModel)]="contact_name_5"></ion-input>
-
+        <!--a href="#"  *ngIf="cont5" (click)="remove(5)" style="color:brown">Remove</a-->
         <ion-item>
           <ion-label stacked>Contact Number<span class="mandatory" *ngIf="hideActionButton"> *</span></ion-label>
           <ion-input type="text" [disabled]="readOnly" formControlName="contact_number_1" [(ngModel)]="contact_number_1"></ion-input>
@@ -102,33 +106,33 @@
 </ion-content>
 <ion-footer color="bluedark">
   <ion-toolbar color="bluedark">
-<ul class="quick-list">
-<li>
-    <button ion-button icon-only clear (click)="redirectToMaps()">
+    <ul class="quick-list">
+      <li>
+        <button ion-button icon-only clear (click)="redirectToMaps()">
     	<ion-icon name="home" class="footer-icon">MAPS</ion-icon>
     </button>
-</li>  
-<li>  
-    <button ion-button icon-only (click)="redirectToUser()" clear>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectToUser()" clear>
     	<ion-icon name="contacts" class="footer-icon">UNITS</ion-icon>
     </button>
-</li>     
-<li>    
-    <button ion-button icon-only (click)="redirectToMessage()" clear>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectToMessage()" clear>
     	<ion-icon name="chatboxes" class="footer-icon">MESSAGE</ion-icon>
     </button>
-</li>     
-<li>    
-    <button ion-button icon-only (click)="redirectCalendar()" clear>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectCalendar()" clear>
     	<ion-icon name="bicycle" class="footer-icon">CALENDAR</ion-icon>
     </button>
-</li>    
-<li>    
-    <button ion-button icon-only (click)="redirectToSettings()" clear>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectToSettings()" clear>
     	<ion-icon name="settings" class="footer-icon">SETTING</ion-icon>
     </button>
-</li>    
-</ul>
+      </li>
+    </ul>
 
   </ion-toolbar>
 </ion-footer>

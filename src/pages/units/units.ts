@@ -107,7 +107,7 @@ export class UnitsPage {
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/units?is_mobile=1&startindex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc + "&company_id=" + this.companyId+ "&loginid=" + this.userId;
+      url: any = this.apiServiceURL + "/units?is_mobile=1&startindex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc + "&company_id=" + this.companyId + "&loginid=" + this.userId;
     let res;
     console.log(url);
     this.http.get(url, options)
@@ -221,22 +221,30 @@ console.log(JSON.stringify(this.selectedAction));*/
     console.log(JSON.stringify(this.str));
     let urlstr;
     if (actpet == 'delete') {
-      urlstr = "/unitlistaction/" + this.str + "/1/delete";
+      if (this.str == '') {
+        this.sendNotification("Please select Atleast One Unit")
+      }
+      else {
+        urlstr = "/unitlistaction/" + this.str + "/1/delete";
+      }
     }
     if (actpet == 'viewdashboard') {
-      urlstr = "/unitlistaction/" + this.str + "/1/dashboard?ses_login_id=" + this.userId;
+      if (this.str == '') {
+        this.sendNotification("Please select Atleast One Unit")
+      }
+      else {
+        urlstr = "/unitlistaction/" + this.str + "/1/dashboard?ses_login_id=" + this.userId;
+      }
     }
     if (actpet == 'view') {
-      if(this.str=='')
-      {
-         this.sendNotification("Please select Atleast One Unit")
+      if (this.str == '') {
+        this.sendNotification("Please select Atleast One Unit")
       }
-      else
-      {
-      this.nav.setRoot(UnitdetailsPage, {
-        record: this.detailvalue
-      });
-      return false;
+      else {
+        this.nav.setRoot(UnitdetailsPage, {
+          record: this.detailvalue
+        });
+        return false;
       }
     }
 
@@ -254,11 +262,15 @@ console.log(JSON.stringify(this.selectedAction));*/
         console.log("Count Response Success:" + JSON.stringify(data.json()));
         // If the request was successful notify the user
         if (data.status === 200) {
-          this.sendNotification(`successfully Added`);
+          if (actpet == 'delete') {
+            this.sendNotification(`Successfully Deleted`);
+          } else {
+            this.sendNotification(`successfully Added`);
+          }
           this.reportData.startindex = 0;
           this.reportData.sort = "unit_id";
-         /// this.doUnit();
-         this.nav.setRoot(this.nav.getActive().component);
+          /// this.doUnit();
+          this.nav.setRoot(this.nav.getActive().component);
         }
         // Otherwise let 'em know anyway
         else {
@@ -278,10 +290,10 @@ console.log(JSON.stringify(this.selectedAction));*/
       localStorage.setItem("unitunitname", item.unitname);
       localStorage.setItem("unitlocation", item.location);
       localStorage.setItem("unitprojectname", item.projectname);
-      localStorage.setItem("unitcolorcode", item.colorcode);
+      localStorage.setItem("unitcolorcode", item.colorcodeindications);
       localStorage.setItem("unitlat", item.lat);
       localStorage.setItem("unitlng", item.lng);
-      
+
       this.nav.setRoot(UnitdetailsPage, {
         record: item
       });
@@ -419,7 +431,7 @@ console.log(JSON.stringify(this.selectedAction));*/
   favorite(unit_id) {
     this.reportData.startindex = 0;
     this.reportAllLists = [];
-    let body: string = "unitid=" + unit_id + "&is_mobile=1"+"&loginid="+this.userId,
+    let body: string = "unitid=" + unit_id + "&is_mobile=1" + "&loginid=" + this.userId,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
@@ -491,7 +503,7 @@ console.log(JSON.stringify(this.selectedAction));*/
     this.doUnit();
   }
 
- notification() {
+  notification() {
     this.nav.setRoot(NotificationPage);
   }
   redirectToUser() {

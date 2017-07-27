@@ -135,6 +135,7 @@ export class AddcommentsinfoPage {
     this.unitDetailData.location = localStorage.getItem("unitlocation");
     this.unitDetailData.projectname = localStorage.getItem("unitprojectname");
     this.unitDetailData.colorcodeindications = localStorage.getItem("unitcolorcode");
+    console.log("Add Comment Color Code:"+this.unitDetailData.colorcodeindications);
     this.unitDetailData.lat = localStorage.getItem("unitlat");
     this.unitDetailData.lng = localStorage.getItem("unitlng");
 
@@ -281,7 +282,7 @@ export class AddcommentsinfoPage {
     let body: string = "is_mobile=1" +
       "&comment_unit_id=" + this.comment_unitid +
       "&comment_priority=" + this.service_priority +
-      "&comments=" + comments +
+      "&comment_remark=" + comments +
       "&comment_by=" + this.unitDetailData.userId +
       "&comment_subject=" + service_subject +
       "&micro_timestamp=" + micro_timestamp +

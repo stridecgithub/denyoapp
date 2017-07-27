@@ -198,6 +198,7 @@ export class EditprofilesteptwoPage {
         if (data.status === 200) {
           this.hideForm = true;
           if (!userPhotoFile) {
+            localStorage.setItem("userPhotoFile","");
             this.sendNotification(`User profile successfully updated`);
             this.nav.setRoot(MyaccountPage);
           }
@@ -278,6 +279,7 @@ export class EditprofilesteptwoPage {
     fileTransfer.upload(path, this.apiServiceURL + '/upload.php', options)
       .then((data) => {
         console.log(JSON.stringify(data));
+         localStorage.setItem("userPhotoFile","");
         console.log("UPLOAD SUCCESS:" + data.response);
         let successData = JSON.parse(data.response);
         this.userInfo.push({

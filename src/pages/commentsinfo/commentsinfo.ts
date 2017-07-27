@@ -71,29 +71,6 @@ export class CommentsinfoPage {
     this.doService();
     //this.unit_id = this.NP.get("record").unit_id;
    
-    let body: string = "is_mobile=1&userid=" + this.userId +
-      "&unitid=" + localStorage.getItem("unitId"),
-      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
-      headers: any = new Headers({ 'Content-Type': type }),
-      options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/removecommentcount";
-    console.log(url);
-    console.log(body);
-
-    this.http.post(url, body, options)
-      .subscribe((data) => {
-        //console.log("Response Success:" + JSON.stringify(data.json()));
-        // If the request was successful notify the user
-        if (data.status === 200) {
-          //this.sendNotification(`Comment count successfully removed`);
-          
-        }
-        // Otherwise let 'em know anyway
-        else {
-          this.sendNotification('Something went wrong!');
-        }
-      });
-
     // Atmentioned Tag Storage
   }
   presentLoading(parm) {
@@ -241,7 +218,7 @@ export class CommentsinfoPage {
   doConfirm(id, item) {
     console.log("Deleted Id" + id);
     let confirm = this.alertCtrl.create({
-      message: 'Are you sure you want to delete this unit group?',
+      message: 'Are you sure you want to delete this comment?',
       buttons: [{
         text: 'Yes',
         handler: () => {

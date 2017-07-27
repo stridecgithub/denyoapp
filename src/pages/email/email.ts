@@ -812,11 +812,11 @@ export class EmailPage {
   }
 
   reply(messages_body) {
-    this.to = '';
+    this.to = this.personalhashtag;
     this.addedImgLists = [];
     this.copytome = 0;
     this.getPrority(1);
-    this.subject = '';
+    this.subject = this.messages_subject;
     this.composemessagecontent = "-----Reply Message-----" + "\n" + messages_body;
     this.choice = 'compose';
   }

@@ -56,7 +56,15 @@ export class AddreporttemplatePage {
     this.userId = localStorage.getItem("userInfoId");
 
   }
+  /*
+insertUserToArray(id,item){
+//check item.user and do stuff
 
+console.log("Current Available Loop Data"+JSON.stringify(this.availableheadingitem));
+console.log("Id"+id+"<==>"+item._value);
+
+console.log("Selected DAta:"+JSON.stringify(this.getCheckboxData));
+}*/
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddreporttemplatePage');
   }
@@ -119,7 +127,7 @@ export class AddreporttemplatePage {
   }
 
 
-  getCheckBoxValue(name) {
+  /*getCheckBoxValue(name) {
     console.log("Available data" + name);
 
 
@@ -127,7 +135,46 @@ export class AddreporttemplatePage {
       availabledata: name
     })
     console.log(JSON.stringify(this.getCheckboxData));
+  }*/
+
+  getCheckBoxValue(id, item, value) {
+
   }
+  insertUserToArray(id, item, value) {
+
+    /* console.log("Available data" + name);
+ 
+ 
+     this.getCheckboxData.push({
+       availabledata: name
+     })
+     console.log(JSON.stringify(this.getCheckboxData));
+     */
+
+
+    //check item.user and do stuff
+
+    console.log("Current Available Loop Data" + JSON.stringify(this.availableheadingitem));
+    console.log("Id:" + id + "<==>Checkbox Boolean:" + item._value + "<==>Checkbox value:" + value);
+
+    //console.log("Selected DAta:"+JSON.stringify(this.getCheckboxData));
+    //this.getCheckboxData.splice(1,1);
+    //console.log("Filter DAta:"+JSON.stringify(this.getCheckboxData));
+
+    if (item._value == true) {
+      this.getCheckboxData.push({ "availabledata": value });
+    } else {
+      for (var i = 0; i < this.getCheckboxData.length; i++) {
+        if (this.getCheckboxData[i].availabledata == value) {
+          this.getCheckboxData.splice(i, 1);
+          break;
+        }
+      }
+    }
+    console.log("Edited Data" + JSON.stringify(this.getCheckboxData));
+  }
+
+
   saveEntry() {
     if (this.isEdited) {
 
@@ -150,41 +197,45 @@ export class AddreporttemplatePage {
     //     console.log(key);
     // }
     // return ret_arr;
-    var uniqueArray = arr.filter(function(elem, pos) {
-    return arr.indexOf(elem) == pos;
-});
-}
+    var uniqueArray = arr.filter(function (elem, pos) {
+      return arr.indexOf(elem) == pos;
+    });
+  }
   updateEntry() {
-    let getCheckbox=this.remove_duplicates(this.getCheckboxData);
-    console.log("Check"+getCheckbox);
-    let templatename: string = this.form.controls["templatename"].value
-    let body: string = "is_mobile=1&templatename=" + templatename + "&data=" + JSON.stringify(this.getCheckboxData) + "&id=" + this.recordID + "&ses_login_id=" + this.userId,
-      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
-      headers: any = new Headers({ 'Content-Type': type }),
-      options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/reporttemplate/update";
-    console.log(url + "?" + body);
+    if (this.getCheckboxData.length == 0) {
+      this.sendNotification('Checkbox ateast one should be selected');
+    } else {
+      let getCheckbox = this.remove_duplicates(this.getCheckboxData);
+      console.log("Check" + getCheckbox);
+      let templatename: string = this.form.controls["templatename"].value
+      let body: string = "is_mobile=1&templatename=" + templatename + "&data=" + JSON.stringify(this.getCheckboxData) + "&id=" + this.recordID + "&ses_login_id=" + this.userId,
+        type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+        headers: any = new Headers({ 'Content-Type': type }),
+        options: any = new RequestOptions({ headers: headers }),
+        url: any = this.apiServiceURL + "/reporttemplate/update";
+      console.log(url + "?" + body);
 
-    this.http.post(url, body, options)
-      .subscribe((data) => {
-        let res = data.json();
-        console.log(JSON.stringify(data.json()));
-        // If the request was successful notify the user
-        if (data.status === 200) {
-          console.log("Msg Results:-" + res.msg[0].result);
-          if (res.msg[0].result > 0) {
-            this.sendNotification(res.msg[0].result);
-            this.nav.setRoot(ReporttemplatePage);
-          } else {
-            this.sendNotification(res.msg[0].result);
-            this.nav.setRoot(ReporttemplatePage);
+      this.http.post(url, body, options)
+        .subscribe((data) => {
+          let res = data.json();
+          console.log(JSON.stringify(data.json()));
+          // If the request was successful notify the user
+          if (data.status === 200) {
+            console.log("Msg Results:-" + res.msg[0].result);
+            if (res.msg[0].result > 0) {
+              this.sendNotification(res.msg[0].result);
+              this.nav.setRoot(ReporttemplatePage);
+            } else {
+              this.sendNotification(res.msg[0].result);
+              this.nav.setRoot(ReporttemplatePage);
+            }
           }
-        }
-        // Otherwise let 'em know anyway
-        else {
-          this.sendNotification('Something went wrong!');
-        }
-      });
+          // Otherwise let 'em know anyway
+          else {
+            this.sendNotification('Something went wrong!');
+          }
+        });
+    }
   }
   selectEntry(item) {
 
@@ -199,36 +250,39 @@ export class AddreporttemplatePage {
 
   }
   createEntry() {
+    if (this.getCheckboxData.length == 0) {
+      this.sendNotification('Checkbox ateast one should be selected');
+    } else {
+      console.log(JSON.stringify(this.getCheckboxData));
+      let templatename: string = this.form.controls["templatename"].value
+      let body: string = "is_mobile=1&templatename=" + templatename + "&data=" + JSON.stringify(this.getCheckboxData) + "&ses_login_id=" + this.userId,
+        type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+        headers: any = new Headers({ 'Content-Type': type }),
+        options: any = new RequestOptions({ headers: headers }),
+        url: any = this.apiServiceURL + "/reporttemplate/store";
+      console.log(url + "?" + body);
 
-    console.log(JSON.stringify(this.getCheckboxData));
-    let templatename: string = this.form.controls["templatename"].value
-    let body: string = "is_mobile=1&templatename=" + templatename + "&data=" + JSON.stringify(this.getCheckboxData) + "&ses_login_id=" + this.userId,
-      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
-      headers: any = new Headers({ 'Content-Type': type }),
-      options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/reporttemplate/store";
-    console.log(url + "?" + body);
-
-    this.http.post(url, body, options)
-      .subscribe((data) => {
-        let res = data.json();
-        console.log(JSON.stringify(data.json()));
-        // If the request was successful notify the user
-        if (data.status === 200) {
-          console.log("Msg Results:-" + res.msg[0].result);
-          if (res.msg[0].result > 0) {
-            this.sendNotification(res.msg[0].result);
-            this.nav.setRoot(ReporttemplatePage);
-          } else {
-            this.sendNotification(res.msg[0].result);
-            this.nav.setRoot(ReporttemplatePage);
+      this.http.post(url, body, options)
+        .subscribe((data) => {
+          let res = data.json();
+          console.log(JSON.stringify(data.json()));
+          // If the request was successful notify the user
+          if (data.status === 200) {
+            console.log("Msg Results:-" + res.msg[0].result);
+            if (res.msg[0].result > 0) {
+              this.sendNotification(res.msg[0].result);
+              this.nav.setRoot(ReporttemplatePage);
+            } else {
+              this.sendNotification(res.msg[0].result);
+              this.nav.setRoot(ReporttemplatePage);
+            }
           }
-        }
-        // Otherwise let 'em know anyway
-        else {
-          this.sendNotification('Something went wrong!');
-        }
-      });
+          // Otherwise let 'em know anyway
+          else {
+            this.sendNotification('Something went wrong!');
+          }
+        });
+    }
   }
   sendNotification(message): void {
     let notification = this.toastCtrl.create({

@@ -29,6 +29,7 @@ import { EmailPage } from '../email/email';
 export class CompanygroupPage {
   public pageTitle: string;
   public loginas: any;
+  public Role;
   public loadingMoreDataContent:string;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   public totalCount;
@@ -52,6 +53,7 @@ export class CompanygroupPage {
     this.loadingMoreDataContent='Loading More Data';
     this.loginas = localStorage.getItem("userInfoName");
      this.companyId = localStorage.getItem("userInfoCompanyId");
+      this.Role = localStorage.getItem("userInfoRoleId");
   }
 
   ionViewDidLoad() {

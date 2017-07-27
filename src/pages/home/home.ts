@@ -56,13 +56,50 @@ export class HomePage {
         } else {
           res = data.json();
           console.log("Logged in Response:" + JSON.stringify(res));
-          console.log("Logged Id:" + res['staffdetails'][0].staff_id);
           localStorage.setItem("userInfo", res['staffdetails'][0]);
           localStorage.setItem("userInfoId", res['staffdetails'][0].staff_id);
           localStorage.setItem("userInfoName", res['staffdetails'][0].firstname);
           localStorage.setItem("userInfoEmail", res['staffdetails'][0].email);
           localStorage.setItem("userInfoCompanyId", res['staffdetails'][0].company_id);
           localStorage.setItem("userInfoRoleId", res['staffdetails'][0].role_id);
+          console.log("Role Permssion Array:" + JSON.stringify(res['roledata']));
+          localStorage.setItem("RolePermissionData", JSON.stringify(res['roledata']));
+
+
+          let roleData = localStorage.getItem("RolePermissionData");
+          let roleparseData = JSON.parse(roleData);
+          for (let rle = 0; rle < roleparseData.length; rle++) {
+            console.log(roleparseData[rle]['module_name']);
+            if (roleparseData[rle]['module_name'] == '1' && roleparseData[rle]['page_name'] == '8') {
+              localStorage.setItem("DASHBOARD_MAP_VIEW", roleparseData[rle]['view_action']);
+              localStorage.setItem("DASHBOARD_MAP_CREATE", roleparseData[rle]['create_action']);
+              localStorage.setItem("DASHBOARD_MAP_EDIT", roleparseData[rle]['edit_action']);
+              localStorage.setItem("DASHBOARD_MAP_DELETE", roleparseData[rle]['delete_action']);
+              localStorage.setItem("DASHBOARD_MAP_HIDE", roleparseData[rle]['hide_action']);
+            }
+            /* if(roleparseData[rle]['page_name']=='8'){
+               
+             }*/
+
+            console.log(roleparseData[rle]['page_name']);
+            console.log(roleparseData[rle]['view_action']);
+          }
+
+          // Get Role Permission Data API Calling
+          /* let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+             headers: any = new Headers({ 'Content-Type': type }),
+             options: any = new RequestOptions({ headers: headers }),
+             url: any = this.apiServiceURL + "/editrole?is_mobile=1&role_id=" + res['staffdetails'][0].role_id;
+           console.log(url);
+           let roleres;
+           this.http.get(url, options)
+             .subscribe((data) => {
+               roleres = data.json();
+               console.log("Role Permssion Array:"+JSON.stringify(roleres.roldata));
+                localStorage.setItem("RolePermissionData", JSON.stringify(roleres.roldata));
+ 
+             });*/
+          // Get Role Permission Data API Calling
           this.navCtrl.setRoot(DashboardPage);
         }
 

@@ -230,7 +230,7 @@ export class AddunitstwoPage {
           this.hideForm = true;
           if(res.msg[0].Error == '1')
           {
-          this.sendNotification(JSON.stringify(data));
+          this.sendNotification(res.msg[0].result);
         }
         else
         {

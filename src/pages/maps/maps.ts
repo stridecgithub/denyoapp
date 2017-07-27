@@ -1,6 +1,6 @@
 
 import { Component } from '@angular/core';
-import {  NavController, ToastController, AlertController, NavParams } from 'ionic-angular';
+import { NavController, ToastController, AlertController, NavParams } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { AddunitsonePage } from '../addunitsone/addunitsone';
@@ -31,19 +31,20 @@ export class MapsPage {
   //map: any;
   public loginas: any;
   public userid: any;
-  public companyid:any;
-  public detailvalue:any;
+  public companyid: any;
+  public detailvalue: any;
   public pageTitle: string;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   public totalCount;
   pet: string = "ALL";
   public sortby = 2;
-  public str:any;
-  public str1:any;
+  public str: any;
+  public str1: any;
   public vendorsort = "asc";
   public ascending = true;
   public colorListArr: any;
   iframeContent: any;
+  public DASHBOARD_MAP_VIEW:any;
   public reportData: any =
   {
     status: '',
@@ -54,7 +55,15 @@ export class MapsPage {
   }
   public reportAllLists = [];
   constructor(public http: Http, public navCtrl: NavController,
-    public toastCtrl: ToastController,private sanitizer: DomSanitizer, public alertCtrl: AlertController, public navParams: NavParams, public loadingCtrl: LoadingController) {
+    public toastCtrl: ToastController, private sanitizer: DomSanitizer, public alertCtrl: AlertController, public navParams: NavParams, public loadingCtrl: LoadingController) {
+    /* Role Authority Start */
+    this.DASHBOARD_MAP_VIEW=localStorage.getItem("DASHBOARD_MAP_VIEW");
+    let DASHBOARD_MAP_HIDE=localStorage.getItem("DASHBOARD_MAP_HIDE");
+    console.log("Role Authority for Map View"+ this.DASHBOARD_MAP_VIEW);
+  
+     console.log("Role Authority for Map Hide"+DASHBOARD_MAP_HIDE);
+    /* Role Authority End */
+
     this.pageTitle = 'Maps';
     this.str = '';
     this.str1 = '';
@@ -109,7 +118,7 @@ export class MapsPage {
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/dashboard?is_mobile=1&startindex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc + "&loginid=" + this.userid+"&company_id="+this.companyid;
+      url: any = this.apiServiceURL + "/dashboard?is_mobile=1&startindex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc + "&loginid=" + this.userid + "&company_id=" + this.companyid;
     let res;
     console.log(url);
     this.http.get(url, options)
@@ -381,7 +390,7 @@ export class MapsPage {
   favorite(unit_id) {
     this.reportData.startindex = 0;
     this.reportAllLists = [];
-    let body: string = "unitid=" + unit_id + "&is_mobile=1"+"&loginid="+this.userid,
+    let body: string = "unitid=" + unit_id + "&is_mobile=1" + "&loginid=" + this.userid,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
@@ -431,7 +440,7 @@ export class MapsPage {
               unitgroups_id: res.units[unit].unitgroups_id,
               models_id: res.units[unit].models_id,
               alarmnotificationto: res.units[unit].alarmnotificationto,
-               viewonid: res.units[unit].viewonid,
+              viewonid: res.units[unit].viewonid,
               favoriteindication: favorite
             });
           }
@@ -453,7 +462,7 @@ export class MapsPage {
       });
     this.doUser();
   }
-   getCheckBoxValue(item,val,val1) {
+  getCheckBoxValue(item, val, val1) {
     /*console.log("Available data" + val);
     this.getCheckboxData.push({
       availabledata: val
@@ -472,39 +481,39 @@ console.log(JSON.stringify(this.selectedAction));*/
         this.str = this.str + "," + val;
       }
     }
-      if (val1 != '') {
+    if (val1 != '') {
       if (this.str1 == '') {
         this.str1 = val1;
       } else {
         this.str1 = this.str1 + "," + val1;
       }
     }
-    console.log(this.str+"//"+this.str1);
-    this.detailvalue=item;
-    console.log(this.str+"//"+JSON.stringify(this.detailvalue));
+    console.log(this.str + "//" + this.str1);
+    this.detailvalue = item;
+    console.log(this.str + "//" + JSON.stringify(this.detailvalue));
     localStorage.setItem("viewlist", this.str);
-   
+
   }
-  onAction(act)
-  {
+  onAction(act) {
     let urlstr;
-    if(act=='view')
-    {
-      if(this.str=='')
-      {
-         this.sendNotification("Please select Atleast One Unit")
+    if (act == 'view') {
+      if (this.str == '') {
+        this.sendNotification("Please select Atleast One Unit")
       }
-      else
-      {
-      this.navCtrl.setRoot(UnitdetailsPage, {
-        record: this.detailvalue
-      });
-      return false;
+      else {
+        this.navCtrl.setRoot(UnitdetailsPage, {
+          record: this.detailvalue
+        });
+        return false;
       }
     }
-    if(act=='hide')
-    {
-        urlstr = "/dashboardaction?id="+this.str1+"&action=hide&is_mobile=1&loginid="+this.userid;
+    if (act == 'hide') {
+      if (this.str == '') {
+        this.sendNotification("Please select Atleast One Unit")
+      }
+      else {
+        urlstr = "/dashboardaction?id=" + this.str1 + "&action=hide&is_mobile=1&loginid=" + this.userid;
+      }
 
     }
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
@@ -523,18 +532,18 @@ console.log(JSON.stringify(this.selectedAction));*/
           this.reportData.sort = "unit_id";
           //this.doUser();
           this.navCtrl.setRoot(this.navCtrl.getActive().component);
-          
-          
+
+
         }
         // Otherwise let 'em know anyway
         else {
           // this.sendNotification('Something went wrong!');
         }
       });
-    
-    
+
+
   }
-   notification() {
+  notification() {
     this.navCtrl.setRoot(NotificationPage);
   }
   redirectToUser() {

@@ -39,44 +39,49 @@
   <ion-item>
     <button class="{{unitDetailData.colorcodeindications}}" style="float: left ;width:8px;height:70px">         
         </button>
-        <button class="dot" (click)="viewunit()" style="float: right ;width: 30px;
+    <button class="dot" (click)="viewunit()" style="float: right ;width: 30px;
     height: 30px;
     margin-top: 23px;
     margin-left: 0px;
     margin-right: 0px;background-color:#ffffff"></button>
     <button class="{{unitDetailData.favoriteindication}}" style="float: right ;width:30px;height:30px;margin-top:24px;background-color:#ffffff"></button>
-    <div style="overflow: hidden; padding-left: 0.5em;">
+    <div style="overflow: hidden; padding-left: 0.5em;">     
       <h5><b>{{unitDetailData.unitname}}</b></h5>
       <h5>Project Name:{{unitDetailData.projectname}}</h5>
       <h5>Location:{{unitDetailData.location}}</h5>
-      <h5  *ngIf="unitDetailData.lat!=''">({{unitDetailData.lat}},{{unitDetailData.lng}})</h5>
-      
+      <h5 *ngIf="unitDetailData.lat!=''">({{unitDetailData.lat}},{{unitDetailData.lng}})</h5>
+
     </div>
   </ion-item>
- 
-  
-  
+
+
+
   <div [innerHTML]="sanitizer.bypassSecurityTrustHtml(iframeContent)"></div>
-  
+
 
 
   <ion-item>
-  
+
     <button ion-button icon-left class="engine-detail" (click)="enginedetail()">
       <div class="btn-align"><span class="eng-icon"></span>Engine Details</div>
     </button>
 
-    <button ion-button icon-left (click)="servicingInfo()" class="service-info">
+    <button ion-button icon-left (click)="servicingInfo(unitDetailData.unit_id)" class="service-info">
       <div class="btn-align"><span class="ser-icon"></span>Servicing Info</div>
+
+       <div class="serviceinfocount"><!--  *ngIf="serviceCount!=0"-->
+      {{serviceCount}}
+    </div>
+    
     </button>
 
 
-<button ion-button icon-left (click)="alamInfo()" class="service-info" style="margin-right: 27%;
+    <button ion-button icon-left (click)="alamInfo()" class="service-info" style="margin-right: 27%;
     margin-top: 2%;background-color:#C5021B">
       	<ion-icon name="ios-warning-outline" style="font-size:32px"></ion-icon>
         <span>Alarm</span>
     </button>
- <!--button class="add-new-btn" (click)="alamInfo()"  style="margin-right: 27%;
+    <!--button class="add-new-btn" (click)="alamInfo()"  style="margin-right: 27%;
     margin-top: 2%;background-color:#C5021B">
   	<div class="algn-cent">
     	<ion-icon name="ios-warning-outline"></ion-icon>
@@ -85,9 +90,7 @@
   </button-->
 
 
-    <div class="serviceinfocount"><!--  *ngIf="serviceCount!=0"-->
-      <ion-badge item-end class="notify-badge">{{serviceCount}}1</ion-badge>
-    </div>
+
   </ion-item>
 
   <ion-item>
@@ -95,45 +98,49 @@
      <div class="btn-align"><span class="ala-icon"></span>Alarm Log</div>
     </button>
 
-    <button ion-button icon-left (click)="commentsInfo()" class="event-comment">
+    <button ion-button icon-left (click)="commentsInfo(unitDetailData.unit_id)" class="event-comment">
      <div class="btn-align"><span class="eve-icon"></span>Events / Comments </div>
+     <div class="commentinfocount">
+     {{commentCount}}
+    </div>
     </button>
 
 
- <div class="commentinfocount"> <ion-badge item-end class="notify-badge">{{commentCount}}1</ion-badge> </div>  <!--*ngIf="commentCount!=0"-->
+    
+    <!--*ngIf="commentCount!=0"-->
   </ion-item>
 </ion-content>
 
 
 <ion-footer color="bluedark">
   <ion-toolbar color="bluedark">
-<ul class="quick-list">
-<li>
-    <button ion-button icon-only clear (click)="redirectToMaps()">
+    <ul class="quick-list">
+      <li>
+        <button ion-button icon-only clear (click)="redirectToMaps()">
     	<ion-icon name="home" class="footer-icon">MAPS</ion-icon>
     </button>
-</li>  
-<li>  
-    <button ion-button icon-only (click)="redirectToUser()" clear>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectToUser()" clear>
     	<ion-icon name="contacts" class="footer-icon">UNITS</ion-icon>
     </button>
-</li>     
-<li>    
-    <button ion-button icon-only (click)="redirectToMessage()" clear>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectToMessage()" clear>
     	<ion-icon name="chatboxes" class="footer-icon">MESSAGE</ion-icon>
     </button>
-</li>     
-<li>    
-    <button ion-button icon-only (click)="redirectCalendar()" clear>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectCalendar()" clear>
     	<ion-icon name="bicycle" class="footer-icon">CALENDAR</ion-icon>
     </button>
-</li>    
-<li>    
-    <button ion-button icon-only (click)="redirectToSettings()" clear>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectToSettings()" clear>
     	<ion-icon name="settings" class="footer-icon">SETTING</ion-icon>
     </button>
-</li>    
-</ul>
+      </li>
+    </ul>
 
   </ion-toolbar>
 </ion-footer>

@@ -31,7 +31,7 @@
       </ion-item>
       <ion-item ion-item *ngFor="let item of availableheadingitem">
         <ion-label>{{item.availabledata}}</ion-label>
-        <ion-checkbox color="bluedark"  (click)="getCheckBoxValue(item.availabledata)" checked={{item.check}}></ion-checkbox>
+        <ion-checkbox color="bluedark" (ionChange)="insertUserToArray(item.id,$event,item.availabledata)" (click)="getCheckBoxValue(item.id,$event,item.availabledata)" checked={{item.check}}></ion-checkbox>
       </ion-item>
       <ion-item>
         <button ion-button color="bluedark" text-center block (click)="saveEntry()">Continue</button>

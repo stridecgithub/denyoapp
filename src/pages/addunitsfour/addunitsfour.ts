@@ -31,6 +31,7 @@ export class AddunitsfourPage {
   public form: FormGroup;
   public unitgroups_id: any;
   public companys_id: any;
+  public compId:any;
   public userId: any;
   public unitname: any;
   public projectname: any;
@@ -72,6 +73,7 @@ export class AddunitsfourPage {
     public fb: FormBuilder,
     public toastCtrl: ToastController, public loadingCtrl: LoadingController, private ngZone: NgZone) {
     this.loginas = localStorage.getItem("userInfoName");
+     this.compId = localStorage.getItem("userInfoCompanyId");
     // Create form builder validation rules
     this.form = fb.group({
       //"unitgroups_id": ["", Validators.required],
@@ -204,7 +206,9 @@ export class AddunitsfourPage {
   createEntry(unitgroups_id, companys_id, createdby) {
 
 
-
+ if (localStorage.getItem("atMentionResult") != '') {
+      this.alarmhashtags = localStorage.getItem("atMentionResult");
+    }
 
     this.timezone = '2017-06-15 00:00:00';
     //this.longitude = "9.918418";
@@ -245,6 +249,7 @@ export class AddunitsfourPage {
         // If the request was successful notify the user
         if (data.status === 200) {
           this.hideForm = true;
+            localStorage.setItem("atMentionResult", '');
           this.sendNotification(`Units created was successfully added`);
           this.nav.setRoot(UnitsPage);
         }
@@ -276,7 +281,9 @@ export class AddunitsfourPage {
     });
     //this.longitude = "9.918418";
     //this.latitude = "78.148566";
-
+ if (localStorage.getItem("atMentionResult") != '') {
+      this.alarmhashtags = localStorage.getItem("atMentionResult");
+    }
     this.timezone = '2017-06-15 00:00:00';
     let body: string = "is_mobile=1&unit_id=" + this.recordID +
       "&unitname=" + this.unitname +
@@ -310,6 +317,7 @@ export class AddunitsfourPage {
         // If the request was successful notify the user
         if (data.status === 200) {
           this.hideForm = true;
+            localStorage.setItem("atMentionResult", '');
           this.sendNotification(`Units was successfully updated`);
           this.nav.setRoot(UnitsPage);
         }
@@ -410,7 +418,7 @@ export class AddunitsfourPage {
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/getunitgroups";
+      url: any = this.apiServiceURL + "/getunitgroups?loginid="+this.userId+"&company_id="+this.compId;
     let res;
     console.log("URL" + url);
     this.http.get(url, options)

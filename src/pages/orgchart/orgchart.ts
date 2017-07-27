@@ -76,7 +76,7 @@ export class OrgchartPage {
     this.dounitGroup();
     
     console.log(this.apiServiceURL + "/orgchart?company_id=" + this.companyId + "&is_mobile=1");
-    this.iframeContent = "<iframe src=" + "http://denyoappv2.stridecdev.com/orgchart?company_id="+this.companyId+"&is_mobile=1&id="+this.userId+ "height=350 frameborder=0></iframe>";
+    this.iframeContent = "<iframe src=" + "http://denyoappv2.stridecdev.com/orgchart?company_id="+this.companyId+"&is_mobile=1&id="+this.userId+ " width=350  frameborder=0  scrolling=yes></iframe>";
   }
   dounitGroup() {
     this.colorListArr = [

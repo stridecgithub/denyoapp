@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {  NavController, NavParams, ToastController } from 'ionic-angular';
+import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { RolePage } from '../role/role';
@@ -296,114 +296,94 @@ export class AddrolePage {
   selectEntry(item) {
     this.role_name = item.role_name;
     this.recordID = item.role_id;
-   // let body: string = "key=permissiondata&role_id=" + this.recordID,
-     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+    // let body: string = "key=permissiondata&role_id=" + this.recordID,
+    let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "editrole?is_mobile=1&role_id="+this.recordID;
-      console.log(url);
+      url: any = this.apiServiceURL + "editrole?is_mobile=1&role_id=" + this.recordID;
+    console.log(url);
     let res;
-    this.http.get(url,options)
+    this.http.get(url, options)
       .subscribe((data) => {
 
         res = data.json();
 
         // Dashboard Mapif()
-        if(res.roledata[0].view_action==1 )
-        {
-           this.rolepermissionData.dashboardviewmap=true;
+        if (res.roledata[0].view_action == 1) {
+          this.rolepermissionData.dashboardviewmap = true;
         }
-        else
-        {
-          
-           this.rolepermissionData.dashboardviewmap=false;
-        
+        else {
+
+          this.rolepermissionData.dashboardviewmap = false;
+
         }
-        if(res.roledata[0].create_action==1 )
-        {
-          this.rolepermissionData.dashboardcreatemap=true;
+        if (res.roledata[0].create_action == 1) {
+          this.rolepermissionData.dashboardcreatemap = true;
         }
-        else
-         {
-          this.rolepermissionData.dashboardcreatemap=false;
+        else {
+          this.rolepermissionData.dashboardcreatemap = false;
         }
-        if(res.roledata[0].edit_action==1 )
-        {
-          this.rolepermissionData.dashboardeditmap=true;
+        if (res.roledata[0].edit_action == 1) {
+          this.rolepermissionData.dashboardeditmap = true;
         }
-        else
-        {
-           
-          this.rolepermissionData.dashboardeditmap=false;
-        
+        else {
+
+          this.rolepermissionData.dashboardeditmap = false;
+
         }
-        if(res.roledata[0].delete_action==1 )
-        {
-this.rolepermissionData.dashboarddeletemap=true;
+        if (res.roledata[0].delete_action == 1) {
+          this.rolepermissionData.dashboarddeletemap = true;
         }
-        else
-        {
-this.rolepermissionData.dashboarddeletemap=false;
+        else {
+          this.rolepermissionData.dashboarddeletemap = false;
         }
-          if(res.roledata[0].hide_action==1 )
-          {
-this.rolepermissionData.dashboardhidemap=true;
-          }
-          else
-          {
-this.rolepermissionData.dashboardhidemap=false;
-          }
+        if (res.roledata[0].hide_action == 1) {
+          this.rolepermissionData.dashboardhidemap = true;
+        }
+        else {
+          this.rolepermissionData.dashboardhidemap = false;
+        }
         //this.rolepermissionData.dashboardviewmap = res[0].dashboardviewmap;
         //this.rolepermissionData.dashboardcreatemap = res[0].dashboardcreatemap;
         //this.rolepermissionData.dashboardeditmap = res[0].dashboardeditmap;
         //this.rolepermissionData.dashboarddeletemap = res[0].dashboarddeletemap;
-       // this.rolepermissionData.dashboardhidemap = res[0].dashboardhidemap;
+        // this.rolepermissionData.dashboardhidemap = res[0].dashboardhidemap;
 
         // Dashboard Units
-         if(res.roledata[1].view_action==1 )
-        {
-           this.rolepermissionData.dashboardviewunits=true;
+        if (res.roledata[1].view_action == 1) {
+          this.rolepermissionData.dashboardviewunits = true;
         }
-        else
-        {
-          
-          this.rolepermissionData.dashboardviewunits=false;
-        
+        else {
+
+          this.rolepermissionData.dashboardviewunits = false;
+
         }
-        if(res.roledata[1].create_action==1 )
-        {
-           this.rolepermissionData.dashboardcreateunits=true;
+        if (res.roledata[1].create_action == 1) {
+          this.rolepermissionData.dashboardcreateunits = true;
         }
-        else
-         {
-           this.rolepermissionData.dashboardcreateunits=false;
+        else {
+          this.rolepermissionData.dashboardcreateunits = false;
         }
-        if(res.roledata[1].edit_action==1 )
-        {
-          this.rolepermissionData.dashboardeditunits=true;
+        if (res.roledata[1].edit_action == 1) {
+          this.rolepermissionData.dashboardeditunits = true;
         }
-        else
-        {
-           
-          this.rolepermissionData.dashboardeditunits=false;
-        
+        else {
+
+          this.rolepermissionData.dashboardeditunits = false;
+
         }
-        if(res.roledata[1].delete_action==1 )
-        {
-          this.rolepermissionData.dashboarddeleteunits=true;
+        if (res.roledata[1].delete_action == 1) {
+          this.rolepermissionData.dashboarddeleteunits = true;
         }
-        else
-        {
-          this.rolepermissionData.dashboarddeleteunits=false;
+        else {
+          this.rolepermissionData.dashboarddeleteunits = false;
         }
-          if(res.roledata[1].hide_action==1 )
-          {
-          this.rolepermissionData.dashboardhideunits=true;
-          }
-          else
-          {
-          this.rolepermissionData.dashboardhideunits=false;
-          }
+        if (res.roledata[1].hide_action == 1) {
+          this.rolepermissionData.dashboardhideunits = true;
+        }
+        else {
+          this.rolepermissionData.dashboardhideunits = false;
+        }
         //this.rolepermissionData.dashboardviewunits = res[1].dashboardviewunits;
         //this.rolepermissionData.dashboardcreateunits = res[1].dashboardcreateunits;
         //this.rolepermissionData.dashboardeditunits = res[1].dashboardeditunits;
@@ -412,84 +392,68 @@ this.rolepermissionData.dashboardhidemap=false;
 
 
         // Calendar Events    
-         if(res.roledata[2].view_action==1 )
-        {
-           this.rolepermissionData.calviewevents=true;
+        if (res.roledata[2].view_action == 1) {
+          this.rolepermissionData.calviewevents = true;
         }
-        else
-        {
-          
-          this.rolepermissionData.calviewevents=false;
-        
+        else {
+
+          this.rolepermissionData.calviewevents = false;
+
         }
-        if(res.roledata[2].create_action==1 )
-        {
-           this.rolepermissionData.calcreateevents=true;
+        if (res.roledata[2].create_action == 1) {
+          this.rolepermissionData.calcreateevents = true;
         }
-        else
-         {
-           this.rolepermissionData.calcreateevents=false;
+        else {
+          this.rolepermissionData.calcreateevents = false;
         }
-        if(res.roledata[2].edit_action==1 )
-        {
-          this.rolepermissionData.caleditevents=true;
+        if (res.roledata[2].edit_action == 1) {
+          this.rolepermissionData.caleditevents = true;
         }
-        else
-        {
-           
-          this.rolepermissionData.caleditevents=false;
-        
+        else {
+
+          this.rolepermissionData.caleditevents = false;
+
         }
-        if(res.roledata[2].delete_action==1 )
-        {
-          this.rolepermissionData.caldeleteevents=true;
+        if (res.roledata[2].delete_action == 1) {
+          this.rolepermissionData.caldeleteevents = true;
         }
-        else
-        {
-          this.rolepermissionData.caldeleteevents=false;
-        } 
-       // this.rolepermissionData.calviewevents = res[2].calviewevents;
-      //  this.rolepermissionData.calcreateevents = res[2].calcreateevents;
-       // this.rolepermissionData.caleditevents = res[2].caleditevents;
+        else {
+          this.rolepermissionData.caldeleteevents = false;
+        }
+        // this.rolepermissionData.calviewevents = res[2].calviewevents;
+        //  this.rolepermissionData.calcreateevents = res[2].calcreateevents;
+        // this.rolepermissionData.caleditevents = res[2].caleditevents;
         //this.rolepermissionData.caldeleteevents = res[2].caldeleteevents;
 
 
         // Calendar Services
-         if(res.roledata[3].view_action==1 )
-        {
-           this.rolepermissionData.calviewservices=true;
+        if (res.roledata[3].view_action == 1) {
+          this.rolepermissionData.calviewservices = true;
         }
-        else
-        {
-          
-          this.rolepermissionData.calviewservices=false;
-        
+        else {
+
+          this.rolepermissionData.calviewservices = false;
+
         }
-        if(res.roledata[3].create_action==1 )
-        {
-           this.rolepermissionData.calcreateservices=true;
+        if (res.roledata[3].create_action == 1) {
+          this.rolepermissionData.calcreateservices = true;
         }
-        else
-         {
-           this.rolepermissionData.calcreateservices=false;
+        else {
+          this.rolepermissionData.calcreateservices = false;
         }
-        if(res.roledata[3].edit_action==1 )
-        {
-          this.rolepermissionData.caleditservices=true;
+        if (res.roledata[3].edit_action == 1) {
+          this.rolepermissionData.caleditservices = true;
         }
-        else
-        {
-           
-          this.rolepermissionData.caleditservices=false;
-        
+        else {
+
+          this.rolepermissionData.caleditservices = false;
+
         }
-        if(res.roledata[3].delete_action==1 )
-        {
-          this.rolepermissionData.caldeleteservices=true;
+        if (res.roledata[3].delete_action == 1) {
+          this.rolepermissionData.caldeleteservices = true;
         }
-        else
-        {
-          this.rolepermissionData.caldeleteservices=false;
+        else {
+          this.rolepermissionData.caldeleteservices = false;
         }
         // this.rolepermissionData.calviewservices = res[3].calviewservices;
         // this.rolepermissionData.calcreateservices = res[3].calcreateservices;
@@ -497,42 +461,34 @@ this.rolepermissionData.dashboardhidemap=false;
         // this.rolepermissionData.caldeleteservices = res[3].caldeleteservices;
 
         // Calendar Alarm 
-        if(res.roledata[4].view_action==1 )
-        {
-           this.rolepermissionData.calviewalarm=true;
+        if (res.roledata[4].view_action == 1) {
+          this.rolepermissionData.calviewalarm = true;
         }
-        else
-        {
-          
-          this.rolepermissionData.calviewalarm=false;
-        
+        else {
+
+          this.rolepermissionData.calviewalarm = false;
+
         }
-        if(res.roledata[4].create_action==1 )
-        {
-           this.rolepermissionData.calcreatealarm=true;
+        if (res.roledata[4].create_action == 1) {
+          this.rolepermissionData.calcreatealarm = true;
         }
-        else
-         {
-           this.rolepermissionData.calcreatealarm=false;
+        else {
+          this.rolepermissionData.calcreatealarm = false;
         }
-        if(res.roledata[4].edit_action==1 )
-        {
-          this.rolepermissionData.caleditalarm=true;
+        if (res.roledata[4].edit_action == 1) {
+          this.rolepermissionData.caleditalarm = true;
         }
-        else
-        {
-           
-          this.rolepermissionData.caleditalarm=false;
-        
+        else {
+
+          this.rolepermissionData.caleditalarm = false;
+
         }
-        if(res.roledata[4].delete_action==1 )
-        {
-          this.rolepermissionData.caldeletealarm=true;
+        if (res.roledata[4].delete_action == 1) {
+          this.rolepermissionData.caldeletealarm = true;
         }
-        else
-        {
-          this.rolepermissionData.caldeletealarm=false;
-        }     
+        else {
+          this.rolepermissionData.caldeletealarm = false;
+        }
         // this.rolepermissionData.calviewalarm = res[4].calviewalarm;
         // this.rolepermissionData.calcreatealarm = res[4].calcreatealarm;
         // this.rolepermissionData.caleditalarm = res[4].caleditalarm;
@@ -540,165 +496,133 @@ this.rolepermissionData.dashboardhidemap=false;
 
 
         // Units Unit List
-        if(res.roledata[5].view_action==1 )
-        {
-           this.rolepermissionData.univiewlist=true;
+        if (res.roledata[5].view_action == 1) {
+          this.rolepermissionData.univiewlist = true;
         }
-        else
-        {
-          
-          this.rolepermissionData.univiewlist=false;
-        
+        else {
+
+          this.rolepermissionData.univiewlist = false;
+
         }
-        if(res.roledata[5].create_action==1 )
-        {
-           this.rolepermissionData.unicreatelist=true;
+        if (res.roledata[5].create_action == 1) {
+          this.rolepermissionData.unicreatelist = true;
         }
-        else
-         {
-           this.rolepermissionData.unicreatelist=false;
+        else {
+          this.rolepermissionData.unicreatelist = false;
         }
-        if(res.roledata[5].edit_action==1 )
-        {
-          this.rolepermissionData.unieditlist=true;
+        if (res.roledata[5].edit_action == 1) {
+          this.rolepermissionData.unieditlist = true;
         }
-        else
-        {
-           
-          this.rolepermissionData.unieditlist=false;
-        
+        else {
+
+          this.rolepermissionData.unieditlist = false;
+
         }
-        if(res.roledata[5].delete_action==1 )
-        {
-          this.rolepermissionData.unideletelist=true;
+        if (res.roledata[5].delete_action == 1) {
+          this.rolepermissionData.unideletelist = true;
         }
-        else
-        {
-          this.rolepermissionData.unideletelist=false;
-        }  
+        else {
+          this.rolepermissionData.unideletelist = false;
+        }
 
         //this.rolepermissionData.univiewlist = res[5].univiewlist;
         //this.rolepermissionData.unicreatelist = res[5].unicreatelist;
         //this.rolepermissionData.unieditlist = res[5].unieditlist;
-       // this.rolepermissionData.unideletelist = res[5].unideletelist;
+        // this.rolepermissionData.unideletelist = res[5].unideletelist;
         // Units Alaram
-if(res.roledata[6].view_action==1 )
-        {
-           this.rolepermissionData.univiewalarm=true;
+        if (res.roledata[6].view_action == 1) {
+          this.rolepermissionData.univiewalarm = true;
         }
-        else
-        {
-          
-          this.rolepermissionData.univiewalarm=false;
-        
+        else {
+
+          this.rolepermissionData.univiewalarm = false;
+
         }
-        if(res.roledata[6].create_action==1 )
-        {
-           this.rolepermissionData.unicreatealarm=true;
+        if (res.roledata[6].create_action == 1) {
+          this.rolepermissionData.unicreatealarm = true;
         }
-        else
-         {
-           this.rolepermissionData.unicreatealarm=false;
+        else {
+          this.rolepermissionData.unicreatealarm = false;
         }
-        if(res.roledata[6].edit_action==1 )
-        {
-          this.rolepermissionData.unieditalarm=true;
+        if (res.roledata[6].edit_action == 1) {
+          this.rolepermissionData.unieditalarm = true;
         }
-        else
-        {
-           
-          this.rolepermissionData.unieditalarm=false;
-        
+        else {
+
+          this.rolepermissionData.unieditalarm = false;
+
         }
-        if(res.roledata[6].delete_action==1 )
-        {
-          this.rolepermissionData.unideletealarm=true;
+        if (res.roledata[6].delete_action == 1) {
+          this.rolepermissionData.unideletealarm = true;
         }
-        else
-        {
-          this.rolepermissionData.unideletealarm=false;
-        }  
+        else {
+          this.rolepermissionData.unideletealarm = false;
+        }
         // this.rolepermissionData.univiewalarm = res[6].univiewalarm;
         // this.rolepermissionData.unicreatealarm = res[6].unicreatealarm;
         // this.rolepermissionData.unieditalarm = res[6].unieditalarm;
         // this.rolepermissionData.unideletealarm = res[6].unideletealarm;
         // Units Services Info
-if(res.roledata[7].view_action==1 )
-        {
-           this.rolepermissionData.univiewservices=true;
+        if (res.roledata[7].view_action == 1) {
+          this.rolepermissionData.univiewservices = true;
         }
-        else
-        {
-          
-          this.rolepermissionData.univiewservices=false;
-        
+        else {
+
+          this.rolepermissionData.univiewservices = false;
+
         }
-        if(res.roledata[7].create_action==1 )
-        {
-           this.rolepermissionData.unicreateservices=true;
+        if (res.roledata[7].create_action == 1) {
+          this.rolepermissionData.unicreateservices = true;
         }
-        else
-         {
-           this.rolepermissionData.unicreateservices=false;
+        else {
+          this.rolepermissionData.unicreateservices = false;
         }
-        if(res.roledata[7].edit_action==1 )
-        {
-          this.rolepermissionData.unieditservices=true;
+        if (res.roledata[7].edit_action == 1) {
+          this.rolepermissionData.unieditservices = true;
         }
-        else
-        {
-           
-          this.rolepermissionData.unieditservices=false;
-        
+        else {
+
+          this.rolepermissionData.unieditservices = false;
+
         }
-        if(res.roledata[7].delete_action==1 )
-        {
-          this.rolepermissionData.unideleteservices=true;
+        if (res.roledata[7].delete_action == 1) {
+          this.rolepermissionData.unideleteservices = true;
         }
-        else
-        {
-          this.rolepermissionData.unideleteservices=false;
+        else {
+          this.rolepermissionData.unideleteservices = false;
         }
         // this.rolepermissionData.univiewservices = res[7].univiewservices;
         // this.rolepermissionData.unicreateservices = res[7].unicreateservices;
         // this.rolepermissionData.unieditservices = res[7].unieditservices;
         // this.rolepermissionData.unideleteservices = res[7].unideleteservices;
         // Units Comments
-        if(res.roledata[8].view_action==1 )
-        {
-           this.rolepermissionData.univiewcomm=true;
+        if (res.roledata[8].view_action == 1) {
+          this.rolepermissionData.univiewcomm = true;
         }
-        else
-        {
-          
-          this.rolepermissionData.univiewcomm=false;
-        
+        else {
+
+          this.rolepermissionData.univiewcomm = false;
+
         }
-        if(res.roledata[8].create_action==1 )
-        {
-           this.rolepermissionData.unicreatecomm=true;
+        if (res.roledata[8].create_action == 1) {
+          this.rolepermissionData.unicreatecomm = true;
         }
-        else
-         {
-           this.rolepermissionData.unicreatecomm=false;
+        else {
+          this.rolepermissionData.unicreatecomm = false;
         }
-        if(res.roledata[8].edit_action==1 )
-        {
-          this.rolepermissionData.unieditcomm=true;
+        if (res.roledata[8].edit_action == 1) {
+          this.rolepermissionData.unieditcomm = true;
         }
-        else
-        {
-           
-          this.rolepermissionData.unieditcomm=false;
-        
+        else {
+
+          this.rolepermissionData.unieditcomm = false;
+
         }
-        if(res.roledata[8].delete_action==1 )
-        {
-          this.rolepermissionData.unideletecomm=true;
+        if (res.roledata[8].delete_action == 1) {
+          this.rolepermissionData.unideletecomm = true;
         }
-        else
-        {
-          this.rolepermissionData.unideletecomm=false;
+        else {
+          this.rolepermissionData.unideletecomm = false;
         }
 
         // this.rolepermissionData.univiewcomm = res[8].univiewcomm;
@@ -706,41 +630,33 @@ if(res.roledata[7].view_action==1 )
         // this.rolepermissionData.unieditcomm = res[8].unieditcomm;
         // this.rolepermissionData.unideletecomm = res[8].unideletecomm;
         // Units Unit Group
- if(res.roledata[9].view_action==1 )
-        {
-           this.rolepermissionData.univiewgroup=true;
+        if (res.roledata[9].view_action == 1) {
+          this.rolepermissionData.univiewgroup = true;
         }
-        else
-        {
-          
-          this.rolepermissionData.univiewgroup=false;
-        
+        else {
+
+          this.rolepermissionData.univiewgroup = false;
+
         }
-        if(res.roledata[9].create_action==1 )
-        {
-           this.rolepermissionData.unicreategroup=true;
+        if (res.roledata[9].create_action == 1) {
+          this.rolepermissionData.unicreategroup = true;
         }
-        else
-         {
-           this.rolepermissionData.unicreategroup=false;
+        else {
+          this.rolepermissionData.unicreategroup = false;
         }
-        if(res.roledata[9].edit_action==1 )
-        {
-          this.rolepermissionData.unieditgroup=true;
+        if (res.roledata[9].edit_action == 1) {
+          this.rolepermissionData.unieditgroup = true;
         }
-        else
-        {
-           
-          this.rolepermissionData.unieditgroup=false;
-        
+        else {
+
+          this.rolepermissionData.unieditgroup = false;
+
         }
-        if(res.roledata[9].delete_action==1 )
-        {
-          this.rolepermissionData.unideletegroup=true;
+        if (res.roledata[9].delete_action == 1) {
+          this.rolepermissionData.unideletegroup = true;
         }
-        else
-        {
-          this.rolepermissionData.unideletegroup=false;
+        else {
+          this.rolepermissionData.unideletegroup = false;
         }
         // this.rolepermissionData.univiewgroup = res[9].univiewgroup;
         // this.rolepermissionData.unicreategroup = res[9].unicreategroup;
@@ -748,41 +664,33 @@ if(res.roledata[7].view_action==1 )
         // this.rolepermissionData.unideletegroup = res[9].unideletegroup;
 
         // Units Generator Model Managment
-        if(res.roledata[10].view_action==1 )
-        {
-           this.rolepermissionData.univiewgmm=true;
+        if (res.roledata[10].view_action == 1) {
+          this.rolepermissionData.univiewgmm = true;
         }
-        else
-        {
-          
-          this.rolepermissionData.univiewgmm=false;
-        
+        else {
+
+          this.rolepermissionData.univiewgmm = false;
+
         }
-        if(res.roledata[10].create_action==1 )
-        {
-           this.rolepermissionData.unicreategmm=true;
+        if (res.roledata[10].create_action == 1) {
+          this.rolepermissionData.unicreategmm = true;
         }
-        else
-         {
-           this.rolepermissionData.unicreategmm=false;
+        else {
+          this.rolepermissionData.unicreategmm = false;
         }
-        if(res.roledata[10].edit_action==1 )
-        {
-          this.rolepermissionData.unieditgmm=true;
+        if (res.roledata[10].edit_action == 1) {
+          this.rolepermissionData.unieditgmm = true;
         }
-        else
-        {
-           
-          this.rolepermissionData.unieditgmm=false;
-        
+        else {
+
+          this.rolepermissionData.unieditgmm = false;
+
         }
-        if(res.roledata[10].delete_action==1 )
-        {
-          this.rolepermissionData.unideletegmm=true;
+        if (res.roledata[10].delete_action == 1) {
+          this.rolepermissionData.unideletegmm = true;
         }
-        else
-        {
-          this.rolepermissionData.unideletegmm=false;
+        else {
+          this.rolepermissionData.unideletegmm = false;
         }
 
         // this.rolepermissionData.univiewgmm = res[10].univiewgmm;
@@ -790,41 +698,33 @@ if(res.roledata[7].view_action==1 )
         // this.rolepermissionData.unieditgmm = res[10].unieditgmm;
         // this.rolepermissionData.unideletegmm = res[10].unideletegmm;
         // Reports
-if(res.roledata[11].view_action==1 )
-        {
-           this.rolepermissionData.viewreports=true;
+        if (res.roledata[11].view_action == 1) {
+          this.rolepermissionData.viewreports = true;
         }
-        else
-        {
-          
-          this.rolepermissionData.viewreports=false;
-        
+        else {
+
+          this.rolepermissionData.viewreports = false;
+
         }
-        if(res.roledata[11].create_action==1 )
-        {
-           this.rolepermissionData.createreports=true;
+        if (res.roledata[11].create_action == 1) {
+          this.rolepermissionData.createreports = true;
         }
-        else
-         {
-           this.rolepermissionData.createreports=false;
+        else {
+          this.rolepermissionData.createreports = false;
         }
-        if(res.roledata[11].edit_action==1 )
-        {
-          this.rolepermissionData.editreports=true;
+        if (res.roledata[11].edit_action == 1) {
+          this.rolepermissionData.editreports = true;
         }
-        else
-        {
-           
-          this.rolepermissionData.editreports=false;
-        
+        else {
+
+          this.rolepermissionData.editreports = false;
+
         }
-        if(res.roledata[11].delete_action==1 )
-        {
-           this.rolepermissionData.deletereports=true;
+        if (res.roledata[11].delete_action == 1) {
+          this.rolepermissionData.deletereports = true;
         }
-        else
-        {
-           this.rolepermissionData.deletereports=false;
+        else {
+          this.rolepermissionData.deletereports = false;
         }
         // this.rolepermissionData.viewreports = res[11].viewreports;
         // this.rolepermissionData.createreports = res[11].createreports;
@@ -832,41 +732,33 @@ if(res.roledata[11].view_action==1 )
         // this.rolepermissionData.deletereports = res[11].deletereports;
 
         // Message Inbox
-        if(res.roledata[12].view_action==1 )
-        {
-           this.rolepermissionData.msgviewinbox=true;
+        if (res.roledata[12].view_action == 1) {
+          this.rolepermissionData.msgviewinbox = true;
         }
-        else
-        {
-          
-          this.rolepermissionData.msgviewinbox=false;
-        
+        else {
+
+          this.rolepermissionData.msgviewinbox = false;
+
         }
-        if(res.roledata[12].create_action==1 )
-        {
-           this.rolepermissionData.msgcreateinbox=true;
+        if (res.roledata[12].create_action == 1) {
+          this.rolepermissionData.msgcreateinbox = true;
         }
-        else
-         {
-           this.rolepermissionData.msgcreateinbox=false;
+        else {
+          this.rolepermissionData.msgcreateinbox = false;
         }
-        if(res.roledata[12].edit_action==1 )
-        {
-          this.rolepermissionData.msgeditinbox=true;
+        if (res.roledata[12].edit_action == 1) {
+          this.rolepermissionData.msgeditinbox = true;
         }
-        else
-        {
-           
-          this.rolepermissionData.msgeditinbox=false;
-        
+        else {
+
+          this.rolepermissionData.msgeditinbox = false;
+
         }
-        if(res.roledata[12].delete_action==1 )
-        {
-           this.rolepermissionData.msgdeleteinbox=true;
+        if (res.roledata[12].delete_action == 1) {
+          this.rolepermissionData.msgdeleteinbox = true;
         }
-        else
-        {
-          this.rolepermissionData.msgdeleteinbox=false;
+        else {
+          this.rolepermissionData.msgdeleteinbox = false;
         }
 
         // this.rolepermissionData.msgviewinbox = res[12].msgviewinbox;
@@ -874,41 +766,33 @@ if(res.roledata[11].view_action==1 )
         // this.rolepermissionData.msgeditinbox = res[12].msgeditinbox;
         // this.rolepermissionData.msgdeleteinbox = res[12].msgdeleteinbox;
         // Message Sent
-        if(res.roledata[13].view_action==1 )
-        {
-           this.rolepermissionData.msgviewsent=true;
+        if (res.roledata[13].view_action == 1) {
+          this.rolepermissionData.msgviewsent = true;
         }
-        else
-        {
-          
-          this.rolepermissionData.msgviewsent=false;
-        
+        else {
+
+          this.rolepermissionData.msgviewsent = false;
+
         }
-        if(res.roledata[13].create_action==1 )
-        {
-           this.rolepermissionData.msgcreatesent=true;
+        if (res.roledata[13].create_action == 1) {
+          this.rolepermissionData.msgcreatesent = true;
         }
-        else
-         {
-           this.rolepermissionData.msgcreatesent=false;
+        else {
+          this.rolepermissionData.msgcreatesent = false;
         }
-        if(res.roledata[13].edit_action==1 )
-        {
-          this.rolepermissionData.msgeditsent=true;
+        if (res.roledata[13].edit_action == 1) {
+          this.rolepermissionData.msgeditsent = true;
         }
-        else
-        {
-           
-          this.rolepermissionData.msgeditsent=false;
-        
+        else {
+
+          this.rolepermissionData.msgeditsent = false;
+
         }
-        if(res.roledata[13].delete_action==1 )
-        {
-           this.rolepermissionData.msgdeletesent=true;
+        if (res.roledata[13].delete_action == 1) {
+          this.rolepermissionData.msgdeletesent = true;
         }
-        else
-        {
-          this.rolepermissionData.msgdeletesent=false;
+        else {
+          this.rolepermissionData.msgdeletesent = false;
         }
 
         // this.rolepermissionData.msgviewsent = res[13].msgviewsent;
@@ -917,83 +801,67 @@ if(res.roledata[11].view_action==1 )
         // this.rolepermissionData.msgdeletesent = res[13].msgdeletesent;
 
         // Settings My Account   
-         if(res.roledata[14].view_action==1 )
-        {
-           this.rolepermissionData.setviewmyacc=true;
+        if (res.roledata[14].view_action == 1) {
+          this.rolepermissionData.setviewmyacc = true;
         }
-        else
-        {
-          
-         this.rolepermissionData.setviewmyacc=false;
-        
+        else {
+
+          this.rolepermissionData.setviewmyacc = false;
+
         }
-        if(res.roledata[14].create_action==1 )
-        {
-           this.rolepermissionData.setcreatemyacc=true;
+        if (res.roledata[14].create_action == 1) {
+          this.rolepermissionData.setcreatemyacc = true;
         }
-        else
-         {
-           this.rolepermissionData.setcreatemyacc=false;
+        else {
+          this.rolepermissionData.setcreatemyacc = false;
         }
-        if(res.roledata[14].edit_action==1 )
-        {
-           this.rolepermissionData.seteditmyacc=true;
+        if (res.roledata[14].edit_action == 1) {
+          this.rolepermissionData.seteditmyacc = true;
         }
-        else
-        {
-           
-           this.rolepermissionData.seteditmyacc=false;
-        
+        else {
+
+          this.rolepermissionData.seteditmyacc = false;
+
         }
-        if(res.roledata[14].delete_action==1 )
-        {
-            this.rolepermissionData.setdeletemyacc=true;
+        if (res.roledata[14].delete_action == 1) {
+          this.rolepermissionData.setdeletemyacc = true;
         }
-        else
-        {
-           this.rolepermissionData.setdeletemyacc=false;
+        else {
+          this.rolepermissionData.setdeletemyacc = false;
         }
-   
+
         // this.rolepermissionData.setviewmyacc = res[14].setviewmyacc;
         // this.rolepermissionData.setcreatemyacc = res[14].setcreatemyacc;
         // this.rolepermissionData.seteditmyacc = res[14].seteditmyacc;
         // this.rolepermissionData.setdeletemyacc = res[14].setdeletemyacc;
         // Settings User List
-  if(res.roledata[15].view_action==1 )
-        {
-           this.rolepermissionData.setviewuselst=true;
+        if (res.roledata[15].view_action == 1) {
+          this.rolepermissionData.setviewuselst = true;
         }
-        else
-        {
-          
-         this.rolepermissionData.setviewuselst=false;
-        
+        else {
+
+          this.rolepermissionData.setviewuselst = false;
+
         }
-        if(res.roledata[15].create_action==1 )
-        {
-           this.rolepermissionData.setcreateuselst=true;
+        if (res.roledata[15].create_action == 1) {
+          this.rolepermissionData.setcreateuselst = true;
         }
-        else
-         {
-           this.rolepermissionData.setcreateuselst=false;
+        else {
+          this.rolepermissionData.setcreateuselst = false;
         }
-        if(res.roledata[15].edit_action==1 )
-        {
-           this.rolepermissionData.setedituselst=true;
+        if (res.roledata[15].edit_action == 1) {
+          this.rolepermissionData.setedituselst = true;
         }
-        else
-        {
-           
-           this.rolepermissionData.setedituselst=false;
-        
+        else {
+
+          this.rolepermissionData.setedituselst = false;
+
         }
-        if(res.roledata[15].delete_action==1 )
-        {
-            this.rolepermissionData.setdeleteuselst=true;
+        if (res.roledata[15].delete_action == 1) {
+          this.rolepermissionData.setdeleteuselst = true;
         }
-        else
-        {
-           this.rolepermissionData.setdeleteuselst=false;
+        else {
+          this.rolepermissionData.setdeleteuselst = false;
         }
 
         // this.rolepermissionData.setviewuselst = res[15].setviewuselst;
@@ -1001,41 +869,33 @@ if(res.roledata[11].view_action==1 )
         // this.rolepermissionData.setedituselst = res[15].setedituselst;
         // this.rolepermissionData.setdeleteuselst = res[15].setdeleteuselst;
         // Settings User Group
-        if(res.roledata[16].view_action==1 )
-        {
-           this.rolepermissionData.setviewusegru=true;
+        if (res.roledata[16].view_action == 1) {
+          this.rolepermissionData.setviewusegru = true;
         }
-        else
-        {
-          
-         this.rolepermissionData.setviewusegru=false;
-        
+        else {
+
+          this.rolepermissionData.setviewusegru = false;
+
         }
-        if(res.roledata[16].create_action==1 )
-        {
-           this.rolepermissionData.setcreateusegru=true;
+        if (res.roledata[16].create_action == 1) {
+          this.rolepermissionData.setcreateusegru = true;
         }
-        else
-         {
-           this.rolepermissionData.setcreateusegru=false;
+        else {
+          this.rolepermissionData.setcreateusegru = false;
         }
-        if(res.roledata[16].edit_action==1 )
-        {
-           this.rolepermissionData.seteditusegru=true;
+        if (res.roledata[16].edit_action == 1) {
+          this.rolepermissionData.seteditusegru = true;
         }
-        else
-        {
-           
-           this.rolepermissionData.seteditusegru=false;
-        
+        else {
+
+          this.rolepermissionData.seteditusegru = false;
+
         }
-        if(res.roledata[16].delete_action==1 )
-        {
-            this.rolepermissionData.setdeleteusegru=true;
+        if (res.roledata[16].delete_action == 1) {
+          this.rolepermissionData.setdeleteusegru = true;
         }
-        else
-        {
-           this.rolepermissionData.setdeleteusegru=false;
+        else {
+          this.rolepermissionData.setdeleteusegru = false;
         }
 
         // this.rolepermissionData.setviewusegru = res[16].setviewusegru;
@@ -1043,82 +903,66 @@ if(res.roledata[11].view_action==1 )
         // this.rolepermissionData.seteditusegru = res[16].seteditusegru;
         // this.rolepermissionData.setdeleteusegru = res[16].setdeleteusegru;
         // Settings User Role
- if(res.roledata[17].view_action==1 )
-        {
-           this.rolepermissionData.setviewuserle=true;
+        if (res.roledata[17].view_action == 1) {
+          this.rolepermissionData.setviewuserle = true;
         }
-        else
-        {
-          
-         this.rolepermissionData.setviewuserle=false;
-        
+        else {
+
+          this.rolepermissionData.setviewuserle = false;
+
         }
-        if(res.roledata[17].create_action==1 )
-        {
-           this.rolepermissionData.setcreateuserle=true;
+        if (res.roledata[17].create_action == 1) {
+          this.rolepermissionData.setcreateuserle = true;
         }
-        else
-         {
-           this.rolepermissionData.setcreateuserle=false;
+        else {
+          this.rolepermissionData.setcreateuserle = false;
         }
-        if(res.roledata[17].edit_action==1 )
-        {
-           this.rolepermissionData.setedituserle=true;
+        if (res.roledata[17].edit_action == 1) {
+          this.rolepermissionData.setedituserle = true;
         }
-        else
-        {
-           
-           this.rolepermissionData.setedituserle=false;
-        
+        else {
+
+          this.rolepermissionData.setedituserle = false;
+
         }
-        if(res.roledata[17].delete_action==1 )
-        {
-            this.rolepermissionData.setdeleteuserle=true;
+        if (res.roledata[17].delete_action == 1) {
+          this.rolepermissionData.setdeleteuserle = true;
         }
-        else
-        {
-           this.rolepermissionData.setdeleteuserle=false;
+        else {
+          this.rolepermissionData.setdeleteuserle = false;
         }
         // this.rolepermissionData.setviewuserle = res[17].setviewuserle;
         // this.rolepermissionData.setcreateuserle = res[17].setcreateuserle;
         // this.rolepermissionData.setedituserle = res[17].setedituserle;
         // this.rolepermissionData.setdeleteuserle = res[17].setdeleteuserle;
         // Settings Report Template
-         if(res.roledata[18].view_action==1 )
-        {
-           this.rolepermissionData.setviewtmp=true;
+        if (res.roledata[18].view_action == 1) {
+          this.rolepermissionData.setviewtmp = true;
         }
-        else
-        {
-          
-         this.rolepermissionData.setviewtmp=false;
-        
+        else {
+
+          this.rolepermissionData.setviewtmp = false;
+
         }
-        if(res.roledata[18].create_action==1 )
-        {
-           this.rolepermissionData.setcreatetmp=true;
+        if (res.roledata[18].create_action == 1) {
+          this.rolepermissionData.setcreatetmp = true;
         }
-        else
-         {
-           this.rolepermissionData.setcreatetmp=false;
+        else {
+          this.rolepermissionData.setcreatetmp = false;
         }
-        if(res.roledata[18].edit_action==1 )
-        {
-           this.rolepermissionData.setedittmp=true;
+        if (res.roledata[18].edit_action == 1) {
+          this.rolepermissionData.setedittmp = true;
         }
-        else
-        {
-           
-           this.rolepermissionData.setedittmp=false;
-        
+        else {
+
+          this.rolepermissionData.setedittmp = false;
+
         }
-        if(res.roledata[18].delete_action==1 )
-        {
-            this.rolepermissionData.setdeletetmp=true;
+        if (res.roledata[18].delete_action == 1) {
+          this.rolepermissionData.setdeletetmp = true;
         }
-        else
-        {
-           this.rolepermissionData.setdeletetmp=false;
+        else {
+          this.rolepermissionData.setdeletetmp = false;
         }
 
         // this.rolepermissionData.setviewtmp = res[18].setviewtmp;
@@ -1126,49 +970,41 @@ if(res.roledata[11].view_action==1 )
         // this.rolepermissionData.setedittmp = res[18].setedittmp;
         // this.rolepermissionData.setdeletetmp = res[18].setdeletetmp;
         // Settings Org Chart
-          if(res.roledata[19].view_action==1 )
-        {
-           this.rolepermissionData.setvieworg=true;
+        if (res.roledata[19].view_action == 1) {
+          this.rolepermissionData.setvieworg = true;
         }
-        else
-        {
-          
-         this.rolepermissionData.setvieworg=false;
-        
+        else {
+
+          this.rolepermissionData.setvieworg = false;
+
         }
-        if(res.roledata[19].create_action==1 )
-        {
-           this.rolepermissionData.setcreateorg=true;
+        if (res.roledata[19].create_action == 1) {
+          this.rolepermissionData.setcreateorg = true;
         }
-        else
-         {
-           this.rolepermissionData.setcreateorg=false;
+        else {
+          this.rolepermissionData.setcreateorg = false;
         }
-        if(res.roledata[19].edit_action==1 )
-        {
-           this.rolepermissionData.seteditorg=true;
+        if (res.roledata[19].edit_action == 1) {
+          this.rolepermissionData.seteditorg = true;
         }
-        else
-        {
-           
-           this.rolepermissionData.seteditorg=false;
-        
+        else {
+
+          this.rolepermissionData.seteditorg = false;
+
         }
-        if(res.roledata[19].delete_action==1 )
-        {
-            this.rolepermissionData.setdeleteorg=true;
+        if (res.roledata[19].delete_action == 1) {
+          this.rolepermissionData.setdeleteorg = true;
         }
-        else
-        {
-           this.rolepermissionData.setdeleteorg=false;
+        else {
+          this.rolepermissionData.setdeleteorg = false;
         }
         // this.rolepermissionData.setvieworg = res[19].setvieworg;
         // this.rolepermissionData.setcreateorg = res[19].setcreateorg;
         // this.rolepermissionData.seteditorg = res[19].seteditorg;
         // this.rolepermissionData.setdeleteorg = res[19].setdeleteorg;
-        
 
-      //  console.log("dashboardviewmap:" + res[1].dashboardviewunits);
+
+        //  console.log("dashboardviewmap:" + res[1].dashboardviewunits);
 
         console.log("Role Permission Data Response:" + JSON.stringify(data.json()));
 
@@ -1187,9 +1023,9 @@ if(res.roledata[11].view_action==1 )
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-     url: any = this.apiServiceURL + "role/store";
-      console.log(url);
-      console.log(body);
+      url: any = this.apiServiceURL + "role/store";
+    console.log(url);
+    console.log(body);
 
     this.http.post(url, body, options)
       .subscribe((data) => {
@@ -1202,7 +1038,8 @@ if(res.roledata[11].view_action==1 )
             this.roleperMissionData = [];
             this.sendNotification(data.json().message);
           } else {
-            this.sendNotification(data.json().message);
+            //this.sendNotification(data.json().message);
+            this.sendNotification(`Role  was successfully added`);
             this.navCtrl.setRoot(RolePage);
           }
         }
@@ -1236,7 +1073,8 @@ if(res.roledata[11].view_action==1 )
           if (data.json().Error > 0) {
             this.sendNotification(data.json().message);
           } else {
-            this.sendNotification(data.json().message);
+            //this.sendNotification(data.json().message);
+            this.sendNotification(`Role  was successfully updated`);
             this.navCtrl.setRoot(RolePage);
           }
         }
@@ -1256,12 +1094,12 @@ if(res.roledata[11].view_action==1 )
   // for the record ID we want to remove from the remote database
   deleteEntry() {
     let role_name: string = this.form.controls["role_name"].value,
-      body: string = "is_mobile=1&role_name=" + role_name+"&module="+JSON.stringify(this.roleperMissionData)+"&updatedby="+this.userId,
+      body: string = "is_mobile=1&role_name=" + role_name + "&module=" + JSON.stringify(this.roleperMissionData) + "&updatedby=" + this.userId,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
       url: any = this.apiServiceURL + "role/store";
-      console.log(body);
+    console.log(body);
 
     this.http.post(url, body, options)
       .subscribe(data => {
@@ -1579,13 +1417,12 @@ if(res.roledata[11].view_action==1 )
     });
     notification.present();
   }
-previous()
-{
-   this.navCtrl.setRoot(RolePage);
-}
+  previous() {
+    this.navCtrl.setRoot(RolePage);
+  }
 
 
- notification() {
+  notification() {
     this.navCtrl.setRoot(NotificationPage);
   }
   redirectToUser() {
@@ -1602,7 +1439,7 @@ previous()
   }
   redirectToSettings() {
     this.navCtrl.setRoot(MyaccountPage);
-  }  
+  }
 
 }
 

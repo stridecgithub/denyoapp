@@ -41,7 +41,7 @@ export class AddrequestsupportPage {
   public service_subject: any;
   public service_remark: any;
   public service_resources: any;
-  public service_id: any
+  public service_id: any;
   micro_timestamp: any;
   public isUploadedProcessing: boolean = false;
   public isProgress = false;
@@ -99,16 +99,25 @@ export class AddrequestsupportPage {
     console.log('ionViewDidLoad AddrequestsupportPage');
   }
   ionViewWillEnter() {
-
+ this.unitDetailData.unit_id = localStorage.getItem("unitId");
+  if (this.unitDetailData.unit_id == undefined) {
+      this.unitDetailData.unit_id = this.NP.get("record").unit_id;
+    }
+    if (this.unitDetailData.unit_id == 'undefined') {
+      this.unitDetailData.unit_id = this.NP.get("record").unit_id;
+    }
     if (this.NP.get("record")) {
       this.selectEntry(this.NP.get("record"));
 
-      if (this.NP.get("act") == 'Add') {
+      if (this.NP.get("act") == 'Add') {        
+        this.service_remark = "";
+        this.service_subject = "";     
+
         this.isEdited = false;
         this.unitDetailData.pageTitle = 'Request Support Add';
-        this.service_unitid = this.NP.get("unit_id");
+        this.service_unitid =this.unitDetailData.unit_id;
       } else {
-        this.service_unitid = this.NP.get("record").service_unitid;
+        this.service_unitid = this.unitDetailData.unit_id;
         this.unitDetailData.pageTitle = 'Request Support Edit';
         this.isEdited = true;
       }
@@ -116,14 +125,18 @@ export class AddrequestsupportPage {
       console.log("Service Unit Id:" + this.service_unitid);
     }
 
+   
+   
 
-    this.unitDetailData.unit_id = localStorage.getItem("unitId");
     this.unitDetailData.unitname = localStorage.getItem("unitunitname");
     this.unitDetailData.location = localStorage.getItem("unitlocation");
     this.unitDetailData.projectname = localStorage.getItem("unitprojectname");
     this.unitDetailData.colorcodeindications = localStorage.getItem("unitcolorcode");
+    console.log("Add Request Color Code:"+this.unitDetailData.colorcodeindications);
     this.unitDetailData.lat = localStorage.getItem("unitlat");
     this.unitDetailData.lng = localStorage.getItem("unitlng");
+
+
   }
 
 
@@ -256,13 +269,13 @@ export class AddrequestsupportPage {
   // to our remote PHP script (note the body variable we have created which
   // supplies a variable of key with a value of create followed by the key/value pairs
   // for the record data
-  createEntry(service_remark, service_subject, addedImgLists, remarkget, nextServiceDate, micro_timestamp) {
-    service_remark = localStorage.getItem("atMentionResult");
+  createEntry(service_remark, service_subject, addedImgLists, remarkget, nextServiceDate, micro_timestamp) {  
     let body: string = "is_mobile=1" +
       "&service_unitid=" + this.service_unitid +
-      "&service_remark=" + remarkget +
+      "&service_remark=" + service_remark +
       "&service_subject=" + service_subject +
       "&micro_timestamp=" + micro_timestamp +
+      "&serviced_by=" + this.unitDetailData.userId +
       "&is_denyo_support=1" +
       "&uploadInfo=" + JSON.stringify(this.addedImgLists),
       //"&contact_number=" + this.contact_number +
@@ -282,7 +295,7 @@ export class AddrequestsupportPage {
         if (data.status === 200) {
           localStorage.setItem("microtime", "");
           this.sendNotification(`Servicing info was successfully added`);
-           localStorage.setItem("atMentionResult", '');
+          localStorage.setItem("atMentionResult", '');
           this.nav.setRoot(ServicinginfoPage, {
             record: this.NP.get("record")
           });
@@ -301,10 +314,7 @@ export class AddrequestsupportPage {
   // to our remote PHP script (note the body variable we have created which
   // supplies a variable of key with a value of update followed by the key/value pairs
   // for the record data
-  updateEntry(service_remark, service_subject, addedImgLists, remarkget, nextServiceDate, micro_timestamp) {
-    if (localStorage.getItem("atMentionResult") != '') {
-      service_remark = localStorage.getItem("atMentionResult");
-    }
+  updateEntry(service_remark, service_subject, addedImgLists, remarkget, nextServiceDate, micro_timestamp) {    
     let body: string = "is_mobile=1&service_id=" + this.service_id +
       "&service_unitid=" + this.service_unitid +
       "&service_remark=" + service_remark +
@@ -328,7 +338,7 @@ export class AddrequestsupportPage {
         if (data.status === 200) {
           localStorage.setItem("microtime", "");
           this.sendNotification(`Servicing info  was successfully updated`);
-           localStorage.setItem("atMentionResult", '');
+          localStorage.setItem("atMentionResult", '');
           this.nav.setRoot(ServicinginfoPage, {
             record: this.NP.get("record")
           });

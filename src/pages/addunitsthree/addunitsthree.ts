@@ -144,22 +144,22 @@ export class AddunitsthreePage {
             this.contact_name_1 = contactName;
             this.contact_number_1 = contactNumber;
           }
-          if (i == 1 && contactName!='') {
+          if (i == 1 && contactName != '') {
             this.cont2 = true;
             this.contact_name_2 = contactName;
             this.contact_number_2 = contactNumber;
           }
-          if (i == 2 && contactName!='') {
+          if (i == 2 && contactName != '') {
             this.cont3 = true;
             this.contact_name_3 = contactName;
             this.contact_number_3 = contactNumber;
           }
-          if (i == 3 && contactName!='') {
+          if (i == 3 && contactName != '') {
             this.cont4 = true;
             this.contact_name_4 = contactName;
             this.contact_number_4 = contactNumber;
           }
-          if (i == 4 && contactName!='') {
+          if (i == 4 && contactName != '') {
             this.cont5 = true;
             this.contact_name_5 = contactName;
             this.contact_number_5 = contactNumber;
@@ -240,6 +240,9 @@ export class AddunitsthreePage {
   // supplies a variable of key with a value of create followed by the key/value pairs
   // for the record data
   createEntry(alarmhashtags, contactInfo, createdby) {
+
+
+
     this.userInfo.push({
       alarmhashtags: alarmhashtags,
       contactInfo: contactInfo,
@@ -267,6 +270,9 @@ export class AddunitsthreePage {
   // supplies a variable of key with a value of update followed by the key/value pairs
   // for the record data
   updateEntry(alarmhashtags, contactInfo, createdby) {
+    if (localStorage.getItem("atMentionResult") != '') {
+      alarmhashtags = localStorage.getItem("atMentionResult");
+    }
     this.userInfo.push({
       alarmhashtags: alarmhashtags,
       contactInfo: contactInfo,
@@ -324,30 +330,46 @@ export class AddunitsthreePage {
   saveEntry() {
     let alarmhashtags: string = this.form.controls["alarmhashtags"].value;
 
+
+
     this.contactInfo.push({
       contact_name: this.form.controls["contact_name_1"].value,
       contact_number: this.form.controls["contact_number_1"].value
     });
 
-    this.contactInfo.push({
-      contact_name: this.form.controls["contact_name_2"].value,
-      contact_number: this.form.controls["contact_number_2"].value
-    });
-
-    this.contactInfo.push({
-      contact_name: this.form.controls["contact_name_3"].value,
-      contact_number: this.form.controls["contact_number_3"].value
-    });
-
-    this.contactInfo.push({
-      contact_name: this.form.controls["contact_name_4"].value,
-      contact_number: this.form.controls["contact_number_4"].value
-    });
-
-    this.contactInfo.push({
-      contact_name: this.form.controls["contact_name_5"].value,
-      contact_number: this.form.controls["contact_number_5"].value
-    });
+    if (this.cont2 = true) {
+      console.log("contact_name_2 value:" + this.form.controls["contact_name_2"].value);
+      if (this.form.controls["contact_name_2"].value != undefined) {
+        this.contactInfo.push({
+          contact_name: this.form.controls["contact_name_2"].value,
+          contact_number: this.form.controls["contact_number_2"].value
+        });
+      }
+    }
+    if (this.cont3 = true) {
+      if (this.form.controls["contact_name_3"].value != undefined) {
+        this.contactInfo.push({
+          contact_name: this.form.controls["contact_name_3"].value,
+          contact_number: this.form.controls["contact_number_3"].value
+        });
+      }
+    }
+    if (this.cont4 = true) {
+      if (this.form.controls["contact_name_4"].value != undefined) {
+        this.contactInfo.push({
+          contact_name: this.form.controls["contact_name_4"].value,
+          contact_number: this.form.controls["contact_number_4"].value
+        });
+      }
+    }
+    if (this.cont5 = true) {
+      if (this.form.controls["contact_name_5"].value != undefined) {
+        this.contactInfo.push({
+          contact_name: this.form.controls["contact_name_5"].value,
+          contact_number: this.form.controls["contact_number_5"].value
+        });
+      }
+    }
 
 
 
@@ -470,7 +492,28 @@ export class AddunitsthreePage {
 
 
   }
-
+  remove(val) {
+    if (val == '2') {
+      this.contact_name_2 = '';
+      this.contact_number_2 = '';
+      this.cont2 = false;
+    }
+    if (val == '3') {
+      this.contact_name_3 = '';
+      this.contact_number_3 = '';
+      this.cont3 = false;
+    }
+    if (val == '4') {
+      this.cont4 = false;
+      this.contact_name_4 = '';
+      this.contact_number_4 = '';
+    }
+    if (val == '5') {
+      this.cont5 = false;
+      this.contact_name_5 = '';
+      this.contact_number_5 = '';
+    }
+  }
 
 
 
