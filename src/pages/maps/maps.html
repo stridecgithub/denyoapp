@@ -39,8 +39,8 @@
   <p style="color: red;
     position: relative;
     margin-top: 50%;
-    margin-left: 30%;
-    font-size: 12pt;">Permission denied</p>
+   text-align:center;
+    font-size: 12pt;">Permission denied for access this page. Please contact your administrator</p>
 </ion-content>
 <ion-content padding class="ion-content" *ngIf="DASHBOARD_MAP_VIEW==1">
   <div [innerHTML]="sanitizer.bypassSecurityTrustHtml(iframeContent)"></div>
