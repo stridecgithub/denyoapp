@@ -28,6 +28,8 @@ export class MyaccountPage {
   public pageTitle: string;
   public photo: any;
   public name: any;
+  public msgcount:any;
+  public notcount:any;
   public userid: any;
   public password: any;
   public hashtag: any;
@@ -85,6 +87,20 @@ export class MyaccountPage {
 
 
 
+      });
+       let //body: string = "loginid=" + this.userId,
+      type1: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers1: any = new Headers({ 'Content-Type': type1 }),
+      options1: any = new RequestOptions({ headers: headers1 }),
+      url1: any = this.apiServiceURL + "/msgnotifycount?loginid=" + this.userId;
+    console.log(url1);
+   // console.log(body);
+
+    this.http.get(url1, options1)
+      .subscribe((data) => {
+        console.log("Count Response Success:" + JSON.stringify(data.json()));
+       this.msgcount=data.json().msgcount;
+        this.notcount=data.json().notifycount;
       });
   }
   ionViewDidLoad() {
