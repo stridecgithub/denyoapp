@@ -61,8 +61,8 @@ export class MapsPage {
   constructor(public http: Http, public navCtrl: NavController,
     public toastCtrl: ToastController, private sanitizer: DomSanitizer, public alertCtrl: AlertController, public navParams: NavParams, public loadingCtrl: LoadingController) {
     /* Role Authority Start */
-    this.VIEWACCESS = localStorage.getItem("VIEWACCESS");
-    this.HIDEACCESS = localStorage.getItem("HIDEACCESS");
+    this.VIEWACCESS = localStorage.getItem("DASHBOARD_MAP_VIEW");
+    this.HIDEACCESS = localStorage.getItem("DASHBOARD_MAP_HIDE");
     console.log("Role Authority for Map View" + this.VIEWACCESS);
 
     console.log("Role Authority for Map Hide" + this.HIDEACCESS);

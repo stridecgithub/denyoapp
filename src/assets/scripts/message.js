@@ -161,6 +161,40 @@ function message(ev) {
 		//}
 	}
 }
+
+
+
+function unit(ev) {
+	var userId = localStorage.getItem("userInfoId");
+	var companyId = localStorage.getItem("userInfoCompanyId");
+	var evt = ev || window.event || {}; var code = ev.charCode || ev.keyCode || ev.which;
+	var kCd = ev.keyCode || ev.charCode; var obj = evt.target;
+	//var code = (e.keyCode ? e.keyCode : e.which);
+	var scrollPos = obj.scrollTop;
+	var caretPos = obj.selectionStart;
+	var front = (obj.value).substring(0, caretPos);
+	var back = (obj.value).substring(obj.selectionEnd, obj.value.length);
+	var atpos = front.lastIndexOf('@'); npos = atpos;
+	if (atpos >= 0) {
+		//e('pol').innerHTML=obj.offsetWidth+"=="+obj.offsetHeight;	 
+		var strkeys = front.substring(atpos + 1, atpos.length);
+		//alert(strkeys);
+		//if (strkeys.length >= 1) {
+		SasiyaAjax.Connect_call_back("http://denyoappv2.stridecdev.com/api/atmentioned.php?method=atmention&id=" + id + "&tem=" + strkeys + "&act=unit&companyId=" + companyId + "&userId=" + userId, 'get', '', 0, function (tx, n) {
+			if (!e("suschoise")) { var el = document.createElement("div"); el.className = "subx"; el.id = "suschoise"; document.body.appendChild(el); }
+			var tmp = e("suschoise"); tmp.innerHTML = tx; tmp.style.display = "block";
+			tmp.style.width = obj.offsetWidth + "px";
+			var searchbox = obj; // add that id, not just class name to html				
+			var pos = getPosition(searchbox);
+			tmp.style.left = obj.offsetLeft + "px";
+			// tmp.style.left = pos[0] + "px";
+			tmp.style.top = (pos[1] + searchbox.offsetHeight) + "px";
+			tmp.style.visibility = "visible";
+
+		});
+		//}
+	}
+}
 function setct(obj) { insertAtCaret("to", obj.innerHTML); if (e("suschoise")) { e("suschoise").style.display = "none"; } }
 
 function address1get(val) {

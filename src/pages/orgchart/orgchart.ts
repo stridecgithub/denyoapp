@@ -56,7 +56,7 @@ export class OrgchartPage {
     this.loginas = localStorage.getItem("userInfoName");
     this.userId = localStorage.getItem("userInfoId");
     this.companyId = localStorage.getItem("userInfoCompanyId");
-    this.apiServiceURL=this.apiServiceURL;
+    this.apiServiceURL = this.apiServiceURL;
   }
   presentPopover(myEvent, item) {
     let popover = this.popoverCtrl.create(PopoverPage, { item: item });
@@ -80,7 +80,7 @@ export class OrgchartPage {
       buttons: [{
         text: 'Yes',
         handler: () => {
-          this.deleteEntry( item[0].staff_id);
+          this.deleteEntry(item[0].staff_id);
         }
       },
       {
@@ -98,7 +98,7 @@ export class OrgchartPage {
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/orgchart/" + recordID + "/1/delete";
+      url: any = this.apiServiceURL + "/staff/" + recordID + "/1/delete";
     this.http.get(url, options)
       .subscribe(data => {
         // If the request was successful notify the user

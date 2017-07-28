@@ -70,13 +70,13 @@ export class UnitsPage {
     this.userId = localStorage.getItem("userInfoId");
     //Authorization Get Value
     this.VIEWACCESS = localStorage.getItem("UNITS_LISTING_VIEW");
-    console.log(this.VIEWACCESS );
+    console.log("Role Authority for Unit Listing View:"+this.VIEWACCESS );
     this.CREATEACCESS = localStorage.getItem("UNITS_LISTING_CREATE");
-    console.log(this.CREATEACCESS );
+    console.log("Role Authority for Unit Listing Create:"+this.CREATEACCESS );
     this.EDITACCESS = localStorage.getItem("UNITS_LISTING_EDIT");
-    console.log(this.EDITACCESS )
+    console.log("Role Authority for Unit Listing Edit:"+this.EDITACCESS )
     this.DELETEACCESS = localStorage.getItem("UNITS_LISTING_DELETE");
-    console.log(this.DELETEACCESS )
+    console.log("Role Authority for Unit Listing Delete:"+this.DELETEACCESS )
     //Authorization Get Value
   }
 
