@@ -32,6 +32,11 @@ export class UnitgroupPage {
   public loginas: any;
   public msgcount:any;
   public notcount:any;
+   private permissionMessage: string = "Permission denied for access this page. Please contact your administrator";
+   public VIEWACCESS: any;
+  public CREATEACCESS: any;
+  public EDITACCESS: any;
+  public DELETEACCESS: any;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   public totalCount;
   pet: string = "ALL";
@@ -52,6 +57,14 @@ export class UnitgroupPage {
     this.loginas = localStorage.getItem("userInfoName");
     this.userId = localStorage.getItem("userInfoId");
     this.companyId = localStorage.getItem("userInfoCompanyId");
+    this.VIEWACCESS = localStorage.getItem("UNITS_UNITGROUP_VIEW");
+    console.log("Role Authority for Unit Listing View:"+this.VIEWACCESS );
+    this.CREATEACCESS = localStorage.getItem("UNITS_UNITGROUP_CREATE");
+    console.log("Role Authority for Unit Listing Create:"+this.CREATEACCESS );
+    this.EDITACCESS = localStorage.getItem("UNITS_UNITGROUP_EDIT");
+    console.log("Role Authority for Unit Listing Edit:"+this.EDITACCESS );
+    this.DELETEACCESS = localStorage.getItem("UNITS_UNITGROUP_DELETE");
+    console.log("Role Authority for Unit Listing Delete:"+this.DELETEACCESS );
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad UnitgroupPage');

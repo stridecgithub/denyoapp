@@ -29,6 +29,11 @@ import { EmailPage } from '../email/email';
 export class RolePage {
   public pageTitle: string;
   public loginas: any;
+  private permissionMessage: string = "Permission denied for access this page. Please contact your administrator";
+   public VIEWACCESS: any;
+  public CREATEACCESS: any;
+  public EDITACCESS: any;
+  public DELETEACCESS: any;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com/";
   public totalCount;
   pet: string = "ALL";
@@ -48,6 +53,14 @@ export class RolePage {
     public toastCtrl: ToastController, public alertCtrl: AlertController, public navParams: NavParams, public loadingCtrl: LoadingController) {
     this.pageTitle = 'Roles';
     this.loginas = localStorage.getItem("userInfoName");
+    this.VIEWACCESS = localStorage.getItem("SETTINGS_USERROLE_VIEW");
+    console.log("Role Authority for Unit Listing View:"+this.VIEWACCESS );
+    this.CREATEACCESS = localStorage.getItem("SETTINGS_USERROLE_CREATE");
+    console.log("Role Authority for Unit Listing Create:"+this.CREATEACCESS );
+    this.EDITACCESS = localStorage.getItem("SETTINGS_USERROLE_EDIT");
+    console.log("Role Authority for Unit Listing Edit:"+this.EDITACCESS );
+    this.DELETEACCESS = localStorage.getItem("SETTINGS_USERROLE_DELETE");
+    console.log("Role Authority for Unit Listing Delete:"+this.DELETEACCESS );
   }
 
   ionViewDidLoad() {

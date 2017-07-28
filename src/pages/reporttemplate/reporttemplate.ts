@@ -34,6 +34,11 @@ export class ReporttemplatePage {
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   public templatenamehash;
   public templatenamecomm;
+   private permissionMessage: string = "Permission denied for access this page. Please contact your administrator";
+   public VIEWACCESS: any;
+  public CREATEACCESS: any;
+  public EDITACCESS: any;
+  public DELETEACCESS: any;
   public totalCount;
   public reporttemplate;
  public msgcount:any;
@@ -52,6 +57,14 @@ export class ReporttemplatePage {
     public toastCtrl: ToastController, public alertCtrl: AlertController, public navParams: NavParams, public loadingCtrl: LoadingController) {
     this.loginas = localStorage.getItem("userInfoName");
     this.userId = localStorage.getItem("userInfoId");
+    this.VIEWACCESS = localStorage.getItem("SETTINGS_REPORTTEMPLATE_VIEW");
+    console.log("Role Authority for Unit Listing View:"+this.VIEWACCESS );
+    this.CREATEACCESS = localStorage.getItem("SETTINGS_REPORTTEMPLATE_CREATE");
+    console.log("Role Authority for Unit Listing Create:"+this.CREATEACCESS );
+    this.EDITACCESS = localStorage.getItem("SETTINGS_REPORTTEMPLATE_EDIT");
+    console.log("Role Authority for Unit Listing Edit:"+this.EDITACCESS );
+    this.DELETEACCESS = localStorage.getItem("SETTINGS_REPORTTEMPLATE_DELETE");
+    console.log("Role Authority for Unit Listing Delete:"+this.DELETEACCESS );
      this.pageTitle = 'Report Template';
   }
   ionViewDidLoad() {

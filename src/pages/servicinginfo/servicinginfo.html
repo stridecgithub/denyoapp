@@ -35,13 +35,13 @@
       Login As:{{loginas}}
     </ion-buttons>
   </ion-navbar>
-  <button class="add-new-btn" ion-button (click)="doAdd()">
+  <button class="add-new-btn" ion-button (click)="doAdd()"  *ngIf="CREATEACCESS==1">
   	<div class="algn-cent">
     	<ion-icon name="ios-add-circle-outline"></ion-icon>
         <span>Servicing Action</span>
     </div>
  </button>
-  <button class="add-new-btn"  ion-button (click)="doRequest()">
+  <button class="add-new-btn"  ion-button (click)="doRequest()"  *ngIf="CREATEACCESS==1">
   	<div class="algn-cent">
     	<ion-icon name="paper-plane"></ion-icon>
         <span>Request Support</span>
@@ -50,8 +50,14 @@
 
 </ion-header>
 
-
-<ion-content padding class="ion-content">
+<ion-content padding class="ion-content" *ngIf="VIEWACCESS==0">
+  <p style="color: red;
+    position: relative;
+    margin-top: 50%;
+   text-align:center;
+    font-size: 12pt;">{{permissionMessage}}</p>
+</ion-content>
+<ion-content padding class="ion-content"  *ngIf="VIEWACCESS==1">
 
  <div class="error" *ngIf="totalCount==0">No entries found</div>
   <ion-item style="width: 100%; margin: 0; padding-left: 10px;">
@@ -77,10 +83,10 @@
         <!--button class="viewcolor" (click)="doEdit(item,'view')">
                        <ion-icon name="eye" class="icon-size"></ion-icon>
                     </button-->
-        <button class="editcolor" (click)="doEdit(item,'edit')">                      
+        <button class="editcolor" (click)="doEdit(item,'edit')"  *ngIf="EDITACCESS==1">                      
                         <ion-icon name="create" class="icon-size"></ion-icon>
                     </button>
-        <button class="trashcolor" (click)="doConfirm(item.service_id,item)">                        
+        <button class="trashcolor" (click)="doConfirm(item.service_id,item)"  *ngIf="DELETEACCESS==1">                        
                          <ion-icon name="trash" class="icon-size"></ion-icon>
                     </button>
       </ion-item-options>

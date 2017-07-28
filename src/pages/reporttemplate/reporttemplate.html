@@ -35,7 +35,7 @@
       Login As:{{loginas}}
     </ion-buttons>
   </ion-navbar>
-  <button class="add-new-btn" (click)="doAdd(reporttemplate)">
+  <button class="add-new-btn" (click)="doAdd(reporttemplate)" *ngIf="CREATEACCESS==1">
   	<div class="algn-cent">
     	<ion-icon name="ios-add-circle-outline"></ion-icon>
         <span>Add Report Template</span>
@@ -50,7 +50,14 @@
     </ion-select>
   </ion-item-->
 </ion-header>
-<ion-content padding class="ion-content">
+<ion-content padding class="ion-content" *ngIf="VIEWACCESS==0">
+  <p style="color: red;
+    position: relative;
+    margin-top: 50%;
+   text-align:center;
+    font-size: 12pt;">{{permissionMessage}}</p>
+</ion-content>
+<ion-content padding class="ion-content" *ngIf="VIEWACCESS==1">
   <div class="error" *ngIf="reportAllLists.length==0">No entries found</div>
 
   <ion-refresher (ionRefresh)="doRefresh($event)" *ngIf="totalCount!=0">
@@ -77,10 +84,10 @@
         <!--button class="viewcolor" (click)="doEdit(item,'view')">
                        <ion-icon name="eye" class="icon-size"></ion-icon>
                     </button-->
-        <button class="editcolor" (click)="doEdit(item,'edit',reporttemplate)">                      
+        <button class="editcolor" (click)="doEdit(item,'edit',reporttemplate)" *ngIf="EDITACCESS==1">                      
                         <ion-icon name="create" class="icon-size"></ion-icon>
                     </button>
-        <button class="trashcolor" (click)="doConfirm(item.id,item)">                        
+        <button class="trashcolor" (click)="doConfirm(item.id,item)" *ngIf="DELETEACCESS==1">                        
                          <ion-icon name="trash" class="icon-size"></ion-icon>
                     </button>
       </ion-item-options>

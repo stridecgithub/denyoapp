@@ -34,6 +34,10 @@ export class UnitsPage {
   public pageTitle: string;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   private permissionMessage: string = "Permission denied for access this page. Please contact your administrator";
+   public VIEWACCESS: any;
+  public CREATEACCESS: any;
+  public EDITACCESS: any;
+  public DELETEACCESS: any;
   public totalCount;
   pet: string = "ALL";
   public userId: any;
@@ -47,10 +51,7 @@ export class UnitsPage {
   public msgcount: any;
   public notcount: any;
   //Authorization Declaration
-  public VIEWACCESS: any;
-  public CREATEACCESS: any;
-  public EDITACCESS: any;
-  public DELETEACCESS: any;
+ 
   //Authorization Declaration
   public reportData: any =
   {
@@ -74,9 +75,9 @@ export class UnitsPage {
     this.CREATEACCESS = localStorage.getItem("UNITS_LISTING_CREATE");
     console.log("Role Authority for Unit Listing Create:"+this.CREATEACCESS );
     this.EDITACCESS = localStorage.getItem("UNITS_LISTING_EDIT");
-    console.log("Role Authority for Unit Listing Edit:"+this.EDITACCESS )
+    console.log("Role Authority for Unit Listing Edit:"+this.EDITACCESS );
     this.DELETEACCESS = localStorage.getItem("UNITS_LISTING_DELETE");
-    console.log("Role Authority for Unit Listing Delete:"+this.DELETEACCESS )
+    console.log("Role Authority for Unit Listing Delete:"+this.DELETEACCESS );
     //Authorization Get Value
   }
 
