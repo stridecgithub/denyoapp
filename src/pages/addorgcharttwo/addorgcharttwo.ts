@@ -131,7 +131,7 @@ export class AddorgcharttwoPage {
     }
     else {
       this.isEdited = false;
-      this.pageTitle = 'New  Org Chart';
+      this.pageTitle = 'Edit Org Chart';
     }
 
     if (this.NP.get("accountInfo")) {
@@ -377,7 +377,9 @@ export class AddorgcharttwoPage {
   }
 
   previous() {
-    this.navCtrl.setRoot(AddorgchartonePage);
+    this.navCtrl.setRoot(AddorgchartonePage, {     
+       record:this.NP.get("record")
+    });
   }
   fileTrans(path) {
     let fileName = path.substr(path.lastIndexOf('/') + 1);

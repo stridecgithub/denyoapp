@@ -26,9 +26,9 @@ export class TrendlinePage {
 	//private _inputpdf: string = '<iframe src="http://denyoappv2.stridecdev.com/2/1/unitdetails" height="350" frameborder="0"></iframe>';
 	private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
 
-	
-	constructor( private sanitizer: DomSanitizer, public NP: NavParams, public navCtrl: NavController, public navParams: NavParams, public nav: NavController) {
-	
+
+	constructor(private sanitizer: DomSanitizer, public NP: NavParams, public navCtrl: NavController, public navParams: NavParams, public nav: NavController) {
+
 
 
 	}
@@ -40,30 +40,31 @@ export class TrendlinePage {
 	}
 
 	ionViewWillEnter() {
+		console.log("Alaram Id" + this.NP.get("alarmid"));
+let alarmID=this.NP.get("alarmid");
+		//$('#loadExternalURL').load('http://www.google.com');
 
-//$('#loadExternalURL').load('http://www.google.com');
+		$.ajax({
+			dataType: 'html',
+			url: 'http://denyoappv2.stridecdev.com/2/FUELLEVEL/1/showgraph',
+			success: function (data) {
+				$('#ajax').html(data);
+			}
+		});
 
-$.ajax({
-  dataType:'html',
-  url:'http://denyoappv2.stridecdev.com/2/FUELLEVEL/1/showgraph',
-  success:function(data) {
-    $('#ajax').html(data);   
-  }
-});
-
-$("#hai").click(function () {
+		$("#hai").click(function () {
 			//$("#payment_status_div").show("slow");
 			alert('Kannan');
 		});
-		this.iframeContent = "<iframe id='filecontainer' src=" + this.apiServiceURL + "/2/FUELLEVEL/1/showgraph height=350 width=100% frameborder=0></iframe>";
+		this.iframeContent = "<iframe id='filecontainer' src=" + this.apiServiceURL + "/"+alarmID+"/FUELLEVEL/1/showgraph height=350 width=100% frameborder=0></iframe>";
 
-	
+
 
 	}
 
-  clickcall(){
-    console.log('Enter kannan kris thibi1');
-  }
+	clickcall() {
+		console.log('Enter kannan kris thibi1');
+	}
 	previous() {
 		this.nav.setRoot(UnitsPage);
 	}

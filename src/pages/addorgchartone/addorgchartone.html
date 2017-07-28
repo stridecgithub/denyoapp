@@ -6,7 +6,7 @@
 -->
 <ion-header>
   <ion-navbar color="bluedark">
-    <ion-title class="page-title">Add Org</ion-title>
+    <ion-title class="page-title">{{pageTitle}}</ion-title>
     <ion-buttons start>
       <button ion-button menuToggle class="menu-toggle">
       <ion-icon name="menu"></ion-icon>
@@ -80,7 +80,11 @@
 
         <ion-item>
           <ion-label stacked>Contact Number <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
-          <ion-input [disabled]="readOnly" type="text" formControlName="contact" [(ngModel)]="contact"></ion-input>
+          <!--ion-input [disabled]="readOnly" type="text" formControlName="contact" [(ngModel)]="contact"></ion-input-->
+
+           <ion-input [disabled]="readOnly" type="text" formControlName="primary" [(ngModel)]="primary" style="width:20%"></ion-input>
+          <ion-input [disabled]="readOnly" type="text" formControlName="contact" [(ngModel)]="contact"  style="width:80%;float:right"></ion-input>
+      
         </ion-item>
 
         <ion-item>

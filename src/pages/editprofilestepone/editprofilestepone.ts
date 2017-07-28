@@ -38,6 +38,7 @@ export class EditprofilesteponePage {
   public re_password: any;
   public photo: any;
   public country: any;
+  public primary:any;
   public contact: any;
   public userId: any;
   public userid: any;
@@ -77,6 +78,7 @@ export class EditprofilesteponePage {
       "username": ["", Validators.required],
       "password": ["", Validators.required],
       "contact": ["", Validators.required],
+        "primary": ["", Validators.required],
       'email': ['', Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(50), Validators.pattern(/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i)])]
     });
     this.userId = localStorage.getItem("userInfoId");
@@ -112,6 +114,11 @@ export class EditprofilesteponePage {
         console.log(res.settings[0].firstname);
         this.username = res.settings[0].username;
         this.contact = res.settings[0].contact_number;
+
+         let contactSplitSpace=this.contact.split(" ");
+    this.primary=contactSplitSpace[0];
+     this.contact=contactSplitSpace[1];
+
         this.email = res.settings[0].email;
         this.email = res.settings[0].email;
         this.password = res.settings[0].password;
@@ -195,7 +202,8 @@ export class EditprofilesteponePage {
       username: string = this.form.controls["username"].value,
       password: string = this.form.controls["password"].value,
       email: string = this.form.controls["email"].value,
-      contact: string = this.form.controls["contact"].value;
+       contact: string = this.form.controls["contact"].value,
+      primary: string = this.form.controls["primary"].value;
     console.log(this.form.controls);
     if (this.isUploadedProcessing == false) {
       this.updateEntry(first_name, last_name, email, username, password, contact, this.userId);

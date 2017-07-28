@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {  NavController, ToastController, AlertController, NavParams } from 'ionic-angular';
+import { NavController, ToastController, AlertController, NavParams } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitsPage } from '../units/units';
@@ -8,7 +8,9 @@ import { MapsPage } from '../maps/maps';
 import { ReportsPage } from '../reports/reports';
 import { CalendarPage } from '../calendar/calendar';
 import { EmailPage } from '../email/email';
-import { AddalarmPage } from '../addalarm/addalarm'; 
+import { AddalarmPage } from '../addalarm/addalarm';
+import { TrendlinePage } from '../trendline/trendline';
+
 import { Http, Headers, RequestOptions } from '@angular/http';
 /**
  * Generated class for the AlarmdetailsPage page.
@@ -21,17 +23,17 @@ import { Http, Headers, RequestOptions } from '@angular/http';
   templateUrl: 'alarmdetails.html',
 })
 export class AlarmdetailsPage {
- public loginas: any;
+  public loginas: any;
   public pageTitle: string;
-  public msgcount:any;
-  public notcount:any;
+  public msgcount: any;
+  public notcount: any;
   public totalCount;
   pet: string = "ALL";
   public sortby = 2;
-   public userId: any;
-  public alarm_assginedby_name:any;
-  public alarm_assginedto_name:any;
-  public alarm_name:any;
+  public userId: any;
+  public alarm_assginedby_name: any;
+  public alarm_assginedto_name: any;
+  public alarm_name: any;
   public estatus;
   public vendorsort = "asc";
   public ascending = true;
@@ -47,55 +49,56 @@ export class AlarmdetailsPage {
     results: 8
   }
   public reportAllLists = [];
-  constructor(public http: Http,public nav: NavController,
+  constructor(public http: Http, public nav: NavController,
     public toastCtrl: ToastController, public alertCtrl: AlertController, public NP: NavParams) {
     this.pageTitle = 'Units';
     this.loginas = localStorage.getItem("userInfoName");
     this.userId = localStorage.getItem("userInfoId");
     this.companyId = localStorage.getItem("userInfoCompanyId");
   }
-
+  trendlineInfo(alarmid) {
+    this.nav.setRoot(TrendlinePage, {
+      alarmid: alarmid
+    });
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad AlarmdetailsPage');
   }
- ionViewWillEnter() {
-      if (this.NP.get("record")) {
+  ionViewWillEnter() {
+    if (this.NP.get("record")) {
       console.log("Alarm Details" + JSON.stringify(this.NP.get("record")));
       console.log(this.NP.get("record").alarm_name);
-    this.alarm_name = this.NP.get("record").alarm_name;
-     this.alarm_assginedby_name=this.NP.get("record").alarm_assginedby_name;
-    this.alarm_assginedto_name=this.NP.get("record").alarm_assginedto_name;
-    if(this.alarm_assginedby_name == "")
-    {
-        this.estatus=1;
+      this.alarm_name = this.NP.get("record").alarm_name;
+      this.alarm_assginedby_name = this.NP.get("record").alarm_assginedby_name;
+      this.alarm_assginedto_name = this.NP.get("record").alarm_assginedto_name;
+      if (this.alarm_assginedby_name == "") {
+        this.estatus = 1;
+      }
+      // this.selectEntry(this.NP.get("record"));
     }
-     // this.selectEntry(this.NP.get("record"));
-    }
-   
-let //body: string = "loginid=" + this.userId,
+
+    let //body: string = "loginid=" + this.userId,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
       url: any = this.apiServiceURL + "/msgnotifycount?loginid=" + this.userId;
     this.http.get(url, options)
       .subscribe((data) => {
-       this.msgcount=data.json().msgcount;
-        this.notcount=data.json().notifycount;
+        this.msgcount = data.json().msgcount;
+        this.notcount = data.json().notifycount;
       });
 
   }
-  selectEntry(item)
-  {
-    
+  selectEntry(item) {
+
     this.alarm_name = item.alarm_name;
-    this.alarm_assginedby_name=item.alarm_assginedby_name;
-    this.alarm_assginedto_name=item.alarm_assginedto_name;
+    this.alarm_assginedby_name = item.alarm_assginedby_name;
+    this.alarm_assginedto_name = item.alarm_assginedto_name;
   }
-  editalarm()
-  {
-     this.nav.setRoot(AddalarmPage);
+  editalarm() {
+    this.nav.setRoot(AddalarmPage);
   }
-   notification() {
+  notification() {
     this.nav.setRoot(NotificationPage);
   }
   redirectToUser() {
@@ -112,5 +115,5 @@ let //body: string = "loginid=" + this.userId,
   }
   redirectToSettings() {
     this.nav.setRoot(MyaccountPage);
-  } 
+  }
 }

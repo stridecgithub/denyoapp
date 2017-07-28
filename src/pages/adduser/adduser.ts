@@ -39,9 +39,10 @@ export class AdduserPage {
   public email: any;
   public photo: any;
   public country: any;
-  public msgcount:any;
-  public notcount:any;
+  public msgcount: any;
+  public notcount: any;
   public contact: any;
+  public primary: any;
   public userId: any;
   public responseResultCountry: any;
   progress: number;
@@ -79,6 +80,7 @@ export class AdduserPage {
       "last_name": ["", Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
       "country": ["", Validators.required],
       "contact": ["", Validators.required],
+      "primary": ["", Validators.required],
       /// "email": ["", Validators.required]
       'email': ['', Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(50), Validators.pattern(/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i)])],
     });
@@ -99,13 +101,13 @@ export class AdduserPage {
       options: any = new RequestOptions({ headers: headers }),
       url: any = this.apiServiceURL + "/msgnotifycount?loginid=" + this.userId;
     console.log(url);
-   // console.log(body);
+    // console.log(body);
 
     this.http.get(url, options)
       .subscribe((data) => {
         console.log("Count Response Success:" + JSON.stringify(data.json()));
-       this.msgcount=data.json().msgcount;
-        this.notcount=data.json().notifycount;
+        this.msgcount = data.json().msgcount;
+        this.notcount = data.json().notifycount;
       });
     this.resetFields();
     this.getJsonCountryListData();
@@ -132,9 +134,8 @@ export class AdduserPage {
       this.isEdited = false;
       this.pageTitle = 'New User';
     }
-    if(this.NP.get("uservalue"))
-    {
-       let info = this.NP.get("uservalue");
+    if (this.NP.get("uservalue")) {
+      let info = this.NP.get("uservalue");
 
       //var objects = JSON.parse(info);
       console.log("JSON.stringify:" + JSON.stringify(info));
@@ -158,7 +159,7 @@ export class AdduserPage {
           this.country = info[key].country;
           this.contact = info[key].contact;
           this.photo = info[key].photo;
-        
+
           console.log("First Name for User Account:" + this.first_name);
           //console.log(JSON.stringify(this));
         } else {
@@ -169,7 +170,7 @@ export class AdduserPage {
           this.country = info[0].country;
           this.contact = info[0].contact;
           this.photo = info[0].photo;
-        
+
           console.log("First Name for User Account:" + this.first_name);
         }
         /* this.userInfo.push({
@@ -196,6 +197,9 @@ export class AdduserPage {
     this.email = item.email;
     this.country = item.country;
     this.contact = item.contact;
+     let contactSplitSpace=this.contact.split(" ");
+    this.primary=contactSplitSpace[0];
+     this.contact=contactSplitSpace[1];
     this.photo = item.photo;
     this.recordID = item.userid;
   }
@@ -317,8 +321,11 @@ export class AdduserPage {
       last_name: string = this.form.controls["last_name"].value,
       email: string = this.form.controls["email"].value,
       country: string = this.form.controls["country"].value,
-      contact: string = this.form.controls["contact"].value;
-    console.log(this.form.controls);
+      contact: string = this.form.controls["contact"].value,
+      primary: string = this.form.controls["primary"].value;
+
+    contact = primary + " " + contact;
+    console.log(contact);
     /*if (this.addedImgLists) {
       this.isUploadedProcessing = true;
     }*/

@@ -52,7 +52,8 @@
         </ion-item>
         <ion-item>
           <ion-label stacked>Company Contact <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
-          <ion-input [disabled]="readOnly" type="text" formControlName="contact" [(ngModel)]="contact"></ion-input>
+          <ion-input [disabled]="readOnly" type="text" formControlName="primary" [(ngModel)]="primary" style="width:20%"></ion-input>
+          <ion-input [disabled]="readOnly" type="text" formControlName="contact" [(ngModel)]="contact"  style="width:80%;float:right"></ion-input>
         </ion-item>
 
 

@@ -39,6 +39,7 @@ export class AddorgchartonePage {
   public photo: any;
   public country: any;
   public contact: any;
+  public primary: any;
   public userId: any;
   public responseResultCountry: any;
   progress: number;
@@ -49,8 +50,8 @@ export class AddorgchartonePage {
   public readOnly: boolean = false;
   public addedImgLists: any;
   public userInfo = [];
-   public msgcount:any;
-  public notcount:any;
+  public msgcount: any;
+  public notcount: any;
   // Flag to hide the form upon successful completion of remote operation
   public hideForm: boolean = false;
   public hideActionButton = true;
@@ -79,6 +80,7 @@ export class AddorgchartonePage {
       "last_name": ["", Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
       "country": ["", Validators.required],
       "contact": ["", Validators.required],
+      "primary": ["", Validators.required],
       /// "email": ["", Validators.required]
       'email': ['', Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(50), Validators.pattern(/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i)])],
     });
@@ -89,19 +91,19 @@ export class AddorgchartonePage {
     console.log('ionViewDidLoad AddorgchartonePage');
   }
   ionViewWillEnter() {
-     let //body: string = "loginid=" + this.userId,
+    let //body: string = "loginid=" + this.userId,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
       url: any = this.apiServiceURL + "/msgnotifycount?loginid=" + this.userId;
     console.log(url);
-   // console.log(body);
+    // console.log(body);
 
     this.http.get(url, options)
       .subscribe((data) => {
         console.log("Count Response Success:" + JSON.stringify(data.json()));
-       this.msgcount=data.json().msgcount;
-        this.notcount=data.json().notifycount;
+        this.msgcount = data.json().msgcount;
+        this.notcount = data.json().notifycount;
       });
     this.resetFields();
     this.getJsonCountryListData();
@@ -110,7 +112,7 @@ export class AddorgchartonePage {
       console.log("Add User:" + JSON.stringify(this.NP.get("record")));
       this.isEdited = true;
       this.selectEntry(this.NP.get("record"));
-      this.pageTitle = 'Edit User';
+      this.pageTitle = 'Edit Org Chart';
       this.readOnly = false;
       this.hideActionButton = true;
       if (this.NP.get("record").photo) {
@@ -123,10 +125,13 @@ export class AddorgchartonePage {
       this.email = editItem.email;
       this.country = editItem.country_id;
       this.contact = editItem.contact_number;
+      let contactSplitSpace = this.contact.split(" ");
+      this.primary = contactSplitSpace[0];
+      this.contact = contactSplitSpace[1];
     }
     else {
       this.isEdited = false;
-      this.pageTitle = 'New User';
+      this.pageTitle = 'Add Org Chart';
     }
     /*this.first_name = "Kannan";
     this.last_name = "Nagarathinam";
@@ -165,6 +170,23 @@ export class AddorgchartonePage {
       accountInfo: this.userInfo
     });
   }
+
+  updateEntry(first_name, last_name, email, country, contact, createdby) {
+    this.userInfo.push({
+      photo: this.photo,
+      first_name: first_name,
+      last_name: last_name,
+      email: email,
+      country: country,
+      contact: contact,
+      createdby: createdby,
+
+    });
+    this.nav.setRoot(AddorgcharttwoPage, {
+      accountInfo: this.userInfo,
+      record: this.NP.get("record")
+    });
+  }
   getJsonCountryListData() {
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
@@ -184,14 +206,16 @@ export class AddorgchartonePage {
       last_name: string = this.form.controls["last_name"].value,
       email: string = this.form.controls["email"].value,
       country: string = this.form.controls["country"].value,
-      contact: string = this.form.controls["contact"].value;
-    console.log(this.form.controls);
+      contact: string = this.form.controls["contact"].value,
+      primary: string = this.form.controls["primary"].value;
+    contact = primary + " " + contact;
+    console.log(contact);
     /*if (this.addedImgLists) {
       this.isUploadedProcessing = true;
     }*/
     if (this.isUploadedProcessing == false) {
       if (this.isEdited) {
-        //this.updateEntry(first_name, last_name, email, country, contact, this.userId);
+        this.updateEntry(first_name, last_name, email, country, contact, this.userId);
       }
       else {
         this.createEntry(first_name, last_name, email, country, contact, this.userId);
