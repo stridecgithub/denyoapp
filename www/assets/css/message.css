@@ -51,7 +51,7 @@
 	font-size:12px;
 	list-style:none;
 }
-.subx{background: #fff; padding: 0px; position: absolute;border:1px solid #ccc;font-size:14px;}
+.subx{background: #fff; padding: 0px; position: absolute;border:1px solid #ccc;font-size:14px;max-height:350px;overflow-y: scroll;}
 #mwin input[type=button], input[type=submit], input[type=reset],#message button {
     background-color: #4CAF50;
     border: none;
