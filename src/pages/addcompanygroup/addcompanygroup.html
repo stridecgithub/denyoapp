@@ -70,13 +70,13 @@
 
           <p> {{ country | json}} </p>
         </div-->
-        <ion-item>
+        <!--ion-item>
           <ion-select>
             <ion-option *ngFor="let cc of currencyList" value="{{ cc }}">
               <span class='flag-icon flag-icon-{{ cc.slice(0, -1) }}'></span> {{ cc }}
             </ion-option>
           </ion-select>
-        </ion-item>
+        </ion-item-->
         <ion-item *ngIf="hideActionButton">
           <button ion-button color="primary" text-center block [disabled]="!form.valid">Complete and Save</button>
         </ion-item>
