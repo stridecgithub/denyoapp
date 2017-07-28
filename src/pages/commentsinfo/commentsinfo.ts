@@ -47,6 +47,9 @@ export class CommentsinfoPage {
   public reportAllLists = [];
   public loginas: any;
   public udetails:any;
+  public comments:any;
+  public service_subject:any;
+  public addedImgLists=[];
   public loadingMoreDataContent: string;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   public totalCount;
@@ -174,12 +177,16 @@ export class CommentsinfoPage {
     this.nav.setRoot(NotificationPage);
   }
   previous() {
+   
     this.nav.setRoot(UnitdetailsPage, {
       record: this.NP.get("record")
     });
   }
   
   doAdd() {
+     this.service_subject='';
+    this.comments='';
+    this.addedImgLists=[];
     localStorage.setItem("microtime", "");
     this.nav.setRoot(AddcommentsinfoPage, {
       record: this.NP.get("record"),

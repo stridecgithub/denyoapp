@@ -80,7 +80,7 @@ export class AddorgchartonePage {
       "last_name": ["", Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
       "country": ["", Validators.required],
       "contact": ["", Validators.required],
-      "primary": ["", Validators.required],
+      "primary": ["", Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(5)])],
       /// "email": ["", Validators.required]
       'email': ['', Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(50), Validators.pattern(/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i)])],
     });
@@ -125,9 +125,11 @@ export class AddorgchartonePage {
       this.email = editItem.email;
       this.country = editItem.country_id;
       this.contact = editItem.contact_number;
-      let contactSplitSpace = this.contact.split(" ");
-      this.primary = contactSplitSpace[0];
-      this.contact = contactSplitSpace[1];
+      if (this.contact != undefined) {
+        let contactSplitSpace = this.contact.split(" ");
+        this.primary = contactSplitSpace[0];
+        this.contact = contactSplitSpace[1];
+      }
     }
     else {
       this.isEdited = false;

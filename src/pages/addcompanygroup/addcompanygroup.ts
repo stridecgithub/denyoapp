@@ -64,7 +64,7 @@ export class AddcompanygroupPage {
       "companygroup_name": ["", Validators.required],
       "country": ["", Validators.required],
       "contact": ["", Validators.required],
-      "primary": ["", Validators.required],
+     "primary": ["", Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(5)])],
       "address": [""]
     });
 

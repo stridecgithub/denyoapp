@@ -80,7 +80,7 @@ export class AdduserPage {
       "last_name": ["", Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
       "country": ["", Validators.required],
       "contact": ["", Validators.required],
-      "primary": ["", Validators.required],
+      "primary": ["", Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(5)])],
       /// "email": ["", Validators.required]
       'email': ['', Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(50), Validators.pattern(/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i)])],
     });
@@ -197,9 +197,14 @@ export class AdduserPage {
     this.email = item.email;
     this.country = item.country;
     this.contact = item.contact;
-     let contactSplitSpace=this.contact.split(" ");
-    this.primary=contactSplitSpace[0];
-     this.contact=contactSplitSpace[1];
+    console.log("Contact Number"+this.contact);
+    if (this.contact != undefined) {
+      let contactSplitSpace = this.contact.split(" ");
+      this.primary = contactSplitSpace[0];
+      this.contact = contactSplitSpace[1];
+    }
+
+
     this.photo = item.photo;
     this.recordID = item.userid;
   }

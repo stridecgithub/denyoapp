@@ -33,10 +33,10 @@ export class ServicinginfoPage {
   public pageTitle: string;
   public unit_id: any;
   public atMentionedInfo = [];
-  public service_subject:any;
-  public service_remark:any;
-public msgcount:any;
-  public notcount:any;
+  public service_subject: any;
+  public service_remark: any;
+  public msgcount: any;
+  public notcount: any;
   public reportData: any =
   {
     status: '',
@@ -47,6 +47,7 @@ public msgcount:any;
   }
   public userId: any;
   public reportAllLists = [];
+  public addedServiceImgLists=[];
   public loginas: any;
   public loadingMoreDataContent: string;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
@@ -62,19 +63,19 @@ public msgcount:any;
     console.log('ionViewDidLoad ServicinginfoPage');
   }
   ionViewWillEnter() {
-     let //body: string = "loginid=" + this.userId,
+    let //body: string = "loginid=" + this.userId,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
       url: any = this.apiServiceURL + "/msgnotifycount?loginid=" + this.userId;
     console.log(url);
-   // console.log(body);
+    // console.log(body);
 
     this.http.get(url, options)
       .subscribe((data) => {
         console.log("Count Response Success:" + JSON.stringify(data.json()));
-       this.msgcount=data.json().msgcount;
-        this.notcount=data.json().notifycount;
+        this.msgcount = data.json().msgcount;
+        this.notcount = data.json().notifycount;
       });
 
     if (this.NP.get("record")) {
@@ -84,7 +85,7 @@ public msgcount:any;
     this.reportData.sort = "service_id";
     this.doService();
 
-    
+
     // Atmentioned Tag Storage
   }
   presentLoading(parm) {
@@ -196,8 +197,9 @@ public msgcount:any;
     this.nav.setRoot(RolePage);
   }
   doAdd() {
-     this.service_subject='';
-    this.service_remark='';
+    this.service_subject = '';
+    this.service_remark = '';
+    this.addedServiceImgLists = [];
     localStorage.setItem("microtime", "");
     this.nav.setRoot(AddserviceinfoPage, {
       record: this.NP.get("record"),
@@ -208,8 +210,8 @@ public msgcount:any;
 
 
   doRequest() {
-    this.service_subject='';
-    this.service_remark='';
+    this.service_subject = '';
+    this.service_remark = '';
     localStorage.setItem("microtime", "");
     this.nav.setRoot(AddrequestsupportPage, {
       record: this.NP.get("record"),
@@ -285,7 +287,7 @@ public msgcount:any;
     });
     notification.present();
   }
-    onSegmentChanged(val) {
+  onSegmentChanged(val) {
     let splitdata = val.split(",");
     this.reportData.sort = splitdata[0];
     this.reportData.sortascdesc = splitdata[1];

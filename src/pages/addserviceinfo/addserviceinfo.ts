@@ -47,8 +47,8 @@ export class AddserviceinfoPage {
   public serviced_datetime: any;
   public service_subject: any;
   public service_remark: any;
-   public msgcount:any;
-  public notcount:any;
+  public msgcount: any;
+  public notcount: any;
   public next_service_date: any;
   public service_priority: any;
   is_request: boolean
@@ -120,19 +120,19 @@ export class AddserviceinfoPage {
     console.log('ionViewDidLoad AddserviceinfoPage');
   }
   ionViewWillEnter() {
-     let //body: string = "loginid=" + this.userId,
+    let //body: string = "loginid=" + this.userId,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
       url: any = this.apiServiceURL + "/msgnotifycount?loginid=" + localStorage.getItem("userInfoId");
     console.log(url);
-   // console.log(body);
+    // console.log(body);
 
     this.http.get(url, options)
       .subscribe((data) => {
         console.log("Count Response Success:" + JSON.stringify(data.json()));
-       this.msgcount=data.json().msgcount;
-        this.notcount=data.json().notifycount;
+        this.msgcount = data.json().msgcount;
+        this.notcount = data.json().notifycount;
       });
     this.getPrority(1);
     let users = localStorage.getItem("atMentionedStorage");
@@ -159,7 +159,7 @@ export class AddserviceinfoPage {
     this.unitDetailData.location = localStorage.getItem("unitlocation");
     this.unitDetailData.projectname = localStorage.getItem("unitprojectname");
     this.unitDetailData.colorcodeindications = localStorage.getItem("unitcolorcode");
-    console.log("Unit Details Color Code:"+this.unitDetailData.colorcodeindications);
+    console.log("Unit Details Color Code:" + this.unitDetailData.colorcodeindications);
     this.unitDetailData.lat = localStorage.getItem("unitlat");
     this.unitDetailData.lng = localStorage.getItem("unitlng");
 
@@ -308,7 +308,7 @@ export class AddserviceinfoPage {
       console.log("is_request:" + is_request);
       console.log("service_subject:" + service_subject);
       console.log("nextServiceDate:" + this.unitDetailData.nextServiceDate);
-     
+
       //let d = new Date();
       //let micro_timestamp = d.getFullYear() + "" + d.getMonth() + "" + d.getDate() + "" + d.getHours() + "" + d.getMinutes() + "" + d.getSeconds();
       if (this.isEdited) {
@@ -372,6 +372,7 @@ export class AddserviceinfoPage {
         // If the request was successful notify the user
         if (data.status === 200) {
           localStorage.setItem("microtime", "");
+          this.addedServiceImgLists = [];
           this.sendNotification(`Servicing info was successfully added`);
           localStorage.setItem("atMentionResult", '');
           this.nav.setRoot(ServicinginfoPage, {
@@ -433,6 +434,7 @@ export class AddserviceinfoPage {
         // If the request was successful notify the user
         if (data.status === 200) {
           localStorage.setItem("microtime", "");
+          this.addedServiceImgLists = [];
           this.sendNotification(`Servicing info  was successfully updated`);
           localStorage.setItem("atMentionResult", '');
           this.nav.setRoot(ServicinginfoPage, {

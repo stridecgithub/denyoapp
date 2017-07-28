@@ -1,5 +1,5 @@
 import { Component, NgZone } from '@angular/core';
-import {  NavController, NavParams, ToastController } from 'ionic-angular';
+import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
 //import { UserPage } from '../user/user';
@@ -40,10 +40,11 @@ export class AddorgcharttwoPage {
   public userId: any;
   public country: any;
   public contact: any;
-   public msgcount:any;
-  public notcount:any;
+  public len = 0;
+  public msgcount: any;
+  public notcount: any;
   public createdby: any;
-  public companyId:any;
+  public companyId: any;
   public photo: any;
   public username: any;
   public password: any;
@@ -78,7 +79,7 @@ export class AddorgcharttwoPage {
     public http: Http,
     public NP: NavParams,
     public fb: FormBuilder,
-    public toastCtrl: ToastController,   
+    public toastCtrl: ToastController,
     private transfer: Transfer,
     private ngZone: NgZone) {
     this.loginas = localStorage.getItem("userInfoName");
@@ -100,19 +101,19 @@ export class AddorgcharttwoPage {
   // Determine whether we adding or editing a record
   // based on any supplied navigation parameters
   ionViewWillEnter() {
-     let //body: string = "loginid=" + this.userId,
+    let //body: string = "loginid=" + this.userId,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
       url: any = this.apiServiceURL + "/msgnotifycount?loginid=" + this.userId;
     console.log(url);
-   // console.log(body);
+    // console.log(body);
 
     this.http.get(url, options)
       .subscribe((data) => {
         console.log("Count Response Success:" + JSON.stringify(data.json()));
-       this.msgcount=data.json().msgcount;
-        this.notcount=data.json().notifycount;
+        this.msgcount = data.json().msgcount;
+        this.notcount = data.json().notifycount;
       });
     this.resetFields();
     this.getCompanyGroupListData();
@@ -150,7 +151,7 @@ export class AddorgcharttwoPage {
       this.contact = info[keyindex]['contact'];
       this.photo = info[keyindex]['photo'];
       this.createdby = info[keyindex]['createdby'];
-    
+
     }
   }
 
@@ -352,7 +353,7 @@ export class AddorgcharttwoPage {
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/getcompanies?loginid="+this.userId;
+      url: any = this.apiServiceURL + "/getcompanies?loginid=" + this.userId;
     let res;
     this.http.get(url, options)
       .subscribe(data => {
@@ -366,19 +367,20 @@ export class AddorgcharttwoPage {
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-     url: any = this.apiServiceURL + "/getstaffs?loginid="+this.userId+"&company_id="+this.companyId;
+      url: any = this.apiServiceURL + "/getstaffs?loginid=" + this.userId + "&company_id=" + this.companyId;
     let res;
     this.http.get(url, options)
       .subscribe(data => {
         res = data.json();
+        this.len = res.TotalCount;
         this.responseResultReportTo = res.staffslist;
       });
 
   }
 
   previous() {
-    this.navCtrl.setRoot(AddorgchartonePage, {     
-       record:this.NP.get("record")
+    this.navCtrl.setRoot(AddorgchartonePage, {
+      record: this.NP.get("record")
     });
   }
   fileTrans(path) {
@@ -439,7 +441,7 @@ export class AddorgcharttwoPage {
     });
   }
 
-   notification() {
+  notification() {
     this.navCtrl.setRoot(NotificationPage);
   }
   redirectToUser() {
@@ -456,7 +458,7 @@ export class AddorgcharttwoPage {
   }
   redirectToSettings() {
     this.navCtrl.setRoot(MyaccountPage);
-  }  
+  }
 
 }
 

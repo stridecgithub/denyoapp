@@ -105,6 +105,8 @@ export class OrgchartPage {
         if (data.status === 200) {
 
           this.sendNotification(`Orgchart was successfully deleted`);
+            this.parents = [];
+          this.doOrgChart();
         }
         // Otherwise let 'em know anyway
         else {
