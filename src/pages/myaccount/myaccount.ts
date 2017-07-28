@@ -27,6 +27,7 @@ import { EmailPage } from '../email/email';
 export class MyaccountPage {
   public pageTitle: string;
   public photo: any;
+  private permissionMessage: string = "Permission denied for access this page. Please contact your administrator";
   public name: any;
   public msgcount:any;
   public notcount:any;
@@ -41,11 +42,23 @@ export class MyaccountPage {
   public accountcreatedby: any;
   public userId: any;
   public item: any;
+  public VIEWACCESS: any;
+  public CREATEACCESS: any;
+  public EDITACCESS: any;
+  public DELETEACCESS: any;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   constructor(public http: Http, public navCtrl: NavController, public navParams: NavParams, public nav: NavController) {
     this.pageTitle = 'My Account';
     this.loginas = localStorage.getItem("userInfoName");
     this.userId = localStorage.getItem("userInfoId");
+    this.VIEWACCESS = localStorage.getItem("SETTINGS_MYACCOUNT_VIEW");
+    console.log("Role Authority for Unit Listing View:"+this.VIEWACCESS );
+    this.CREATEACCESS = localStorage.getItem("SETTINGS_MYACCOUNT_CREATE");
+    console.log("Role Authority for Unit Listing Create:"+this.CREATEACCESS );
+    this.EDITACCESS = localStorage.getItem("SETTINGS_MYACCOUNT_EDIT");
+    console.log("Role Authority for Unit Listing Edit:"+this.EDITACCESS )
+    this.DELETEACCESS = localStorage.getItem("SETTINGS_MYACCOUNT_DELETE");
+    console.log("Role Authority for Unit Listing Delete:"+this.DELETEACCESS )
   }
 
 

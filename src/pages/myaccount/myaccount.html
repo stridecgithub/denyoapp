@@ -53,6 +53,13 @@
     </ion-buttons>
   </ion-navbar>
 </ion-header>
+<ion-content padding class="ion-content" *ngIf="VIEWACCESS==0">
+  <p style="color: red;
+    position: relative;
+    margin-top: 50%;
+   text-align:center;
+    font-size: 12pt;">{{permissionMessage}}</p>
+</ion-content>
 <ion-content padding   class="ion-content">
 
   <div class="div-alignmnt">
@@ -81,7 +88,7 @@
   <div class="div-alignmnt"> <b>Country:</b> {{country}}</div>
 
   <div class="div-alignmnt"> <b>Job Position:</b> {{job_position}}</div>
-  <button ion-button color="greenm" text-center block (click)="doEdit(userId)">Edit Profile</button>
+  <button ion-button color="greenm" text-center block (click)="doEdit(userId)"  *ngIf="EDITACCESS==1">Edit Profile</button>
 </ion-content>
 
 <ion-footer color="bluedark">

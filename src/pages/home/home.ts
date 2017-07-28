@@ -90,7 +90,7 @@ export class HomePage {
             // 1 - Child Module My Account
             // 6 - Parent Module Settings
             if (roleparseData[rle]['page_name'] == '1' && roleparseData[rle]['module_name'] == '6') {
-              localStorage.setItem("SETTINGS_MYACCOUN_VIEW", roleparseData[rle]['view_action']);
+              localStorage.setItem("SETTINGS_MYACCOUNT_VIEW", roleparseData[rle]['view_action']);
               localStorage.setItem("SETTINGS_MYACCOUNT_CREATE", roleparseData[rle]['create_action']);
               localStorage.setItem("SETTINGS_MYACCOUNT_EDIT", roleparseData[rle]['edit_action']);
               localStorage.setItem("SETTINGS_MYACCOUNT_DELETE", roleparseData[rle]['delete_action']);

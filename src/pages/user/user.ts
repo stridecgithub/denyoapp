@@ -34,6 +34,11 @@ export class UserPage {
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   public totalCount;
   pet: string = "ALL";
+   private permissionMessage: string = "Permission denied for access this page. Please contact your administrator";
+   public VIEWACCESS: any;
+  public CREATEACCESS: any;
+  public EDITACCESS: any;
+  public DELETEACCESS: any;
   public sortby = 2;
   public vendorsort = "asc";
   public ascending = true;
@@ -55,6 +60,14 @@ export class UserPage {
     this.pageTitle = 'Users';
     this.companyId = localStorage.getItem("userInfoCompanyId");
     this.loginas = localStorage.getItem("userInfoName");
+    this.VIEWACCESS = localStorage.getItem("SETTINGS_USERLIST_VIEW");
+    console.log("Role Authority for Unit Listing View:"+this.VIEWACCESS );
+    this.CREATEACCESS = localStorage.getItem("SETTINGS_USERLIST_CREATE");
+    console.log("Role Authority for Unit Listing Create:"+this.CREATEACCESS );
+    this.EDITACCESS = localStorage.getItem("SETTINGS_USERLIST_EDIT");
+    console.log("Role Authority for Unit Listing Edit:"+this.EDITACCESS )
+    this.DELETEACCESS = localStorage.getItem("SETTINGS_USERLIST_DELETE");
+    console.log("Role Authority for Unit Listing Delete:"+this.DELETEACCESS )
   }
 
   ionViewDidLoad() {
@@ -144,9 +157,13 @@ export class UserPage {
        this.msgcount=data.json().msgcount;
         this.notcount=data.json().notifycount;
       });
-    this.reportData.startindex = 0;
+   
+    if(this.VIEWACCESS > 0)
+    {
+       this.reportData.startindex = 0;
     this.reportData.sort = "staff_id";
     this.doUser();
+    }
   }
 
   doAdd() {
