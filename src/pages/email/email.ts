@@ -45,6 +45,7 @@ export class EmailPage {
   public addedImgListsArray = [];
   public addedImgLists = [];
   public attachedFileLists = [];
+  private permissionMessage: string = "Permission denied for access this page. Please contact your administrator";
   public composemessagecontent: any;
   progress: number;
   public personalhashtag;
