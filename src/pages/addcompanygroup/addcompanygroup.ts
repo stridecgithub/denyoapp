@@ -32,7 +32,7 @@ export class AddcompanygroupPage {
   public address: any;
   public country: any;
   public contact: any;
-  public primary:any;
+  public primary: any;
   public userId: any;
   public msgcount: any;
   public selectedCountry: any;
@@ -64,7 +64,7 @@ export class AddcompanygroupPage {
       "companygroup_name": ["", Validators.required],
       "country": ["", Validators.required],
       "contact": ["", Validators.required],
-     "primary": ["", Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(5)])],
+      "primary": ["", Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(5)])],
       "address": [""]
     });
 
@@ -1095,10 +1095,11 @@ export class AddcompanygroupPage {
     this.address = item.address;
     this.country = item.country;
     this.contact = item.contact;
-
-    let contactSplitSpace=this.contact.split(" ");
-    this.primary=contactSplitSpace[0];
-     this.contact=contactSplitSpace[1];
+    if (this.contact != undefined) {
+      let contactSplitSpace = this.contact.split(" ");
+      this.primary = contactSplitSpace[0];
+      this.contact = contactSplitSpace[1];
+    }
     this.recordID = item.companygroup_id;
   }
 

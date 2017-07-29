@@ -79,7 +79,7 @@
         <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
         </ion-refresher-content>
       </ion-refresher>
-      <ion-list *ngIf="totalCount!=0">
+      <ion-list *ngIf="totalCount!=0  && this.MESSAGEINBOXVIEWACCESS=='1'">
         <ion-item-sliding *ngFor="let item of inboxLists;">
           <ion-item>
             <button (click)="favorite(item.message_id)" *ngIf="item.is_favorite==1" class="favorite" style="float: right ;width:50px;height:50px;background-color:#ffffff"></button>
@@ -123,7 +123,7 @@
         <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
         </ion-refresher-content>
       </ion-refresher>
-      <ion-list *ngIf="totalCountSend!=0">
+      <ion-list *ngIf="totalCountSend!=0 && this.MESSAGESENTVIEWACCESS=='1'">
         <ion-item-sliding *ngFor="let item of sendLists;">
           <ion-item (click)="doDetails(item)">           
             <h2>{{item.messages_subject}}</h2>

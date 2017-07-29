@@ -450,7 +450,7 @@ export class AddcalendarPage {
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/units?is_mobile=1&startindex=0&results=30&sort=unit_id&dir=asc&company_id=" + this.companyId + "&loginid=" + this.userId;
+      url: any = this.apiServiceURL + "/units?is_mobile=1&startindex=0&results=300&sort=unit_id&dir=asc&company_id=" + this.companyId + "&loginid=" + this.userId;
     let res;
     console.log("URL" + url);
     this.http.get(url, options)

@@ -120,8 +120,10 @@ export class AdduserPage {
       this.readOnly = false;
       this.hideActionButton = true;
       if (this.NP.get("record").photo) {
+        if(this.NP.get("record").photo!='undefined'){
         this.addedImgLists = this.apiServiceURL + "/staffphotos/" + this.NP.get("record").photo;
         console.log(this.addedImgLists);
+        }
       }
       let editItem = this.NP.get("record");
       this.first_name = editItem.firstname;
@@ -129,6 +131,12 @@ export class AdduserPage {
       this.email = editItem.email;
       this.country = editItem.country_id;
       this.contact = editItem.contact_number;
+      if (this.contact != undefined) {
+        let contactSplitSpace = this.contact.split(" ");
+        this.primary = contactSplitSpace[0];
+        this.contact = contactSplitSpace[1];
+      }
+
     }
     else {
       this.isEdited = false;
@@ -196,9 +204,9 @@ export class AdduserPage {
     this.last_name = item.last_name;
     this.email = item.email;
     this.country = item.country;
-    this.contact = item.contact;
-    console.log("Contact Number"+this.contact);
-    if (this.contact != undefined) {
+    this.contact = item.contact_number;
+    console.log("Contact Number" + item.contact_number);
+    if (this.contact != '') {
       let contactSplitSpace = this.contact.split(" ");
       this.primary = contactSplitSpace[0];
       this.contact = contactSplitSpace[1];

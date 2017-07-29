@@ -73,8 +73,22 @@ export class EmailPage {
   public selectedAction = [];
   public message_readstatus: any;
   item: any;
-   public msgcount:any;
-  public notcount:any;
+
+  // Authority for message send
+  public MESSAGESENTVIEWACCESS;
+  public MESSAGESENTCREATEACCESS;
+  public MESSAGESENTEDITACCESS;
+  public MESSAGESENTDELETEACCESS;
+  // Authority for message send
+  // Authority for message inbox
+  public MESSAGEINBOXVIEWACCESS;
+  public MESSAGEINBOXCREATEACCESS;
+  public MESSAGEINBOXEDITACCESS;
+  public MESSAGEINBOXDELETEACCESS;
+  // Authority for message inbox
+
+  public msgcount: any;
+  public notcount: any;
   public to: any;
   public subject: any;
   public isEdited: boolean = false;
@@ -104,6 +118,19 @@ export class EmailPage {
   constructor(public keyboard: Keyboard, private file: File, public http: Http, public loadingCtrl: LoadingController, public alertCtrl: AlertController, public NP: NavParams, public nav: NavController, public toastCtrl: ToastController, public navParams: NavParams, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera, private filechooser: FileChooser,
     private transfer: Transfer,
     private ngZone: NgZone) {
+
+    // Authority for message send
+    this.MESSAGESENTVIEWACCESS = localStorage.getItem("MESSAGE_SENT_VIEW");
+    this.MESSAGESENTCREATEACCESS = localStorage.getItem("MESSAGE_SENT_CREATE");
+    this.MESSAGESENTEDITACCESS = localStorage.getItem("MESSAGE_SENT_EDIT");
+    this.MESSAGESENTDELETEACCESS = localStorage.getItem("MESSAGE_SENT_DELETE");
+    // Authority for message send
+    // Authority for message inbox
+    this.MESSAGEINBOXVIEWACCESS = localStorage.getItem("MESSAGE_INBOX_VIEW");
+    this.MESSAGEINBOXCREATEACCESS = localStorage.getItem("MESSAGE_INBOX_CREATE");
+    this.MESSAGEINBOXEDITACCESS = localStorage.getItem("MESSAGE_INBOX_EDIT");
+    this.MESSAGEINBOXDELETEACCESS = localStorage.getItem("MESSAGE_INBOX_DELETE");
+    // Authority for message inbox
 
     this.priority_highclass = '';
     this.priority_lowclass = '';
@@ -153,13 +180,13 @@ export class EmailPage {
       options: any = new RequestOptions({ headers: headers }),
       url: any = this.apiServiceURL + "/msgnotifycount?loginid=" + this.userId;
     console.log(url);
-   // console.log(body);
+    // console.log(body);
 
     this.http.get(url, options)
       .subscribe((data) => {
         console.log("Count Response Success:" + JSON.stringify(data.json()));
-       this.msgcount=data.json().msgcount;
-        this.notcount=data.json().notifycount;
+        this.msgcount = data.json().msgcount;
+        this.notcount = data.json().notifycount;
       });
     this.keyboard.onKeyboardShow().subscribe(() => { this.valueforngif = false })
     this.keyboard.onKeyboardHide().subscribe(() => { this.valueforngif = true })
