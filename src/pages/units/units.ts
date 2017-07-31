@@ -204,6 +204,7 @@ export class UnitsPage {
     console.log('E');
   }
   ionViewWillEnter() {
+    localStorage.setItem("viewlist", "");
     let //body: string = "loginid=" + this.userId,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
