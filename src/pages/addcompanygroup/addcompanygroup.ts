@@ -38,6 +38,7 @@ export class AddcompanygroupPage {
   public selectedCountry: any;
   public countries: any;
   public notcount: any;
+  public borderbottomredvalidation: any;
   public responseResultCountry: any;
   public currencyList: any;
 
@@ -78,6 +79,7 @@ export class AddcompanygroupPage {
   // Determine whether we adding or editing a record
   // based on any supplied navigation parameters
   ionViewWillEnter() {
+    this.borderbottomredvalidation = '';
     let //body: string = "loginid=" + this.userId,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
@@ -1103,8 +1105,17 @@ export class AddcompanygroupPage {
     this.recordID = item.companygroup_id;
   }
 
-
-
+  getPrimaryContact(ev) {
+    console.log(ev.target.value);
+    let char = ev.target.value.toString();
+    if (char.length > 5) {
+      console.log('Reached five characters above');
+      this.borderbottomredvalidation = 'border-bottom-validtion';
+    } else {
+      console.log('Reached five characters below');
+      this.borderbottomredvalidation = '';
+    }
+  }
   // Save a new record that has been added to the page's HTML form
   // Use angular's http post method to submit the record data
   // to our remote PHP script (note the body variable we have created which

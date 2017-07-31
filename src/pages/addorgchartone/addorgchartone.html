@@ -87,7 +87,7 @@
 
          <div>
             <ion-label stacked>Contact Number <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
-            <ion-input [disabled]="readOnly" type="text" formControlName="primary" [(ngModel)]="primary" style="width:19%;float:left;"></ion-input>
+            <ion-input class="{{borderbottomredvalidation}}" [disabled]="readOnly" type="text" formControlName="primary" (keyup)="getPrimaryContact($event)" [(ngModel)]="primary" style="width:19%;float:left;"></ion-input>
             <ion-input [disabled]="readOnly" type="text" formControlName="contact" [(ngModel)]="contact" style="width:79%;float:right;"></ion-input>
           </div>
        

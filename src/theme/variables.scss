@@ -870,7 +870,10 @@ page-addcompanygroup {
     background-color: gray;
 } 
 
-
+.border-bottom-validtion{
+border-bottom-color: red;
+border-bottom-width: 2px;
+}
 
     .messagecount{
    color: white;
@@ -1094,6 +1097,10 @@ page-addorgchartone {
     background-color: gray;
 } 
 
+.border-bottom-validtion{
+border-bottom-color: red;
+border-bottom-width: 2px;
+}
 
 
     .messagecount{
@@ -2852,7 +2859,10 @@ page-adduser {
     /* border: 1px solid; */
     background-color: gray;
 } 
-
+.border-bottom-validtion{
+border-bottom-color: red;
+border-bottom-width: 2px;
+}
 
 
     .messagecount{
@@ -3822,6 +3832,12 @@ page-editprofilestepone {
     .ion-content{
     background-color:white;
 }
+
+.border-bottom-validtion{
+border-bottom-color: red;
+border-bottom-width: 2px;
+}
+
 .notificationcount{
   color: white;
     border-radius: 50px;

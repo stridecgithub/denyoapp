@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {  NavController, ToastController, AlertController, NavParams } from 'ionic-angular';
+import { NavController, ToastController, AlertController, NavParams } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { AddreporttemplatePage } from '../addreporttemplate/addreporttemplate';
@@ -34,15 +34,15 @@ export class ReporttemplatePage {
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   public templatenamehash;
   public templatenamecomm;
-   private permissionMessage: string = "Permission denied for access this page. Please contact your administrator";
-   public VIEWACCESS: any;
+  private permissionMessage: string = "Permission denied for access this page. Please contact your administrator";
+  public VIEWACCESS: any;
   public CREATEACCESS: any;
   public EDITACCESS: any;
   public DELETEACCESS: any;
   public totalCount;
   public reporttemplate;
- public msgcount:any;
-  public notcount:any;
+  public msgcount: any;
+  public notcount: any;
   pet: string = "ALL";
   public reportData: any =
   {
@@ -58,14 +58,14 @@ export class ReporttemplatePage {
     this.loginas = localStorage.getItem("userInfoName");
     this.userId = localStorage.getItem("userInfoId");
     this.VIEWACCESS = localStorage.getItem("SETTINGS_REPORTTEMPLATE_VIEW");
-    console.log("Role Authority for Unit Listing View:"+this.VIEWACCESS );
+    console.log("Role Authority for Unit Listing View:" + this.VIEWACCESS);
     this.CREATEACCESS = localStorage.getItem("SETTINGS_REPORTTEMPLATE_CREATE");
-    console.log("Role Authority for Unit Listing Create:"+this.CREATEACCESS );
+    console.log("Role Authority for Unit Listing Create:" + this.CREATEACCESS);
     this.EDITACCESS = localStorage.getItem("SETTINGS_REPORTTEMPLATE_EDIT");
-    console.log("Role Authority for Unit Listing Edit:"+this.EDITACCESS );
+    console.log("Role Authority for Unit Listing Edit:" + this.EDITACCESS);
     this.DELETEACCESS = localStorage.getItem("SETTINGS_REPORTTEMPLATE_DELETE");
-    console.log("Role Authority for Unit Listing Delete:"+this.DELETEACCESS );
-     this.pageTitle = 'Report Template';
+    console.log("Role Authority for Unit Listing Delete:" + this.DELETEACCESS);
+    this.pageTitle = 'Report Template';
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad ReporttemplatePage');
@@ -83,26 +83,25 @@ export class ReporttemplatePage {
   }
 
   ionViewWillEnter() {
-     let //body: string = "loginid=" + this.userId,
+    let //body: string = "loginid=" + this.userId,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
       url: any = this.apiServiceURL + "/msgnotifycount?loginid=" + this.userId;
     console.log(url);
-   // console.log(body);
+    // console.log(body);
 
     this.http.get(url, options)
       .subscribe((data) => {
         console.log("Count Response Success:" + JSON.stringify(data.json()));
-       this.msgcount=data.json().msgcount;
-        this.notcount=data.json().notifycount;
+        this.msgcount = data.json().msgcount;
+        this.notcount = data.json().notifycount;
       });
-    this.doReport();
-    this.doReportTemplate();
+    if (this.VIEWACCESS > 0) {
+      this.doReport();
+    }
   }
-  doReportTemplate() {
 
-  }
   doRefresh(refresher) {
     console.log('doRefresh function calling...');
     this.reportData.startindex = 0;
@@ -248,7 +247,7 @@ export class ReporttemplatePage {
   previous() {
     this.nav.setRoot(HomePage);
   }
- notification() {
+  notification() {
     this.nav.setRoot(NotificationPage);
   }
   redirectToUser() {

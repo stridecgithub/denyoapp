@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {  NavController, ToastController, AlertController, NavParams } from 'ionic-angular';
+import { NavController, ToastController, AlertController, NavParams } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { AddunitgroupPage } from '../addunitgroup/addunitgroup';
@@ -30,10 +30,10 @@ export class UnitgroupPage {
 
   public pageTitle: string;
   public loginas: any;
-  public msgcount:any;
-  public notcount:any;
-   private permissionMessage: string = "Permission denied for access this page. Please contact your administrator";
-   public VIEWACCESS: any;
+  public msgcount: any;
+  public notcount: any;
+  private permissionMessage: string = "Permission denied for access this page. Please contact your administrator";
+  public VIEWACCESS: any;
   public CREATEACCESS: any;
   public EDITACCESS: any;
   public DELETEACCESS: any;
@@ -58,13 +58,13 @@ export class UnitgroupPage {
     this.userId = localStorage.getItem("userInfoId");
     this.companyId = localStorage.getItem("userInfoCompanyId");
     this.VIEWACCESS = localStorage.getItem("UNITS_UNITGROUP_VIEW");
-    console.log("Role Authority for Unit Listing View:"+this.VIEWACCESS );
+    console.log("Role Authority for Unit Listing View:" + this.VIEWACCESS);
     this.CREATEACCESS = localStorage.getItem("UNITS_UNITGROUP_CREATE");
-    console.log("Role Authority for Unit Listing Create:"+this.CREATEACCESS );
+    console.log("Role Authority for Unit Listing Create:" + this.CREATEACCESS);
     this.EDITACCESS = localStorage.getItem("UNITS_UNITGROUP_EDIT");
-    console.log("Role Authority for Unit Listing Edit:"+this.EDITACCESS );
+    console.log("Role Authority for Unit Listing Edit:" + this.EDITACCESS);
     this.DELETEACCESS = localStorage.getItem("UNITS_UNITGROUP_DELETE");
-    console.log("Role Authority for Unit Listing Delete:"+this.DELETEACCESS );
+    console.log("Role Authority for Unit Listing Delete:" + this.DELETEACCESS);
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad UnitgroupPage');
@@ -88,18 +88,20 @@ export class UnitgroupPage {
       options: any = new RequestOptions({ headers: headers }),
       url: any = this.apiServiceURL + "/msgnotifycount?loginid=" + this.userId;
     console.log(url);
-   // console.log(body);
+    // console.log(body);
 
     this.http.get(url, options)
       .subscribe((data) => {
         console.log("Count Response Success:" + JSON.stringify(data.json()));
-       this.msgcount=data.json().msgcount;
-        this.notcount=data.json().notifycount;
+        this.msgcount = data.json().msgcount;
+        this.notcount = data.json().notifycount;
       });
     this.pageTitle = "Unit Groups";
     this.reportData.startindex = 0;
     this.reportData.sort = "unitgroup_id";
-    this.dounitGroup();
+    if (this.VIEWACCESS > 0) {
+      this.dounitGroup();
+    }
   }
   dounitGroup() {
     this.colorListArr = [
@@ -296,7 +298,7 @@ export class UnitgroupPage {
     this.reportAllLists = [];
     let body: string = "unitgroupid=" + unit_id +
       "&staffs_id=" + this.userId +
-      "&is_mobile=1"+"&company_id="+this.companyId,
+      "&is_mobile=1" + "&company_id=" + this.companyId,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
@@ -367,7 +369,7 @@ export class UnitgroupPage {
     //this.dounitGroup();
   }
 
-   notification() {
+  notification() {
     this.nav.setRoot(NotificationPage);
   }
   redirectToUser() {

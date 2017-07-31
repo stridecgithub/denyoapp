@@ -34,6 +34,7 @@ export class EditprofilesteponePage {
   public last_name: any;
   public email: any;
   public username: any;
+  public borderbottomredvalidation: any;
   public password: any;
   public re_password: any;
   public photo: any;
@@ -135,7 +136,17 @@ export class EditprofilesteponePage {
   }
 
 
-
+ getPrimaryContact(ev) {
+    console.log(ev.target.value);
+    let char = ev.target.value.toString();
+    if (char.length > 5) {
+      console.log('Reached five characters above');
+      this.borderbottomredvalidation = 'border-bottom-validtion';
+    } else {
+      console.log('Reached five characters below');
+      this.borderbottomredvalidation = '';
+    }
+  }
   // Assign the navigation retrieved data to properties
   // used as models on the page's HTML form
   // Update an existing record that has been edited in the page's HTML form

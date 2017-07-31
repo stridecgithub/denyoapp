@@ -31,7 +31,7 @@ import 'intl/locale-data/jsonp/en';
 export class CalendarPage {
   public msgcount: any;
   public notcount: any;
-
+  private permissionMessage: string = "Permission denied for access this page. Please contact your administrator";
   @ViewChild('postcontent') postcontent: ElementRef;
   myVal: any;
   viewLink: any;
@@ -63,6 +63,7 @@ export class CalendarPage {
   public serviceIdentify = [];
   public alarmIdentity = [];
   public companyId: any;
+  public currentCalendarDate: any;
   public EVENTVIEWACCESS: any;
   public EVENTCREATEACCESS: any;
   public EVENTEDITACCESS: any;
@@ -127,7 +128,7 @@ export class CalendarPage {
 
     this.pageTitle = "Calendar";
     this.curDate = new Date();
-    console.log('1' + this.curDate);
+    console.log('Current Date is now when will enter:' + this.curDate);
     let yearMonth = this.splitDate(this.curDate)
     //this.dateHeaderTitle = yearMonth;
     this.onTimeSelected(this.curDate);
@@ -190,12 +191,13 @@ export class CalendarPage {
     this.calendar.currentDate = new Date();
   }
   pre() {
+
     this.calendarResultAll = [];
     this.calendarResultService = [];
     this.calendarResultEvent = [];
     this.calendarResultAlarm = [];
     let prevmonth = this.addMonthsUTC(this.calendar.currentDate, -1);
-    //console.log("nextmonth:" + prevmonth);
+    console.log("nextmonth:" + prevmonth);
     this.calendar.currentDate = prevmonth;
     let yearMonth = this.splitDate(this.calendar.currentDate)
     //this.dateHeaderTitle = yearMonth;
@@ -203,14 +205,16 @@ export class CalendarPage {
     this.calendarResultAll = [];
     this.curDate = this.calendar.currentDate;
     this.onTimeSelected(this.curDate);
+    this.createRandomEvents();
   }
   nex() {
+
     this.calendarResultAll = [];
     this.calendarResultService = [];
     this.calendarResultEvent = [];
     this.calendarResultAlarm = [];
     let nextmonth = this.addMonthsUTC(this.calendar.currentDate, 1);
-    //console.log("nextmonth:" + nextmonth);
+    console.log("nextmonth:" + nextmonth);
     this.calendar.currentDate = nextmonth;
     let yearMonth = this.splitDate(this.calendar.currentDate)
     //this.dateHeaderTitle = yearMonth;
@@ -218,6 +222,7 @@ export class CalendarPage {
     this.calendarResultAll = [];
     this.curDate = this.calendar.currentDate;
     this.onTimeSelected(this.curDate);
+    this.createRandomEvents();
   }
   splitDate(curdate) {
     //var splitDt = curdate.split("@");
@@ -232,12 +237,13 @@ export class CalendarPage {
     return number.toString().length;
   }
   onTimeSelected(ev) {
+    this.currentCalendarDate = ev;
     this.calendarResultAll = [];
     this.calendarResultService = [];
     this.calendarResultEvent = [];
     this.calendarResultAlarm = [];
 
-
+    // this.createRandomEvents();
     let dateStr;
     let month;
     let year;
@@ -407,8 +413,23 @@ export class CalendarPage {
       }
     }
     for (var j = 0; j < this.serviceIdentify.length; j += 1) {
+      let eventdate;
+      /*if (this.serviceIdentify[j]['serviced_datetime'] == '0000-00-00') {
+        eventdate = this.serviceIdentify[j]['next_service_date'] + " " + this.serviceIdentify[j]['serviced_time'];
+      } else {
+        eventdate = this.serviceIdentify[j]['serviced_datetime'];
+      }*/
 
-      let eventdate = this.serviceIdentify[j]['next_service_date'] + " " + this.serviceIdentify[j]['serviced_time'];
+      if (this.serviceIdentify[j]['serviced_datetime'] == '0000-00-00') {
+        eventdate = this.serviceIdentify[j]['next_service_date'] + " " + this.serviceIdentify[j]['serviced_time'];
+      } else {
+        if (this.serviceIdentify[j]['serviced_time'] == null) {
+          eventdate = this.serviceIdentify[j]['next_service_date'];
+        } else {
+          eventdate = this.serviceIdentify[j]['serviced_datetime'];
+        }
+      }
+
       this.calendarResultEvent.push({
         event_id: this.serviceIdentify[j]['service_id'],
         event_title: this.serviceIdentify[j]['service_subject'],
@@ -545,15 +566,43 @@ export class CalendarPage {
     notification.present();
   }
   createRandomEvents() {
+
+    let today = new Date();
+    console.log("Today is " + today);
+    console.log("Month wise Current Date:-" + this.currentCalendarDate);
+
+    // let currentdateArr=this.currentCalendarDate.split(" ");
+
+    //Sun Oct 01 2017
+    let curdate = this.currentCalendarDate.getDate();
+    let curmonth = this.currentCalendarDate.getMonth() + 1;
+
+    let mnstr;
+    if (curmonth > 9) {
+      curmonth = curmonth;
+      mnstr = '';
+      console.log("Less than 9 below 10")
+
+    } else {
+      console.log("Greater than 9 reach 10")
+      curmonth = curmonth;
+      mnstr = '0';
+
+    }
+
+
+    let curyear = this.currentCalendarDate.getFullYear();
+    let currentdate = curyear + "-" + mnstr + curmonth + "-" + curdate;
     var events = [];
 
     let
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/calendar? is_mobile=1&loginid=" + this.userId;
-    console.log(url);
-    //console.log(body);
+      url: any = this.apiServiceURL + "/calendar? is_mobile=1&loginid=" + this.userId + "&date=" + currentdate + "&companyid=" + this.companyId;
+    console.log("All Events calling API URL" + url);
+
+    // console.log(url);
 
     this.http.get(url, options)
       .subscribe((data) => {
@@ -583,7 +632,31 @@ export class CalendarPage {
         for (var j = 0; j < this.serviceIdentify.length; j += 1) {
           var startTime;
           var endTime;
-          var service_date_array = this.serviceIdentify[j]['next_service_date'].split('-');
+          // var service_date_array = this.serviceIdentify[j]['next_service_date'].split('-');
+
+          /* var service_date_array;
+           if (this.serviceIdentify[j]['serviced_datetime'] == '0000-00-00') {
+             service_date_array = this.serviceIdentify[j]['next_service_date'].split('-');
+           } else {
+             service_date_array = this.serviceIdentify[j]['serviced_datetime'].split('-');
+           }*/
+
+
+          var service_date_array;
+          if (this.serviceIdentify[j]['serviced_datetime'] == '0000-00-00') {
+            service_date_array = this.serviceIdentify[j]['next_service_date'].split('-');
+          } else {
+            if (this.serviceIdentify[j]['serviced_time'] == null) {
+              service_date_array = this.serviceIdentify[j]['next_service_date'].split('-');
+            } else {
+              service_date_array = this.serviceIdentify[j]['serviced_datetime'].split('-');
+            }
+          }
+
+
+
+
+
           var yearstr = service_date_array[0];
           var monthstr = parseInt(service_date_array[1], 10) - 1;
           var datestr = parseInt(service_date_array[2], 10);

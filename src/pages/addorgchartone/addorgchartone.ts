@@ -38,6 +38,7 @@ export class AddorgchartonePage {
   public email: any;
   public photo: any;
   public country: any;
+  public borderbottomredvalidation: any;
   public contact: any;
   public primary: any;
   public userId: any;
@@ -140,6 +141,17 @@ export class AddorgchartonePage {
     this.email = "kannanrathvalli@gmail.com";
     this.country = "238";
     this.contact = "9443976954";*/
+  }
+   getPrimaryContact(ev) {
+    console.log(ev.target.value);
+    let char = ev.target.value.toString();
+    if (char.length > 5) {
+      console.log('Reached five characters above');
+      this.borderbottomredvalidation = 'border-bottom-validtion';
+    } else {
+      console.log('Reached five characters below');
+      this.borderbottomredvalidation = '';
+    }
   }
   selectEntry(item) {
     this.first_name = item.first_name;
