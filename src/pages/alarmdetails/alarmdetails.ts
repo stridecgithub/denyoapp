@@ -31,6 +31,7 @@ export class AlarmdetailsPage {
   pet: string = "ALL";
   public sortby = 2;
   public userId: any;
+  public alarmid:any;
   public alarm_assginedby_name: any;
   public alarm_assginedto_name: any;
   public alarm_name: any;
@@ -68,6 +69,7 @@ export class AlarmdetailsPage {
     if (this.NP.get("record")) {
       console.log("Alarm Details" + JSON.stringify(this.NP.get("record")));
       console.log(this.NP.get("record").alarm_name);
+      this.alarmid=this.NP.get("record").alarm_id;
       this.alarm_name = this.NP.get("record").alarm_name;
       this.alarm_assginedby_name = this.NP.get("record").alarm_assginedby_name;
       this.alarm_assginedto_name = this.NP.get("record").alarm_assginedto_name;

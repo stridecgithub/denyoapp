@@ -36,8 +36,8 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-<div id="ajax"></div>
-  <!--div [innerHTML]="sanitizer.bypassSecurityTrustHtml(ajax)"></div-->
+
+  <div [innerHTML]="sanitizer.bypassSecurityTrustHtml(iframeContent)"></div>
 </ion-content>
 
 <ion-footer color="bluedark">

@@ -42,17 +42,20 @@
 
 <ion-content padding>
 <div>
+  <div style = "float:right">
   <button (click)="editalarm" *ngIf="estatus==1" class="edit" style="float: right ;width:50px;height:50px;background-color:#ffffff"></button>
+  <button ion-button icon-left (click)="trendlineInfo(alarmid)" class="trend" style="width:50px;height:50px;margin-right: 10px;background-color:#ffffff;border: none;
+    box-shadow: none;"
+   >
+      	
+    </button>
+    </div>
   <div style="overflow: hidden; padding-left: .5em;">
           <p><b>Fault Code:{{alarm_name}}</b>
           </p>
           <p><b>Assigned by:{{alarm_assginedby_name}}</b></p>
            <p><b>Assigned to:{{alarm_assginedto_name}}</b></p>
- <button ion-button icon-left (click)="trendlineInfo(alarmid)" class="service-info" style="margin-right: 27%;
-    margin-top: 2%;background-color:#C5021B">
-      	<ion-icon name="ios-warning-outline" style="font-size:32px"></ion-icon>
-        <span>Alarm</span>
-    </button>
+ 
         </div>
 </div>
 </ion-content>

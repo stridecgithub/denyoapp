@@ -44,18 +44,7 @@ export class TrendlinePage {
 let alarmID=this.NP.get("alarmid");
 		//$('#loadExternalURL').load('http://www.google.com');
 
-		$.ajax({
-			dataType: 'html',
-			url: 'http://denyoappv2.stridecdev.com/2/FUELLEVEL/1/showgraph',
-			success: function (data) {
-				$('#ajax').html(data);
-			}
-		});
-
-		$("#hai").click(function () {
-			//$("#payment_status_div").show("slow");
-			alert('Kannan');
-		});
+	
 		this.iframeContent = "<iframe id='filecontainer' src=" + this.apiServiceURL + "/"+alarmID+"/FUELLEVEL/1/showgraph height=350 width=100% frameborder=0></iframe>";
 
 
