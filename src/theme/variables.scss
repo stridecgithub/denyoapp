@@ -3425,8 +3425,8 @@ padding: 10px;}
 .table-bordered[_ngcontent-c1]{border:0px solid #ddd!important;}
 .calendar_pre{float:left;}
 .calendar_nex{float:right;}
-.calendar_pre span.button-inner{background:url(../img/left_arrow.png) no-repeat;width:32px;height:32px;font-size:0;}
-.calendar_nex span.button-inner{background:url(../img/right_arrow.png) no-repeat;width:32px;height:32px;font-size:0;}
+.calendar_pre span.button-inner{background:url(../img/left_arrow.png) no-repeat;width:32px;height:32px!important;font-size:0;}
+.calendar_nex span.button-inner{background:url(../img/right_arrow.png) no-repeat;width:32px;height:32px!important;font-size:0;}
 .calendar_ttl{margin-top:10px;padding-bottom:0;margin-bottom:0;}
 .calendar_ttl span{font-size:18px;}
 .list-title{margin:10px 0;}
@@ -3437,7 +3437,7 @@ ion-navbar.toolbar-md-bluedark .toolbar-background-md{background:#00569F;}
 .bar-button-menutoggle-md .button-inner, .bar-button .button-inner{height:inherit!important;}
 .footer-md-bluedark .toolbar-md-bluedark .button[icon-only]{height:75px;}
 
-
+.monthview-primary-with-event[_ngcontent-c1]{color:white!important;border-radius:20px;}
 //commentdetails
 
 
