@@ -34,7 +34,16 @@
 
 
 </ion-header>
-<ion-content>
+
+<ion-content padding class="ion-content" *ngIf="EVENTVIEWACCESS==0">
+  <p style="color: red;
+    position: relative;
+    margin-top: 50%;
+   text-align:center;
+    font-size: 12pt;">{{permissionMessage}}</p>
+</ion-content>
+
+<ion-content *ngIf="EVENTVIEWACCESS==1">
   <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="pet" (ionChange)="onSegmentChanged(pet)">
     <ion-option value="ALL" selected=true>All</ion-option>
     <ion-option value="SERVICE">Service</ion-option>
@@ -75,8 +84,20 @@
   +</span>
  </button>
     <ion-list *ngIf="totalCountEventDateWise!=0">
+
+
       <ion-item-sliding *ngFor="let item of calendarResultEvent;">
-        <ion-item *ngIf="item.event_type=='E'">
+
+         <ion-item *ngIf="EVENTVIEWACCESS=='0'">
+          <p style="color: red;
+    position: relative;
+    margin-top: 50%;
+   text-align:center;
+    font-size: 12pt;">{{permissionMessage}}</p>
+        </ion-item>
+
+
+        <ion-item *ngIf="item.event_type=='E'  && EVENTVIEWACCESS=='1'">
           Event
           <div>
 
@@ -94,8 +115,14 @@
                          <ion-icon name="trash" class="icon-size"></ion-icon>
                     </button>
       </ion-item-options-->
-
-        <ion-item *ngIf="item.event_type=='S'">
+ <ion-item *ngIf="SERVICEVIEWACCESS=='0'">
+          <p style="color: red;
+    position: relative;
+    margin-top: 50%;
+   text-align:center;
+    font-size: 12pt;">{{permissionMessage}}</p>
+        </ion-item>
+        <ion-item *ngIf="item.event_type=='S' && SERVICEVIEWACCESS=='1'">
           Service
           <div>
 
@@ -114,7 +141,15 @@
                     </button>
       </ion-item-options-->
 
-        <ion-item *ngIf="item.event_type=='A'">
+
+        <ion-item *ngIf="ALARMVIEWACCESS=='0'">
+          <p style="color: red;
+    position: relative;
+    margin-top: 50%;
+   text-align:center;
+    font-size: 12pt;">{{permissionMessage}}</p>
+        </ion-item>
+        <ion-item *ngIf="item.event_type=='A' && ALARMVIEWACCESS=='1'">
           Alarm
           <div>
             <h2 clear item-right><b>Alarm:{{item.event_title}}  </b></h2>
@@ -125,26 +160,26 @@
         </ion-item>
         <ion-item-options>
 
-          <button class="editcolor" (click)="doCalendarEdit(item,'Service')" *ngIf="item.event_type=='S'">                      
+          <button class="editcolor" (click)="doCalendarEdit(item,'Service')" *ngIf="item.event_type=='S' && SERVICEEDITACCESS==1">                      
                         <ion-icon name="create" class="icon-size"></ion-icon>
                     </button>
-          <button class="trashcolor" (click)="doCalendarDelete(item,'Service')" *ngIf="item.event_type=='S'">                        
+          <button class="trashcolor" (click)="doCalendarDelete(item,'Service')" *ngIf="item.event_type=='S' && SERVICEDELETEACCESS==1">                        
                          <ion-icon name="trash" class="icon-size"></ion-icon>
                     </button>
 
 
 
 
-          <button class="editcolor" (click)="doCalendarEdit(item,'Event')" *ngIf="item.event_type=='E'">                      
+          <button class="editcolor" (click)="doCalendarEdit(item,'Event')" *ngIf="item.event_type=='E' && EVENTEDITACCESS==1">                      
                         <ion-icon name="create" class="icon-size"></ion-icon>
                     </button>
-          <button class="trashcolor" (click)="doCalendarDelete(item,'Event')" *ngIf="item.event_type=='E'">                        
+          <button class="trashcolor" (click)="doCalendarDelete(item,'Event')" *ngIf="item.event_type=='E' && EVENTDELETEACCESS==1">                        
                          <ion-icon name="trash" class="icon-size"></ion-icon>
                     </button>
 
 
 
-          <button class="trashcolor" (click)="doCalendarDelete(item,'Alarm')" *ngIf="item.event_type=='A'">                        
+          <button class="trashcolor" (click)="doCalendarDelete(item,'Alarm')" *ngIf="item.event_type=='A'  && ALARMDELETEACCESS==1">                        
                          <ion-icon name="trash" class="icon-size"></ion-icon>
                     </button>
 

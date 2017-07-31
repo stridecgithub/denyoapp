@@ -19,6 +19,9 @@ export class PopoverPage {
   public job_position: any;
   public itemData: any;
   public itemDataDelete = [];
+  
+  public EDITACCESS: any;
+  public DELETEACCESS: any;
   constructor(public viewCtrl: ViewController, public navParams: NavParams) {
     this.itemData = this.navParams.get("item");
     console.log(JSON.stringify(this.itemData));
@@ -27,6 +30,10 @@ export class PopoverPage {
     this.firstname = this.itemData.firstname;
     this.lastname = this.itemData.lastname;
     this.job_position = this.itemData.job_position;
+     this.EDITACCESS = localStorage.getItem("SETTINGS_ORGCHART_EDIT");
+    console.log("Role Authority for Unit Listing Edit:" + this.EDITACCESS);
+    this.DELETEACCESS = localStorage.getItem("SETTINGS_ORGCHART_DELETE");
+    console.log("Role Authority for Unit Listing Delete:" + this.DELETEACCESS);
   }
 
   ionViewDidLoad() {

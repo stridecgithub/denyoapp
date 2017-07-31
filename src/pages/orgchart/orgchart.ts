@@ -29,11 +29,12 @@ import { PopoverController } from 'ionic-angular';
   templateUrl: 'orgchart.html'
 })
 export class OrgchartPage {
-  public responseResultCompany: any;
+  public responseResultCompanyGroup: any;
   public pageTitle: string;
   public loginas: any;
   public htmlContent;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
+  private permissionMessage: string = "Permission denied for access this page. Please contact your administrator";
   public totalCount;
   pet: string = "ALL";
   public msgcount: any;
@@ -50,6 +51,8 @@ export class OrgchartPage {
   public colorListArr: any;
   public userId: any;
   public companyId: any;
+  public VIEWACCESS: any;
+  public CREATEACCESS: any;
   iframeContent: any;
   constructor(public popoverCtrl: PopoverController, public http: Http, public nav: NavController, private sanitizer: DomSanitizer,
     public toastCtrl: ToastController, public alertCtrl: AlertController, public navParams: NavParams, public loadingCtrl: LoadingController) {
@@ -57,6 +60,20 @@ export class OrgchartPage {
     this.userId = localStorage.getItem("userInfoId");
     this.companyId = localStorage.getItem("userInfoCompanyId");
     this.apiServiceURL = this.apiServiceURL;
+
+    //Authorization Get Value
+
+
+
+
+    this.VIEWACCESS = localStorage.getItem("SETTINGS_ORGCHART_VIEW");
+    console.log("Role Authority for Unit Listing View:" + this.VIEWACCESS);
+    this.CREATEACCESS = localStorage.getItem("SETTINGS_ORGCHART_CREATE");
+    console.log("Role Authority for Unit Listing Create:" + this.CREATEACCESS);
+
+
+    //Authorization Get Value
+
   }
   presentPopover(myEvent, item) {
     let popover = this.popoverCtrl.create(PopoverPage, { item: item });
@@ -64,12 +81,13 @@ export class OrgchartPage {
       ev: myEvent,
     });
     popover.onWillDismiss(data => {
-      console.log("Dismiss Data:" + JSON.stringify(data));
-      console.log("Data Length:" + data);
-      if (data.length == 1) {
-        this.doDelete(data);
-      } else {
-        this.doEdit(data, 'edit');
+      console.log(JSON.stringify(data));
+      if (data != null) {
+        if (data.length == 1) {
+          this.doDelete(data);
+        } else {
+          this.doEdit(data, 'edit');
+        }
       }
     });
   }
@@ -105,7 +123,7 @@ export class OrgchartPage {
         if (data.status === 200) {
 
           this.sendNotification(`Orgchart was successfully deleted`);
-            this.parents = [];
+          this.parents = [];
           this.doOrgChart();
         }
         // Otherwise let 'em know anyway
@@ -135,6 +153,7 @@ export class OrgchartPage {
   }
 
   ionViewWillEnter() {
+    this.getCompanyGroupListData();
     this.pet = this.companyId;
     let //body: string = "loginid=" + this.userId,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
@@ -154,10 +173,12 @@ export class OrgchartPage {
     this.pageTitle = "Org Chart";
     this.reportData.startindex = 0;
     this.reportData.sort = "unitgroup_id";
-    this.doOrgChart();
+    if (this.VIEWACCESS > 0) {
+      this.doOrgChart();
+    }
 
     console.log(this.apiServiceURL + "/orgchart?company_id=" + this.companyId + "&is_mobile=1");
-    this.iframeContent = "<iframe src=" + "http://denyoappv2.stridecdev.com/orgchart?company_id=" + this.companyId + "&is_mobile=1&id=" + this.userId + " width=350  frameborder=0  scrolling=yes></iframe>";
+   // this.iframeContent = "<iframe src=" + "http://denyoappv2.stridecdev.com/orgchart?company_id=" + this.companyId + "&is_mobile=1&id=" + this.userId + " width=350  frameborder=0  scrolling=yes></iframe>";
   }
   doOrgChart() {
     //this.presentLoading(1);
@@ -172,11 +193,12 @@ export class OrgchartPage {
     this.http.get(url, options)
       .subscribe((data) => {
         // this.presentLoading(0);
-        console.log("Orgchart Response Success:" + JSON.stringify(data.json()));
+        // console.log("Orgchart Response Success:" + JSON.stringify(data.json()));
         res = data.json();
         if (res.parents.length > 0) {
           this.parents = res.parents;
-          this.responseResultCompany = res.companies;
+          // this.responseResultCompany = res.companies;
+          //console.log("1:"+JSON.stringify(this.responseResultCompany));
         } else {
           //this.totalCount = 0;
         }
@@ -184,7 +206,19 @@ export class OrgchartPage {
 
   }
 
+  getCompanyGroupListData() {
+    let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/getcompanies?loginid=" + this.userId;
+    let res;
+    this.http.get(url, options)
+      .subscribe(data => {
+        res = data.json();
+        this.responseResultCompanyGroup = res.companies;
+      });
 
+  }
   presentLoading(parm) {
     let loader;
     loader = this.loadingCtrl.create({

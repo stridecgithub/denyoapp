@@ -172,6 +172,7 @@ export class EditprofilesteptwoPage {
       console.log("Upload Device Image File:" + userPhotoFile);
       this.fileTrans(userPhotoFile);
     }
+     this.contact = this.contact.replace("+", "%2B");
     let body: string = "is_mobile=1&loggedin_id=" + userid +
       "&firstname=" + this.first_name +
       "&lastname=" + this.last_name +

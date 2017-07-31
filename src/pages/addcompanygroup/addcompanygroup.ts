@@ -1111,6 +1111,7 @@ export class AddcompanygroupPage {
   // supplies a variable of key with a value of create followed by the key/value pairs
   // for the record data
   createEntry(companygroup_name, address, country, contact, createdby) {
+    contact = contact.replace("+", "%2B");
     let updatedby = createdby;
     let body: string = "is_mobile=1&companygroup_name=" + companygroup_name + "&address=" + address + "&country=" + country + "&contact=" + contact + "&createdby=" + createdby + "&updatedby=" + updatedby,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
@@ -1153,6 +1154,7 @@ export class AddcompanygroupPage {
   // supplies a variable of key with a value of update followed by the key/value pairs
   // for the record data
   updateEntry(companygroup_name, address, country, contact, createdby) {
+    contact = contact.replace("+", "%2B");
     let updatedby = createdby;
     let body: string = "is_mobile=1&companygroup_name=" + companygroup_name + "&address=" + address + "&country=" + country + "&contact=" + contact + "&companygroup_id=" + this.recordID + "&createdby=" + createdby + "&updatedby=" + updatedby,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",

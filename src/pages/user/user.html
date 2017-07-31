@@ -95,7 +95,7 @@
   </ion-refresher>
   <ion-list *ngIf="totalCount!=0">
     <ion-item-sliding *ngFor="let item of reportAllLists;">
-      <ion-item>
+      <ion-item  *ngIf="item.staff_id!='1'">
         <h5><b>User ID:</b>{{item.username}}</h5>
         <h5><b>Name:</b>{{item.firstname}} {{item.lastname}}</h5>
         <h5><b>Email:</b>{{item.email}}</h5>
@@ -108,7 +108,7 @@
         <button class="editcolor" (click)="doEdit(item,'edit')" *ngIf="EDITACCESS==1">                      
                         <ion-icon name="create" class="icon-size"></ion-icon>
                     </button>
-        <button  *ngIf="item.staff_id!=1 && DELETEACCESS==1" class="trashcolor" (click)="doConfirm(item.staff_id,item)">                        
+        <button  *ngIf="DELETEACCESS==1" class="trashcolor" (click)="doConfirm(item.staff_id,item)">                        
                          <ion-icon name="trash" class="icon-size"></ion-icon>
                     </button>
       </ion-item-options>

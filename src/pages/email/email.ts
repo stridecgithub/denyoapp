@@ -870,7 +870,7 @@ export class EmailPage {
     this.addedImgLists = [];
     this.copytome = 0;
     this.getPrority(1);
-    this.subject = '';
+     this.subject = this.messages_subject;
     this.composemessagecontent = "-----Forward Message-----" + "\n" + messages_body;
     this.choice = 'compose';
   }

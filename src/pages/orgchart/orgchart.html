@@ -39,15 +39,20 @@
   <ion-item style="width: 100%; margin: 0; padding-left: 10px; background-color:#ffffff">
     <ion-label>Sort By Company</ion-label>
     <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="pet" (ionChange)="onSegmentChanged(pet)">
-      <ion-option *ngFor="let companyData of responseResultCompany" value="{{companyData.companygroup_id}}">{{companyData.companygroup_name}}</ion-option>
-
+      <ion-option *ngFor="let companyData of responseResultCompanyGroup" value="{{companyData.companygroup_id}}">{{companyData.companygroup_name}}</ion-option>
     </ion-select>
   </ion-item>
 </ion-header>
-
-<ion-content padding>
+<ion-content padding class="ion-content" *ngIf="VIEWACCESS==0">
+  <p style="color: red;
+    position: relative;
+    margin-top: 50%;
+   text-align:center;
+    font-size: 12pt;">{{permissionMessage}}</p>
+</ion-content>
+<ion-content padding *ngIf="VIEWACCESS==1">
   <div>
-    <button class="add-new-btn" (click)="doAdd()">
+    <button class="add-new-btn" (click)="doAdd()" *ngIf="CREATEACCESS==1">
   	<div class="algn-cent">
     	<ion-icon name="ios-add-circle-outline"></ion-icon>
         <span></span>
@@ -63,6 +68,7 @@
       <div id="treehtml">
         <div class="tree">
           <ul>
+            <div class="error" *ngIf="parents.length==0">No entries found</div>
             <li *ngFor="let parent of parents; let i=index">
               <img src="{{apiServiceURL}}/staffphotos/{{parent.photo}}" (click)="presentPopover($event,parent)" *ngIf="parent.photo!=''">
               <img src="{{apiServiceURL}}/images/default.png" (click)="presentPopover($event,parent)" *ngIf="parent.photo==''">
@@ -128,5 +134,3 @@
 
   </ion-toolbar>
 </ion-footer>
-
-

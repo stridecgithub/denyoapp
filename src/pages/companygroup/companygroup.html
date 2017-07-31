@@ -89,7 +89,7 @@
         <button class="editcolor" (click)="doEdit(item,'edit')"   *ngIf="this.Role=='1' && EDITACCESS==1">                      
                         <ion-icon name="create" class="icon-size"></ion-icon>
                     </button>
-        <button class="trashcolor" (click)="doConfirm(item.comment_id,item)"   *ngIf="this.Role=='1' &&  DELETEACCESS==1">                        
+        <button class="trashcolor" (click)="doConfirm(item.companygroup_id,item)"   *ngIf="this.Role=='1' &&  DELETEACCESS==1">                        
                          <ion-icon name="trash" class="icon-size"></ion-icon>
                     </button>
       </ion-item-options>

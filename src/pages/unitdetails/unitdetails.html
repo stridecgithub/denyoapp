@@ -18,7 +18,7 @@
         </button>
     </ion-buttons-->
     <ion-buttons end>
-        <button ion-button (click)="notification()">
+      <button ion-button (click)="notification()">
   <ion-icon ios="ios-notifications-outline" md="md-notifications-outline"></ion-icon>
   <ion-badge item-end class="notificationcount" *ngIf="notcount>0">{{this.notcount}}</ion-badge>
 </button>
@@ -46,7 +46,7 @@
     margin-left: 0px;
     margin-right: 0px;background-color:#ffffff"></button>
     <button class="{{unitDetailData.favoriteindication}}" style="float: right ;width:30px;height:30px;margin-top:24px;background-color:#ffffff"></button>
-    <div style="overflow: hidden; padding-left: 0.5em;">     
+    <div style="overflow: hidden; padding-left: 0.5em;">
       <h5><b>{{unitDetailData.unitname}}</b></h5>
       <h5>Project Name:{{unitDetailData.projectname}}</h5>
       <h5>Location:{{unitDetailData.location}}</h5>
@@ -63,14 +63,17 @@
 
   <ion-item>
 
-    <button ion-button icon-left class="engine-detail" (click)="enginedetail()">
-      <div class="btn-align"><span class="eng-icon"></span>Engine Details</div>
+    <button ion-button icon-left class="engine-detail" (click)="enginedetail()" style="padding-bottom: 12px;
+    padding-top: 12px;">
+      <div class="btn-align" syle="padding-bottom: 16px;
+    padding-top: 16px;"><span class="eng-icon"></span>Engine Details</div>
     </button>
 
-    <button ion-button icon-left (click)="servicingInfo(unitDetailData.unit_id)" class="service-info">
+    <button ion-button icon-left (click)="servicingInfo(unitDetailData.unit_id)" class="service-info" style="padding-bottom: 12px;
+    padding-top: 12px;">
       <div class="btn-align"><span class="ser-icon"></span>Servicing Info</div>
 
-       <div class="serviceinfocount"><!--  *ngIf="serviceCount!=0"-->
+       <div class="serviceinfocount"  *ngIf="serviceCount>0"><!--  *ngIf="serviceCount!=0"-->
       {{serviceCount}}
     </div>
     
@@ -79,7 +82,8 @@
 
     <button ion-button icon-left (click)="alamInfo()" class="service-info" style="margin-right: 27%;
     margin-top: 2%;background-color:#C5021B">
-      	<ion-icon name="ios-warning-outline" style="font-size:32px"></ion-icon>
+      	<ion-icon name="ios-warning-outline" style="font-size:32px;padding-bottom: 16px;
+    padding-top: 16px;"></ion-icon>
         <span>Alarm</span>
     </button>
     <!--button class="add-new-btn" (click)="alamInfo()"  style="margin-right: 27%;
@@ -95,19 +99,20 @@
   </ion-item>
 
   <ion-item>
-    <button ion-button icon-left (click)="alarm()" class="alarm-log">
-     <div class="btn-align"><span class="ala-icon"></span>Alarm Log</div>
+    <button ion-button icon-left (click)="alarm()" class="alarm-log" style="padding-bottom: 12px;
+    padding-top: 16px;">
+     <div class="btn-align"><span class="ala-icon" ></span>Alarm Log</div>
     </button>
 
     <button ion-button icon-left (click)="commentsInfo(unitDetailData.unit_id)" class="event-comment">
-     <div class="btn-align"><span class="eve-icon"></span>Events / Comments </div>
-     <div class="commentinfocount">
+     <div class="btn-align"  style="padding-top: 4px;"><span class="eve-icon"></span>Events /<br> Comments </div>
+     <div class="commentinfocount" *ngIf="commentCount>0">
      {{commentCount}}
     </div>
     </button>
 
 
-    
+
     <!--*ngIf="commentCount!=0"-->
   </ion-item>
 </ion-content>
@@ -126,13 +131,13 @@
     	<ion-icon name="contacts" class="footer-icon">UNITS</ion-icon>
     </button>
       </li>
-      <li>    
-    <button ion-button icon-only (click)="redirectToMessage()" clear>
+      <li>
+        <button ion-button icon-only (click)="redirectToMessage()" clear>
     	<ion-icon name="chatboxes" class="footer-icon">MESSAGE</ion-icon>
       <ion-badge item-end class="messagecount"  *ngIf="msgcount>0">{{this.msgcount}}</ion-badge>
     </button>
-    <ion-badge color="danger"></ion-badge>
-</li> 
+        <ion-badge color="danger"></ion-badge>
+      </li>
       <li>
         <button ion-button icon-only (click)="redirectCalendar()" clear>
     	<ion-icon name="bicycle" class="footer-icon">CALENDAR</ion-icon>

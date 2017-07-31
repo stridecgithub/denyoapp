@@ -180,6 +180,13 @@ export class AddorgcharttwoPage {
       console.log("Upload Device Image File:" + userPhotoFile);
       this.fileTrans(userPhotoFile);
     }
+    if (this.photo == undefined) {
+      this.photo = '';
+    }
+    if (this.photo == 'undefined') {
+      this.photo = '';
+    }
+    this.contact = this.contact.replace("+", "%2B");
     let body: string = "is_mobile=1&firstname=" + this.first_name +
       "&lastname=" + this.last_name +
       "&photo=" + this.photo +
@@ -229,6 +236,13 @@ export class AddorgcharttwoPage {
       console.log("Upload Device Image File:" + userPhotoFile);
       this.fileTrans(userPhotoFile);
     }
+    if (this.photo == undefined) {
+      this.photo = '';
+    }
+    if (this.photo == 'undefined') {
+      this.photo = '';
+    }
+    this.contact = this.contact.replace("+", "%2B");
     let body: string = "is_mobile=1&staff_id=" + this.recordID +
       "&firstname=" + this.first_name +
       "&lastname=" + this.last_name +

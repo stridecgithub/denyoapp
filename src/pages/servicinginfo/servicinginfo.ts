@@ -37,8 +37,8 @@ export class ServicinginfoPage {
   public service_remark: any;
   public msgcount: any;
   public notcount: any;
-    private permissionMessage: string = "Permission denied for access this page. Please contact your administrator";
-   public VIEWACCESS: any;
+  private permissionMessage: string = "Permission denied for access this page. Please contact your administrator";
+  public VIEWACCESS: any;
   public CREATEACCESS: any;
   public EDITACCESS: any;
   public DELETEACCESS: any;
@@ -52,7 +52,8 @@ export class ServicinginfoPage {
   }
   public userId: any;
   public reportAllLists = [];
-  public addedServiceImgLists=[];
+  public addedServiceImgLists = [];
+  public addedImgLists=[];
   public loginas: any;
   public loadingMoreDataContent: string;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
@@ -63,13 +64,13 @@ export class ServicinginfoPage {
     this.loginas = localStorage.getItem("userInfoName");
     this.userId = localStorage.getItem("userInfoId");
     this.VIEWACCESS = localStorage.getItem("UNITS_SERVICINGINFO_VIEW");
-    console.log("Role Authority for Unit Listing View:"+this.VIEWACCESS );
+    console.log("Role Authority for Unit Listing View:" + this.VIEWACCESS);
     this.CREATEACCESS = localStorage.getItem("UNITS_SERVICINGINFO_CREATE");
-    console.log("Role Authority for Unit Listing Create:"+this.CREATEACCESS );
+    console.log("Role Authority for Unit Listing Create:" + this.CREATEACCESS);
     this.EDITACCESS = localStorage.getItem("UNITS_SERVICINGINFO_EDIT");
-    console.log("Role Authority for Unit Listing Edit:"+this.EDITACCESS );
+    console.log("Role Authority for Unit Listing Edit:" + this.EDITACCESS);
     this.DELETEACCESS = localStorage.getItem("UNITS_SERVICINGINFO_DELETE");
-    console.log("Role Authority for Unit Listing Delete:"+this.DELETEACCESS );
+    console.log("Role Authority for Unit Listing Delete:" + this.DELETEACCESS);
   }
 
   ionViewDidLoad() {
@@ -225,6 +226,7 @@ export class ServicinginfoPage {
   doRequest() {
     this.service_subject = '';
     this.service_remark = '';
+    this.addedImgLists = [];
     localStorage.setItem("microtime", "");
     this.nav.setRoot(AddrequestsupportPage, {
       record: this.NP.get("record"),
@@ -253,7 +255,7 @@ export class ServicinginfoPage {
   doConfirm(id, item) {
     console.log("Deleted Id" + id);
     let confirm = this.alertCtrl.create({
-      message: 'Are you sure you want to delete this unit group?',
+      message: 'Are you sure you want to delete this service info?',
       buttons: [{
         text: 'Yes',
         handler: () => {

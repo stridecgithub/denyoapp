@@ -301,7 +301,7 @@ console.log(JSON.stringify(this.selectedAction));*/
           if (actpet == 'delete') {
             this.sendNotification(`Successfully Deleted`);
           } else {
-            this.sendNotification(`successfully Added`);
+            this.sendNotification(`Successfully Added`);
           }
           this.reportData.startindex = 0;
           this.reportData.sort = "unit_id";

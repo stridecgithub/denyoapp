@@ -36,7 +36,7 @@ export class UserorgchartPage {
   public email: any;
   public userId: any;
   public roleId: any;
-  public companyId:any;
+  public companyId: any;
   public country: any;
   public contact: any;
   public createdby: any;
@@ -56,14 +56,15 @@ export class UserorgchartPage {
   public responseResultReportTo: any;
   progress: number;
   public isUploadedProcessing: boolean = false;
+  public naDisplay: any;
   public isProgress = false;
   public isUploaded: boolean = true;
   // Flag to be used for checking whether we are adding/editing an entry
   public isEdited: boolean = false;
   public readOnly: boolean = false;
-  public len=0;
-  public msgcount:any;
-  public notcount:any;
+  public len = 0;
+  public msgcount: any;
+  public notcount: any;
 
   // Flag to hide the form upon successful completion of remote operation
   public hideForm: boolean = false;
@@ -91,7 +92,7 @@ export class UserorgchartPage {
     });
 
     this.userId = localStorage.getItem("userInfoId");
-     this.companyId = localStorage.getItem("userInfoCompanyId");
+    this.companyId = localStorage.getItem("userInfoCompanyId");
   }
 
   ionViewDidLoad() {
@@ -107,17 +108,18 @@ export class UserorgchartPage {
       options: any = new RequestOptions({ headers: headers }),
       url: any = this.apiServiceURL + "/msgnotifycount?loginid=" + this.userId;
     console.log(url);
-   // console.log(body);
+    this.naDisplay = 0;
+    // console.log(body);
 
     this.http.get(url, options)
       .subscribe((data) => {
         console.log("Count Response Success:" + JSON.stringify(data.json()));
-       this.msgcount=data.json().msgcount;
-        this.notcount=data.json().notifycount;
+        this.msgcount = data.json().msgcount;
+        this.notcount = data.json().notifycount;
       });
     this.resetFields();
     this.getCompanyGroupListData();
-   
+
     if (this.NP.get("record")) {
       console.log("User Org Chart:" + JSON.stringify(this.NP.get("record")));
       this.isEdited = true;
@@ -128,9 +130,16 @@ export class UserorgchartPage {
       let editItem = this.NP.get("record");
       this.job_position = editItem.job_position;
       this.company_group = editItem.company_id;
-      console.log("EDIT"+this.company_group);
+      console.log("EDIT" + this.company_group);
       this.getUserListData();
       this.report_to = editItem.report_to;
+       this.naDisplay=0;
+      if (this.NP.get("record").role_id == 1) {
+        this.naDisplay = 1;
+      }
+      if (this.NP.get("record").role_id == 2) {
+        this.naDisplay = 1;
+      }
     }
     else {
       this.isEdited = false;
@@ -158,7 +167,7 @@ export class UserorgchartPage {
       this.hashtag = info[keyindex]['hashtag'];
       this.role = info[keyindex]['role'];
     }
-    
+
   }
 
 
@@ -186,6 +195,7 @@ export class UserorgchartPage {
       console.log("Upload Device Image File:" + userPhotoFile);
       this.fileTrans(userPhotoFile);
     }
+     this.contact = this.contact.replace("+", "%2B");
     let body: string = "is_mobile=1&firstname=" + this.first_name +
       "&lastname=" + this.last_name +
       "&photo=" + this.photo +
@@ -239,6 +249,7 @@ export class UserorgchartPage {
       console.log("Upload Device Image File:" + userPhotoFile);
       this.fileTrans(userPhotoFile);
     }
+     this.contact = this.contact.replace("+", "%2B");
     let body: string = "is_mobile=1&staff_id=" + this.recordID +
       "&firstname=" + this.first_name +
       "&lastname=" + this.last_name +
@@ -381,22 +392,23 @@ export class UserorgchartPage {
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/getstaffs?loginid="+this.userId+"&company_id="+this.company_group;
+      url: any = this.apiServiceURL + "/getstaffs?loginid=" + this.userId + "&company_id=" + this.company_group;
     let res;
     console.log("Report To API:" + url)
     this.http.get(url, options)
       .subscribe(data => {
         res = data.json();
         // this.responseResultReportTo="N/A";
-        this.len=res.TotalCount;
-        console.log("length"+res.TotalCount);
+        this.len = res.TotalCount;
+        console.log("length" + res.TotalCount);
+        this.naDisplay = 1;
         this.responseResultReportTo = res.staffslist;
       });
 
   }
 
   previous() {
-     this.userInfo.push({
+    this.userInfo.push({
       photo: this.photo,
       first_name: this.first_name,
       last_name: this.last_name,
@@ -409,7 +421,7 @@ export class UserorgchartPage {
       hashtag: this.hashtag,
       role: this.role
     });
-   this.navCtrl.setRoot(UseraccountPage, {
+    this.navCtrl.setRoot(UseraccountPage, {
       uservalue: this.userInfo
     });
   }
@@ -492,10 +504,9 @@ export class UserorgchartPage {
   redirectToSettings() {
     this.navCtrl.setRoot(MyaccountPage);
   }
-  onSegmentChanged()
-  {
-    console.log("ID"+this.company_group);
-     this.getUserListData();
+  onSegmentChanged() {
+    console.log("ID" + this.company_group);
+    this.getUserListData();
   }
 }
 

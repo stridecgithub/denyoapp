@@ -28,7 +28,7 @@ class CommentController extends Controller
 	* @return \Illuminate\Http\Response
 	*/
 	public function index(Request $request, CommentDataTable $dataTable)
-	{				
+	{
 		$ismobile = $request->is_mobile;
 		$unitid = $request->unitid;
 		if($ismobile == 1)
@@ -50,9 +50,10 @@ class CommentController extends Controller
 					if($allcomment->event_type == "S")
 					{
 						$services = Service::where('service_id', $allcomment->type_table_id)->get();
-						
-						if($services)
+						//echo count($services);exit; - I am modified below line sunday 31-07-2017 if($service) to if(count($services)>0)-Kannan.N
+						if(count($services)>0)
 						{
+							
 							$service = $services[0];
 							$comments[$i]['service_id'] = $service->service_id;
 							$comments[$i]['service_unitid'] = $service->service_unitid;
@@ -102,8 +103,9 @@ class CommentController extends Controller
 							$staff = Staff::where('staff_id', $comment->comment_by)->select('firstname')->get();
 							$comments[$i]['comment_by_name'] = $staff[0]->firstname;
 							$commentresources = '';
-							$resources = DB::table('comment_resources')->where('comment_resource_id', $comment->comment_id)->get();
-							if($resources)
+							$resources = DB::table('comment_resources')->where('comments_id', $comment->comment_id)->get();
+							
+							if(count($resources) > 0)
 							{
 								foreach($resources as $resource)
 								{
@@ -161,15 +163,23 @@ class CommentController extends Controller
 		$unit = $units[0];
 		$currentstatus = DB::table('unit_currentstatus')->where('generatorid', $unit->controllerid)->where('code', 'RUNNINGHR')->get();
 		$runninghrs = 0;
-		if($currentstatus)
+		if(count($currentstatus) > 0) {
 			$runninghrs = $currentstatus[0]->value;
+		}	
 		$microtimestamp = date("YmdHis");
-		$session = new Session();
+		
 		$company_id = $session->get('ses_company_id');
 		$staffid = $session->get('ses_login_id');
 		$serviceby = Staff::where('staff_id', $staffid)->select('firstname', 'lastname')->get();
 		$staffname = $serviceby[0]->firstname;
-		$staffs = DB::table('users')->where('users.company_id', $company_id)->join('staffs','staffs.staff_id','=','users.staffs_id')->where('staffs.non_user',0)->get();
+		
+		if($ses_login_id == 1) {
+			$staffs = DB::table('users')->join('staffs','staffs.staff_id','=','users.staffs_id')->where('staffs.status','0')->where('staffs.non_user',0)->where('users.deletestatus', '0')->where('users.staffs_id', '!=', $ses_login_id)->get();
+		}
+		else
+			$staffs = DB::table('users')->where('users.company_id', $company_id)->join('staffs','staffs.staff_id','=','users.staffs_id')->where('staffs.status','0')->where('staffs.non_user',0)->where('users.deletestatus', '0')->where('users.staffs_id', '!=', $ses_login_id)->get();
+		
+		
 		$staffids = '';
 		if($staffs)
 		{
@@ -191,8 +201,7 @@ class CommentController extends Controller
 	*/
 	public function store(Request $request)
 	{	
-//echo '<pre>';	
-	//	print_r($request->all());
+		$session = new Session();
 		$ismobile = $request->is_mobile;		
 		$commentdata['comment_unit_id'] = $request->comment_unit_id;
 		$commentdata['comment_by'] = $request->comment_by;
@@ -260,7 +269,7 @@ class CommentController extends Controller
 			foreach($hashtags as $hashtag)
 			{		
 				$chkhashtag = substr($hashtag, 0,1); 	
-				$hashtag = preg_replace('/[^A-Za-z\-]/', '', $hashtag);					
+				$hashtag = preg_replace('/[^A-Za-z0-9\-]/', '', $hashtag);					
 				if($chkhashtag == "@")
 				{
 					$hashtag = '@'.$hashtag;
@@ -309,14 +318,17 @@ class CommentController extends Controller
 			}
 		}
 
-		if(count($notifyids) > 1)
+		if(count($notifyids) > 0)
 		{
-
-
 			// Insert data for send push notifications
 			for($i = 0; $i < count($notifyids); $i++)
 			{				
-				DB::table('pushnotifications')->insert(['notify_subject'=>$request->comment_subject,'notify_content' => $notifycontent, 'notify_by' => $request->comment_by, 'notify_to' => $notifyids[$i], 'notify_type' => 'C', 'table_id' => $commentid]);
+				if(isset($notifyids[$i]) && $notifyids[$i] > 0) {
+					DB::table('pushnotifications')->insert(['notify_subject'=>$request->comment_subject,'notify_content' => $notifycontent, 'notify_by' => $request->comment_by, 'notify_to' => $notifyids[$i], 'notify_type' => 'C', 'table_id' => $commentid]);
+
+					// Insert data for service notification to show count in unit details 
+					DB::table('comment_notifications')->insert(['comment_unit_id' => $request->comment_unit_id, 'comment_staff_id' => $notifyids[$i], 'comments_id' => $commentid]);
+				}
 			}
 		}
 
@@ -346,7 +358,8 @@ class CommentController extends Controller
 			return response()->json(['msg'=>$msg]);
 		}
 		else {
-			return redirect('/comments?unitid='.$request->comment_unit_id)->with('alert','Comment details created successfully');	
+			$session->getFlashBag()->add('comment_created','Comment details created successfully');
+			return redirect('/comments?unitid='.$request->comment_unit_id);	
 		}
 		
 	}
@@ -433,8 +446,7 @@ class CommentController extends Controller
 	* @return \Illuminate\Http\Response
 	*/
 	public function edit($id)
-	{
-				
+	{				
 		$comments = DB::table('comments')->where('comment_id',$id)->get();
 		
 		$comments = $comments[0];
@@ -444,15 +456,22 @@ class CommentController extends Controller
 		$unit = $units[0];
 		$currentstatus = DB::table('unit_currentstatus')->where('generatorid', $unit->controllerid)->where('code', 'RUNNINGHR')->get();
 		$runninghrs = 0;
-		if($currentstatus)
+		if(count($currentstatus) > 0) {
 			$runninghrs = $currentstatus[0]->value;
+		}
 		$microtimestamp = date("YmdHis");
 		$session = new Session();
 		$company_id = $session->get('ses_company_id');
 		$staffid = $session->get('ses_login_id');
 		$commentby = Staff::where('staff_id', $comments->comment_by)->select('firstname', 'lastname')->get();
 		$staffname = $commentby[0]->firstname;
-		$staffs = DB::table('users')->where('company_id', $company_id)->get();
+		
+		if($staffid == 1) {
+			$staffs = DB::table('users')->where('deletestatus', '0')->where('staffs_id','!=',$staffid)->get();
+		}
+		else
+			$staffs = DB::table('users')->where('company_id', $company_id)->where('staffs_id','!=',$staffid)->where('deletestatus', '0')->get();
+		
 		$staffids = '';
 		if($staffs)
 		{
@@ -477,7 +496,7 @@ class CommentController extends Controller
 	*/
 	public function update(Request $request)
 	{		
-	
+		$session = new Session();
 		$ismobile = $request->is_mobile;
 		$commentid = $request->comment_id;
 		$commentdata['comment_unit_id'] = $request->comment_unit_id;
@@ -508,6 +527,7 @@ class CommentController extends Controller
 			return response()->json(['msg'=>$msg]);
 		}
 		else {
+			$session->getFlashBag()->add('comment_updated','Comment details updated successfully');
 			return redirect('/comments?unitid='.$request->comment_unit_id)->with('alert','Comment details updated successfully');	
 		}
 	}
@@ -519,12 +539,16 @@ class CommentController extends Controller
 	* @return \Illuminate\Http\Response
 	*/
 	public function delete($id, $ismobile)
-	{
+	{		
 		$comment = DB::table('comments')->where('comment_id', $id)->update(['comment_status' => '1']);		
 		DB::table('eventorcomments')->where('event_type','C')->where('type_table_id',$id)->delete();
 		DB::table('comment_resources')->where('comments_id',$id)->delete();
-		if($ismobile == 0)
-			return redirect('/comments');
+		if($ismobile == 0) {
+			$session = new Session();
+			$unitid = $session->get('unit_id');
+			$session->getFlashBag()->add('comment_deleted','Comment details deleted successfully');
+			return redirect('/comments?unitid='.$unitid);
+		}
 		else {
 			$msg = array(array('Error' => '0','result'=>'Comment details deleted successfully'));
 			return response()->json(['msg'=>$msg]);
@@ -566,6 +590,7 @@ class CommentController extends Controller
 			DB::table('comment_resources')->where('comment_resource_id', $resources[0]->comment_resource_id)->delete();
 			if(file_exists($filename))
 				unlink($filename);
+			//return redirect('/comments/'.$resources[0]->comments_id.'/edit');
 		}
 	}
 

@@ -63,12 +63,46 @@ export class CalendarPage {
   public serviceIdentify = [];
   public alarmIdentity = [];
   public companyId: any;
+  public EVENTVIEWACCESS: any;
+  public EVENTCREATEACCESS: any;
+  public EVENTEDITACCESS: any;
+  public EVENTDELETEACCESS: any;
+  public ALARMVIEWACCESS: any;
+  public ALARMDELETEACCESS: any;
+  public SERVICEVIEWACCESS: any;
+  public SERVICECREATEACCESS: any;
+  public SERVICEEDITACCESS: any;
+  public SERVICEDELETEACCESS: any;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   constructor(public toastCtrl: ToastController, public alertCtrl: AlertController, public navCtrl: NavController, private datePicker: DatePicker, private http: Http, public loadingCtrl: LoadingController) {
     this.loginas = localStorage.getItem("userInfoName");
     this.userId = localStorage.getItem("userInfoId");
     this.userId = localStorage.getItem("userInfoId");
     this.companyId = localStorage.getItem("userInfoCompanyId");
+
+
+
+
+
+    this.EVENTVIEWACCESS = localStorage.getItem("CALENDAR_EVENTS_VIEW");
+    console.log("Role Authority for Unit Listing View:" + this.EVENTVIEWACCESS);
+    this.EVENTCREATEACCESS = localStorage.getItem("CALENDAR_EVENTS_CREATE");
+    console.log("Role Authority for Unit Listing Create:" + this.EVENTCREATEACCESS);
+    this.EVENTEDITACCESS = localStorage.getItem("CALENDAR_EVENTS_EDIT");
+    console.log("Role Authority for Unit Listing Edit:" + this.EVENTEDITACCESS);
+    this.EVENTDELETEACCESS = localStorage.getItem("CALENDAR_EVENTS_DELETE");
+    console.log("Role Authority for Unit Listing Delete:" + this.EVENTDELETEACCESS);
+
+
+    this.ALARMVIEWACCESS = localStorage.getItem("UNITS_ALARM_VIEW");
+    this.ALARMDELETEACCESS = localStorage.getItem("UNITS_ALARM_DELETE");
+
+    this.SERVICEVIEWACCESS = localStorage.getItem("UNITS_SERVICINGINFO_VIEW");
+    this.SERVICECREATEACCESS = localStorage.getItem("UNITS_SERVICINGINFO_CREATE");
+    this.SERVICEEDITACCESS = localStorage.getItem("UNITS_SERVICINGINFO_EDIT");
+    this.SERVICEDELETEACCESS = localStorage.getItem("UNITS_SERVICINGINFO_DELETE");
+
+
   }
 
   opendatePicker() {
@@ -285,8 +319,8 @@ export class CalendarPage {
         let months = { '01': 'January', '02': 'February', '03': 'March', '04': 'April', '05': 'May', '06': 'June', '07': 'July', '08': 'August', '09': 'September', '10': 'October', '11': 'November', '12': 'December' };
 
         let selDate = year + "-" + month + "-" + date;
-
-        this.dateHeaderTitle = months[month] +" "+ year;
+        if (year != undefined)
+          this.dateHeaderTitle = months[month] + " " + year;
         if (ev != '') {
           console.log("curDate:" + curDate);
           console.log("selDate:" + selDate);

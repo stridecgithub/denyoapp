@@ -30,7 +30,7 @@ export class RolePage {
   public pageTitle: string;
   public loginas: any;
   private permissionMessage: string = "Permission denied for access this page. Please contact your administrator";
-   public VIEWACCESS: any;
+  public VIEWACCESS: any;
   public CREATEACCESS: any;
   public EDITACCESS: any;
   public DELETEACCESS: any;
@@ -54,13 +54,13 @@ export class RolePage {
     this.pageTitle = 'Roles';
     this.loginas = localStorage.getItem("userInfoName");
     this.VIEWACCESS = localStorage.getItem("SETTINGS_USERROLE_VIEW");
-    console.log("Role Authority for Unit Listing View:"+this.VIEWACCESS );
+    console.log("Role Authority for Unit Listing View:" + this.VIEWACCESS);
     this.CREATEACCESS = localStorage.getItem("SETTINGS_USERROLE_CREATE");
-    console.log("Role Authority for Unit Listing Create:"+this.CREATEACCESS );
+    console.log("Role Authority for Unit Listing Create:" + this.CREATEACCESS);
     this.EDITACCESS = localStorage.getItem("SETTINGS_USERROLE_EDIT");
-    console.log("Role Authority for Unit Listing Edit:"+this.EDITACCESS );
+    console.log("Role Authority for Unit Listing Edit:" + this.EDITACCESS);
     this.DELETEACCESS = localStorage.getItem("SETTINGS_USERROLE_DELETE");
-    console.log("Role Authority for Unit Listing Delete:"+this.DELETEACCESS );
+    console.log("Role Authority for Unit Listing Delete:" + this.DELETEACCESS);
   }
 
   ionViewDidLoad() {
@@ -97,20 +97,20 @@ export class RolePage {
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "role?is_mobile=1&role_name="+this.reportData.sort;
-      console.log(url);
+      url: any = this.apiServiceURL + "role?is_mobile=1&role_name=" + this.reportData.sort;
+    console.log(url);
     let res;
-    this.http.get(url,options)
+    this.http.get(url, options)
       .subscribe((data) => {
         res = data.json();
         if (res.roles.length > 0) {
           this.reportAllLists = res.roles;
-         // this.totalCount = res[0].totalCount;
+          // this.totalCount = res[0].totalCount;
           this.reportData.startindex += this.reportData.results;
         } else {
           //this.totalCount = 0;
         }
-        
+
 
       });
     this.presentLoading(0);
@@ -137,7 +137,9 @@ export class RolePage {
   ionViewWillEnter() {
     this.reportData.startindex = 0;
     this.reportData.sort = "createdon";
-    this.doRole();
+    if (this.VIEWACCESS > 0) {
+      this.doRole();
+    }
   }
 
   doAdd() {
@@ -149,7 +151,7 @@ export class RolePage {
         record: item,
         act: act
       });
-    } 
+    }
   }
 
   onSegmentChanged(val) {
@@ -196,12 +198,12 @@ export class RolePage {
   // for the record ID we want to remove from the remote database
   deleteEntry(recordID) {
     let
-     // body: string = "key=delete&recordID=" + recordID,
+      // body: string = "key=delete&recordID=" + recordID,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
       url: any = this.apiServiceURL + "role/" + recordID + "/1/delete";
-      console.log(url);
+    console.log(url);
 
     this.http.get(url, options)
       .subscribe(data => {
@@ -285,11 +287,11 @@ export class RolePage {
   redirectToSettings() {
     this.nav.setRoot(MyaccountPage);
   }
- previous() {
+  previous() {
     this.nav.setRoot(HomePage);
-     
-    
+
+
   }
-   
+
 }
 

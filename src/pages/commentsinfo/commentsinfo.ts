@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {  NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
+import { NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
 import { CompanygroupPage } from '../companygroup/companygroup';
 import { UserPage } from '../user/user';
 import { LoadingController } from 'ionic-angular';
@@ -32,8 +32,8 @@ import { EmailPage } from '../email/email';
 export class CommentsinfoPage {
   public pageTitle: string;
   public unit_id: any;
-   public msgcount:any;
-  public notcount:any;
+  public msgcount: any;
+  public notcount: any;
   public atMentionedInfo = [];
   public reportData: any =
   {
@@ -46,15 +46,15 @@ export class CommentsinfoPage {
   public userId: any;
   public reportAllLists = [];
   public loginas: any;
-  public udetails:any;
-    private permissionMessage: string = "Permission denied for access this page. Please contact your administrator";
-   public VIEWACCESS: any;
+  public udetails: any;
+  private permissionMessage: string = "Permission denied for access this page. Please contact your administrator";
+  public VIEWACCESS: any;
   public CREATEACCESS: any;
   public EDITACCESS: any;
   public DELETEACCESS: any;
-  public comments:any;
-  public service_subject:any;
-  public addedImgLists=[];
+  public comments: any;
+  public service_subject: any;
+  public addedImgLists = [];
   public loadingMoreDataContent: string;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   public totalCount;
@@ -65,13 +65,13 @@ export class CommentsinfoPage {
     this.userId = localStorage.getItem("userInfoId");
     this.udetails = localStorage.getItem("unitdetails");
     this.VIEWACCESS = localStorage.getItem("UNITS_COMMENTS_VIEW");
-    console.log("Role Authority for Unit Listing View:"+this.VIEWACCESS );
+    console.log("Role Authority for Unit Listing View:" + this.VIEWACCESS);
     this.CREATEACCESS = localStorage.getItem("UNITS_COMMENTS_CREATE");
-    console.log("Role Authority for Unit Listing Create:"+this.CREATEACCESS );
+    console.log("Role Authority for Unit Listing Create:" + this.CREATEACCESS);
     this.EDITACCESS = localStorage.getItem("UNITS_COMMENTS_EDIT");
-    console.log("Role Authority for Unit Listing Edit:"+this.EDITACCESS );
+    console.log("Role Authority for Unit Listing Edit:" + this.EDITACCESS);
     this.DELETEACCESS = localStorage.getItem("UNITS_COMMENTS_DELETE");
-    console.log("Role Authority for Unit Listing Delete:"+this.DELETEACCESS );
+    console.log("Role Authority for Unit Listing Delete:" + this.DELETEACCESS);
   }
 
   ionViewDidLoad() {
@@ -84,16 +84,16 @@ export class CommentsinfoPage {
       options: any = new RequestOptions({ headers: headers }),
       url: any = this.apiServiceURL + "/msgnotifycount?loginid=" + this.userId;
     console.log(url);
-   // console.log(body);
+    // console.log(body);
 
     this.http.get(url, options)
       .subscribe((data) => {
         console.log("Count Response Success:" + JSON.stringify(data.json()));
-       this.msgcount=data.json().msgcount;
-        this.notcount=data.json().notifycount;
+        this.msgcount = data.json().msgcount;
+        this.notcount = data.json().notifycount;
       });
-     this.unit_id =  localStorage.getItem("unitId");
-    console.log("NUD"+localStorage.getItem("unitdetails"));
+    this.unit_id = localStorage.getItem("unitId");
+    console.log("NUD" + localStorage.getItem("unitdetails"));
 
     if (this.NP.get("record")) {
       console.log("Service Info Record Param Value:" + JSON.stringify(this.NP.get("record")));
@@ -102,7 +102,7 @@ export class CommentsinfoPage {
     this.reportData.sort = "comment_id";
     this.doService();
     //this.unit_id = this.NP.get("record").unit_id;
-   
+
     // Atmentioned Tag Storage
   }
   presentLoading(parm) {
@@ -163,7 +163,7 @@ export class CommentsinfoPage {
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/comments?is_mobile=1&startindex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc + "&unitid=" +  localStorage.getItem("unitId");
+      url: any = this.apiServiceURL + "/comments?is_mobile=1&startindex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc + "&unitid=" + localStorage.getItem("unitId");
     let res;
     console.log(url);
     this.http.get(url, options)
@@ -190,16 +190,16 @@ export class CommentsinfoPage {
     this.nav.setRoot(NotificationPage);
   }
   previous() {
-   
+
     this.nav.setRoot(UnitdetailsPage, {
       record: this.NP.get("record")
     });
   }
-  
+
   doAdd() {
-     this.service_subject='';
-    this.comments='';
-    this.addedImgLists=[];
+    this.service_subject = '';
+    this.comments = '';
+    this.addedImgLists = [];
     localStorage.setItem("microtime", "");
     this.nav.setRoot(AddcommentsinfoPage, {
       record: this.NP.get("record"),
@@ -211,44 +211,41 @@ export class CommentsinfoPage {
 
 
 
-  doEdit(item, act,type) {
-    if(type.toLowerCase() == 'c')
-    {
+  doEdit(item, act, type) {
+    if (type.toLowerCase() == 'c') {
       console.log("comment")
-        localStorage.setItem("microtime", "");
-    this.nav.setRoot(AddcommentsinfoPage, {
-      record: item,
-      act: 'Edit'
-    });
+      localStorage.setItem("microtime", "");
+      this.nav.setRoot(AddcommentsinfoPage, {
+        record: item,
+        act: 'Edit'
+      });
     }
-    if(type.toLowerCase() == 's')
-    {
+    if (type.toLowerCase() == 's') {
       console.log("service")
-       localStorage.setItem("microtime", "");
-    this.nav.setRoot(AddserviceinfoPage, {
-      record: item,
-      act: 'Edit'
-    });
+      localStorage.setItem("microtime", "");
+      this.nav.setRoot(AddserviceinfoPage, {
+        record: item,
+        act: 'Edit'
+      });
     }
 
-  
+
   }
-   details(item, act,type) {
-      if(type.toLowerCase() == 'c'){
-    localStorage.setItem("microtime", "");
-    this.nav.setRoot(CommentdetailsPage, {
-      record: item,
-      act: 'Edit'
-    });
-      }
- if(type.toLowerCase() == 's')
- {
-    localStorage.setItem("microtime", "");
-    this.nav.setRoot(ServicedetailsPage, {
-      record: item,
-      act: 'Edit'
-    });
- }
+  details(item, act, type) {
+    if (type.toLowerCase() == 'c') {
+      localStorage.setItem("microtime", "");
+      this.nav.setRoot(CommentdetailsPage, {
+        record: item,
+        act: 'Edit'
+      });
+    }
+    if (type.toLowerCase() == 's') {
+      localStorage.setItem("microtime", "");
+      this.nav.setRoot(ServicedetailsPage, {
+        record: item,
+        act: 'Edit'
+      });
+    }
   }
 
   doConfirm(id, item) {
@@ -303,7 +300,7 @@ export class CommentsinfoPage {
   }
 
 
- 
+
   redirectToUser() {
     this.nav.setRoot(UnitsPage);
   }
@@ -318,5 +315,5 @@ export class CommentsinfoPage {
   }
   redirectToSettings() {
     this.nav.setRoot(MyaccountPage);
-  }   
+  }
 }

@@ -547,9 +547,12 @@ console.log(JSON.stringify(this.selectedAction));*/
     this.http.get(url, options)
       .subscribe((data) => {
         console.log("Count Response Success:" + JSON.stringify(data.json()));
+         if (act == 'hide') {
+          this.sendNotification(`Dashboard hide action successfully updated`);
+           }
         // If the request was successful notify the user
         if (data.status === 200) {
-          //this.sendNotification(`Comment count successfully removed`);
+          
           this.reportData.startindex = 0;
           this.reportData.sort = "unit_id";
           //this.doUser();
