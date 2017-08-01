@@ -37,6 +37,7 @@ export class ServicinginfoPage {
   public service_remark: any;
   public msgcount: any;
   public notcount: any;
+  public photo:any;
   private permissionMessage: string = "Permission denied for access this page. Please contact your administrator";
   public VIEWACCESS: any;
   public CREATEACCESS: any;
@@ -214,6 +215,12 @@ this.unitDetailData.favoriteindication = favorite;
           this.totalCount = res.totalCount;
           this.reportData.startindex += this.reportData.results;
           this.loadingMoreDataContent = 'Loading More Data';
+           for(var i=0;i<res.services.length;i++)
+           {
+            this.photo = res.services[i].user_photo;
+            console.log("PHOTO"+this.photo);
+           }
+         
         } else {
           this.totalCount = 0;
           this.loadingMoreDataContent = 'No More Data';

@@ -90,16 +90,22 @@
       </ion-list>
       <ion-list *ngIf="totalCount!=0  && MESSAGEINBOXVIEWACCESS=='1'">
         <ion-item-sliding *ngFor="let item of inboxLists;">
-          <ion-item>
+           <ion-item style="float:left;">
+      <ion-avatar item-start>
+        <img src="{{item.senderphoto}}">
+      </ion-avatar>
+          <ion-item style="float:left">
             <button (click)="favorite(item.message_id)" *ngIf="item.is_favorite==1" class="favorite" style="float: right ;width:50px;height:50px;background-color:#ffffff"></button>
             <button (click)="favorite(item.message_id)" *ngIf="item.is_favorite==0" class="unfavorite" style="float: right ;width:50px;height:50px;background-color:#ffffff"></button>
             <div style="overflow: hidden; padding-left: .5em;">
-              <h2 *ngIf="item.message_readstatus==0" (click)="doDetails(item)"><b>{{item.messages_subject}}</b></h2>
-              <h2 *ngIf="item.message_readstatus==1" (click)="doDetails(item)">{{item.messages_subject}}</h2>
+              <h5 *ngIf="item.message_readstatus==0" (click)="doDetails(item)"><b>{{item.messages_subject}}</b></h5>
+              <h5 *ngIf="item.message_readstatus==1" (click)="doDetails(item)">{{item.messages_subject}}</h5>
+              <h6 style="margin-left: 195px;">{{item.message_date}}</h6>
             </div>
 
 
           </ion-item>
+           </ion-item>
           <ion-item-options>
             <button class="trashcolor" (click)="doConfirm(item.message_id,item,'inbox')" *ngIf="MESSAGEINBOXDELETEACCESS==0">                        
                          <ion-icon name="trash" class="icon-size"></ion-icon>
