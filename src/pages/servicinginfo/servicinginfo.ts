@@ -37,6 +37,7 @@ export class ServicinginfoPage {
   public service_remark: any;
   public msgcount: any;
   public notcount: any;
+  public photo:any;
   private permissionMessage: string = "Permission denied for access this page. Please contact your administrator";
   public VIEWACCESS: any;
   public CREATEACCESS: any;
@@ -49,6 +50,16 @@ export class ServicinginfoPage {
     sortascdesc: 'asc',
     startindex: 0,
     results: 8
+  }
+  public unitDetailData: any = {
+    userId: '',
+    loginas: '',
+    pageTitle: '',
+    getremark: '',
+    serviced_by: '',
+    nextServiceDate: '',
+    addedImgLists1: '',
+    addedImgLists2: ''
   }
   public userId: any;
   public reportAllLists = [];
@@ -94,6 +105,38 @@ export class ServicinginfoPage {
 
     if (this.NP.get("record")) {
       console.log("Service Info Record Param Value:" + JSON.stringify(this.NP.get("record")));
+      let editItem = this.NP.get("record");
+      let favorite;
+    //this.unitDetailData.unit_id = editItem.unit_id;
+    //this.unitDetailData.unitname = editItem.unitname;
+    //this.unitDetailData.location = editItem.location;
+    //this.unitDetailData.projectname = editItem.projectname;
+    this.unitDetailData.runninghr = editItem.runninghr;
+    this.unitDetailData.gen_status = editItem.gen_status;
+    this.unitDetailData.nextservicedate = editItem.nextservicedate;
+if (this.NP.get("record").favoriteindication == 'favorite') {
+			favorite = "favorite";
+		}
+		else {
+			favorite = "unfavorite";
+
+		}
+this.unitDetailData.favoriteindication = favorite;
+    this.unitDetailData.unit_id = localStorage.getItem("unitId");
+    if (this.unitDetailData.unit_id == undefined) {
+      this.unitDetailData.unit_id = editItem.unit_id;
+    }
+    if (this.unitDetailData.unit_id == 'undefined') {
+      this.unitDetailData.unit_id = editItem.unit_id;
+    }
+    this.unitDetailData.unitname = localStorage.getItem("unitunitname");
+    this.unitDetailData.location = localStorage.getItem("unitlocation");
+    this.unitDetailData.projectname = localStorage.getItem("unitprojectname");
+    this.unitDetailData.colorcodeindications = localStorage.getItem("unitcolorcode");
+    console.log("Unit Details Color Code:" + this.unitDetailData.colorcodeindications);
+    this.unitDetailData.lat = localStorage.getItem("unitlat");
+    this.unitDetailData.lng = localStorage.getItem("unitlng");
+
     }
     this.reportData.startindex = 0;
     this.reportData.sort = "service_id";
@@ -172,6 +215,12 @@ export class ServicinginfoPage {
           this.totalCount = res.totalCount;
           this.reportData.startindex += this.reportData.results;
           this.loadingMoreDataContent = 'Loading More Data';
+           for(var i=0;i<res.services.length;i++)
+           {
+            this.photo = res.services[i].user_photo;
+            console.log("PHOTO"+this.photo);
+           }
+         
         } else {
           this.totalCount = 0;
           this.loadingMoreDataContent = 'No More Data';

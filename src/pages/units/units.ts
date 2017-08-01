@@ -40,6 +40,7 @@ export class UnitsPage {
   public DELETEACCESS: any;
   public totalCount;
   pet: string = "ALL";
+  public fav:any;
   public userId: any;
   public sortby = 2;
   public detailvalue: any;
@@ -147,11 +148,15 @@ export class UnitsPage {
             console.log("Color is" + colorcode);
             if (res.units[unit].favorite == 1) {
               favorite = "favorite";
+              localStorage.setItem("unitfav",favorite);
             }
             else {
+              this.fav=favorite;
               favorite = "unfavorite";
+              localStorage.setItem("unitfav",favorite);
 
             }
+            
             this.reportAllLists.push({
               unit_id: res.units[unit].unit_id,
               unitname: res.units[unit].unitname,
@@ -330,6 +335,7 @@ console.log(JSON.stringify(this.selectedAction));*/
       localStorage.setItem("unitcolorcode", item.colorcodeindications);
       localStorage.setItem("unitlat", item.lat);
       localStorage.setItem("unitlng", item.lng);
+     
 
       this.nav.setRoot(UnitdetailsPage, {
         record: item

@@ -107,6 +107,16 @@ export class CommentdetailsPage {
     console.log('ionViewDidLoad CommentdetailsPage');
   }
   ionViewWillEnter() {
+    
+    this.unitDetailData.unit_id = localStorage.getItem("unitId");
+    this.unitDetailData.unitname = localStorage.getItem("unitunitname");
+    this.unitDetailData.location = localStorage.getItem("unitlocation");
+    this.unitDetailData.projectname = localStorage.getItem("unitprojectname");
+    this.unitDetailData.colorcodeindications = localStorage.getItem("unitcolorcode");
+    this.unitDetailData.favoriteindication=localStorage.getItem("unitfav");
+    console.log("Add Comment Color Code:"+this.unitDetailData.colorcodeindications);
+    this.unitDetailData.lat = localStorage.getItem("unitlat");
+    this.unitDetailData.lng = localStorage.getItem("unitlng");
     this.getPrority(1);
     this.udetails = localStorage.getItem("unitdetails");
     console.log("UD" + JSON.stringify(this.udetails));

@@ -40,12 +40,13 @@ export class EnginedetailPage {
     startindex: 0,
     results: 8
   }
+
   public reportAllLists = [];
   public colorListArr: any;
   public userId: any;
   public companyId;
   constructor(public http: Http, public nav: NavController,
-    public toastCtrl: ToastController, public alertCtrl: AlertController, public navParams: NavParams, public loadingCtrl: LoadingController) {
+    public toastCtrl: ToastController, public alertCtrl: AlertController, public NP: NavParams, public loadingCtrl: LoadingController) {
     this.loginas = localStorage.getItem("userInfoName");
     this.userId = localStorage.getItem("userInfoId");
     this.companyId = localStorage.getItem("userInfoCompanyId");
@@ -55,6 +56,7 @@ export class EnginedetailPage {
     console.log('ionViewDidLoad EnginedetailPage');
   }
   ionViewWillEnter() {
+   
     let //body: string = "loginid=" + this.userId,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),

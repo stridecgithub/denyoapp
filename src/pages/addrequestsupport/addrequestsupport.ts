@@ -124,6 +124,7 @@ export class AddrequestsupportPage {
     }
     if (this.NP.get("record")) {
       this.selectEntry(this.NP.get("record"));
+      
 
       if (this.NP.get("act") == 'Add') {        
         this.service_remark = "";
