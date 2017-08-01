@@ -35,6 +35,19 @@
       Login As:{{loginas}}
     </ion-buttons>
   </ion-navbar>
+  <ion-item>
+    <button class="{{unitDetailData.colorcodeindications}}" style="float: left ;width:8px;height:70px">         
+        </button>
+        
+    <button class="{{unitDetailData.favoriteindication}}" style="float: right ;width:50px;height:50px;background-color:#ffffff"></button>
+    <div style="overflow: hidden; padding-left: 0.5em;">
+      <h5><b>{{unitDetailData.unitname}}</b></h5>
+      <h5>Project Name:{{unitDetailData.projectname}}</h5>
+      <h5>Location:{{unitDetailData.location}}</h5>
+      <h5  *ngIf="unitDetailData.lat!=''">({{unitDetailData.lat}},{{unitDetailData.lng}})</h5>
+      
+    </div>
+  </ion-item>
   <button class="add-new-btn" ion-button (click)="doAdd()"  *ngIf="CREATEACCESS==1">
   	<div class="algn-cent">
     	<ion-icon name="ios-add-circle-outline"></ion-icon>

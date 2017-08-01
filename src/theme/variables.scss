@@ -531,6 +531,14 @@ page-addcommentsinfo {
     /* border: 1px solid; */
     background-color: gray;
 }
+ .unfavorite
+ {
+     background-image:url('../img/unfav.png');background-size:cover;
+ }
+ .favorite
+ {
+     background-image:url('../img/fr.png');background-size:cover;
+ }
 
     .button1{
 background-color: #FBE983;
@@ -1656,7 +1664,14 @@ page-addrequestsupport  {
     /* border: 1px solid; */
     background-color: gray;
 } 
-
+ .unfavorite
+ {
+     background-image:url('../img/unfav.png');background-size:cover;
+ }
+ .favorite
+ {
+     background-image:url('../img/fr.png');background-size:cover;
+ }
 
 
     .messagecount{
@@ -1981,7 +1996,14 @@ page-addserviceinfo {
     /* border: 1px solid; */
     background-color: gray;
 } 
-
+ .unfavorite
+ {
+     background-image:url('../img/unfav.png');background-size:cover;
+ }
+ .favorite
+ {
+     background-image:url('../img/fr.png');background-size:cover;
+ }
 
 
     .messagecount{
@@ -3078,6 +3100,73 @@ page-alarm {
       .ion-content{
     background-color:white;
 }
+  .button1{
+background-color: #FBE983;
+ width: 40px;
+ height: 40px;
+ }
+ .button2{
+ background-color: #5584EE;
+ width: 40px;
+ height: 40px;
+ }
+  .button3{
+ background-color: #A4BDFD;
+ width: 40px;
+ height: 40px;
+ }
+  .button4{
+ background-color: #47D6DC;
+ width: 40px;
+ height: 40px;
+ }
+  .button5{
+ background-color: #7AE7BE;
+ width: 40px;
+ height: 40px;
+ }
+  .button6{
+ background-color: #51B749;
+ width: 40px;
+ height: 40px;
+ }
+  .button7{
+ background-color: #FBD75C;
+ width: 40px;
+ height: 40px;
+ }
+  .button8{
+ background-color: #FFB878;
+ width: 40px;
+ height: 40px;
+ }
+ .buttoncolorgroup button:focus {
+border: 1px solid #000;
+}
+ .buttoncolorgroup button.active {
+border: 1px solid #000;
+}
+ /*.buttoncolorgroup button:active,.buttoncolorgroup button:focus,.buttoncolorgroup button:hover{border: 2px solid #000;}
+ */.button9{
+ background-color: #FF877C;
+ width: 40px;
+ height: 40px;
+ }
+  .button10{
+ background-color: #DC2128;
+ width: 40px;
+ height: 40px;
+ }
+  .button11{
+ background-color: #DAADFE;
+ width: 40px;
+ height: 40px;
+ }
+  .button12{
+ background-color: #E1E1E1;
+ width: 40px;
+ height: 40px;
+ }
 .notificationcount{
   color: white;
     border-radius: 50px;
@@ -3088,7 +3177,14 @@ page-alarm {
     background-color: gray;
 } 
 
-
+ .unfavorite
+ {
+     background-image:url('../img/unfav.png');background-size:cover;
+ }
+ .favorite
+ {
+     background-image:url('../img/fr.png');background-size:cover;
+ }
 
     .messagecount{
    color: white;
@@ -3126,6 +3222,73 @@ page-alarmdetails {
      .ion-content{
     background-color:white;
 }
+  .button1{
+background-color: #FBE983;
+ width: 40px;
+ height: 40px;
+ }
+ .button2{
+ background-color: #5584EE;
+ width: 40px;
+ height: 40px;
+ }
+  .button3{
+ background-color: #A4BDFD;
+ width: 40px;
+ height: 40px;
+ }
+  .button4{
+ background-color: #47D6DC;
+ width: 40px;
+ height: 40px;
+ }
+  .button5{
+ background-color: #7AE7BE;
+ width: 40px;
+ height: 40px;
+ }
+  .button6{
+ background-color: #51B749;
+ width: 40px;
+ height: 40px;
+ }
+  .button7{
+ background-color: #FBD75C;
+ width: 40px;
+ height: 40px;
+ }
+  .button8{
+ background-color: #FFB878;
+ width: 40px;
+ height: 40px;
+ }
+ .buttoncolorgroup button:focus {
+border: 1px solid #000;
+}
+ .buttoncolorgroup button.active {
+border: 1px solid #000;
+}
+ /*.buttoncolorgroup button:active,.buttoncolorgroup button:focus,.buttoncolorgroup button:hover{border: 2px solid #000;}
+ */.button9{
+ background-color: #FF877C;
+ width: 40px;
+ height: 40px;
+ }
+  .button10{
+ background-color: #DC2128;
+ width: 40px;
+ height: 40px;
+ }
+  .button11{
+ background-color: #DAADFE;
+ width: 40px;
+ height: 40px;
+ }
+  .button12{
+ background-color: #E1E1E1;
+ width: 40px;
+ height: 40px;
+ }
 .notificationcount{
   color: white;
     border-radius: 50px;
@@ -3253,7 +3416,81 @@ page-alarmlog {
  .ion-content{
     background-color:white;
 }
-
+ .unfavorite
+ {
+     background-image:url('../img/unfav.png');background-size:cover;
+ }
+ .favorite
+ {
+     background-image:url('../img/fr.png');background-size:cover;
+ }
+  .button1{
+background-color: #FBE983;
+ width: 40px;
+ height: 40px;
+ }
+ .button2{
+ background-color: #5584EE;
+ width: 40px;
+ height: 40px;
+ }
+  .button3{
+ background-color: #A4BDFD;
+ width: 40px;
+ height: 40px;
+ }
+  .button4{
+ background-color: #47D6DC;
+ width: 40px;
+ height: 40px;
+ }
+  .button5{
+ background-color: #7AE7BE;
+ width: 40px;
+ height: 40px;
+ }
+  .button6{
+ background-color: #51B749;
+ width: 40px;
+ height: 40px;
+ }
+  .button7{
+ background-color: #FBD75C;
+ width: 40px;
+ height: 40px;
+ }
+  .button8{
+ background-color: #FFB878;
+ width: 40px;
+ height: 40px;
+ }
+ .buttoncolorgroup button:focus {
+border: 1px solid #000;
+}
+ .buttoncolorgroup button.active {
+border: 1px solid #000;
+}
+ /*.buttoncolorgroup button:active,.buttoncolorgroup button:focus,.buttoncolorgroup button:hover{border: 2px solid #000;}
+ */.button9{
+ background-color: #FF877C;
+ width: 40px;
+ height: 40px;
+ }
+  .button10{
+ background-color: #DC2128;
+ width: 40px;
+ height: 40px;
+ }
+  .button11{
+ background-color: #DAADFE;
+ width: 40px;
+ height: 40px;
+ }
+  .button12{
+ background-color: #E1E1E1;
+ width: 40px;
+ height: 40px;
+ }
 .notificationcount{
   color: white;
     border-radius: 50px;
@@ -3470,7 +3707,82 @@ page-commentdetails {
 } 
 
 
+.unfavorite
+ {
+     background-image:url('../img/unfav.png');background-size:cover;
+ }
+ .favorite
+ {
+     background-image:url('../img/fr.png');background-size:cover;
+ }
 
+    .button1{
+background-color: #FBE983;
+ width: 40px;
+ height: 40px;
+ }
+ .button2{
+ background-color: #5584EE;
+ width: 40px;
+ height: 40px;
+ }
+  .button3{
+ background-color: #A4BDFD;
+ width: 40px;
+ height: 40px;
+ }
+  .button4{
+ background-color: #47D6DC;
+ width: 40px;
+ height: 40px;
+ }
+  .button5{
+ background-color: #7AE7BE;
+ width: 40px;
+ height: 40px;
+ }
+  .button6{
+ background-color: #51B749;
+ width: 40px;
+ height: 40px;
+ }
+  .button7{
+ background-color: #FBD75C;
+ width: 40px;
+ height: 40px;
+ }
+  .button8{
+ background-color: #FFB878;
+ width: 40px;
+ height: 40px;
+ }
+ .buttoncolorgroup button:focus {
+border: 1px solid #000;
+}
+ .buttoncolorgroup button.active {
+border: 1px solid #000;
+}
+ /*.buttoncolorgroup button:active,.buttoncolorgroup button:focus,.buttoncolorgroup button:hover{border: 2px solid #000;}
+ */.button9{
+ background-color: #FF877C;
+ width: 40px;
+ height: 40px;
+ }
+  .button10{
+ background-color: #DC2128;
+ width: 40px;
+ height: 40px;
+ }
+  .button11{
+ background-color: #DAADFE;
+ width: 40px;
+ height: 40px;
+ }
+  .button12{
+ background-color: #E1E1E1;
+ width: 40px;
+ height: 40px;
+ }
     .messagecount{
    color: white;
     border-radius: 50px;
@@ -3639,8 +3951,81 @@ page-commentsinfo {
     background-color: gray;
 } 
 
-
-
+ .unfavorite
+ {
+     background-image:url('../img/unfav.png');background-size:cover;
+ }
+ .favorite
+ {
+     background-image:url('../img/fr.png');background-size:cover;
+ }
+  .button1{
+background-color: #FBE983;
+ width: 40px;
+ height: 40px;
+ }
+ .button2{
+ background-color: #5584EE;
+ width: 40px;
+ height: 40px;
+ }
+  .button3{
+ background-color: #A4BDFD;
+ width: 40px;
+ height: 40px;
+ }
+  .button4{
+ background-color: #47D6DC;
+ width: 40px;
+ height: 40px;
+ }
+  .button5{
+ background-color: #7AE7BE;
+ width: 40px;
+ height: 40px;
+ }
+  .button6{
+ background-color: #51B749;
+ width: 40px;
+ height: 40px;
+ }
+  .button7{
+ background-color: #FBD75C;
+ width: 40px;
+ height: 40px;
+ }
+  .button8{
+ background-color: #FFB878;
+ width: 40px;
+ height: 40px;
+ }
+ .buttoncolorgroup button:focus {
+border: 1px solid #000;
+}
+ .buttoncolorgroup button.active {
+border: 1px solid #000;
+}
+ /*.buttoncolorgroup button:active,.buttoncolorgroup button:focus,.buttoncolorgroup button:hover{border: 2px solid #000;}
+ */.button9{
+ background-color: #FF877C;
+ width: 40px;
+ height: 40px;
+ }
+  .button10{
+ background-color: #DC2128;
+ width: 40px;
+ height: 40px;
+ }
+  .button11{
+ background-color: #DAADFE;
+ width: 40px;
+ height: 40px;
+ }
+  .button12{
+ background-color: #E1E1E1;
+ width: 40px;
+ height: 40px;
+ }
     .messagecount{
    color: white;
     border-radius: 50px;
@@ -4189,6 +4574,73 @@ page-enginedetail {
    .ion-content{
     background-color:white;
 }
+  .button1{
+background-color: #FBE983;
+ width: 40px;
+ height: 40px;
+ }
+ .button2{
+ background-color: #5584EE;
+ width: 40px;
+ height: 40px;
+ }
+  .button3{
+ background-color: #A4BDFD;
+ width: 40px;
+ height: 40px;
+ }
+  .button4{
+ background-color: #47D6DC;
+ width: 40px;
+ height: 40px;
+ }
+  .button5{
+ background-color: #7AE7BE;
+ width: 40px;
+ height: 40px;
+ }
+  .button6{
+ background-color: #51B749;
+ width: 40px;
+ height: 40px;
+ }
+  .button7{
+ background-color: #FBD75C;
+ width: 40px;
+ height: 40px;
+ }
+  .button8{
+ background-color: #FFB878;
+ width: 40px;
+ height: 40px;
+ }
+ .buttoncolorgroup button:focus {
+border: 1px solid #000;
+}
+ .buttoncolorgroup button.active {
+border: 1px solid #000;
+}
+ /*.buttoncolorgroup button:active,.buttoncolorgroup button:focus,.buttoncolorgroup button:hover{border: 2px solid #000;}
+ */.button9{
+ background-color: #FF877C;
+ width: 40px;
+ height: 40px;
+ }
+  .button10{
+ background-color: #DC2128;
+ width: 40px;
+ height: 40px;
+ }
+  .button11{
+ background-color: #DAADFE;
+ width: 40px;
+ height: 40px;
+ }
+  .button12{
+ background-color: #E1E1E1;
+ width: 40px;
+ height: 40px;
+ }
 .notificationcount{
   color: white;
     border-radius: 50px;
@@ -5802,7 +6254,82 @@ page-servicedetails {
     border: 1px solid #ccc;
     border-radius: 3px;
 }
+.unfavorite
+ {
+     background-image:url('../img/unfav.png');background-size:cover;
+ }
+ .favorite
+ {
+     background-image:url('../img/fr.png');background-size:cover;
+ }
 
+    .button1{
+background-color: #FBE983;
+ width: 40px;
+ height: 40px;
+ }
+ .button2{
+ background-color: #5584EE;
+ width: 40px;
+ height: 40px;
+ }
+  .button3{
+ background-color: #A4BDFD;
+ width: 40px;
+ height: 40px;
+ }
+  .button4{
+ background-color: #47D6DC;
+ width: 40px;
+ height: 40px;
+ }
+  .button5{
+ background-color: #7AE7BE;
+ width: 40px;
+ height: 40px;
+ }
+  .button6{
+ background-color: #51B749;
+ width: 40px;
+ height: 40px;
+ }
+  .button7{
+ background-color: #FBD75C;
+ width: 40px;
+ height: 40px;
+ }
+  .button8{
+ background-color: #FFB878;
+ width: 40px;
+ height: 40px;
+ }
+ .buttoncolorgroup button:focus {
+border: 1px solid #000;
+}
+ .buttoncolorgroup button.active {
+border: 1px solid #000;
+}
+ /*.buttoncolorgroup button:active,.buttoncolorgroup button:focus,.buttoncolorgroup button:hover{border: 2px solid #000;}
+ */.button9{
+ background-color: #FF877C;
+ width: 40px;
+ height: 40px;
+ }
+  .button10{
+ background-color: #DC2128;
+ width: 40px;
+ height: 40px;
+ }
+  .button11{
+ background-color: #DAADFE;
+ width: 40px;
+ height: 40px;
+ }
+  .button12{
+ background-color: #E1E1E1;
+ width: 40px;
+ height: 40px;
+ }
 
 .button-md-primary{width:100%;padding: 14px 1.1em;height:inherit;font-size: 16px;}
 .scroll-content{background:#fff;}
@@ -5918,8 +6445,82 @@ page-servicinginfo {
     /* border: 1px solid; */
     background-color: gray;
 } 
+  .unfavorite
+ {
+     background-image:url('../img/unfav.png');background-size:cover;
+ }
+ .favorite
+ {
+     background-image:url('../img/fr.png');background-size:cover;
+ }
 
-
+  .button1{
+background-color: #FBE983;
+ width: 40px;
+ height: 40px;
+ }
+ .button2{
+ background-color: #5584EE;
+ width: 40px;
+ height: 40px;
+ }
+  .button3{
+ background-color: #A4BDFD;
+ width: 40px;
+ height: 40px;
+ }
+  .button4{
+ background-color: #47D6DC;
+ width: 40px;
+ height: 40px;
+ }
+  .button5{
+ background-color: #7AE7BE;
+ width: 40px;
+ height: 40px;
+ }
+  .button6{
+ background-color: #51B749;
+ width: 40px;
+ height: 40px;
+ }
+  .button7{
+ background-color: #FBD75C;
+ width: 40px;
+ height: 40px;
+ }
+  .button8{
+ background-color: #FFB878;
+ width: 40px;
+ height: 40px;
+ }
+ .buttoncolorgroup button:focus {
+border: 1px solid #000;
+}
+ .buttoncolorgroup button.active {
+border: 1px solid #000;
+}
+ /*.buttoncolorgroup button:active,.buttoncolorgroup button:focus,.buttoncolorgroup button:hover{border: 2px solid #000;}
+ */.button9{
+ background-color: #FF877C;
+ width: 40px;
+ height: 40px;
+ }
+  .button10{
+ background-color: #DC2128;
+ width: 40px;
+ height: 40px;
+ }
+  .button11{
+ background-color: #DAADFE;
+ width: 40px;
+ height: 40px;
+ }
+  .button12{
+ background-color: #E1E1E1;
+ width: 40px;
+ height: 40px;
+ }
 
     .messagecount{
    color: white;

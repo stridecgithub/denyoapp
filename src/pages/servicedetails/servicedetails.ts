@@ -102,6 +102,15 @@ export class ServicedetailsPage {
     console.log('ionViewDidLoad ServicedetailsPage');
   }
  ionViewWillEnter() {
+   this.unitDetailData.unit_id = localStorage.getItem("unitId");
+    this.unitDetailData.unitname = localStorage.getItem("unitunitname");
+    this.unitDetailData.location = localStorage.getItem("unitlocation");
+    this.unitDetailData.projectname = localStorage.getItem("unitprojectname");
+    this.unitDetailData.colorcodeindications = localStorage.getItem("unitcolorcode");
+    this.unitDetailData.favoriteindication=localStorage.getItem("unitfav");
+    console.log("Add Comment Color Code:"+this.unitDetailData.colorcodeindications);
+    this.unitDetailData.lat = localStorage.getItem("unitlat");
+    this.unitDetailData.lng = localStorage.getItem("unitlng");
    let //body: string = "loginid=" + this.userId,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),

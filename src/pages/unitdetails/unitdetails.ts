@@ -130,13 +130,13 @@ public msgcount:any;
 		console.log(JSON.stringify(this.NP.get("record")));
 		let editItem = this.NP.get("record");
 		let colorcode;
-		let favorite;
+		
 		let index = this.colorListArr.indexOf(this.NP.get("record").colorcode); // 1
 		console.log("Color Index:" + index);
 		let colorvalincrmentone = index + 1;
 		colorcode = "button" + colorvalincrmentone;
 		console.log("Color is" + colorcode);
-
+let favorite;
 		if (this.NP.get("record").favoriteindication == 'favorite') {
 			favorite = "favorite";
 		}
@@ -144,7 +144,7 @@ public msgcount:any;
 			favorite = "unfavorite";
 
 		}
-
+this.unitDetailData.favoriteindication = favorite;
 
 		this.unitDetailData.unit_id = localStorage.getItem("unitId");
 		this.unitDetailData.unitname = localStorage.getItem("unitunitname");
@@ -155,7 +155,7 @@ public msgcount:any;
 		this.unitDetailData.gen_status = editItem.gen_status;
 		this.unitDetailData.nextservicedate = editItem.nextservicedate;
 		this.unitDetailData.alarmnotificationto = editItem.nextservicedate;
-		this.unitDetailData.favoriteindication = favorite;
+		
 		this.unitDetailData.lat = localStorage.getItem("unitlat");
 		this.unitDetailData.lng = localStorage.getItem("unitlng");
 		console.log(this.apiServiceURL + "/" + localStorage.getItem("unitId") + "/1/unitdetails");

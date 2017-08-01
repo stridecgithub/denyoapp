@@ -146,7 +146,15 @@ export class AddserviceinfoPage {
     this.unitDetailData.runninghr = editItem.runninghr;
     this.unitDetailData.gen_status = editItem.gen_status;
     this.unitDetailData.nextservicedate = editItem.nextservicedate;
+let favorite;
+		if (this.NP.get("record").favoriteindication == 'favorite') {
+			favorite = "favorite";
+		}
+		else {
+			favorite = "unfavorite";
 
+		}
+this.unitDetailData.favoriteindication = favorite;
 
     this.unitDetailData.unit_id = localStorage.getItem("unitId");
     if (this.unitDetailData.unit_id == undefined) {

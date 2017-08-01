@@ -43,6 +43,16 @@ export class CommentsinfoPage {
     startindex: 0,
     results: 8
   }
+    public unitDetailData: any = {
+    userId: '',
+    loginas: '',
+    pageTitle: '',
+    getremark: '',
+    serviced_by: '',
+    nextServiceDate: '',
+    addedImgLists1: '',
+    addedImgLists2: ''
+  }
   public userId: any;
   public reportAllLists = [];
   public loginas: any;
@@ -96,6 +106,38 @@ export class CommentsinfoPage {
     console.log("NUD" + localStorage.getItem("unitdetails"));
 
     if (this.NP.get("record")) {
+        let editItem = this.NP.get("record");
+    //this.unitDetailData.unit_id = editItem.unit_id;
+    //this.unitDetailData.unitname = editItem.unitname;
+    //this.unitDetailData.location = editItem.location;
+    //this.unitDetailData.projectname = editItem.projectname;
+    this.unitDetailData.runninghr = editItem.runninghr;
+    this.unitDetailData.gen_status = editItem.gen_status;
+    this.unitDetailData.nextservicedate = editItem.nextservicedate;
+let favorite;
+		if (this.NP.get("record").favoriteindication == 'favorite') {
+			favorite = "favorite";
+		}
+		else {
+			favorite = "unfavorite";
+
+		}
+this.unitDetailData.favoriteindication = favorite;
+
+    this.unitDetailData.unit_id = localStorage.getItem("unitId");
+    if (this.unitDetailData.unit_id == undefined) {
+      this.unitDetailData.unit_id = editItem.unit_id;
+    }
+    if (this.unitDetailData.unit_id == 'undefined') {
+      this.unitDetailData.unit_id = editItem.unit_id;
+    }
+    this.unitDetailData.unitname = localStorage.getItem("unitunitname");
+    this.unitDetailData.location = localStorage.getItem("unitlocation");
+    this.unitDetailData.projectname = localStorage.getItem("unitprojectname");
+    this.unitDetailData.colorcodeindications = localStorage.getItem("unitcolorcode");
+    console.log("Unit Details Color Code:" + this.unitDetailData.colorcodeindications);
+    this.unitDetailData.lat = localStorage.getItem("unitlat");
+    this.unitDetailData.lng = localStorage.getItem("unitlng");
       console.log("Service Info Record Param Value:" + JSON.stringify(this.NP.get("record")));
     }
     this.reportData.startindex = 0;
