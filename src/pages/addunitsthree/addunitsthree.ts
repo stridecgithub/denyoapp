@@ -46,8 +46,8 @@ export class AddunitsthreePage {
   public createdby: any;
   public location: any;
   public latitude: any;
-   public msgcount:any;
-  public notcount:any;
+  public msgcount: any;
+  public notcount: any;
   public longitude: any;
   public projectname: any;
   public controllerid: any;
@@ -65,12 +65,13 @@ export class AddunitsthreePage {
   public cont3: boolean = false;
   public cont4: boolean = false;
   public cont5: boolean = false;
-
+  public primary: any;
   public addedImgLists: any;
   public userInfo = [];
   public contactInfo = [];
   public contactnameArray = [];
   public contactnumberArray = [];
+  public borderbottomredvalidation: any;
   // Flag to hide the form upon successful completion of remote operation
   public hideForm: boolean = false;
   public hideActionButton = true;
@@ -101,7 +102,8 @@ export class AddunitsthreePage {
       "contact_name_5": [""],
       'contact_number_5': [""],
       "contact_name": [""],
-      'contact_number': [""]
+      'contact_number': [""],
+      "primary": ["", Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(5)])],
 
     });
     this.userId = localStorage.getItem("userInfoId");
@@ -111,7 +113,17 @@ export class AddunitsthreePage {
     console.log('ionViewDidLoad AddunitsonePage');
 
   }
-
+  getPrimaryContact(ev) {
+    console.log(ev.target.value);
+    let char = ev.target.value.toString();
+    if (char.length > 5) {
+      console.log('Reached five characters above');
+      this.borderbottomredvalidation = 'border-bottom-validtion';
+    } else {
+      console.log('Reached five characters below');
+      this.borderbottomredvalidation = '';
+    }
+  }
   // Determine whether we adding or editing a record
   // based on any supplied navigation parameters
   ionViewWillEnter() {
@@ -121,13 +133,13 @@ export class AddunitsthreePage {
       options: any = new RequestOptions({ headers: headers }),
       url: any = this.apiServiceURL + "/msgnotifycount?loginid=" + this.userId;
     console.log(url);
-   // console.log(body);
+    // console.log(body);
 
     this.http.get(url, options)
       .subscribe((data) => {
         console.log("Count Response Success:" + JSON.stringify(data.json()));
-       this.msgcount=data.json().msgcount;
-        this.notcount=data.json().notifycount;
+        this.msgcount = data.json().msgcount;
+        this.notcount = data.json().notifycount;
       });
     this.resetFields();
     this.getJsonCountryListData();
@@ -153,12 +165,19 @@ export class AddunitsthreePage {
           let contactNumber;
           contactName = contDataArr[0];
           contactNumber = contDataArr[1];
+
           console.log("incr:" + i);
           console.log("contactName:" + contactName);
           console.log("contactNumber:" + contactNumber);
           if (i == 0) {
             this.contact_name_1 = contactName;
             this.contact_number_1 = contactNumber;
+
+            if (this.contact_number_1 != undefined) {
+              let contactSplitSpace = this.contact_number_1.split(" ");
+              this.primary = contactSplitSpace[0];
+              this.contact_number_1 = contactSplitSpace[1];
+            }
           }
           if (i == 1 && contactName != '') {
             this.cont2 = true;
@@ -344,13 +363,14 @@ export class AddunitsthreePage {
   // Determine whether we are adding a new record or amending an
   // existing record
   saveEntry() {
-    let alarmhashtags: string = this.form.controls["alarmhashtags"].value;
-
-
-
+    let alarmhashtags: string = this.form.controls["alarmhashtags"].value,
+      primary: string = this.form.controls["primary"].value;
+    let contact = primary + " " + this.form.controls["contact_number_1"].value;
+    console.log(contact);
+     contact = contact.replace("+", "%2B");
     this.contactInfo.push({
       contact_name: this.form.controls["contact_name_1"].value,
-      contact_number: this.form.controls["contact_number_1"].value
+      contact_number: contact
     });
 
     if (this.cont2 = true) {

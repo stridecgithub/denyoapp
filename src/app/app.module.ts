@@ -62,6 +62,7 @@ import { ViewunitsPage } from '../pages/viewunits/viewunits';
 import { NavbarComponent } from '../components/navbar/navbar';
 import { CustomHeaderComponent } from '../pages/custom-header-component';
 import { CustomFooterComponent } from '../pages/custom-footer-component';
+import { Geolocation } from '@ionic-native/geolocation';
 @NgModule({
   declarations: [
     MyApp,
@@ -191,7 +192,8 @@ import { CustomFooterComponent } from '../pages/custom-footer-component';
   ],
   providers: [
     StatusBar,
-    SplashScreen,
+    SplashScreen,  
+    Geolocation, 
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     DataServiceProvider
   ]

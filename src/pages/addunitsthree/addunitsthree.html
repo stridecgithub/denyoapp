@@ -79,10 +79,17 @@
         <!--a href="#"  *ngIf="cont4" (click)="remove(4)" style="color:brown">Remove</a-->
         <ion-input *ngIf="cont5" type="text" placeholder="Name" [disabled]="readOnly" formControlName="contact_name_5" [(ngModel)]="contact_name_5"></ion-input>
         <!--a href="#"  *ngIf="cont5" (click)="remove(5)" style="color:brown">Remove</a-->
-        <ion-item>
+        <!--ion-item>
           <ion-label stacked>Contact Number<span class="mandatory" *ngIf="hideActionButton"> *</span></ion-label>
           <ion-input type="text" [disabled]="readOnly" formControlName="contact_number_1" [(ngModel)]="contact_number_1"></ion-input>
-        </ion-item>
+        </ion-item-->
+
+         <div>
+            <ion-label stacked>Contact Number <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
+            <ion-input class="{{borderbottomredvalidation}}" [disabled]="readOnly" (keyup)="getPrimaryContact($event)" type="text" formControlName="primary" [(ngModel)]="primary" style="width:19%;float:left;"></ion-input>
+            <ion-input [disabled]="readOnly" type="text" formControlName="contact_number_1" [(ngModel)]="contact_number_1" style="width:79%;float:right;"></ion-input>
+          </div>
+       
         <ion-input *ngIf="cont2" type="text" placeholder="Number" [disabled]="readOnly" formControlName="contact_number_2" [(ngModel)]="contact_number_2"></ion-input>
         <ion-input *ngIf="cont3" type="text" placeholder="Number" [disabled]="readOnly" formControlName="contact_number_3" [(ngModel)]="contact_number_3"></ion-input>
         <ion-input *ngIf="cont4" type="text" placeholder="Number" [disabled]="readOnly" formControlName="contact_number_4" [(ngModel)]="contact_number_4"></ion-input>
