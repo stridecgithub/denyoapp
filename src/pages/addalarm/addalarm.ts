@@ -3,6 +3,7 @@ import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { AlarmlogPage } from '../alarmlog/alarmlog';
+import { AlarmdetailsPage } from '../alarmdetails/alarmdetails';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
 import { RolePage } from '../role/role';
 import { AlarmPage } from '../alarm/alarm';
@@ -130,7 +131,7 @@ export class AddalarmPage {
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/getstaffs";
+      url: any = this.apiServiceURL +"/getstaffs?loginid=" + this.userId + "&company_id="+this.companyid;
     let res;
     console.log(url);
     this.http.get(url, options)
@@ -179,7 +180,10 @@ export class AddalarmPage {
     notification.present();
   }
   previous() {
-    this.nav.setRoot(AlarmPage);
+    this.nav.setRoot(AlarmdetailsPage,
+    {
+      record: this.NP.get("record")
+    });
   }
   notification() {
     this.nav.setRoot(NotificationPage);

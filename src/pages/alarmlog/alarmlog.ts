@@ -88,9 +88,7 @@ export class AlarmlogPage {
   }
   doAlarm() {
     let editItem = this.NP.get("record");
-    if (this.NP.get("record").unit_id != undefined && this.NP.get("record").unit_id != 'undefined') {
-      this.unit_id = editItem.unit_id;
-    }
+    
     this.presentLoading(1);
     if (this.reportData.status == '') {
       this.reportData.status = "DRAFT";
@@ -102,7 +100,7 @@ export class AlarmlogPage {
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/alarms?is_mobile=1&startindex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc + "&unitid=" + this.unit_id;
+      url: any = this.apiServiceURL + "/alarms?is_mobile=1&startindex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc + "&unitid=" + localStorage.getItem("unitId");;
     let res;
     console.log(url);
     this.http.get(url, options)
@@ -143,43 +141,15 @@ export class AlarmlogPage {
     this.presentLoading(0);
   }
   ionViewWillEnter() {
-      if (this.NP.get("record")) {
-      console.log("Service Info Record Param Value:" + JSON.stringify(this.NP.get("record")));
-      let editItem = this.NP.get("record");
-    //this.unitDetailData.unit_id = editItem.unit_id;
-    //this.unitDetailData.unitname = editItem.unitname;
-    //this.unitDetailData.location = editItem.location;
-    //this.unitDetailData.projectname = editItem.projectname;
-    let favorite;
-		if (this.NP.get("record").favoriteindication == 'favorite') {
-			favorite = "favorite";
-		}
-		else {
-			favorite = "unfavorite";
-
-		}
-this.unitDetailData.favoriteindication = favorite;
-    this.unitDetailData.runninghr = editItem.runninghr;
-    this.unitDetailData.gen_status = editItem.gen_status;
-    this.unitDetailData.nextservicedate = editItem.nextservicedate;
-
-
-    this.unitDetailData.unit_id = localStorage.getItem("unitId");
-    if (this.unitDetailData.unit_id == undefined) {
-      this.unitDetailData.unit_id = editItem.unit_id;
-    }
-    if (this.unitDetailData.unit_id == 'undefined') {
-      this.unitDetailData.unit_id = editItem.unit_id;
-    }
+     this.unitDetailData.unit_id = localStorage.getItem("unitId");
     this.unitDetailData.unitname = localStorage.getItem("unitunitname");
     this.unitDetailData.location = localStorage.getItem("unitlocation");
     this.unitDetailData.projectname = localStorage.getItem("unitprojectname");
     this.unitDetailData.colorcodeindications = localStorage.getItem("unitcolorcode");
-    console.log("Unit Details Color Code:" + this.unitDetailData.colorcodeindications);
+    this.unitDetailData.favoriteindication=localStorage.getItem("unitfav");
+    console.log("Add Comment Color Code:"+this.unitDetailData.colorcodeindications);
     this.unitDetailData.lat = localStorage.getItem("unitlat");
     this.unitDetailData.lng = localStorage.getItem("unitlng");
-
-    }
     this.pageTitle = "Alarm";
     this.reportData.startindex = 0;
     this.reportData.sort = "alarm_id";

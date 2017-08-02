@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { UserPage } from '../user/user';
 import { CompanygroupPage } from '../companygroup/companygroup';
+import { AlarmlogPage } from '../alarmlog/alarmlog';
 import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitsPage } from '../units/units';
 import { RolePage } from '../role/role';
@@ -55,7 +56,7 @@ let alarmID=this.NP.get("alarmid");
 		console.log('Enter kannan kris thibi1');
 	}
 	previous() {
-		this.nav.setRoot(UnitsPage);
+		this.nav.setRoot(AlarmlogPage);
 	}
 	redirectToUser() {
 		this.nav.setRoot(UserPage);

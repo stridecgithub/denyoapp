@@ -131,7 +131,7 @@ public msgcount:any;
 		let editItem = this.NP.get("record");
 		let colorcode;
 		
-		let index = this.colorListArr.indexOf(this.NP.get("record").colorcode); // 1
+		let index = this.colorListArr.indexOf( localStorage.getItem("unitcolorcode")); // 1
 		console.log("Color Index:" + index);
 		let colorvalincrmentone = index + 1;
 		colorcode = "button" + colorvalincrmentone;

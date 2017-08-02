@@ -10,6 +10,7 @@ import { CalendarPage } from '../calendar/calendar';
 import { EmailPage } from '../email/email';
 import { AddalarmPage } from '../addalarm/addalarm';
 import { TrendlinePage } from '../trendline/trendline';
+import { AlarmlogPage } from '../alarmlog/alarmlog';
 
 import { Http, Headers, RequestOptions } from '@angular/http';
 /**
@@ -98,7 +99,14 @@ export class AlarmdetailsPage {
     this.alarm_assginedto_name = item.alarm_assginedto_name;
   }
   editalarm() {
-    this.nav.setRoot(AddalarmPage);
+    this.nav.setRoot(AddalarmPage,
+    {
+      record: this.NP.get("record")
+    });
+  }
+  previous()
+  {
+     this.nav.setRoot(AlarmlogPage);
   }
   notification() {
     this.nav.setRoot(NotificationPage);
