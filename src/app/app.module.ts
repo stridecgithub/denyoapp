@@ -59,6 +59,8 @@ import { PopoverPage } from '../pages/popover/popover';
 import { TrendlinePage } from '../pages/trendline/trendline';
 import { DataServiceProvider } from '../providers/data-service/data-service';
 import { ViewunitsPage } from '../pages/viewunits/viewunits';
+import { AddalarmlistPage } from '../pages/addalarmlist/addalarmlist';
+import { AlarmlistdetailPage } from '../pages/alarmlistdetail/alarmlistdetail';
 import { NavbarComponent } from '../components/navbar/navbar';
 import { CustomHeaderComponent } from '../pages/custom-header-component';
 import { CustomFooterComponent } from '../pages/custom-footer-component';
@@ -67,6 +69,8 @@ import { Geolocation } from '@ionic-native/geolocation';
   declarations: [
     MyApp,
     HomePage,
+    AddalarmlistPage,
+    AlarmlistdetailPage,
     DashboardPage,
     CalendarPage,
     CompanygroupPage,
@@ -134,6 +138,8 @@ import { Geolocation } from '@ionic-native/geolocation';
   entryComponents: [
     MyApp,
     HomePage,
+    AddalarmlistPage,
+    AlarmlistdetailPage,
     DashboardPage,
     CalendarPage,
     CompanygroupPage,
@@ -192,8 +198,8 @@ import { Geolocation } from '@ionic-native/geolocation';
   ],
   providers: [
     StatusBar,
-    SplashScreen,  
-    Geolocation, 
+    SplashScreen,
+    Geolocation,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     DataServiceProvider
   ]
