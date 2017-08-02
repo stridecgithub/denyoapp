@@ -2096,7 +2096,7 @@ border:2px solid #009ACD;
 
 .item-md .item-button {
     
-    height: 45px;
+   // height: 45px;
    
 }
 .ion-badge-container{
@@ -2122,9 +2122,9 @@ border:2px solid #009ACD;
     background-color:white;
 }
 .button-inner{
-  position:relative;
+ // position:relative;
  // bottom:12px;
-  margin-top: 12px;
+ // margin-top: 12px;
 }
 .priority-one-highlight
 {
@@ -6488,7 +6488,9 @@ page-servicinginfo {
  {
      background-image:url('../img/fr.png');background-size:cover;
  }
-
+.label-md {
+    margin: 12px 0px 0px 1px;
+}
   .button1{
 background-color: #FBE983;
  width: 40px;

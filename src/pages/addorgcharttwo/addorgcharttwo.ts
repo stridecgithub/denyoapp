@@ -386,6 +386,7 @@ export class AddorgcharttwoPage {
     this.http.get(url, options)
       .subscribe(data => {
         res = data.json();
+        console.log("DATA"+JSON.stringify(res));
         this.len = res.TotalCount;
         this.responseResultReportTo = res.staffslist;
       });
