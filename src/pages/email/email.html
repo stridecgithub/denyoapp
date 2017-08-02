@@ -118,7 +118,7 @@
       </ion-infinite-scroll>
     </ion-list>
     <ion-list *ngSwitchCase="'send'">
-      <div class="error" *ngIf="totalCountSend==0 && MESSAGESENTVIEWACCESS=='1'">No send itme entries found</div>
+      <div class="error" *ngIf="totalCountSend==0 && MESSAGESENTVIEWACCESS=='1'">No sent item entries found</div>
       <ion-item *ngIf="MESSAGESENTVIEWACCESS=='1'">
         <ion-label>Sort By</ion-label>
         <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="pet" (ionChange)="onSendSegmentChanged(pet)">

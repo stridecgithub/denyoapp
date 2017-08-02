@@ -5,14 +5,103 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>addalarmlist</ion-title>
+  <ion-navbar color="bluedark">
+    <ion-title class="page-title">Alarm</ion-title>
+    <ion-buttons start>
+      <button ion-button menuToggle class="menu-toggle">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    </ion-buttons>
+    <!--ion-buttons end>
+      <button (click)="doAdd()" style="background-color:transparent">
+            <ion-icon name="ios-add-circle-outline"></ion-icon>           
+        </button>
+    </ion-buttons-->
+    <ion-buttons end>
+      <button ion-button (click)="notification()">
+  <ion-icon ios="ios-notifications-outline" md="md-notifications-outline"></ion-icon>
+  <ion-badge item-end class="notificationcount" *ngIf="notcount>0">{{this.notcount}}</ion-badge>
+  
+</button>
+    </ion-buttons>
   </ion-navbar>
+  <ion-navbar class="backtoprevious-navbar">
+    <ion-buttons start class="backtoprevious-start">
+      <button ion-button icon-left class="backtoprevious-button" (click)="previous()">
+ <ion-icon name="arrow-back" class="backtoprevious-icon"></ion-icon>
+ Back to previous
+</button>
+    </ion-buttons>
+    <ion-buttons end>
+      Login As:{{loginas}}
+    </ion-buttons>
+  </ion-navbar>
+
 
 </ion-header>
 
 
 <ion-content padding>
+  <div>
+    <form [formGroup]="form" (ngSubmit)="saveEntry()">
+      <ion-item>
+        <ion-label stacked>Subject<span class="mandatory" *ngIf="hideActionButton"> *</span></ion-label>
+        <ion-input type="text" [disabled]=true formControlName="subject" [(ngModel)]="subject"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>Assign by <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
+        <ion-input type="text" [disabled]=true formControlName="assignedby" [(ngModel)]="assignedby"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Assigned To</ion-label>
+        <ion-select [disabled]="readOnly" [(ngModel)]="assigned_to" formControlName="assigned_to">
+          <ion-option *ngFor="let userData of responseResultReportTo" value="{{userData.staff_id}}">{{userData.firstname}} {{userData.lastname}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <div>
+        <ion-label stacked>Remark</ion-label>
+        <ion-textarea rows="6" type="text" [disabled]="readOnly" formControlName="remark" [(ngModel)]="remark"></ion-textarea>
+
+      </div>
+      <ion-item>
+        <button ion-button color="primary" text-center [disabled]="!form.valid">Complete and Save</button>
+      </ion-item>
+    </form>
+  </div>
 
 </ion-content>
+<ion-footer color="bluedark">
+  <ion-toolbar color="bluedark">
+    <ul class="quick-list">
+      <li>
+        <button ion-button icon-only clear (click)="redirectToMaps()">
+    	<ion-icon name="home" class="footer-icon">MAPS</ion-icon>
+    </button>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectToUser()" clear>
+    	<ion-icon name="contacts" class="footer-icon">UNITS</ion-icon>
+    </button>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectToMessage()" clear>
+    	<ion-icon name="chatboxes" class="footer-icon">MESSAGE</ion-icon>
+       <ion-badge item-end class="messagecount"  *ngIf="msgcount>0">{{this.msgcount}}</ion-badge>    
+       </button>
+        <ion-badge color="danger"></ion-badge>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectCalendar()" clear>
+    	<ion-icon name="bicycle" class="footer-icon">CALENDAR</ion-icon>
+    </button>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectToSettings()" clear>
+    	<ion-icon name="settings" class="footer-icon">SETTING</ion-icon>
+    </button>
+      </li>
+    </ul>
+
+  </ion-toolbar>
+</ion-footer>

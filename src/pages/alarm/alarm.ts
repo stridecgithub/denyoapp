@@ -11,6 +11,8 @@ import { MapsPage } from '../maps/maps';
 import { ReportsPage } from '../reports/reports';
 import { CalendarPage } from '../calendar/calendar';
 import { EmailPage } from '../email/email';
+import { AlarmlistdetailPage } from '../alarmlistdetail/alarmlistdetail';
+import { AddalarmlistPage } from '../addalarmlist/addalarmlist';
 
 //import { TabsPage } from '../tabs/tabs';
 //import { UserPage } from '../user/user';
@@ -92,9 +94,7 @@ export class AlarmPage {
   }
   doAlarm() {
     let editItem = this.NP.get("record");
-    if (this.NP.get("record").unit_id != undefined && this.NP.get("record").unit_id != 'undefined') {
-      this.unit_id = editItem.unit_id;
-    }
+   
     this.presentLoading(1);
     if (this.reportData.status == '') {
       this.reportData.status = "DRAFT";
@@ -106,7 +106,7 @@ export class AlarmPage {
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/alarms?is_mobile=1&startindex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc + "&unitid=" + this.unit_id;
+      url: any = this.apiServiceURL + "/alarms?is_mobile=1&startindex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc + "&unitid=" +  localStorage.getItem("unitId");
     let res;
     console.log(url);
     this.http.get(url, options)
@@ -123,10 +123,10 @@ export class AlarmPage {
 
 
             this.reportAllLists.push({
+              alarm_id: res.alarms[alarm].alarm_id,
               alarm_name: res.alarms[alarm].alarm_name,
-              alarm_assigned_by: res.alarms[alarm].alarm_assigned_by,
-              alarm_assigned_to: res.alarms[alarm].alarm_assigned_to
-
+              alarm_assginedby_name: res.alarms[alarm].alarm_assginedby_name,
+              alarm_assginedto_name: res.alarms[alarm].alarm_assginedto_name
 
             });
           }
@@ -146,42 +146,15 @@ export class AlarmPage {
     this.presentLoading(0);
   }
   ionViewWillEnter() {
-    if (this.NP.get("record")) {
-      console.log("Service Info Record Param Value:" + JSON.stringify(this.NP.get("record")));
-      let editItem = this.NP.get("record");
-    //this.unitDetailData.unit_id = editItem.unit_id;
-    //this.unitDetailData.unitname = editItem.unitname;
-    //this.unitDetailData.location = editItem.location;
-    //this.unitDetailData.projectname = editItem.projectname;
-    this.unitDetailData.runninghr = editItem.runninghr;
-    this.unitDetailData.gen_status = editItem.gen_status;
-    this.unitDetailData.nextservicedate = editItem.nextservicedate;
-
-let favorite;
-		if (this.NP.get("record").favoriteindication == 'favorite') {
-			favorite = "favorite";
-		}
-		else {
-			favorite = "unfavorite";
-
-		}
-this.unitDetailData.favoriteindication = favorite;
     this.unitDetailData.unit_id = localStorage.getItem("unitId");
-    if (this.unitDetailData.unit_id == undefined) {
-      this.unitDetailData.unit_id = editItem.unit_id;
-    }
-    if (this.unitDetailData.unit_id == 'undefined') {
-      this.unitDetailData.unit_id = editItem.unit_id;
-    }
     this.unitDetailData.unitname = localStorage.getItem("unitunitname");
     this.unitDetailData.location = localStorage.getItem("unitlocation");
     this.unitDetailData.projectname = localStorage.getItem("unitprojectname");
     this.unitDetailData.colorcodeindications = localStorage.getItem("unitcolorcode");
-    console.log("Unit Details Color Code:" + this.unitDetailData.colorcodeindications);
+    this.unitDetailData.favoriteindication=localStorage.getItem("unitfav");
+    console.log("Add Comment Color Code:"+this.unitDetailData.colorcodeindications);
     this.unitDetailData.lat = localStorage.getItem("unitlat");
     this.unitDetailData.lng = localStorage.getItem("unitlng");
-
-    }
     this.pageTitle = "Alarm";
     this.reportData.startindex = 0;
     this.reportData.sort = "alarm_id";
@@ -225,6 +198,23 @@ this.unitDetailData.favoriteindication = favorite;
       loader.present();
     } else {
       loader.dismiss();
+    }
+  }
+   details(item, act) {
+    if (act == 'edit') {
+      this.nav.setRoot(AlarmlistdetailPage, {
+        record: item,
+        act: act
+      });
+      return false;
+    }
+  }
+    doEdit(item, act) {
+    if (act == 'edit') {
+      this.nav.setRoot(AddalarmlistPage, {
+        record: item,
+        act: act
+      });
     }
   }
   previous() {

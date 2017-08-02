@@ -35,7 +35,7 @@
       Login As:{{loginas}}
     </ion-buttons>
   </ion-navbar>
-  <ion-item>
+  <ion-item >
     <button class="{{unitDetailData.colorcodeindications}}" style="float: left ;width:8px;height:70px">         
         </button>
         
@@ -76,7 +76,7 @@
   <ion-list *ngIf="totalCount!=0">
     <ion-item-sliding *ngFor="let item of reportAllLists;">
 
-      <ion-item>
+      <ion-item (click)="details(item,'edit')">
 
 
         <div style="overflow: hidden; padding-left: .5em;">
