@@ -2769,9 +2769,11 @@ ion-navbar ion-buttons{margin-right:15px;}
 page-addunitstwo {
     .item-md .item-button {
    // padding: 0 7.6em;
-    height: 45px;
+   // height: 45px;
    // font-size: 1.2rem;
 }
+
+
 .quick-list li button ion-icon{font-family: "Roboto", "Helvetica Neue", sans-serif;font-style:normal;font-size:11px!important;width:inherit;height:58px;margin-top:10px;}
 .notificationcount{
   color: white;
@@ -2882,6 +2884,12 @@ ion-navbar ion-buttons{margin-right:15px;}
 //adduser
 
 page-adduser {
+    .quick-list {
+    margin: -5px auto;
+    display: table;
+    padding: 0;
+    width: 100%;
+}
     .item-md.item-block .item-inner{padding-right:0;}
     .notificationcount{
   color: white;
