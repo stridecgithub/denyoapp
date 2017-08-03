@@ -42,6 +42,8 @@ export class ServicedetailsPage {
   public service_remark: any;
   public next_service_date: any;
   public service_priority: any;
+  public photo:any;
+  public sdate:any;
   
   is_request: boolean
   public serviced_by_name: any;
@@ -136,6 +138,7 @@ export class ServicedetailsPage {
     this.unitDetailData.runninghr = editItem.runninghr;
     this.unitDetailData.gen_status = editItem.gen_status;
     this.unitDetailData.nextservicedate = editItem.nextservicedate;
+    
     if (this.NP.get("record")) {
       this.selectEntry(this.NP.get("record"));
       this.service_id = this.NP.get("record").service_id;
@@ -162,6 +165,8 @@ export class ServicedetailsPage {
     this.serviced_datetime = item.serviced_datetime;
     this.service_subject = item.service_subject;
     this.service_remark = item.service_remark;
+     this.photo = item.user_photo;
+     this.sdate = item.serviced_datetime+"("+item.time_ago+")";
    // this.requestbutton=1;
     //this.next_service_date = item.next_service_date;
     this.service_priority = item.service_priority;
@@ -182,6 +187,7 @@ export class ServicedetailsPage {
     this.service_resources = item.service_resources;
     this.service_priority=item.service_priority;
     this.requestbutton=item.is_request;
+   
     console.log("RQ"+this.is_request);
 
 if (this.service_resources != undefined && this.service_resources != 'undefined' && this.service_resources != '') {

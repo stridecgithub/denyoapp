@@ -36,6 +36,8 @@ export class CommentdetailsPage {
   public addedImgLists = [];
   progress: number;
   public recordID: any;
+  public photo:any;
+  public cdate:any;
   public comment_unitid: any;
   public comment_id: any;
   public udetails: any;
@@ -162,6 +164,8 @@ export class CommentdetailsPage {
     this.comment_by_name = item.comment_by_name;
     this.comment_priority = item.comment_priority;
     this.comment_remark = item.comment_remark;
+    this.photo = item.user_photo;
+    this.cdate = item.comment_date+"("+item.time_ago+")";
     console.log("X" + this.comment_priority);
     if (this.comment_priority == "1") {
       this.service_priority_class1 = '';

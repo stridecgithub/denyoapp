@@ -50,7 +50,11 @@
    
  
       <div>
-                  <ion-col>
+        <ion-item style="float:left;">
+      <ion-avatar item-start>
+        <img src="{{photo}}">
+      </ion-avatar>
+                  <ion-col style="float:left">
             <p><b>Subject:</b>{{service_subject}}</p>
             <p><b>Serviced Date:</b>{{serviced_datetime}}</p>
             <p  *ngIf="serviced_by_name!=''"><b>Serviced By:</b>{{serviced_by_name}}
@@ -58,6 +62,10 @@
             </p>
   
           </ion-col>
+          <ion-item >
+            <h6 style="float:right">{{sdate}}</h6>
+          </ion-item>
+        </ion-item>
 
         <p><b>Remark:</b>
         <br>{{service_remark}}</p>
