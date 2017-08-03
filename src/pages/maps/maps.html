@@ -91,9 +91,9 @@
         <button (click)="favorite(item.unit_id)" class="{{item.favoriteindication}}" style="float: right ;width:30px;height:30px;background-color:#ffffff"></button>
         <div style="overflow: hidden; padding-left: 3.5em;">
           <h5 (click)="loadMap(item)"><b>{{item.unitname}}</b></h5>
-          <h5 (click)="doEdit(item,'detail')"><b>{{item.projectname}}</b></h5>
-          <h5 (click)="doEdit(item,'detail')"><b>Gen Status:</b>{{item.gen_status}}</h5>
-          <h5 (click)="doEdit(item,'detail')"><b>Next Servicing:</b>{{item.runninghr}}</h5>
+          <h5 (click)="loadMap(item)"><b>{{item.projectname}}</b></h5>
+          <h5 (click)="loadMap(item)"><b>Gen Status:</b>{{item.gen_status}}</h5>
+          <h5 (click)="loadMap(item)"><b>Next Servicing:</b>{{item.runninghr}}</h5>
         </div>
       </ion-item>
       <ion-item-options>

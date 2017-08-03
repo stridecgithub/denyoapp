@@ -22,13 +22,9 @@ import { NotificationPage } from '../notification/notification';
 import { ReportsPage } from '../reports/reports';
 import { CalendarPage } from '../calendar/calendar';
 import { EmailPage } from '../email/email';
-
-import { Locations } from '../../providers/locations';
-import { GoogleMaps } from '../../providers/google-maps';
 @Component({
   selector: 'page-maps',
-  templateUrl: 'maps.html',
-  providers: [GoogleMaps, Locations]
+  templateUrl: 'maps.html'
 })
 export class MapsPage {
 
@@ -68,7 +64,7 @@ export class MapsPage {
     results: 8
   }
   public reportAllLists = [];
-  constructor(private googleMaps: GoogleMaps, public maps: GoogleMaps, public platform: Platform, public locations: Locations, public http: Http, public navCtrl: NavController,
+  constructor( public platform: Platform, public http: Http, public navCtrl: NavController,
     public toastCtrl: ToastController, private sanitizer: DomSanitizer, public alertCtrl: AlertController, public navParams: NavParams, public loadingCtrl: LoadingController) {
     /* Role Authority Start */
     this.VIEWACCESS = localStorage.getItem("DASHBOARD_MAP_VIEW");
