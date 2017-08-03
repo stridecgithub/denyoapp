@@ -5191,7 +5191,42 @@ body{
 
 
 page-maps {
-
+ .Running
+ {
+     background-image:url('../img/ready.png');background-size:cover;
+    // margin-top: 13px;
+ 
+ }
+  .Ready
+ {
+     background-image:url('../img/ready.png');background-size:cover;
+    // margin-top: 13px;
+ 
+ }
+  .NOT_READY
+ {
+     background-image:url('../img/notready.png');background-size:cover;
+    // margin-top: 13px;
+ 
+ }
+  .Offline
+ {
+     background-image:url('../img/offline.png');background-size:cover;
+    // margin-top: 13px;
+ 
+ }
+   .Warning
+ {
+     background-image:url('../img/warning.png');background-size:cover;
+    // margin-top: 13px;
+ 
+ }
+   .Tripped
+ {
+     background-image:url('../img/notready.png');background-size:cover;
+    // margin-top: 13px;
+ 
+ }
 
      #please-connect {
     position: absolute;

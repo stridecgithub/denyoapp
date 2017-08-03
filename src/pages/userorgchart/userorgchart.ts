@@ -133,6 +133,8 @@ export class UserorgchartPage {
       console.log("EDIT" + this.company_group);
       this.getUserListData();
       this.report_to = editItem.report_to;
+      console.log("RTO"+this.report_to);
+      
        this.naDisplay=0;
        
       if (this.NP.get("record").role_id == 1) {
@@ -404,7 +406,14 @@ export class UserorgchartPage {
       .subscribe(data => {
         res = data.json();
         // this.responseResultReportTo="N/A";
+        if(this.report_to == 0)
+      {
+        this.len=0;
+      }
+      else
+      {
         this.len = res.TotalCount;
+      }
         console.log("length" + res.TotalCount);
         this.naDisplay = 1;
         this.responseResultReportTo = res.staffslist;

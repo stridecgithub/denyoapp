@@ -82,17 +82,18 @@
     height: 20px;
     position: absolute;
     top: 36px;
-    left: 20px;" (click)="getCheckBoxValue(item,item.unit_id,item.viewonid);" value="1">
+    left: 50px;" (click)="getCheckBoxValue(item,item.unit_id,item.viewonid);" value="1">
                 </label>
         </div>
         <button class="{{item.colorcodeindications}}" style="float: left ;width:8px;height:70px">
          
         </button>
+        <button  class="{{item.genstatus}}" style="float:left ;width:30px;height:30px;margin-top: 13px;background-color:#ffffff"></button>
         <button (click)="favorite(item.unit_id)" class="{{item.favoriteindication}}" style="float: right ;width:30px;height:30px;background-color:#ffffff"></button>
         <div style="overflow: hidden; padding-left: 3.5em;">
           <h5 (click)="loadMap(item)"><b>{{item.unitname}}</b></h5>
           <h5 (click)="loadMap(item)"><b>{{item.projectname}}</b></h5>
-          <h5 (click)="loadMap(item)"><b>Gen Status:</b>{{item.gen_status}}</h5>
+          <h5 (click)="loadMap(item)"><b>Gen Status:</b>{{item.genstatus}}</h5>
           <h5 (click)="loadMap(item)"><b>Next Servicing:</b>{{item.runninghr}}</h5>
         </div>
       </ion-item>

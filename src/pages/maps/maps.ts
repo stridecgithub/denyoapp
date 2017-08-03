@@ -173,6 +173,7 @@ export class MapsPage {
               models_id: res.units[unit].models_id,
               alarmnotificationto: res.units[unit].alarmnotificationto,
               viewonid: res.units[unit].viewonid,
+              genstatus: res.units[unit].genstatus,
               favoriteindication: favorite,
               latitude: res.units[unit].latitude,
               longtitude: res.units[unit].longtitude
