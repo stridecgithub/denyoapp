@@ -40,6 +40,8 @@ export class EmailPage {
   public sendLists = [];
   public loginas: any;
   public hashtag;
+  public photo:any;
+  public mdate:any;
   public priority_lowclass: any;
   public priority_highclass: any;
   public addedImgListsArray = [];
@@ -689,6 +691,8 @@ export class EmailPage {
     this.messages_body = item.message_body;
     this.messages_body = item.message_body;
     this.personalhashtag = item.personalhashtag;
+    this.photo=item.senderphoto;
+    this.mdate=item.message_date+"("+item.time_ago+")";
     //this.message_readstatus=item.message_readstatus;
     this.receiver_id = item.receiver_id;
 

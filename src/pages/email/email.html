@@ -100,7 +100,7 @@
             <div style="overflow: hidden; padding-left: .5em;">
               <h5 *ngIf="item.message_readstatus==0" (click)="doDetails(item)"><b>{{item.messages_subject}}</b></h5>
               <h5 *ngIf="item.message_readstatus==1" (click)="doDetails(item)">{{item.messages_subject}}</h5>
-              <h6 style="margin-left: 195px;">{{item.message_date}}</h6>
+              <h6 style="margin-left: 195px;float:right">{{item.message_date}}</h6>
             </div>
 
 
@@ -232,6 +232,11 @@
 
 
     <ion-list *ngSwitchCase="'details'">
+      <div>
+         <ion-item style="float:left;">
+      <ion-avatar item-start>
+        <img src="{{photo}}">
+      </ion-avatar>
       <div><b>Subject:</b>{{messages_subject}}</div>
       <hr>
       <div><b>From:</b>{{personalhashtag}}</div>
@@ -241,6 +246,11 @@
       <div><b>Message:</b>{{messages_body}}</div>
       <br>
       <div *ngIf="attachedFileLists.length>0"><b>Attachments:</b></div>
+      <ion-item >
+            <h6 style="float:right">{{mdate}}</h6>
+          </ion-item>
+         </ion-item>
+      </div>
       <ion-grid>
         <ion-row>
           <ion-col col-auto *ngFor="let item of attachedFileLists; let i = index" [attr.data-index]="i">
