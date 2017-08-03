@@ -43,8 +43,9 @@
    text-align:center;
     font-size: 12pt;">{{permissionMessage}}</p>
 </ion-content>
-<ion-content padding class="ion-content" *ngIf="VIEWACCESS==1">
-  <div [innerHTML]="sanitizer.bypassSecurityTrustHtml(iframeContent)"></div>
+<ion-content padding class="ion-content" *ngIf="VIEWACCESS==1">  
+	<div #map id="map"></div>
+  <!--div [innerHTML]="sanitizer.bypassSecurityTrustHtml(iframeContent)"></div-->
   <ion-item style="width: 100%; margin: 0; padding-left: 10px;" *ngIf="totalCount!=0">
     <ion-label>Sort By</ion-label>
     <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="pet" (ionChange)="onSegmentChanged(pet)">
@@ -68,10 +69,10 @@
   </ion-item>
   <div class="error" *ngIf="reportAllLists.length==0">No unit entries found</div>
   <div class="separator-line" *ngIf="totalCount!=0">&nbsp;</div>
-  <ion-refresher (ionRefresh)="doRefresh($event)" *ngIf="totalCount!=0">
+  <!--ion-refresher (ionRefresh)="doRefresh($event)" *ngIf="totalCount!=0">
     <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
     </ion-refresher-content>
-  </ion-refresher>
+  </ion-refresher-->
   <ion-list *ngIf="totalCount!=0">
     <ion-item-sliding *ngFor="let item of reportAllLists;">
       <ion-item>
@@ -81,7 +82,7 @@
     height: 20px;
     position: absolute;
     top: 36px;
-    left: 20px;" (click)="getCheckBoxValue(item,item.unit_id,item.viewonid)" value="1">
+    left: 20px;" (click)="getCheckBoxValue(item,item.unit_id,item.viewonid);" value="1">
                 </label>
         </div>
         <button class="{{item.colorcodeindications}}" style="float: left ;width:8px;height:70px">
@@ -89,7 +90,7 @@
         </button>
         <button (click)="favorite(item.unit_id)" class="{{item.favoriteindication}}" style="float: right ;width:30px;height:30px;background-color:#ffffff"></button>
         <div style="overflow: hidden; padding-left: 3.5em;">
-          <h5 (click)="doEdit(item,'detail')"><b>{{item.unitname}}</b></h5>
+          <h5 (click)="loadMap(item)"><b>{{item.unitname}}</b></h5>
           <h5 (click)="doEdit(item,'detail')"><b>{{item.projectname}}</b></h5>
           <h5 (click)="doEdit(item,'detail')"><b>Gen Status:</b>{{item.gen_status}}</h5>
           <h5 (click)="doEdit(item,'detail')"><b>Next Servicing:</b>{{item.runninghr}}</h5>

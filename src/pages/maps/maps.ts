@@ -1,6 +1,6 @@
 
-import { Component } from '@angular/core';
-import { NavController, ToastController, AlertController, NavParams } from 'ionic-angular';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { NavController, ToastController, AlertController, NavParams, Platform } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { AddunitsonePage } from '../addunitsone/addunitsone';
@@ -13,7 +13,7 @@ import { RolePage } from '../role/role';
 import { HomePage } from '../home/home';
 
 import { UnitdetailsPage } from '../unitdetails/unitdetails';
-//declare var google;
+declare var google;
 import { DomSanitizer } from '@angular/platform-browser';
 import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitsPage } from '../units/units';
@@ -22,16 +22,26 @@ import { NotificationPage } from '../notification/notification';
 import { ReportsPage } from '../reports/reports';
 import { CalendarPage } from '../calendar/calendar';
 import { EmailPage } from '../email/email';
+
+import { Locations } from '../../providers/locations';
+import { GoogleMaps } from '../../providers/google-maps';
 @Component({
   selector: 'page-maps',
   templateUrl: 'maps.html',
+  providers: [GoogleMaps, Locations]
 })
 export class MapsPage {
+
+  @ViewChild('map') mapElement: ElementRef;
+  @ViewChild('pleaseConnect') pleaseConnect: ElementRef;
+
+
   //@ViewChild('mapContainer') mapContainer: ElementRef;
   //map: any;
   public loginas: any;
   public userid: any;
   public companyid: any;
+  public addressData = [];
   public detailvalue: any;
   public pageTitle: string;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
@@ -58,7 +68,7 @@ export class MapsPage {
     results: 8
   }
   public reportAllLists = [];
-  constructor(public http: Http, public navCtrl: NavController,
+  constructor(private googleMaps: GoogleMaps, public maps: GoogleMaps, public platform: Platform, public locations: Locations, public http: Http, public navCtrl: NavController,
     public toastCtrl: ToastController, private sanitizer: DomSanitizer, public alertCtrl: AlertController, public navParams: NavParams, public loadingCtrl: LoadingController) {
     /* Role Authority Start */
     this.VIEWACCESS = localStorage.getItem("DASHBOARD_MAP_VIEW");
@@ -75,6 +85,7 @@ export class MapsPage {
     this.userid = localStorage.getItem("userInfoId");
     this.companyid = localStorage.getItem("userInfoCompanyId");
   }
+
 
 
 
@@ -114,7 +125,7 @@ export class MapsPage {
       "DAADFE",
       "E1E1E1"
     ];
-    this.presentLoading(1);
+    //this.presentLoading(1);
     if (this.reportData.status == '') {
       this.reportData.status = "DRAFT";
     }
@@ -166,7 +177,9 @@ export class MapsPage {
               models_id: res.units[unit].models_id,
               alarmnotificationto: res.units[unit].alarmnotificationto,
               viewonid: res.units[unit].viewonid,
-              favoriteindication: favorite
+              favoriteindication: favorite,
+              latitude: res.units[unit].latitude,
+              longtitude: res.units[unit].longtitude
             });
           }
           //this.reportAllLists = res.units;
@@ -178,7 +191,7 @@ export class MapsPage {
         console.log("Total Record:" + this.totalCount);
 
       });
-    this.presentLoading(0);
+    // this.presentLoading(0);
   }
 
   /**********************/
@@ -199,9 +212,15 @@ export class MapsPage {
     }, 500);
     console.log('E');
   }
+  mapunitdetail(item) {
+    this.navCtrl.setRoot(UnitdetailsPage, {
+      record: item
+    });
+
+  }
   ionViewWillEnter() {
-    //this.displayGoogleMap();
-    //this.getMarkers();
+
+
     let //body: string = "loginid=" + this.userId,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
@@ -221,47 +240,119 @@ export class MapsPage {
       this.reportData.sort = "unit_id";
       this.doUser();
     }
-    console.log(this.apiServiceURL + "/api/webview/map.php?is_mobile=1&loginid=1&startindex=0&results=8&sort=unit_id&dir=desc");
-    //this.iframeContent = "<iframe src=" + this.apiServiceURL + "/api/webview/map.php?is_mobile=1&loginid=1&startindex=0&results=8&sort=unit_id&dir=desc height=350 frameborder=0></iframe>";
-
-    this.iframeContent = "<iframe src=" + this.apiServiceURL + "/mapwebview?ses_login_id=" + this.userid + " height=350 frameborder=0></iframe>";
-
+    // console.log(this.apiServiceURL + "/api/webview/map.php?is_mobile=1&loginid=1&startindex=0&results=8&sort=unit_id&dir=desc");
+    this.loadMap(0);
   }
-  /*displayGoogleMap() {
-    let latLng = new google.maps.LatLng(9.9252, 78.1198);
 
-    let mapOptions = {
-      center: latLng,
-      disableDefaultUI: true,
-      zoom: 11,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
+  loadMap(val) {
+    console.log(JSON.stringify(val));
+    console.log(val.length);
+    if (JSON.stringify(val).length > 0) {
+      this.reportData.startindex = 0;
+      this.reportData.results = 8;
     }
-    this.map = new google.maps.Map(this.mapContainer.nativeElement, mapOptions);
-  }*/
-
-  /*getMarkers() {
-    let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
-      headers: any = new Headers({ 'Content-Type': type }),
-      options: any = new RequestOptions({ headers: headers }),
-      //url: any = this.apiServiceURL + "/api/webview/googlemap.php";
-      url: any = "http://strtheme.stridecdev.com/googlemap.php";
-    this.http.get(url, options)
+    var typestr: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headersstr: any = new Headers({ 'Content-Type': typestr }),
+      optionsstr: any = new RequestOptions({ headers: headersstr }),
+      urlstr: any = this.apiServiceURL + "/dashboard?is_mobile=1&startindex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc + "&loginid=" + this.userid + "&company_id=" + this.companyid;
+    console.log("Map Marker api url:" + urlstr);
+    var res;
+    var latLng
+    this.http.get(urlstr, optionsstr)
       .subscribe(data => {
-        console.log("Map Response:-" + JSON.stringify(data.json()));
-        //let staticdata = [{ "id": 1, "address": "Ambiga Cinemas", "lat": "9.918418", "lng": "78.148566" }, { "id": 2, "address": "Vasan Eye Care", "lat": "9.920792", "lng": "78.148785" }, { "id": 3, "address": "Naveen Bakery & Sweets", "lat": "9.921392", "lng": "78.148819" }, { "id": 4, "address": "Thanga Mayil Jewllery Shop", "lat": "9.918599", "lng": "78.148852" }, { "id": 5, "address": "Aravind Eye Hospital", "lat": "9.921358", "lng": "78.140062" }, { "id": 6, "address": "No 12 Vaigai Nagar", "lat": "9.918418", "lng": "78.140062" }];
-        this.addMarkersToMap(data.json());
+        res = data.json();
+        if (res.units.length > 0) {
+          for (var unit in res.units) {
+            if (val == 0) {
+              var labeldata = '<div class="info_content">' +
+                '<h3><a href="#" (click)="mapunitdetail(' + res.units[unit].unit_id + ')">' + res.units[unit].unitname + '</a></h3>' +
+                '<h4>' + res.units[unit].projectname + '</h4>' +
+                '<p>Running Hours:' + res.units[unit].runninghr + '</p>' + '</div>';
+              this.addressData.push({
+                title: labeldata
+              });
+              latLng = new google.maps.LatLng(res.units[unit].latitude, res.units[unit].longtitude);
+
+              // Creating a marker and putting it on the map
+              var marker = new google.maps.Marker({
+                position: latLng,
+                map: map,
+                title: res.units[unit].unitname,
+                infoContent: labeldata
+              });
+              var infoWindow = new google.maps.InfoWindow();
+              (function (marker, data, unit, addressData) {
+                // Attaching a click event to the current marker
+                google.maps.event.addListener(marker, "click", function (e) {
+                  console.log(e);
+                  infoWindow.setContent(addressData[unit].title);
+                  infoWindow.open(map, marker);
+                  this.navCtrl.setRoot(UnitdetailsPage, {
+                    record: addressData[unit]
+                  });
+                });
+              })(marker, data, unit, this.addressData);
+
+            } else {            
+              var labeldata = '<div class="info_content">' +
+                '<h3><a href="#" data-tap-disabled="true" (click)="mapunitdetail(' + val.unit_id + ')">' + val.unitname + '</a></h3>' +
+                '<h4>' + val.projectname + '</h4>' +
+                '<p>Running Hours:' + val.runninghr + '</p>' + '</div>';
+             
+              latLng = new google.maps.LatLng(val.latitude, val.longtitude);
+              // Creating a marker and putting it on the map
+              var marker = new google.maps.Marker({
+                position: latLng,
+                map: map,
+                title: val.unitname,
+                infoContent: labeldata
+              });
+              var infoWindow = new google.maps.InfoWindow();
+              (function (marker, data, addressData) {
+                // Attaching a click event to the current marker
+                google.maps.event.addListener(marker, "click", function (e) {
+                  infoWindow.setContent(addressData);
+                  infoWindow.open(map, marker);
+                });
+
+              })(marker, data,  labeldata);
+            }
+          }
+        }
       },
       err => {
         console.log("Map error:-" + JSON.stringify(err));
       });
-  }*/
-  /*addMarkersToMap(markers) {
-    for (let marker of markers) {
-      var position = new google.maps.LatLng(marker.lat, marker.lng);
-      var dogwalkMarker = new google.maps.Marker({ position: position, title: marker.address });
-      dogwalkMarker.setMap(this.map);
+
+    // Creating a new map
+
+    if (val == 0) {
+      console.log("Default Loading...");
+      var map = new google.maps.Map(document.getElementById("map"), {
+        center: new google.maps.LatLng(1.3249773, 103.70307100000002),
+        zoom: 11,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      });
+    } else {
+      /* console.log("Selected one:"+val.latitude+" "+val.longtitude);
+       var map = new google.maps.Map(document.getElementById("map"), {
+         center: new google.maps.LatLng(val.latitude, val.longtitude),
+         zoom: 14,
+         mapTypeId: google.maps.MapTypeId.ROADMAP
+       });*/
+      console.log("Selected Unit...");
+      var map = new google.maps.Map(document.getElementById("map"), {
+        center: new google.maps.LatLng(val.latitude, val.longtitude),
+        zoom: 14,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      });
+
     }
-  }*/
+  }
+
+  xyz() {
+    console.log('Hello');
+  }
   doAdd() {
     this.navCtrl.setRoot(AddunitsonePage);
   }
@@ -370,7 +461,7 @@ export class MapsPage {
     this.doUser();
     console.log('6');
   }
-  presentLoading(parm) {
+  /*presentLoading(parm) {
     let loader;
     loader = this.loadingCtrl.create({
       content: "Please wait...",
@@ -381,7 +472,7 @@ export class MapsPage {
     } else {
       loader.dismiss();
     }
-  }
+  }*/
 
 
 
@@ -463,7 +554,9 @@ export class MapsPage {
               models_id: res.units[unit].models_id,
               alarmnotificationto: res.units[unit].alarmnotificationto,
               viewonid: res.units[unit].viewonid,
-              favoriteindication: favorite
+              favoriteindication: favorite,
+              latitude: res.units[unit].latitude,
+              longtitude: res.units[unit].longtitude
             });
           }
           //this.reportAllLists = res.units;
@@ -492,10 +585,10 @@ export class MapsPage {
 
 
     /*console.log("Available data" + name);
-this.selectedAction.push({
+  this.selectedAction.push({
   availabledata: name
-})
-console.log(JSON.stringify(this.selectedAction));*/
+  })
+  console.log(JSON.stringify(this.selectedAction));*/
     if (val != '') {
       if (this.str == '') {
         this.str = val;
@@ -547,12 +640,12 @@ console.log(JSON.stringify(this.selectedAction));*/
     this.http.get(url, options)
       .subscribe((data) => {
         console.log("Count Response Success:" + JSON.stringify(data.json()));
-         if (act == 'hide') {
+        if (act == 'hide') {
           this.sendNotification(`Dashboard hide action successfully updated`);
-           }
+        }
         // If the request was successful notify the user
         if (data.status === 200) {
-          
+
           this.reportData.startindex = 0;
           this.reportData.sort = "unit_id";
           //this.doUser();
