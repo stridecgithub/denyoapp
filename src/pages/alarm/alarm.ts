@@ -210,14 +210,27 @@ export class AlarmPage {
     }
   }
     doEdit(item, act) {
+      if(item.alarm_assginedby_name == '')
+    {
     if (act == 'edit') {
       this.nav.setRoot(AddalarmlistPage, {
         record: item,
         act: act
       });
     }
+     }
+  else{
+    this.sendNotification("Already Assigned");
   }
-  previous() {
+  }
+   sendNotification(message): void {
+    let notification = this.toastCtrl.create({
+      message: message,
+      duration: 3000
+    });
+    notification.present();
+  }
+ previous() {
     this.nav.setRoot(UnitdetailsPage, {
       record: this.NP.get("record")
     });

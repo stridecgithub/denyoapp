@@ -134,6 +134,7 @@ export class UserorgchartPage {
       this.getUserListData();
       this.report_to = editItem.report_to;
        this.naDisplay=0;
+       
       if (this.NP.get("record").role_id == 1) {
         this.naDisplay = 1;
       }
@@ -390,6 +391,9 @@ export class UserorgchartPage {
   }
 
   getUserListData() {
+    if(this.isEdited==true)
+    {
+      this.userId=this.recordID;
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
@@ -405,6 +409,25 @@ export class UserorgchartPage {
         this.naDisplay = 1;
         this.responseResultReportTo = res.staffslist;
       });
+    }
+    else
+    {
+ let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/getstaffs?loginid=" + this.userId + "&company_id=" + this.company_group;
+    let res;
+    console.log("Report To API:" + url)
+    this.http.get(url, options)
+      .subscribe(data => {
+        res = data.json();
+        // this.responseResultReportTo="N/A";
+        this.len = res.TotalCount;
+        console.log("length" + res.TotalCount);
+        this.naDisplay = 1;
+        this.responseResultReportTo = res.staffslist;
+      });
+    }
 
   }
 

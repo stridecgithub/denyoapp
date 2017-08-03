@@ -199,12 +199,25 @@ export class AlarmlogPage {
     });
   }
   doEdit(item, act) {
+    if(item.alarm_assginedby_name == '')
+    {
     if (act == 'edit') {
       this.nav.setRoot(AddalarmPage, {
         record: item,
         act: act
       });
     }
+  }
+  else{
+    this.sendNotification("Already Assigned");
+  }
+}
+ sendNotification(message): void {
+    let notification = this.toastCtrl.create({
+      message: message,
+      duration: 3000
+    });
+    notification.present();
   }
   details(item, act) {
     if (act == 'edit') {

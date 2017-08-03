@@ -134,7 +134,7 @@ export class AddserviceinfoPage {
         this.msgcount = data.json().msgcount;
         this.notcount = data.json().notifycount;
       });
-    this.getPrority(1);
+   // this.getPrority(1);
     let users = localStorage.getItem("atMentionedStorage");
     this.is_request = false;
     console.log(JSON.stringify(this.NP.get("record")));
