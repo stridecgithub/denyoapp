@@ -377,19 +377,51 @@ export class AddorgcharttwoPage {
 
   }
 
-  getUserListData() {
+ getUserListData() {
+    if(this.isEdited==true)
+    {
+      this.userId=this.recordID;
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/getstaffs?loginid=" + this.userId + "&company_id=" + this.companyId;
+      url: any = this.apiServiceURL + "/getstaffs?loginid=" + this.userId + "&company_id=" + this.company_group;
     let res;
+    console.log("Report To API:" + url)
     this.http.get(url, options)
       .subscribe(data => {
         res = data.json();
-        console.log("DATA"+JSON.stringify(res));
+        // this.responseResultReportTo="N/A";
+        if(this.report_to == 0)
+      {
+        this.len=0;
+      }
+      else
+      {
         this.len = res.TotalCount;
+      }
+        console.log("length" + res.TotalCount);
+       // this.naDisplay = 1;
         this.responseResultReportTo = res.staffslist;
       });
+    }
+    else
+    {
+ let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/getstaffs?loginid=" + this.userId + "&company_id=" + this.company_group;
+    let res;
+    console.log("Report To API:" + url)
+    this.http.get(url, options)
+      .subscribe(data => {
+        res = data.json();
+        // this.responseResultReportTo="N/A";
+        this.len = res.TotalCount;
+        console.log("length" + res.TotalCount);
+       // this.naDisplay = 1;
+        this.responseResultReportTo = res.staffslist;
+      });
+    }
 
   }
 
