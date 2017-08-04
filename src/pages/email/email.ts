@@ -874,7 +874,7 @@ export class EmailPage {
     this.copytome = 0;
     this.getPrority(1);
     this.subject = this.messages_subject;
-    this.composemessagecontent = "-----Reply Message-----" + "\n" + messages_body;
+    //this.composemessagecontent = "-----Reply Message-----" + "\n" + messages_body;
     this.choice = 'compose';
   }
   else
