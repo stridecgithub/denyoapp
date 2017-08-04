@@ -71,7 +71,8 @@
             <div class="error" *ngIf="parents.length==0">No entries found</div>
             <li *ngFor="let parent of parents; let i=index">
               <img src="{{apiServiceURL}}/staffphotos/{{parent.photo}}" (click)="presentPopover($event,parent)" *ngIf="parent.photo!=''">
-              <img src="{{apiServiceURL}}/images/default.png" (click)="presentPopover($event,parent)" *ngIf="parent.photo==''">
+              <img src="{{apiServiceURL}}/images/default.png" (click)="presentPopover($event,parent)" *ngIf="parent.photo=='' ">
+               
               <h3>{{parent.firstname}}</h3>
               <h3>{{parent.lastname}}</h3>
               <h4>{{parent.job_position}}</h4>

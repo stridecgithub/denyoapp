@@ -195,6 +195,7 @@ export class OrgchartPage {
         // this.presentLoading(0);
         // console.log("Orgchart Response Success:" + JSON.stringify(data.json()));
         res = data.json();
+        console.log("Parent"+JSON.stringify(res));
         if (res.parents.length > 0) {
           this.parents = res.parents;
           // this.responseResultCompany = res.companies;
