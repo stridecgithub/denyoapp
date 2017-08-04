@@ -76,6 +76,7 @@ export class EmailPage {
   public selectedAction = [];
   public message_readstatus: any;
   item: any;
+  public senderid:any;
 
   // Authority for message send
   public MESSAGESENTVIEWACCESS;
@@ -695,6 +696,7 @@ export class EmailPage {
     this.mdate=item.message_date+"("+item.time_ago+")";
     //this.message_readstatus=item.message_readstatus;
     this.receiver_id = item.receiver_id;
+    this.senderid=item.sender_id;
 
 
     //this.next_service_date = item.next_service_date;
@@ -860,13 +862,27 @@ export class EmailPage {
   }
 
   reply(messages_body) {
-    this.to = this.personalhashtag;
+    if(this.senderid == this.userId)
+    {
+      this.to = this.personalhashtag;
     this.addedImgLists = [];
     this.copytome = 0;
     this.getPrority(1);
     this.subject = this.messages_subject;
     this.composemessagecontent = "-----Reply Message-----" + "\n" + messages_body;
     this.choice = 'compose';
+  }
+  else
+  {
+    
+    this.to = this.receiver_id;
+    this.addedImgLists = [];
+    this.copytome = 0;
+    this.getPrority(1);
+    this.subject = this.messages_subject;
+    this.composemessagecontent = "-----Reply Message-----" + "\n" + messages_body;
+    this.choice = 'compose';
+  }
   }
 
   forward(messages_body) {
