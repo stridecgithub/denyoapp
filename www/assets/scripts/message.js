@@ -77,7 +77,11 @@ function sptions(ev) {
 	var front = (obj.value).substring(0, caretPos);
 	var back = (obj.value).substring(obj.selectionEnd, obj.value.length);
 	var atpos = front.lastIndexOf('@'); npos = atpos;
-	if (atpos >= 0) {
+	var charsplit = obj.value.split(" ");
+	var lastchar = charsplit[charsplit.length - 1];
+	var ltpos = lastchar.lastIndexOf('@');
+	//alert(ltpos);
+	if (ltpos == 0) {
 		//e('pol').innerHTML=obj.offsetWidth+"=="+obj.offsetHeight;	 
 		var strkeys = front.substring(atpos + 1, atpos.length);
 		//alert(strkeys);
@@ -109,7 +113,11 @@ function sptions(ev) {
 	var front = (obj.value).substring(0, caretPos);
 	var back = (obj.value).substring(obj.selectionEnd, obj.value.length);
 	var atpos = front.lastIndexOf('@'); npos = atpos;
-	if (atpos >= 0) {
+	var charsplit = obj.value.split(" ");
+	var lastchar = charsplit[charsplit.length - 1];
+	var ltpos = lastchar.lastIndexOf('@');
+	//alert(ltpos);
+	if (ltpos == 0) {
 		//e('pol').innerHTML=obj.offsetWidth+"=="+obj.offsetHeight;	 
 		var strkeys = front.substring(atpos + 1, atpos.length);
 		//alert(strkeys);
@@ -141,7 +149,12 @@ function message(ev) {
 	var front = (obj.value).substring(0, caretPos);
 	var back = (obj.value).substring(obj.selectionEnd, obj.value.length);
 	var atpos = front.lastIndexOf('@'); npos = atpos;
-	if (atpos >= 0) {
+	var charsplit = obj.value.split(" ");
+	var lastchar = charsplit[charsplit.length - 1];
+	var ltpos = lastchar.lastIndexOf('@');
+	//alert(ltpos);
+	if (ltpos == 0) {
+
 		//e('pol').innerHTML=obj.offsetWidth+"=="+obj.offsetHeight;	 
 		var strkeys = front.substring(atpos + 1, atpos.length);
 		//alert(strkeys);
@@ -175,7 +188,11 @@ function unit(ev) {
 	var front = (obj.value).substring(0, caretPos);
 	var back = (obj.value).substring(obj.selectionEnd, obj.value.length);
 	var atpos = front.lastIndexOf('@'); npos = atpos;
-	if (atpos >= 0) {
+	var charsplit = obj.value.split(" ");
+	var lastchar = charsplit[charsplit.length - 1];
+	var ltpos = lastchar.lastIndexOf('@');
+	//alert(ltpos);
+	if (ltpos == 0) {
 		//e('pol').innerHTML=obj.offsetWidth+"=="+obj.offsetHeight;	 
 		var strkeys = front.substring(atpos + 1, atpos.length);
 		//alert(strkeys);

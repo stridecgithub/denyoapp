@@ -22,6 +22,7 @@ import { NotificationPage } from '../notification/notification';
 import { ReportsPage } from '../reports/reports';
 import { CalendarPage } from '../calendar/calendar';
 import { EmailPage } from '../email/email';
+import { Deeplinks } from '@ionic-native/deeplinks';
 @Component({
   selector: 'page-maps',
   templateUrl: 'maps.html'
@@ -64,7 +65,7 @@ export class MapsPage {
     results: 8
   }
   public reportAllLists = [];
-  constructor( public platform: Platform, public http: Http, public navCtrl: NavController,
+  constructor(private deeplinks: Deeplinks, public platform: Platform, public http: Http, public navCtrl: NavController,
     public toastCtrl: ToastController, private sanitizer: DomSanitizer, public alertCtrl: AlertController, public navParams: NavParams, public loadingCtrl: LoadingController) {
     /* Role Authority Start */
     this.VIEWACCESS = localStorage.getItem("DASHBOARD_MAP_VIEW");
@@ -80,6 +81,20 @@ export class MapsPage {
     this.loginas = localStorage.getItem("userInfoName");
     this.userid = localStorage.getItem("userInfoId");
     this.companyid = localStorage.getItem("userInfoCompanyId");
+
+    this.deeplinks.route({
+      '/email': EmailPage,
+      '/myaccount': MyaccountPage,
+      '/unitdetails': UnitdetailsPage // '/unitdetails/:productId':
+    }).subscribe((match) => {
+      // match.$route - the route we matched, which is the matched entry from the arguments to route()
+      // match.$args - the args passed in the link
+      // match.$link - the full link data
+      console.log('Successfully matched route', match);
+    }, (nomatch) => {
+      // nomatch.$link - the full link data
+      console.error('Got a deeplink that didn\'t match', nomatch);
+    });
   }
 
 
@@ -261,10 +276,18 @@ export class MapsPage {
         if (res.units.length > 0) {
           for (var unit in res.units) {
             if (val == 0) {
-              var labeldata = '<div class="info_content">' +
+             var labeldata = '<div class="info_content">' +
                 '<h3><a href="#" (click)="mapunitdetail(' + res.units[unit].unit_id + ')">' + res.units[unit].unitname + '</a></h3>' +
                 '<h4>' + res.units[unit].projectname + '</h4>' +
                 '<p>Running Hours:' + res.units[unit].runninghr + '</p>' + '</div>';
+
+                /* var labeldata = '<div class="info_content">' +
+                '<h3><a href="/unitdetails/">' + res.units[unit].unitname + '</a></h3>' +
+                '<h4>' + res.units[unit].projectname + '</h4>' +
+                '<p>Running Hours:' + res.units[unit].runninghr + '</p>' + '</div>';*/
+
+
+                
               this.addressData.push({
                 title: labeldata
               });
@@ -284,9 +307,7 @@ export class MapsPage {
                   console.log(e);
                   infoWindow.setContent(addressData[unit].title);
                   infoWindow.open(map, marker);
-                  this.navCtrl.setRoot(UnitdetailsPage, {
-                    record: addressData[unit]
-                  });
+                 
                 });
               })(marker, data, unit, this.addressData);
 
@@ -296,6 +317,11 @@ export class MapsPage {
                 '<h4>' + val.projectname + '</h4>' +
                 '<p>Running Hours:' + val.runninghr + '</p>' + '</div>';
              
+
+               /* var labeldata = '<div class="info_content">' +
+                '<h3><a href="./email">' + res.units[unit].unitname + '</a></h3>' +
+                '<h4>' + res.units[unit].projectname + '</h4>' +
+                '<p>Running Hours:' + res.units[unit].runninghr + '</p>' + '</div>';*/
               latLng = new google.maps.LatLng(val.latitude, val.longtitude);
               // Creating a marker and putting it on the map
               var marker = new google.maps.Marker({

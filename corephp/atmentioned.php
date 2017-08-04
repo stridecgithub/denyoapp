@@ -26,23 +26,27 @@ $companyId=$_GET['companyId'];
 $userId=$_GET['userId'];
 try {
    // echo "select username from users where username like '$tem%'";
+
+
+	//$queryStr = "SELECT * FROM staffs WHERE status = 0 AND company_id IN (1, $comapnyId)";
+
 if($act=='message'){
-  if($userId!='1'){
-	$queryStr="select s.personalhashtag as username from staffs as s,users as u where  s.company_id in (1, $companyId) and s.staff_id!=".$userId." and u.username like '$tem%' and u.user_id=s.staff_id and s.status=0 and u.deletestatus = 0";
+  if($companyId != '1'){
+	$queryStr = "SELECT * FROM staffs WHERE status = 0 AND company_id IN (1, $companyId) AND non_user = 0 AND staff_id != ".$userId;
   }else{
-    	$queryStr="select s.personalhashtag as username from staffs as s,users as u where  u.username like '$tem%' and u.user_id=s.staff_id  and s.status=0 and u.deletestatus = 0";
+    	$queryStr = "SELECT * FROM staffs WHERE status = 0 AND non_user = 0";
   }  
 }elseif($act=='unit'){
-  if($userId!='1'){
-	$queryStr="select s.personalhashtag as username from staffs as s,users as u where  s.company_id in (1, $companyId) and u.username like '$tem%' and u.user_id=s.staff_id and s.status=0 and u.deletestatus = 0";
+  if($companyId != '1'){
+	$queryStr = "SELECT * FROM staffs WHERE status = 0 AND non_user = 0 AND company_id =". $companyId;
   }else{
-    	$queryStr="select s.personalhashtag as username from staffs as s,users as u where  u.username like '$tem%' and u.user_id=s.staff_id  and s.status=0 and u.deletestatus = 0";
+    	$queryStr = "SELECT * FROM staffs WHERE status = 0 AND non_user = 0";
   }  
 }else{
-   if($userId!='1'){
-	$queryStr="select s.personalhashtag as username from staffs as s,users as u where  s.company_id=".$companyId." and s.staff_id!=".$userId.  " and u.username like '$tem%'  and u.user_id=s.staff_id  and s.status=0 and u.deletestatus = 0";
+   if($companyId != '1'){
+	$queryStr = "SELECT * FROM staffs WHERE status = 0 AND non_user = 0 AND company_id =". $companyId. " AND staff_id != ".$userId;
    }else{
-	$queryStr="select s.personalhashtag as username from staffs as s,users as u where  s.company_id=".$companyId." and u.username like '$tem%'  and u.user_id=s.staff_id  and s.status=0 and u.deletestatus = 0";
+	$queryStr = "SELECT * FROM staffs WHERE status = 0 AND non_user = 0";
      }
 }
  
@@ -62,8 +66,8 @@ if($act=='message'){
       while($row  = $stmt->fetch(PDO::FETCH_OBJ))
       {
         $sno++;
-        if($row->username!=''){
-		echo "<li onclick='setct(this)'>".$row->username."</li>";
+        if($row->personalhashtag!=''){
+		echo "<li onclick='setct(this)'>".$row->personalhashtag."</li>";
         }
       }
        if($sno==0){echo "<li>No data match</li>";};

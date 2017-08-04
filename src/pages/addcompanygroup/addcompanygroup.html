@@ -80,7 +80,7 @@
           </ion-select>
         </ion-item-->
         <ion-item *ngIf="hideActionButton">
-          <button ion-button color="primary" text-center block [disabled]="!form.valid">Complete and Save</button>
+          <button ion-button color="primary" text-center block [disabled]="!form.valid || isSubmitted">Complete and Save</button>
         </ion-item>
       </ion-list>
     </form>

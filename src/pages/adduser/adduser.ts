@@ -121,9 +121,9 @@ export class AdduserPage {
       this.readOnly = false;
       this.hideActionButton = true;
       if (this.NP.get("record").photo) {
-        if(this.NP.get("record").photo!='undefined'){
-        this.addedImgLists = this.apiServiceURL + "/staffphotos/" + this.NP.get("record").photo;
-        console.log(this.addedImgLists);
+        if (this.NP.get("record").photo != 'undefined') {
+          this.addedImgLists = this.apiServiceURL + "/staffphotos/" + this.NP.get("record").photo;
+          console.log(this.addedImgLists);
         }
       }
       let editItem = this.NP.get("record");
@@ -168,6 +168,11 @@ export class AdduserPage {
           this.country = info[key].country;
           this.contact = info[key].contact;
           this.photo = info[key].photo;
+           if (this.contact != '') {
+            let contactSplitSpace = this.contact.split(" ");
+            this.primary = contactSplitSpace[0];
+            this.contact = contactSplitSpace[1];
+          }
 
           console.log("First Name for User Account:" + this.first_name);
           //console.log(JSON.stringify(this));
@@ -179,6 +184,13 @@ export class AdduserPage {
           this.country = info[0].country;
           this.contact = info[0].contact;
           this.photo = info[0].photo;
+
+          if (this.contact != '') {
+            let contactSplitSpace = this.contact.split(" ");
+            this.primary = contactSplitSpace[0];
+            this.contact = contactSplitSpace[1];
+          }
+
 
           console.log("First Name for User Account:" + this.first_name);
         }
@@ -196,7 +208,7 @@ export class AdduserPage {
     this.contact = "9443976954";*/
   }
 
- getPrimaryContact(ev) {
+  getPrimaryContact(ev) {
     console.log(ev.target.value);
     let char = ev.target.value.toString();
     if (char.length > 5) {

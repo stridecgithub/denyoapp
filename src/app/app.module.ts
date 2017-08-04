@@ -65,6 +65,7 @@ import { NavbarComponent } from '../components/navbar/navbar';
 import { CustomHeaderComponent } from '../pages/custom-header-component';
 import { CustomFooterComponent } from '../pages/custom-footer-component';
 import { Geolocation } from '@ionic-native/geolocation';
+import { Deeplinks } from '@ionic-native/deeplinks';
 @NgModule({
   declarations: [
     MyApp,
@@ -198,6 +199,7 @@ import { Geolocation } from '@ionic-native/geolocation';
   ],
   providers: [
     StatusBar,
+    Deeplinks,
     SplashScreen,
     Geolocation,
     { provide: ErrorHandler, useClass: IonicErrorHandler },

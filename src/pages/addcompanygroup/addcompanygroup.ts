@@ -45,6 +45,8 @@ export class AddcompanygroupPage {
   // Flag to be used for checking whether we are adding/editing an entry
   public isEdited: boolean = false;
   public readOnly: boolean = false;
+  public isSubmitted: boolean =false;
+  
 
   // Flag to hide the form upon successful completion of remote operation
   public hideForm: boolean = false;
@@ -1122,6 +1124,7 @@ export class AddcompanygroupPage {
   // supplies a variable of key with a value of create followed by the key/value pairs
   // for the record data
   createEntry(companygroup_name, address, country, contact, createdby) {
+    this.isSubmitted=true;
     contact = contact.replace("+", "%2B");
     let updatedby = createdby;
     let body: string = "is_mobile=1&companygroup_name=" + companygroup_name + "&address=" + address + "&country=" + country + "&contact=" + contact + "&createdby=" + createdby + "&updatedby=" + updatedby,
@@ -1165,6 +1168,7 @@ export class AddcompanygroupPage {
   // supplies a variable of key with a value of update followed by the key/value pairs
   // for the record data
   updateEntry(companygroup_name, address, country, contact, createdby) {
+     this.isSubmitted=true;
     contact = contact.replace("+", "%2B");
     let updatedby = createdby;
     let body: string = "is_mobile=1&companygroup_name=" + companygroup_name + "&address=" + address + "&country=" + country + "&contact=" + contact + "&companygroup_id=" + this.recordID + "&createdby=" + createdby + "&updatedby=" + updatedby,
