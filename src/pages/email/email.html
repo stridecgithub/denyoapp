@@ -262,7 +262,7 @@
 
         </ion-row>
       </ion-grid>
-      <div  *ngIf="act==inbox"><a href="#" (click)="reply(messages_body)">Reply</a>&nbsp; &nbsp; &nbsp; &nbsp;<a href="#" (click)="forward(messages_body)">Forward</a></div>
+      <div><a href="#" (click)="reply(messages_body,messageid)"  *ngIf="act==inbox">Reply</a>&nbsp; &nbsp; &nbsp; &nbsp;<a href="#" (click)="forward(messages_body,messageid)">Forward</a></div>
     </ion-list>
 
   </div>

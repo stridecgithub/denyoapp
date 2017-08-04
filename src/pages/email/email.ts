@@ -42,7 +42,7 @@ export class EmailPage {
   public hashtag;
   public photo: any;
   public mdate: any;
-  public act:any;
+  public act: any;
   public priority_lowclass: any;
   public priority_highclass: any;
   public addedImgListsArray = [];
@@ -62,6 +62,7 @@ export class EmailPage {
   public str: any;
   public service_id: any;
   public serviced_by: any;
+  public messageid: any; 
   public serviced_datetime: any;
   public isSubmitted: boolean = false;
   public messages_subject: any;
@@ -77,6 +78,7 @@ export class EmailPage {
   public isUploaded: boolean = true;
   public selectedAction = [];
   public message_readstatus: any;
+  public replyforward: any;
   item: any;
   public senderid: any;
 
@@ -94,6 +96,7 @@ export class EmailPage {
   // Authority for message inbox
 
   public msgcount: any;
+  public 
   public notcount: any;
   public to: any;
   public subject: any;
@@ -124,6 +127,7 @@ export class EmailPage {
   constructor(public keyboard: Keyboard, private file: File, public http: Http, public loadingCtrl: LoadingController, public alertCtrl: AlertController, public NP: NavParams, public nav: NavController, public toastCtrl: ToastController, public navParams: NavParams, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera, private filechooser: FileChooser,
     private transfer: Transfer,
     private ngZone: NgZone) {
+    this.replyforward = 0;
 
     // Authority for message send
     this.MESSAGESENTVIEWACCESS = localStorage.getItem("MESSAGE_SENT_VIEW");
@@ -585,29 +589,49 @@ export class EmailPage {
       copytome = '1';
     }
     to = localStorage.getItem("atMentionResult");
-    let body: string = "is_mobile=1" +
-      "&important=" + this.message_priority +
-      "&microtime=" + micro_timestamp +
-      "&loginid=" + this.userId +
-      "&to=" + to +
-      "&composemessagecontent=" + composemessagecontent +
-      "&copytome=" + copytome +
-      "&subject=" + subject,
-      //"&contact_number=" + this.contact_number +
-      //"&contact_name=" + this.contact_name +
-      //"&nextServiceDate=" + nextServiceDate,
-      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
-      headers: any = new Headers({ 'Content-Type': type }),
-      options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/messages/store";
-    console.log(url);
-    console.log(body);
+    //http://denyoappv2.stridecdev.com/messages/replyforward?&submit=Reply&forwardmsgid=16
+    let url;
+    let body;
+    let options;
+    if (this.replyforward > 0) {
+      let body: string = "is_mobile=1" +
+        "&important=" + this.message_priority +
+        "&microtime=" + micro_timestamp +
+        "&loginid=" + this.userId +
+        "&to=" + to +
+        "&composemessagecontent=" + composemessagecontent +
+        "&copytome=" + copytome +
+        "&copytome=" + copytome +
+        "&submit=Reply" +
+        "&forwardmsgid=" + this.messageid,
+
+        type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+        headers: any = new Headers({ 'Content-Type': type }),
+        options: any = new RequestOptions({ headers: headers }),
+        url: any = this.apiServiceURL + "/messages/replyforward";
+    } else {
+      let body: string = "is_mobile=1" +
+        "&important=" + this.message_priority +
+        "&microtime=" + micro_timestamp +
+        "&loginid=" + this.userId +
+        "&to=" + to +
+        "&composemessagecontent=" + composemessagecontent +
+        "&copytome=" + copytome +
+        "&subject=" + subject,
+
+        type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+        headers: any = new Headers({ 'Content-Type': type }),
+        options: any = new RequestOptions({ headers: headers }),
+        url: any = this.apiServiceURL + "/messages/store";
+    }
+
 
     this.http.post(url, body, options)
       .subscribe((data) => {
         //console.log("Response Success:" + JSON.stringify(data.json()));
         // If the request was successful notify the user
         if (data.status === 200) {
+          this.replyforward = 0;
           localStorage.setItem("microtime", "");
           this.sendNotification(`Message sending successfully`);
           localStorage.setItem("atMentionResult", '');
@@ -696,6 +720,7 @@ export class EmailPage {
     this.serviced_datetime = item.serviced_datetime;
     this.messages_subject = item.messages_subject;
     this.messages_body = item.message_body;
+    this.messageid=item.message_id;
     this.personalhashtag = item.personalhashtag;
     this.photo = item.senderphoto;
     this.mdate = item.message_date + "(" + item.time_ago + ")";
@@ -839,7 +864,7 @@ export class EmailPage {
   }
   doDetails(item, act) {
     this.act = act;
-    console.log("Do Details act is:"+this.act);
+    console.log("Do Details act is:" + this.act);
     this.choice = 'details';
     this.selectEntry(item);
     //http://denyoappv2.stridecdev.com/messages/changereadunread?is_mobile=1&ses_login_id=9&messages_id=44
@@ -869,6 +894,7 @@ export class EmailPage {
   }
 
   reply(messages_body) {
+    this.replyforward = 1;
     if (this.senderid == this.userId) {
       this.to = this.receiver_id;
       this.addedImgLists = [];
@@ -880,7 +906,7 @@ export class EmailPage {
       this.choice = 'compose';
     }
     else {
-
+      this.replyforward = 1;
       this.to = this.personalhashtag;
       this.addedImgLists = [];
       this.copytome = 0;

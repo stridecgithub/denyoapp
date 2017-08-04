@@ -340,17 +340,17 @@ export class AddserviceinfoPage {
 
 
     if (this.service_priority == undefined) {
-      this.service_priority = '';
+      this.service_priority = '0';
     }
     if (this.service_priority == 'undefined') {
-      this.service_priority = '';
+      this.service_priority = '0';
     }
 
-    if (this.next_service_date == 'undefined') {
-      this.next_service_date = next_service_date;
+    if (nextServiceDate == 'undefined') {
+      nextServiceDate = '';
     }
-    if (this.next_service_date == undefined) {
-      this.next_service_date = next_service_date;
+    if (nextServiceDate == undefined) {
+      nextServiceDate = '';
     }
 
     let body: string = "is_mobile=1" +
@@ -411,16 +411,16 @@ export class AddserviceinfoPage {
       service_remark = localStorage.getItem("atMentionResult");
     }
     if (this.service_priority == undefined) {
-      this.service_priority = 1;
+      this.service_priority = 0;
     }
     if (this.service_priority == 'undefined') {
-      this.service_priority = 1;
+      this.service_priority = 0;
     }
-    if (this.next_service_date == 'undefined') {
-      this.next_service_date = next_service_date;
+    if (nextServiceDate == 'undefined') {
+      nextServiceDate = '';
     }
-    if (this.next_service_date == undefined) {
-      this.next_service_date = next_service_date;
+    if (nextServiceDate == undefined) {
+      nextServiceDate = '';
     }
     let body: string = "is_mobile=1&service_id=" + this.service_id +
       "&serviced_datetime=" + serviced_datetime +
