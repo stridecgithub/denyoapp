@@ -45,6 +45,7 @@ export class AddrequestsupportPage {
   micro_timestamp: any;
   public msgcount:any;
   public notcount:any;
+   public isSubmitted: boolean = false;
   public isUploadedProcessing: boolean = false;
   public isProgress = false;
   public isUploaded: boolean = true;
@@ -287,6 +288,7 @@ export class AddrequestsupportPage {
   // supplies a variable of key with a value of create followed by the key/value pairs
   // for the record data
   createEntry(service_remark, service_subject, addedImgLists, remarkget, nextServiceDate, micro_timestamp) {  
+     this.isSubmitted = true;
     let body: string = "is_mobile=1" +
       "&service_unitid=" + this.service_unitid +
       "&service_remark=" + service_remark +
@@ -332,6 +334,7 @@ export class AddrequestsupportPage {
   // supplies a variable of key with a value of update followed by the key/value pairs
   // for the record data
   updateEntry(service_remark, service_subject, addedImgLists, remarkget, nextServiceDate, micro_timestamp) {    
+     this.isSubmitted = true;
     let body: string = "is_mobile=1&service_id=" + this.service_id +
       "&service_unitid=" + this.service_unitid +
       "&service_remark=" + service_remark +

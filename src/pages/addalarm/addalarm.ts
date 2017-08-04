@@ -39,6 +39,7 @@ export class AddalarmPage {
   public assignedby: any;
   micro_timestamp: any;
   public userId: any;
+   public isSubmitted: boolean = false;
   public responseResultCountry: any;
   public responseResultReportTo: any;
   // Flag to be used for checking whether we are adding/editing an entry
@@ -143,6 +144,7 @@ export class AddalarmPage {
 
   }
   saveEntry() {
+    this.isSubmitted=true;
     let body: string = "is_mobile=1&alarmid=" + this.recordID +
       "&alarm_assigned_by=" + this.userId +
       "&alarm_assigned_to=" + this.assigned_to +

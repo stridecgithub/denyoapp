@@ -29,6 +29,7 @@ export class AddrolePage {
   public userId: any;
   public msgcount: any;
   public notcount: any;
+   public isSubmitted: boolean = false;
   public roleperMissionData = [];
   // Flag to be used for checking whether we are adding/editing an entry
   public isEdited: boolean = false;
@@ -1034,6 +1035,7 @@ export class AddrolePage {
   // supplies a variable of key with a value of create followed by the key/value pairs
   // for the record data
   createEntry(role_name, roleperMissionData, createdby) {
+    this.isSubmitted=true;
     let body: string = "is_mobile=1&role_name=" + role_name + "&module=" + JSON.stringify(roleperMissionData) + "&createdby=" + createdby,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
@@ -1073,6 +1075,7 @@ export class AddrolePage {
   // supplies a variable of key with a value of update followed by the key/value pairs
   // for the record data
   updateEntry(role_name, roleperMissionData, createdby) {
+    this.isSubmitted=true;
     let body: string = "is_mobile=1&role_name=" + role_name + "&module=" + JSON.stringify(roleperMissionData) + "&createdby=" + createdby+"&role_id="+this.recordID,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),

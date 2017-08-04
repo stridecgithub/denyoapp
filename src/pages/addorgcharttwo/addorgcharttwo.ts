@@ -41,6 +41,7 @@ export class AddorgcharttwoPage {
   public country: any;
   public contact: any;
   public len = 0;
+   public isSubmitted: boolean = false;
   public msgcount: any;
   public notcount: any;
   public createdby: any;
@@ -175,7 +176,7 @@ export class AddorgcharttwoPage {
   // supplies a variable of key with a value of create followed by the key/value pairs
   // for the record data
   createEntry(userdata, userid) {
-
+  this.isSubmitted = true;
     let userPhotoFile = localStorage.getItem("userPhotoFile");
     if (userPhotoFile) {
       console.log("Upload Device Image File:" + userPhotoFile);
@@ -231,7 +232,7 @@ export class AddorgcharttwoPage {
   // supplies a variable of key with a value of update followed by the key/value pairs
   // for the record data
   updateEntry(userdata, userid) {
-
+  this.isSubmitted = true;
     let userPhotoFile = localStorage.getItem("userPhotoFile");
     if (userPhotoFile) {
       console.log("Upload Device Image File:" + userPhotoFile);

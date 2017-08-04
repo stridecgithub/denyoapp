@@ -69,6 +69,11 @@ function sendmsg() {
 function sptions(ev) {
 	var userId = localStorage.getItem("userInfoId");
 	var companyId = localStorage.getItem("userInfoCompanyId");
+
+
+	if (ev.which === 13) {
+		return false;
+	}
 	var evt = ev || window.event || {}; var code = ev.charCode || ev.keyCode || ev.which;
 	var kCd = ev.keyCode || ev.charCode; var obj = evt.target;
 	//var code = (e.keyCode ? e.keyCode : e.which);
@@ -103,6 +108,9 @@ function sptions(ev) {
 }
 
 function sptions(ev) {
+	if (ev.which === 13) {
+		return false;
+	}
 	var userId = localStorage.getItem("userInfoId");
 	var companyId = localStorage.getItem("userInfoCompanyId");
 	var evt = ev || window.event || {}; var code = ev.charCode || ev.keyCode || ev.which;
@@ -139,6 +147,10 @@ function sptions(ev) {
 }
 
 function message(ev) {
+	alert(ev.which);
+	if (ev.which === 13) {
+		return false;
+	}
 	var userId = localStorage.getItem("userInfoId");
 	var companyId = localStorage.getItem("userInfoCompanyId");
 	var evt = ev || window.event || {}; var code = ev.charCode || ev.keyCode || ev.which;
@@ -178,6 +190,9 @@ function message(ev) {
 
 
 function unit(ev) {
+	if (ev.which === 13) {
+		return false;
+	}
 	var userId = localStorage.getItem("userInfoId");
 	var companyId = localStorage.getItem("userInfoCompanyId");
 	var evt = ev || window.event || {}; var code = ev.charCode || ev.keyCode || ev.which;

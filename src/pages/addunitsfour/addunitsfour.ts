@@ -34,6 +34,7 @@ export class AddunitsfourPage {
   public compId:any;
   public userId: any;
   public unitname: any;
+   public isSubmitted: boolean = false;
   public projectname: any;
   public createdby: any;
   public responseResultCompany: any;
@@ -221,7 +222,7 @@ export class AddunitsfourPage {
   // for the record data
   createEntry(unitgroups_id, companys_id, createdby) {
 
-
+this.isSubmitted=true;
  if (localStorage.getItem("atMentionResult") != '') {
       this.alarmhashtags = localStorage.getItem("atMentionResult");
     }
@@ -289,6 +290,7 @@ export class AddunitsfourPage {
   // supplies a variable of key with a value of update followed by the key/value pairs
   // for the record data
   updateEntry(unitgroups_id, companys_id, createdby) {
+    this.isSubmitted=true;
     this.userInfo.push({
       unitgroups_id: unitgroups_id,
       companys_id: companys_id,

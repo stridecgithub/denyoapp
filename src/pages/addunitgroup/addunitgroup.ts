@@ -29,6 +29,7 @@ export class AddunitgroupPage {
   public companyid: any;
   public form: FormGroup;
   public cname: any;
+   public isSubmitted: boolean = false;
   public remark: any;
   public ccode: any;
   public nccode: any;
@@ -172,7 +173,7 @@ export class AddunitgroupPage {
   }
   updateEntry(cname, ccode, remark, userid, companyid) {
     console.log(cname, ccode, remark, userid, companyid);
-
+      this.isSubmitted=true;
     let body: string = "is_mobile=1&unitgroup_name=" + cname + "&colorcode=" + this.ccode + "&remark=" + remark + "&createdby=" + userid + "&updatedby=" + userid + "&company_id=" + companyid + "&unitgroup_id=" + this.recordID,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
@@ -201,6 +202,7 @@ export class AddunitgroupPage {
       });
   }
   createEntry(cname, ccode, remark, createdby, companyid) {
+    this.isSubmitted=true;
     // this.isUploadedProcessing = true;
     let updatedby = createdby;
     console.log(cname, ccode, remark, companyid);
