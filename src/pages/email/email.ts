@@ -42,6 +42,7 @@ export class EmailPage {
   public hashtag;
   public photo: any;
   public mdate: any;
+  public act:any;
   public priority_lowclass: any;
   public priority_highclass: any;
   public addedImgListsArray = [];
@@ -77,7 +78,7 @@ export class EmailPage {
   public selectedAction = [];
   public message_readstatus: any;
   item: any;
-  public senderid:any;
+  public senderid: any;
 
   // Authority for message send
   public MESSAGESENTVIEWACCESS;
@@ -556,7 +557,7 @@ export class EmailPage {
       console.log("copytome:" + copytome);
       console.log("messages_subject:" + subject);
 
-      console.log("Attached image for file for reply and forward"+JSON.stringify(this.attachedFileLists));
+      console.log("Attached image for file for reply and forward" + JSON.stringify(this.attachedFileLists));
       console.log("Image Data" + JSON.stringify(this.addedImgLists));
       //let d = new Date();
       //let micro_timestamp = d.getFullYear() + "" + d.getMonth() + "" + d.getDate() + "" + d.getHours() + "" + d.getMinutes() + "" + d.getSeconds();
@@ -700,7 +701,7 @@ export class EmailPage {
     this.mdate = item.message_date + "(" + item.time_ago + ")";
     //this.message_readstatus=item.message_readstatus;
     this.receiver_id = item.receiver_id;
-    this.senderid=item.sender_id;
+    this.senderid = item.sender_id;
 
 
     //this.next_service_date = item.next_service_date;
@@ -836,7 +837,9 @@ export class EmailPage {
         }
       });
   }
-  doDetails(item) {
+  doDetails(item, act) {
+    this.act = act;
+    console.log("Do Details act is:"+this.act);
     this.choice = 'details';
     this.selectEntry(item);
     //http://denyoappv2.stridecdev.com/messages/changereadunread?is_mobile=1&ses_login_id=9&messages_id=44
@@ -866,28 +869,26 @@ export class EmailPage {
   }
 
   reply(messages_body) {
-    if(this.senderid == this.userId)
-    {
+    if (this.senderid == this.userId) {
       this.to = this.receiver_id;
-    this.addedImgLists = [];
-    console.log("Attached image for file"+JSON.stringify(this.attachedFileLists));
-    this.copytome = 0;
-    this.getPrority(1);
-    this.subject = this.messages_subject;
-    //this.composemessagecontent = "-----Reply Message-----" + "\n" + messages_body;
-    this.choice = 'compose';
-  }
-  else
-  {
-    
-    this.to = this.personalhashtag;
-    this.addedImgLists = [];
-    this.copytome = 0;
-    this.getPrority(1);
-    this.subject = this.messages_subject;
-    this.composemessagecontent = "-----Reply Message-----" + "\n" + messages_body;
-    this.choice = 'compose';
-  }
+      this.addedImgLists = [];
+      console.log("Attached image for file" + JSON.stringify(this.attachedFileLists));
+      this.copytome = 0;
+      this.getPrority(1);
+      this.subject = this.messages_subject;
+      //this.composemessagecontent = "-----Reply Message-----" + "\n" + messages_body;
+      this.choice = 'compose';
+    }
+    else {
+
+      this.to = this.personalhashtag;
+      this.addedImgLists = [];
+      this.copytome = 0;
+      this.getPrority(1);
+      this.subject = this.messages_subject;
+      this.composemessagecontent = "-----Reply Message-----" + "\n" + messages_body;
+      this.choice = 'compose';
+    }
   }
 
   forward(messages_body) {

@@ -340,10 +340,10 @@ export class AddserviceinfoPage {
 
 
     if (this.service_priority == undefined) {
-      this.service_priority = 1;
+      this.service_priority = '';
     }
     if (this.service_priority == 'undefined') {
-      this.service_priority = 1;
+      this.service_priority = '';
     }
 
     if (this.next_service_date == 'undefined') {
@@ -380,6 +380,9 @@ export class AddserviceinfoPage {
         //console.log("Response Success:" + JSON.stringify(data.json()));
         // If the request was successful notify the user
         if (data.status === 200) {
+          this.service_subject = '';
+          this.service_remark = '';
+          this.addedServiceImgLists = [];
           localStorage.setItem("microtime", "");
           this.addedServiceImgLists = [];
           this.sendNotification(`Servicing info was successfully added`);
@@ -444,6 +447,9 @@ export class AddserviceinfoPage {
         // If the request was successful notify the user
         if (data.status === 200) {
           localStorage.setItem("microtime", "");
+          this.addedServiceImgLists = [];
+          this.service_subject = '';
+          this.service_remark = '';
           this.addedServiceImgLists = [];
           this.sendNotification(`Servicing info  was successfully updated`);
           localStorage.setItem("atMentionResult", '');

@@ -43,9 +43,10 @@ export class AddcommentsinfoPage {
   public addedImgLists = [];
   public priority_lowclass: any;
   public priority_highclass: any;
+  public isSubmitted: boolean = false;
   progress: number;
-   public msgcount:any;
-  public notcount:any;
+  public msgcount: any;
+  public notcount: any;
   public recordID: any;
   public comment_unitid: any;
   public comment_id: any;
@@ -115,19 +116,19 @@ export class AddcommentsinfoPage {
     console.log('ionViewDidLoad AddcommentsinfoPage');
   }
   ionViewWillEnter() {
-     let //body: string = "loginid=" + this.userId,
+    let //body: string = "loginid=" + this.userId,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
       url: any = this.apiServiceURL + "/msgnotifycount?loginid=" + localStorage.getItem("userInfoId");
     console.log(url);
-   // console.log(body);
+    // console.log(body);
 
     this.http.get(url, options)
       .subscribe((data) => {
         console.log("Count Response Success:" + JSON.stringify(data.json()));
-       this.msgcount=data.json().msgcount;
-        this.notcount=data.json().notifycount;
+        this.msgcount = data.json().msgcount;
+        this.notcount = data.json().notifycount;
       });
     let users = localStorage.getItem("atMentionedStorage");
     if (this.NP.get("record")) {
@@ -151,8 +152,8 @@ export class AddcommentsinfoPage {
     this.unitDetailData.location = localStorage.getItem("unitlocation");
     this.unitDetailData.projectname = localStorage.getItem("unitprojectname");
     this.unitDetailData.colorcodeindications = localStorage.getItem("unitcolorcode");
-    this.unitDetailData.favoriteindication=localStorage.getItem("unitfav");
-    console.log("Add Comment Color Code:"+this.unitDetailData.colorcodeindications);
+    this.unitDetailData.favoriteindication = localStorage.getItem("unitfav");
+    console.log("Add Comment Color Code:" + this.unitDetailData.colorcodeindications);
     this.unitDetailData.lat = localStorage.getItem("unitlat");
     this.unitDetailData.lng = localStorage.getItem("unitlng");
 
@@ -289,12 +290,13 @@ export class AddcommentsinfoPage {
   // supplies a variable of key with a value of create followed by the key/value pairs
   // for the record data
   createEntry(comments, service_subject, addedImgLists, remarkget, micro_timestamp) {
+    this.isSubmitted = true;
     comments = localStorage.getItem("atMentionResult");
     if (this.service_priority == undefined) {
-      this.service_priority = 1;
+      this.service_priority = '';
     }
     if (this.service_priority == 'undefined') {
-      this.service_priority = 1;
+      this.service_priority = '';
     }
     let body: string = "is_mobile=1" +
       "&comment_unit_id=" + this.comment_unitid +
@@ -321,9 +323,12 @@ export class AddcommentsinfoPage {
         //console.log("Response Success:" + JSON.stringify(data.json()));
         // If the request was successful notify the user
         if (data.status === 200) {
+          this.service_subject = '';
+          this.comments = '';
+          this.addedImgLists = [];
           localStorage.setItem("microtime", "");
           this.sendNotification(`Comments was successfully added`);
-           localStorage.setItem("atMentionResult", '');
+          localStorage.setItem("atMentionResult", '');
           this.nav.setRoot(CommentsinfoPage, {
             record: this.NP.get("record")
           });
@@ -343,6 +348,7 @@ export class AddcommentsinfoPage {
   // supplies a variable of key with a value of update followed by the key/value pairs
   // for the record data
   updateEntry(comments, service_subject, addedImgLists, remarkget, micro_timestamp) {
+    this.isSubmitted = true;
     if (localStorage.getItem("atMentionResult") != '') {
       comments = localStorage.getItem("atMentionResult");
     }
@@ -373,9 +379,12 @@ export class AddcommentsinfoPage {
         console.log(data);
         // If the request was successful notify the user
         if (data.status === 200) {
+          this.service_subject = '';
+          this.comments = '';
+          this.addedImgLists = [];
           localStorage.setItem("microtime", "");
           this.sendNotification(`Comments was successfully updated`);
-           localStorage.setItem("atMentionResult", '');
+          localStorage.setItem("atMentionResult", '');
           this.nav.setRoot(CommentsinfoPage, {
             record: this.NP.get("record")
           });
