@@ -40,8 +40,8 @@ export class EmailPage {
   public sendLists = [];
   public loginas: any;
   public hashtag;
-  public photo:any;
-  public mdate:any;
+  public photo: any;
+  public mdate: any;
   public priority_lowclass: any;
   public priority_highclass: any;
   public addedImgListsArray = [];
@@ -62,6 +62,7 @@ export class EmailPage {
   public service_id: any;
   public serviced_by: any;
   public serviced_datetime: any;
+  public isSubmitted: boolean = false;
   public messages_subject: any;
   public messages_body: any;
   public next_service_date: any;
@@ -539,6 +540,7 @@ export class EmailPage {
   }
 
   saveEntry() {
+
     console.log(this.form.controls);
     if (this.isUploadedProcessing == false) {
       /* let name: string = this.form.controls["lat"].value,
@@ -553,6 +555,8 @@ export class EmailPage {
       console.log("serviced_datetime:" + to);
       console.log("copytome:" + copytome);
       console.log("messages_subject:" + subject);
+
+      console.log("Attached image for file for reply and forward"+JSON.stringify(this.attachedFileLists));
       console.log("Image Data" + JSON.stringify(this.addedImgLists));
       //let d = new Date();
       //let micro_timestamp = d.getFullYear() + "" + d.getMonth() + "" + d.getDate() + "" + d.getHours() + "" + d.getMinutes() + "" + d.getSeconds();
@@ -575,6 +579,7 @@ export class EmailPage {
   // supplies a variable of key with a value of create followed by the key/value pairs
   // for the record data
   createEntry(micro_timestamp, to, copytome, composemessagecontent, subject) {
+    this.isSubmitted = true;
     if (copytome == true) {
       copytome = '1';
     }
@@ -690,10 +695,9 @@ export class EmailPage {
     this.serviced_datetime = item.serviced_datetime;
     this.messages_subject = item.messages_subject;
     this.messages_body = item.message_body;
-    this.messages_body = item.message_body;
     this.personalhashtag = item.personalhashtag;
-    this.photo=item.senderphoto;
-    this.mdate=item.message_date+"("+item.time_ago+")";
+    this.photo = item.senderphoto;
+    this.mdate = item.message_date + "(" + item.time_ago + ")";
     //this.message_readstatus=item.message_readstatus;
     this.receiver_id = item.receiver_id;
     this.senderid=item.sender_id;
@@ -866,6 +870,7 @@ export class EmailPage {
     {
       this.to = this.personalhashtag;
     this.addedImgLists = [];
+    console.log("Attached image for file"+JSON.stringify(this.attachedFileLists));
     this.copytome = 0;
     this.getPrority(1);
     this.subject = this.messages_subject;
@@ -890,7 +895,7 @@ export class EmailPage {
     this.addedImgLists = [];
     this.copytome = 0;
     this.getPrority(1);
-     this.subject = this.messages_subject;
+    this.subject = this.messages_subject;
     this.composemessagecontent = "-----Forward Message-----" + "\n" + messages_body;
     this.choice = 'compose';
   }

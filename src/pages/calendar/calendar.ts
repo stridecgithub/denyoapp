@@ -424,6 +424,7 @@ export class CalendarPage {
         eventdate = this.serviceIdentify[j]['next_service_date'] + " " + this.serviceIdentify[j]['serviced_time'];
       } else {
         if (this.serviceIdentify[j]['serviced_time'] == null) {
+          //eventdate = this.serviceIdentify[j]['next_service_date'];
           eventdate = this.serviceIdentify[j]['next_service_date'];
         } else {
           eventdate = this.serviceIdentify[j]['serviced_datetime'];
@@ -647,7 +648,8 @@ export class CalendarPage {
             service_date_array = this.serviceIdentify[j]['next_service_date'].split('-');
           } else {
             if (this.serviceIdentify[j]['serviced_time'] == null) {
-              service_date_array = this.serviceIdentify[j]['next_service_date'].split('-');
+              //service_date_array = this.serviceIdentify[j]['next_service_date'].split('-');
+               service_date_array = this.serviceIdentify[j]['next_service_date'].split('-');
             } else {
               service_date_array = this.serviceIdentify[j]['serviced_datetime'].split('-');
             }

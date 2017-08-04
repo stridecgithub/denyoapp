@@ -40,6 +40,7 @@ export class AddserviceinfoPage {
   progress: number;
   public priority_lowclass: any;
   public priority_highclass: any;
+  public isSubmitted: boolean = false;
   public recordID: any;
   public service_unitid: any;
   public service_id: any;
@@ -134,7 +135,7 @@ export class AddserviceinfoPage {
         this.msgcount = data.json().msgcount;
         this.notcount = data.json().notifycount;
       });
-   // this.getPrority(1);
+    // this.getPrority(1);
     let users = localStorage.getItem("atMentionedStorage");
     this.is_request = false;
     console.log(JSON.stringify(this.NP.get("record")));
@@ -146,15 +147,15 @@ export class AddserviceinfoPage {
     this.unitDetailData.runninghr = editItem.runninghr;
     this.unitDetailData.gen_status = editItem.gen_status;
     this.unitDetailData.nextservicedate = editItem.nextservicedate;
-let favorite;
-		if (this.NP.get("record").favoriteindication == 'favorite') {
-			favorite = "favorite";
-		}
-		else {
-			favorite = "unfavorite";
+    let favorite;
+    if (this.NP.get("record").favoriteindication == 'favorite') {
+      favorite = "favorite";
+    }
+    else {
+      favorite = "unfavorite";
 
-		}
-this.unitDetailData.favoriteindication = favorite;
+    }
+    this.unitDetailData.favoriteindication = favorite;
 
     this.unitDetailData.unit_id = localStorage.getItem("unitId");
     if (this.unitDetailData.unit_id == undefined) {
@@ -334,7 +335,7 @@ this.unitDetailData.favoriteindication = favorite;
   // supplies a variable of key with a value of create followed by the key/value pairs
   // for the record data
   createEntry(serviced_datetime, service_remark, next_service_date, serviced_by, is_request, service_subject, addedImgLists, remarkget, nextServiceDate, micro_timestamp) {
-
+    this.isSubmitted = true;
     service_remark = localStorage.getItem("atMentionResult");
 
 
@@ -402,6 +403,7 @@ this.unitDetailData.favoriteindication = favorite;
   // supplies a variable of key with a value of update followed by the key/value pairs
   // for the record data
   updateEntry(serviced_datetime, service_remark, next_service_date, serviced_by, is_request, service_subject, addedImgLists, remarkget, nextServiceDate, micro_timestamp) {
+    this.isSubmitted = true;
     if (localStorage.getItem("atMentionResult") != '') {
       service_remark = localStorage.getItem("atMentionResult");
     }

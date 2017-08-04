@@ -224,7 +224,7 @@
 
 
           <ion-item *ngIf="hideActionButton">
-            <button ion-button color="primary" text-center block [disabled]="!form.valid">Send Message</button>
+            <button ion-button color="primary" text-center block [disabled]="!form.valid || isSubmitted">Send Message</button>
           </ion-item>
         </div>
       </ion-list>
@@ -234,7 +234,7 @@
     <ion-list *ngSwitchCase="'details'">
       <div>
          <ion-item style="float:left;">
-      <ion-avatar item-start>
+      <ion-avatar item-start *ngIf="'!send'">
         <img src="{{photo}}">
       </ion-avatar>
       <div><b>Subject:</b>{{messages_subject}}</div>
