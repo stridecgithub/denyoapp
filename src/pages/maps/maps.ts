@@ -628,6 +628,12 @@ export class MapsPage {
     }
     console.log(this.str + "//" + this.str1);
     this.detailvalue = item;
+     localStorage.setItem("unitunitname", item.unitname);
+      localStorage.setItem("unitlocation", item.location);
+      localStorage.setItem("unitprojectname", item.projectname);
+      localStorage.setItem("unitcolorcode", item.colorcodeindications);
+      localStorage.setItem("unitlat", item.lat);
+      localStorage.setItem("unitlng", item.lng);
     console.log(this.str + "//" + JSON.stringify(this.detailvalue));
     localStorage.setItem("viewlist", this.str);
 

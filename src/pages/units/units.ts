@@ -209,6 +209,7 @@ export class UnitsPage {
     console.log('E');
   }
   ionViewWillEnter() {
+    this.detailvalue="";
     localStorage.setItem("viewlist", "");
     let //body: string = "loginid=" + this.userId,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
@@ -254,6 +255,14 @@ console.log(JSON.stringify(this.selectedAction));*/
       }
     }
     this.detailvalue = item;
+     
+      
+      localStorage.setItem("unitunitname", item.unitname);
+      localStorage.setItem("unitlocation", item.location);
+      localStorage.setItem("unitprojectname", item.projectname);
+      localStorage.setItem("unitcolorcode", item.colorcodeindications);
+      localStorage.setItem("unitlat", item.lat);
+      localStorage.setItem("unitlng", item.lng);
     console.log(this.str + "//" + JSON.stringify(this.detailvalue));
     localStorage.setItem("viewlist", this.str);
   }
@@ -328,6 +337,7 @@ console.log(JSON.stringify(this.selectedAction));*/
       });
       return false;
     } else if (act == 'detail') {
+      
       localStorage.setItem("unitId", unitId);
       localStorage.setItem("unitunitname", item.unitname);
       localStorage.setItem("unitlocation", item.location);

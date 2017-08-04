@@ -145,8 +145,8 @@ let favorite;
 
 		}
 this.unitDetailData.favoriteindication = favorite;
-
-		this.unitDetailData.unit_id = localStorage.getItem("unitId");
+localStorage.setItem("unitId", editItem.unit_id);
+		this.unitDetailData.unit_id = editItem.unit_id;
 		this.unitDetailData.unitname = localStorage.getItem("unitunitname");
 		this.unitDetailData.location = localStorage.getItem("unitlocation");
 		this.unitDetailData.projectname = localStorage.getItem("unitprojectname");
