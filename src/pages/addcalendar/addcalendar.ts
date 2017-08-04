@@ -40,6 +40,7 @@ export class AddcalendarPage {
   public event_date: any;
   public event_time: any;
   public event_title: any;
+   public isSubmitted: boolean =false;
   public event_type: any;
   public event_notes: any;
   public service_remark: any;
@@ -204,9 +205,6 @@ export class AddcalendarPage {
       }, {
         id: '12.45PM',
         time_name: '12:45 PM'
-      }, {
-        id: '12.45PM',
-        time_name: '12:45 PM'
       });
     let dateStr = new Date();
     let month = dateStr.getMonth() + 1;
@@ -295,6 +293,7 @@ export class AddcalendarPage {
   // for the record data
   createEntry(type_name, event_project, event_subject, event_unitid, event_time, event_location, service_remark, createdby) {
     //let updatedby = createdby;
+     this.isSubmitted=true;
     service_remark = localStorage.getItem("atMentionResult");
     let field;
     if (type_name == 'Service') {
@@ -343,6 +342,7 @@ export class AddcalendarPage {
   //http://denyoappv2.stridecdev.com/calendar/update?is_mobile=1&event_type=Event&event_title=sfd&event_location=london&event_date=2017-07-07&event_time=6:00 AM&ses_login_id=2&event_remark=@vignesh&id=1
 
   updateEntry(type_name, event_project, event_subject, event_unitid, event_time, event_location, service_remark, createdby) {
+     this.isSubmitted=true;
     if (localStorage.getItem("atMentionResult") != '') {
       service_remark = localStorage.getItem("atMentionResult");
     }
