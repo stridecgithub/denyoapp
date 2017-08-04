@@ -293,10 +293,10 @@ export class AddcommentsinfoPage {
     this.isSubmitted = true;
     comments = localStorage.getItem("atMentionResult");
     if (this.service_priority == undefined) {
-      this.service_priority = '';
+      this.service_priority = '0';
     }
     if (this.service_priority == 'undefined') {
-      this.service_priority = '';
+      this.service_priority = '0';
     }
     let body: string = "is_mobile=1" +
       "&comment_unit_id=" + this.comment_unitid +
@@ -353,10 +353,10 @@ export class AddcommentsinfoPage {
       comments = localStorage.getItem("atMentionResult");
     }
     if (this.service_priority == undefined) {
-      this.service_priority = 1;
+      this.service_priority = 0;
     }
     if (this.service_priority == 'undefined') {
-      this.service_priority = 1;
+      this.service_priority = 0;
     }
     let body: string = "is_mobile=1" +
       "&comment_remark=" + comments +
