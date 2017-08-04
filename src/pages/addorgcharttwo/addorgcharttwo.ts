@@ -117,7 +117,7 @@ export class AddorgcharttwoPage {
       });
     this.resetFields();
     this.getCompanyGroupListData();
-    this.getUserListData();
+   
     if (this.NP.get("record")) {
       console.log("User Org Chart:" + JSON.stringify(this.NP.get("record")));
       this.isEdited = true;
@@ -129,6 +129,7 @@ export class AddorgcharttwoPage {
       this.job_position = editItem.job_position;
       this.company_group = editItem.company_id;
       this.report_to = editItem.report_to;
+       this.getUserListData();
     }
     else {
       this.isEdited = false;
@@ -393,6 +394,7 @@ export class AddorgcharttwoPage {
         // this.responseResultReportTo="N/A";
         if(this.report_to == 0)
       {
+        console.log("LENGTH"+this.report_to);
         this.len=0;
       }
       else
@@ -506,7 +508,10 @@ export class AddorgcharttwoPage {
   redirectToSettings() {
     this.navCtrl.setRoot(MyaccountPage);
   }
-
+ onSegmentChanged() {
+    console.log("ID" + this.company_group);
+    this.getUserListData();
+  }
 }
 
 
