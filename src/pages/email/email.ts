@@ -868,7 +868,7 @@ export class EmailPage {
   reply(messages_body) {
     if(this.senderid == this.userId)
     {
-      this.to = this.personalhashtag;
+      this.to = this.receiver_id;
     this.addedImgLists = [];
     console.log("Attached image for file"+JSON.stringify(this.attachedFileLists));
     this.copytome = 0;
@@ -880,7 +880,7 @@ export class EmailPage {
   else
   {
     
-    this.to = this.receiver_id;
+    this.to = this.personalhashtag;
     this.addedImgLists = [];
     this.copytome = 0;
     this.getPrority(1);
