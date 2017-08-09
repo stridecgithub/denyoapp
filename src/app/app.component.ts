@@ -7,6 +7,7 @@ import { HomePage } from '../pages/home/home';
 //import { DashboardPage } from '../pages/dashboard/dashboard';
 
 import { CompanygroupPage } from '../pages/companygroup/companygroup';
+import { CompanydetailPage } from '../pages/companydetail/companydetail';
 import { UserPage } from '../pages/user/user';
 import { EnginedetailviewPage } from '../pages/enginedetailview/enginedetailview';
 import { MyaccountPage } from '../pages/myaccount/myaccount';
@@ -82,6 +83,7 @@ export class MyApp {
       { title: 'Add Engine Details', Component: AddenginedetailPage },
       { title: 'Engine Details', Component: EngineviewPage },
       { title: 'ForgotPassword', Component: ForgotpasswordPage },
+      { title: 'Company Group Detail', Component:CompanydetailPage},
 
       // { title: 'Map Demo', component: MapdemoPage },
 

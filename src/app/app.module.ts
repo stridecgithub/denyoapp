@@ -67,6 +67,7 @@ import { CustomHeaderComponent } from '../pages/custom-header-component';
 import { CustomFooterComponent } from '../pages/custom-footer-component';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Deeplinks } from '@ionic-native/deeplinks';
+import { CompanydetailPage } from '../pages/companydetail/companydetail';
 @NgModule({
   declarations: [
     MyApp,
@@ -129,7 +130,8 @@ import { Deeplinks } from '@ionic-native/deeplinks';
     NavbarComponent,
     CustomHeaderComponent,
     EnginedetailviewPage,
-    CustomFooterComponent
+    CustomFooterComponent,
+    CompanydetailPage
   ],
   imports: [
     BrowserModule,
@@ -198,7 +200,8 @@ import { Deeplinks } from '@ionic-native/deeplinks';
     ViewunitsPage,
     TrendlinePage,
     CustomHeaderComponent,
-    CustomFooterComponent
+    CustomFooterComponent,
+    CompanydetailPage
   ],
   providers: [
     StatusBar,
