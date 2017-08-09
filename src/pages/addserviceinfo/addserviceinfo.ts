@@ -44,6 +44,8 @@ export class AddserviceinfoPage {
   public recordID: any;
   public service_unitid: any;
   public service_id: any;
+  public dd: any;
+  public mm: any;
   public serviced_by: any;
   public serviced_datetime: any;
   public servicemindate: any;
@@ -81,13 +83,60 @@ export class AddserviceinfoPage {
     private transfer: Transfer,
     private file: File, private ngZone: NgZone) {
 
-    let dateValidStr = new Date();
-    this.servicemindate = this.subDays(5);
-    let maxmonth = dateValidStr.getUTCMonth() + 1;
-    this.servicemaxdate = dateValidStr.getFullYear() + '-' + maxmonth + "-" + dateValidStr.getUTCDate();
-    this.servicemindate = this.servicemindate.getFullYear() + '-' + parseInt(this.servicemindate.getUTCMonth() + 1) + "-" + this.servicemindate.getUTCDate();
-console.log("Min"+this.servicemindate);
-console.log("Max"+this.servicemaxdate);
+
+
+
+
+    let today = new Date();
+    this.dd = today.getDate();
+    this.mm = today.getMonth() + 1; //January is 0!
+    let yyyy = today.getFullYear();
+
+    if (this.dd < 10) {
+      this.dd = '0' + this.dd
+    }
+
+    if (this.mm < 10) {
+      this.mm = '0' + this.mm
+    }
+
+    this.servicemaxdate = yyyy + '-' + this.mm + '-' + this.dd;
+
+    //let d = new Date();
+    //this.servicemindate=d.setDate(d.getDate()-5);
+
+
+
+    var d = new Date();
+    d.setDate(d.getDate() - 5);
+    this.servicemindate = d.toLocaleString();
+    let splitcomma = this.servicemindate.split(",");
+    let splitslash = splitcomma[0].split("/");
+    let minyr = splitslash[2];
+    let minmn = splitslash[0];
+    let mindt = splitslash[1];
+
+    if (mindt < 10) {
+      mindt = '0' + mindt
+    }
+
+    if (minmn < 10) {
+      minmn = '0' + minmn
+    }
+
+    this.servicemindate = minyr + '-' + minmn + '-' + mindt;
+
+    /* let d = new Date(); // today!
+     let x = 5; // go back 5 days!
+     this.servicemindate = d.setDate(d.getDate() - x);
+ */
+
+
+    //Min8/4/2017, 4:43:05 PM
+
+
+    console.log("Min:" + this.servicemindate);
+    console.log("Max:" + this.servicemaxdate);
 
     // parseInt(date.getMonth() + 1)
     /* let mindateStr = this.servicemindate.getFullYear() + '-0' + parseInt(this.servicemindate.getMonth()+1) + "-0" + this.servicemindate.getDate();
@@ -523,6 +572,7 @@ console.log("Max"+this.servicemaxdate);
   subDays(days) {
     let result = new Date();
     result.setDate(result.getDate() - days);
+    console.log("SubDays Function Result is:" + result);
     return result;
   }
   showDatePicker() {
@@ -544,9 +594,7 @@ console.log("Max"+this.servicemaxdate);
     this.unitDetailData.hashtag = hashtag;
   }
 
-  updateIsRequest(val) {
-    console.log('Is Request:' + this.is_request);
-  }
+  
 
   previous() {
     this.nav.setRoot(ServicinginfoPage, {
@@ -668,6 +716,33 @@ console.log("Max"+this.servicemaxdate);
   }
   redirectToSettings() {
     this.nav.setRoot(MyaccountPage);
+  }
+
+
+  showConfirm() {
+    let confirm = this.alertCtrl.create({
+      title: 'Attention',
+     
+      message: 'Be requesting for Denyo Service Support',
+      buttons: [
+        {
+          text: 'Confirm',
+          handler: () => {
+            this.is_request = true;
+            console.log('Confirm clicked');
+          }
+        },
+        {
+          text: 'Cancel',
+          handler: () => {
+            this.is_request = false;
+            console.log('Cancel clicked');
+          }
+        }
+      ],
+       cssClass: 'alertDanger'
+    });
+    confirm.present();
   }
 
 }

@@ -74,7 +74,7 @@ export class AlarmdetailsPage {
         console.log(this.NP.get("record").alarm_name);
         this.alarmid = this.NP.get("record").alarm_id;
         this.alarm_name = this.NP.get("record").alarm_name;
-        this.alarm_unitid=this.NP.get("record").alarm_name;
+        this.alarm_unitid = this.NP.get("record").alarm_name;
         this.alarm_assginedby_name = this.NP.get("record").alarm_assginedby_name;
         this.alarm_assginedto_name = this.NP.get("record").alarm_assginedto_name;
         if (this.alarm_assginedby_name == "") {
@@ -110,14 +110,17 @@ export class AlarmdetailsPage {
         this.msgcount = data.json().msgcount;
         this.notcount = data.json().notifycount;
       });
-   
+
   }
   selectEntry(item) {
+    console.log("selectEntry Array" + JSON.stringify(item.alarm_unit_id));
+    console.log("item.alarm_unit_id" + item.alarm_unit_id);
     localStorage.setItem("unitId", item.alarm_unit_id);
+    localStorage.setItem("iframeunitId", item.alarm_unit_id);
     this.alarm_name = item.alarm_name;
     this.alarm_assginedby_name = item.alarm_assginedby_name;
     this.alarm_assginedto_name = item.alarm_assginedto_name;
-     localStorage.setItem("iframeunitId",  item.alarm_unit_id);
+
   }
   editalarm() {
     this.nav.setRoot(AddalarmPage,

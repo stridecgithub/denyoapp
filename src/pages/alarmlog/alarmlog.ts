@@ -148,6 +148,12 @@ export class AlarmlogPage {
     this.unitDetailData.colorcodeindications = localStorage.getItem("unitcolorcode");
     this.unitDetailData.favoriteindication=localStorage.getItem("unitfav");
     console.log("Add Comment Color Code:"+this.unitDetailData.colorcodeindications);
+
+
+    console.log("Alarm log page unit id is"+this.unitDetailData.unit_id)
+    localStorage.setItem("unitId",  this.unitDetailData.unit_id);
+    localStorage.setItem("iframeunitId",  this.unitDetailData.unit_id);
+
     this.unitDetailData.lat = localStorage.getItem("unitlat");
     this.unitDetailData.lng = localStorage.getItem("unitlng");
     this.pageTitle = "Alarm";

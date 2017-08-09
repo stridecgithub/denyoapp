@@ -58,10 +58,7 @@
   <div>
  
   </div>
-  <div>
-    <div [innerHTML]="htmlContent"></div>
-    <!--<iframe src="http://denyoappv2.stridecdev.com/orgchart?company_id="+{{companyId}}+"&is_mobile=1&id="+{{userId}}></iframe>-->
-     <div [innerHTML]="sanitizer.bypassSecurityTrustHtml(iframeContent)"></div>
+  <div> <div [innerHTML]="sanitizer.bypassSecurityTrustHtml(iframeContent)"></div>
   </div>
 </ion-content>
 <ion-footer color="bluedark">

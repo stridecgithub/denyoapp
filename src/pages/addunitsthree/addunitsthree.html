@@ -90,10 +90,39 @@
             <ion-input [disabled]="readOnly" type="text" formControlName="contact_number_1" [(ngModel)]="contact_number_1" style="width:79%;float:right;"></ion-input>
           </div>
        
-        <ion-input *ngIf="cont2" type="text" placeholder="Number" [disabled]="readOnly" formControlName="contact_number_2" [(ngModel)]="contact_number_2"></ion-input>
+
+
+        <div *ngIf="cont2">
+            
+            <ion-input class="{{borderbottomredvalidation2}}" [disabled]="readOnly" (keyup)="getPrimaryContact2($event)" type="text" formControlName="primary_2" [(ngModel)]="primary_2" style="width:19%;float:left;"></ion-input>
+            <ion-input [disabled]="readOnly" type="text" formControlName="contact_number_2" [(ngModel)]="contact_number_2" style="width:79%;float:right;"></ion-input>
+          </div>
+
+
+           <div *ngIf="cont3">
+           
+            <ion-input class="{{borderbottomredvalidation3}}" [disabled]="readOnly" (keyup)="getPrimaryContac3($event)" type="text" formControlName="primary_3" [(ngModel)]="primary_3" style="width:19%;float:left;"></ion-input>
+            <ion-input [disabled]="readOnly" type="text" formControlName="contact_number_3" [(ngModel)]="contact_number_3" style="width:79%;float:right;"></ion-input>
+          </div>
+
+
+           <div *ngIf="cont4">
+           
+            <ion-input class="{{borderbottomredvalidation4}}" [disabled]="readOnly" (keyup)="getPrimaryContac4($event)" type="text" formControlName="primary_4" [(ngModel)]="primary_4" style="width:19%;float:left;"></ion-input>
+            <ion-input [disabled]="readOnly" type="text" formControlName="contact_number_4" [(ngModel)]="contact_number_4" style="width:79%;float:right;"></ion-input>
+          </div>
+
+
+           <div *ngIf="cont5">
+            
+            <ion-input class="{{borderbottomredvalidation5}}" [disabled]="readOnly" (keyup)="getPrimaryContac5($event)" type="text" formControlName="primary_5" [(ngModel)]="primary_5" style="width:19%;float:left;"></ion-input>
+            <ion-input [disabled]="readOnly" type="text" formControlName="contact_number_5" [(ngModel)]="contact_number_5" style="width:79%;float:right;"></ion-input>
+          </div>
+
+        <!--ion-input *ngIf="cont2" type="text" placeholder="Number" [disabled]="readOnly" formControlName="contact_number_2" [(ngModel)]="contact_number_2"></ion-input>
         <ion-input *ngIf="cont3" type="text" placeholder="Number" [disabled]="readOnly" formControlName="contact_number_3" [(ngModel)]="contact_number_3"></ion-input>
         <ion-input *ngIf="cont4" type="text" placeholder="Number" [disabled]="readOnly" formControlName="contact_number_4" [(ngModel)]="contact_number_4"></ion-input>
-        <ion-input *ngIf="cont5" type="text" placeholder="Number" [disabled]="readOnly" formControlName="contact_number_5" [(ngModel)]="contact_number_5"></ion-input>
+        <ion-input *ngIf="cont5" type="text" placeholder="Number" [disabled]="readOnly" formControlName="contact_number_5" [(ngModel)]="contact_number_5"></ion-input-->
 
         <!--ion-item *ngFor="let contactnumberData of contactnumberArray;let i = index;">         
           <ion-input type="text" placeholder="{{contactnumberData.placeholder}}" [disabled]="readOnly" formControlName="{{contactnumberData.name}}"

@@ -1,7 +1,5 @@
 {
   "name": "denyofinal",
   "app_id": "",
-  "type": "ionic-angular",
-  "typescript": true,
-"v2": true
+  "type": "ionic-angular"
 }

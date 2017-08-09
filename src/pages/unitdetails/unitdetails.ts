@@ -79,10 +79,7 @@ export class UnitdetailsPage {
 
 
 	ionViewDidLoad() {
-		console.log('ionViewDidLoad UnitdetailsPage');
-	}
-
-	ionViewWillEnter() {
+		this.pageTitle = "Unit Detail";
 		this.colorListArr = [
 			"FBE983",
 			"5584EE",
@@ -97,31 +94,10 @@ export class UnitdetailsPage {
 			"DAADFE",
 			"E1E1E1"
 		];
-		localStorage.setItem("unitdetails", JSON.stringify(this.NP.get("record")));
-		console.log("UD", JSON.stringify(this.NP.get("record")));
-		this.pageTitle = 'Unit Details';
-		let nud = localStorage.getItem("unitdetails");
-		console.log(JSON.stringify(this.NP.get("record")));
 		let editItem = this.NP.get("record");
-		let colorcode;
 
-		let index = this.colorListArr.indexOf(localStorage.getItem("unitcolorcode")); // 1
-		console.log("Color Index:" + index);
-		let colorvalincrmentone = index + 1;
-		colorcode = "button" + colorvalincrmentone;
-		console.log("Color is" + colorcode);
-		let favorite;
-		if (this.NP.get("record").favoriteindication == 'favorite') {
-			favorite = "favorite";
-		}
-		else {
-			favorite = "unfavorite";
-
-		}
-		this.unitDetailData.favoriteindication = favorite;
-		localStorage.setItem("unitId", editItem.unit_id);
 		let iframeunitid = localStorage.getItem("iframeunitId");
-		console.log("iframeunitid:"+iframeunitid);
+		console.log("iframeunitid:" + iframeunitid);
 		if (iframeunitid == 'undefined') {
 			iframeunitid = '0';
 		}
@@ -137,19 +113,48 @@ export class UnitdetailsPage {
 				this.unitDetailData.unit_id = editItem.unit_id;
 			}
 		}
+		console.log('ionViewDidLoad UnitdetailsPage');
+		// UnitDetails Api Call		
+		let
+			type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+			headers: any = new Headers({ 'Content-Type': type }),
+			options: any = new RequestOptions({ headers: headers }),
+			url: any = this.apiServiceURL + "/getunitdetailsbyid?is_mobile=1&loginid=" + this.unitDetailData.userId +
+				"&unitid=" + this.unitDetailData.unit_id;
+		console.log(url);
+		this.http.get(url, options)
+			.subscribe((data) => {					// If the request was successful notify the user
+				if (data.status === 200) {
+					this.unitDetailData.unitname = data.json().units[0].unitname;
+					this.unitDetailData.projectname = data.json().units[0].projectname;
+					this.unitDetailData.location = data.json().units[0].location;
+					this.unitDetailData.colorcodeindications = data.json().units[0].colorcode;
+					this.unitDetailData.gen_status = data.json().units[0].genstatus;
+					this.unitDetailData.nextservicedate = data.json().units[0].nextservicedate;
+					this.unitDetailData.alarmnotificationto = data.json().units[0].nextservicedate;
+					this.unitDetailData.lat = data.json().units[0].lat;
+					this.unitDetailData.lng = data.json().units[0].lng;
+					let colorcode;
+					let index = this.colorListArr.indexOf(this.unitDetailData.colorcodeindications);
+					let colorvalincrmentone = index + 1;
+					colorcode = "button" + colorvalincrmentone;
+					this.unitDetailData.colorcodeindications = colorcode;
+					let favorite;
+					if (data.json().units[0].favorite == '1') {
+						favorite = "favorite";
+					}
+					else {
+						favorite = "unfavorite";
 
-		this.unitDetailData.unitname = localStorage.getItem("unitunitname");
-		this.unitDetailData.location = localStorage.getItem("unitlocation");
-		this.unitDetailData.projectname = localStorage.getItem("unitprojectname");
-		this.unitDetailData.colorcodeindications = localStorage.getItem("unitcolorcode");
-		console.log("Unit Details Color Code:" + this.unitDetailData.colorcodeindications);
-		this.unitDetailData.gen_status = editItem.gen_status;
-		this.unitDetailData.nextservicedate = editItem.nextservicedate;
-		this.unitDetailData.alarmnotificationto = editItem.nextservicedate;
+					}
+					this.unitDetailData.favoriteindication = favorite;
 
-		this.unitDetailData.lat = localStorage.getItem("unitlat");
-		this.unitDetailData.lng = localStorage.getItem("unitlng");
-		console.log(this.apiServiceURL + "/" + localStorage.getItem("unitId") + "/1/unitdetails");
+				}
+			});
+		// Unit Details API Call	
+	}
+
+	ionViewWillEnter() {
 		this.iframeContent = "<iframe id='filecontainer' src=" + this.apiServiceURL + "/" + this.unitDetailData.unit_id + "/1/unitdetails height=350 width=100% frameborder=0></iframe>";
 
 		//http://denyoappv2.stridecdev.com/getcount?loginid=1&unitid=2
@@ -185,7 +190,7 @@ export class UnitdetailsPage {
 			type1: string = "application/x-www-form-urlencoded; charset=UTF-8",
 			headers1: any = new Headers({ 'Content-Type': type1 }),
 			options1: any = new RequestOptions({ headers: headers1 }),
-			url1: any = this.apiServiceURL + "/msgnotifycount?loginid=" + this.userId;
+			url1: any = this.apiServiceURL + "/msgnotifycount?loginid=" + this.unitDetailData.userId;
 		console.log(url1);
 		// console.log(body);
 
@@ -208,7 +213,6 @@ export class UnitdetailsPage {
 
 		this.http.post(url, body, options)
 			.subscribe((data) => {
-				console.log("Response Success:" + JSON.stringify(data.json()));
 				if (data.status === 200) {
 					console.log("Service count successfully removed");
 				}

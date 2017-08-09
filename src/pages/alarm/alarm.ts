@@ -33,10 +33,10 @@ import { AddalarmlistPage } from '../addalarmlist/addalarmlist';
   templateUrl: 'alarm.html',
 })
 export class AlarmPage {
-  public msgcount:any;
-  public notcount:any;
-    private permissionMessage: string = "Permission denied for access this page. Please contact your administrator";
-   public VIEWACCESS: any;
+  public msgcount: any;
+  public notcount: any;
+  private permissionMessage: string = "Permission denied for access this page. Please contact your administrator";
+  public VIEWACCESS: any;
   public CREATEACCESS: any;
   public EDITACCESS: any;
   public DELETEACCESS: any;
@@ -53,7 +53,7 @@ export class AlarmPage {
     startindex: 0,
     results: 8
   }
-   public unitDetailData: any = {
+  public unitDetailData: any = {
     userId: '',
     loginas: '',
     pageTitle: '',
@@ -71,14 +71,14 @@ export class AlarmPage {
     public toastCtrl: ToastController, public alertCtrl: AlertController, public NP: NavParams, public navParams: NavParams, public loadingCtrl: LoadingController) {
     this.loginas = localStorage.getItem("userInfoName");
     this.userId = localStorage.getItem("userInfoId");
-     this.VIEWACCESS = localStorage.getItem("UNITS_ALARM_VIEW");
-    console.log("Role Authority for Unit Listing View:"+this.VIEWACCESS );
+    this.VIEWACCESS = localStorage.getItem("UNITS_ALARM_VIEW");
+    console.log("Role Authority for Unit Listing View:" + this.VIEWACCESS);
     this.CREATEACCESS = localStorage.getItem("UNITS_ALARM_CREATE");
-    console.log("Role Authority for Unit Listing Create:"+this.CREATEACCESS );
+    console.log("Role Authority for Unit Listing Create:" + this.CREATEACCESS);
     this.EDITACCESS = localStorage.getItem("UNITS_ALARM_EDIT");
-    console.log("Role Authority for Unit Listing Edit:"+this.EDITACCESS );
+    console.log("Role Authority for Unit Listing Edit:" + this.EDITACCESS);
     this.DELETEACCESS = localStorage.getItem("UNITS_ALARM_DELETE");
-    console.log("Role Authority for Unit Listing Delete:"+this.DELETEACCESS );
+    console.log("Role Authority for Unit Listing Delete:" + this.DELETEACCESS);
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad AlarmPage');
@@ -94,7 +94,7 @@ export class AlarmPage {
   }
   doAlarm() {
     let editItem = this.NP.get("record");
-   
+
     this.presentLoading(1);
     if (this.reportData.status == '') {
       this.reportData.status = "DRAFT";
@@ -106,7 +106,7 @@ export class AlarmPage {
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/alarms?is_mobile=1&startindex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc + "&unitid=" +  localStorage.getItem("unitId");
+      url: any = this.apiServiceURL + "/alarms?is_mobile=1&startindex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc + "&unitid=" + localStorage.getItem("unitId");
     let res;
     console.log(url);
     this.http.get(url, options)
@@ -151,8 +151,12 @@ export class AlarmPage {
     this.unitDetailData.location = localStorage.getItem("unitlocation");
     this.unitDetailData.projectname = localStorage.getItem("unitprojectname");
     this.unitDetailData.colorcodeindications = localStorage.getItem("unitcolorcode");
-    this.unitDetailData.favoriteindication=localStorage.getItem("unitfav");
-    console.log("Add Comment Color Code:"+this.unitDetailData.colorcodeindications);
+    this.unitDetailData.favoriteindication = localStorage.getItem("unitfav");
+console.log("Alarm list page unit id is"+this.unitDetailData.unit_id)
+    localStorage.setItem("unitId",  this.unitDetailData.unit_id);
+    localStorage.setItem("iframeunitId",  this.unitDetailData.unit_id);
+
+    console.log("Add Comment Color Code:" + this.unitDetailData.colorcodeindications);
     this.unitDetailData.lat = localStorage.getItem("unitlat");
     this.unitDetailData.lng = localStorage.getItem("unitlng");
     this.pageTitle = "Alarm";
@@ -167,8 +171,8 @@ export class AlarmPage {
       url: any = this.apiServiceURL + "/msgnotifycount?loginid=" + this.userId;
     this.http.get(url, options)
       .subscribe((data) => {
-       this.msgcount=data.json().msgcount;
-        this.notcount=data.json().notifycount;
+        this.msgcount = data.json().msgcount;
+        this.notcount = data.json().notifycount;
       });
 
   }
@@ -200,7 +204,7 @@ export class AlarmPage {
       loader.dismiss();
     }
   }
-   details(item, act) {
+  details(item, act) {
     if (act == 'edit') {
       this.nav.setRoot(AlarmlistdetailPage, {
         record: item,
@@ -209,28 +213,27 @@ export class AlarmPage {
       return false;
     }
   }
-    doEdit(item, act) {
-      if(item.alarm_assginedby_name == '')
-    {
-    if (act == 'edit') {
-      this.nav.setRoot(AddalarmlistPage, {
-        record: item,
-        act: act
-      });
+  doEdit(item, act) {
+    if (item.alarm_assginedby_name == '') {
+      if (act == 'edit') {
+        this.nav.setRoot(AddalarmlistPage, {
+          record: item,
+          act: act
+        });
+      }
     }
-     }
-  else{
-    this.sendNotification("Already Assigned");
+    else {
+      this.sendNotification("Already Assigned");
+    }
   }
-  }
-   sendNotification(message): void {
+  sendNotification(message): void {
     let notification = this.toastCtrl.create({
       message: message,
       duration: 3000
     });
     notification.present();
   }
- previous() {
+  previous() {
     this.nav.setRoot(UnitdetailsPage, {
       record: this.NP.get("record")
     });

@@ -91,10 +91,10 @@
     position: absolute;
     margin-left: 70%;" class="{{priority_highclass}}"></a>
       </p>
-      <!-- min="{{servicemindate}}" max="{{servicemaxdate}}}"-->
+      <!-- min="{{servicemindate}}" max="{{servicemaxdate}}"-->
       <ion-item>
         <ion-label stacked>Servicing Date <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
-        <ion-datetime pickerFormat="MMM DD YYYY" displayFormat="MM/DD/YYYY" formControlName="serviced_datetime" [(ngModel)]="serviced_datetime"></ion-datetime>
+        <ion-datetime pickerFormat="MMM DD YYYY" displayFormat="MM/DD/YYYY" formControlName="serviced_datetime" [(ngModel)]="serviced_datetime" min="{{servicemindate}}" max="{{servicemaxdate}}"></ion-datetime>
       </ion-item>
       <ion-item>
         <ion-label stacked>Serviced By <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
@@ -179,7 +179,7 @@
       <div>Next Service Date:{{unitDetailData.nextServiceDate}}</div>
       <ion-item>
         <ion-label stacked>Request Denyo Service Support</ion-label>
-        <ion-checkbox [disabled]="readOnly" formControlName="is_request" [(ngModel)]="is_request" (ionChange)="updateIsRequest()"></ion-checkbox>
+        <ion-checkbox [disabled]="readOnly" (click)="showConfirm()" formControlName="is_request" [(ngModel)]="is_request"></ion-checkbox>
       </ion-item>
 
       <ion-item *ngIf="hideActionButton">

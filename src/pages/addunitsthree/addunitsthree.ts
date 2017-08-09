@@ -66,12 +66,20 @@ export class AddunitsthreePage {
   public cont4: boolean = false;
   public cont5: boolean = false;
   public primary: any;
+  public primary_2: any;
+  public primary_3: any;
+  public primary_4: any;
+  public primary_5: any;
   public addedImgLists: any;
   public userInfo = [];
   public contactInfo = [];
   public contactnameArray = [];
   public contactnumberArray = [];
   public borderbottomredvalidation: any;
+  public borderbottomredvalidation2: any;
+  public borderbottomredvalidation3: any;
+  public borderbottomredvalidation4: any;
+  public borderbottomredvalidation5: any;
   // Flag to hide the form upon successful completion of remote operation
   public hideForm: boolean = false;
   public hideActionButton = true;
@@ -104,6 +112,10 @@ export class AddunitsthreePage {
       "contact_name": [""],
       'contact_number': [""],
       "primary": ["", Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(5)])],
+      "primary_2": [""],
+      "primary_3": [""],
+      "primary_4": [""],
+      "primary_5": [""],
 
     });
     this.userId = localStorage.getItem("userInfoId");
@@ -122,6 +134,55 @@ export class AddunitsthreePage {
     } else {
       console.log('Reached five characters below');
       this.borderbottomredvalidation = '';
+    }
+  }
+
+   getPrimaryContact2(ev) {
+    console.log(ev.target.value);
+    let char = ev.target.value.toString();
+    if (char.length > 5) {
+      console.log('Reached five characters above');
+      this.borderbottomredvalidation2 = 'border-bottom-validtion';
+    } else {
+      console.log('Reached five characters below');
+      this.borderbottomredvalidation2 = '';
+    }
+  }
+
+   getPrimaryContact3(ev) {
+    console.log(ev.target.value);
+    let char = ev.target.value.toString();
+    if (char.length > 5) {
+      console.log('Reached five characters above');
+      this.borderbottomredvalidation3 = 'border-bottom-validtion';
+    } else {
+      console.log('Reached five characters below');
+      this.borderbottomredvalidation3 = '';
+    }
+  }
+
+   getPrimaryContact4(ev) {
+    console.log(ev.target.value);
+    let char = ev.target.value.toString();
+    if (char.length > 5) {
+      console.log('Reached five characters above');
+      this.borderbottomredvalidation4 = 'border-bottom-validtion';
+    } else {
+      console.log('Reached five characters below');
+      this.borderbottomredvalidation4 = '';
+    }
+  }
+
+
+   getPrimaryContact5(ev) {
+    console.log(ev.target.value);
+    let char = ev.target.value.toString();
+    if (char.length > 5) {
+      console.log('Reached five characters above');
+      this.borderbottomredvalidation5 = 'border-bottom-validtion';
+    } else {
+      console.log('Reached five characters below');
+      this.borderbottomredvalidation5 = '';
     }
   }
   // Determine whether we adding or editing a record
@@ -182,22 +243,50 @@ export class AddunitsthreePage {
           if (i == 1 && contactName != '') {
             this.cont2 = true;
             this.contact_name_2 = contactName;
-            this.contact_number_2 = contactNumber;
+             this.contact_number_2 = contactNumber;
+
+            if (this.contact_number_2 != undefined) {
+              let contactSplitSpace = this.contact_number_2.split(" ");
+              this.primary_2 = contactSplitSpace[0];
+              this.contact_number_2 = contactSplitSpace[1];
+              console.log("primary_2:" + this.primary_2);
+              console.log("contact_number_2:" + this.contact_number_2);
+            }
+
+
           }
           if (i == 2 && contactName != '') {
             this.cont3 = true;
             this.contact_name_3 = contactName;
             this.contact_number_3 = contactNumber;
+
+            if (this.contact_number_3 != undefined) {
+              let contactSplitSpace = this.contact_number_3.split(" ");
+              this.primary_3 = contactSplitSpace[0];
+              this.contact_number_3 = contactSplitSpace[1];
+            }
           }
           if (i == 3 && contactName != '') {
             this.cont4 = true;
             this.contact_name_4 = contactName;
             this.contact_number_4 = contactNumber;
+            if (this.contact_number_4 != undefined) {
+              let contactSplitSpace = this.contact_number_4.split(" ");
+              this.primary_4 = contactSplitSpace[0];
+              this.contact_number_4 = contactSplitSpace[1];
+            }
           }
           if (i == 4 && contactName != '') {
             this.cont5 = true;
             this.contact_name_5 = contactName;
             this.contact_number_5 = contactNumber;
+
+            if (this.contact_number_5 != undefined) {
+              let contactSplitSpace = this.contact_number_5.split(" ");
+              this.primary_5 = contactSplitSpace[0];
+              this.contact_number_5 = contactSplitSpace[1];
+            }
+
           }
         }
 
@@ -367,42 +456,61 @@ export class AddunitsthreePage {
       primary: string = this.form.controls["primary"].value;
     let contact = primary + " " + this.form.controls["contact_number_1"].value;
     console.log(contact);
-     contact = contact.replace("+", "%2B");
+    contact = contact.replace("+", "%2B");
     this.contactInfo.push({
       contact_name: this.form.controls["contact_name_1"].value,
       contact_number: contact
     });
 
     if (this.cont2 = true) {
-      console.log("contact_name_2 value:" + this.form.controls["contact_name_2"].value);
       if (this.form.controls["contact_name_2"].value != undefined) {
+        let contact;
+        contact = this.form.controls["primary_2"].value + " " + this.form.controls["contact_number_2"].value;
+        console.log(contact);
+        contact = contact.replace("+", "%2B");
+
+
         this.contactInfo.push({
           contact_name: this.form.controls["contact_name_2"].value,
-          contact_number: this.form.controls["contact_number_2"].value
+          contact_number: contact
         });
       }
     }
     if (this.cont3 = true) {
       if (this.form.controls["contact_name_3"].value != undefined) {
+        let contact;
+        contact = this.form.controls["primary_3"].value + " " + this.form.controls["contact_number_3"].value;
+        console.log(contact);
+        contact = contact.replace("+", "%2B");
+
         this.contactInfo.push({
           contact_name: this.form.controls["contact_name_3"].value,
-          contact_number: this.form.controls["contact_number_3"].value
+          contact_number: contact
         });
       }
     }
     if (this.cont4 = true) {
       if (this.form.controls["contact_name_4"].value != undefined) {
+        let contact;
+        contact = this.form.controls["primary_4"].value + " " + this.form.controls["contact_number_4"].value;
+        console.log(contact);
+        contact = contact.replace("+", "%2B");
+
         this.contactInfo.push({
           contact_name: this.form.controls["contact_name_4"].value,
-          contact_number: this.form.controls["contact_number_4"].value
+          contact_number: contact
         });
       }
     }
     if (this.cont5 = true) {
       if (this.form.controls["contact_name_5"].value != undefined) {
+        let contact;
+        contact = this.form.controls["primary_5"].value + " " + this.form.controls["contact_number_5"].value;
+        console.log(contact);
+        contact = contact.replace("+", "%2B");
         this.contactInfo.push({
           contact_name: this.form.controls["contact_name_5"].value,
-          contact_number: this.form.controls["contact_number_5"].value
+          contact_number: contact
         });
       }
     }

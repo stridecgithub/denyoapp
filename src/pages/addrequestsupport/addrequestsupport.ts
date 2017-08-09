@@ -43,9 +43,9 @@ export class AddrequestsupportPage {
   public service_resources: any;
   public service_id: any;
   micro_timestamp: any;
-  public msgcount:any;
-  public notcount:any;
-   public isSubmitted: boolean = false;
+  public msgcount: any;
+  public notcount: any;
+  public isSubmitted: boolean = false;
   public isUploadedProcessing: boolean = false;
   public isProgress = false;
   public isUploaded: boolean = true;
@@ -102,22 +102,22 @@ export class AddrequestsupportPage {
     console.log('ionViewDidLoad AddrequestsupportPage');
   }
   ionViewWillEnter() {
-     let //body: string = "loginid=" + this.userId,
+    let //body: string = "loginid=" + this.userId,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
       url: any = this.apiServiceURL + "/msgnotifycount?loginid=" + localStorage.getItem("userInfoId");
     console.log(url);
-   // console.log(body);
+    // console.log(body);
 
     this.http.get(url, options)
       .subscribe((data) => {
         console.log("Count Response Success:" + JSON.stringify(data.json()));
-       this.msgcount=data.json().msgcount;
-        this.notcount=data.json().notifycount;
+        this.msgcount = data.json().msgcount;
+        this.notcount = data.json().notifycount;
       });
- this.unitDetailData.unit_id = localStorage.getItem("unitId");
-  if (this.unitDetailData.unit_id == undefined) {
+    this.unitDetailData.unit_id = localStorage.getItem("unitId");
+    if (this.unitDetailData.unit_id == undefined) {
       this.unitDetailData.unit_id = this.NP.get("record").unit_id;
     }
     if (this.unitDetailData.unit_id == 'undefined') {
@@ -125,15 +125,15 @@ export class AddrequestsupportPage {
     }
     if (this.NP.get("record")) {
       this.selectEntry(this.NP.get("record"));
-      
 
-      if (this.NP.get("act") == 'Add') {        
+
+      if (this.NP.get("act") == 'Add') {
         this.service_remark = "";
-        this.service_subject = "";     
+        this.service_subject = "";
 
         this.isEdited = false;
         this.unitDetailData.pageTitle = 'Request Support Add';
-        this.service_unitid =this.unitDetailData.unit_id;
+        this.service_unitid = this.unitDetailData.unit_id;
       } else {
         this.service_unitid = this.unitDetailData.unit_id;
         this.unitDetailData.pageTitle = 'Request Support Edit';
@@ -143,14 +143,14 @@ export class AddrequestsupportPage {
       console.log("Service Unit Id:" + this.service_unitid);
     }
 
-   
-   
+
+
 
     this.unitDetailData.unitname = localStorage.getItem("unitunitname");
     this.unitDetailData.location = localStorage.getItem("unitlocation");
     this.unitDetailData.projectname = localStorage.getItem("unitprojectname");
     this.unitDetailData.colorcodeindications = localStorage.getItem("unitcolorcode");
-    console.log("Add Request Color Code:"+this.unitDetailData.colorcodeindications);
+    console.log("Add Request Color Code:" + this.unitDetailData.colorcodeindications);
     this.unitDetailData.lat = localStorage.getItem("unitlat");
     this.unitDetailData.lng = localStorage.getItem("unitlng");
 
@@ -287,8 +287,8 @@ export class AddrequestsupportPage {
   // to our remote PHP script (note the body variable we have created which
   // supplies a variable of key with a value of create followed by the key/value pairs
   // for the record data
-  createEntry(service_remark, service_subject, addedImgLists, remarkget, nextServiceDate, micro_timestamp) {  
-     this.isSubmitted = true;
+  createEntry(service_remark, service_subject, addedImgLists, remarkget, nextServiceDate, micro_timestamp) {
+    this.isSubmitted = true;
     let body: string = "is_mobile=1" +
       "&service_unitid=" + this.service_unitid +
       "&service_remark=" + service_remark +
@@ -333,8 +333,8 @@ export class AddrequestsupportPage {
   // to our remote PHP script (note the body variable we have created which
   // supplies a variable of key with a value of update followed by the key/value pairs
   // for the record data
-  updateEntry(service_remark, service_subject, addedImgLists, remarkget, nextServiceDate, micro_timestamp) {    
-     this.isSubmitted = true;
+  updateEntry(service_remark, service_subject, addedImgLists, remarkget, nextServiceDate, micro_timestamp) {
+    this.isSubmitted = true;
     let body: string = "is_mobile=1&service_id=" + this.service_id +
       "&service_unitid=" + this.service_unitid +
       "&service_remark=" + service_remark +
@@ -507,6 +507,31 @@ export class AddrequestsupportPage {
   }
   redirectToSettings() {
     this.nav.setRoot(MyaccountPage);
+  }
+
+  showConfirm() {
+    let confirm = this.alertCtrl.create({
+      title: 'Attention',
+
+      message: 'Be requesting for Denyo Service Support',
+      buttons: [
+        {
+          text: 'Confirm',
+          handler: () => {
+           this.saveEntry();
+          }
+        },
+        {
+          text: 'Cancel',
+          handler: () => {
+             this.isSubmitted = false;
+            console.log('Cancel clicked');
+          }
+        }
+      ],
+      cssClass: 'alertDanger'
+    });
+    confirm.present();
   }
 
 }
