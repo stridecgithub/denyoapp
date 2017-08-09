@@ -49,9 +49,10 @@
    text-align:center;
     font-size: 12pt;">{{permissionMessage}}</p>
 </ion-content>
-<ion-content padding class="ion-content"  *ngIf="VIEWACCESS==1">
 
-  <ion-item style="width: 100%; margin: 0; padding-left: 10px;" *ngIf="totalCount!=0">
+<ion-content padding class="ion-content"  *ngIf="VIEWACCESS==1">
+<div style="width:40%">
+  <ion-item style="width: 100%; margin: 0; padding-left: 10px;" *ngIf="reportAllLists.length!=0">
     <ion-label>Sort By</ion-label>
     <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="pet" (ionChange)="onSegmentChanged(pet)">
       <ion-option value="favorite,desc">Favorite</ion-option>
@@ -65,8 +66,9 @@
       <ion-option value="offline,desc">Offline</ion-option>
     </ion-select>
   </ion-item>
+  </div>
 
-
+<div style="width:50%;float:right;margin-top:-40px">
   <ion-item style="width: 100%; margin: 0; padding-left: 10px;" *ngIf="totalCount!=0">
     <ion-label>Select Action</ion-label>
     <ion-select style="padding: 1px 1px 6px 1px;"  [(ngModel)]="actpet" (ionChange)="onAction(actpet)">
@@ -75,15 +77,16 @@
       <ion-option value="viewdashboard">View on Dashboard</ion-option>
     </ion-select>
   </ion-item>
+</div>
 
 
-  <div class="error" *ngIf="totalCount==0">No unit entries found</div>
-  <div class="separator-line" *ngIf="totalCount!=0">&nbsp;</div>
-  <ion-refresher (ionRefresh)="doRefresh($event)" *ngIf="totalCount!=0">
+  <div class="error" *ngIf="reportAllLists.length==0">No unit entries found</div>
+  <div class="separator-line" *ngIf="reportAllLists.length!=0">&nbsp;</div>
+  <ion-refresher (ionRefresh)="doRefresh($event)" *ngIf="reportAllLists.length!=0">
     <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
     </ion-refresher-content>
   </ion-refresher>
-  <ion-list *ngIf="totalCount!=0">
+  <ion-list *ngIf="reportAllListslength!=0">
     <ion-item-sliding *ngFor="let item of reportAllLists;">
 
       <ion-item>
@@ -122,7 +125,7 @@
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
-  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="totalCount!=0">
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="reportAllLists.length!=0">
     <ion-infinite-scroll-content loadingText="Loading More Data"></ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>

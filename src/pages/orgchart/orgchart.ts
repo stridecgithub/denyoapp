@@ -54,7 +54,7 @@ export class OrgchartPage {
   public VIEWACCESS: any;
   public CREATEACCESS: any;
   iframeContent: any;
-  constructor(public popoverCtrl: PopoverController, public http: Http, public nav: NavController, private sanitizer: DomSanitizer,
+  constructor(public NP: NavParams, public popoverCtrl: PopoverController, public http: Http, public nav: NavController, private sanitizer: DomSanitizer,
     public toastCtrl: ToastController, public alertCtrl: AlertController, public navParams: NavParams, public loadingCtrl: LoadingController) {
     this.loginas = localStorage.getItem("userInfoName");
     this.userId = localStorage.getItem("userInfoId");
@@ -154,7 +154,16 @@ export class OrgchartPage {
 
   ionViewWillEnter() {
     this.getCompanyGroupListData();
-    this.pet = this.companyId;
+
+
+    let compId = this.NP.get("companyId")
+    if (compId > 0) {
+      this.pet = compId;
+      this.companyId = compId;
+    } else {
+      this.pet = this.companyId;
+    }
+
     let //body: string = "loginid=" + this.userId,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
@@ -178,7 +187,7 @@ export class OrgchartPage {
     }
 
     console.log(this.apiServiceURL + "/orgchart?company_id=" + this.companyId + "&is_mobile=1");
-   // this.iframeContent = "<iframe src=" + "http://denyoappv2.stridecdev.com/orgchart?company_id=" + this.companyId + "&is_mobile=1&id=" + this.userId + " width=350  frameborder=0  scrolling=yes></iframe>";
+    // this.iframeContent = "<iframe src=" + "http://denyoappv2.stridecdev.com/orgchart?company_id=" + this.companyId + "&is_mobile=1&id=" + this.userId + " width=350  frameborder=0  scrolling=yes></iframe>";
   }
   doOrgChart() {
     //this.presentLoading(1);
@@ -195,7 +204,7 @@ export class OrgchartPage {
         // this.presentLoading(0);
         // console.log("Orgchart Response Success:" + JSON.stringify(data.json()));
         res = data.json();
-        console.log("Parent"+JSON.stringify(res));
+        console.log("Parent" + JSON.stringify(res));
         if (res.parents.length > 0) {
           this.parents = res.parents;
           // this.responseResultCompany = res.companies;

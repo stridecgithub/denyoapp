@@ -34,13 +34,13 @@ export class UnitsPage {
   public pageTitle: string;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   private permissionMessage: string = "Permission denied for access this page. Please contact your administrator";
-   public VIEWACCESS: any;
+  public VIEWACCESS: any;
   public CREATEACCESS: any;
   public EDITACCESS: any;
   public DELETEACCESS: any;
   public totalCount;
   pet: string = "ALL";
-  public fav:any;
+  public fav: any;
   public userId: any;
   public sortby = 2;
   public detailvalue: any;
@@ -52,7 +52,7 @@ export class UnitsPage {
   public msgcount: any;
   public notcount: any;
   //Authorization Declaration
- 
+
   //Authorization Declaration
   public reportData: any =
   {
@@ -72,13 +72,13 @@ export class UnitsPage {
     this.userId = localStorage.getItem("userInfoId");
     //Authorization Get Value
     this.VIEWACCESS = localStorage.getItem("UNITS_LISTING_VIEW");
-    console.log("Role Authority for Unit Listing View:"+this.VIEWACCESS );
+    console.log("Role Authority for Unit Listing View:" + this.VIEWACCESS);
     this.CREATEACCESS = localStorage.getItem("UNITS_LISTING_CREATE");
-    console.log("Role Authority for Unit Listing Create:"+this.CREATEACCESS );
+    console.log("Role Authority for Unit Listing Create:" + this.CREATEACCESS);
     this.EDITACCESS = localStorage.getItem("UNITS_LISTING_EDIT");
-    console.log("Role Authority for Unit Listing Edit:"+this.EDITACCESS );
+    console.log("Role Authority for Unit Listing Edit:" + this.EDITACCESS);
     this.DELETEACCESS = localStorage.getItem("UNITS_LISTING_DELETE");
-    console.log("Role Authority for Unit Listing Delete:"+this.DELETEACCESS );
+    console.log("Role Authority for Unit Listing Delete:" + this.DELETEACCESS);
     //Authorization Get Value
   }
 
@@ -148,15 +148,15 @@ export class UnitsPage {
             console.log("Color is" + colorcode);
             if (res.units[unit].favorite == 1) {
               favorite = "favorite";
-              localStorage.setItem("unitfav",favorite);
+              localStorage.setItem("unitfav", favorite);
             }
             else {
-              this.fav=favorite;
+              this.fav = favorite;
               favorite = "unfavorite";
-              localStorage.setItem("unitfav",favorite);
+              localStorage.setItem("unitfav", favorite);
 
             }
-            
+
             this.reportAllLists.push({
               unit_id: res.units[unit].unit_id,
               unitname: res.units[unit].unitname,
@@ -209,7 +209,7 @@ export class UnitsPage {
     console.log('E');
   }
   ionViewWillEnter() {
-    this.detailvalue="";
+    this.detailvalue = "";
     localStorage.setItem("viewlist", "");
     let //body: string = "loginid=" + this.userId,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
@@ -255,14 +255,14 @@ console.log(JSON.stringify(this.selectedAction));*/
       }
     }
     this.detailvalue = item;
-     
-      
-      localStorage.setItem("unitunitname", item.unitname);
-      localStorage.setItem("unitlocation", item.location);
-      localStorage.setItem("unitprojectname", item.projectname);
-      localStorage.setItem("unitcolorcode", item.colorcodeindications);
-      localStorage.setItem("unitlat", item.lat);
-      localStorage.setItem("unitlng", item.lng);
+
+
+    localStorage.setItem("unitunitname", item.unitname);
+    localStorage.setItem("unitlocation", item.location);
+    localStorage.setItem("unitprojectname", item.projectname);
+    localStorage.setItem("unitcolorcode", item.colorcodeindications);
+    localStorage.setItem("unitlat", item.lat);
+    localStorage.setItem("unitlng", item.lng);
     console.log(this.str + "//" + JSON.stringify(this.detailvalue));
     localStorage.setItem("viewlist", this.str);
   }
@@ -298,36 +298,37 @@ console.log(JSON.stringify(this.selectedAction));*/
         return false;
       }
     }
+    if (urlstr != undefined) {
+      //http://denyoappv2.stridecdev.com/unitlistaction/4,6/1/delete
+      //http://denyoappv2.stridecdev.com/unitlistaction/4,6/1/dashboard?ses_login_id=2
+      // let body: string = "ses_login_id=" + this.userId,
+      let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+        headers: any = new Headers({ 'Content-Type': type }),
+        options: any = new RequestOptions({ headers: headers }),
+        url: any = this.apiServiceURL + urlstr;
+      console.log(url);
 
-    //http://denyoappv2.stridecdev.com/unitlistaction/4,6/1/delete
-    //http://denyoappv2.stridecdev.com/unitlistaction/4,6/1/dashboard?ses_login_id=2
-    // let body: string = "ses_login_id=" + this.userId,
-    let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
-      headers: any = new Headers({ 'Content-Type': type }),
-      options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + urlstr;
-    console.log(url);
-
-    this.http.get(url, options)
-      .subscribe((data) => {
-        console.log("Count Response Success:" + JSON.stringify(data.json()));
-        // If the request was successful notify the user
-        if (data.status === 200) {
-          if (actpet == 'delete') {
-            this.sendNotification(`Successfully Deleted`);
-          } else {
-            this.sendNotification(`Successfully Added`);
+      this.http.get(url, options)
+        .subscribe((data) => {
+          console.log("Count Response Success:" + JSON.stringify(data.json()));
+          // If the request was successful notify the user
+          if (data.status === 200) {
+            if (actpet == 'delete') {
+              this.sendNotification(`Successfully Deleted`);
+            } else {
+              this.sendNotification(`Successfully Added`);
+            }
+            this.reportData.startindex = 0;
+            this.reportData.sort = "unit_id";
+            /// this.doUnit();
+            this.nav.setRoot(this.nav.getActive().component);
           }
-          this.reportData.startindex = 0;
-          this.reportData.sort = "unit_id";
-          /// this.doUnit();
-          this.nav.setRoot(this.nav.getActive().component);
-        }
-        // Otherwise let 'em know anyway
-        else {
-          // this.sendNotification('Something went wrong!');
-        }
-      });
+          // Otherwise let 'em know anyway
+          else {
+            // this.sendNotification('Something went wrong!');
+          }
+        });
+    }
   }
   doEdit(item, act, unitId) {
     if (act == 'edit') {
@@ -337,15 +338,16 @@ console.log(JSON.stringify(this.selectedAction));*/
       });
       return false;
     } else if (act == 'detail') {
-      
+
       localStorage.setItem("unitId", unitId);
+      localStorage.setItem("iframeunitId", unitId);
       localStorage.setItem("unitunitname", item.unitname);
       localStorage.setItem("unitlocation", item.location);
       localStorage.setItem("unitprojectname", item.projectname);
       localStorage.setItem("unitcolorcode", item.colorcodeindications);
       localStorage.setItem("unitlat", item.lat);
       localStorage.setItem("unitlng", item.lng);
-     
+
 
       this.nav.setRoot(UnitdetailsPage, {
         record: item
