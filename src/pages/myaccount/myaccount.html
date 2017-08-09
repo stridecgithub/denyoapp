@@ -35,7 +35,7 @@
     </button>
     </ion-buttons>
     <ion-buttons end>
-    <button ion-button (click)="notification()">
+      <button ion-button (click)="notification()">
   <ion-icon ios="ios-notifications-outline" md="md-notifications-outline"></ion-icon>
   <ion-badge item-end class="notificationcount" *ngIf="notcount>0">{{this.notcount}}</ion-badge>
 </button>
@@ -60,7 +60,7 @@
    text-align:center;
     font-size: 12pt;">{{permissionMessage}}</p>
 </ion-content>
-<ion-content padding   class="ion-content">
+<ion-content padding class="ion-content">
 
   <div class="div-alignmnt">
     <ion-item>
@@ -87,41 +87,42 @@
 
   <div class="div-alignmnt"> <b>Country:</b> {{country}}</div>
 
-  <div class="div-alignmnt"> <b>Job Position:</b> {{job_position}}</div>
-  <button ion-button color="greenm" text-center block (click)="doEdit(userId)"  *ngIf="EDITACCESS==1">Edit Profile</button>
+  <div class="div-alignmnt"> <b>Job Position:</b> {{job_position}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a (click)="viewOrgChart()" href="#" >View in Org Chart</a></div>
+  
+  <button ion-button color="greenm" text-center block (click)="doEdit(userId)" *ngIf="EDITACCESS==1">Edit Profile</button>
 </ion-content>
 
 <ion-footer color="bluedark">
   <ion-toolbar color="bluedark">
-<ul class="quick-list">
-<li>
-    <button ion-button icon-only clear (click)="redirectToMaps()">
+    <ul class="quick-list">
+      <li>
+        <button ion-button icon-only clear (click)="redirectToMaps()">
     	<ion-icon name="home" class="footer-icon">MAPS</ion-icon>
     </button>
-</li>  
-<li>  
-    <button ion-button icon-only (click)="redirectToUser()" clear>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectToUser()" clear>
     	<ion-icon name="contacts" class="footer-icon">UNITS</ion-icon>
     </button>
-</li>     
-<li>    
-    <button ion-button icon-only (click)="redirectToMessage()" clear>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectToMessage()" clear>
     	<ion-icon name="chatboxes" class="footer-icon">MESSAGE</ion-icon>
       <ion-badge item-end class="messagecount"  *ngIf="msgcount>0">{{this.msgcount}}</ion-badge>
     </button>
-    <ion-badge color="danger"></ion-badge>
-</li>     
-<li>    
-    <button ion-button icon-only (click)="redirectCalendar()" clear>
+        <ion-badge color="danger"></ion-badge>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectCalendar()" clear>
     	<ion-icon name="bicycle" class="footer-icon">CALENDAR</ion-icon>
     </button>
-</li>    
-<li>    
-    <button ion-button icon-only (click)="redirectToSettings()" clear>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectToSettings()" clear>
     	<ion-icon name="settings" class="footer-icon">SETTING</ion-icon>
     </button>
-</li>    
-</ul>
+      </li>
+    </ul>
 
   </ion-toolbar>
 </ion-footer>

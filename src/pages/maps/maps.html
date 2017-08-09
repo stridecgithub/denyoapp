@@ -35,6 +35,10 @@
       Login As:{{loginas}}
     </ion-buttons>
   </ion-navbar>
+
+
+
+
 </ion-header>
 <ion-content padding class="ion-content" *ngIf="VIEWACCESS==0">
   <p style="color: red;
@@ -43,32 +47,40 @@
    text-align:center;
     font-size: 12pt;">{{permissionMessage}}</p>
 </ion-content>
-<ion-content padding class="ion-content" *ngIf="VIEWACCESS==1">  
-	<div #map id="map"></div>
+<ion-content padding class="ion-content" *ngIf="VIEWACCESS==1">
+  <div #map id="map"></div>
   <!--div [innerHTML]="sanitizer.bypassSecurityTrustHtml(iframeContent)"></div-->
-  <ion-item style="width: 100%; margin: 0; padding-left: 10px;" *ngIf="totalCount!=0">
-    <ion-label>Sort By</ion-label>
-    <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="pet" (ionChange)="onSegmentChanged(pet)">
-      <ion-option value="favorite,desc">Favorite</ion-option>
-      <ion-option value="unitname,asc">Unit Name Ascending</ion-option>
-      <ion-option value="unitname,desc">Unit Name Descending</ion-option>
-      <ion-option value="companygroup_name,asc">Unit Group Ascending</ion-option>
-      <ion-option value="companygroup_name,desc">Unit Group Descending</ion-option>
-      <ion-option value="tripped,asc">Tripped</ion-option>
-      <ion-option value="warning,asc">Warning</ion-option>
-      <ion-option value="running,asc">Running</ion-option>
-      <ion-option value="offline,asc">Offline</ion-option>
-    </ion-select>
-  </ion-item>
-  <ion-item style="width: 100%; margin: 0; padding-left: 10px;" *ngIf="totalCount!=0">
-    <ion-label>Select Action</ion-label>
-    <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="actpet" (ionChange)="onAction(actpet)">
-      <ion-option value="view">View</ion-option>
-      <ion-option value="hide">Hide on Dashboard</ion-option>
-    </ion-select>
-  </ion-item>
+
   <div class="error" *ngIf="reportAllLists.length==0">No unit entries found</div>
   <div class="separator-line" *ngIf="totalCount!=0">&nbsp;</div>
+
+  <div style="width:40%" *ngIf="totalCount!=0">
+    <ion-item>
+      <ion-label>Sort By</ion-label>
+      <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="pet" (ionChange)="onSegmentChanged(pet)">
+        <ion-option value="favorite,desc">Favorite</ion-option>
+        <ion-option value="unitname,asc">Unit Name Ascending</ion-option>
+        <ion-option value="unitname,desc">Unit Name Descending</ion-option>
+        <ion-option value="companygroup_name,asc">Unit Group Ascending</ion-option>
+        <ion-option value="companygroup_name,desc">Unit Group Descending</ion-option>
+        <ion-option value="tripped,asc">Tripped</ion-option>
+        <ion-option value="warning,asc">Warning</ion-option>
+        <ion-option value="running,asc">Running</ion-option>
+        <ion-option value="offline,asc">Offline</ion-option>
+      </ion-select>
+    </ion-item>
+
+  </div>
+  <div style="width:50%;float:right;margin-top:-40px" *ngIf="totalCount!=0">
+    <ion-item>
+      <ion-label>Select Action</ion-label>
+      <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="actpet" (ionChange)="onAction(actpet)">
+        <ion-option value="view">View</ion-option>
+        <ion-option value="hide">Hide on Dashboard</ion-option>
+      </ion-select>
+    </ion-item>
+
+  </div>
   <!--ion-refresher (ionRefresh)="doRefresh($event)" *ngIf="totalCount!=0">
     <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
     </ion-refresher-content>
@@ -88,7 +100,7 @@
         <button class="{{item.colorcodeindications}}" style="float: left ;width:8px;height:70px">
          
         </button>
-        <button  class="{{item.genstatus}}" style="float:left ;width:30px;height:30px;margin-top: 13px;background-color:#ffffff"></button>
+        <button class="{{item.genstatus}}" style="float:left ;width:30px;height:30px;margin-top: 13px;background-color:#ffffff"></button>
         <button (click)="favorite(item.unit_id)" class="{{item.favoriteindication}}" style="float: right ;width:30px;height:30px;background-color:#ffffff"></button>
         <div style="overflow: hidden; padding-left: 3.5em;">
           <h5 (click)="loadMap(item)"><b>{{item.unitname}}</b></h5>

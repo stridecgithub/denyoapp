@@ -36,8 +36,8 @@ export class CommentdetailsPage {
   public addedImgLists = [];
   progress: number;
   public recordID: any;
-  public photo:any;
-  public cdate:any;
+  public photo: any;
+  public cdate: any;
   public comment_unitid: any;
   public comment_id: any;
   public udetails: any;
@@ -54,7 +54,7 @@ export class CommentdetailsPage {
   public isProgress = false;
   public isUploaded: boolean = true;
   item: any;
-   public userId: any;
+  public userId: any;
   public isEdited: boolean = false;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   form: FormGroup;
@@ -70,10 +70,10 @@ export class CommentdetailsPage {
     addedImgLists2: ''
   }
   public hideActionButton = true;
-  constructor(public http: Http,public alertCtrl: AlertController, public NP: NavParams, public nav: NavController, public toastCtrl: ToastController, public navParams: NavParams, public viewCtrl: ViewController, formBuilder: FormBuilder
+  constructor(public http: Http, public alertCtrl: AlertController, public NP: NavParams, public nav: NavController, public toastCtrl: ToastController, public navParams: NavParams, public viewCtrl: ViewController, formBuilder: FormBuilder
 
   ) {
-     this.userId = localStorage.getItem("userInfoId");
+    this.userId = localStorage.getItem("userInfoId");
     this.service_priority_class1 = "-outline";
     this.service_priority_class2 = "-outline";
     this.unitDetailData.loginas = localStorage.getItem("userInfoName");
@@ -109,14 +109,14 @@ export class CommentdetailsPage {
     console.log('ionViewDidLoad CommentdetailsPage');
   }
   ionViewWillEnter() {
-    
+
     this.unitDetailData.unit_id = localStorage.getItem("unitId");
     this.unitDetailData.unitname = localStorage.getItem("unitunitname");
     this.unitDetailData.location = localStorage.getItem("unitlocation");
     this.unitDetailData.projectname = localStorage.getItem("unitprojectname");
     this.unitDetailData.colorcodeindications = localStorage.getItem("unitcolorcode");
-    this.unitDetailData.favoriteindication=localStorage.getItem("unitfav");
-    console.log("Add Comment Color Code:"+this.unitDetailData.colorcodeindications);
+    this.unitDetailData.favoriteindication = localStorage.getItem("unitfav");
+    console.log("Add Comment Color Code:" + this.unitDetailData.colorcodeindications);
     this.unitDetailData.lat = localStorage.getItem("unitlat");
     this.unitDetailData.lng = localStorage.getItem("unitlng");
     this.getPrority(1);
@@ -124,19 +124,51 @@ export class CommentdetailsPage {
     console.log("UD" + JSON.stringify(this.udetails));
     console.log("comment:" + JSON.stringify(this.NP.get("record")));
     if (this.NP.get("record")) {
-      this.selectEntry(this.NP.get("record"));
-      this.comment_id = this.NP.get("record").comment_id;
-      if (this.NP.get("act") == 'Add') {
-        this.isEdited = false;
-        this.unitDetailData.pageTitle = 'Add Comments';
-        this.comment_unitid = this.NP.get("unit_id");
+
+      if (this.NP.get("act") != 'Push') {
+        this.selectEntry(this.NP.get("record"));
+        this.comment_id = this.NP.get("record").comment_id;
+        if (this.NP.get("act") == 'Add') {
+          this.isEdited = false;
+          this.unitDetailData.pageTitle = 'Add Comments';
+          this.comment_unitid = this.NP.get("unit_id");
+        } else {
+          this.comment_unitid = this.NP.get("record").comment_unitid;
+          this.unitDetailData.pageTitle = 'Edit Comments';
+          this.isEdited = true;
+        }
+        console.log("Comment Id:" + this.comment_id);
+        console.log("Comment Unit Id:" + this.comment_unitid);
       } else {
-        this.comment_unitid = this.NP.get("record").comment_unitid;
-        this.unitDetailData.pageTitle = 'Edit Comments';
-        this.isEdited = true;
+        /*console.log('Push');
+        let //body: string = "loginid=" + this.userId,
+          type1: string = "application/x-www-form-urlencoded; charset=UTF-8",
+          headers1: any = new Headers({ 'Content-Type': type1 }),
+          options1: any = new RequestOptions({ headers: headers1 }),
+          url1: any = this.apiServiceURL + "getcommentdetails/" + this.NP.get("record");
+        console.log(url1);
+        this.http.get(url1, options1)
+          .subscribe((data) => {
+            console.log("getcommentdetails Response Success:" + JSON.stringify(data.json()));
+            console.log("comments Details:" + data.json().comments);
+            this.selectEntry(data.json().servicedetail);
+          });*/
+
+        console.log('Push');
+        let body: string = "commentid=" + this.NP.get("record"),
+          type1: string = "application/x-www-form-urlencoded; charset=UTF-8",
+          headers1: any = new Headers({ 'Content-Type': type1 }),
+          options1: any = new RequestOptions({ headers: headers1 }),
+          url1: any = this.apiServiceURL + "/getcommentdetails";
+        console.log(url1);
+        this.http.post(url1, body, options1)
+          //this.http.get(url1, options1)
+          .subscribe((data) => {
+            console.log("servicebyid Response Success:" + JSON.stringify(data.json()));
+            console.log("Service Details:" + data.json().comments[0]);
+            this.selectEntry(data.json().comments[0]);
+          });
       }
-      console.log("Comment Id:" + this.comment_id);
-      console.log("Comment Unit Id:" + this.comment_unitid);
     }
 
 
@@ -151,7 +183,7 @@ export class CommentdetailsPage {
         this.notcount = data.json().notifycount;
       });
 
-
+localStorage.setItem("iframeunitId", this.comment_unitid);
   }
   getPrority(val) {
     this.comment_priority = val
@@ -160,12 +192,12 @@ export class CommentdetailsPage {
 
     this.comments = item.comments;
     this.comment_subject = item.comment_subject;
-
+    localStorage.setItem("unitId", item.comment_unit_id);
     this.comment_by_name = item.comment_by_name;
     this.comment_priority = item.comment_priority;
     this.comment_remark = item.comment_remark;
     this.photo = item.user_photo;
-    this.cdate = item.comment_date+"("+item.time_ago+")";
+    this.cdate = item.comment_date + "(" + item.time_ago + ")";
     console.log("X" + this.comment_priority);
     if (this.comment_priority == "1") {
       this.service_priority_class1 = '';

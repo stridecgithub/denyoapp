@@ -22,7 +22,7 @@
     </button>
     </ion-buttons>
     <ion-buttons end>
-    <button ion-button (click)="notification()">
+      <button ion-button (click)="notification()">
   <ion-icon ios="ios-notifications-outline" md="md-notifications-outline"></ion-icon>
   <ion-badge item-end class="notificationcount" *ngIf="notcount>0">{{this.notcount}}</ion-badge>
 </button>
@@ -58,42 +58,53 @@
           </ion-select>
         </ion-item>
 
+
+
+
+
+
         <ion-item *ngIf="hideActionButton">
-          <button ion-button color="primary" text-center block [disabled]="!form.valid">Save and Complete</button>
+          <button ion-button color="primary" text-center block [disabled]="!form.valid   || isSubmitted">Save and Complete</button>
         </ion-item>
       </ion-list>
     </form>
   </div>
+
+  <div style="text-align:center" *ngIf="isProgress">
+    <span style="color:green">Profile photo uploaded. please wait</span>
+    <progress value="{{progress}}" max="100" *ngIf="isProgress"> </progress>
+    <span *ngIf="isProgress" style="padding:2px">{{progress}}%</span>
+  </div>
 </ion-content>
 <ion-footer color="bluedark">
   <ion-toolbar color="bluedark">
-<ul class="quick-list">
-<li>
-    <button ion-button icon-only clear (click)="redirectToMaps()">
+    <ul class="quick-list">
+      <li>
+        <button ion-button icon-only clear (click)="redirectToMaps()">
     	<ion-icon name="home" class="footer-icon">MAPS</ion-icon>
     </button>
-</li>  
-<li>  
-    <button ion-button icon-only (click)="redirectToUser()" clear>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectToUser()" clear>
     	<ion-icon name="contacts" class="footer-icon">UNITS</ion-icon>
     </button>
-</li>     
-<li>    
-    <button ion-button icon-only (click)="redirectToMessage()" clear>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectToMessage()" clear>
     	<ion-icon name="chatboxes" class="footer-icon">MESSAGE</ion-icon>
     </button>
-</li>     
-<li>    
-    <button ion-button icon-only (click)="redirectCalendar()" clear>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectCalendar()" clear>
     	<ion-icon name="bicycle" class="footer-icon">CALENDAR</ion-icon>
     </button>
-</li>      
-<li>    
-    <button ion-button icon-only (click)="redirectToSettings()" clear>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectToSettings()" clear>
     	<ion-icon name="settings" class="footer-icon">SETTING</ion-icon>
     </button>
-</li>    
-</ul>
+      </li>
+    </ul>
 
   </ion-toolbar>
 </ion-footer>

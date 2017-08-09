@@ -1,6 +1,6 @@
 var id = 1; var lpos = 1; var npos = 1; var postm = true;
 var notify = function (message) {
-	alert(message);
+	
 }
 var getKeyCode = function (str) {
 	return str.charCodeAt(str);
@@ -71,9 +71,6 @@ function sptions(ev) {
 	var companyId = localStorage.getItem("userInfoCompanyId");
 
 
-	if (ev.which === 13) {
-		return false;
-	}
 	var evt = ev || window.event || {}; var code = ev.charCode || ev.keyCode || ev.which;
 	var kCd = ev.keyCode || ev.charCode; var obj = evt.target;
 	//var code = (e.keyCode ? e.keyCode : e.which);
@@ -85,8 +82,9 @@ function sptions(ev) {
 	var charsplit = obj.value.split(" ");
 	var lastchar = charsplit[charsplit.length - 1];
 	var ltpos = lastchar.lastIndexOf('@');
+	var hashpos = lastchar.lastIndexOf('#');
 	//alert(ltpos);
-	if (ltpos == 0) {
+	if (ltpos == 0 && !hashpos >= 0) {
 		//e('pol').innerHTML=obj.offsetWidth+"=="+obj.offsetHeight;	 
 		var strkeys = front.substring(atpos + 1, atpos.length);
 		//alert(strkeys);
@@ -108,9 +106,7 @@ function sptions(ev) {
 }
 
 function sptions(ev) {
-	if (ev.which === 13) {
-		return false;
-	}
+
 	var userId = localStorage.getItem("userInfoId");
 	var companyId = localStorage.getItem("userInfoCompanyId");
 	var evt = ev || window.event || {}; var code = ev.charCode || ev.keyCode || ev.which;
@@ -124,8 +120,9 @@ function sptions(ev) {
 	var charsplit = obj.value.split(" ");
 	var lastchar = charsplit[charsplit.length - 1];
 	var ltpos = lastchar.lastIndexOf('@');
+	var hashpos = lastchar.lastIndexOf('#');
 	//alert(ltpos);
-	if (ltpos == 0) {
+	if (ltpos == 0 && !hashpos >= 0) {
 		//e('pol').innerHTML=obj.offsetWidth+"=="+obj.offsetHeight;	 
 		var strkeys = front.substring(atpos + 1, atpos.length);
 		//alert(strkeys);
@@ -147,10 +144,7 @@ function sptions(ev) {
 }
 
 function message(ev) {
-	alert(ev.which);
-	if (ev.which === 13) {
-		return false;
-	}
+
 	var userId = localStorage.getItem("userInfoId");
 	var companyId = localStorage.getItem("userInfoCompanyId");
 	var evt = ev || window.event || {}; var code = ev.charCode || ev.keyCode || ev.which;
@@ -164,8 +158,9 @@ function message(ev) {
 	var charsplit = obj.value.split(" ");
 	var lastchar = charsplit[charsplit.length - 1];
 	var ltpos = lastchar.lastIndexOf('@');
+	var hashpos = lastchar.lastIndexOf('#');
 	//alert(ltpos);
-	if (ltpos == 0) {
+	if (ltpos == 0 && !hashpos >= 0) {
 
 		//e('pol').innerHTML=obj.offsetWidth+"=="+obj.offsetHeight;	 
 		var strkeys = front.substring(atpos + 1, atpos.length);
@@ -190,9 +185,7 @@ function message(ev) {
 
 
 function unit(ev) {
-	if (ev.which === 13) {
-		return false;
-	}
+
 	var userId = localStorage.getItem("userInfoId");
 	var companyId = localStorage.getItem("userInfoCompanyId");
 	var evt = ev || window.event || {}; var code = ev.charCode || ev.keyCode || ev.which;
@@ -206,8 +199,9 @@ function unit(ev) {
 	var charsplit = obj.value.split(" ");
 	var lastchar = charsplit[charsplit.length - 1];
 	var ltpos = lastchar.lastIndexOf('@');
+	var hashpos = lastchar.lastIndexOf('#');
 	//alert(ltpos);
-	if (ltpos == 0) {
+	if (ltpos == 0 && !hashpos >= 0) {
 		//e('pol').innerHTML=obj.offsetWidth+"=="+obj.offsetHeight;	 
 		var strkeys = front.substring(atpos + 1, atpos.length);
 		//alert(strkeys);

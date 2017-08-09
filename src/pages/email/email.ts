@@ -52,7 +52,9 @@ export class EmailPage {
   public composemessagecontent: any;
   progress: number;
   public personalhashtag;
+  public personalhashtagreplaceat;
   public receiver_id;
+  public receiver_idreplaceat;
   public pageTitle: any;
   pet: string = "";
   choice: string = "inbox";
@@ -62,13 +64,14 @@ export class EmailPage {
   public str: any;
   public service_id: any;
   public serviced_by: any;
-  public messageid: any; 
+  public messageid: any;
   public serviced_datetime: any;
   public isSubmitted: boolean = false;
   public messages_subject: any;
   public messages_body: any;
   public next_service_date: any;
   public message_priority: any;
+  public isReply: any;
   copytome: any;
   public serviced_by_name: any;
   public service_resources: any;
@@ -96,7 +99,7 @@ export class EmailPage {
   // Authority for message inbox
 
   public msgcount: any;
-  public 
+  public
   public notcount: any;
   public to: any;
   public subject: any;
@@ -184,6 +187,8 @@ export class EmailPage {
 
   }
   ionViewDidEnter() {
+
+    this.pageTitle = 'Messsage';
     let //body: string = "loginid=" + this.userId,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
@@ -385,23 +390,43 @@ export class EmailPage {
   }
 
   ionViewWillEnter() {
+    this.pageTitle = 'Messsage';
     this.getPrority(1);
     this.copytome = 0;
     console.log(JSON.stringify(this.NP.get("record")));
 
     if (this.NP.get("record")) {
-      this.selectEntry(this.NP.get("record"));
-      this.service_id = this.NP.get("record").service_id;
-      if (this.NP.get("act") == 'Add') {
-        this.isEdited = false;
-        this.pageTitle = 'Servicing Info Add';
+      if (this.NP.get("act") != 'Push') {
+        this.selectEntry(this.NP.get("record"));
+        this.service_id = this.NP.get("record").service_id;
+        if (this.NP.get("act") == 'Add') {
+          this.isEdited = false;
+          this.pageTitle = 'Message';
 
+        } else {
+
+          this.pageTitle = 'Message';
+          this.isEdited = true;
+        }
+        console.log("Service Id:" + this.service_id);
       } else {
 
-        this.pageTitle = 'Servicing Info Edit';
-        this.isEdited = true;
+        let bodymessage: string = "messageid=" + this.NP.get("record"),
+          type1: string = "application/x-www-form-urlencoded; charset=UTF-8",
+          headers1: any = new Headers({ 'Content-Type': type1 }),
+          options1: any = new RequestOptions({ headers: headers1 }),
+          url1: any = this.apiServiceURL + "/getmessagedetails";
+        console.log(url1);
+        this.http.post(url1, bodymessage, options1)
+          //this.http.get(url1, options1)
+          .subscribe((data) => {
+            this.doDetails(data.json().messages[0], 'inbox')
+            this.act = 'inbox'
+            console.log("Message Response Success:" + JSON.stringify(data.json()));
+            console.log("Message Details:" + data.json().messages[0]);
+            this.selectEntry(data.json().messages[0]);
+          });
       }
-      console.log("Service Id:" + this.service_id);
 
     }
 
@@ -590,41 +615,48 @@ export class EmailPage {
     }
     to = localStorage.getItem("atMentionResult");
     //http://denyoappv2.stridecdev.com/messages/replyforward?&submit=Reply&forwardmsgid=16
-    let url;
-    let body;
-    let options;
+    let param;
+    let urlstring;
+    console.log("is reply forward and this.messageid" + this.replyforward + " " + this.messageid);
+    console.log("Is reply?" + this.isReply);
     if (this.replyforward > 0) {
-      let body: string = "is_mobile=1" +
+
+      let isrepfor;
+      if (this.isReply > 0) {
+        isrepfor = 'Reply';
+      } else {
+        isrepfor = 'forward';
+      }
+
+      param = "is_mobile=1" +
         "&important=" + this.message_priority +
         "&microtime=" + micro_timestamp +
         "&loginid=" + this.userId +
         "&to=" + to +
         "&composemessagecontent=" + composemessagecontent +
         "&copytome=" + copytome +
-        "&copytome=" + copytome +
-        "&submit=Reply" +
-        "&forwardmsgid=" + this.messageid,
-
-        type: string = "application/x-www-form-urlencoded; charset=UTF-8",
-        headers: any = new Headers({ 'Content-Type': type }),
-        options: any = new RequestOptions({ headers: headers }),
-        url: any = this.apiServiceURL + "/messages/replyforward";
+        "&submit=" + isrepfor +
+        "&forwardmsgid=" + this.messageid +
+        "&subject=" + subject;
+      urlstring = this.apiServiceURL + "/messages/replyforward";
     } else {
-      let body: string = "is_mobile=1" +
+      param = "is_mobile=1" +
         "&important=" + this.message_priority +
         "&microtime=" + micro_timestamp +
         "&loginid=" + this.userId +
         "&to=" + to +
         "&composemessagecontent=" + composemessagecontent +
         "&copytome=" + copytome +
-        "&subject=" + subject,
-
-        type: string = "application/x-www-form-urlencoded; charset=UTF-8",
-        headers: any = new Headers({ 'Content-Type': type }),
-        options: any = new RequestOptions({ headers: headers }),
-        url: any = this.apiServiceURL + "/messages/store";
+        "&subject=" + subject;
+      urlstring = this.apiServiceURL + "/messages/store";
     }
+    let body: string = param,
 
+      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = urlstring;
+    console.log("Message sending API" + url + "?" + body);
 
     this.http.post(url, body, options)
       .subscribe((data) => {
@@ -720,12 +752,14 @@ export class EmailPage {
     this.serviced_datetime = item.serviced_datetime;
     this.messages_subject = item.messages_subject;
     this.messages_body = item.message_body;
-    this.messageid=item.message_id;
+    this.messageid = item.message_id;
     this.personalhashtag = item.personalhashtag;
+    this.personalhashtagreplaceat = item.personalhashtag.replace("@", "");
     this.photo = item.senderphoto;
     this.mdate = item.message_date + "(" + item.time_ago + ")";
     //this.message_readstatus=item.message_readstatus;
     this.receiver_id = item.receiver_id;
+    this.receiver_idreplaceat = item.receiver_id.replace("@", "");
     this.senderid = item.sender_id;
 
 
@@ -895,6 +929,7 @@ export class EmailPage {
 
   reply(messages_body) {
     this.replyforward = 1;
+    this.isReply = 1;
     if (this.senderid == this.userId) {
       this.to = this.receiver_id;
       this.addedImgLists = [];
@@ -906,7 +941,7 @@ export class EmailPage {
       this.choice = 'compose';
     }
     else {
-      this.replyforward = 1;
+      this.isReply = 0;
       this.to = this.personalhashtag;
       this.addedImgLists = [];
       this.copytome = 0;
@@ -918,6 +953,7 @@ export class EmailPage {
   }
 
   forward(messages_body) {
+    this.replyforward = 1;
     this.to = '';
     this.addedImgLists = [];
     this.copytome = 0;

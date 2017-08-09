@@ -1126,6 +1126,7 @@ export class AddcompanygroupPage {
   createEntry(companygroup_name, address, country, contact, createdby) {
     this.isSubmitted=true;
     contact = contact.replace("+", "%2B");
+    address = address.replace("#", "%23");
     let updatedby = createdby;
     let body: string = "is_mobile=1&companygroup_name=" + companygroup_name + "&address=" + address + "&country=" + country + "&contact=" + contact + "&createdby=" + createdby + "&updatedby=" + updatedby,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
@@ -1170,6 +1171,7 @@ export class AddcompanygroupPage {
   updateEntry(companygroup_name, address, country, contact, createdby) {
      this.isSubmitted=true;
     contact = contact.replace("+", "%2B");
+    address = address.replace("#", "%23");
     let updatedby = createdby;
     let body: string = "is_mobile=1&companygroup_name=" + companygroup_name + "&address=" + address + "&country=" + country + "&contact=" + contact + "&companygroup_id=" + this.recordID + "&createdby=" + createdby + "&updatedby=" + updatedby,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",

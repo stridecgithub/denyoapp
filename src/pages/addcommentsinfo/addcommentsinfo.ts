@@ -419,7 +419,8 @@ export class AddcommentsinfoPage {
     this.priority_lowclass = '';
     if (val == "2") {
       this.priority_highclass = "border_high";
-    } else {
+    }
+    if (val == "1") {
       this.priority_lowclass = "border_low";
     }
     this.service_priority = val
@@ -483,9 +484,6 @@ export class AddcommentsinfoPage {
     //this.next_service_date = item.next_service_date;
     this.service_priority = item.comment_priority;
     if (this.service_priority == "1") {
-      this.priority_lowclass = "border_low";
-
-    } else if (this.service_priority == "0") {
       this.priority_lowclass = "border_low";
 
     } else if (this.service_priority == "2") {
