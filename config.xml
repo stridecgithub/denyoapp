@@ -95,12 +95,7 @@
         <variable name="SENDER_ID" value="218019355699" />
     </plugin>
     <plugin name="plugin.google.maps" spec="~1.3.9">
-        <variable name="API_KEY_FOR_ANDROID" value="AIzaSyD1jiUUFbfyBuZqRTXPg8iwWDWDq9OzrAE" />
-        <variable name="API_KEY_FOR_IOS" value="YOUR_IOS_API_KEY_IS_HERE" />
-    </plugin>
-    <engine name="android" spec="~6.1.2" />
-    <plugin name="cordova-plugin-googlemaps" spec="https://github.com/mapsplugin/cordova-plugin-googlemaps#multiple_maps">
-        <variable name="API_KEY_FOR_ANDROID" value="AIzaSyD1jiUUFbfyBuZqRTXPg8iwWDWDq9OzrAE" />
+        <variable name="API_KEY_FOR_ANDROID" value="AIzaSyCbvwOWwex4xcDVJKlfPsJiz5fmmsEB9KA" />
         <variable name="API_KEY_FOR_IOS" value="YOUR_IOS_API_KEY_IS_HERE" />
     </plugin>
     <plugin name="cordova-plugin-geolocation" spec="~2.4.3" />
@@ -123,4 +118,10 @@
         <variable name="DEEPLINK_5_HOST" value=" " />
     </plugin>
     <plugin name="cordova-plugin-splashscreen" spec="~4.0.3" />
+    <engine name="android" spec="~6.1.2" />
+    <plugin name="cordova-plugin-googlemaps" spec="https://github.com/mapsplugin/cordova-plugin-googlemaps#multiple_maps">
+        <variable name="API_KEY_FOR_ANDROID" value="AIzaSyCbvwOWwex4xcDVJKlfPsJiz5fmmsEB9KA" />
+        <variable name="API_KEY_FOR_IOS" value="YOUR_IOS_API_KEY_IS_HERE" />
+    </plugin>
+    <plugin name="de.appplant.cordova.plugin.local-notification" spec="~0.8.5" />
 </widget>

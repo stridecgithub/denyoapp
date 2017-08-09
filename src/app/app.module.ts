@@ -51,6 +51,7 @@ import { NotificationPage } from '../pages/notification/notification';
 import { ReportsPage } from '../pages/reports/reports';
 import { AddenginedetailPage } from '../pages/addenginedetail/addenginedetail';
 import { EnginedetailPage } from '../pages/enginedetail/enginedetail';
+import { CalendardetailPage } from '../pages/calendardetail/calendardetail';
 import { EnginedetailviewPage } from '../pages/enginedetailview/enginedetailview';
 import { EngineviewPage } from '../pages/engineview/engineview';
 import { ForgotpasswordPage } from '../pages/forgotpassword/forgotpassword';
@@ -108,6 +109,7 @@ import { Deeplinks } from '@ionic-native/deeplinks';
     AddenginedetailPage,
     EnginedetailPage,
     CalendarPage,
+     CalendardetailPage,
     AddcalendarPage,
     AlarmPage,
     AddalarmPage,
@@ -143,6 +145,7 @@ import { Deeplinks } from '@ionic-native/deeplinks';
     AlarmlistdetailPage,
     DashboardPage,
     CalendarPage,
+     CalendardetailPage,
     CompanygroupPage,
     AddcompanygroupPage,
     ViewcompanygroupPage,

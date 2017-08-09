@@ -6,7 +6,7 @@
 -->
 <ion-header>
   <ion-navbar color="bluedark">
-    <ion-title class="page-title">Message</ion-title>
+    <ion-title class="page-title">{{pageTitle}}</ion-title>
     <ion-buttons start>
       <button ion-button menuToggle class="menu-toggle">
       <ion-icon name="menu"></ion-icon>
@@ -90,22 +90,22 @@
       </ion-list>
       <ion-list *ngIf="totalCount!=0  && MESSAGEINBOXVIEWACCESS=='1'">
         <ion-item-sliding *ngFor="let item of inboxLists;">
-           <ion-item style="float:left;">
-      <ion-avatar item-start>
-        <img src="{{item.senderphoto}}">
-      </ion-avatar>
-          <ion-item style="float:left">
-            <button (click)="favorite(item.message_id)" *ngIf="item.is_favorite==1" class="favorite" style="float: right ;width:50px;height:50px;background-color:#ffffff"></button>
-            <button (click)="favorite(item.message_id)" *ngIf="item.is_favorite==0" class="unfavorite" style="float: right ;width:50px;height:50px;background-color:#ffffff"></button>
-            <div style="overflow: hidden; padding-left: .5em;">
-              <h5 *ngIf="item.message_readstatus==0" (click)="doDetails(item,'inbox')"><b>{{item.messages_subject}}</b></h5>
-              <h5 *ngIf="item.message_readstatus==1" (click)="doDetails(item,'inbox')">{{item.messages_subject}}</h5>
-              <h6 style="margin-left: 195px;float:right">{{item.message_date}}</h6>
-            </div>
+          <ion-item style="float:left;">
+            <ion-avatar item-start>
+              <img src="{{item.senderphoto}}">
+            </ion-avatar>
+            <ion-item style="float:left">
+              <button (click)="favorite(item.message_id)" *ngIf="item.is_favorite==1" class="favorite" style="float: right ;width:50px;height:50px;background-color:#ffffff"></button>
+              <button (click)="favorite(item.message_id)" *ngIf="item.is_favorite==0" class="unfavorite" style="float: right ;width:50px;height:50px;background-color:#ffffff"></button>
+              <div style="overflow: hidden; padding-left: .5em;">
+                <h5 *ngIf="item.message_readstatus==0" (click)="doDetails(item,'inbox')"><b>{{item.messages_subject}}</b></h5>
+                <h5 *ngIf="item.message_readstatus==1" (click)="doDetails(item,'inbox')">{{item.messages_subject}}</h5>
+                <h6 style="margin-left: 195px;float:right">{{item.message_date}}</h6>
+              </div>
 
 
+            </ion-item>
           </ion-item>
-           </ion-item>
           <ion-item-options>
             <button class="trashcolor" (click)="doConfirm(item.message_id,item,'inbox')" *ngIf="MESSAGEINBOXDELETEACCESS==0">                        
                          <ion-icon name="trash" class="icon-size"></ion-icon>
@@ -233,23 +233,23 @@
 
     <ion-list *ngSwitchCase="'details'">
       <div>
-         <ion-item style="float:left;">
-      <ion-avatar item-start *ngIf="act==inbox">
-        <img src="{{photo}}">
-      </ion-avatar>
-      <div><b>Subject:</b>{{messages_subject}}</div>
-      <hr>
-      <div><b>From:</b>{{personalhashtag}}</div>
-      <br>
-      <div><b>To:</b>{{receiver_id}}</div>
-      <br>
-      <div><b>Message:</b>{{messages_body}}</div>
-      <br>
-      <div *ngIf="attachedFileLists.length>0"><b>Attachments:</b></div>
-      <ion-item >
-            <h6 style="float:right">{{mdate}}</h6>
+        <ion-item style="float:left;">
+          <ion-avatar item-start *ngIf="act==inbox">
+            <img src="{{photo}}">
+          </ion-avatar>
+          <div><b>Subject:</b>{{messages_subject}}</div>
+          <hr>
+          <div><b>From:</b>{{personalhashtagreplaceat}}</div>
+          <br>
+          <div><b>To:</b>{{receiver_idreplaceat}}</div>
+          <br>
+          <div><b>Message:</b>{{messages_body}}</div>
+          <br>
+          <div *ngIf="attachedFileLists.length>0"><b>Attachments:</b></div>
+          <ion-item>
+            <h6 style="float:right;padding-top:4px">{{mdate}}</h6>
           </ion-item>
-         </ion-item>
+        </ion-item>
       </div>
       <ion-grid>
         <ion-row>
@@ -262,7 +262,8 @@
 
         </ion-row>
       </ion-grid>
-      <div><a href="#" (click)="reply(messages_body,messageid)"  *ngIf="act==inbox">Reply</a>&nbsp; &nbsp; &nbsp; &nbsp;<a href="#" (click)="forward(messages_body,messageid)">Forward</a></div>
+      <div><a href="#" (click)="reply(messages_body,messageid)" *ngIf="act=='inbox'">Reply</a>&nbsp; &nbsp; &nbsp; &nbsp;<a href="#"
+          (click)="forward(messages_body,messageid)">Forward</a></div>
     </ion-list>
 
   </div>

@@ -1,5 +1,5 @@
 import { Component, NgZone } from '@angular/core';
-import {  NavController, NavParams, ToastController } from 'ionic-angular';
+import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
 //import { UserPage } from '../user/user';
@@ -43,6 +43,7 @@ export class EditprofilesteptwoPage {
   public responseResultCountry: any;
   public contact: any;
   public createdby: any;
+  public isSubmitted: boolean = false;
   public photo: any;
   public username: any;
   public password: any;
@@ -163,7 +164,7 @@ export class EditprofilesteptwoPage {
   // for the record data
 
   updateEntry(country, hashtag, userid) {
-
+    this.isSubmitted = true;
 
     //http://denyoappv2.stridecdev.com/settings/profileupdate?is_mobile=1&username=newtestmdv&loggedin_id=14
 
@@ -172,7 +173,7 @@ export class EditprofilesteptwoPage {
       console.log("Upload Device Image File:" + userPhotoFile);
       this.fileTrans(userPhotoFile);
     }
-     this.contact = this.contact.replace("+", "%2B");
+    this.contact = this.contact.replace("+", "%2B");
     let body: string = "is_mobile=1&loggedin_id=" + userid +
       "&firstname=" + this.first_name +
       "&lastname=" + this.last_name +
@@ -199,7 +200,7 @@ export class EditprofilesteptwoPage {
         if (data.status === 200) {
           this.hideForm = true;
           if (!userPhotoFile) {
-            localStorage.setItem("userPhotoFile","");
+            localStorage.setItem("userPhotoFile", "");
             this.sendNotification(`User profile successfully updated`);
             this.nav.setRoot(MyaccountPage);
           }
@@ -275,12 +276,12 @@ export class EditprofilesteptwoPage {
 
     //  http://127.0.0.1/ionic/upload_attach.php
     //http://amahr.stridecdev.com/getgpsvalue.php?key=create&lat=34&long=45
-    this.sendNotification(`profile photo uploaded few minutes redirect to my account page. please wait`);
+    // this.sendNotification(`profile photo uploaded few minutes redirect to my account page. please wait`);
     fileTransfer.onProgress(this.onProgress);
     fileTransfer.upload(path, this.apiServiceURL + '/upload.php', options)
       .then((data) => {
         console.log(JSON.stringify(data));
-         localStorage.setItem("userPhotoFile","");
+        localStorage.setItem("userPhotoFile", "");
         console.log("UPLOAD SUCCESS:" + data.response);
         let successData = JSON.parse(data.response);
         this.userInfo.push({
@@ -338,12 +339,12 @@ export class EditprofilesteptwoPage {
   //main.js:61622 File Name is:1497379310688.jpg
 
 
- 
+
   previous() {
     this.nav.setRoot(EditprofilesteponePage);
   }
 
- notification() {
+  notification() {
     this.nav.setRoot(NotificationPage);
   }
   redirectToUser() {
@@ -360,6 +361,6 @@ export class EditprofilesteptwoPage {
   }
   redirectToSettings() {
     this.nav.setRoot(MyaccountPage);
-  }  
+  }
 }
 

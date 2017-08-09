@@ -12,8 +12,8 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     </ion-buttons>
-      <ion-buttons end>
-     <button ion-button (click)="notification()">
+    <ion-buttons end>
+      <button ion-button (click)="notification()">
   <ion-icon ios="ios-notifications-outline" md="md-notifications-outline"></ion-icon>
   <ion-badge item-end class="notificationcount" *ngIf="notcount>0">{{this.notcount}}</ion-badge>
 </button>
@@ -35,6 +35,7 @@
   <form [formGroup]="form" (ngSubmit)="saveEntry()" enctype='application/x-www-form-urlencoded' method="post">
     <ion-list>
 
+
 <ion-item>
     <button class="{{unitDetailData.colorcodeindications}}" style="float: left ;width:8px;height:85px">         
         </button>
@@ -48,6 +49,9 @@
       
     </div>
   </ion-item>
+
+    
+
       <!--ion-grid>
         <ion-row>
           <ion-col>
@@ -81,16 +85,17 @@
        width: 29px;
     height: 29px;
     position: absolute;
-    margin-left: 60%;" class="{{priority_lowclass}}"></a><a  (click)="getPrority(2)" href="#"><img  src="img/high_priority.png"  style="
+    margin-left: 60%;" class="{{priority_lowclass}}"></a><a (click)="getPrority(2)" href="#"><img  src="img/high_priority.png"  style="
         width: 29px;
     height: 29px;
     position: absolute;
     margin-left: 70%;" class="{{priority_highclass}}"></a>
-    </p>
-
+      </p>
+<!-- min="{{servicemindate}}" max="{{servicemaxdate}}}"-->
       <ion-item>
         <ion-label stacked>Servicing Date <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
-        <ion-datetime pickerFormat="MMM DD YYYY" displayFormat="MM/DD/YYYY" formControlName="serviced_datetime" [(ngModel)]="serviced_datetime"></ion-datetime>
+        <ion-datetime pickerFormat="MMM DD YYYY" displayFormat="MM/DD/YYYY"  formControlName="serviced_datetime"
+          [(ngModel)]="serviced_datetime"></ion-datetime>
       </ion-item>
       <ion-item>
         <ion-label stacked>Serviced By <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
@@ -103,15 +108,16 @@
       </ion-item>
 
       <b>Remark</b> <span class="mandatory" *ngIf="hideActionButton">*</span>
-      <textarea type="text" (keyup)=address1get($event.target.value); name="to" id="to"  class="sugges" onkeyup="sptions(event);address1get(this.value)" onblur="sptionshide();address1get(this.value)" class="form-control" rows="8" [disabled]="readOnly"
-        formControlName="service_remark" [(ngModel)]="service_remark" ></textarea>
+      <textarea type="text" (keyup)=address1get($event.target.value); name="to" id="to" class="sugges" onkeyup="sptions(event);address1get(this.value)"
+        onblur="sptionshide();address1get(this.value)" class="form-control" rows="8" [disabled]="readOnly" formControlName="service_remark"
+        [(ngModel)]="service_remark"></textarea>
 
 
 
       <p><b>Upload Images</b></p>
       <p>Maximum Number of upload photos:10</p>
 
-     
+
       <div class="profile-image-wrapper" (click)="takePictureURL(micro_timestamp)" *ngIf="isUploaded">
         <div class="profile-image-placeholder">
           <ion-icon name="add" style="color: blue;
@@ -149,13 +155,25 @@
 
 
       <div class="ion-badge-container">
+
         <ion-badge item-end style ="height: 66px"><a  href="#" (click)="getNextDate(14)" style="color:white;font-weight:bold;margin-top:7px">2 <br>Weeks</a></ion-badge>
         <ion-badge item-end style ="height: 66px"><a href="#" (click)="getNextDate(30)" style="color:white;font-weight:bold;margin-top:7px">1 <br> Months</a></ion-badge>
         <ion-badge item-end style ="height: 66px"><a href="#" (click)="getNextDate(90)" style="color:white;font-weight:bold;margin-top:7px">3 <br> Months</a></ion-badge>
         <ion-badge item-end style ="height: 66px">
           <a href="#" (click)="getNextDate(0)" style="color:white;font-weight:bold;margin-top:6px">
+
+        <!--<ion-badge item-end><a href="#" (click)="getNextDate(14)" style="color:white;font-weight:bold">2 <br>Weeks</a></ion-badge>
+        <ion-badge item-end><a href="#" (click)="getNextDate(30)" style="color:white;font-weight:bold">1 <br> Months</a></ion-badge>
+        <ion-badge item-end><a href="#" (click)="getNextDate(90)" style="color:white;font-weight:bold">3 <br> Months</a></ion-badge>
+        <ion-badge item-end style="height: 51px;
+    width: 64px;
+    position: relative;
+    left: 3px;
+    top: 4px;">
+          <a href="#" (click)="getNextDate(0)" style="color:white;font-weight:bold">
+
             <ion-icon name="calendar"></ion-icon>
-          </a>
+          </a>-->
         </ion-badge>
       </div>
       <div style="clear:both"><br></div>
@@ -173,35 +191,35 @@
 </ion-content>
 <ion-footer color="bluedark">
   <ion-toolbar color="bluedark">
-<ul class="quick-list">
-<li>
-    <button ion-button icon-only clear (click)="redirectToMaps()">
+    <ul class="quick-list">
+      <li>
+        <button ion-button icon-only clear (click)="redirectToMaps()">
     	<ion-icon name="home" class="footer-icon">MAPS</ion-icon>
     </button>
-</li>  
-<li>  
-    <button ion-button icon-only (click)="redirectToUser()" clear>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectToUser()" clear>
     	<ion-icon name="contacts" class="footer-icon">UNITS</ion-icon>
     </button>
-</li>     
-<li>    
-    <button ion-button icon-only (click)="redirectToMessage()" clear>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectToMessage()" clear>
     	<ion-icon name="chatboxes" class="footer-icon">MESSAGE</ion-icon>
       <ion-badge item-end class="messagecount"  *ngIf="msgcount>0">{{this.msgcount}}</ion-badge>
     </button>
-    <ion-badge color="danger"></ion-badge>
-</li>     
-<li>    
-    <button ion-button icon-only (click)="redirectCalendar()" clear>
+        <ion-badge color="danger"></ion-badge>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectCalendar()" clear>
     	<ion-icon name="bicycle" class="footer-icon">CALENDAR</ion-icon>
     </button>
-</li>      
-<li>    
-    <button ion-button icon-only (click)="redirectToSettings()" clear>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectToSettings()" clear>
     	<ion-icon name="settings" class="footer-icon">SETTING</ion-icon>
     </button>
-</li>    
-</ul>
+      </li>
+    </ul>
 
   </ion-toolbar>
 </ion-footer>

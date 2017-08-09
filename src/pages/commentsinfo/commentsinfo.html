@@ -38,6 +38,7 @@
   <ion-item>
     <button class="{{unitDetailData.colorcodeindications}}" style="float: left ;width:8px;height:70px">         
         </button>
+
         
     <button class="{{unitDetailData.favoriteindication}}" style="float: right ;width:30px;height:30px;background-color:#ffffff"></button>
     <div style="overflow: hidden; padding-left: 0.5em;padding-top: 4px">
@@ -46,6 +47,16 @@
       <h5 style="white-space:normal;">Location:{{unitDetailData.location}}</h5>
       <h5  *ngIf="unitDetailData.lat!=''">({{unitDetailData.lat}},{{unitDetailData.lng}})</h5>
       
+
+<!--
+    <button class="{{unitDetailData.favoriteindication}}" style="float: right ;width:50px;height:50px;background-color:#ffffff"></button>
+    <div style="overflow: hidden; padding-left: 0.5em;padding-top: 4px">
+      <h5><b>{{unitDetailData.unitname}}</b></h5>
+      <h5>Project Name:{{unitDetailData.projectname}}</h5>
+      <h5>Location:{{unitDetailData.location}}</h5>
+      <h5 *ngIf="unitDetailData.lat!=''">({{unitDetailData.lat}},{{unitDetailData.lng}})</h5>-->
+
+
     </div>
   </ion-item>
   <button class="add-new-btn" ion-button (click)="doAdd()" *ngIf="CREATEACCESS==1">
@@ -84,37 +95,65 @@
   </ion-refresher>
   <ion-list *ngIf="totalCount!=0">
     <ion-item-sliding *ngFor="let item of reportAllLists;">
-       <ion-item style="float:left;" *ngIf="item.event_type=='C'">
-      <ion-avatar item-start>
-        <img src="{{item.user_photo}}" *ngIf="item.event_type=='C'">
-      </ion-avatar>
-      <ion-item (click)="details(item,'edit',item.event_type)"  style="float: left">
-        <h5><b>{{item.comment_subject}}</b></h5>
-        <h5><b>Comment By:</b>{{item.comment_by_name}}</h5>
-        <h5><b>Remark:</b>{{item.comment_remark}}</h5>      
-         
-        <span class="priorityicon"><img *ngIf="item.comment_resources" src="img/attach.png" hspace="10"/> <img src="img/low_priority.png" hspace="10" *ngIf="item.comment_priority=='1' || item.comment_priority=='0'" />
+      <ion-item style="float:left;" *ngIf="item.event_type=='C'">
+        <ion-avatar item-start>
+          <img src="{{item.user_photo}}" *ngIf="item.user_photo!=''">
+        </ion-avatar>
+        <ion-item (click)="details(item,'edit',item.event_type)" style="float: left">
+          <h5><b>{{item.comment_subject}}</b></h5>
+          <h5><b>Comment By:</b>{{item.comment_by_name}}</h5>
+          <h5><b>Remark:</b>{{item.comment_remark}}</h5>
+
+          <span class="priorityicon"><img *ngIf="item.comment_resources" src="img/attach.png" hspace="10"/> <img src="img/low_priority.png" hspace="10" *ngIf="item.comment_priority=='1'" />
         <img src="img/high_priority.png" hspace="10" *ngIf="item.comment_priority=='2'" /></span>
-      <h6 style="float:right;margin-left: 200px;">{{item.comment_date}}</h6>
-      </ion-item>
-       </ion-item >
-        <ion-item style="float:left;"  *ngIf="item.event_type=='S'">
-      <ion-avatar item-start>
-        <img src="{{item.user_photo}}" *ngIf="item.event_type=='S'">
-      </ion-avatar>
-      <ion-item (click)="details(item,'edit',item.event_type)" style="float:left">
-        <h5><b>{{item.service_subject}}</b></h5>
-        <h5><b>Service Date:</b>{{item.serviced_datetime}} <span class="priorityicon"> <img *ngIf="item.service_resources" src="img/attach.png" hspace="10"/>
-        <img src="img/low_priority.png" hspace="10" *ngIf="item.service_priority=='1' || item.service_priority=='0'" />
-        <img src="img/high_priority.png" hspace="10" *ngIf="item.service_priority=='2'" /></span>
-        </h5>       
-        <h6 style=" float:right;margin-left: 200px;">{{item.serviced_datetime}}</h6>
-      
-      </ion-item>
+          <h6 style="float:right;margin-left: 200px;">{{item.comment_date}}</h6>
         </ion-item>
-      <ion-item (click)="details(item,'edit',item.event_type)" *ngIf="item.event_type=='A'">
-        <img src="img/alarm.png" hspace="10" />
       </ion-item>
+      <ion-item style="float:left;" *ngIf="item.event_type=='S'">
+        <ion-avatar item-start>
+          <img src="{{item.user_photo}}" *ngIf="item.user_photo!=''">
+        </ion-avatar>
+        <ion-item (click)="details(item,'edit',item.event_type)" style="float:left">
+          <h5><b>{{item.service_subject}}</b></h5>
+          <h5><b>Service Date:</b>{{item.serviced_datetime}} <span class="priorityicon"> <img *ngIf="item.service_resources" src="img/attach.png" hspace="10"/>
+        <img src="img/low_priority.png" hspace="10" *ngIf="item.service_priority=='1'" />
+        <img src="img/high_priority.png" hspace="10" *ngIf="item.service_priority=='2'" /></span>
+          </h5>
+          <h6 style=" float:right;margin-left: 200px;">{{item.serviced_datetime}}</h6>
+
+        </ion-item>
+      </ion-item>
+
+
+
+      <ion-item style="float:left;" *ngIf="item.event_type=='A'">
+        <ion-avatar item-start>
+          <img src="{{item.user_photo}}" *ngIf="item.user_photo!=''">
+        </ion-avatar>
+        <ion-item style="float:left">
+          <h5><b>{{item.alarm_name}}</b></h5>
+          <h5><b>Received Date:</b>{{item.alarm_received_date}} <span class="priorityicon"> 
+        <img src="img/low_priority.png" hspace="10" *ngIf="item.alarm_priority=='1'" />
+        <img src="img/high_priority.png" hspace="10" *ngIf="item.alarm_priority=='2'" /></span>
+          </h5>
+          <h6 style=" float:right;margin-left: 200px;">{{item.time_ago}}</h6>
+
+        </ion-item>
+      </ion-item>
+
+
+      <!--ion-item (click)="details(item,'edit',item.event_type)" *ngIf="item.event_type=='A'">
+        <img src="img/alarm.png" hspace="10" />
+        <ion-avatar item-start>
+          <img src="{{item.user_photo}}" *ngIf="item.user_photo!=''">
+        </ion-avatar>
+        <h5><b>Alarm:{{item.alarm_name}}</b></h5>
+        <h5><b>Received Date:</b>{{item.alarm_received_date}}<span class="priorityicon">
+        <img src="img/low_priority.png" hspace="10" *ngIf="item.alarm_priority=='1'" />
+        <img src="img/high_priority.png" hspace="10" *ngIf="item.alarm_priority=='2'" />  Time:{{item.time_ago}}
+       
+        </span>
+      </ion-item-->
       <ion-item-options>
         <!--button class="viewcolor" (click)="doEdit(item,'view')">
                        <ion-icon name="eye" class="icon-size"></ion-icon>
@@ -134,35 +173,35 @@
 </ion-content>
 <ion-footer color="bluedark">
   <ion-toolbar color="bluedark">
-<ul class="quick-list">
-<li>
-    <button ion-button icon-only clear (click)="redirectToMaps()">
+    <ul class="quick-list">
+      <li>
+        <button ion-button icon-only clear (click)="redirectToMaps()">
     	<ion-icon name="home" class="footer-icon">MAPS</ion-icon>
     </button>
-</li>  
-<li>  
-    <button ion-button icon-only (click)="redirectToUser()" clear>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectToUser()" clear>
     	<ion-icon name="contacts" class="footer-icon">UNITS</ion-icon>
     </button>
-</li>     
-<li>    
-    <button ion-button icon-only (click)="redirectToMessage()" clear>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectToMessage()" clear>
     	<ion-icon name="chatboxes" class="footer-icon">MESSAGE</ion-icon>
       <ion-badge item-end class="messagecount"  *ngIf="msgcount>0">{{this.msgcount}}</ion-badge>
     </button>
-    <ion-badge color="danger"></ion-badge>
-</li>    
-<li>    
-    <button ion-button icon-only (click)="redirectCalendar()" clear>
+        <ion-badge color="danger"></ion-badge>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectCalendar()" clear>
     	<ion-icon name="bicycle" class="footer-icon">CALENDAR</ion-icon>
     </button>
-</li>       
-<li>    
-    <button ion-button icon-only (click)="redirectToSettings()" clear>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectToSettings()" clear>
     	<ion-icon name="settings" class="footer-icon">SETTING</ion-icon>
     </button>
-</li>    
-</ul>
+      </li>
+    </ul>
 
   </ion-toolbar>
 </ion-footer>

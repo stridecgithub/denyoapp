@@ -22,18 +22,19 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 @Component({
   selector: 'page-servicedetails',
   templateUrl: 'servicedetails.html',
-   providers: [Camera,]
+  providers: [Camera,]
 })
 export class ServicedetailsPage {
- isReadyToSave: boolean;
+  isReadyToSave: boolean;
   public photoInfo = [];
   public addedImgListsArray = [];
   public addedImgLists = [];
   progress: number;
- public msgcount:any;
-  public notcount:any;
+  public colorListArr = [];
+  public msgcount: any;
+  public notcount: any;
   public recordID: any;
-  public requestbutton:any;
+  public requestbutton: any;
   public service_unitid: any;
   public service_id: any;
   public serviced_by: any;
@@ -42,9 +43,9 @@ export class ServicedetailsPage {
   public service_remark: any;
   public next_service_date: any;
   public service_priority: any;
-  public photo:any;
-  public sdate:any;
-  
+  public photo: any;
+  public sdate: any;
+
   is_request: boolean
   public serviced_by_name: any;
   public service_resources: any;
@@ -70,17 +71,17 @@ export class ServicedetailsPage {
     addedImgLists2: ''
   }
   public hideActionButton = true;
-  constructor(public http: Http, public alertCtrl: AlertController,  public NP: NavParams, public nav: NavController, public toastCtrl: ToastController, public navParams: NavParams, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera) {
+  constructor(public http: Http, public alertCtrl: AlertController, public NP: NavParams, public nav: NavController, public toastCtrl: ToastController, public navParams: NavParams, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera) {
     this.service_priority_class1 = "-outline";
     this.service_priority_class2 = "-outline";
     this.unitDetailData.loginas = localStorage.getItem("userInfoName");
     this.unitDetailData.userId = localStorage.getItem("userInfoId");
     this.unitDetailData.serviced_by = localStorage.getItem("userInfoName");
 
-   
+
     this.service_priority = 0;
     // Watch the form for changes, and
-  
+
 
 
     let already = localStorage.getItem("microtime");
@@ -103,71 +104,121 @@ export class ServicedetailsPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ServicedetailsPage');
   }
- ionViewWillEnter() {
-   this.unitDetailData.unit_id = localStorage.getItem("unitId");
-    this.unitDetailData.unitname = localStorage.getItem("unitunitname");
-    this.unitDetailData.location = localStorage.getItem("unitlocation");
-    this.unitDetailData.projectname = localStorage.getItem("unitprojectname");
-    this.unitDetailData.colorcodeindications = localStorage.getItem("unitcolorcode");
-    this.unitDetailData.favoriteindication=localStorage.getItem("unitfav");
-    console.log("Add Comment Color Code:"+this.unitDetailData.colorcodeindications);
-    this.unitDetailData.lat = localStorage.getItem("unitlat");
-    this.unitDetailData.lng = localStorage.getItem("unitlng");
-   let //body: string = "loginid=" + this.userId,
+  ionViewWillEnter() {
+    /* this.unitDetailData.unit_id = localStorage.getItem("unitId");
+     this.unitDetailData.unitname = localStorage.getItem("unitunitname");
+     this.unitDetailData.location = localStorage.getItem("unitlocation");
+     this.unitDetailData.projectname = localStorage.getItem("unitprojectname");
+     this.unitDetailData.colorcodeindications = localStorage.getItem("unitcolorcode");
+     this.unitDetailData.favoriteindication = localStorage.getItem("unitfav");
+     console.log("Add Comment Color Code:" + this.unitDetailData.colorcodeindications);
+     this.unitDetailData.lat = localStorage.getItem("unitlat");
+     this.unitDetailData.lng = localStorage.getItem("unitlng");*/
+    let //body: string = "loginid=" + this.userId,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
       url: any = this.apiServiceURL + "/msgnotifycount?loginid=" + localStorage.getItem("userInfoId");
     console.log(url);
-   // console.log(body);
+    // console.log(body);
 
     this.http.get(url, options)
       .subscribe((data) => {
         console.log("Count Response Success:" + JSON.stringify(data.json()));
-       this.msgcount=data.json().msgcount;
-        this.notcount=data.json().notifycount;
+        this.msgcount = data.json().msgcount;
+        this.notcount = data.json().notifycount;
       });
-    this.getPrority(1);    
+    this.getPrority(1);
     this.is_request = false;
     console.log(JSON.stringify(this.NP.get("record")));
     let editItem = this.NP.get("record");
-    this.unitDetailData.unit_id = editItem.unit_id;
-    this.unitDetailData.unitname = editItem.unitname;
-    this.unitDetailData.location = editItem.location;
-    this.unitDetailData.projectname = editItem.projectname;
-    this.unitDetailData.runninghr = editItem.runninghr;
-    this.unitDetailData.gen_status = editItem.gen_status;
-    this.unitDetailData.nextservicedate = editItem.nextservicedate;
-    
+    /* this.unitDetailData.unit_id = editItem.unit_id;
+     this.unitDetailData.unitname = editItem.unitname;
+     this.unitDetailData.location = editItem.location;
+     this.unitDetailData.projectname = editItem.projectname;
+     this.unitDetailData.runninghr = editItem.runninghr;
+     this.unitDetailData.gen_status = editItem.gen_status;
+     this.unitDetailData.nextservicedate = editItem.nextservicedate;*/
+
+
+    // Get Unit Details from API
     if (this.NP.get("record")) {
-      this.selectEntry(this.NP.get("record"));
-      this.service_id = this.NP.get("record").service_id;
-      if (this.NP.get("act") == 'Add') {
-       
+      if (this.NP.get("act") != 'Push') {
+        //this.selectEntry(this.NP.get("record"));
+        this.service_id = this.NP.get("record").service_id;
+        if (this.NP.get("act") == 'Add') {
+
+        } else {
+          this.service_unitid = this.NP.get("record").service_unitid;
+          this.unitDetailData.pageTitle = 'Servicing Info Edit';
+          this.isEdited = true;
+        }
+        console.log("Service Id:" + this.service_id);
+        console.log("Service Unit Id:" + this.service_unitid);
+
+        console.log('Not Push');
+        let body: string = "serviceid=" + this.service_id,
+          type1: string = "application/x-www-form-urlencoded; charset=UTF-8",
+          headers1: any = new Headers({ 'Content-Type': type1 }),
+          options1: any = new RequestOptions({ headers: headers1 }),
+          url1: any = this.apiServiceURL + "/servicebyid";
+        console.log(url1);
+        this.http.post(url1, body, options1)
+          //this.http.get(url1, options1)
+          .subscribe((data) => {
+            console.log("servicebyid Response Success:" + JSON.stringify(data.json()));
+            console.log("Service Details:" + data.json().servicedetail[0]);
+            this.selectEntry(data.json().servicedetail[0]);
+          });
+
       } else {
-        this.service_unitid = this.NP.get("record").service_unitid;
-        this.unitDetailData.pageTitle = 'Servicing Info Edit';
-        this.isEdited = true;
+        console.log('Push');
+        let body: string = "serviceid=" + this.NP.get("record"),
+          type1: string = "application/x-www-form-urlencoded; charset=UTF-8",
+          headers1: any = new Headers({ 'Content-Type': type1 }),
+          options1: any = new RequestOptions({ headers: headers1 }),
+          url1: any = this.apiServiceURL + "/servicebyid";
+        console.log(url1);
+        this.http.post(url1, body, options1)
+          //this.http.get(url1, options1)
+          .subscribe((data) => {
+            console.log("servicebyid Response Success:" + JSON.stringify(data.json()));
+            console.log("Service Details:" + data.json().servicedetail[0]);
+            this.selectEntry(data.json().servicedetail[0]);
+          });
       }
-      console.log("Service Id:" + this.service_id);
-      console.log("Service Unit Id:" + this.service_unitid);
+       localStorage.setItem("iframeunitId", this.service_unitid);
     }
-
-  
-
+    console.log('Push');
+    // if (this.NP.get("act") != 'Push') {
+    /*let body: string = "loginid=" + localStorage.getItem("userInfoId") + "&unitid=" + this.service_unitid,
+      type1: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers1: any = new Headers({ 'Content-Type': type1 }),
+      options1: any = new RequestOptions({ headers: headers1 }),
+      url1: any = this.apiServiceURL + "/getunitdetailsbyid";
+    console.log(url1 + "?" + body);
+    this.http.post(url1, body, options1)
+      //this.http.get(url1, options1)
+      .subscribe((data) => {
+        console.log("servicebyid Response Success:" + JSON.stringify(data.json()));
+        console.log("Service Details:" + data.json().units[0]);
+        this.selectEntry(data.json().units[0]);
+      });*/
+    //}
+    // Get Unit Details from API
 
   }
-   getPrority(val) {
+  getPrority(val) {
     this.service_priority = val
   }
-   selectEntry(item) {
+  selectEntry(item) {
     this.serviced_by_name = item.serviced_by_name;
     this.serviced_datetime = item.serviced_datetime;
     this.service_subject = item.service_subject;
     this.service_remark = item.service_remark;
-     this.photo = item.user_photo;
-     this.sdate = item.serviced_datetime+"("+item.time_ago+")";
-   // this.requestbutton=1;
+    this.photo = item.user_photo;
+    this.sdate = item.serviced_datetime + "(" + item.time_ago + ")";
+    // this.requestbutton=1;
     //this.next_service_date = item.next_service_date;
     this.service_priority = item.service_priority;
     console.log("X" + this.service_priority);
@@ -185,12 +236,49 @@ export class ServicedetailsPage {
     this.service_resources = item.service_resources;
     this.unitDetailData.nextServiceDate = item.next_service_date;
     this.service_resources = item.service_resources;
-    this.service_priority=item.service_priority;
-    this.requestbutton=item.is_request;
-   
-    console.log("RQ"+this.is_request);
+    this.service_priority = item.service_priority;
+    this.requestbutton = item.is_request;
 
-if (this.service_resources != undefined && this.service_resources != 'undefined' && this.service_resources != '') {
+
+    // Unit Details from Push
+    this.colorListArr = [
+      "FBE983",
+      "5584EE",
+      "A4BDFD",
+      "47D6DC",
+      "7AE7BE",
+      "51B749",
+      "FBD75C",
+      "FFB878",
+      "FF877C",
+      "DC2128",
+      "DAADFE",
+      "E1E1E1"
+    ];
+
+    let index = this.colorListArr.indexOf(item.colorcode); // 1
+    console.log("Color Index:" + index);
+    let colorvalincrmentone = index + 1;
+    let colorcode;
+    colorcode = "button" + colorvalincrmentone;
+    console.log("Color is" + colorcode);
+
+    this.unitDetailData.unit_id = item.service_unitid;
+    localStorage.setItem("unitId", this.unitDetailData.unit_id)
+    this.unitDetailData.unitname = item.unitname;
+    this.unitDetailData.location = item.location;
+    this.unitDetailData.projectname = item.projectname;
+    this.unitDetailData.runninghr = item.runninghr;
+    this.unitDetailData.gen_status = item.gen_status;
+    this.unitDetailData.nextservicedate = item.nextservicedate;
+    this.unitDetailData.lat = item.latitude;
+    this.unitDetailData.lng = item.longtitude;
+    this.unitDetailData.colorcodeindications = colorcode;
+    // Unit Details from Push
+
+    console.log("RQ" + this.is_request);
+
+    if (this.service_resources != undefined && this.service_resources != 'undefined' && this.service_resources != '') {
       let hashhypenhash = this.service_resources.split("#-#");
       for (let i = 0; i < hashhypenhash.length; i++) {
         let imgDataArr = hashhypenhash[i].split("|");
@@ -208,14 +296,14 @@ if (this.service_resources != undefined && this.service_resources != 'undefined'
         this.isUploaded = false;
       }
     }
-   
-    }
-    previous() {
+
+  }
+  previous() {
     this.nav.setRoot(ServicinginfoPage, {
       record: this.NP.get("record")
     });
   }
-   redirectToUser() {
+  redirectToUser() {
     this.nav.setRoot(UserPage);
   }
 

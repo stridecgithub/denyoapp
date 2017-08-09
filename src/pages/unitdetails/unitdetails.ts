@@ -46,8 +46,8 @@ export class UnitdetailsPage {
 
 	public serviceCount;
 	public commentCount;
-public msgcount:any;
-  public notcount:any;
+	public msgcount: any;
+	public notcount: any;
 
 
 
@@ -83,32 +83,6 @@ public msgcount:any;
 	}
 
 	ionViewWillEnter() {
-		
-		$('#alarm').trigger("click");
-		$('#filecontainer').contents().find('#alarm').trigger("click");
-		$("#payment_status_div").hide();
-		var iframe = $('#filecontainer').contents();
-		iframe.find("#alarm").click(function () {
-			//$("#payment_status_div").show("slow");
-			alert('Kannan');
-		});
-
-		/*
-				$('iframe#filecontainer').on('load', function () {   // 2. wait for the iframe to load
-					var $inner$ = $(this)[0].contentWindow.$;   // 3. get hold of the inner jQuery
-					$inner$(function () {   // 4. wait for the inner jQuery to be ready
-						$inner$.on('click', function () {   // Now I can intercept inner events.
-							// do something
-						});
-					});
-				});
-		*/
-		/*
-		$("#filecontainer #alarm").click(function () {
-			console.log('Alarm button pressed');			// do something here
-			//this.baseURI.anchor.;
-		});*/
-
 		this.colorListArr = [
 			"FBE983",
 			"5584EE",
@@ -130,13 +104,13 @@ public msgcount:any;
 		console.log(JSON.stringify(this.NP.get("record")));
 		let editItem = this.NP.get("record");
 		let colorcode;
-		
-		let index = this.colorListArr.indexOf( localStorage.getItem("unitcolorcode")); // 1
+
+		let index = this.colorListArr.indexOf(localStorage.getItem("unitcolorcode")); // 1
 		console.log("Color Index:" + index);
 		let colorvalincrmentone = index + 1;
 		colorcode = "button" + colorvalincrmentone;
 		console.log("Color is" + colorcode);
-let favorite;
+		let favorite;
 		if (this.NP.get("record").favoriteindication == 'favorite') {
 			favorite = "favorite";
 		}
@@ -144,9 +118,26 @@ let favorite;
 			favorite = "unfavorite";
 
 		}
-this.unitDetailData.favoriteindication = favorite;
-localStorage.setItem("unitId", editItem.unit_id);
-		this.unitDetailData.unit_id = editItem.unit_id;
+		this.unitDetailData.favoriteindication = favorite;
+		localStorage.setItem("unitId", editItem.unit_id);
+		let iframeunitid = localStorage.getItem("iframeunitId");
+		console.log("iframeunitid:"+iframeunitid);
+		if (iframeunitid == 'undefined') {
+			iframeunitid = '0';
+		}
+		if (iframeunitid == undefined) {
+			iframeunitid = '0';
+		}
+		if (iframeunitid != '0') {
+			this.unitDetailData.unit_id = iframeunitid
+		} else {
+			if (this.NP.get("record").unit_id > 0) {
+				this.unitDetailData.unit_id = this.NP.get("record").unit_id;
+			} else {
+				this.unitDetailData.unit_id = editItem.unit_id;
+			}
+		}
+
 		this.unitDetailData.unitname = localStorage.getItem("unitunitname");
 		this.unitDetailData.location = localStorage.getItem("unitlocation");
 		this.unitDetailData.projectname = localStorage.getItem("unitprojectname");
@@ -155,7 +146,7 @@ localStorage.setItem("unitId", editItem.unit_id);
 		this.unitDetailData.gen_status = editItem.gen_status;
 		this.unitDetailData.nextservicedate = editItem.nextservicedate;
 		this.unitDetailData.alarmnotificationto = editItem.nextservicedate;
-		
+
 		this.unitDetailData.lat = localStorage.getItem("unitlat");
 		this.unitDetailData.lng = localStorage.getItem("unitlng");
 		console.log(this.apiServiceURL + "/" + localStorage.getItem("unitId") + "/1/unitdetails");
@@ -190,20 +181,20 @@ localStorage.setItem("unitId", editItem.unit_id);
 					// this.sendNotification('Something went wrong!');
 				}
 			});
-let //body: string = "loginid=" + this.userId,
-      type1: string = "application/x-www-form-urlencoded; charset=UTF-8",
-      headers1: any = new Headers({ 'Content-Type': type1 }),
-      options1: any = new RequestOptions({ headers: headers1 }),
-      url1: any = this.apiServiceURL + "/msgnotifycount?loginid=" + this.userId;
-    console.log(url1);
-   // console.log(body);
+		let //body: string = "loginid=" + this.userId,
+			type1: string = "application/x-www-form-urlencoded; charset=UTF-8",
+			headers1: any = new Headers({ 'Content-Type': type1 }),
+			options1: any = new RequestOptions({ headers: headers1 }),
+			url1: any = this.apiServiceURL + "/msgnotifycount?loginid=" + this.userId;
+		console.log(url1);
+		// console.log(body);
 
-    this.http.get(url1, options1)
-      .subscribe((data) => {
-        console.log("Count Response Success:" + JSON.stringify(data.json()));
-       this.msgcount=data.json().msgcount;
-        this.notcount=data.json().notifycount;
-      });
+		this.http.get(url1, options1)
+			.subscribe((data) => {
+				console.log("Count Response Success:" + JSON.stringify(data.json()));
+				this.msgcount = data.json().msgcount;
+				this.notcount = data.json().notifycount;
+			});
 	}
 	servicingInfo(unitId) {
 		let body: string = "is_mobile=1&userid=" + this.unitDetailData.userId +
@@ -245,21 +236,21 @@ let //body: string = "loginid=" + this.userId,
 			url: any = this.apiServiceURL + "/removecommentcount";
 		console.log(url);
 		console.log(body);
-		
-				this.http.post(url, body, options)
-					.subscribe((data) => {
-					
-						// If the request was successful notify the user
-						if (data.status === 200) {
-							console.log("Comment count successfully removed");
-		
-						}
-						// Otherwise let 'em know anyway
-						else {
-							console.log("Something went wrong!");
-						}
-					});
-	
+
+		this.http.post(url, body, options)
+			.subscribe((data) => {
+
+				// If the request was successful notify the user
+				if (data.status === 200) {
+					console.log("Comment count successfully removed");
+
+				}
+				// Otherwise let 'em know anyway
+				else {
+					console.log("Something went wrong!");
+				}
+			});
+
 		this.nav.setRoot(CommentsinfoPage, {
 			record: this.NP.get("record")
 		});

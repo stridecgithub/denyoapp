@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {  NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { EditprofilesteponePage } from '../editprofilestepone/editprofilestepone';
 import { HomePage } from '../home/home';
@@ -12,6 +12,7 @@ import { MapsPage } from '../maps/maps';
 import { ReportsPage } from '../reports/reports';
 import { CalendarPage } from '../calendar/calendar';
 import { EmailPage } from '../email/email';
+import { OrgchartPage } from '../orgchart/orgchart';
 
 
 /**
@@ -29,8 +30,8 @@ export class MyaccountPage {
   public photo: any;
   private permissionMessage: string = "Permission denied for access this page. Please contact your administrator";
   public name: any;
-  public msgcount:any;
-  public notcount:any;
+  public msgcount: any;
+  public notcount: any;
   public userid: any;
   public password: any;
   public hashtag: any;
@@ -44,6 +45,7 @@ export class MyaccountPage {
   public item: any;
   public VIEWACCESS: any;
   public CREATEACCESS: any;
+  public companyId: any;
   public EDITACCESS: any;
   public DELETEACCESS: any;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
@@ -52,15 +54,15 @@ export class MyaccountPage {
     this.loginas = localStorage.getItem("userInfoName");
     this.userId = localStorage.getItem("userInfoId");
     this.VIEWACCESS = localStorage.getItem("SETTINGS_MYACCOUNT_VIEW");
-    console.log("Role Authority for Unit Listing View:"+this.VIEWACCESS );
+    console.log("Role Authority for Unit Listing View:" + this.VIEWACCESS);
     this.CREATEACCESS = localStorage.getItem("SETTINGS_MYACCOUNT_CREATE");
-    console.log("Role Authority for Unit Listing Create:"+this.CREATEACCESS );
+    console.log("Role Authority for Unit Listing Create:" + this.CREATEACCESS);
     this.EDITACCESS = localStorage.getItem("SETTINGS_MYACCOUNT_EDIT");
-    console.log("Role Authority for Unit Listing Edit:"+this.EDITACCESS )
+    console.log("Role Authority for Unit Listing Edit:" + this.EDITACCESS)
     this.DELETEACCESS = localStorage.getItem("SETTINGS_MYACCOUNT_DELETE");
-    console.log("Role Authority for Unit Listing Delete:"+this.DELETEACCESS )
+    console.log("Role Authority for Unit Listing Delete:" + this.DELETEACCESS);
+    this.companyId = localStorage.getItem("userInfoCompanyId");
   }
-
 
   //[{"userid":"1","userdetailsid":"1","username":"webkannan","password":"webkannan","role":"1","hashtag":"@welcome","first_name":"Kannan","last_name":"Nagarathinam","email":"kannan@gmail.com","contact":"123456789","country":"2","photo":"1496647262537.jpg","job_position":"At prog","report_to":"0","company_group":"1","companygroup_name":"Denyo"}]
   ionViewWillEnter() {
@@ -87,12 +89,12 @@ export class MyaccountPage {
           this.country = res.settings[0].country_name;
           this.job_position = res.settings[0].job_position;
           this.accountcreatedby = res.settings[0].report_to;
-          console.log("A"+res.settings[0].photo_filename);
+          console.log("A" + res.settings[0].photo_filename);
           if (res.settings[0].photo_filename != 'undefined' && res.settings[0].photo_filename != undefined) {
-             console.log("B");
+            console.log("B");
             this.photo = this.apiServiceURL + "/staffphotos/" + res.settings[0].photo_filename;
-          }else{
-            console.log('No photo available');            
+          } else {
+            console.log('No photo available');
             this.photo = 'img/undefined.png';
           }
         }
@@ -101,19 +103,19 @@ export class MyaccountPage {
 
 
       });
-       let //body: string = "loginid=" + this.userId,
+    let //body: string = "loginid=" + this.userId,
       type1: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers1: any = new Headers({ 'Content-Type': type1 }),
       options1: any = new RequestOptions({ headers: headers1 }),
       url1: any = this.apiServiceURL + "/msgnotifycount?loginid=" + this.userId;
     console.log(url1);
-   // console.log(body);
+    // console.log(body);
 
     this.http.get(url1, options1)
       .subscribe((data) => {
         console.log("Count Response Success:" + JSON.stringify(data.json()));
-       this.msgcount=data.json().msgcount;
-        this.notcount=data.json().notifycount;
+        this.msgcount = data.json().msgcount;
+        this.notcount = data.json().notifycount;
       });
   }
   ionViewDidLoad() {
@@ -126,6 +128,11 @@ export class MyaccountPage {
   }
 
 
+  viewOrgChart() {
+    this.nav.setRoot(OrgchartPage, {
+      companyId: this.companyId
+    });
+  }
   previous() {
     this.nav.setRoot(HomePage);
   }

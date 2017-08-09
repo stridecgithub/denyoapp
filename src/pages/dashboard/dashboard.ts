@@ -6,6 +6,7 @@ import { NotificationPage } from '../notification/notification';
 import { MapsPage } from '../maps/maps';
 import { ReportsPage } from '../reports/reports';
 import { CalendarPage } from '../calendar/calendar';
+import { CalendardetailPage } from '../calendardetail/calendardetail';
 import { EmailPage } from '../email/email';
 import { Http, Headers, RequestOptions } from '@angular/http';
 @Component({
@@ -14,11 +15,11 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 })
 export class DashboardPage {
   public loginas: any;
-  public userId:any;
-  public msgcount:any;
-  public notcount:any;
+  public userId: any;
+  public msgcount: any;
+  public notcount: any;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
-  constructor(public http: Http,public navCtrl: NavController, public nav: NavController) {
+  constructor(public http: Http, public navCtrl: NavController, public nav: NavController) {
     this.loginas = localStorage.getItem("userInfoName");
     this.userId = localStorage.getItem("userInfoId");
   }
@@ -37,6 +38,13 @@ export class DashboardPage {
 
   }
 
+
+  pushMessagePage() {
+    this.nav.setRoot(CalendardetailPage, {
+      event_id: 4,
+      act: 'Push'
+    });
+  }
   notification() {
     this.nav.setRoot(NotificationPage);
   }
@@ -63,13 +71,13 @@ export class DashboardPage {
       options: any = new RequestOptions({ headers: headers }),
       url: any = this.apiServiceURL + "/msgnotifycount?loginid=" + this.userId;
     console.log(url);
-   // console.log(body);
+    // console.log(body);
 
     this.http.get(url, options)
       .subscribe((data) => {
         console.log("Count Response Success:" + JSON.stringify(data.json()));
-       this.msgcount=data.json().msgcount;
-        this.notcount=data.json().notifycount;
+        this.msgcount = data.json().msgcount;
+        this.notcount = data.json().notifycount;
       });
   }
 

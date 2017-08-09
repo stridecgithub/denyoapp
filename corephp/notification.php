@@ -45,7 +45,7 @@ exit;
 */
 define( 'API_ACCESS_KEY', 'AAAAMsL3XDM:APA91bE7SEGJJDb84Rm9ZDCSyCaKzIRFNeJuLfioAFqbCJ3ulYPN9Mmn4fJzsQUHaMH8uZZuG7lm4fItlyIB_U2BV9qWvgA8zNGYly5xXWtCmRGuNJj051bjjYbvyMp_L18b15IDsXHI' );
 
-$registrationIds = array('djyXLyiNJlI:APA91bFQh15eYUFk_Eg0qNzXsdDg_nyTdGeKoOUooqDwLAqAcuCYSYV1ED16Wp-yXW-rbLR9ft1uQHuzSYfoXpUbPxB9oSq3DFGl75BTryKKdY3cw0KJUIDNF9LVJ9tkLd_taakKwMDa');
+$registrationIds = array('eBrMSTR5sL4:APA91bFMOQomiMjajCR9yDQal6oefWYpqthoUc…y_tEzmBKC2MBE_9-nPyz2yHcynEhW0o54zZ1qmr2p0KnxXN8H');
 
 // prep the bundle
 $msg = array

@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform, MenuController, ToastController } from 'ionic-angular';
+import { Nav, Platform, MenuController, ToastController, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -13,6 +13,7 @@ import { MyaccountPage } from '../pages/myaccount/myaccount';
 import { UnitgroupPage } from '../pages/unitgroup/unitgroup';
 import { RolePage } from '../pages/role/role';
 import { ReporttemplatePage } from '../pages/reporttemplate/reporttemplate';
+import { CalendardetailPage } from '../pages/calendardetail/calendardetail';
 import { UnitsPage } from '../pages/units/units';
 import { OrgchartPage } from '../pages/orgchart/orgchart';
 //import { AlarmPage } from '../pages/alarm/alarm';
@@ -35,9 +36,10 @@ import { DataServiceProvider } from '../providers/data-service/data-service';
 import { ViewunitsPage } from '../pages/viewunits/viewunits';
 import { Push, PushObject, PushOptions } from '@ionic-native/push';
 import { Network } from '@ionic-native/network';
+import { LocalNotifications } from '@ionic-native/local-notifications';
 @Component({
   templateUrl: 'app.html',
-  providers: [Push, Network]
+  providers: [Push, Network, LocalNotifications]
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
@@ -46,7 +48,7 @@ export class MyApp {
   showLevel1 = null;
   showLevel2 = null;
   ///private push: Push,
-  constructor(private network: Network, private push: Push, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public dataService: DataServiceProvider, public menuCtrl: MenuController,
+  constructor(private localNotifications: LocalNotifications, public alertCtrl: AlertController, private network: Network, private push: Push, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public dataService: DataServiceProvider, public menuCtrl: MenuController,
     public toastCtrl: ToastController) {
 
     this.initializeApp();
@@ -97,7 +99,7 @@ export class MyApp {
       this.statusBar.styleDefault();
       setTimeout(() => {
         this.splashScreen.hide();
-      }, 100);
+      }, 50);
 
     });
 
@@ -233,10 +235,10 @@ export class MyApp {
     localStorage.setItem("DASHBOARD_MAP_HIDE", '');
 
 
-    localStorage.setItem("DASHBOARD_UNITS_VIEW",'');
+    localStorage.setItem("DASHBOARD_UNITS_VIEW", '');
     localStorage.setItem("DASHBOARD_UNITS_CREATE", '');
     localStorage.setItem("DASHBOARD_UNITS_EDIT", '');
-    localStorage.setItem("DASHBOARD_UNITS_DELETE",'');
+    localStorage.setItem("DASHBOARD_UNITS_DELETE", '');
     localStorage.setItem("DASHBOARD_UNITS_HIDE", '');
 
 
@@ -274,8 +276,13 @@ export class MyApp {
 
 
     const pushObject: PushObject = this.push.init(options);
-
-    pushObject.on('notification').subscribe((notification: any) => console.log('Received a notification', notification));
+    pushObject.on('notification').subscribe((notification: any) => {
+      console.log('Received a new notification', notification);
+      //this.sendNotification('Received a new notification' + JSON.stringify(notification));
+      //this.showAlert(notification.title, notification.message);
+      this.schedule(notification);
+    }
+    );
 
     pushObject.on('registration').subscribe((registration: any) => {
 
@@ -288,6 +295,89 @@ export class MyApp {
     pushObject.on('error').subscribe(error => console.error('Error with Push plugin', error));
 
 
+
+
   }
+
+  showAlert(title, message) {
+    let alert = this.alertCtrl.create({
+      title: title,
+      subTitle: message,
+      buttons: ['OK']
+    });
+    alert.present();
+  }
+
+  public schedule(notification) {
+    this.localNotifications.schedule({
+      title: notification.title,
+      text: notification.message,
+      at: new Date(new Date()),
+      sound: null
+    });
+
+    localStorage.setItem("navtype", notification.additionalData.arrayval.type);
+    localStorage.setItem("navtid", notification.additionalData.arrayval.id);
+
+    this.localNotifications.on("click", (notification, state) => {
+      console.log("Local notification clicked...");
+      console.log("1" + notification);
+      console.log("2" + state);
+      console.log("3" + JSON.stringify(notification));
+      console.log("4" + JSON.stringify(state));
+      /*console.log("5" + notification.additionalData);
+      console.log("6" + notification.additionalData.arrayval.id);
+      console.log("7" + notification.additionalData.arrayval.type);
+      */
+      let navids = localStorage.getItem("navtid");
+      let navtypes = localStorage.getItem("navtype");
+      console.log(navids);
+      console.log(navtypes);
+
+      if (navtypes == 'M') {
+        // this.nav.setRoot(EmailPage);
+
+        this.nav.setRoot(EmailPage, {
+          record: navids,
+          act: 'Push'
+        });
+
+      } else if (navtypes == 'OA') {
+        this.nav.setRoot(AlarmdetailsPage, {
+          record: navids,
+          act: 'Push'
+        });
+      } else if (navtypes == 'A') {
+        //this.nav.setRoot(AlarmdetailsPage);
+
+        this.nav.setRoot(AlarmdetailsPage, {
+          record: navids,
+          act: 'Push'
+        });
+
+      } else if (navtypes == 'C') {
+        //this.nav.setRoot(CommentdetailsPage);
+        this.nav.setRoot(CommentdetailsPage, {
+          record: navids,
+          act: 'Push'
+        });
+      } else if (navtypes == 'E') {
+        this.nav.setRoot(CalendardetailPage, {
+          event_id: navids,
+          act: 'Push'
+        });
+      } else if (navtypes == 'S') {
+        // this.nav.setRoot(ServicedetailsPage);
+        this.nav.setRoot(ServicedetailsPage, {
+          record: navids,
+          act: 'Push'
+        });
+      }
+    });
+
+  }
+
+
+
 }
 

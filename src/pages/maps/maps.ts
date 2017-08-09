@@ -22,7 +22,7 @@ import { NotificationPage } from '../notification/notification';
 import { ReportsPage } from '../reports/reports';
 import { CalendarPage } from '../calendar/calendar';
 import { EmailPage } from '../email/email';
-import { Deeplinks } from '@ionic-native/deeplinks';
+
 @Component({
   selector: 'page-maps',
   templateUrl: 'maps.html'
@@ -65,7 +65,7 @@ export class MapsPage {
     results: 8
   }
   public reportAllLists = [];
-  constructor(private deeplinks: Deeplinks, public platform: Platform, public http: Http, public navCtrl: NavController,
+  constructor(public platform: Platform, public http: Http, public navCtrl: NavController,
     public toastCtrl: ToastController, private sanitizer: DomSanitizer, public alertCtrl: AlertController, public navParams: NavParams, public loadingCtrl: LoadingController) {
     /* Role Authority Start */
     this.VIEWACCESS = localStorage.getItem("DASHBOARD_MAP_VIEW");
@@ -82,23 +82,10 @@ export class MapsPage {
     this.userid = localStorage.getItem("userInfoId");
     this.companyid = localStorage.getItem("userInfoCompanyId");
 
-    this.deeplinks.route({
-      '/email': EmailPage,
-      '/myaccount': MyaccountPage,
-      '/unitdetails': UnitdetailsPage // '/unitdetails/:productId':
-    }).subscribe((match) => {
-      // match.$route - the route we matched, which is the matched entry from the arguments to route()
-      // match.$args - the args passed in the link
-      // match.$link - the full link data
-      console.log('Successfully matched route', match);
-    }, (nomatch) => {
-      // nomatch.$link - the full link data
-      console.error('Got a deeplink that didn\'t match', nomatch);
-    });
+
+
+
   }
-
-
-
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MapsPage');
@@ -152,10 +139,15 @@ export class MapsPage {
     this.http.get(url, options)
       .subscribe((data) => {
         res = data.json();
-        console.log(JSON.stringify(res));
-        console.log("1" + res.units.length);
-        console.log("2" + res.units);
-        if (res.units.length > 0) {
+        res = data.json();
+
+        /* if (res.msg[0].Error > 0) {
+           res.units = [];
+         }*/
+
+
+
+        if (res.totalCount > 0) {
           for (let unit in res.units) {
             let colorcode;
             let favorite;
@@ -200,6 +192,7 @@ export class MapsPage {
         } else {
           this.totalCount = 0;
         }
+
         console.log("Total Record:" + this.totalCount);
 
       });
@@ -273,21 +266,24 @@ export class MapsPage {
     this.http.get(urlstr, optionsstr)
       .subscribe(data => {
         res = data.json();
-        if (res.units.length > 0) {
+        /* if (res.msg[0].Error > 0) {
+           res.units = [];
+         }*/
+        if (res.totalCount > 0) {
           for (var unit in res.units) {
             if (val == 0) {
-             var labeldata = '<div class="info_content">' +
+              var labeldata = '<div class="info_content">' +
                 '<h3><a href="#" (click)="mapunitdetail(' + res.units[unit].unit_id + ')">' + res.units[unit].unitname + '</a></h3>' +
                 '<h4>' + res.units[unit].projectname + '</h4>' +
                 '<p>Running Hours:' + res.units[unit].runninghr + '</p>' + '</div>';
 
-                /* var labeldata = '<div class="info_content">' +
-                '<h3><a href="/unitdetails/">' + res.units[unit].unitname + '</a></h3>' +
-                '<h4>' + res.units[unit].projectname + '</h4>' +
-                '<p>Running Hours:' + res.units[unit].runninghr + '</p>' + '</div>';*/
+              /* var labeldata = '<div class="info_content">' +
+              '<h3><a href="/unitdetails/">' + res.units[unit].unitname + '</a></h3>' +
+              '<h4>' + res.units[unit].projectname + '</h4>' +
+              '<p>Running Hours:' + res.units[unit].runninghr + '</p>' + '</div>';*/
 
 
-                
+
               this.addressData.push({
                 title: labeldata
               });
@@ -307,21 +303,21 @@ export class MapsPage {
                   console.log(e);
                   infoWindow.setContent(addressData[unit].title);
                   infoWindow.open(map, marker);
-                 
+
                 });
               })(marker, data, unit, this.addressData);
 
-            } else {            
+            } else {
               var labeldata = '<div class="info_content">' +
                 '<h3><a href="#" data-tap-disabled="true" (click)="mapunitdetail(' + val.unit_id + ')">' + val.unitname + '</a></h3>' +
                 '<h4>' + val.projectname + '</h4>' +
                 '<p>Running Hours:' + val.runninghr + '</p>' + '</div>';
-             
 
-               /* var labeldata = '<div class="info_content">' +
-                '<h3><a href="./email">' + res.units[unit].unitname + '</a></h3>' +
-                '<h4>' + res.units[unit].projectname + '</h4>' +
-                '<p>Running Hours:' + res.units[unit].runninghr + '</p>' + '</div>';*/
+
+              /* var labeldata = '<div class="info_content">' +
+               '<h3><a href="./email">' + res.units[unit].unitname + '</a></h3>' +
+               '<h4>' + res.units[unit].projectname + '</h4>' +
+               '<p>Running Hours:' + res.units[unit].runninghr + '</p>' + '</div>';*/
               latLng = new google.maps.LatLng(val.latitude, val.longtitude);
               // Creating a marker and putting it on the map
               var marker = new google.maps.Marker({
@@ -338,7 +334,7 @@ export class MapsPage {
                   infoWindow.open(map, marker);
                 });
 
-              })(marker, data,  labeldata);
+              })(marker, data, labeldata);
             }
           }
         }
@@ -628,12 +624,12 @@ export class MapsPage {
     }
     console.log(this.str + "//" + this.str1);
     this.detailvalue = item;
-     localStorage.setItem("unitunitname", item.unitname);
-      localStorage.setItem("unitlocation", item.location);
-      localStorage.setItem("unitprojectname", item.projectname);
-      localStorage.setItem("unitcolorcode", item.colorcodeindications);
-      localStorage.setItem("unitlat", item.lat);
-      localStorage.setItem("unitlng", item.lng);
+    localStorage.setItem("unitunitname", item.unitname);
+    localStorage.setItem("unitlocation", item.location);
+    localStorage.setItem("unitprojectname", item.projectname);
+    localStorage.setItem("unitcolorcode", item.colorcodeindications);
+    localStorage.setItem("unitlat", item.lat);
+    localStorage.setItem("unitlng", item.lng);
     console.log(this.str + "//" + JSON.stringify(this.detailvalue));
     localStorage.setItem("viewlist", this.str);
 
@@ -670,15 +666,16 @@ export class MapsPage {
       .subscribe((data) => {
         console.log("Count Response Success:" + JSON.stringify(data.json()));
         if (act == 'hide') {
+
           this.sendNotification(`Dashboard hide action successfully updated`);
         }
         // If the request was successful notify the user
         if (data.status === 200) {
-
+          this.loadMap(0);
           this.reportData.startindex = 0;
           this.reportData.sort = "unit_id";
           //this.doUser();
-          this.navCtrl.setRoot(this.navCtrl.getActive().component);
+      this.navCtrl.setRoot(this.navCtrl.getActive().component);
 
 
         }

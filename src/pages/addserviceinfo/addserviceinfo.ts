@@ -46,6 +46,8 @@ export class AddserviceinfoPage {
   public service_id: any;
   public serviced_by: any;
   public serviced_datetime: any;
+  public servicemindate: any;
+  public servicemaxdate: any;
   public service_subject: any;
   public service_remark: any;
   public msgcount: any;
@@ -78,6 +80,23 @@ export class AddserviceinfoPage {
   constructor(public http: Http, public alertCtrl: AlertController, private datePicker: DatePicker, public NP: NavParams, public nav: NavController, public toastCtrl: ToastController, public navParams: NavParams, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera, private filechooser: FileChooser,
     private transfer: Transfer,
     private file: File, private ngZone: NgZone) {
+
+    let dateValidStr = new Date();
+    this.servicemindate = this.subDays(5);
+    let maxmonth = dateValidStr.getUTCMonth() + 1;
+    this.servicemaxdate = dateValidStr.getFullYear() + '-' + maxmonth + "-" + dateValidStr.getUTCDate();
+    this.servicemindate = this.servicemindate.getFullYear() + '-' + parseInt(this.servicemindate.getUTCMonth() + 1) + "-" + this.servicemindate.getUTCDate();
+console.log("Min"+this.servicemindate);
+console.log("Max"+this.servicemaxdate);
+
+    // parseInt(date.getMonth() + 1)
+    /* let mindateStr = this.servicemindate.getFullYear() + '-0' + parseInt(this.servicemindate.getMonth()+1) + "-0" + this.servicemindate.getDate();
+     this.servicemaxdate = dateValidStr.getFullYear() + '-0' + dateValidStr.getMonth() + "-0" + dateValidStr.getDate();
+     this.servicemindate=mindateStr;
+     console.log("Service Minimum Date:" + mindateStr);
+      console.log("Service Minimum Date - After convert:" + this.servicemindate);
+     console.log("Service Maximum Date:" + this.servicemaxdate);*/
+    //'2017-08-08';
     this.priority_highclass = '';
     this.priority_lowclass = '';
     this.unitDetailData.loginas = localStorage.getItem("userInfoName");
@@ -488,7 +507,8 @@ export class AddserviceinfoPage {
     this.priority_lowclass = '';
     if (val == "2") {
       this.priority_highclass = "border_high";
-    } else {
+    }
+    if (val == "1") {
       this.priority_lowclass = "border_low";
     }
     this.service_priority = val
@@ -497,6 +517,12 @@ export class AddserviceinfoPage {
   addDays(days) {
     let result = new Date();
     result.setDate(result.getDate() + days);
+    return result;
+  }
+
+  subDays(days) {
+    let result = new Date();
+    result.setDate(result.getDate() - days);
     return result;
   }
   showDatePicker() {
@@ -542,9 +568,6 @@ export class AddserviceinfoPage {
     this.service_priority = item.service_priority;
     console.log("X" + this.service_priority);
     if (this.service_priority == "1") {
-      this.priority_lowclass = "border_low";
-
-    } else if (this.service_priority == "0") {
       this.priority_lowclass = "border_low";
 
     } else if (this.service_priority == "2") {

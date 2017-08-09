@@ -31,6 +31,7 @@
         "@ionic-native/google-maps": "^4.1.0",
         "@ionic-native/http": "^3.13.1",
         "@ionic-native/keyboard": "^4.0.0",
+        "@ionic-native/local-notifications": "^4.1.0",
         "@ionic-native/native-geocoder": "^3.13.1",
         "@ionic-native/network": "^4.0.1",
         "@ionic-native/push": "^4.0.1",
