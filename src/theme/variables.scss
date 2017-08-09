@@ -1654,7 +1654,15 @@ ion-navbar ion-buttons{margin-right:15px;}
 
 
 page-addrequestsupport  {
-
+    ion-app.md [padding] .scroll-content {
+    padding: 8px;
+}
+.form-control {
+    width:98%;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    height: 37px;
+}
 .notificationcount{
   color: white;
     border-radius: 50px;
@@ -1988,6 +1996,17 @@ ion-navbar ion-buttons{margin-right:15px;}
 
 
 page-addserviceinfo {
+    .item-label-stacked ion-datetime, .item-label-floating ion-datetime {
+    padding-left: 0;
+    width: 100%;
+    height: 36px;
+}
+    page-addserviceinfo .ion-md-calendar:before {
+    content: "\f2ab";
+    width: 40px;
+    height: 27px;
+    margin-top: 11px;
+    margin-bottom: -11px;}
 .notificationcount{
   color: white;
     border-radius: 50px;
@@ -2340,6 +2359,7 @@ ion-navbar.toolbar{background:#f0f0f0;}
    ion-input, ion-textarea,ion-select {    
     border: 1px solid #ccc;
     border-radius: 3px;
+        margin-top: 5px;
 }
 .scroll-content{background:#fff;}
     .header{
@@ -2428,6 +2448,10 @@ border: 1px solid #000;
 
 
 page-addunitsfour {
+    .item-input ion-input, .item-input ion-textarea {
+    position: static;
+    margin-top: 5px;
+}
     .ion-content{
     background-color:white;
 }
@@ -2475,6 +2499,7 @@ ion-navbar.toolbar{background:#f0f0f0;}
         font-size: 14px;
         color:black;
         font-weight:bold;
+            margin-bottom: 6px;
 
     }
 
@@ -2537,6 +2562,10 @@ ion-navbar ion-buttons{margin-right:15px;}
 
 //addunitsone
 page-addunitsone {
+    .item-input ion-input, .item-input ion-textarea {
+    position: static;
+    margin-top: 5px;
+}
     .ion-content{
     background-color:white;
 }
@@ -2652,7 +2681,11 @@ line-height: 37px;}
 
 //adddunitsthee
 //@import "http://netdna.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css";
-page-addunitsthree {    
+page-addunitsthree {  
+    .item-input ion-input, .item-input ion-textarea {
+    position: static;
+    margin-top: 5px;
+}  
 .ion-content{
     background-color:white;
 }
@@ -2762,11 +2795,28 @@ ion-navbar ion-buttons{margin-right:15px;}
 .algn-cent .ios-add-circle-outline{float:left;}
 .algn-cent span{float:right;font-size: 15px;margin: 6px 10px;}
 .toolbar-title-md{padding:0;}
+.form-control {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    height: 35px;
+        margin-top: 5px;
+}
 }
 
 
 //addunitstwo
 page-addunitstwo {
+    .item-label-stacked .select-md, .item-label-floating .select-md {
+    padding-left: 0;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    margin-top: 5px;
+}
+    .item-input ion-input, .item-input ion-textarea {
+    position: static;
+    margin-top: 5px;
+}
     .item-md .item-button {
    // padding: 0 7.6em;
    // height: 45px;
@@ -6293,6 +6343,17 @@ ion-navbar ion-buttons{margin-right:15px;}
 //servicedetails
 
 page-servicedetails {
+    .item-md ion-avatar ion-img, .item-md ion-avatar img {
+    border-radius: 50%;
+    overflow: hidden;
+    height: 50px;
+    width: 50px;
+    margin-bottom: 49px;
+}
+    .item-md.item-block .item-inner {
+    padding-right: 0px;
+    border-bottom: 1px solid #dedede!important;
+}
    .ion-content{
     background-color:white;
 }
@@ -6538,6 +6599,21 @@ ion-navbar ion-buttons{margin-right:15px;}
 //servicinginfo
 
 page-servicinginfo {
+    .item-md ion-avatar img {
+    border-radius: 50%;
+    overflow: hidden;
+    width: 50px;
+    height: 50px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+    .item-md h5, .item-md h6 {
+    margin: 2px 0;
+    font-size: 1.4rem;
+    font-weight: normal;
+    line-height: normal;
+    
+}
  .notificationcount{
   color: white;
     border-radius: 50px;
@@ -6947,12 +7023,12 @@ ion-navbar.toolbar{ background:#f0f0f0}
 ion-item-sliding{border-bottom: 1px solid #ccc;}
 .item-md{color:#333;padding:0;}
 .item-md h2{margin:10px 0;}
-.label-md b{width:40%;display:inline-block;}
+.label-md b{width:40%;display:inline-block;    font-size: 14px;}
 ion-navbar ion-buttons{margin-right:15px;}
 .add-new-btn{background: #333;color: #fff;padding: 10px;text-align: center;width: 100%;}
 .algn-cent{margin:0 auto;display:table;}
 .algn-cent .ios-add-circle-outline{float:left;}
-.algn-cent span{float:right;font-size: 15px;margin: 6px 10px;}
+.algn-cent span{float:right;font-size: 15px;margin: 2px 9px;}
 .toolbar-title-md{padding:0;}
 .button1{
 background-color: #FBE983;
@@ -7053,7 +7129,13 @@ page-units {
     background-color: gray;
 } 
 
-
+.separator-line {
+    border-top: 0px solid #cccccc;
+    position: relative;
+    margin-left: 6%;
+    margin-top: 3px;
+        height: 0px;
+}
 
     .messagecount{
    color: white;
@@ -7074,18 +7156,26 @@ ion-navbar.toolbar{ background:#f0f0f0}
 #sortbar ion-label button{width: 100%;background:none;padding: 0;}
 .company-name {float: left;}
 .ion-md-arrow-dropup{float: right;}
-.scroll-content{background-color:#fff;}	
+.scroll-content{background-color:#fff;padding: 7px;}	
 ion-item-sliding{border-bottom: 1px solid #ccc;}
 .item-md{color:#333;padding:0;}
 .item-md h2{margin:10px 0;}
-.item-md h5{margin: 6px -77px 0px -15px;}
+.item-md h5{margin: 0px -77px 0px -15px;}
+.item-md h6{margin: 0px -60px 0px -15px;}
+.item-md a{margin: 0px -77px 0px -15px;}
 .label-md b{width:40%;display:inline-block;}
+.item-cover{position:absolute!important}
 ion-navbar ion-buttons{margin-right:15px;}
 .add-new-btn{background: #333;color: #fff;padding: 10px;text-align: center;width: 100%;}
 .algn-cent{margin:0 auto;display:table;}
 .algn-cent .ios-add-circle-outline{float:left;}
 .algn-cent span{float:right;font-size: 15px;margin: 6px 10px;}
 .toolbar-title-md{padding:0;}
+.select-md .select-icon {
+    position: relative;
+    width: 16px;
+    height: 19px;
+}
 .button1{
 background-color: #FBE983;
  width: 40px;

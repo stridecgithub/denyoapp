@@ -50,8 +50,8 @@
     font-size: 12pt;">{{permissionMessage}}</p>
 </ion-content>
 <ion-content padding class="ion-content"  *ngIf="VIEWACCESS==1">
-
-  <ion-item style="width: 100%; margin: 0; padding-left: 10px;" *ngIf="totalCount!=0">
+<div>
+  <ion-item style="float:left;width: 50%; margin: 0; padding-left: 10px;" *ngIf="totalCount!=0">
     <ion-label>Sort By</ion-label>
     <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="pet" (ionChange)="onSegmentChanged(pet)">
       <ion-option value="favorite,desc">Favorite</ion-option>
@@ -67,7 +67,7 @@
   </ion-item>
 
 
-  <ion-item style="width: 100%; margin: 0; padding-left: 10px;" *ngIf="totalCount!=0">
+  <ion-item style="float:left;width: 50%; margin: 0; padding-left: 10px;" *ngIf="totalCount!=0">
     <ion-label>Select Action</ion-label>
     <ion-select style="padding: 1px 1px 6px 1px;"  [(ngModel)]="actpet" (ionChange)="onAction(actpet)">
       <ion-option value="view">View</ion-option>
@@ -75,6 +75,7 @@
       <ion-option value="viewdashboard">View on Dashboard</ion-option>
     </ion-select>
   </ion-item>
+</div>
 
 
   <div class="error" *ngIf="totalCount==0">No unit entries found</div>
@@ -86,28 +87,28 @@
   <ion-list *ngIf="totalCount!=0">
     <ion-item-sliding *ngFor="let item of reportAllLists;">
 
-      <ion-item>
+      <ion-item style="margin-bottom: -4px;">
         <div class="item-checkbox">
           <label class="checkbox">
                     <input type="checkbox" style="width: 20px;
     height: 20px;
     position: absolute;
-    top: 36px;
-    left: 50px;" (click)="getCheckBoxValue(item,item.unit_id)" value="1">
+    top: 35px;
+    left: 60px;" (click)="getCheckBoxValue(item,item.unit_id)" value="1">
                 </label>
         </div>
-        <button class="{{item.colorcodeindications}}" style="float: left ;width:8px;height:70px">
+        <button class="{{item.colorcodeindications}}" style="float: left ;width:8px;height:68px">
          
         </button>
-<button  class="{{item.genstatus}}" style="float:left ;width:30px;height:30px;margin-top: 13px;background-color:#ffffff"></button>
-        <button (click)="favorite(item.unit_id)" class="{{item.favoriteindication}}" style="float: right ;width:30px;height:30px;margin-top: 13px;background-color:#ffffff"></button>
+<button  class="{{item.genstatus}}" style="float:left ;width:40px;height:40px;margin-left: 6px;margin-top: 12px;background-color:#ffffff"></button>
+        <button (click)="favorite(item.unit_id)" class="{{item.favoriteindication}}" style="margin-left: -25px;float: right ;width:30px;height:30px;margin-top: 13px;background-color:#ffffff"></button>
         
         
-        <div style="overflow: hidden; padding-left: 3.5em;padding-top: 4px">
-          <h5 (click)="doEdit(item,'detail',item.unit_id)"><b>{{item.unitname}}</b></h5>
-          <h5 (click)="doEdit(item,'detail',item.unit_id)"><b>{{item.projectname}}</b></h5>
-          <h5 (click)="doEdit(item,'detail',item.unit_id)"><b>Gen Status:</b>{{item.genstatus}}</h5>
-          <h5 (click)="doEdit(item,'detail',item.unit_id)"><b>Next Servicing:</b>{{item.nextservicedate}}</h5>
+        <div style="overflow: hidden; padding-left: 2.7em;padding-top: 4px">
+          <h5 (click)="doEdit(item,'detail',item.unit_id)"><b style="font-size: 14px;">{{item.unitname}}</b></h5>
+          <h5 (click)="doEdit(item,'detail',item.unit_id)"><b style="font-size: 14px;">{{item.projectname}}</b></h5>
+          <h6 (click)="doEdit(item,'detail',item.unit_id)"><b style="font-size: 14px;">Gen Status:</b>{{item.genstatus}}</h6>
+          <h6 (click)="doEdit(item,'detail',item.unit_id)"><b style="font-size: 14px;">Next Servicing:</b>{{item.nextservicedate}}</h6>
         </div>
       </ion-item>
 

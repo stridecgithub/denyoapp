@@ -36,14 +36,14 @@
     <ion-list>
 
 <ion-item>
-    <button class="{{unitDetailData.colorcodeindications}}" style="float: left ;width:8px;height:70px">         
+    <button class="{{unitDetailData.colorcodeindications}}" style="float: left ;width:8px;height:85px">         
         </button>
         
-    <button class="{{unitDetailData.favoriteindication}}" style="float: right ;width:50px;height:50px;background-color:#ffffff"></button>
+    <button class="{{unitDetailData.favoriteindication}}" style="float: right ;width:30px;height:30px;background-color:#ffffff"></button>
     <div style="overflow: hidden; padding-left: 0.5em;padding-top: 4px">
       <h5><b>{{unitDetailData.unitname}}</b></h5>
       <h5>Project Name:{{unitDetailData.projectname}}</h5>
-      <h5>Location:{{unitDetailData.location}}</h5>
+      <h5 style="white-space:normal">Location:{{unitDetailData.location}}</h5>
       <h5  *ngIf="unitDetailData.lat!=''">({{unitDetailData.lat}},{{unitDetailData.lng}})</h5>
       
     </div>
@@ -149,11 +149,11 @@
 
 
       <div class="ion-badge-container">
-        <ion-badge item-end><a href="#" (click)="getNextDate(14)" style="color:white;font-weight:bold">2 <br>Weeks</a></ion-badge>
-        <ion-badge item-end><a href="#" (click)="getNextDate(30)" style="color:white;font-weight:bold">1 <br> Months</a></ion-badge>
-        <ion-badge item-end><a href="#" (click)="getNextDate(90)" style="color:white;font-weight:bold">3 <br> Months</a></ion-badge>
-        <ion-badge item-end>
-          <a href="#" (click)="getNextDate(0)" style="color:white;font-weight:bold">
+        <ion-badge item-end style ="height: 66px"><a  href="#" (click)="getNextDate(14)" style="color:white;font-weight:bold;margin-top:7px">2 <br>Weeks</a></ion-badge>
+        <ion-badge item-end style ="height: 66px"><a href="#" (click)="getNextDate(30)" style="color:white;font-weight:bold;margin-top:7px">1 <br> Months</a></ion-badge>
+        <ion-badge item-end style ="height: 66px"><a href="#" (click)="getNextDate(90)" style="color:white;font-weight:bold;margin-top:7px">3 <br> Months</a></ion-badge>
+        <ion-badge item-end style ="height: 66px">
+          <a href="#" (click)="getNextDate(0)" style="color:white;font-weight:bold;margin-top:6px">
             <ion-icon name="calendar"></ion-icon>
           </a>
         </ion-badge>

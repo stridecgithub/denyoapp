@@ -31,14 +31,14 @@
     </ion-buttons>
   </ion-navbar>
    <ion-item style="background-color: white;">
-    <button class="{{unitDetailData.colorcodeindications}}" style="float: left ;width:8px;height:70px">         
+    <button class="{{unitDetailData.colorcodeindications}}" style="float: left ;width:8px;height:85px">         
         </button>
        
-    <button class="{{unitDetailData.favoriteindication}}" style="float: right ;width:50px;height:50px;background-color:#ffffff"></button>
+    <button class="{{unitDetailData.favoriteindication}}" style="float: right ;width:30px;height:30px;background-color:#ffffff"></button>
     <div style="overflow: hidden; padding-left: 0.5em;padding-top: 4px">
       <h5><b>{{unitDetailData.unitname}}</b></h5>
       <h5>Project Name:{{unitDetailData.projectname}}</h5>
-      <h5>Location:{{unitDetailData.location}}</h5>
+      <h5 style="white-space: normal">Location:{{unitDetailData.location}}</h5>
       <h5  *ngIf="unitDetailData.lat!=''">({{unitDetailData.lat}},{{unitDetailData.lng}})</h5>
       
     </div>
@@ -55,16 +55,16 @@
         <img src="{{photo}}">
       </ion-avatar>
                   <ion-col style="float:left">
-            <p><b>Subject:</b>{{service_subject}}</p>
-            <p><b>Serviced Date:</b>{{serviced_datetime}}</p>
-            <p  *ngIf="serviced_by_name!=''"><b>Serviced By:</b>{{serviced_by_name}}
+            <p style="white-space:normal;margin-right:45%;"><b>Subject:</b>{{service_subject}}</p>
+            <p style="margin-right: 15px"><b>Serviced Date:</b>{{serviced_datetime}}</p>
+            <p style="margin-right: 45px" *ngIf="serviced_by_name!=''"><b>Serviced By:</b>{{serviced_by_name}}
         
             </p>
   
           </ion-col>
-          <ion-item >
-            <h6 style="float:right">{{sdate}}</h6>
-          </ion-item>
+          
+            <h6 style="float:right;font-size: 11px;margin-bottom: 6px;">{{sdate}}</h6>
+          
         </ion-item>
 
         <p><b>Remark:</b>
