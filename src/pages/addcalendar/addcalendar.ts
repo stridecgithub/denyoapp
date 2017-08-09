@@ -233,6 +233,7 @@ export class AddcalendarPage {
   // Determine whether we adding or editing a record
   // based on any supplied navigation parameters
   ionViewWillEnter() {
+    this.event_date=localStorage.getItem("sdate");
     this.getUnitListData();
     this.resetFields();
     if (this.NP.get("item")) {

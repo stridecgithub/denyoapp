@@ -326,11 +326,13 @@ export class CalendarPage {
         let months = { '01': 'January', '02': 'February', '03': 'March', '04': 'April', '05': 'May', '06': 'June', '07': 'July', '08': 'August', '09': 'September', '10': 'October', '11': 'November', '12': 'December' };
 
         let selDate = year + "-" + month + "-" + date;
+        let selectdate=date+"/"+month+"/"+year;
         if (year != undefined)
           this.dateHeaderTitle = months[month] + " " + year;
         if (ev != '') {
           console.log("curDate:" + curDate);
           console.log("selDate:" + selDate);
+           localStorage.setItem("sdate", selectdate);
           if (curDate == selDate) {
             this.daySession = 'Todays  Event';
             console.log(this.daySession);

@@ -109,13 +109,29 @@
           <h6 style="float:right;margin-left: 200px;">{{item.comment_date}}</h6>
         </ion-item>
       </ion-item>
+      <ion-item style="float:left;" *ngIf="item.event_type=='R'">
+        <ion-avatar item-start>
+          <img src="{{item.user_photo}}" *ngIf="item.user_photo!=''">
+        </ion-avatar>
+        <ion-item (click)="details(item,'edit',item.event_type)" style="float:left">
+          <h5><b>{{item.service_subject}}</b></h5>
+          
+          <h5><b>By:</b>{{item.serviced_by_name}} <span class="priorityicon"> <img *ngIf="item.service_resources" src="img/attach.png" hspace="10"/>
+        <img src="img/low_priority.png" hspace="10" *ngIf="item.service_priority=='1'" />
+        <img src="img/high_priority.png" hspace="10" *ngIf="item.service_priority=='2'" /></span>
+          </h5>
+          <h6 style=" float:right;margin-left: 200px;">{{item.serviced_datetime}}</h6>
+
+        </ion-item>
+      </ion-item>
       <ion-item style="float:left;" *ngIf="item.event_type=='S'">
         <ion-avatar item-start>
           <img src="{{item.user_photo}}" *ngIf="item.user_photo!=''">
         </ion-avatar>
         <ion-item (click)="details(item,'edit',item.event_type)" style="float:left">
           <h5><b>{{item.service_subject}}</b></h5>
-          <h5><b>Service Date:</b>{{item.serviced_datetime}} <span class="priorityicon"> <img *ngIf="item.service_resources" src="img/attach.png" hspace="10"/>
+          <h5><b>Serviced By:</b>{{item.serviced_by_name}}</h5>
+          <h5><b>Next Servicing:</b>{{item.next_service_date}} <span class="priorityicon"> <img *ngIf="item.service_resources" src="img/attach.png" hspace="10"/>
         <img src="img/low_priority.png" hspace="10" *ngIf="item.service_priority=='1'" />
         <img src="img/high_priority.png" hspace="10" *ngIf="item.service_priority=='2'" /></span>
           </h5>
@@ -131,8 +147,9 @@
           <img src="{{item.user_photo}}" *ngIf="item.user_photo!=''">
         </ion-avatar>
         <ion-item style="float:left">
-          <h5><b>{{item.alarm_name}}</b></h5>
-          <h5><b>Received Date:</b>{{item.alarm_received_date}} <span class="priorityicon"> 
+          <h5><b>Fault Code:{{item.alarm_name}}</b></h5>
+          <h5><b>Assigned By:</b>{{item.alarm_assigned_by}}</h5>
+          <h5><b>Assigned To:</b>{{item.alarm_assigned_to}} <span class="priorityicon"> 
         <img src="img/low_priority.png" hspace="10" *ngIf="item.alarm_priority=='1'" />
         <img src="img/high_priority.png" hspace="10" *ngIf="item.alarm_priority=='2'" /></span>
           </h5>
