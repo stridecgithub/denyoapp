@@ -80,6 +80,8 @@
     <ion-select style="padding: 1px 1px 6px 1px;" [(ngModel)]="pet" (ionChange)="onSegmentChanged(pet)">
       <ion-option value="serviced_by,asc" selected="true">Sender Ascending</ion-option>
       <ion-option value="serviced_by,desc">Sender Descending</ion-option>
+       <ion-option value="service_priority,asc">Priority</ion-option>
+        <ion-option value="serviced_datetime,desc">Date Received</ion-option>
     </ion-select>
   </ion-item>
   

@@ -16,6 +16,7 @@ import { MapsPage } from '../maps/maps';
 import { ReportsPage } from '../reports/reports';
 import { CalendarPage } from '../calendar/calendar';
 import { EmailPage } from '../email/email';
+import { CompanydetailPage } from '../companydetail/companydetail';
 /**
  * Generated class for the CompanygroupPage page.
  *
@@ -178,6 +179,13 @@ export class CompanygroupPage {
 
   doAdd() {
     this.nav.setRoot(AddcompanygroupPage);
+  }
+  detail(item)
+  {
+    this.nav.setRoot(CompanydetailPage, {
+        record: item
+       
+      });
   }
   doEdit(item, act) {
     if (act == 'edit') {
