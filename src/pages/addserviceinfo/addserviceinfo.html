@@ -36,21 +36,21 @@
     <ion-list>
 
 
-<ion-item>
-    <button class="{{unitDetailData.colorcodeindications}}" style="float: left ;width:8px;height:85px">         
+      <ion-item>
+        <button class="{{unitDetailData.colorcodeindications}}" style="float: left ;width:8px;height:85px">         
         </button>
-        
-    <button class="{{unitDetailData.favoriteindication}}" style="float: right ;width:30px;height:30px;background-color:#ffffff"></button>
-    <div style="overflow: hidden; padding-left: 0.5em;padding-top: 4px">
-      <h5><b>{{unitDetailData.unitname}}</b></h5>
-      <h5>Project Name:{{unitDetailData.projectname}}</h5>
-      <h5 style="white-space:normal">Location:{{unitDetailData.location}}</h5>
-      <h5  *ngIf="unitDetailData.lat!=''">({{unitDetailData.lat}},{{unitDetailData.lng}})</h5>
-      
-    </div>
-  </ion-item>
 
-    
+        <button class="{{unitDetailData.favoriteindication}}" style="float: right ;width:30px;height:30px;background-color:#ffffff"></button>
+        <div style="overflow: hidden; padding-left: 0.5em;padding-top: 4px">
+          <h5><b>{{unitDetailData.unitname}}</b></h5>
+          <h5>Project Name:{{unitDetailData.projectname}}</h5>
+          <h5 style="white-space:normal">Location:{{unitDetailData.location}}</h5>
+          <h5 *ngIf="unitDetailData.lat!=''">({{unitDetailData.lat}},{{unitDetailData.lng}})</h5>
+
+        </div>
+      </ion-item>
+
+
 
       <!--ion-grid>
         <ion-row>
@@ -91,11 +91,10 @@
     position: absolute;
     margin-left: 70%;" class="{{priority_highclass}}"></a>
       </p>
-<!-- min="{{servicemindate}}" max="{{servicemaxdate}}}"-->
+      <!-- min="{{servicemindate}}" max="{{servicemaxdate}}}"-->
       <ion-item>
         <ion-label stacked>Servicing Date <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
-        <ion-datetime pickerFormat="MMM DD YYYY" displayFormat="MM/DD/YYYY"  formControlName="serviced_datetime"
-          [(ngModel)]="serviced_datetime"></ion-datetime>
+        <ion-datetime pickerFormat="MMM DD YYYY" displayFormat="MM/DD/YYYY" formControlName="serviced_datetime" [(ngModel)]="serviced_datetime"></ion-datetime>
       </ion-item>
       <ion-item>
         <ion-label stacked>Serviced By <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
@@ -155,15 +154,14 @@
 
 
       <div class="ion-badge-container">
-
-        <ion-badge item-end style ="height: 66px"><a  href="#" (click)="getNextDate(14)" style="color:white;font-weight:bold;margin-top:7px">2 <br>Weeks</a></ion-badge>
-        <ion-badge item-end style ="height: 66px"><a href="#" (click)="getNextDate(30)" style="color:white;font-weight:bold;margin-top:7px">1 <br> Months</a></ion-badge>
-        <ion-badge item-end style ="height: 66px"><a href="#" (click)="getNextDate(90)" style="color:white;font-weight:bold;margin-top:7px">3 <br> Months</a></ion-badge>
-        <ion-badge item-end style ="height: 66px">
+        <ion-badge item-end style="height: 66px"><a href="#" (click)="getNextDate(14)" style="color:white;font-weight:bold;margin-top:7px">2 <br>Weeks</a></ion-badge>
+        <ion-badge item-end style="height: 66px"><a href="#" (click)="getNextDate(30)" style="color:white;font-weight:bold;margin-top:7px">1 <br> Months</a></ion-badge>
+        <ion-badge item-end style="height: 66px"><a href="#" (click)="getNextDate(90)" style="color:white;font-weight:bold;margin-top:7px">3 <br> Months</a></ion-badge>
+        <ion-badge item-end style="height: 66px">
           <a href="#" (click)="getNextDate(0)" style="color:white;font-weight:bold;margin-top:6px">
- <ion-icon name="calendar"></ion-icon>
+            <ion-icon name="calendar"></ion-icon>
           </a>
-        <!--<ion-badge item-end><a href="#" (click)="getNextDate(14)" style="color:white;font-weight:bold">2 <br>Weeks</a></ion-badge>
+          <!--<ion-badge item-end><a href="#" (click)="getNextDate(14)" style="color:white;font-weight:bold">2 <br>Weeks</a></ion-badge>
         <ion-badge item-end><a href="#" (click)="getNextDate(30)" style="color:white;font-weight:bold">1 <br> Months</a></ion-badge>
         <ion-badge item-end><a href="#" (click)="getNextDate(90)" style="color:white;font-weight:bold">3 <br> Months</a></ion-badge>
         <ion-badge item-end style="height: 51px;
