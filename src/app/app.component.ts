@@ -101,7 +101,7 @@ export class MyApp {
       this.statusBar.styleDefault();
       setTimeout(() => {
         this.splashScreen.hide();
-      }, 50);
+      }, 300);
 
     });
 
