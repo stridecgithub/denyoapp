@@ -98,6 +98,8 @@
               <button (click)="favorite(item.message_id)" *ngIf="item.is_favorite==1" class="favorite" style="float: right ;width:50px;height:50px;background-color:#ffffff"></button>
               <button (click)="favorite(item.message_id)" *ngIf="item.is_favorite==0" class="unfavorite" style="float: right ;width:50px;height:50px;background-color:#ffffff"></button>
               <div style="overflow: hidden; padding-left: .5em;">
+                <h5 *ngIf="item.message_readstatus==0" (click)="doDetails(item,'inbox')"><b>{{item.sendername}}</b></h5>
+                <h5 *ngIf="item.message_readstatus==1" (click)="doDetails(item,'inbox')">{{item.sendername}}</h5>
                 <h5 *ngIf="item.message_readstatus==0" (click)="doDetails(item,'inbox')"><b>{{item.messages_subject}}</b></h5>
                 <h5 *ngIf="item.message_readstatus==1" (click)="doDetails(item,'inbox')">{{item.messages_subject}}</h5>
                 <h6 style="margin-left: 195px;float:right">{{item.message_date}}</h6>
@@ -152,7 +154,8 @@
       <ion-list *ngIf="totalCountSend!=0 && MESSAGESENTVIEWACCESS=='1'">
         <ion-item-sliding *ngFor="let item of sendLists;">
           <ion-item (click)="doDetails(item,'send')">
-            <h2>{{item.messages_subject}}</h2>
+            <h2>To:{{item.receiver_id}}</h2>
+            <h2>Subject:{{item.messages_subject}}</h2>
           </ion-item>
           <ion-item-options>
             <button class="trashcolor" (click)="doConfirm(item.message_id,item,'send')" *ngIf="MESSAGESENTDELETEACCESS==0">                        

@@ -16,6 +16,7 @@ import { MapsPage } from '../maps/maps';
 import { ReportsPage } from '../reports/reports';
 import { CalendarPage } from '../calendar/calendar';
 import { EmailPage } from '../email/email';
+import { CompanydetailPage } from '../companydetail/companydetail';
 /**
  * Generated class for the CompanygroupPage page.
  *
@@ -179,6 +180,13 @@ export class CompanygroupPage {
   doAdd() {
     this.nav.setRoot(AddcompanygroupPage);
   }
+  detail(item)
+  {
+    this.nav.setRoot(CompanydetailPage, {
+        record: item
+       
+      });
+  }
   doEdit(item, act) {
     if (act == 'edit') {
       this.nav.setRoot(AddcompanygroupPage, {
@@ -201,6 +209,8 @@ export class CompanygroupPage {
   /******************************************/
   doConfirm(id, item) {
     console.log("Deleted Id" + id);
+    if(item.totalunits == 0 || item.totalusers == 0)
+    {
     let confirm = this.alertCtrl.create({
       message: 'Are you sure you want to delete this company group?',
       buttons: [{
@@ -219,7 +229,36 @@ export class CompanygroupPage {
         handler: () => { }
       }]
     });
+  
+  
     confirm.present();
+  }
+  else
+  {
+    {
+    let confirm = this.alertCtrl.create({
+      message: 'There are some user and units under this Company Group.If delete Company Group,all users and units will be deleted.Are you sure you want to delete?',
+      buttons: [{
+        text: 'Yes',
+        handler: () => {
+          this.deleteEntry(id);
+          for (let q: number = 0; q < this.reportAllLists.length; q++) {
+            if (this.reportAllLists[q] == item) {
+              this.reportAllLists.splice(q, 1);
+            }
+          }
+        }
+      },
+      {
+        text: 'No',
+        handler: () => { }
+      }]
+    });
+  
+  
+    confirm.present();
+    }
+  }
   }
 
   // Remove an existing record that has been selected in the page's HTML form

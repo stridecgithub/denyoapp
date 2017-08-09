@@ -235,6 +235,7 @@ export class UnitgroupPage {
     }
   }
   doConfirm(id, item) {
+    if(item.totalunits == 0){
     console.log("Deleted Id" + id);
     let confirm = this.alertCtrl.create({
       message: 'Are you sure you want to delete this unit group?',
@@ -255,6 +256,31 @@ export class UnitgroupPage {
       }]
     });
     confirm.present();
+  }
+  else
+  {
+ console.log("Deleted Id" + id);
+    let confirm = this.alertCtrl.create({
+      message: 'There are some units under this Unit Group.If delete this Unit Group,all units will be deleted.Are you sure you want to delete this unit group?',
+      buttons: [{
+        text: 'Yes',
+        handler: () => {
+          this.deleteEntry(id);
+          for (let q: number = 0; q < this.reportAllLists.length; q++) {
+            if (this.reportAllLists[q] == item) {
+              this.reportAllLists.splice(q, 1);
+            }
+          }
+        }
+      },
+      {
+        text: 'No',
+        handler: () => { }
+      }]
+    });
+    confirm.present();
+    }
+  
   }
   deleteEntry(recordID) {
     let
