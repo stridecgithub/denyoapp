@@ -5,7 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 //import { DashboardPage } from '../pages/dashboard/dashboard';
-
+import { Unitgrouplist } from '../pages/unitgrouplist/unitgrouplist';
 import { CompanygroupPage } from '../pages/companygroup/companygroup';
 import { CompanydetailPage } from '../pages/companydetail/companydetail';
 import { UserPage } from '../pages/user/user';
@@ -84,6 +84,7 @@ export class MyApp {
       { title: 'Engine Details', Component: EngineviewPage },
       { title: 'ForgotPassword', Component: ForgotpasswordPage },
       { title: 'Company Group Detail', Component:CompanydetailPage},
+      { title: 'Unit Group List', Component:Unitgrouplist},
 
       // { title: 'Map Demo', component: MapdemoPage },
 

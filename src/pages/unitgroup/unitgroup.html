@@ -67,7 +67,7 @@
   <ion-list *ngIf="totalCount!=0">
     <ion-item-sliding *ngFor="let item of reportAllLists;">
 
-      <ion-item style="margin-bottom: -9px;">
+      <ion-item style="margin-bottom: -9px;"(click)="view(item.unitgroup_id)">
         <button class="{{item.colorcodeindication}}" style="float: left ;width:8px;height: 47px;">
          
         </button>

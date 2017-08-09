@@ -15,6 +15,7 @@ import { MapsPage } from '../maps/maps';
 import { ReportsPage } from '../reports/reports';
 import { CalendarPage } from '../calendar/calendar';
 import { EmailPage } from '../email/email';
+import { Unitgrouplist } from '../unitgrouplist/unitgrouplist';
 
 /**
  * Generated class for the UnitgroupPage page.
@@ -412,5 +413,10 @@ export class UnitgroupPage {
   }
   redirectToSettings() {
     this.nav.setRoot(MyaccountPage);
+  }
+   view(id)
+  {
+    localStorage.setItem("uid",id);
+    this.nav.setRoot(Unitgrouplist);
   }
 }
