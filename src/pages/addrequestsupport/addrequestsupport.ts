@@ -34,7 +34,7 @@ export class AddrequestsupportPage {
   isReadyToSave: boolean;
   public photoInfo = [];
   public addedImgListsArray = [];
-  public addedImgLists = [];
+  public addedImgListsRequest = [];
   progress: number;
   public recordID: any;
   public service_unitid: any;
@@ -99,10 +99,11 @@ export class AddrequestsupportPage {
   }
 
   ionViewDidLoad() {
-    this.addedImgLists = [];
+    this.addedImgListsRequest = [];
     console.log('ionViewDidLoad AddrequestsupportPage');
   }
   ionViewWillEnter() {
+    this.addedImgListsRequest = [];
     let //body: string = "loginid=" + this.userId,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
@@ -219,14 +220,14 @@ export class AddrequestsupportPage {
       .then((data) => {
         let imgSrc;
         imgSrc = this.apiServiceURL + "/serviceimages" + '/' + newFileName;
-        this.addedImgLists.push({
+        this.addedImgListsRequest.push({
           imgSrc: imgSrc,
           imgDateTime: new Date(),
           fileName: newFileName
         });
 
         //loading.dismiss();
-        if (this.addedImgLists.length > 9) {
+        if (this.addedImgListsRequest.length > 9) {
           this.isUploaded = false;
         }
         this.progress += 5;
@@ -271,14 +272,14 @@ export class AddrequestsupportPage {
 
       console.log("service_subject:" + service_subject);
       console.log("nextServiceDate:" + this.unitDetailData.nextServiceDate);
-      console.log("Image Data" + JSON.stringify(this.addedImgLists));
+      console.log("Image Data" + JSON.stringify(this.addedImgListsRequest));
       //let d = new Date();
       //let micro_timestamp = d.getFullYear() + "" + d.getMonth() + "" + d.getDate() + "" + d.getHours() + "" + d.getMinutes() + "" + d.getSeconds();
       if (this.isEdited) {
-        this.updateEntry(service_remark, service_subject, this.addedImgLists, this.unitDetailData.hashtag, this.unitDetailData.nextServiceDate, this.micro_timestamp);
+        this.updateEntry(service_remark, service_subject, this.addedImgListsRequest, this.unitDetailData.hashtag, this.unitDetailData.nextServiceDate, this.micro_timestamp);
       }
       else {
-        this.createEntry(service_remark, service_subject, this.addedImgLists, this.unitDetailData.hashtag, this.unitDetailData.nextServiceDate, this.micro_timestamp);
+        this.createEntry(service_remark, service_subject, this.addedImgListsRequest, this.unitDetailData.hashtag, this.unitDetailData.nextServiceDate, this.micro_timestamp);
       }
     }
   }
@@ -297,7 +298,7 @@ export class AddrequestsupportPage {
       "&micro_timestamp=" + micro_timestamp +
       "&serviced_by=" + this.unitDetailData.userId +
       "&is_denyo_support=1" +
-      "&uploadInfo=" + JSON.stringify(this.addedImgLists),
+      "&uploadInfo=" + JSON.stringify(this.addedImgListsRequest),
       //"&contact_number=" + this.contact_number +
       //"&contact_name=" + this.contact_name +
       //"&nextServiceDate=" + nextServiceDate,
@@ -344,7 +345,7 @@ export class AddrequestsupportPage {
       "&service_subject=" + service_subject +
       "&is_denyo_support=1" +
       "&micro_timestamp=" + micro_timestamp +
-      "&uploadInfo=" + JSON.stringify(this.addedImgLists),
+      "&uploadInfo=" + JSON.stringify(this.addedImgListsRequest),
 
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
@@ -425,7 +426,7 @@ export class AddrequestsupportPage {
         let imgDataArr = hashhypenhash[i].split("|");
         let imgSrc;
         imgSrc = this.apiServiceURL + "/serviceimages" + '/' + imgDataArr[1];
-        this.addedImgLists.push({
+        this.addedImgListsRequest.push({
           imgSrc: imgSrc,
           imgDateTime: new Date(),
           fileName: imgDataArr[1],
@@ -433,7 +434,7 @@ export class AddrequestsupportPage {
         });
       }
 
-      if (this.addedImgLists.length > 9) {
+      if (this.addedImgListsRequest.length > 9) {
         this.isUploaded = false;
       }
     }
@@ -446,9 +447,9 @@ export class AddrequestsupportPage {
         text: 'Yes',
         handler: () => {
           this.deleteEntry(id);
-          for (let q: number = 0; q < this.addedImgLists.length; q++) {
-            if (this.addedImgLists[q] == item) {
-              this.addedImgLists.splice(q, 1);
+          for (let q: number = 0; q < this.addedImgListsRequest.length; q++) {
+            if (this.addedImgListsRequest[q] == item) {
+              this.addedImgListsRequest.splice(q, 1);
             }
           }
         }
@@ -487,7 +488,6 @@ export class AddrequestsupportPage {
       });
   }
   previous() {
-    this.addedImgLists = [];
     this.nav.setRoot(ServicinginfoPage, {
       record: this.NP.get("record")
     });

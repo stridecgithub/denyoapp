@@ -78,9 +78,9 @@
         </div>
         <div>
          <ion-row>
-          <ion-col col-auto *ngFor="let item of addedImgLists; let i = index" [attr.data-index]="i">
+          <ion-col col-auto *ngFor="let item of addedImgListsDetails; let i = index" [attr.data-index]="i">
             <ion-item>
-              <img src="{{addedImgLists[i].imgSrc}}" width=100% height=100% /> 
+              <img src="{{addedImgListsDetails[i].imgSrc}}" width=100% height=100% /> 
             </ion-item>
        
           </ion-col>

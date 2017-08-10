@@ -145,7 +145,7 @@ export class AdduserPage {
     }
     if (this.NP.get("uservalue")) {
       let info = this.NP.get("uservalue");
-
+      this.pageTitle = 'Edit User';
       //var objects = JSON.parse(info);
       console.log("JSON.stringify:" + JSON.stringify(info));
       console.log("Length:" + info.length);
@@ -168,7 +168,7 @@ export class AdduserPage {
           this.country = info[key].country;
           this.contact = info[key].contact;
           this.photo = info[key].photo;
-           if (this.contact != '') {
+          if (this.contact != '') {
             let contactSplitSpace = this.contact.split(" ");
             this.primary = contactSplitSpace[0];
             this.contact = contactSplitSpace[1];
