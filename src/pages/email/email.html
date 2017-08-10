@@ -95,8 +95,8 @@
               <img src="{{item.senderphoto}}">
             </ion-avatar>
             <ion-item style="float:left">
-              <button (click)="favorite(item.message_id)" *ngIf="item.is_favorite==1" class="favorite" style="float: right ;width:50px;height:50px;background-color:#ffffff"></button>
-              <button (click)="favorite(item.message_id)" *ngIf="item.is_favorite==0" class="unfavorite" style="float: right ;width:50px;height:50px;background-color:#ffffff"></button>
+              <button (click)="favorite(item.message_id)" *ngIf="item.is_favorite==1" class="favorite" style="float: right ;width:30px;height:30px;background-color:#ffffff"></button>
+              <button (click)="favorite(item.message_id)" *ngIf="item.is_favorite==0" class="unfavorite" style="float: right ;width:30px;height:30px;background-color:#ffffff"></button>
               <div style="overflow: hidden; padding-left: .5em;">
                 <h5 *ngIf="item.message_readstatus==0" (click)="doDetails(item,'inbox')"><b>{{item.sendername}}</b></h5>
                 <h5 *ngIf="item.message_readstatus==1" (click)="doDetails(item,'inbox')">{{item.sendername}}</h5>

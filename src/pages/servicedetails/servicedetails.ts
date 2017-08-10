@@ -105,7 +105,7 @@ export class ServicedetailsPage {
     console.log('ionViewDidLoad ServicedetailsPage');
   }
   ionViewWillEnter() {
-    /* this.unitDetailData.unit_id = localStorage.getItem("unitId");
+    this.unitDetailData.unit_id = localStorage.getItem("unitId");
      this.unitDetailData.unitname = localStorage.getItem("unitunitname");
      this.unitDetailData.location = localStorage.getItem("unitlocation");
      this.unitDetailData.projectname = localStorage.getItem("unitprojectname");
@@ -113,7 +113,7 @@ export class ServicedetailsPage {
      this.unitDetailData.favoriteindication = localStorage.getItem("unitfav");
      console.log("Add Comment Color Code:" + this.unitDetailData.colorcodeindications);
      this.unitDetailData.lat = localStorage.getItem("unitlat");
-     this.unitDetailData.lng = localStorage.getItem("unitlng");*/
+     this.unitDetailData.lng = localStorage.getItem("unitlng");
     let //body: string = "loginid=" + this.userId,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
@@ -263,18 +263,18 @@ export class ServicedetailsPage {
     colorcode = "button" + colorvalincrmentone;
     console.log("Color is" + colorcode);
 
-    this.unitDetailData.unit_id = item.service_unitid;
-    localStorage.setItem("unitId", this.unitDetailData.unit_id)
-    this.unitDetailData.unitname = item.unitname;
-    this.unitDetailData.location = item.location;
-    this.unitDetailData.projectname = item.projectname;
-    this.unitDetailData.runninghr = item.runninghr;
-    this.unitDetailData.gen_status = item.gen_status;
-    this.unitDetailData.nextservicedate = item.nextservicedate;
-    this.unitDetailData.lat = item.latitude;
-    this.unitDetailData.lng = item.longtitude;
-    this.unitDetailData.colorcodeindications = colorcode;
-    // Unit Details from Push
+     this.unitDetailData.unit_id = item.service_unitid;
+     localStorage.setItem("unitId", this.unitDetailData.unit_id)
+    // this.unitDetailData.unitname = item.unitname;
+    // this.unitDetailData.location = item.location;
+    // this.unitDetailData.projectname = item.projectname;
+    // this.unitDetailData.runninghr = item.runninghr;
+    // this.unitDetailData.gen_status = item.gen_status;
+    // this.unitDetailData.nextservicedate = item.nextservicedate;
+    // this.unitDetailData.lat = item.latitude;
+    // this.unitDetailData.lng = item.longtitude;
+    // this.unitDetailData.colorcodeindications = colorcode;
+    // // Unit Details from Push
 
     console.log("RQ" + this.is_request);
 

@@ -298,6 +298,13 @@ export class CommentsinfoPage {
         act: 'Edit'
       });
     }
+    if (type.toLowerCase() == 'r') {
+      localStorage.setItem("microtime", "");
+      this.nav.setRoot(ServicedetailsPage, {
+        record: item,
+        act: 'Edit'
+      });
+    }
   }
 
   doConfirm(id, item) {
