@@ -60,7 +60,8 @@
    text-align:center;
     font-size: 12pt;">{{permissionMessage}}</p>
 </ion-content>
-<ion-content padding class="ion-content">
+<ion-content padding class="ion-content" *ngIf="VIEWACCESS==1">
+  
 
   <div class="div-alignmnt">
     <ion-item>

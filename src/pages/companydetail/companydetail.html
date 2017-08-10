@@ -41,7 +41,7 @@
 
 <ion-content padding>
   <ion-item>
-  <div style="overflow: hidden; padding-left: 2.7em;padding-top: 4px">
+  <div style="overflow: hidden; padding-left: 0.7em;padding-top: 4px">
           <h6><b style="font-size: 14px;">Company Name:</b>{{name}}</h6>
           <h6><b style="font-size: 14px;">Contact:</b>{{contact}}</h6>
           <h6><b style="font-size: 14px;">Address:</b>{{address}}</h6>
@@ -63,3 +63,37 @@
       </ion-item>
 
 </ion-content>
+<ion-footer color="bluedark">
+  <ion-toolbar color="bluedark">
+    <ul class="quick-list">
+      <li>
+        <button ion-button icon-only clear (click)="redirectToMaps()">
+    	<ion-icon name="home" class="footer-icon">MAPS</ion-icon>
+    </button>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectToUser()" clear>
+    	<ion-icon name="contacts" class="footer-icon">UNITS</ion-icon>
+    </button>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectToMessage()" clear>
+    	<ion-icon name="chatboxes" class="footer-icon">MESSAGE</ion-icon>
+      <ion-badge item-end class="messagecount"  *ngIf="msgcount>0">{{this.msgcount}}</ion-badge>
+    </button>
+        <ion-badge color="danger"></ion-badge>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectCalendar()" clear>
+    	<ion-icon name="bicycle" class="footer-icon">CALENDAR</ion-icon>
+    </button>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectToSettings()" clear>
+    	<ion-icon name="settings" class="footer-icon">SETTING</ion-icon>
+    </button>
+      </li>
+    </ul>
+
+  </ion-toolbar>
+</ion-footer>

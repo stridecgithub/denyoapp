@@ -267,7 +267,11 @@ background-color:red;
 .toolbar-md{text-align:center;}
 .toolbar-md-bluedark{min-height:52px!important;}
 .toolbar-md-bluedark .toolbar-background-md{background:#f2f2f2;}
-
+.ion-md-ma:before, .ion-md-us:before, .ion-md-cg:before, .ion-md-role:before,{display:none;}
+.ion-md-ma{background:url(../img/myn.png) no-repeat center top;}
+.ion-md-us{background:url(../img/us.png) no-repeat center top;}
+.ion-md-cg{background:url(../img/mycg.png) no-repeat center top;}
+.ion-md-role{background:url(../img/ur.png) no-repeat center top;}
 .ion-md-home:before, .ion-md-contacts:before, .ion-md-chatboxes:before, .ion-md-bicycle:before, .ion-md-settings:before{display:none;}
 .ion-md-home{background:url(../img/map_icon.png) no-repeat center top;}
 .ion-md-contacts{background:url(../img/units_icon.png) no-repeat center top;}
@@ -5737,7 +5741,9 @@ ion-navbar ion-buttons{margin-right:15px;}
 //myaccount
 
 page-myaccount {
-
+.quick-list {
+    background-color: #fff;
+}
 .notificationcount{
   color: white;
     border-radius: 50px;
@@ -5857,6 +5863,29 @@ ion-navbar ion-buttons{margin-right:15px;}
 .algn-cent .ios-add-circle-outline{float:left;}
 .algn-cent span{float:right;font-size: 15px;margin: 6px 10px;}
 .toolbar-title-md{padding:0;}
+.ion-md-ma:before, .ion-md-us:before, .ion-md-cg:before, .ion-md-role:before,{display:none;}
+.ion-md-ma{background:url(../img/myn.png) no-repeat center top;}
+.ion-md-us{background:url(../img/us.png) no-repeat center top;}
+.ion-md-cg{background:url(../img/mycg.png) no-repeat center top;}
+.ion-md-role{background:url(../img/ur.png) no-repeat center top;}
+.footer-icon{color:#888888;font-size:18px!important;text-align:center;padding:42px 0 0 0!important;}
+.toolbar-md-bluedark .button[icon-only]{height:inherit;margin:0;}
+.toolbar-md-bluedark .button-inner{height:80px;}
+.title{margin:25px auto;font-size:19px;}
+.title strong{display:block;margin-top:10px;}
+.four-icons{text-align:center;color:#fff;display:table;margin:0 auto;text-transform:uppercase;font-weight:bold;min-width:32%;}
+.four-icons img{display:table;margin:0 auto 15px;}
+.icon-top{border-bottom:1px solid #fff;display:block;overflow:hidden;}
+.icon-bottom{display:block;overflow:hidden; }
+.icon-left{border-right:1px solid #fff;width:50%;float:left;padding:20px;font-size: 16px;text-align: center;font-weight:400; }
+.icon-right{width:50%;float:left;padding:20px;font-size: 16px;text-align: center;font-weight:400; }
+.quick-list{margin:0 auto;display:table;padding:0;width:100%;}
+.quick-list li{display: inline;margin:0 10px;list-style:none;font-family: "Roboto", "Helvetica Neue", sans-serif;font-style:normal;}
+.quick-list li button ion-icon{font-family: "Roboto", "Helvetica Neue", sans-serif;font-style:normal;font-size:11px!important;width:inherit;height:58px;margin-top:10px;}
+
+.icon-left span, .icon-right span{margin-top: 80px!important;}
+ion-footer .toolbar-md-bluedark{min-height:auto;}
+.footer-md-bluedark .toolbar-md-bluedark .button[icon-only]{height:auto;}
 }
 
 
