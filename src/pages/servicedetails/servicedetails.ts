@@ -299,6 +299,7 @@ export class ServicedetailsPage {
 
   }
   previous() {
+    this.addedImgLists = [];
     this.nav.setRoot(ServicinginfoPage, {
       record: this.NP.get("record")
     });
