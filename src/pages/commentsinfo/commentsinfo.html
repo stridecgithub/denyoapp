@@ -95,7 +95,7 @@
   </ion-refresher>
   <ion-list *ngIf="totalCount!=0">
     <ion-item-sliding *ngFor="let item of reportAllLists;">
-      <ion-item style="float:left;" *ngIf="item.event_type=='C'">
+      <ion-item style="float:left;padding-top: 4px" *ngIf="item.event_type=='C'">
         <ion-avatar item-start>
           <img src="{{item.user_photo}}" *ngIf="item.user_photo!=''">
         </ion-avatar>
@@ -109,7 +109,7 @@
           <h6 style="float:right;margin-left: 200px;">{{item.comment_date}}</h6>
         </ion-item>
       </ion-item>
-      <ion-item style="float:left;" *ngIf="item.event_type=='R'">
+      <ion-item style="float:left;padding-top: 4px" *ngIf="item.event_type=='R'">
         <ion-avatar item-start>
           <img src="{{item.user_photo}}" *ngIf="item.user_photo!=''">
         </ion-avatar>
@@ -124,7 +124,7 @@
 
         </ion-item>
       </ion-item>
-      <ion-item style="float:left;" *ngIf="item.event_type=='S'">
+      <ion-item style="float:left;padding-top: 4px" *ngIf="item.event_type=='S'">
         <ion-avatar item-start>
           <img src="{{item.user_photo}}" *ngIf="item.user_photo!=''">
         </ion-avatar>
@@ -142,7 +142,7 @@
 
 
 
-      <ion-item style="float:left;" *ngIf="item.event_type=='A'">
+      <ion-item style="float:left;padding-top: 4px" *ngIf="item.event_type=='A'">
         <ion-avatar item-start>
           <img src="{{item.user_photo}}" *ngIf="item.user_photo!=''">
         </ion-avatar>

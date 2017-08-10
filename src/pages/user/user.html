@@ -95,7 +95,7 @@
   </ion-refresher>
   <ion-list *ngIf="totalCount!=0">
     <ion-item-sliding *ngFor="let item of reportAllLists;">
-      <ion-item  *ngIf="item.staff_id!='1'">
+      <ion-item style="padding-top: 4px;"  *ngIf="item.staff_id!='1'">
         <h5><b>User ID:</b>{{item.username}}</h5>
         <h5><b>Name:</b>{{item.firstname}} {{item.lastname}}</h5>
         <h5><b>Email:</b>{{item.email}}</h5>
