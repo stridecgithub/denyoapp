@@ -27,8 +27,8 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 export class ServicedetailsPage {
   isReadyToSave: boolean;
   public photoInfo = [];
-  public addedImgListsArray = [];
-  public addedImgLists = [];
+  public addedImgListsDetailsArray = [];
+  public addedImgListsDetails = [];
   progress: number;
   public colorListArr = [];
   public msgcount: any;
@@ -67,8 +67,8 @@ export class ServicedetailsPage {
     getremark: '',
     serviced_by: '',
     nextServiceDate: '',
-    addedImgLists1: '',
-    addedImgLists2: ''
+    addedImgListsDetails1: '',
+    addedImgListsDetails2: ''
   }
   public hideActionButton = true;
   constructor(public http: Http, public alertCtrl: AlertController, public NP: NavParams, public nav: NavController, public toastCtrl: ToastController, public navParams: NavParams, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera) {
@@ -284,7 +284,7 @@ export class ServicedetailsPage {
         let imgDataArr = hashhypenhash[i].split("|");
         let imgSrc;
         imgSrc = this.apiServiceURL + "/serviceimages" + '/' + imgDataArr[1];
-        this.addedImgLists.push({
+        this.addedImgListsDetails.push({
           imgSrc: imgSrc,
           imgDateTime: new Date(),
           fileName: imgDataArr[1],
@@ -292,14 +292,13 @@ export class ServicedetailsPage {
         });
       }
 
-      if (this.addedImgLists.length > 9) {
+      if (this.addedImgListsDetails.length > 9) {
         this.isUploaded = false;
       }
     }
 
   }
   previous() {
-    this.addedImgLists = [];
     this.nav.setRoot(ServicinginfoPage, {
       record: this.NP.get("record")
     });
