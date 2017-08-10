@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Camera } from '@ionic-native/camera';
 import { UserPage } from '../user/user';
 import { ServicinginfoPage } from '../servicinginfo/servicinginfo';
+import { CommentsinfoPage } from '../commentsinfo/commentsinfo';
 import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
 import { UnitsPage } from '../units/units';
@@ -300,9 +301,18 @@ export class ServicedetailsPage {
   }
   previous() {
     this.addedImgLists = [];
+    if(this.NP.get("from")=='service')
+    {
     this.nav.setRoot(ServicinginfoPage, {
       record: this.NP.get("record")
     });
+  }
+  else
+  {
+ this.nav.setRoot(CommentsinfoPage, {
+      record: this.NP.get("record")
+    });
+  }
   }
   redirectToUser() {
     this.nav.setRoot(UserPage);

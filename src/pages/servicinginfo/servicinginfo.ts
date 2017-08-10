@@ -297,7 +297,8 @@ this.unitDetailData.favoriteindication = favorite;
     localStorage.setItem("microtime", "");
     this.nav.setRoot(ServicedetailsPage, {
       record: item,
-      act: 'Edit'
+      act: 'Edit',
+      from:'service'
     });
   }
 

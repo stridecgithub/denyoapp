@@ -295,14 +295,16 @@ export class CommentsinfoPage {
       localStorage.setItem("microtime", "");
       this.nav.setRoot(ServicedetailsPage, {
         record: item,
-        act: 'Edit'
+        act: 'Edit',
+        from:'comment'
       });
     }
     if (type.toLowerCase() == 'r') {
       localStorage.setItem("microtime", "");
       this.nav.setRoot(ServicedetailsPage, {
         record: item,
-        act: 'Edit'
+        act: 'Edit',
+        from:'comment'
       });
     }
   }
