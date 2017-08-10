@@ -897,6 +897,7 @@ export class EmailPage {
       });
   }
   doDetails(item, act) {
+    this.isSubmitted = false;
     this.act = act;
     console.log("Do Details act is:" + this.act);
     this.choice = 'details';
@@ -928,6 +929,7 @@ export class EmailPage {
   }
 
   reply(messages_body) {
+    this.isSubmitted = false;
     this.replyforward = 1;
     this.isReply = 1;
     if (this.senderid == this.userId) {
@@ -953,6 +955,7 @@ export class EmailPage {
   }
 
   forward(messages_body) {
+    this.isSubmitted = false;
     this.replyforward = 1;
     this.to = '';
     this.addedImgLists = [];

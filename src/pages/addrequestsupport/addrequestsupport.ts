@@ -99,6 +99,7 @@ export class AddrequestsupportPage {
   }
 
   ionViewDidLoad() {
+    this.addedImgLists = [];
     console.log('ionViewDidLoad AddrequestsupportPage');
   }
   ionViewWillEnter() {
@@ -486,6 +487,7 @@ export class AddrequestsupportPage {
       });
   }
   previous() {
+    this.addedImgLists = [];
     this.nav.setRoot(ServicinginfoPage, {
       record: this.NP.get("record")
     });
@@ -518,13 +520,13 @@ export class AddrequestsupportPage {
         {
           text: 'Confirm',
           handler: () => {
-           this.saveEntry();
+            this.saveEntry();
           }
         },
         {
           text: 'Cancel',
           handler: () => {
-             this.isSubmitted = false;
+            this.isSubmitted = false;
             console.log('Cancel clicked');
           }
         }

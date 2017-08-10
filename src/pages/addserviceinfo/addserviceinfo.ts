@@ -51,6 +51,11 @@ export class AddserviceinfoPage {
   public servicemindate: any;
   public servicemaxdate: any;
   public service_subject: any;
+
+  public minyr;
+  public minmn;
+  public mindt;
+
   public service_remark: any;
   public msgcount: any;
   public notcount: any;
@@ -107,24 +112,7 @@ export class AddserviceinfoPage {
 
 
 
-    var d = new Date();
-    d.setDate(d.getDate() - 5);
-    this.servicemindate = d.toLocaleString();
-    let splitcomma = this.servicemindate.split(",");
-    let splitslash = splitcomma[0].split("/");
-    let minyr = splitslash[2];
-    let minmn = splitslash[0];
-    let mindt = splitslash[1];
 
-    if (mindt < 10) {
-      mindt = '0' + mindt
-    }
-
-    if (minmn < 10) {
-      minmn = '0' + minmn
-    }
-
-    this.servicemindate = minyr + '-' + minmn + '-' + mindt;
 
     /* let d = new Date(); // today!
      let x = 5; // go back 5 days!
@@ -134,6 +122,34 @@ export class AddserviceinfoPage {
 
     //Min8/4/2017, 4:43:05 PM
 
+
+
+    let oneWeekAgo = new Date();
+    let prevfivedays = oneWeekAgo.setDate(oneWeekAgo.getDate() - 5);
+    console.log("Previous five days:" + prevfivedays);
+
+    let dateFormat = new Date(prevfivedays);
+    // this.servicemindate = dateFormat.getDate() + '/' + (dateFormat.getMonth() + 1) + '/' + dateFormat.getFullYear();
+    this.servicemindate = dateFormat.getFullYear() + '-' + (dateFormat.getMonth() + 1) + '-' + dateFormat.getDate();
+
+
+
+    this.minyr = dateFormat.getFullYear();
+    this.minmn = (dateFormat.getMonth() + 1);
+    this.mindt = dateFormat.getDate();
+
+    if (this.mindt < 10) {
+      //mindt = '0' + mindt;
+      this.mindt = '0' + this.mindt;
+
+    }
+
+    if (this.minmn < 10) {
+      //minmn = '0' + minmn;
+      this.minmn = '0' + this.minmn;
+    }
+
+    this.servicemindate = this.minyr + '-' + this.minmn + '-' + this.mindt;
 
     console.log("Min:" + this.servicemindate);
     console.log("Max:" + this.servicemaxdate);
@@ -186,6 +202,7 @@ export class AddserviceinfoPage {
   }
 
   ionViewDidLoad() {
+    this.addedServiceImgLists = [];
     console.log('ionViewDidLoad AddserviceinfoPage');
   }
   ionViewWillEnter() {
@@ -543,10 +560,6 @@ export class AddserviceinfoPage {
     if (field == '1') {
       this.serviced_datetime = date.getFullYear() + "-" + parseInt(date.getMonth() + 1) + "-" + date.getDate();
     } else {
-      console.log("date.getMonth()" + date.getMonth());
-      console.log("date.getMonth()+1" + date.getMonth() + 1);
-      console.log("date.month" + date.month);
-      console.log("date.monthstr" + date.monthstr);
       this.unitDetailData.nextServiceDate = date.getFullYear() + "-" + parseInt(date.getMonth() + 1) + "-" + date.getDate();
     }
   }
@@ -576,9 +589,28 @@ export class AddserviceinfoPage {
     return result;
   }
   showDatePicker() {
+
+    let today = new Date();
+    this.dd = today.getDate();
+    this.mm = today.getMonth() + 1; //January is 0!
+    let yyyy = today.getFullYear();
+
+    if (this.dd < 10) {
+      this.dd = '0' + this.dd
+    }
+
+    if (this.mm < 10) {
+      this.mm = '0' + this.mm
+    }
+
+    this.servicemaxdate = yyyy + '-' + this.mm + '-' + this.dd;
+
+    console.log("showDatePicker:" + this.servicemaxdate);
     this.datePicker.show({
       date: new Date(),
       mode: 'date',
+      allowFutureDates: true,
+      allowOldDates: false,
       androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
     }).then(
       date => {
@@ -594,9 +626,10 @@ export class AddserviceinfoPage {
     this.unitDetailData.hashtag = hashtag;
   }
 
-  
+
 
   previous() {
+    this.addedServiceImgLists = [];
     this.nav.setRoot(ServicinginfoPage, {
       record: this.NP.get("record")
     });
@@ -722,7 +755,7 @@ export class AddserviceinfoPage {
   showConfirm() {
     let confirm = this.alertCtrl.create({
       title: 'Attention',
-     
+
       message: 'Be requesting for Denyo Service Support',
       buttons: [
         {
@@ -740,7 +773,7 @@ export class AddserviceinfoPage {
           }
         }
       ],
-       cssClass: 'alertDanger'
+      cssClass: 'alertDanger'
     });
     confirm.present();
   }

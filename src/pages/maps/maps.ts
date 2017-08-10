@@ -362,7 +362,7 @@ export class MapsPage {
       console.log("Selected Unit...");
       var map = new google.maps.Map(document.getElementById("map"), {
         center: new google.maps.LatLng(val.latitude, val.longtitude),
-        zoom: 14,
+        zoom: 16,
         mapTypeId: google.maps.MapTypeId.ROADMAP
       });
 

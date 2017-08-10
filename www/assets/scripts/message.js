@@ -1,6 +1,6 @@
 var id = 1; var lpos = 1; var npos = 1; var postm = true;
 var notify = function (message) {
-	
+
 }
 var getKeyCode = function (str) {
 	return str.charCodeAt(str);
@@ -89,6 +89,7 @@ function sptions(ev) {
 		var strkeys = front.substring(atpos + 1, atpos.length);
 		//alert(strkeys);
 		//if (strkeys.length >= 1) {
+			strkeys = strkeys.replace("#", "%23");
 		SasiyaAjax.Connect_call_back("http://denyoappv2.stridecdev.com/api/atmentioned.php?method=atmention&id=" + id + "&tem=" + strkeys + "&act=message&companyId=" + companyId + "&userId=" + userId, 'get', '', 0, function (tx, n) {
 			if (!e("suschoise")) { var el = document.createElement("div"); el.className = "subx"; el.id = "suschoise"; document.body.appendChild(el); }
 			var tmp = e("suschoise"); tmp.innerHTML = tx; tmp.style.display = "block";
@@ -127,6 +128,7 @@ function sptions(ev) {
 		var strkeys = front.substring(atpos + 1, atpos.length);
 		//alert(strkeys);
 		//if (strkeys.length >= 1) {
+			strkeys = strkeys.replace("#", "%23");
 		SasiyaAjax.Connect_call_back("http://denyoappv2.stridecdev.com/api/atmentioned.php?method=atmention&id=" + id + "&tem=" + strkeys + "&act=&companyId=" + companyId + "&userId=" + userId, 'get', '', 0, function (tx, n) {
 			if (!e("suschoise")) { var el = document.createElement("div"); el.className = "subx"; el.id = "suschoise"; document.body.appendChild(el); }
 			var tmp = e("suschoise"); tmp.innerHTML = tx; tmp.style.display = "block";
@@ -166,6 +168,8 @@ function message(ev) {
 		var strkeys = front.substring(atpos + 1, atpos.length);
 		//alert(strkeys);
 		//if (strkeys.length >= 1) {
+
+		strkeys = strkeys.replace("#", "%23");
 		SasiyaAjax.Connect_call_back("http://denyoappv2.stridecdev.com/api/atmentioned.php?method=atmention&id=" + id + "&tem=" + strkeys + "&act=message&companyId=" + companyId + "&userId=" + userId, 'get', '', 0, function (tx, n) {
 			if (!e("suschoise")) { var el = document.createElement("div"); el.className = "subx"; el.id = "suschoise"; document.body.appendChild(el); }
 			var tmp = e("suschoise"); tmp.innerHTML = tx; tmp.style.display = "block";
@@ -206,6 +210,7 @@ function unit(ev) {
 		var strkeys = front.substring(atpos + 1, atpos.length);
 		//alert(strkeys);
 		//if (strkeys.length >= 1) {
+			strkeys = strkeys.replace("#", "%23");
 		SasiyaAjax.Connect_call_back("http://denyoappv2.stridecdev.com/api/atmentioned.php?method=atmention&id=" + id + "&tem=" + strkeys + "&act=unit&companyId=" + companyId + "&userId=" + userId, 'get', '', 0, function (tx, n) {
 			if (!e("suschoise")) { var el = document.createElement("div"); el.className = "subx"; el.id = "suschoise"; document.body.appendChild(el); }
 			var tmp = e("suschoise"); tmp.innerHTML = tx; tmp.style.display = "block";
