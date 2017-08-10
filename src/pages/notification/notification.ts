@@ -188,7 +188,7 @@ export class NotificationPage {
               if (isphoto > 0) {
                 usericon = this.apiServiceURL + "/staffphotos/" + res.notification[notifications].usericon;
               } else {
-                usericon = '';
+                usericon = this.apiServiceURL + "/images/" + res.notification[notifications].usericon;;
               }
               this.notificationAllLists.push({
                 table_id: res.notification[notifications].table_id,
