@@ -340,7 +340,7 @@ export class CompanygroupPage {
 
  
   previous() {
-    this.nav.setRoot(HomePage);
+    this.nav.setRoot(MyaccountPage);
   }
   notification() {
     this.nav.setRoot(NotificationPage);

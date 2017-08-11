@@ -61,26 +61,44 @@
     font-size: 12pt;">{{permissionMessage}}</p>
 </ion-content>
 <ion-content padding class="ion-content" *ngIf="VIEWACCESS==1">
-  <!--<div>
-    <div>
   <div>
- <img src="img/myac.png" style="width : 15% ; height : 50%;margin-right:15px;" ng-click="nextpage()" >
+    <div style="float: left">
+  <div>
+ <img src="img/myac.png" style="width : 25% ; height : 50%;margin-right:15px;" ng-click="nextpage()" >
   </div>
   <div>
- <ion-label>My Account</ion-label>
+ <ion-label style="    font-size: 10px;">My Account</ion-label>
   </div>
     </div>
-    <div>
- <img src="img/us.png" style="width : 15% ; height : 50%;float:left;margin-right:15px;" ng-click="nextpage()" >
+     <div style="float: left;" (click)="user()">
+  <div>
+ <img src="img/us.png" style="width : 25% ; height : 50%;margin-right:15px;" ng-click="nextpage()" >
+  </div>
+  <div>
+ <ion-label style=" margin-left: 5px;   font-size: 10px;">User List</ion-label>
+  </div>
     </div>
-    <div>
- <img src="img/mycg.png" style="width : 17% ; height : 50%;float:left;margin-right:15px;" ng-click="nextpage()" >
+    <div style="float: left;" (click)="cgroup()">
+  <div style="    margin-left: 5px;">
+ <img src="img/mycg.png" style="width : 30% ; height : 50%;margin-right:15px;" ng-click="nextpage()" >
+  </div>
+  <div>
+ <ion-label style="    font-size: 10px;">Company Group</ion-label>
+  </div>
     </div>
-    <div>
- <img src="img/ur.png" style="width : 17% ; height : 50%;float:left;margin-right:15px;" ng-click="nextpage()" >
+    <div style="float: left;   margin-left: -7px;" (click)="urole()">
+  <div>
+ <img src="img/ur.png" style="width : 25% ; height : 50%;margin-right:15px;" ng-click="nextpage()" >
+  </div>
+  <div>
+ <ion-label style="    font-size: 10px;">User Role</ion-label>
+  </div>
     </div>
-  </div>-->
-  
+  </div>
+  <div>
+          <button (click)="orgchart()" style="float:left;width:50%;height:40px">View Org Chart</button>
+           <button (click)="report()"style="float:left;width:50%;height:40px">Report Template</button>
+        </div>
 
   <div class="div-alignmnt">
     <ion-item>

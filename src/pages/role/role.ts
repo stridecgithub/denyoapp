@@ -288,7 +288,7 @@ export class RolePage {
     this.nav.setRoot(MyaccountPage);
   }
   previous() {
-    this.nav.setRoot(HomePage);
+    this.nav.setRoot(MyaccountPage);
 
 
   }
