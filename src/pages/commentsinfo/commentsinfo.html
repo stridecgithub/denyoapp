@@ -175,7 +175,7 @@
         <!--button class="viewcolor" (click)="doEdit(item,'view')">
                        <ion-icon name="eye" class="icon-size"></ion-icon>
                     </button-->
-        <button class="editcolor" (click)="doEdit(item,'edit',item.event_type)" *ngIf="EDITACCESS==1">                      
+        <button class="editcolor" (click)="doEdit(item,'edit',item.event_type)" *ngIf="EDITACCESS==1 || item.duration!=1">                      
                         <ion-icon name="create" class="icon-size"></ion-icon>
                     </button>
         <button class="trashcolor" (click)="doConfirm(item.comment_id,item)" *ngIf="DELETEACCESS==1">                        
