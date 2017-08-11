@@ -218,7 +218,8 @@ console.log("Alarm list page unit id is"+this.unitDetailData.unit_id)
       if (act == 'edit') {
         this.nav.setRoot(AddalarmlistPage, {
           record: item,
-          act: act
+          act: act,
+          from:'alarm'
         });
       }
     }

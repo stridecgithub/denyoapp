@@ -14,6 +14,7 @@ import { MapsPage } from '../maps/maps';
 import { ReportsPage } from '../reports/reports';
 import { CalendarPage } from '../calendar/calendar';
 import { EmailPage } from '../email/email';
+import { CommentsinfoPage } from '../commentsinfo/commentsinfo';
 
 /**
  * Generated class for the AddalarmlistPage page.
@@ -167,7 +168,17 @@ export class AddalarmlistPage {
           this.hideForm = true;
           this.sendNotification(`successfully Assigned`);
           localStorage.setItem("userPhotoFile", "");
-          this.nav.setRoot(AlarmlogPage);
+          if(this.NP.get("record")=='alarm')
+    {
+    this.nav.setRoot(AlarmPage,
+    {
+      record: this.NP.get("record")
+    });
+  }
+  else
+  {
+ this.nav.setRoot(CommentsinfoPage);
+  }
         }
         // Otherwise let 'em know anyway
         else {
@@ -183,10 +194,17 @@ export class AddalarmlistPage {
     notification.present();
   }
   previous() {
+    if(this.NP.get("record")=='alarm')
+    {
     this.nav.setRoot(AlarmlistdetailPage,
     {
       record: this.NP.get("record")
     });
+  }
+  else
+  {
+ this.nav.setRoot(CommentsinfoPage);
+  }
   }
   notification() {
     this.nav.setRoot(NotificationPage);
