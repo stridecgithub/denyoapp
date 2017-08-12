@@ -246,7 +246,7 @@ export class OrgchartPage {
     this.nav.setRoot(AddorgchartonePage);
   }
   previous() {
-    this.nav.setRoot(HomePage);
+    this.nav.setRoot(MyaccountPage);
   }
   doEdit(item, act) {
     if (act == 'edit') {

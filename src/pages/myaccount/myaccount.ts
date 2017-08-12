@@ -13,6 +13,8 @@ import { ReportsPage } from '../reports/reports';
 import { CalendarPage } from '../calendar/calendar';
 import { EmailPage } from '../email/email';
 import { OrgchartPage } from '../orgchart/orgchart';
+import { CompanygroupPage } from '../companygroup/companygroup';
+import { ReporttemplatePage } from '../reporttemplate/reporttemplate';
 
 
 /**
@@ -156,5 +158,24 @@ export class MyaccountPage {
     this.nav.setRoot(MyaccountPage);
   }
 
-
+user()
+{
+ this.nav.setRoot(UserPage);
+}
+cgroup()
+{
+ this.nav.setRoot(CompanygroupPage);
+}
+urole()
+{
+ this.nav.setRoot(RolePage);
+}
+orgchart()
+{
+ this.nav.setRoot(OrgchartPage);
+}
+report()
+{
+ this.nav.setRoot(ReporttemplatePage);
+}
 }
