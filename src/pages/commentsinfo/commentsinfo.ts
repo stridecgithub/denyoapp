@@ -269,7 +269,10 @@ export class CommentsinfoPage {
        else {
       this.sendNotification("Already Assigned");
     }
-    }
+  }
+   if (type.toLowerCase() == 'r') {
+     this.sendNotification("Not Applicable!!!");
+   }
 
 
   }
@@ -310,13 +313,17 @@ export class CommentsinfoPage {
   }
 
   doConfirm(id, item) {
+    if (item.event_type.toLowerCase() == 'r') {
+     this.sendNotification("Not Applicable!!!");
+   }
+   if(item.event_type.toLowerCase()=='c'){
     console.log("Deleted Id" + id);
     let confirm = this.alertCtrl.create({
       message: 'Are you sure you want to delete this comment?',
       buttons: [{
         text: 'Yes',
         handler: () => {
-          this.deleteEntry(id);
+          this.deleteEntry(id,item.event_type);
           for (let q: number = 0; q < this.reportAllLists.length; q++) {
             if (this.reportAllLists[q] == item) {
               this.reportAllLists.splice(q, 1);
@@ -330,8 +337,32 @@ export class CommentsinfoPage {
       }]
     });
     confirm.present();
+   }
+     if(item.event_type.toLowerCase()=='s'){
+        console.log("Deleted Id" + id);
+    let confirm = this.alertCtrl.create({
+      message: 'Are you sure you want to delete this Service?',
+      buttons: [{
+        text: 'Yes',
+        handler: () => {
+          this.deleteEntry(id,item.event_type);
+          for (let q: number = 0; q < this.reportAllLists.length; q++) {
+            if (this.reportAllLists[q] == item) {
+              this.reportAllLists.splice(q, 1);
+            }
+          }
+        }
+      },
+      {
+        text: 'No',
+        handler: () => { }
+      }]
+    });
+    confirm.present();
+     }
   }
-  deleteEntry(recordID) {
+  deleteEntry(recordID,types) {
+    if(types.toLowerCase()=='c'){
     let
       //body: string = "key=delete&recordID=" + recordID,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
@@ -350,6 +381,28 @@ export class CommentsinfoPage {
           this.sendNotification('Something went wrong!');
         }
       });
+    }
+    if(types.toLowerCase()=='s'){
+       let
+      //body: string = "key=delete&recordID=" + recordID,
+      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/services/" + recordID + "/1/delete";
+    this.http.get(url, options)
+      .subscribe(data => {
+        // If the request was successful notify the user
+        if (data.status === 200) {
+
+          this.sendNotification(`Service was successfully deleted`);
+        }
+        // Otherwise let 'em know anyway
+        else {
+          this.sendNotification('Something went wrong!');
+        }
+      });
+    }
+    
   }
 
   sendNotification(message): void {
