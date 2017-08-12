@@ -57,8 +57,6 @@
           <ion-select [disabled]="readOnly" [(ngModel)]="seltemplate" formControlName="seltemplate">
             <ion-option *ngFor="let templateData of responseTemplate" value="{{templateData.id}}">{{templateData.templatename}}</ion-option>
           </ion-select>
-
-
         </ion-item>
 
         <ion-item>
@@ -67,30 +65,17 @@
             <ion-option *ngFor="let timeData of responseResultTimeFrame" value="{{timeData.id}}">{{timeData.time_name}}</ion-option>
           </ion-select>
         </ion-item>
-
-
-
         <br>
         <div><b>Display Format</b></div>
-
         <div>
           <ion-radio name="r1" [(ngModel)]="r1" (click)="getFormat('table')"></ion-radio>Table &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <ion-radio name="r1" [(ngModel)]="r2" (click)="getFormat('graph')"></ion-radio>Graph</div>
-
-
-
-
-
-
-
         <div class="ion-badge-container">
           <ion-badge item-end style="height: 66px">
             <a href="#" (click)="getNextDate(1)" style="color:white;font-weight:bold;margin-top:6px">
               <ion-icon name="calendar" style="font-size: 32pt"></ion-icon> Start Date
             </a>
           </ion-badge>
-
-
           <ion-badge item-end style="height: 66px">
             <a href="#" (click)="getNextDate(2)" style="color:white;font-weight:bold;margin-top:6px">
               <ion-icon name="calendar" style="font-size: 32pt"></ion-icon> End Date
