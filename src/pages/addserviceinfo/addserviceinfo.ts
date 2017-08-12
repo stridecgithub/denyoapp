@@ -7,6 +7,7 @@ import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/trans
 import { File } from '@ionic-native/file';
 import { UserPage } from '../user/user';
 import { ServicinginfoPage } from '../servicinginfo/servicinginfo';
+import { CommentsinfoPage } from '../commentsinfo/commentsinfo';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
 import { RolePage } from '../role/role';
 import { DatePicker } from '@ionic-native/date-picker';
@@ -604,9 +605,21 @@ export class AddserviceinfoPage {
 
   previous() {
     this.addedServiceImgLists = [];
+    if(this.NP.get("from")=='service'){
     this.nav.setRoot(ServicinginfoPage, {
       record: this.NP.get("record")
     });
+  }
+  else if(this.NP.get("from")=='comment')
+  {
+ this.nav.setRoot(CommentsinfoPage);
+  }
+  else
+  {
+ this.nav.setRoot(ServicinginfoPage, {
+      record: this.NP.get("record")
+    });
+  }
   }
 
 

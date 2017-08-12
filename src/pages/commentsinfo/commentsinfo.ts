@@ -253,7 +253,7 @@ export class CommentsinfoPage {
       localStorage.setItem("microtime", "");
       this.nav.setRoot(AddserviceinfoPage, {
         record: item,
-        act: 'Edit'
+        act: 'Edit',from:'comment'
       });
     }
      if (type.toLowerCase() == 'a') {
