@@ -897,6 +897,7 @@ export class EmailPage {
       });
   }
   doDetails(item, act) {
+    this.attachedFileLists = []
     this.isSubmitted = false;
     this.act = act;
     console.log("Do Details act is:" + this.act);

@@ -116,8 +116,8 @@ export class AddcommentsinfoPage {
     console.log('ionViewDidLoad AddcommentsinfoPage');
   }
   ionViewWillEnter() {
-    this.comments="";
-    this.service_subject="";
+    this.comments = "";
+    this.service_subject = "";
     let //body: string = "loginid=" + this.userId,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
@@ -145,8 +145,8 @@ export class AddcommentsinfoPage {
         this.unitDetailData.pageTitle = 'Edit Comments';
         this.isEdited = true;
       }
-      console.log("Comment Id:" + this.comment_id);
-      console.log("Comment Unit Id:" + this.comment_unitid);
+      localStorage.setItem("iframeunitId", this.comment_unitid);
+      localStorage.setItem("unitId", this.comment_unitid);
     }
 
     this.unitDetailData.unit_id = localStorage.getItem("unitId");

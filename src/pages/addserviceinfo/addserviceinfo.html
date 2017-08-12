@@ -50,37 +50,6 @@
         </div>
       </ion-item>
 
-
-
-      <!--ion-grid>
-        <ion-row>
-          <ion-col>
-            <p><b>{{unitDetailData.unitname}}</b></p>
-            <p><b>{{unitDetailData.projectname}}</b></p>
-            <p><b>Location :</b>{{unitDetailData.location}}
-              <br>(1.31425556,103.7093099)
-            </p>
-            <p><b>Next Servicing Date :</b> {{unitDetailData.nextservicedate}}</p>
-            <p><b>Running Hours :</b> {{unitDetailData.runninghr}}</p>
-          </ion-col>
-
-          <ion-col>
-            <a href="#" (click)="getPrority(1)">
-              <ion-icon name="download{{service_priority_class1}}" style="color:aquamarine;font-size: 37px;"></ion-icon>
-            </a>
-          </ion-col>
-
-
-          <ion-col>
-            <a href="#" (click)="getPrority(2)">
-              <ion-icon name="alert{{service_priority_class2}}" style="color: brown;font-size: 37px;"></ion-icon>
-            </a>
-          </ion-col>
-        </ion-row>
-      </ion-grid-->
-
-
-
       <p><a (click)="getPrority(1)" href="#"><img src="img/low_priority.png" style="
        width: 29px;
     height: 29px;
@@ -94,7 +63,8 @@
       <!-- min="{{servicemindate}}" max="{{servicemaxdate}}"-->
       <ion-item>
         <ion-label stacked>Servicing Date <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
-        <ion-datetime pickerFormat="MMM DD YYYY" displayFormat="MM/DD/YYYY" formControlName="serviced_datetime" [(ngModel)]="serviced_datetime" min="{{servicemindate}}" max="{{servicemaxdate}}"></ion-datetime>
+        <ion-datetime pickerFormat="MMM DD YYYY" displayFormat="MM/DD/YYYY" formControlName="serviced_datetime" [(ngModel)]="serviced_datetime"
+          min="{{servicemindate}}" max="{{servicemaxdate}}"></ion-datetime>
       </ion-item>
       <ion-item>
         <ion-label stacked>Serviced By <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>

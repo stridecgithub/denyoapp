@@ -81,7 +81,7 @@
         <ion-row>
           <ion-col col-auto *ngFor="let item of addedImgListsRequest; let i = index" [attr.data-index]="i">
             <ion-item>
-              <ion-avatar item-start><img src="{{addedImgListsRequest[i].imgSrc}}" width="100" height="50" /> </ion-avatar>
+              <ion-avatar item-start><img src="{{addedImgListsRequest[i].imgSrc}}" width="300" height="350" /> </ion-avatar>
             </ion-item>
             <a href="#" (click)="doRemoveResouce(addedImgListsRequest[i].resouce_id,item)">
               <ion-icon name="backspace" style="color: brown;

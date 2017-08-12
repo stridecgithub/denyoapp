@@ -68,7 +68,7 @@ export class AddrequestsupportPage {
     this.unitDetailData.loginas = localStorage.getItem("userInfoName");
     this.unitDetailData.userId = localStorage.getItem("userInfoId");
     this.unitDetailData.serviced_by = localStorage.getItem("userInfoName");
-
+    this.addedImgListsRequest = [];
     this.form = formBuilder.group({
       profilePic: [''],
       service_subject: ['', Validators.required],
@@ -126,6 +126,7 @@ export class AddrequestsupportPage {
       this.unitDetailData.unit_id = this.NP.get("record").unit_id;
     }
     if (this.NP.get("record")) {
+      console.log("Np record param from previous" + JSON.stringify(this.NP.get("record")));
       this.selectEntry(this.NP.get("record"));
 
 
@@ -433,7 +434,16 @@ export class AddrequestsupportPage {
           resouce_id: imgDataArr[0]
         });
       }
+      console.log("this.addedImgListsRequest" + JSON.stringify(this.addedImgListsRequest));
+      console.log("Length is:" + this.addedImgListsRequest.length);
 
+      if (this.NP.get("act") == 'Add') {
+        console.log("Fresh Clear add request support info.ts start...");
+        this.addedImgListsRequest = [];
+        this.addedImgListsRequest.length = 0;
+        this.service_subject = '';
+        this.service_remark = '';
+      }
       if (this.addedImgListsRequest.length > 9) {
         this.isUploaded = false;
       }

@@ -92,76 +92,14 @@ export class AddserviceinfoPage {
 
 
 
-    let today = new Date();
-    this.dd = today.getDate();
-    this.mm = today.getMonth() + 1; //January is 0!
-    let yyyy = today.getFullYear();
-
-    if (this.dd < 10) {
-      this.dd = '0' + this.dd
-    }
-
-    if (this.mm < 10) {
-      this.mm = '0' + this.mm
-    }
-
-    this.servicemaxdate = yyyy + '-' + this.mm + '-' + this.dd;
-
-    //let d = new Date();
-    //this.servicemindate=d.setDate(d.getDate()-5);
 
 
+    this.servicemindate = this.minDateStr();
+    this.servicemaxdate = this.maxDateStr();
 
 
-
-    /* let d = new Date(); // today!
-     let x = 5; // go back 5 days!
-     this.servicemindate = d.setDate(d.getDate() - x);
- */
-
-
-    //Min8/4/2017, 4:43:05 PM
-
-
-
-    let oneWeekAgo = new Date();
-    let prevfivedays = oneWeekAgo.setDate(oneWeekAgo.getDate() - 5);
-    console.log("Previous five days:" + prevfivedays);
-
-    let dateFormat = new Date(prevfivedays);
-    // this.servicemindate = dateFormat.getDate() + '/' + (dateFormat.getMonth() + 1) + '/' + dateFormat.getFullYear();
-    this.servicemindate = dateFormat.getFullYear() + '-' + (dateFormat.getMonth() + 1) + '-' + dateFormat.getDate();
-
-
-
-    this.minyr = dateFormat.getFullYear();
-    this.minmn = (dateFormat.getMonth() + 1);
-    this.mindt = dateFormat.getDate();
-
-    if (this.mindt < 10) {
-      //mindt = '0' + mindt;
-      this.mindt = '0' + this.mindt;
-
-    }
-
-    if (this.minmn < 10) {
-      //minmn = '0' + minmn;
-      this.minmn = '0' + this.minmn;
-    }
-
-    this.servicemindate = this.minyr + '-' + this.minmn + '-' + this.mindt;
-
-    console.log("Min:" + this.servicemindate);
     console.log("Max:" + this.servicemaxdate);
 
-    // parseInt(date.getMonth() + 1)
-    /* let mindateStr = this.servicemindate.getFullYear() + '-0' + parseInt(this.servicemindate.getMonth()+1) + "-0" + this.servicemindate.getDate();
-     this.servicemaxdate = dateValidStr.getFullYear() + '-0' + dateValidStr.getMonth() + "-0" + dateValidStr.getDate();
-     this.servicemindate=mindateStr;
-     console.log("Service Minimum Date:" + mindateStr);
-      console.log("Service Minimum Date - After convert:" + this.servicemindate);
-     console.log("Service Maximum Date:" + this.servicemaxdate);*/
-    //'2017-08-08';
     this.priority_highclass = '';
     this.priority_lowclass = '';
     this.unitDetailData.loginas = localStorage.getItem("userInfoName");
@@ -201,6 +139,52 @@ export class AddserviceinfoPage {
     localStorage.setItem("microtime", this.micro_timestamp);
   }
 
+  maxDateStr() {
+
+    let today = new Date();
+    this.dd = today.getDate();
+    this.mm = today.getMonth() + 1; //January is 0!
+    let yyyy = today.getFullYear();
+
+    if (this.dd < 10) {
+      this.dd = '0' + this.dd
+    }
+
+    if (this.mm < 10) {
+      this.mm = '0' + this.mm
+    }
+
+    this.servicemaxdate = yyyy + '-' + this.mm + '-' + this.dd;
+
+    // this.servicemindate = this.minyr + '-' + this.minmn + '-' + this.mindt
+    console.log("Max:" + this.servicemaxdate);
+    return this.servicemaxdate;
+
+  }
+
+  minDateStr() {
+
+    let oneWeekAgo = new Date();
+    let prevfivedays = oneWeekAgo.setDate(oneWeekAgo.getDate() - 5);
+    console.log("Previous five days:" + prevfivedays);
+
+    let dateFormat = new Date(prevfivedays);
+    this.servicemindate = dateFormat.getFullYear() + '-' + (dateFormat.getMonth() + 1) + '-' + dateFormat.getDate();
+    this.minyr = dateFormat.getFullYear();
+    this.minmn = (dateFormat.getMonth() + 1);
+    this.mindt = dateFormat.getDate();
+
+    if (this.mindt < 10) {
+      this.mindt = '0' + this.mindt;
+    }
+
+    if (this.minmn < 10) {
+      this.minmn = '0' + this.minmn;
+    }
+    this.servicemindate = this.minyr + '-' + this.minmn + '-' + this.mindt
+    console.log("Min:" + this.servicemindate);
+    return this.servicemindate;
+  }
   ionViewDidLoad() {
     this.addedServiceImgLists = [];
     console.log('ionViewDidLoad AddserviceinfoPage');
@@ -262,6 +246,7 @@ export class AddserviceinfoPage {
       this.service_id = this.NP.get("record").service_id;
       if (this.NP.get("act") == 'Add') {
         this.serviced_datetime = "";
+        this.getPrority(0);
         this.service_remark = "";
         this.service_subject = "";
         this.next_service_date = "";
@@ -588,30 +573,19 @@ export class AddserviceinfoPage {
     console.log("SubDays Function Result is:" + result);
     return result;
   }
-  showDatePicker() {
-
-    let today = new Date();
-    this.dd = today.getDate();
-    this.mm = today.getMonth() + 1; //January is 0!
-    let yyyy = today.getFullYear();
-
-    if (this.dd < 10) {
-      this.dd = '0' + this.dd
-    }
-
-    if (this.mm < 10) {
-      this.mm = '0' + this.mm
-    }
-
-    this.servicemaxdate = yyyy + '-' + this.mm + '-' + this.dd;
+  showDatePicker() {  
 
     console.log("showDatePicker:" + this.servicemaxdate);
     this.datePicker.show({
       date: new Date(),
       mode: 'date',
-      allowFutureDates: true,
+      minDate: this.minDateStr(),
+      maxDate: this.maxDateStr(),
       allowOldDates: false,
-      androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
+      doneButtonColor: '#F2F3F4',
+      cancelButtonColor: '#000000',
+      allowFutureDates: true,
+      androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_LIGHT
     }).then(
       date => {
         let monthstr = date.getMonth() + parseInt("1");
@@ -643,6 +617,10 @@ export class AddserviceinfoPage {
   selectEntry(item) {
     this.serviced_by = item.serviced_by;
     this.serviced_datetime = item.serviced_datetime;
+    console.log("Service Date Time:" + this.serviced_datetime);
+    if (this.serviced_datetime == "0000-00-00") {
+      this.serviced_datetime = '';
+    }
     this.service_subject = item.service_subject;
     this.service_remark = item.service_remark;
     //this.next_service_date = item.next_service_date;
@@ -677,9 +655,23 @@ export class AddserviceinfoPage {
         });
       }
 
+
+
+
       if (this.addedServiceImgLists.length > 9) {
         this.isUploaded = false;
       }
+    }
+
+    if (this.NP.get("act") == 'Add') {
+      console.log("Fresh Clear add service info.ts start...");
+      this.addedServiceImgLists = [];
+      this.addedServiceImgLists.length = 0;
+      this.unitDetailData.nextServiceDate = '';
+      this.is_request = false;
+      this.service_remark = '';
+      this.service_subject = '';
+      localStorage.setItem("microtime", "");
     }
   }
   doRemoveResouce(id, item) {
@@ -689,12 +681,16 @@ export class AddserviceinfoPage {
       buttons: [{
         text: 'Yes',
         handler: () => {
-          this.deleteEntry(id);
+          if (id != undefined) {
+            this.deleteEntry(id);
+          }
           for (let q: number = 0; q < this.addedServiceImgLists.length; q++) {
             if (this.addedServiceImgLists[q] == item) {
               this.addedServiceImgLists.splice(q, 1);
             }
           }
+
+          console.log("After Deleted" + JSON.stringify(this.addedServiceImgLists));
         }
       },
       {

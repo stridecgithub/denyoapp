@@ -250,7 +250,7 @@
           <br>
           <div *ngIf="attachedFileLists.length>0"><b>Attachments:</b></div>
           <ion-item>
-            <h6 style="float:right;padding-top:4px">{{mdate}}</h6>
+            <h6 style="float:right;padding-top:4px" *ngIf="mdate!='undefined'">{{mdate}}</h6>
           </ion-item>
         </ion-item>
       </div>

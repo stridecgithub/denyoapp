@@ -42,10 +42,10 @@
         </ion-item-->
 
 
-         <ion-item>
-        <ion-label stacked>Date <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
-        <ion-input formControlName="event_date" [(ngModel)]="event_date"></ion-input>
-      </ion-item>
+        <ion-item>
+          <ion-label stacked>Date <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
+          <ion-input formControlName="event_date" [(ngModel)]="event_date"></ion-input>
+        </ion-item>
 
         <!--ion-item (click)="showDatePicker()">
           <ion-label stacked>Date <span class="mandatory" *ngIf="hideActionButton">*</span></ion-label>
@@ -92,13 +92,22 @@
           </ion-select>
         </ion-item>
 
-         <div><b>Notes/Remarks</b> <span class="mandatory" *ngIf="hideActionButton">*</span></div>
-        <!--textarea (keyup)=address1get($event.target.value); id="example1" class="form-control" rows="8" [disabled]="readOnly" formControlName="alarmhashtags"
-          rows="6" [(ngModel)]="alarmhashtags"></textarea-->
-<div>
+        <!--div><b>Notes/Remarks</b> <span class="mandatory" *ngIf="hideActionButton">*</span></div>
+        <div>
          <textarea (keyup)=address1get($event.target.value); name="to" id="to"  class="suggest form-control" onkeyup="sptions(event);address1get(this.value)" onblur="sptionshide();address1get(this.value)" rows="8" [disabled]="readOnly" formControlName="event_notes"
           cols="62" [(ngModel)]="event_notes"></textarea>
-</div>
+</div-->
+
+
+
+        <br><br>
+        <div><b>Notes/Remarks</b> <span class="mandatory" *ngIf="hideActionButton">*</span></div>
+        <div><textarea type="text" (keyup)=address1get($event.target.value); name="to" id="to" class="suggest form-control" onkeyup="sptions(event);address1get(this.value)"
+            onblur="sptionshide();address1get(this.value)" class="form-control" rows="8" [disabled]="readOnly" formControlName="event_notes"
+            [(ngModel)]="event_notes" style="height: 100px;
+    width: 281px;"></textarea></div>
+
+
         <ion-item *ngIf="hideActionButton">
           <button ion-button color="primary" text-center block [disabled]="!form.valid  || isSubmitted">Complete and Save</button>
         </ion-item>
@@ -109,33 +118,33 @@
 
 <ion-footer color="bluedark">
   <ion-toolbar color="bluedark">
-<ul class="quick-list">
-<li>
-    <button ion-button icon-only clear (click)="redirectToMaps()">
+    <ul class="quick-list">
+      <li>
+        <button ion-button icon-only clear (click)="redirectToMaps()">
     	<ion-icon name="home" class="footer-icon">MAPS</ion-icon>
     </button>
-</li>  
-<li>  
-    <button ion-button icon-only (click)="redirectToUser()" clear>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectToUser()" clear>
     	<ion-icon name="contacts" class="footer-icon">UNITS</ion-icon>
     </button>
-</li>     
-<li>    
-    <button ion-button icon-only (click)="redirectToMessage()" clear>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectToMessage()" clear>
     	<ion-icon name="chatboxes" class="footer-icon">MESSAGE</ion-icon>
     </button>
-</li>     
-<li>    
-    <button ion-button icon-only (click)="redirectCalendar()" clear>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectCalendar()" clear>
     	<ion-icon name="bicycle" class="footer-icon">CALENDAR</ion-icon>
     </button>
-</li>      
-<li>    
-    <button ion-button icon-only (click)="redirectToSettings()" clear>
+      </li>
+      <li>
+        <button ion-button icon-only (click)="redirectToSettings()" clear>
     	<ion-icon name="settings" class="footer-icon">SETTING</ion-icon>
     </button>
-</li>    
-</ul>
+      </li>
+    </ul>
 
   </ion-toolbar>
 </ion-footer>

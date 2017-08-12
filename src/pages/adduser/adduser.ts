@@ -200,6 +200,13 @@ export class AdduserPage {
          console.log("User Information:" + JSON.stringify(this.userInfo));
          */
       }
+     
+      if (this.NP.get("uservalue")[0].photo) {
+        if (this.NP.get("uservalue")[0].photo != 'undefined') {
+          this.addedImgLists = this.apiServiceURL + "/staffphotos/" + this.NP.get("uservalue")[0].photo;
+          console.log(this.addedImgLists);
+        }
+      }
     }
     /*this.first_name = "Kannan";
     this.last_name = "Nagarathinam";

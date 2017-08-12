@@ -31,6 +31,20 @@ import 'intl/locale-data/jsonp/en';
 })
 export class CalendarPage {
   public msgcount: any;
+   public colors: any = {
+    red: {
+      primary: '#ad2121',
+      secondary: '#FAE3E3'
+    },
+    blue: {
+      primary: '#1e90ff',
+      secondary: '#D1E8FF'
+    },
+    yellow: {
+      primary: '#e3bc08',
+      secondary: '#FDF1BA'
+    }
+  };
   public notcount: any;
   private permissionMessage: string = "Permission denied for access this page. Please contact your administrator";
   @ViewChild('postcontent') postcontent: ElementRef;
@@ -388,7 +402,8 @@ export class CalendarPage {
     }
     for (var i = 0; i < this.eventIdentify.length; i += 1) {
 
-      let eventdate = this.eventIdentify[i]['event_date'] + " " + this.eventIdentify[i]['event_time'];
+      //let eventdate = this.eventIdentify[i]['event_date'] + " " + this.eventIdentify[i]['event_time'];// Check Date and Time
+      let eventdate = this.eventIdentify[i]['event_date'] ;// Check Date only
       this.calendarResultEvent.push({
         event_id: this.eventIdentify[i]['event_id'],
         event_title: this.eventIdentify[i]['event_title'],
@@ -416,18 +431,13 @@ export class CalendarPage {
       }
     }
     for (var j = 0; j < this.serviceIdentify.length; j += 1) {
-      let eventdate;
-      /*if (this.serviceIdentify[j]['serviced_datetime'] == '0000-00-00') {
-        eventdate = this.serviceIdentify[j]['next_service_date'] + " " + this.serviceIdentify[j]['serviced_time'];
-      } else {
-        eventdate = this.serviceIdentify[j]['serviced_datetime'];
-      }*/
+      let eventdate;    
 
       if (this.serviceIdentify[j]['serviced_datetime'] == '0000-00-00') {
-        eventdate = this.serviceIdentify[j]['next_service_date'] + " " + this.serviceIdentify[j]['serviced_time'];
+        //eventdate = this.serviceIdentify[j]['next_service_date'] + " " + this.serviceIdentify[j]['serviced_time'];// Check Date and Time
+        eventdate = this.serviceIdentify[j]['next_service_date'] ;// Check Date only
       } else {
         if (this.serviceIdentify[j]['serviced_time'] == null) {
-          //eventdate = this.serviceIdentify[j]['next_service_date'];
           eventdate = this.serviceIdentify[j]['next_service_date'];
         } else {
           eventdate = this.serviceIdentify[j]['serviced_datetime'];
@@ -633,7 +643,8 @@ export class CalendarPage {
             title: this.eventIdentify[i]['event_title'],
             startTime: startTime,
             endTime: endTime,
-            allDay: true
+            allDay: true,
+            color: this.colors.red
           });
         }
 
@@ -642,22 +653,11 @@ export class CalendarPage {
         for (var j = 0; j < this.serviceIdentify.length; j += 1) {
           var startTime;
           var endTime;
-          // var service_date_array = this.serviceIdentify[j]['next_service_date'].split('-');
-
-          /* var service_date_array;
-           if (this.serviceIdentify[j]['serviced_datetime'] == '0000-00-00') {
-             service_date_array = this.serviceIdentify[j]['next_service_date'].split('-');
-           } else {
-             service_date_array = this.serviceIdentify[j]['serviced_datetime'].split('-');
-           }*/
-
-
           var service_date_array;
           if (this.serviceIdentify[j]['serviced_datetime'] == '0000-00-00') {
             service_date_array = this.serviceIdentify[j]['next_service_date'].split('-');
           } else {
             if (this.serviceIdentify[j]['serviced_time'] == null) {
-              //service_date_array = this.serviceIdentify[j]['next_service_date'].split('-');
                service_date_array = this.serviceIdentify[j]['next_service_date'].split('-');
             } else {
               service_date_array = this.serviceIdentify[j]['serviced_datetime'].split('-');
@@ -679,7 +679,8 @@ export class CalendarPage {
             title: this.serviceIdentify[j]['service_subject'],
             startTime: startTime,
             endTime: endTime,
-            allDay: true
+            allDay: true,
+            color: this.colors.yellow
           });
 
         }
@@ -704,7 +705,8 @@ export class CalendarPage {
             title: this.alarmIdentity[k]['alarm_name'],
             startTime: startTime,
             endTime: endTime,
-            allDay: true
+            allDay: true,
+            color: this.colors.blue
           });
 
         }

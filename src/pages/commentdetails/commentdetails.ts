@@ -133,12 +133,14 @@ export class CommentdetailsPage {
           this.unitDetailData.pageTitle = 'Add Comments';
           this.comment_unitid = this.NP.get("unit_id");
         } else {
-          this.comment_unitid = this.NP.get("record").comment_unitid;
+          this.comment_unitid = this.NP.get("record").comment_unit_id;
           this.unitDetailData.pageTitle = 'Edit Comments';
           this.isEdited = true;
         }
-        console.log("Comment Id:" + this.comment_id);
         console.log("Comment Unit Id:" + this.comment_unitid);
+
+        localStorage.setItem("iframeunitId",  this.comment_unitid);
+        localStorage.setItem("unitId",  this.comment_unitid);
       } else {
         /*console.log('Push');
         let //body: string = "loginid=" + this.userId,
@@ -183,16 +185,19 @@ export class CommentdetailsPage {
         this.notcount = data.json().notifycount;
       });
 
-localStorage.setItem("iframeunitId", this.comment_unitid);
+    //localStorage.setItem("iframeunitId", this.comment_unitid);
+   // localStorage.setItem("unitId", this.comment_unitid);
   }
   getPrority(val) {
     this.comment_priority = val
   }
   selectEntry(item) {
+    console.log("Comment Unit Id" + JSON.stringify(item));
 
     this.comments = item.comments;
     this.comment_subject = item.comment_subject;
     localStorage.setItem("unitId", item.comment_unit_id);
+    localStorage.setItem("iframeunitId", item.comment_unit_id);
     this.comment_by_name = item.comment_by_name;
     this.comment_priority = item.comment_priority;
     this.comment_remark = item.comment_remark;
