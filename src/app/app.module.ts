@@ -41,6 +41,7 @@ import { CommentsinfoPage } from '../pages/commentsinfo/commentsinfo';
 import { AddcommentsinfoPage } from '../pages/addcommentsinfo/addcommentsinfo';
 import { AddcalendarPage } from '../pages/addcalendar/addcalendar';
 import { AlarmPage } from '../pages/alarm/alarm';
+import { ReportviewtablePage } from '../pages/reportviewtable/reportviewtable';
 import { AlarmlogPage } from '../pages/alarmlog/alarmlog';
 import { AddalarmPage } from '../pages/addalarm/addalarm';
 import { MapsPage } from '../pages/maps/maps';
@@ -80,6 +81,7 @@ import { Unitgrouplist } from '../pages/unitgrouplist/unitgrouplist';
     CompanygroupPage,
     AddcompanygroupPage,
     ViewcompanygroupPage,
+    ReportviewtablePage,
     UserPage,
     AdduserPage,
     UseraccountPage,
@@ -152,6 +154,7 @@ import { Unitgrouplist } from '../pages/unitgrouplist/unitgrouplist';
      CalendardetailPage,
     CompanygroupPage,
     AddcompanygroupPage,
+    ReportviewtablePage,
     ViewcompanygroupPage,
     AddenginedetailPage,
     EnginedetailPage,

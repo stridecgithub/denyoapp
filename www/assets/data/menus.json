@@ -33,7 +33,7 @@
                 "component": "MyaccountPage"
             },
             {
-                "title": "User",
+                "title": "User List",
                 "component": "UserPage"
             },
             {
