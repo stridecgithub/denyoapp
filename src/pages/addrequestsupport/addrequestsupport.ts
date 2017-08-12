@@ -219,12 +219,19 @@ export class AddrequestsupportPage {
     fileTransfer.onProgress(this.onProgress);
     fileTransfer.upload(path, this.apiServiceURL + '/fileupload.php?micro_timestamp=' + micro_timestamp, options)
       .then((data) => {
+
+         console.log("Upload Response is" + JSON.stringify(data))
+        let res = JSON.parse(data.response);
+        console.log(res.id);
+        console.log(JSON.stringify(res));
+
         let imgSrc;
         imgSrc = this.apiServiceURL + "/serviceimages" + '/' + newFileName;
         this.addedImgListsRequest.push({
           imgSrc: imgSrc,
           imgDateTime: new Date(),
-          fileName: newFileName
+          fileName: newFileName,
+          resouce_id:res.id
         });
 
         //loading.dismiss();
