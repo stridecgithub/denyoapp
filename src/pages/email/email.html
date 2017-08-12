@@ -95,6 +95,12 @@
               <img src="{{item.senderphoto}}">
             </ion-avatar>
             <ion-item style="float:left">
+               <p><a  href="#"><img src="img/attach.png" style="
+       width: 29px;
+    height: 29px;
+    position: absolute;    margin-top: -13px;
+    margin-left: 50%;" *ngIf="item.attachments!=''" ></a>
+    </p>
               <button (click)="favorite(item.message_id)" *ngIf="item.is_favorite==1" class="favorite" style="float: right ;width:30px;height:30px;background-color:#ffffff"></button>
               <button (click)="favorite(item.message_id)" *ngIf="item.is_favorite==0" class="unfavorite" style="float: right ;width:30px;height:30px;background-color:#ffffff"></button>
               <div style="overflow: hidden; padding-left: .5em;">
@@ -153,7 +159,14 @@
 
       <ion-list *ngIf="totalCountSend!=0 && MESSAGESENTVIEWACCESS=='1'">
         <ion-item-sliding *ngFor="let item of sendLists;">
+       
           <ion-item (click)="doDetails(item,'send')">
+                <p><a  href="#"><img src="img/attach.png" style="
+       width: 29px;
+    height: 29px;
+    position: absolute;    margin-top: -13px;
+    margin-left: 75%;" *ngIf="item.attachments!=''" ></a>
+    </p>
             <h2>To:{{item.receiver_id}}</h2>
             <h2>Subject:{{item.messages_subject}}</h2>
           </ion-item>
