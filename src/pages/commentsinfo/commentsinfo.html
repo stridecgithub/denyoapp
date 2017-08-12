@@ -146,7 +146,7 @@
         <ion-avatar item-start>
           <img src="{{item.user_photo}}" *ngIf="item.user_photo!=''">
         </ion-avatar>
-        <ion-item style="float:left;padding-top: 6px">
+        <ion-item style="float:left;padding-top: 6px" (click)="details(item,'edit',item.event_type)" >
           <h5><b>Fault Code:{{item.alarm_name}}</b></h5>
           <h5><b>Assigned By:</b>{{item.alarm_assigned_by}}</h5>
           <h5><b>Assigned To:</b>{{item.alarm_assigned_to}} <span class="priorityicon"> 

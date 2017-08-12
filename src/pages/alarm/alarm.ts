@@ -126,7 +126,8 @@ export class AlarmPage {
               alarm_id: res.alarms[alarm].alarm_id,
               alarm_name: res.alarms[alarm].alarm_name,
               alarm_assginedby_name: res.alarms[alarm].alarm_assginedby_name,
-              alarm_assginedto_name: res.alarms[alarm].alarm_assginedto_name
+              alarm_assginedto_name: res.alarms[alarm].alarm_assginedto_name,
+              alarm_priority:res.alarms[alarm].alarm_priority
 
             });
           }
@@ -208,7 +209,9 @@ console.log("Alarm list page unit id is"+this.unitDetailData.unit_id)
     if (act == 'edit') {
       this.nav.setRoot(AlarmlistdetailPage, {
         record: item,
-        act: act
+        act: act,
+
+        from:'alarm'
       });
       return false;
     }

@@ -11,6 +11,7 @@ import { EmailPage } from '../email/email';
 import { AddalarmlistPage } from '../addalarmlist/addalarmlist';
 import { TrendlinePage } from '../trendline/trendline';
 import { AlarmPage } from '../alarm/alarm';
+import { CommentsinfoPage } from '../commentsinfo/commentsinfo';
 
 import { Http, Headers, RequestOptions } from '@angular/http';
 
@@ -109,7 +110,17 @@ export class AlarmlistdetailPage {
   }
   previous()
   {
-     this.nav.setRoot(AlarmPage);
+      if(this.NP.get("record")=='alarm')
+    {
+    this.nav.setRoot(AlarmPage,
+    {
+      record: this.NP.get("record")
+    });
+  }
+  else
+  {
+ this.nav.setRoot(CommentsinfoPage);
+  }
   }
   notification() {
     this.nav.setRoot(NotificationPage);

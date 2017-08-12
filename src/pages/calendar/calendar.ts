@@ -134,7 +134,7 @@ export class CalendarPage {
 
 
   ionViewWillEnter() {
-    this.totalCountEventDateWise = 0;
+   
     this.eventsselected = true;
     this.allselected = false;
     this.serviceselected = false;

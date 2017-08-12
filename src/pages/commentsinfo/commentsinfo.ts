@@ -20,6 +20,7 @@ import { MapsPage } from '../maps/maps';
 import { ReportsPage } from '../reports/reports';
 import { CalendarPage } from '../calendar/calendar';
 import { EmailPage } from '../email/email';
+import { AlarmlistdetailPage } from '../alarmlistdetail/alarmlistdetail';
 /**
  * Generated class for the ServicinginfoPage page.
  *
@@ -258,7 +259,7 @@ export class CommentsinfoPage {
      if (type.toLowerCase() == 'a') {
       console.log("Alarm")
      // localStorage.setItem("microtime", "");
-      if (item.alarm_assginedby_name == '') {
+      if (item.alarm_assigned_to == '') {
       this.nav.setRoot(AddalarmlistPage, {
           record: item,
           act: act,
@@ -294,6 +295,16 @@ export class CommentsinfoPage {
         record: item,
         act: 'Edit',
         from:'comment'
+      });
+    }
+    if(type.toLowerCase()=='a')
+    {
+      this.nav.setRoot(AlarmlistdetailPage, {
+        record: item,
+        act: act,
+        from:'comment'
+
+       
       });
     }
   }

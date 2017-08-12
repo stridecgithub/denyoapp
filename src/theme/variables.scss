@@ -3171,6 +3171,18 @@ ion-navbar ion-buttons{margin-right:15px;}
 
 //alarm
 page-alarm {
+     .alar
+ {
+     background-image:url('../img/notready.png');background-size:cover;
+    // margin-top: 13px;
+ 
+ }
+   .warning
+ {
+     background-image:url('../img/notready.png');background-size:cover;
+    // margin-top: 13px;
+ 
+ }
       .ion-content{
     background-color:white;
 }
@@ -3549,6 +3561,18 @@ ion-navbar ion-buttons{margin-right:15px;}
 
 //alarmlog
 page-alarmlog {
+        .alar
+ {
+     background-image:url('../img/notready.png');background-size:cover;
+    // margin-top: 13px;
+ 
+ }
+   .warning
+ {
+     background-image:url('../img/notready.png');background-size:cover;
+    // margin-top: 13px;
+ 
+ }
  .ion-content{
     background-color:white;
 }
@@ -7641,12 +7665,7 @@ background-color: #FBE983;
     // margin-top: 13px;
  
  }
-  .Not_Ready
- {
-     background-image:url('../img/notready.png');background-size:cover;
-    // margin-top: 13px;
  
- }
   .Offline
  {
      background-image:url('../img/offline.png');background-size:cover;
@@ -7656,6 +7675,12 @@ background-color: #FBE983;
    .Warning
  {
      background-image:url('../img/warning.png');background-size:cover;
+    // margin-top: 13px;
+ 
+ }
+  .Not_Ready
+ {
+     background-image:url('../img/notready.png');background-size:cover;
     // margin-top: 13px;
  
  }

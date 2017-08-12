@@ -120,7 +120,8 @@ export class AlarmlogPage {
               alarm_id: res.alarms[alarm].alarm_id,
               alarm_name: res.alarms[alarm].alarm_name,
               alarm_assginedby_name: res.alarms[alarm].alarm_assginedby_name,
-              alarm_assginedto_name: res.alarms[alarm].alarm_assginedto_name
+              alarm_assginedto_name: res.alarms[alarm].alarm_assginedto_name,
+              alarm_priority:res.alarms[alarm].alarm_priority
 
 
             });

@@ -239,6 +239,7 @@ export class ServicedetailsPage {
     this.service_resources = item.service_resources;
     this.service_priority = item.service_priority;
     this.requestbutton = item.is_request;
+    console.log("RS"+item.is_request);
 
 
     // Unit Details from Push

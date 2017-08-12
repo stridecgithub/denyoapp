@@ -77,7 +77,8 @@
 
       <ion-item (click)="details(item,'edit')">
         
-        
+         <button  class="alar" style="float:left ;width:30px;height:30px;margin-left: 6px;margin-top: 12px;background-color:#ffffff" *ngIf="item.alarm_priority=='1'"></button>
+        <button  class="warning" style="float:left ;width:30px;height:30px;margin-left: 6px;margin-top: 12px;background-color:#ffffff" *ngIf="item.alarm_priority=='2'"></button>
         <div style="overflow: hidden; padding-left: .5em;padding-top: 4px">
           <h5><b>Fault Code:{{item.alarm_name}}</b>
           </h5>
