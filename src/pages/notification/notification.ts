@@ -171,24 +171,25 @@ export class NotificationPage {
     this.http.get(url, options)
       .subscribe((data) => {
         res = data.json();
+        console.log("UCS"+JSON.stringify(res))
         if (res.notification != undefined) {
           if (res.notification.length > 0) {
             for (let notifications in res.notification) {
               let isphoto = 0;
-              if (res.notification[notifications].id != 'null') {
-                isphoto = 1;
-              }
-              if (res.notification[notifications].id != null) {
-                isphoto = 1;
-              }
-              if (res.notification[notifications].id != '') {
-                isphoto = 1;
-              }
+              // if (res.notification[notifications].id != 'null') {
+              //   isphoto = 1;
+              // }
+              // if (res.notification[notifications].id != null) {
+              //   isphoto = 1;
+              // }
+              // if (res.notification[notifications].id != '') {
+              //   isphoto = 1;
+              // }
               let usericon
-              if (isphoto > 0) {
+              if (res.notification[notifications].usericon !='') {
                 usericon = this.apiServiceURL + "/staffphotos/" + res.notification[notifications].usericon;
               } else {
-                usericon = this.apiServiceURL + "/images/" + res.notification[notifications].usericon;;
+                usericon = this.apiServiceURL + "/images/default.png";
               }
               this.notificationAllLists.push({
                 table_id: res.notification[notifications].table_id,

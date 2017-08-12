@@ -287,11 +287,19 @@ this.unitDetailData.favoriteindication = favorite;
 
 
   doEdit(item, act) {
+    if(item.event_type.toLowerCase()=='s')
+    {
     localStorage.setItem("microtime", "");
     this.nav.setRoot(AddserviceinfoPage, {
       record: item,
-      act: 'Edit'
+      act: 'Edit',
+      from:'service'
     });
+  }
+  else
+  {
+    this.sendNotification("Not Applicable!!!")
+  }
   }
   servicedetails(item, act) {
     localStorage.setItem("microtime", "");
@@ -303,6 +311,8 @@ this.unitDetailData.favoriteindication = favorite;
   }
 
   doConfirm(id, item) {
+    if(item.event_type.toLowerCase()=='s')
+    {
     console.log("Deleted Id" + id);
     let confirm = this.alertCtrl.create({
       message: 'Are you sure you want to delete this service info?',
@@ -323,6 +333,11 @@ this.unitDetailData.favoriteindication = favorite;
       }]
     });
     confirm.present();
+  }
+  else
+  {
+    this.sendNotification("Not Applicable!!!")
+  }
   }
   deleteEntry(recordID) {
     let

@@ -238,7 +238,7 @@ export class ServicedetailsPage {
     this.unitDetailData.nextServiceDate = item.next_service_date;
     this.service_resources = item.service_resources;
     this.service_priority = item.service_priority;
-    this.requestbutton = item.is_request;
+    this.requestbutton = item.is_denyo_support;
     console.log("RS"+item.is_request);
 
 

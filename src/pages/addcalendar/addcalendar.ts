@@ -90,13 +90,7 @@ export class AddcalendarPage {
     this.disunit = false;
     this.userId = localStorage.getItem("userInfoId");
     this.companyId = localStorage.getItem("userInfoCompanyId");
-    this.responseResultType.push({
-      id: '1',
-      type_name: 'Service',
-    }, {
-        id: '2',
-        type_name: 'Event'
-      });
+   
 
 
     /*for (let am = 600; am <= 1145; am++) {
@@ -243,8 +237,31 @@ export class AddcalendarPage {
       this.pageTitle = 'Edit Calendar';
       this.readOnly = false;
       this.hideActionButton = true;
+      if(this.NP.get("type").toLowerCase()=='event')
+      {
+         this.responseResultType.push({
+      id: '1',
+      type_name: 'Event',
+    }
+      );
+    }
+    else
+    {
+          this.responseResultType.push({
+      id: '1',
+      type_name: 'Service',
+    }
+      );
+    }
     }
     else {
+       this.responseResultType.push({
+      id: '1',
+      type_name: 'Service',
+    }, {
+        id: '2',
+        type_name: 'Event'
+      });
       this.isEdited = false;
       this.pageTitle = 'Add Calendar';
     }

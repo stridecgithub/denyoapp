@@ -149,11 +149,13 @@ export class AddrequestsupportPage {
 
 
 
+    this.unitDetailData.unit_id = localStorage.getItem("unitId");
     this.unitDetailData.unitname = localStorage.getItem("unitunitname");
     this.unitDetailData.location = localStorage.getItem("unitlocation");
     this.unitDetailData.projectname = localStorage.getItem("unitprojectname");
     this.unitDetailData.colorcodeindications = localStorage.getItem("unitcolorcode");
-    console.log("Add Request Color Code:" + this.unitDetailData.colorcodeindications);
+    this.unitDetailData.favoriteindication = localStorage.getItem("unitfav");
+    console.log("Add Comment Color Code:" + this.unitDetailData.colorcodeindications);
     this.unitDetailData.lat = localStorage.getItem("unitlat");
     this.unitDetailData.lng = localStorage.getItem("unitlng");
 
