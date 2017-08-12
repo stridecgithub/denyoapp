@@ -99,7 +99,7 @@
       <ion-item (click)="servicedetails(item,'view')" style="float:left;padding-top: 6px" *ngIf="item.event_type=='S'">
         <h5 ><b>{{item.service_subject}}</b></h5>
         <h5  *ngIf="item.serviced_by_name!=''"><b>Serviced By:</b>{{item.serviced_by_name}}</h5>
-        <h5><b>Next Servicing:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{item.next_service_date}}</h5>       
+        <h5><b>Next Servicing:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{item.nxtserviceformatted}}</h5>       
         <span class="priorityicon"> <img *ngIf="item.service_resources" src="img/attach.png" hspace="10"/>
         <img src="img/low_priority.png" hspace="10" *ngIf="item.service_priority=='1' " />
         <img src="img/high_priority.png" hspace="10" *ngIf="item.service_priority=='2'" /></span>
