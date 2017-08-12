@@ -430,4 +430,13 @@ export class CommentsinfoPage {
   redirectToSettings() {
     this.nav.setRoot(MyaccountPage);
   }
+   onSegmentChanged(val) {
+    let splitdata = val.split(",");
+    this.reportData.sort = splitdata[0];
+    this.reportData.sortascdesc = splitdata[1];
+    //this.reportData.status = "ALL";
+    this.reportData.startindex = 0;
+    this.reportAllLists = [];
+    this.doService();
+  }
 }
