@@ -328,12 +328,22 @@ export class AddserviceinfoPage {
     fileTransfer.onProgress(this.onProgress);
     fileTransfer.upload(path, this.apiServiceURL + '/fileupload.php?micro_timestamp=' + micro_timestamp, options)
       .then((data) => {
+
+       // Upload Response is{"bytesSent":1872562,"responseCode":200,"response":"{\"error\":false,\"id\":51}","objectId":""}
+
+
+        console.log("Upload Response is" + JSON.stringify(data))
+        let res = JSON.parse(data.response);
+        console.log(res.id);
+        console.log(JSON.stringify(res));
+
         let imgSrc;
         imgSrc = this.apiServiceURL + "/serviceimages" + '/' + newFileName;
         this.addedServiceImgLists.push({
           imgSrc: imgSrc,
           imgDateTime: new Date(),
-          fileName: newFileName
+          fileName: newFileName,
+          resouce_id:res.id
         });
 
         //loading.dismiss();
@@ -573,7 +583,7 @@ export class AddserviceinfoPage {
     console.log("SubDays Function Result is:" + result);
     return result;
   }
-  showDatePicker() {  
+  showDatePicker() {
 
     console.log("showDatePicker:" + this.servicemaxdate);
     this.datePicker.show({
