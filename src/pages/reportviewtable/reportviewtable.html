@@ -33,8 +33,29 @@
 </ion-header>
 
 <ion-content padding class="ion-content">
-
-
+  <div class="error" *ngIf="reportAllLists.length==0" style="color:red;text-align:center">No report entries found</div>
+  <ion-grid  *ngIf="reportAllLists.length>0">
+    <ion-row style="color: white;
+    background-color: gray;
+    font-size: 12px;">
+      <ion-col><b>Date</b></ion-col>
+      <ion-col><b>Fuel Level</b></ion-col>
+      <ion-col><b>Loadpower Factor</b></ion-col>
+      <ion-col><b>Freq</b></ion-col>
+      <ion-col><b>Engine State</b></ion-col>
+      <ion-col><b>Coolant Temp</b></ion-col>
+    </ion-row>
+    <ion-row *ngFor="let item of reportAllLists;" style="color: blue;
+    background-color: lightblue;
+    font-size: 12px;">
+      <ion-col>{{item.DATEANDTIME}}</ion-col>
+      <ion-col>{{item.FUELLEVEL}}</ion-col>
+      <ion-col>{{item.LOADPOWERFACTOR}}</ion-col>
+      <ion-col>{{item.FREQ}}</ion-col>
+      <ion-col>{{item.ENGINESTATE}}</ion-col>
+      <ion-col>{{item.COLLANTTEMP}}</ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
 <ion-footer color="bluedark">
   <ion-toolbar color="bluedark">

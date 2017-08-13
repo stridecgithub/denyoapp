@@ -40,6 +40,9 @@ export class ReportsPage {
   public exportto: any;
   public action: any;
   public seltype: any;
+  public button1: any;
+  public button2: any;
+  public datevalidaton: any;
 
 
   public responseResultTimeFrame = [];
@@ -52,14 +55,15 @@ export class ReportsPage {
     this.companyid = localStorage.getItem("userInfoCompanyId");
     // Create form builder validation rules
     this.form = fb.group({
-      "selunit": [""],
-      "seltemplate": [""],
-      "seltimeframe": [""],
-      "typeone": [""],
-      "typetwo": [""],
+      "selunit": ["", Validators.required],
+      "seltemplate": ["", Validators.required],
+      "seltimeframe": ["", Validators.required]
     });
+
   }
   ionViewWillEnter() {
+    this.datevalidaton = 0;
+    this.getFormat('table');
     this.getDropDownDataTemplate();
     this.getDropDownDataUnits();
     let //body: string = "loginid=" + this.userId,
@@ -88,30 +92,88 @@ export class ReportsPage {
 
   getNextDate(val) {
     let date;
-    this.showDatePicker(val);
+    this.datePicker.show({
+      date: new Date(), mode: 'date',
+      doneButtonColor: '#F2F3F4',
+      cancelButtonColor: '#000000',
+      allowFutureDates: true,
+      androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_LIGHT
+    }).then(
+      date => {
+        let monthstr = date.getMonth() + parseInt("1");
+        if (val == '1') {
+          this.from = date.getFullYear() + "-" + monthstr + "-" + date.getDate();
+          console.log('From date: ', this.from);
+        }
+        if (val == '2') {
+          this.to = date.getFullYear() + "-" + monthstr + "-" + date.getDate();
+          console.log('To date: ', this.to);
+        }
+      },
+      err => console.log('Error occurred while getting date: ', err)
+      );
 
-    if (val == '1') {
+    /*if (val == '1') {
       this.from = date.getFullYear() + "-" + parseInt(date.getMonth() + 1) + "-" + date.getDate();
+      console.log("From date from choosen calendar:" + this.from);
     }
 
     if (val == '2') {
       this.to = date.getFullYear() + "-" + parseInt(date.getMonth() + 1) + "-" + date.getDate();
-    }
+      console.log("From date from choosen calendar:" + this.to);
+    }*/
   }
 
 
   saveEntry() {
+    console.log("Button 1:" + this.button1);
+    console.log("Button 2:" + this.button2);
     let selunit: string = this.form.controls["selunit"].value,
       seltemplate: string = this.form.controls["seltemplate"].value,
       seltimeframe: string = this.form.controls["seltimeframe"].value;
     // this.createEntry(selunit, seltemplate, seltimeframe);
-    this.from = "2017-08-09";
-    this.to = "2017-08-12";
-    this.action = 'view';
+    //this.from = "2017-08-09";
+    //this.to = "2017-08-09";
+
     this.exportto = 'table';
     this.seltype = 0; // 0 for TABLE 1 for PDF
 
 
+    // Statically
+    /*selunit = '1';
+    seltimeframe = 'continues';
+    seltemplate = '1';
+    this.from = "2017-08-12";
+    this.to = "2017-08-12";
+    this.action = 'view';
+    this.exportto = 'table';
+    this.seltype = 0;*/
+    // Statically
+    if (this.from == undefined) {
+      this.from = '';
+    }
+    if (this.from == 'undefined') {
+      this.from = '';
+    }
+    if (this.from == '') {
+      this.from = '';
+    }
+
+    if (this.to == undefined) {
+      this.to = '';
+    }
+    if (this.to == 'undefined') {
+      this.to = '';
+    }
+    if (this.to == '') {
+      this.to = '';
+    }
+    if (this.from == '' && this.to == '') {
+      this.datevalidaton = 1;
+      return false;
+    } else {
+      this.datevalidaton = 0;
+    }
 
 
     this.nav.setRoot(ReportviewtablePage, {
@@ -121,8 +183,6 @@ export class ReportsPage {
       from: this.from,
       to: this.to,
       exportto: this.exportto,
-      action: this.action,
-      seltype: this.seltype
     });
 
 
@@ -136,31 +196,7 @@ export class ReportsPage {
 
   }
 
-  showDatePicker(val) {
 
-
-    this.datePicker.show({
-      date: new Date(), mode: 'date',
-
-      doneButtonColor: '#F2F3F4',
-      cancelButtonColor: '#000000',
-      allowFutureDates: true,
-      androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_LIGHT
-    }).then(
-      date => {
-        let monthstr = date.getMonth() + parseInt("1");
-        if (val == '1') {
-          this.from = date.getFullYear() + "-" + monthstr + "-" + date.getDate();
-          console.log('Got date: ', date);
-        }
-        if (val == '2') {
-          this.to = date.getFullYear() + "-" + monthstr + "-" + date.getDate();
-          console.log('Got date: ', date);
-        }
-      },
-      err => console.log('Error occurred while getting date: ', err)
-      );
-  }
 
   //http://denyoappv2.stridecdev.com/reports/viewreport?is_mobile=1&selunit=1&seltimeframe=continues&seltemplate=1&from=2017-08-12&to=2017-08-12&action=view&exportto=table&seltype=0
   getTemplate(templateId) {
