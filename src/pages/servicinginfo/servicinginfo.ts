@@ -136,6 +136,8 @@ this.unitDetailData.favoriteindication = favorite;
     console.log("Unit Details Color Code:" + this.unitDetailData.colorcodeindications);
     this.unitDetailData.lat = localStorage.getItem("unitlat");
     this.unitDetailData.lng = localStorage.getItem("unitlng");
+     this.unitDetailData.rh=localStorage.getItem("runninghr");
+     this.unitDetailData.ns=localStorage.getItem("nsd");
 
     }
     this.reportData.startindex = 0;
@@ -311,8 +313,7 @@ this.unitDetailData.favoriteindication = favorite;
   }
 
   doConfirm(id, item) {
-    if(item.event_type.toLowerCase()=='s')
-    {
+   
     console.log("Deleted Id" + id);
     let confirm = this.alertCtrl.create({
       message: 'Are you sure you want to delete this service info?',
@@ -333,11 +334,8 @@ this.unitDetailData.favoriteindication = favorite;
       }]
     });
     confirm.present();
-  }
-  else
-  {
-    this.sendNotification("Not Applicable!!!")
-  }
+  
+  
   }
   deleteEntry(recordID) {
     let

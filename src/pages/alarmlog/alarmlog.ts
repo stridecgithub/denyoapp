@@ -154,6 +154,8 @@ export class AlarmlogPage {
     console.log("Alarm log page unit id is"+this.unitDetailData.unit_id)
     localStorage.setItem("unitId",  this.unitDetailData.unit_id);
     localStorage.setItem("iframeunitId",  this.unitDetailData.unit_id);
+     this.unitDetailData.rh=localStorage.getItem("runninghr");
+     this.unitDetailData.ns=localStorage.getItem("nsd");
 
     this.unitDetailData.lat = localStorage.getItem("unitlat");
     this.unitDetailData.lng = localStorage.getItem("unitlng");

@@ -114,6 +114,8 @@ this.unitDetailData.favoriteindication = favorite;
     console.log("Unit Details Color Code:" + this.unitDetailData.colorcodeindications);
     this.unitDetailData.lat = localStorage.getItem("unitlat");
     this.unitDetailData.lng = localStorage.getItem("unitlng");
+     this.unitDetailData.rh=localStorage.getItem("runninghr");
+     this.unitDetailData.ns=localStorage.getItem("nsd");
 
     }
     let //body: string = "loginid=" + this.userId,

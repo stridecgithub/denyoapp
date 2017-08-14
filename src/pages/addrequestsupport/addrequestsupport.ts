@@ -158,6 +158,8 @@ export class AddrequestsupportPage {
     console.log("Add Comment Color Code:" + this.unitDetailData.colorcodeindications);
     this.unitDetailData.lat = localStorage.getItem("unitlat");
     this.unitDetailData.lng = localStorage.getItem("unitlng");
+     this.unitDetailData.rh=localStorage.getItem("runninghr");
+     this.unitDetailData.ns=localStorage.getItem("nsd");
 
 
   }

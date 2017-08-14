@@ -115,6 +115,8 @@ export class ServicedetailsPage {
      console.log("Add Comment Color Code:" + this.unitDetailData.colorcodeindications);
      this.unitDetailData.lat = localStorage.getItem("unitlat");
      this.unitDetailData.lng = localStorage.getItem("unitlng");
+      this.unitDetailData.rh=localStorage.getItem("runninghr");
+     this.unitDetailData.ns=localStorage.getItem("nsd");
     let //body: string = "loginid=" + this.userId,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),

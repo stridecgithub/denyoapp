@@ -906,7 +906,7 @@ export class EmailPage {
     //http://denyoappv2.stridecdev.com/messages/changereadunread?is_mobile=1&ses_login_id=9&messages_id=44
 
     let body: string = "is_mobile=1&ses_login_id=" + this.userId +
-      "&message_id=" + item.message_id,
+      "&message_id=" + item.message_id+"&frompage=inbox",
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),

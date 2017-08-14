@@ -47,6 +47,8 @@
       <h5 style="white-space: normal;
     width: 100%;">Location:{{unitDetailData.location}}</h5>
       <h5  *ngIf="unitDetailData.lat!=''">({{unitDetailData.lat}},{{unitDetailData.lng}})</h5>
+      <h5 style="white-space:normal;">Next Servicing Date:{{unitDetailData.ns}}</h5>
+      <h5 style="white-space:normal;">Running Hours:{{unitDetailData.rh}} Hours</h5>
       
     </div>
   </ion-item>
@@ -120,7 +122,7 @@
         <!--button class="viewcolor" (click)="doEdit(item,'view')">
                        <ion-icon name="eye" class="icon-size"></ion-icon>
                     </button-->
-        <button class="editcolor" (click)="doEdit(item,'edit')"  *ngIf="EDITACCESS==1">                      
+        <button class="editcolor" (click)="doEdit(item,'edit')"  *ngIf="EDITACCESS== 1 && item.duration!=1">                      
                         <ion-icon name="create" class="icon-size"></ion-icon>
                     </button>
         <button class="trashcolor" (click)="doConfirm(item.service_id,item)"  *ngIf="DELETEACCESS==1">                        

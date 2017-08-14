@@ -156,6 +156,8 @@ export class AlarmPage {
 console.log("Alarm list page unit id is"+this.unitDetailData.unit_id)
     localStorage.setItem("unitId",  this.unitDetailData.unit_id);
     localStorage.setItem("iframeunitId",  this.unitDetailData.unit_id);
+     this.unitDetailData.rh=localStorage.getItem("runninghr");
+     this.unitDetailData.ns=localStorage.getItem("nsd");
 
     console.log("Add Comment Color Code:" + this.unitDetailData.colorcodeindications);
     this.unitDetailData.lat = localStorage.getItem("unitlat");

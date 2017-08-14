@@ -175,6 +175,7 @@ export class UnitsPage {
               genstatus: res.units[unit].genstatus,
               lat: res.units[unit].lat,
               lng: res.units[unit].lng,
+              runninghr:res.units[unit].runninghr,
               favoriteindication: favorite
             });
           }
@@ -263,6 +264,8 @@ console.log(JSON.stringify(this.selectedAction));*/
     localStorage.setItem("unitcolorcode", item.colorcodeindications);
     localStorage.setItem("unitlat", item.lat);
     localStorage.setItem("unitlng", item.lng);
+    localStorage.setItem("runninghr",item.runninghr);
+      localStorage.setItem("nsd",item.nextservicedate);
     console.log(this.str + "//" + JSON.stringify(this.detailvalue));
     localStorage.setItem("viewlist", this.str);
   }
@@ -292,6 +295,19 @@ console.log(JSON.stringify(this.selectedAction));*/
         this.sendNotification("Please select Atleast One Unit")
       }
       else {
+        let item;
+        item = this.detailvalue;
+         localStorage.setItem("unitId", item.unit_id);
+      localStorage.setItem("iframeunitId", item.unit_id);
+      localStorage.setItem("unitunitname", item.unitname);
+      localStorage.setItem("unitlocation", item.location);
+      localStorage.setItem("unitprojectname", item.projectname);
+      localStorage.setItem("unitcolorcode", item.colorcodeindications);
+      localStorage.setItem("unitlat", item.lat);
+      localStorage.setItem("unitlng", item.lng);
+      localStorage.setItem("runninghr",item.runninghr);
+      localStorage.setItem("nsd",item.nextservicedate);
+
         this.nav.setRoot(UnitdetailsPage, {
           record: this.detailvalue
         });
@@ -347,6 +363,9 @@ console.log(JSON.stringify(this.selectedAction));*/
       localStorage.setItem("unitcolorcode", item.colorcodeindications);
       localStorage.setItem("unitlat", item.lat);
       localStorage.setItem("unitlng", item.lng);
+      localStorage.setItem("runninghr",item.runninghr);
+      console.log("RHR"+item.runninghr);
+      localStorage.setItem("nsd",item.nextservicedate);
 
 
       this.nav.setRoot(UnitdetailsPage, {

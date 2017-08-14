@@ -12,9 +12,10 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     </ion-buttons>
-    <ion-buttons end>
-      <button ion-button>
- <ion-icon name="notifications-outline"></ion-icon>
+  <ion-buttons end>
+      <button ion-button (click)="notification()">
+  <ion-icon ios="ios-notifications-outline" md="md-notifications-outline"></ion-icon>
+  <ion-badge item-end class="notificationcount" *ngIf="notcount>0">{{this.notcount}}</ion-badge>
 </button>
     </ion-buttons>
   </ion-navbar>

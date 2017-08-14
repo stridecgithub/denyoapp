@@ -32,7 +32,7 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-  <form [formGroup]="form" (ngSubmit)="showConfirm()" enctype='application/x-www-form-urlencoded' method="post">
+  <form [formGroup]="form" enctype='application/x-www-form-urlencoded' method="post">
     <ion-list>
 
  <ion-item>
@@ -45,6 +45,8 @@
       <h5>Project Name:{{unitDetailData.projectname}}</h5>
       <h5 style="white-space:normal">Location:{{unitDetailData.location}}</h5>
       <h5 *ngIf="unitDetailData.lat!=''">({{unitDetailData.lat}},{{unitDetailData.lng}})</h5>
+        <h5 style="white-space:normal;">Next Servicing Date:{{unitDetailData.ns}}</h5>
+      <h5 style="white-space:normal;">Running Hours:{{unitDetailData.rh}} Hours</h5>
       
     </div>
   </ion-item>
@@ -57,9 +59,12 @@
       <!--input type="text" (keyup)=address1get($event.target.value); id="example1" class="form-control" rows="8" [disabled]="readOnly"
         formControlName="service_remark" rows="6" [(ngModel)]="service_remark"-->
 
+ <textarea type="text"  
+        class="form-control" rows="8" [disabled]="readOnly" formControlName="service_remark"
+        [(ngModel)]="service_remark"></textarea>
 
-         <input type="text" class="form-control" rows="8" [disabled]="readOnly"
-        formControlName="service_remark" [(ngModel)]="service_remark">
+         <!--<input type="text" class="form-control" rows="8" [disabled]="readOnly"
+        formControlName="service_remark" [(ngModel)]="service_remark">-->
 
       <p><b>Upload Images</b></p>
       <p>Maximum Number of upload photos:10</p>
@@ -95,7 +100,7 @@
         </ion-row>
       </ion-grid>
       <ion-item *ngIf="hideActionButton">
-        <button ion-button color="primary" text-center block [disabled]="!form.valid  || isSubmitted">Complete and Save</button>
+        <button ion-button color="primary" (click)="showConfirm()" text-center block [disabled]="!form.valid  || isSubmitted">Complete and Save</button>
       </ion-item>
     </ion-list>
   </form>

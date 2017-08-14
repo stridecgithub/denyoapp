@@ -3179,7 +3179,7 @@ page-alarm {
  }
    .warning
  {
-     background-image:url('../img/notready.png');background-size:cover;
+     background-image:url('../img/warning.png');background-size:cover;
     // margin-top: 13px;
  
  }
@@ -3569,7 +3569,7 @@ page-alarmlog {
  }
    .warning
  {
-     background-image:url('../img/notready.png');background-size:cover;
+     background-image:url('../img/warning.png');background-size:cover;
     // margin-top: 13px;
  
  }
@@ -4103,6 +4103,18 @@ page-commentsinfo {
     .ion-content{
     background-color:white;
 }
+     .alar
+ {
+     background-image:url('../img/notready.png');background-size:cover;
+    // margin-top: 13px;
+ 
+ }
+   .warning
+ {
+     background-image:url('../img/warning.png');background-size:cover;
+    // margin-top: 13px;
+ 
+ }
 .notificationcount{
   color: white;
     border-radius: 50px;

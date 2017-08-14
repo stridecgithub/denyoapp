@@ -46,6 +46,8 @@
       <h5>Project Name:{{unitDetailData.projectname}}</h5>
       <h5 style="white-space:normal;">Location:{{unitDetailData.location}}</h5>
       <h5  *ngIf="unitDetailData.lat!=''">({{unitDetailData.lat}},{{unitDetailData.lng}})</h5>
+      <h5 style="white-space:normal;">Next Servicing Date::{{unitDetailData.ns}}</h5>
+      <h5 style="white-space:normal;">Running Hours:{{unitDetailData.rh}} Hours</h5>
       
 
 <!--
@@ -130,7 +132,7 @@
         <img src="img/low_priority.png" hspace="10" *ngIf="item.service_priority=='1'" />
         <img src="img/high_priority.png" hspace="10" *ngIf="item.service_priority=='2'" /></span>
           </h5>
-          <h6 style=" float:right;margin-left: 200px;">{{item.serviced_datetime}}</h6>
+          <h6 style=" float:right;margin-left: 200px;">{{item.serviced_datetime_formatted}}</h6>
 
         </ion-item>
       </ion-item>
@@ -145,7 +147,7 @@
         <img src="img/low_priority.png" hspace="10" *ngIf="item.service_priority=='1'" />
         <img src="img/high_priority.png" hspace="10" *ngIf="item.service_priority=='2'" /></span>
           </h5>
-          <h6 style=" float:right;margin-left: 200px;">{{item.serviced_datetime}}</h6>
+          <h6 style=" float:right;margin-left: 200px;">{{item.serviced_datetime_formatted}}</h6>
 
         </ion-item>
       </ion-item>
@@ -188,7 +190,7 @@
         <button class="editcolor" (click)="doEdit(item,'edit',item.event_type)" *ngIf="EDITACCESS==1 || item.duration!=1">                      
                         <ion-icon name="create" class="icon-size"></ion-icon>
                     </button>
-        <button class="trashcolor" (click)="doConfirm(item.comment_id,item)" *ngIf="DELETEACCESS==1">                        
+        <button class="trashcolor" (click)="doConfirm(item,item.event_type)" *ngIf="DELETEACCESS==1">                        
                          <ion-icon name="trash" class="icon-size"></ion-icon>
                     </button>
       </ion-item-options>

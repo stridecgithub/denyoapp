@@ -46,6 +46,8 @@
       <h5>Project Name:{{unitDetailData.projectname}}</h5>
       <h5 style="white-space: normal">Location:{{unitDetailData.location}}</h5>
       <h5  *ngIf="unitDetailData.lat!=''">({{unitDetailData.lat}},{{unitDetailData.lng}})</h5>
+      <h5 style="white-space:normal;">Next Servicing Date:{{unitDetailData.ns}}</h5>
+      <h5 style="white-space:normal;">Running Hours:{{unitDetailData.rh}} Hours</h5>
       
     </div>
   </ion-item>
