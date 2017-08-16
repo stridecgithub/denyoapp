@@ -64,8 +64,14 @@
   <!--script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?&sensor=false"></script-->
   <script async defer src="https://maps.googleapis.com/maps/api/js?v=3&key= AIzaSyCbvwOWwex4xcDVJKlfPsJiz5fmmsEB9KA"></script>
   <script>
-    function getButton(val) {     
-       localStorage.setItem("buttonRpt",val);
+    function getButton(val) {
+      localStorage.setItem("buttonRpt", val);
+    }
+
+    function unitDetailsPageNavigation(item) {
+      // alert('Map Navigation calling...');
+      //window.location.href = 'pages/unitdetails/unitdetails.html';
+      localStorage.setItem("unitdetailsclicked", item);
     }
   </script>
 </body>

@@ -1,10 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform, MenuController, ToastController, AlertController } from 'ionic-angular';
+import { Nav, Platform, MenuController, ToastController, AlertController, NavController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 //import { DashboardPage } from '../pages/dashboard/dashboard';
+
+import { UnitdetailsPage } from '../pages/unitdetails/unitdetails';
 import { Unitgrouplist } from '../pages/unitgrouplist/unitgrouplist';
 import { CompanygroupPage } from '../pages/companygroup/companygroup';
 import { CompanydetailPage } from '../pages/companydetail/companydetail';
@@ -44,6 +46,7 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
+  @ViewChild('content') navCtrl: NavController;
   rootPage: any = HomePage;
   pages: any;
   showLevel1 = null;
@@ -83,8 +86,8 @@ export class MyApp {
       { title: 'Add Engine Details', Component: AddenginedetailPage },
       { title: 'Engine Details', Component: EngineviewPage },
       { title: 'ForgotPassword', Component: ForgotpasswordPage },
-      { title: 'Company Group Detail', Component:CompanydetailPage},
-      { title: 'Unit Group List', Component:Unitgrouplist},
+      { title: 'Company Group Detail', Component: CompanydetailPage },
+      { title: 'Unit Group List', Component: Unitgrouplist },
 
       // { title: 'Map Demo', component: MapdemoPage },
 
@@ -103,7 +106,40 @@ export class MyApp {
       setTimeout(() => {
         this.splashScreen.hide();
       }, 100);
-
+      /// Set timer for click to edit unit details page
+      /*
+       var timer = 0;
+     setInterval(() => {      
+         timer++;       
+         console.log("Timer value of " + timer);
+         let isclickedtounitdetails = 1;
+         let clicked = localStorage.getItem("unitdetailsclicked");
+          console.log("Unit  " + JSON.stringify(clicked));
+         if (clicked == undefined) {
+           isclickedtounitdetails = 0;
+         }
+         if (clicked == 'undefined') {
+           isclickedtounitdetails = 0;
+         }
+         if (clicked == '') {
+           isclickedtounitdetails = 0;
+         }
+         if (isclickedtounitdetails > 0) {
+           timer = 1;
+           console.log(JSON.stringify(clicked))
+ 
+           //this.nav.setRoot(HomePage);
+           this.callUnitDetails(clicked);
+           //this.openPage(UnitsPage);
+         }
+ 
+ 
+       }, 1000);
+       setTimeout(function () {
+ 
+       }, 3000);
+ */
+      /// Set timer for click to edit unit details page
     });
 
 
@@ -134,6 +170,12 @@ export class MyApp {
 
     // stop connect watch
     connectSubscription.unsubscribe();
+  }
+
+  callUnitDetails(clicked) {
+    this.nav.setRoot(UnitdetailsPage, {
+      record: clicked
+    });
   }
 
   // Manage notifying the user of the outcome

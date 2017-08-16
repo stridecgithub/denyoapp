@@ -1,7 +1,7 @@
 import { Component, ViewChild, NgZone } from '@angular/core';
-import { AlertController, NavController, NavParams, ViewController, ToastController, LoadingController } from 'ionic-angular';
+import { ActionSheetController, AlertController, NavController, NavParams, ViewController, ToastController, LoadingController } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { Camera } from '@ionic-native/camera';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
@@ -36,6 +36,7 @@ export class EmailPage {
 
   isReadyToSave: boolean;
   public photoInfo = [];
+  public uploadResultBase64Data;
   public inboxLists = [];
   public sendLists = [];
   public loginas: any;
@@ -127,7 +128,7 @@ export class EmailPage {
     results: 8
   }
   public hideActionButton = true;
-  constructor(public keyboard: Keyboard, private file: File, public http: Http, public loadingCtrl: LoadingController, public alertCtrl: AlertController, public NP: NavParams, public nav: NavController, public toastCtrl: ToastController, public navParams: NavParams, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera, private filechooser: FileChooser,
+  constructor(public actionSheetCtrl: ActionSheetController, public keyboard: Keyboard, private file: File, public http: Http, public loadingCtrl: LoadingController, public alertCtrl: AlertController, public NP: NavParams, public nav: NavController, public toastCtrl: ToastController, public navParams: NavParams, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera, private filechooser: FileChooser,
     private transfer: Transfer,
     private ngZone: NgZone) {
     this.replyforward = 0;
@@ -448,6 +449,85 @@ export class EmailPage {
 
 
   fileChooser(micro_timestamp) {
+
+
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Attachment',
+      buttons: [
+        {
+          text: 'From File',
+          role: 'fromfile',
+          handler: () => {
+            console.log('From File clicked');
+
+            this.isUploadedProcessing = true;
+            this.filechooser.open()
+              .then(
+              uri => {
+                console.log(uri);
+                this.fileTrans(uri, micro_timestamp);
+                this.addedAttachList = uri;
+              }
+
+              )
+              .catch(e => console.log(e));
+          }
+        }, {
+          text: 'From Camera',
+          handler: () => {
+            console.log('Camera clicked');
+
+            /*const options: CameraOptions = {
+              quality: 75,
+              destinationType: this.camera.DestinationType.FILE_URI,
+              targetWidth: 200,
+              targetHeight: 200,
+              sourceType: 1
+            }*/
+
+            const options: CameraOptions = {
+              quality: 75,
+              destinationType: this.camera.DestinationType.FILE_URI,
+              sourceType: 1,
+              // allowEdit: true,
+              targetWidth: 200,
+              targetHeight: 200,
+              //encodingType: this.camera.EncodingType.JPEG,
+              //saveToPhotoAlbum: true
+            };
+
+            this.camera.getPicture(options).then((uri) => {
+              /* console.log(imageData);
+               localStorage.setItem("userPhotoFile", imageData);
+               //this.fileTrans(imageData);
+ 
+               this.uploadResultBase64Data = imageData;
+               this.addedImgLists = imageData;
+               this.isUploadedProcessing = false;
+               return false;*/
+
+              console.log(uri);
+              this.fileTrans(uri, micro_timestamp);
+              this.addedAttachList = uri;
+            }, (err) => {
+              // Handle error
+              this.sendNotification(err);
+            });
+          }
+        }, {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    actionSheet.present();
+
+
+
+    /*
     this.isUploadedProcessing = true;
     this.filechooser.open()
       .then(
@@ -461,7 +541,7 @@ export class EmailPage {
       .catch(e => console.log(e));
 
 
-    return false;
+    return false;*/
 
 
   }
@@ -906,7 +986,7 @@ export class EmailPage {
     //http://denyoappv2.stridecdev.com/messages/changereadunread?is_mobile=1&ses_login_id=9&messages_id=44
 
     let body: string = "is_mobile=1&ses_login_id=" + this.userId +
-      "&message_id=" + item.message_id+"&frompage=inbox",
+      "&message_id=" + item.message_id + "&frompage=inbox",
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),

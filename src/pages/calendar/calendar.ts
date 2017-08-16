@@ -31,7 +31,7 @@ import 'intl/locale-data/jsonp/en';
 })
 export class CalendarPage {
   public msgcount: any;
-   public colors: any = {
+  public colors: any = {
     red: {
       primary: '#ad2121',
       secondary: '#FAE3E3'
@@ -134,7 +134,7 @@ export class CalendarPage {
 
 
   ionViewWillEnter() {
-   
+
     this.eventsselected = true;
     this.allselected = false;
     this.serviceselected = false;
@@ -340,13 +340,13 @@ export class CalendarPage {
         let months = { '01': 'January', '02': 'February', '03': 'March', '04': 'April', '05': 'May', '06': 'June', '07': 'July', '08': 'August', '09': 'September', '10': 'October', '11': 'November', '12': 'December' };
 
         let selDate = year + "-" + month + "-" + date;
-        let selectdate=year+"-"+month+"-"+date;
+        let selectdate = year + "-" + month + "-" + date;
         if (year != undefined)
           this.dateHeaderTitle = months[month] + " " + year;
         if (ev != '') {
           console.log("curDate:" + curDate);
           console.log("selDate:" + selDate);
-           localStorage.setItem("sdate", selectdate);
+          localStorage.setItem("sdate", selectdate);
           if (curDate == selDate) {
             this.daySession = 'Todays  Event';
             console.log(this.daySession);
@@ -403,7 +403,7 @@ export class CalendarPage {
     for (var i = 0; i < this.eventIdentify.length; i += 1) {
 
       //let eventdate = this.eventIdentify[i]['event_date'] + " " + this.eventIdentify[i]['event_time'];// Check Date and Time
-      let eventdate = this.eventIdentify[i]['event_date'] ;// Check Date only
+      let eventdate = this.eventIdentify[i]['event_date'];// Check Date only
       this.calendarResultEvent.push({
         event_id: this.eventIdentify[i]['event_id'],
         event_title: this.eventIdentify[i]['event_title'],
@@ -412,7 +412,14 @@ export class CalendarPage {
         event_location: this.eventIdentify[i]['event_location'],
         event_remark: this.eventIdentify[i]['event_remark'],
         event_addedby_name: this.eventIdentify[i]['event_addedby_name'],
-        event_type: 'E'
+        event_type: 'E',
+        icon: 'alarm', // Icon of the alert. This is compulsory when using the 
+        // calendar on small screens, as the name of the event will
+        // not be displayed in the month grid. It has to be a valid
+        // IonicIcons icon name.
+        class: 'class', // Class of the item in the month grid cell
+        iconStyle: { color: 'green' }, // Style for the item's icon
+        style: { color: 'red' }, // Style for the item
       });
     }
 
@@ -431,11 +438,11 @@ export class CalendarPage {
       }
     }
     for (var j = 0; j < this.serviceIdentify.length; j += 1) {
-      let eventdate;    
+      let eventdate;
 
       if (this.serviceIdentify[j]['serviced_datetime'] == '0000-00-00') {
         //eventdate = this.serviceIdentify[j]['next_service_date'] + " " + this.serviceIdentify[j]['serviced_time'];// Check Date and Time
-        eventdate = this.serviceIdentify[j]['next_service_date'] ;// Check Date only
+        eventdate = this.serviceIdentify[j]['next_service_date'];// Check Date only
       } else {
         if (this.serviceIdentify[j]['serviced_time'] == null) {
           eventdate = this.serviceIdentify[j]['next_service_date'];
@@ -453,7 +460,14 @@ export class CalendarPage {
         event_remark: this.serviceIdentify[j]['service_remark'],
         event_location: this.serviceIdentify[j]['service_location'],
         event_addedby_name: this.serviceIdentify[j]['serviced_by_name'],
-        event_type: 'S'
+        event_type: 'S',
+        icon: 'alarm', // Icon of the alert. This is compulsory when using the 
+        // calendar on small screens, as the name of the event will
+        // not be displayed in the month grid. It has to be a valid
+        // IonicIcons icon name.
+        class: 'class', // Class of the item in the month grid cell
+        iconStyle: { color: 'green' }, // Style for the item's icon
+        style: { color: 'red' }, // Style for the item
       });
 
     }
@@ -483,7 +497,14 @@ export class CalendarPage {
         event_remark: this.alarmIdentity[k]['alarm_remark'],
         event_location: this.alarmIdentity[k]['alarm_location'],
         event_addedby_name: this.alarmIdentity[k]['alarm_assginedby_name'],
-        event_type: 'A'
+        event_type: 'A',
+        icon: 'alarm', // Icon of the alert. This is compulsory when using the 
+        // calendar on small screens, as the name of the event will
+        // not be displayed in the month grid. It has to be a valid
+        // IonicIcons icon name.
+        class: 'class', // Class of the item in the month grid cell
+        iconStyle: { color: 'green' }, // Style for the item's icon
+        style: { color: 'red' }, // Style for the item
       });
 
 
@@ -531,7 +552,7 @@ export class CalendarPage {
     });
   }
 
-  doCalendarView(event_id){    
+  doCalendarView(event_id) {
     this.navCtrl.setRoot(CalendardetailPage, {
       event_id: event_id
     });
@@ -623,7 +644,7 @@ export class CalendarPage {
     console.log("All Events calling API URL" + url);
 
     // console.log(url);
-
+    let colors: string[] = ['primary', 'warning', 'danger', 'success'];
     this.http.get(url, options)
       .subscribe((data) => {
         let res = data.json();
@@ -637,14 +658,28 @@ export class CalendarPage {
           var datestr = parseInt(event_date_array[2], 10);
           var startMinute = Math.floor(Math.random() * 24 * 60);
           var endMinute = Math.floor(Math.random() * 180) + startMinute;
-          startTime = new Date(yearstr, monthstr, datestr, 0, 0 + startMinute);
-          endTime = new Date(yearstr, monthstr, datestr, 0, 0 + endMinute);
+          /* startTime = new Date(yearstr, monthstr, datestr, 0, 0 + startMinute);
+           endTime = new Date(yearstr, monthstr, datestr, 0, 0 + endMinute);*/
+
+          startTime = new Date(yearstr, monthstr, datestr, 0, 0);
+          endTime = new Date(yearstr, monthstr, datestr, 0, 0);
+
+
           events.push({
             title: this.eventIdentify[i]['event_title'],
             startTime: startTime,
             endTime: endTime,
             allDay: true,
-            color: this.colors.red
+            //color: this.colors.red,
+            className: ['eventsClass'],
+            icon: 'alarm', // Icon of the alert. This is compulsory when using the 
+            // calendar on small screens, as the name of the event will
+            // not be displayed in the month grid. It has to be a valid
+            // IonicIcons icon name.
+            class: 'class', // Class of the item in the month grid cell
+            iconStyle: { color: 'green' }, // Style for the item's icon
+            style: { color: 'red' }, // Style for the item
+            color: colors[Math.floor(Math.random() * colors.length)]
           });
         }
 
@@ -658,7 +693,7 @@ export class CalendarPage {
             service_date_array = this.serviceIdentify[j]['next_service_date'].split('-');
           } else {
             if (this.serviceIdentify[j]['serviced_time'] == null) {
-               service_date_array = this.serviceIdentify[j]['next_service_date'].split('-');
+              service_date_array = this.serviceIdentify[j]['next_service_date'].split('-');
             } else {
               service_date_array = this.serviceIdentify[j]['serviced_datetime'].split('-');
             }
@@ -673,14 +708,26 @@ export class CalendarPage {
           var datestr = parseInt(service_date_array[2], 10);
           var startMinute = Math.floor(Math.random() * 24 * 60);
           var endMinute = Math.floor(Math.random() * 180) + startMinute;
-          startTime = new Date(yearstr, monthstr, datestr, 0, 0 + startMinute);
-          endTime = new Date(yearstr, monthstr, datestr, 0, 0 + endMinute);
+          /*startTime = new Date(yearstr, monthstr, datestr, 0, 0 + startMinute);
+          endTime = new Date(yearstr, monthstr, datestr, 0, 0 + endMinute);*/
+
+          startTime = new Date(yearstr, monthstr, datestr, 0, 0);
+          endTime = new Date(yearstr, monthstr, datestr, 0, 0);
           events.push({
             title: this.serviceIdentify[j]['service_subject'],
             startTime: startTime,
             endTime: endTime,
             allDay: true,
-            color: this.colors.yellow
+
+            className: ['eventsService'],
+            icon: 'alarm', // Icon of the alert. This is compulsory when using the 
+            // calendar on small screens, as the name of the event will
+            // not be displayed in the month grid. It has to be a valid
+            // IonicIcons icon name.
+            class: 'class', // Class of the item in the month grid cell
+            iconStyle: { color: 'green' }, // Style for the item's icon
+            style: { color: 'red' }, // Style for the item
+            color: colors[Math.floor(Math.random() * colors.length)]
           });
 
         }
@@ -699,14 +746,26 @@ export class CalendarPage {
           var startMinute = Math.floor(Math.random() * 24 * 60);
           var endMinute = Math.floor(Math.random() * 180) + startMinute;
 
-          startTime = new Date(yearstr, monthstr, datestr, 0, 0 + startMinute);
-          endTime = new Date(yearstr, monthstr, datestr, 0, 0 + endMinute);
+          /*startTime = new Date(yearstr, monthstr, datestr, 0, 0 + startMinute);
+          endTime = new Date(yearstr, monthstr, datestr, 0, 0 + endMinute);*/
+
+          startTime = new Date(yearstr, monthstr, datestr, 0, 0);
+          endTime = new Date(yearstr, monthstr, datestr, 0, 0);
           events.push({
             title: this.alarmIdentity[k]['alarm_name'],
             startTime: startTime,
             endTime: endTime,
             allDay: true,
-            color: this.colors.blue
+
+            className: ['eventsAlarm'],
+            icon: 'alarm', // Icon of the alert. This is compulsory when using the 
+            // calendar on small screens, as the name of the event will
+            // not be displayed in the month grid. It has to be a valid
+            // IonicIcons icon name.
+            class: 'class', // Class of the item in the month grid cell
+            iconStyle: { color: 'green' }, // Style for the item's icon
+            style: { color: 'red' }, // Style for the item
+            color: colors[Math.floor(Math.random() * colors.length)]
           });
 
         }
