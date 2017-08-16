@@ -61,7 +61,8 @@
       </ion-item>
       <div>
         <ion-label stacked>Remark</ion-label>
-        <ion-textarea rows="6" type="text" [disabled]="readOnly" formControlName="remark" [(ngModel)]="remark"></ion-textarea>
+        <ion-textarea  (keyup)=address1get($event.target.value); name="to" id="to" class="sugges" onkeyup="sptions(event);address1get(this.value)"
+        onblur="sptionshide();address1get(this.value)" rows="6" type="text" [disabled]="readOnly" formControlName="remark" [(ngModel)]="remark"></ion-textarea>
 
       </div>
       <ion-item>

@@ -47,6 +47,9 @@ export class AddalarmlistPage {
   // Flag to be used for checking whether we are adding/editing an entry
   public isEdited: boolean = false;
   public readOnly: boolean = false;
+  public unitDetailData: any = {
+    hashtag:''
+  }
 
   // Flag to hide the form upon successful completion of remote operation
   public hideForm: boolean = false;
@@ -144,6 +147,10 @@ export class AddalarmlistPage {
         this.responseResultReportTo = res.staffslist;
       });
 
+  }
+   address1get(hashtag) {
+    console.log(hashtag);
+    this.unitDetailData.hashtag = hashtag;
   }
   saveEntry() {
     this.isSubmitted=true;

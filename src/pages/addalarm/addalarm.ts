@@ -38,6 +38,9 @@ export class AddalarmPage {
   public uname: any;
   public assignedby: any;
   micro_timestamp: any;
+   public unitDetailData: any = {
+    hashtag:''
+  }
   public userId: any;
    public isSubmitted: boolean = false;
   public responseResultCountry: any;
@@ -180,6 +183,10 @@ export class AddalarmPage {
       duration: 3000
     });
     notification.present();
+  }
+   address1get(hashtag) {
+    console.log(hashtag);
+    this.unitDetailData.hashtag = hashtag;
   }
   previous() {
     this.nav.setRoot(AlarmdetailsPage,
