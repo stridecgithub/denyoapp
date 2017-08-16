@@ -316,7 +316,7 @@ export class MapsPage {
 
 
   loadMap(val) {
-    this.timerStart();
+    //this.timerStart();
     console.log(JSON.stringify(val));
     console.log(val.length);
     if (JSON.stringify(val).length > 0) {
@@ -699,6 +699,8 @@ export class MapsPage {
     localStorage.setItem("unitcolorcode", item.colorcodeindications);
     localStorage.setItem("unitlat", item.lat);
     localStorage.setItem("unitlng", item.lng);
+     localStorage.setItem("runninghr",item.runninghr);
+      localStorage.setItem("nsd",item.nextservicedate);
     console.log(this.str + "//" + JSON.stringify(this.detailvalue));
     localStorage.setItem("viewlist", this.str);
 
@@ -710,6 +712,18 @@ export class MapsPage {
         this.sendNotification("Please select Atleast One Unit")
       }
       else {
+         let item;
+        item = this.detailvalue;
+         localStorage.setItem("unitId", item.unit_id);
+      localStorage.setItem("iframeunitId", item.unit_id);
+      localStorage.setItem("unitunitname", item.unitname);
+      localStorage.setItem("unitlocation", item.location);
+      localStorage.setItem("unitprojectname", item.projectname);
+      localStorage.setItem("unitcolorcode", item.colorcodeindications);
+      localStorage.setItem("unitlat", item.lat);
+      localStorage.setItem("unitlng", item.lng);
+      localStorage.setItem("runninghr",item.runninghr);
+      localStorage.setItem("nsd",item.nextservicedate);
         this.navCtrl.setRoot(UnitdetailsPage, {
           record: this.detailvalue
         });
@@ -740,7 +754,7 @@ export class MapsPage {
         }
         // If the request was successful notify the user
         if (data.status === 200) {
-          this.loadMap(0);
+this.loadMap(0);
           this.reportData.startindex = 0;
           this.reportData.sort = "unit_id";
           //this.doUser();
