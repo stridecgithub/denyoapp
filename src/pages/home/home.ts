@@ -5,10 +5,11 @@ import { Device } from '@ionic-native/device';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { DashboardPage } from '../dashboard/dashboard';
 import { ForgotpasswordPage } from '../forgotpassword/forgotpassword';
+import { DatePicker } from '@ionic-native/date-picker';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
-  providers: [Device]
+  providers: [Device, DatePicker]
 })
 export class HomePage {
   public form: FormGroup;
@@ -17,7 +18,7 @@ export class HomePage {
   public userInf: any;
   header_data: any;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
-  constructor(public navCtrl: NavController, public fb: FormBuilder, public device: Device, private http: Http, public toastCtrl: ToastController) {
+  constructor(public navCtrl: NavController, private datePicker: DatePicker, public fb: FormBuilder, public device: Device, private http: Http, public toastCtrl: ToastController) {
     this.form = fb.group({
       "userid": ["", Validators.required],
       "password": ["", Validators.required]
@@ -25,7 +26,7 @@ export class HomePage {
     this.header_data = { ismenu: true, ishome: false, title: "Home" };
     this.userInf = localStorage.getItem("userInfoId");
     console.log("UserId Localtorage" + this.userInf);
-console.log("A");
+    console.log("A");
     if (this.userInf == 'null') {
       this.userInf = 0;
       console.log("B");
@@ -40,19 +41,33 @@ console.log("A");
     }
     console.log(this.userInf);
     if (this.userInf > 0) {
-       console.log("E");
+      console.log("E");
       this.navCtrl.setRoot(DashboardPage);
-    } 
+    }
   }
   login() {
     let userid: string = this.form.controls["userid"].value,
       password: string = this.form.controls["password"].value;
-        console.log("G");
+    console.log("G");
     this.loginEntry(userid, password);
   }
 
+
+  showDatePicker() {
+    this.datePicker.show({
+      date: new Date(),
+      mode: 'date',
+      minDate: "2017-08-15",
+      maxDate: "2017-08-19",
+      androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_LIGHT
+    }).then(
+      date => console.log('Got date: ', date),
+      err => console.log('Error occurred while getting date: ', err)
+      );
+  }
+
   loginEntry(username, password) {
-      console.log("H");
+    console.log("H");
     let device_token = localStorage.getItem("deviceTokenForPushNotification");
     let res;
     let body: string = "username=" + username +
@@ -339,7 +354,7 @@ console.log("A");
         }
 
       });
-       console.log("I");
+    console.log("I");
   }
   sendNotification(message): void {
     let notification = this.toastCtrl.create({

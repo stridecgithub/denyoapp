@@ -155,6 +155,7 @@ export class UnitdetailsPage {
 	}
 
 	ionViewWillEnter() {
+		 localStorage.setItem("unitdetailsclicked",'');
 		this.iframeContent = "<iframe id='filecontainer' src=" + this.apiServiceURL + "/" + this.unitDetailData.unit_id + "/1/unitdetails height=350 width=100% frameborder=0></iframe>";
 
 		//http://denyoappv2.stridecdev.com/getcount?loginid=1&unitid=2

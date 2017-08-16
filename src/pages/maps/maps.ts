@@ -224,6 +224,27 @@ export class MapsPage {
 
   }
   ionViewWillEnter() {
+    let i = 0;
+    let isclickedtounitdetails = 1;
+    setTimeout(() => {
+      let clicked = localStorage.getItem("unitdetailsclicked");
+      if (clicked == undefined) {
+        isclickedtounitdetails = 0;
+      }
+      if (clicked == 'undefined') {
+        isclickedtounitdetails = 0;
+      }
+      if (clicked == '') {
+        isclickedtounitdetails = 0;
+      }
+      if (isclickedtounitdetails > 0) {
+        this.navCtrl.setRoot(UnitdetailsPage, {
+          record: clicked
+        });
+      }
+      console.log(i);
+      i++;
+    }, 1000);
 
 
     let //body: string = "loginid=" + this.userId,
@@ -249,7 +270,53 @@ export class MapsPage {
     this.loadMap(0);
   }
 
+
+  timerStart() {
+    /// Set timer for click to edit unit details page
+
+    var timer = 0;
+    let id = setInterval(() => {
+      timer++;
+      console.log("Timer value of " + timer);
+      let isclickedtounitdetails = 1;
+      let clicked = localStorage.getItem("unitdetailsclicked");
+      console.log("Unit  " + JSON.stringify(clicked));
+      if (clicked == undefined) {
+        isclickedtounitdetails = 0;
+      }
+      if (clicked == 'undefined') {
+        isclickedtounitdetails = 0;
+      }
+      if (clicked == '') {
+        isclickedtounitdetails = 0;
+      }
+      if (isclickedtounitdetails > 0) {
+        timer = 1;
+        console.log(JSON.stringify(clicked))
+
+        //this.nav.setRoot(HomePage);
+        this.callUnitDetails(clicked);
+        //this.openPage(UnitsPage);
+      }
+
+
+    }, 1000);
+    setTimeout(function () {
+
+    }, 3000);
+
+    /// Set timer for click to edit unit details page
+  }
+
+  callUnitDetails(clicked) {
+    this.navCtrl.setRoot(UnitdetailsPage, {
+      record: clicked
+    });
+  }
+
+
   loadMap(val) {
+    this.timerStart();
     console.log(JSON.stringify(val));
     console.log(val.length);
     if (JSON.stringify(val).length > 0) {
@@ -273,9 +340,9 @@ export class MapsPage {
           for (var unit in res.units) {
             if (val == 0) {
               var labeldata = '<div class="info_content">' +
-                '<h3><a href="#" (click)="mapunitdetail(' + res.units[unit].unit_id + ')">' + res.units[unit].unitname + '</a></h3>' +
+                '<h3><a href="#" onclick="unitDetailsPageNavigation( ' + res.units[unit].unit_id + ')" (click)="mapunitdetail(' + res.units[unit].unit_id + ')">' + res.units[unit].unitname + '</a></h3>' +
                 '<h4>' + res.units[unit].projectname + '</h4>' +
-                '<p>Running Hours:' + res.units[unit].runninghr + '</p>' + '</div>';
+                '<p>Running Hours:' + res.units[unit].runninghr + ' Hours</p>' + '</div>';
 
               /* var labeldata = '<div class="info_content">' +
               '<h3><a href="/unitdetails/">' + res.units[unit].unitname + '</a></h3>' +
@@ -294,7 +361,8 @@ export class MapsPage {
                 position: latLng,
                 map: map,
                 title: res.units[unit].unitname,
-                infoContent: labeldata
+                infoContent: labeldata,
+                icon: this.apiServiceURL + "/images/completed.png"
               });
               var infoWindow = new google.maps.InfoWindow();
               (function (marker, data, unit, addressData) {
@@ -309,9 +377,9 @@ export class MapsPage {
 
             } else {
               var labeldata = '<div class="info_content">' +
-                '<h3><a href="#" data-tap-disabled="true" (click)="mapunitdetail(' + val.unit_id + ')">' + val.unitname + '</a></h3>' +
+                '<h3><a href="#" onclick="unitDetailsPageNavigation( ' + res.units[unit].unit_id + ')"  data-tap-disabled="true" (click)="mapunitdetail(' + val.unit_id + ')">' + val.unitname + '</a></h3>' +
                 '<h4>' + val.projectname + '</h4>' +
-                '<p>Running Hours:' + val.runninghr + '</p>' + '</div>';
+                '<p>Running Hours:' + val.runninghr + ' Hours</p>' + '</div>';
 
 
               /* var labeldata = '<div class="info_content">' +
@@ -324,7 +392,10 @@ export class MapsPage {
                 position: latLng,
                 map: map,
                 title: val.unitname,
-                infoContent: labeldata
+                infoContent: labeldata,
+                //  icon: iconBase + 'parking_lot_maps.png'
+
+                icon: this.apiServiceURL + "/images/completed.png"
               });
               var infoWindow = new google.maps.InfoWindow();
               (function (marker, data, addressData) {
@@ -369,9 +440,7 @@ export class MapsPage {
     }
   }
 
-  xyz() {
-    console.log('Hello');
-  }
+
   doAdd() {
     this.navCtrl.setRoot(AddunitsonePage);
   }
@@ -675,7 +744,7 @@ export class MapsPage {
           this.reportData.startindex = 0;
           this.reportData.sort = "unit_id";
           //this.doUser();
-      this.navCtrl.setRoot(this.navCtrl.getActive().component);
+          this.navCtrl.setRoot(this.navCtrl.getActive().component);
 
 
         }

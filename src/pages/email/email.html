@@ -200,7 +200,7 @@
             onblur="sptionshide();address1get(this.value)" class="form-control" rows="10" [disabled]="readOnly" formControlName="to"
             [(ngModel)]="to">
           <div style="position: relative;top: 12px;">
-            <span><ion-checkbox type="checkbox" name="copytome" formControlName="copytome"  [(ngModel)]="copytome"></ion-checkbox>&nbsp; Copy Mail</span>
+            <span><ion-checkbox type="checkbox" name="copytome" formControlName="copytome"  [(ngModel)]="copytome"></ion-checkbox>&nbsp; Email a copy to myself</span>
             <span> 
             <ion-icon (click)="fileChooser(micro_timestamp)" *ngIf="isUploaded" name="attach" style="color: black;
     position: relative;

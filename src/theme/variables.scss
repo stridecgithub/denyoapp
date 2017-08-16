@@ -3700,6 +3700,20 @@ ion-navbar ion-buttons{margin-right:15px;}
 
 page-calendar {
 
+
+    .eventsClass
+    {
+border:3px solid lightcoral;
+    }
+
+    .eventsService{
+       border:3px solid lemonchiffon; 
+    }
+
+     .eventsService{
+       border:3px solid yellow; 
+    }
+
     /* Badge Count for Notification and Message */
 .notificationcount{
   color: white;
