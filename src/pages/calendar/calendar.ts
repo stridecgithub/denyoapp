@@ -11,6 +11,7 @@ import { UserPage } from '../user/user';
 
 import { AddcalendarPage } from '../addcalendar/addcalendar';
 
+import { AlarmdetailsPage } from '../alarmdetails/alarmdetails';
 import { CalendardetailPage } from '../calendardetail/calendardetail';
 import { DatePicker } from '@ionic-native/date-picker';
 
@@ -555,6 +556,13 @@ export class CalendarPage {
   doCalendarView(event_id) {
     this.navCtrl.setRoot(CalendardetailPage, {
       event_id: event_id
+    });
+  }
+
+  doAlarmView(event_id) {
+    this.navCtrl.setRoot(AlarmdetailsPage, {
+      record: event_id,
+      act: 'Push'
     });
   }
   deleteEntry(recordID, deltype) {
