@@ -1,6 +1,21 @@
-import { Component } from '@angular/core';
-import {  NavController, NavParams } from 'ionic-angular';
-
+import { Component, NgZone } from '@angular/core';
+import { NavController, NavParams, ToastController } from 'ionic-angular';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { Http, Headers, RequestOptions } from '@angular/http';
+import { UserPage } from '../user/user';
+import { UseraccountPage } from '../useraccount/useraccount';
+import 'rxjs/add/operator/map';
+import { FileChooser } from '@ionic-native/file-chooser';
+import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
+import { File } from '@ionic-native/file';
+import { MyaccountPage } from '../myaccount/myaccount';
+import { UnitsPage } from '../units/units';
+import { NotificationPage } from '../notification/notification';
+import { MapsPage } from '../maps/maps';
+import { ReportsPage } from '../reports/reports';
+import { CalendarPage } from '../calendar/calendar';
+import { EmailPage } from '../email/email';
+import { OrgchartPage} from '../orgchart/orgchart';
 /**
  * Generated class for the ViewcompanygroupPage page.
  *
@@ -45,5 +60,23 @@ export class ViewcompanygroupPage {
     this.totalunit = item.totalunit;
     this.recordID = item.companygroup_id;
    
+  }
+   notification() {
+    this.navCtrl.setRoot(NotificationPage);
+  }
+  redirectToUser() {
+    this.navCtrl.setRoot(UnitsPage);
+  }
+  redirectToMessage() {
+    this.navCtrl.setRoot(EmailPage);
+  }
+  redirectCalendar() {
+    this.navCtrl.setRoot(CalendarPage);
+  }
+  redirectToMaps() {
+    this.navCtrl.setRoot(MapsPage);
+  }
+  redirectToSettings() {
+    this.navCtrl.setRoot(OrgchartPage);
   }
 }

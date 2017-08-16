@@ -12,6 +12,7 @@ import { RolePage } from '../role/role';
 import { CompanygroupPage } from '../companygroup/companygroup';
 import 'rxjs/add/operator/map';
 import { Http, Headers, RequestOptions } from '@angular/http';
+import { OrgchartPage} from '../orgchart/orgchart';
 //import { Http, Headers, RequestOptions } from '@angular/http';
 
 /**
@@ -333,7 +334,7 @@ export class ServicedetailsPage {
     this.nav.setRoot(UnitsPage);
   }
   redirectToMyAccount() {
-    this.nav.setRoot(MyaccountPage);
+    this.nav.setRoot(OrgchartPage);
   }
 
   redirectToRole() {

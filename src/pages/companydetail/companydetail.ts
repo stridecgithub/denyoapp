@@ -17,6 +17,7 @@ import { ReportsPage } from '../reports/reports';
 import { CalendarPage } from '../calendar/calendar';
 import { CompanygroupPage } from '../companygroup/companygroup';
 import { EmailPage } from '../email/email';
+import { OrgchartPage} from '../orgchart/orgchart';
 
 
 /**
@@ -219,6 +220,6 @@ this.nav.setRoot(CompanygroupPage);
     this.nav.setRoot(MapsPage);
   }
   redirectToSettings() {
-    this.nav.setRoot(MyaccountPage);
+    this.nav.setRoot(OrgchartPage);
   }  
 }

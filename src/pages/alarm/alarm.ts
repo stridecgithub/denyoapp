@@ -13,7 +13,7 @@ import { CalendarPage } from '../calendar/calendar';
 import { EmailPage } from '../email/email';
 import { AlarmlistdetailPage } from '../alarmlistdetail/alarmlistdetail';
 import { AddalarmlistPage } from '../addalarmlist/addalarmlist';
-
+import { OrgchartPage} from '../orgchart/orgchart'
 //import { TabsPage } from '../tabs/tabs';
 //import { UserPage } from '../user/user';
 ////import { CompanygroupPage } from '../companygroup/companygroup';
@@ -261,6 +261,6 @@ console.log("Alarm list page unit id is"+this.unitDetailData.unit_id)
     this.nav.setRoot(MapsPage);
   }
   redirectToSettings() {
-    this.nav.setRoot(MyaccountPage);
+    this.nav.setRoot(OrgchartPage);
   }
 }

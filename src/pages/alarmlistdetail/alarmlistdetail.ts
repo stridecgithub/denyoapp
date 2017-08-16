@@ -12,7 +12,7 @@ import { AddalarmlistPage } from '../addalarmlist/addalarmlist';
 import { TrendlinePage } from '../trendline/trendline';
 import { AlarmPage } from '../alarm/alarm';
 import { CommentsinfoPage } from '../commentsinfo/commentsinfo';
-
+import { OrgchartPage} from '../orgchart/orgchart';
 import { Http, Headers, RequestOptions } from '@angular/http';
 
 /**
@@ -138,6 +138,6 @@ export class AlarmlistdetailPage {
     this.nav.setRoot(MapsPage);
   }
   redirectToSettings() {
-    this.nav.setRoot(MyaccountPage);
+    this.nav.setRoot(OrgchartPage);
   }
 }

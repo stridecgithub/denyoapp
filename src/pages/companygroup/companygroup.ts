@@ -17,6 +17,7 @@ import { ReportsPage } from '../reports/reports';
 import { CalendarPage } from '../calendar/calendar';
 import { EmailPage } from '../email/email';
 import { CompanydetailPage } from '../companydetail/companydetail';
+import { OrgchartPage} from '../orgchart/orgchart';
 /**
  * Generated class for the CompanygroupPage page.
  *
@@ -358,6 +359,6 @@ export class CompanygroupPage {
     this.nav.setRoot(MapsPage);
   }
   redirectToSettings() {
-    this.nav.setRoot(MyaccountPage);
+    this.nav.setRoot(OrgchartPage);
   }  
 }

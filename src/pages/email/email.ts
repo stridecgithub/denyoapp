@@ -19,6 +19,7 @@ import { MapsPage } from '../maps/maps';
 import { ReportsPage } from '../reports/reports';
 import { CalendarPage } from '../calendar/calendar';
 import { Keyboard } from '@ionic-native/keyboard';
+import { OrgchartPage} from '../orgchart/orgchart';
 
 /**
  * Generated class for the AddserviceinfoPage page.
@@ -824,7 +825,7 @@ export class EmailPage {
     this.nav.setRoot(MapsPage);
   }
   redirectToSettings() {
-    this.nav.setRoot(MyaccountPage);
+    this.nav.setRoot(OrgchartPage);
   }
   selectEntry(item) {
     console.log(JSON.stringify(item));

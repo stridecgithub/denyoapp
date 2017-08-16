@@ -14,6 +14,7 @@ import { ReportsPage } from '../reports/reports';
 import { CalendarPage } from '../calendar/calendar';
 import { EmailPage } from '../email/email';
 import { Http, Headers, RequestOptions } from '@angular/http';
+import { OrgchartPage} from '../orgchart/orgchart';
 import 'rxjs/add/operator/map';
 
 /**
@@ -258,7 +259,7 @@ export class CommentdetailsPage {
     this.nav.setRoot(MapsPage);
   }
   redirectToSettings() {
-    this.nav.setRoot(MyaccountPage);
+    this.nav.setRoot(OrgchartPage);
   }
 
   redirectToRole() {

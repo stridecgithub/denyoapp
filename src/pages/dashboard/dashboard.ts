@@ -8,6 +8,7 @@ import { ReportsPage } from '../reports/reports';
 import { CalendarPage } from '../calendar/calendar';
 import { CalendardetailPage } from '../calendardetail/calendardetail';
 import { EmailPage } from '../email/email';
+import { OrgchartPage} from '../orgchart/orgchart';
 import { Http, Headers, RequestOptions } from '@angular/http';
 @Component({
   selector: 'page-dashboard',
@@ -61,7 +62,7 @@ export class DashboardPage {
     this.nav.setRoot(MapsPage);
   }
   redirectToSettings() {
-    this.nav.setRoot(MyaccountPage);
+    this.nav.setRoot(OrgchartPage);
   }
 
   ionViewWillEnter() {

@@ -272,7 +272,7 @@ export class OrgchartPage {
     this.nav.setRoot(MapsPage);
   }
   redirectToSettings() {
-    this.nav.setRoot(MyaccountPage);
+    //this.nav.setRoot(OrgchartPage);
   }
 }
 

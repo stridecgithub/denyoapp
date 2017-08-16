@@ -23,7 +23,7 @@ import { ReportsPage } from '../reports/reports';
 import { CalendarPage } from '../calendar/calendar';
 import { EmailPage } from '../email/email';
 import { AlarmPage } from '../alarm/alarm';
-
+import { OrgchartPage} from '../orgchart/orgchart';
 
 /**
  * Generated class for the UnitdetailsPage page.
@@ -289,7 +289,7 @@ export class UnitdetailsPage {
 		this.nav.setRoot(MapsPage);
 	}
 	redirectToSettings() {
-		this.nav.setRoot(MyaccountPage);
+		this.nav.setRoot(OrgchartPage);
 	}
 	viewunit() {
 		this.nav.setRoot(ViewunitsPage, {
