@@ -1085,6 +1085,7 @@ export class EmailPage {
 
   }
   com() {
+    this.isSubmitted = false;
     this.to = "";
     this.subject = "";
     this.composemessagecontent = "";

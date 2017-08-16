@@ -48,7 +48,9 @@
     font-size: 12pt;">{{permissionMessage}}</p>
 </ion-content>
 <ion-content padding class="ion-content" *ngIf="VIEWACCESS==1">
-  <div #map id="map"></div>
+  <div #map id="map" style="position: relative;
+    overflow: hidden;
+    height: 275px;"></div>
   <!--div [innerHTML]="sanitizer.bypassSecurityTrustHtml(iframeContent)"></div-->
 
   <div class="error" *ngIf="reportAllLists.length==0">No unit entries found</div>
