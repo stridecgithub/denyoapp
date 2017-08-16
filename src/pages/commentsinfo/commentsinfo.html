@@ -112,7 +112,7 @@
           <img src="{{item.user_photo}}" *ngIf="item.user_photo!=''">
         </ion-avatar>
         <ion-item style="padding-top: 6px;" (click)="details(item,'edit',item.event_type)" style="float: left">
-          <h5><b>{{item.comment_subject}}</b></h5>
+          <h5  style="padding-top:3px"><b>{{item.comment_subject}}</b></h5>
           <h5><b>Comment By:</b>{{item.comment_by_name}}</h5>
           <h5><b>Remark:</b>{{item.comment_remark}}</h5>
 
@@ -125,8 +125,8 @@
         <ion-avatar item-start>
           <img src="{{item.user_photo}}" *ngIf="item.user_photo!=''">
         </ion-avatar>
-        <ion-item style="padding-top: 6px;" (click)="details(item,'edit',item.event_type)" style="float:left">
-          <h5><b>{{item.service_subject}}</b></h5>
+        <ion-item style="padding-top:8px;" (click)="details(item,'edit',item.event_type)" style="float:left">
+          <h5  style="padding-top:3px"><b>{{item.service_subject}}</b></h5>
           
           <h5><b>By:</b>{{item.serviced_by_name}} <span class="priorityicon"> <img *ngIf="item.service_resources" src="img/attach.png" hspace="10"/>
         <img src="img/low_priority.png" hspace="10" *ngIf="item.service_priority=='1'" />
@@ -140,8 +140,8 @@
         <ion-avatar item-start>
           <img src="{{item.user_photo}}" *ngIf="item.user_photo!=''">
         </ion-avatar>
-        <ion-item style="padding-top: 6px;" (click)="details(item,'edit',item.event_type)" style="float:left">
-          <h5><b>{{item.service_subject}}</b></h5>
+        <ion-item style="padding-top:8px;" (click)="details(item,'edit',item.event_type)" style="float:left">
+          <h5  style="padding-top:3px"><b>{{item.service_subject}}</b></h5>
           <h5><b>Serviced By:</b>{{item.serviced_by_name}}</h5>
           <h5><b>Next Servicing:</b>{{item.nxt_serviceformatted}} <span class="priorityicon"> <img *ngIf="item.service_resources" src="img/attach.png" hspace="10"/>
         <img src="img/low_priority.png" hspace="10" *ngIf="item.service_priority=='1'" />
@@ -158,8 +158,8 @@
         <ion-avatar item-start>
           <img src="{{item.user_photo}}" *ngIf="item.user_photo!=''">
         </ion-avatar>
-        <ion-item style="float:left;padding-top: 6px" (click)="details(item,'edit',item.event_type)" >
-          <h5><b>Fault Code:{{item.alarm_name}}</b></h5>
+        <ion-item style="float:left;padding-top: 8px" (click)="details(item,'edit',item.event_type)" >
+          <h5 style="padding-top:3px"><b>Fault Code:{{item.alarm_name}}</b></h5>
           <h5><b>Assigned By:</b>{{item.alarm_assigned_by}}</h5>
           <h5><b>Assigned To:</b>{{item.alarm_assigned_to}} <span class="priorityicon"> 
         <img src="img/low_priority.png" hspace="10" *ngIf="item.alarm_priority=='1'" />

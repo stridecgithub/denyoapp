@@ -99,7 +99,7 @@
         <img src="{{item.user_photo}}">
       </ion-avatar>
       <ion-item (click)="servicedetails(item,'view')" style="float:left;padding-top: 6px" *ngIf="item.event_type=='S'">
-        <h5 ><b>{{item.service_subject}}</b></h5>
+        <h5  style="padding-top:3px" ><b>{{item.service_subject}}</b></h5>
         <h5  *ngIf="item.serviced_by_name!=''"><b>Serviced By:</b>{{item.serviced_by_name}}</h5>
         <h5><b>Next Servicing:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{item.nxtserviceformatted}}</h5>       
         <span class="priorityicon"> <img *ngIf="item.service_resources" src="img/attach.png" hspace="10"/>
@@ -108,7 +108,7 @@
         <h6 style="float:right;margin-left: 254px;" *ngIf="item.serviced_datetime_display!='0000-00-00'">{{item.serviced_datetime_display}}</h6>
       </ion-item>
        <ion-item (click)="servicedetails(item,'view')" style="float:left;padding-top: 6px" *ngIf="item.event_type=='R'">
-        <h5 ><b>{{item.service_subject}}</b></h5>
+        <h5  style="padding-top:3px" ><b>{{item.service_subject}}</b></h5>
         <h5  *ngIf="item.serviced_by_name!=''"><b>By:</b>{{item.serviced_by_name}}</h5>
            
         <span class="priorityicon"> <img *ngIf="item.service_resources" src="img/attach.png" hspace="10"/>
