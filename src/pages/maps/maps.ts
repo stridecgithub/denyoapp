@@ -407,6 +407,20 @@ export class MapsPage {
 
               })(marker, data, labeldata);
             }
+
+            // Copied from below
+            if (val != 0) {
+              console.log("Selected unit id is:" + JSON.stringify(val));
+              console.log('From zero for popup' + JSON.stringify(res.units))
+              let unitcontent;
+              unitcontent = '<div class="info_content">' +
+                '<h3><a href="#" onclick="unitDetailsPageNavigation( ' + res.units[unit].unit_id + ')"  data-tap-disabled="true" (click)="mapunitdetail(' + val.unit_id + ')">' + val.unitname + '</a></h3>' +
+                '<h4>' + val.projectname + '</h4>' +
+                '<p>Running Hours:' + val.runninghr + ' Hours</p>' + '</div>';
+              infoWindow.setContent(unitcontent);
+              infoWindow.open(map, marker);
+            }
+            // Copied from below
           }
         }
       },
@@ -699,8 +713,8 @@ export class MapsPage {
     localStorage.setItem("unitcolorcode", item.colorcodeindications);
     localStorage.setItem("unitlat", item.lat);
     localStorage.setItem("unitlng", item.lng);
-     localStorage.setItem("runninghr",item.runninghr);
-      localStorage.setItem("nsd",item.nextservicedate);
+    localStorage.setItem("runninghr", item.runninghr);
+    localStorage.setItem("nsd", item.nextservicedate);
     console.log(this.str + "//" + JSON.stringify(this.detailvalue));
     localStorage.setItem("viewlist", this.str);
 
@@ -712,18 +726,18 @@ export class MapsPage {
         this.sendNotification("Please select Atleast One Unit")
       }
       else {
-         let item;
+        let item;
         item = this.detailvalue;
-         localStorage.setItem("unitId", item.unit_id);
-      localStorage.setItem("iframeunitId", item.unit_id);
-      localStorage.setItem("unitunitname", item.unitname);
-      localStorage.setItem("unitlocation", item.location);
-      localStorage.setItem("unitprojectname", item.projectname);
-      localStorage.setItem("unitcolorcode", item.colorcodeindications);
-      localStorage.setItem("unitlat", item.lat);
-      localStorage.setItem("unitlng", item.lng);
-      localStorage.setItem("runninghr",item.runninghr);
-      localStorage.setItem("nsd",item.nextservicedate);
+        localStorage.setItem("unitId", item.unit_id);
+        localStorage.setItem("iframeunitId", item.unit_id);
+        localStorage.setItem("unitunitname", item.unitname);
+        localStorage.setItem("unitlocation", item.location);
+        localStorage.setItem("unitprojectname", item.projectname);
+        localStorage.setItem("unitcolorcode", item.colorcodeindications);
+        localStorage.setItem("unitlat", item.lat);
+        localStorage.setItem("unitlng", item.lng);
+        localStorage.setItem("runninghr", item.runninghr);
+        localStorage.setItem("nsd", item.nextservicedate);
         this.navCtrl.setRoot(UnitdetailsPage, {
           record: this.detailvalue
         });
@@ -754,7 +768,7 @@ export class MapsPage {
         }
         // If the request was successful notify the user
         if (data.status === 200) {
-this.loadMap(0);
+          this.loadMap(0);
           this.reportData.startindex = 0;
           this.reportData.sort = "unit_id";
           //this.doUser();
