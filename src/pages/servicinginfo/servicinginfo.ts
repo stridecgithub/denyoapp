@@ -18,7 +18,7 @@ import { MapsPage } from '../maps/maps';
 import { ReportsPage } from '../reports/reports';
 import { CalendarPage } from '../calendar/calendar';
 import { EmailPage } from '../email/email';
-
+import { OrgchartPage} from '../orgchart/orgchart';
 /**
  * Generated class for the ServicinginfoPage page.
  *
@@ -385,7 +385,7 @@ this.unitDetailData.favoriteindication = favorite;
     this.nav.setRoot(MapsPage);
   }
   redirectToSettings() {
-    this.nav.setRoot(MyaccountPage);
+    this.nav.setRoot(OrgchartPage);
   }
 
 }

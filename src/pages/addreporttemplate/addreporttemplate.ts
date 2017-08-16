@@ -13,6 +13,7 @@ import { MapsPage } from '../maps/maps';
 import { ReportsPage } from '../reports/reports';
 import { CalendarPage } from '../calendar/calendar';
 import { EmailPage } from '../email/email';
+import { OrgchartPage} from '../orgchart/orgchart';
 ///import { LoadingController } from 'ionic-angular';
 
 /**
@@ -310,6 +311,6 @@ console.log("Selected DAta:"+JSON.stringify(this.getCheckboxData));
     this.nav.setRoot(MapsPage);
   }
   redirectToSettings() {
-    this.nav.setRoot(MyaccountPage);
+    this.nav.setRoot(OrgchartPage);
   }
 }

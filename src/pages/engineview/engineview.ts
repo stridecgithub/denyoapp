@@ -13,6 +13,7 @@ import { ReportsPage } from '../reports/reports';
 import { CalendarPage } from '../calendar/calendar';
 import { EmailPage } from '../email/email';
 import { EnginedetailPage } from '../enginedetail/enginedetail';
+import { OrgchartPage} from '../orgchart/orgchart';
 
 
 @Component({
@@ -89,7 +90,7 @@ model_id: '',
     this.nav.setRoot(MapsPage);
   }
   redirectToSettings() {
-    this.nav.setRoot(MyaccountPage);
+    this.nav.setRoot(OrgchartPage);
   }
 
    previous() {

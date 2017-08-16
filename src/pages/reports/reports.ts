@@ -15,7 +15,7 @@ import { CalendarPage } from '../calendar/calendar';
 import { EmailPage } from '../email/email';
 import { DatePicker } from '@ionic-native/date-picker';
 import { ReportviewtablePage } from '../reportviewtable/reportviewtable';
-
+import { OrgchartPage} from '../orgchart/orgchart';
 @Component({
   selector: 'page-reports',
   templateUrl: 'reports.html',
@@ -264,7 +264,7 @@ export class ReportsPage {
     this.navCtrl.setRoot(MapsPage);
   }
   redirectToSettings() {
-    this.navCtrl.setRoot(MyaccountPage);
+    this.navCtrl.setRoot(OrgchartPage);
   }
   previous() {
     this.navCtrl.setRoot(HomePage);

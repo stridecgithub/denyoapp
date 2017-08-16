@@ -14,7 +14,7 @@ import { AddcalendarPage } from '../addcalendar/addcalendar';
 import { AlarmdetailsPage } from '../alarmdetails/alarmdetails';
 import { CalendardetailPage } from '../calendardetail/calendardetail';
 import { DatePicker } from '@ionic-native/date-picker';
-
+import { OrgchartPage} from '../orgchart/orgchart';
 import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitsPage } from '../units/units';
 import { NotificationPage } from '../notification/notification';
@@ -847,7 +847,7 @@ export class CalendarPage {
     this.navCtrl.setRoot(MapsPage);
   }
   redirectToSettings() {
-    this.navCtrl.setRoot(MyaccountPage);
+    this.navCtrl.setRoot(OrgchartPage);
   }
 
   doAdd() {

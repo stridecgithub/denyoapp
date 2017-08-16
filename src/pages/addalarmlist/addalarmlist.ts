@@ -15,6 +15,7 @@ import { ReportsPage } from '../reports/reports';
 import { CalendarPage } from '../calendar/calendar';
 import { EmailPage } from '../email/email';
 import { CommentsinfoPage } from '../commentsinfo/commentsinfo';
+import { OrgchartPage} from '../orgchart/orgchart';
 
 /**
  * Generated class for the AddalarmlistPage page.
@@ -229,6 +230,6 @@ export class AddalarmlistPage {
     this.nav.setRoot(MapsPage);
   }
   redirectToSettings() {
-    this.nav.setRoot(MyaccountPage);
+    this.nav.setRoot(OrgchartPage);
   }
 }

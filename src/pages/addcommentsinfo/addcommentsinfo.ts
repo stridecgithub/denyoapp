@@ -14,7 +14,7 @@ import { UnitgroupPage } from '../unitgroup/unitgroup';
 import { RolePage } from '../role/role';
 import { UserPage } from '../user/user';
 import { AlarmPage } from '../alarm/alarm';
-
+import { OrgchartPage} from '../orgchart/orgchart';
 import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitsPage } from '../units/units';
 import { NotificationPage } from '../notification/notification';
@@ -474,7 +474,7 @@ export class AddcommentsinfoPage {
     this.nav.setRoot(MapsPage);
   }
   redirectToSettings() {
-    this.nav.setRoot(MyaccountPage);
+    this.nav.setRoot(OrgchartPage);
   }
 
   selectEntry(item) {

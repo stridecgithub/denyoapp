@@ -21,6 +21,7 @@ import { ReportsPage } from '../reports/reports';
 import { CalendarPage } from '../calendar/calendar';
 import { EmailPage } from '../email/email';
 import { AlarmlistdetailPage } from '../alarmlistdetail/alarmlistdetail';
+import { OrgchartPage} from '../orgchart/orgchart';
 /**
  * Generated class for the ServicinginfoPage page.
  *
@@ -471,7 +472,7 @@ export class CommentsinfoPage {
     this.nav.setRoot(MapsPage);
   }
   redirectToSettings() {
-    this.nav.setRoot(MyaccountPage);
+    this.nav.setRoot(OrgchartPage);
   }
    onSegmentChanged(val) {
     let splitdata = val.split(",");

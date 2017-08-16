@@ -16,7 +16,7 @@ import { ReportsPage } from '../reports/reports';
 import { CalendarPage } from '../calendar/calendar';
 import { EmailPage } from '../email/email';
 import { Unitgrouplist } from '../unitgrouplist/unitgrouplist';
-
+import { OrgchartPage} from '../orgchart/orgchart';
 /**
  * Generated class for the UnitgroupPage page.
  *
@@ -412,7 +412,7 @@ export class UnitgroupPage {
     this.nav.setRoot(MapsPage);
   }
   redirectToSettings() {
-    this.nav.setRoot(MyaccountPage);
+    this.nav.setRoot(OrgchartPage);
   }
    view(id)
   {

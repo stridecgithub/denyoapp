@@ -10,7 +10,7 @@ import { UnitgroupPage } from '../unitgroup/unitgroup';
 import { DomSanitizer } from '@angular/platform-browser';
 
 
-
+import { OrgchartPage} from '../orgchart/orgchart';
 /**
  * Generated class for the UnitdetailsPage page.
  *
@@ -72,7 +72,7 @@ let alarmID=this.NP.get("alarmid");
 		this.nav.setRoot(UnitsPage);
 	}
 	redirectToMyAccount() {
-		this.nav.setRoot(MyaccountPage);
+		this.nav.setRoot(OrgchartPage);
 	}
 
 	redirectToRole() {

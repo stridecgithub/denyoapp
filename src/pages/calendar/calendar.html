@@ -111,7 +111,7 @@
           </div>
           <div>Time:{{item.event_time}}</div>
           <div style="white-space: normal">Location:{{item.event_location}}</div>
-          <div>Remarks:{{item.event_remark}}</div>
+          <div style="white-space: normal">Remarks:{{item.event_remark}}</div>
           <div>Created By:{{item.event_addedby_name}}</div>
         </ion-item>
         <!--ion-item-options>
@@ -137,7 +137,7 @@
           </div>
           <div>Time:{{item.event_time}}</div>
           <div style="white-space: normal">Location:{{item.event_location}}</div>
-          <div>Remarks:{{item.event_remark}}</div>
+          <div style="white-space: normal">Remarks:{{item.event_remark}}</div>
            <div>Created By:{{item.event_addedby_name}}</div>
         </ion-item>
         <!--ion-item-options>
@@ -162,9 +162,9 @@
           <div>
             <h2 clear item-right><b>Alarm:{{item.event_title}}  </b></h2>
           </div>
-          <div>Date & Time:{{item.event_date}}</div>
-          <div>Location:{{item.event_location}}</div>
-          <div>Remarks:{{item.event_remark}}</div>
+          <div>Time:{{item.event_time}}</div>
+          <div style="white-space: normal">Location:{{item.event_location}}</div>
+          <div style="white-space: normal">Remarks:{{item.event_remark}}</div>
         </ion-item>
         <ion-item-options>
 
@@ -239,7 +239,7 @@
       </li>
       <li>
         <button ion-button icon-only (click)="redirectToSettings()" clear>
-    	<ion-icon name="settings" class="footer-icon">SETTING</ion-icon>
+    	<ion-icon name="settings" class="footer-icon">Org Chart</ion-icon>
     </button>
       </li>
     </ul>

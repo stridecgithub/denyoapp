@@ -12,6 +12,7 @@ import { MapsPage } from '../maps/maps';
 import { ReportsPage } from '../reports/reports';
 import { CalendarPage } from '../calendar/calendar';
 import { EmailPage } from '../email/email';
+import { OrgchartPage} from '../orgchart/orgchart';
 
 /**
  * Generated class for the UseraccountPage page.
@@ -401,6 +402,6 @@ export class UseraccountPage {
     this.navCtrl.setRoot(MapsPage);
   }
   redirectToSettings() {
-    this.navCtrl.setRoot(MyaccountPage);
+    this.navCtrl.setRoot(OrgchartPage);
   }
 }

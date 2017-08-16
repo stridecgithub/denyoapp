@@ -11,7 +11,7 @@ import { EmailPage } from '../email/email';
 import { AddalarmPage } from '../addalarm/addalarm';
 import { TrendlinePage } from '../trendline/trendline';
 import { AlarmlogPage } from '../alarmlog/alarmlog';
-
+import { OrgchartPage} from '../orgchart/orgchart';
 import { Http, Headers, RequestOptions } from '@angular/http';
 /**
  * Generated class for the AlarmdetailsPage page.
@@ -147,6 +147,6 @@ export class AlarmdetailsPage {
     this.nav.setRoot(MapsPage);
   }
   redirectToSettings() {
-    this.nav.setRoot(MyaccountPage);
+    this.nav.setRoot(OrgchartPage);
   }
 }

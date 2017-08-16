@@ -507,7 +507,7 @@ export class AddorgcharttwoPage {
     this.navCtrl.setRoot(MapsPage);
   }
   redirectToSettings() {
-    this.navCtrl.setRoot(MyaccountPage);
+    this.navCtrl.setRoot(OrgchartPage);
   }
  onSegmentChanged() {
     console.log("ID" + this.company_group);

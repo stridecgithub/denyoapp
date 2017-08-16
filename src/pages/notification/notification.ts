@@ -20,6 +20,7 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { AddrequestsupportPage } from '../addrequestsupport/addrequestsupport';
 import { HomePage } from '../home/home';
 import { DomSanitizer } from '@angular/platform-browser';
+import { OrgchartPage} from '../orgchart/orgchart'
 /**
  * Generated class for the ServicinginfoPage page.
  *
@@ -312,7 +313,7 @@ export class NotificationPage {
     this.nav.setRoot(MapsPage);
   }
   redirectToSettings() {
-    this.nav.setRoot(MyaccountPage);
+    this.nav.setRoot(OrgchartPage);
   }
 }
 
