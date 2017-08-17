@@ -6,7 +6,7 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { AddunitsonePage } from '../addunitsone/addunitsone';
 import { ViewcompanygroupPage } from '../viewcompanygroup/viewcompanygroup';
 import { LoadingController } from 'ionic-angular';
-
+import { OrgchartPage} from '../orgchart/orgchart';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
 import { CompanygroupPage } from '../companygroup/companygroup';
 import { RolePage } from '../role/role';
@@ -593,7 +593,7 @@ export class MapsPage {
     this.navCtrl.setRoot(UnitsPage);
   }
   redirectToMyAccount() {
-    this.navCtrl.setRoot(MyaccountPage);
+     this.navCtrl.setRoot(OrgchartPage);
   }
 
   redirectToRole() {
