@@ -396,6 +396,11 @@ export class EmailPage {
     this.getPrority(1);
     this.copytome = 0;
     console.log(JSON.stringify(this.NP.get("record")));
+    if(this.NP.get("recordemail")!='')
+    {
+      this.choice='compose';
+      this.to=this.NP.get("recordemail");
+    }
 
     if (this.NP.get("record")) {
       if (this.NP.get("act") != 'Push') {
