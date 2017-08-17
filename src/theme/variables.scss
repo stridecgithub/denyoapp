@@ -217,7 +217,7 @@ bottom: 0;
 // Dashboard
 
 page-dashboard {  
-
+ .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
    /* Badge Count for Notification and Message */
 
  .notificationcount{
@@ -277,7 +277,7 @@ background-color:red;
 .ion-md-contacts{background:url(../img/units_icon.png) no-repeat center top;}
 .ion-md-chatboxes{background:url(../img/msg_icon.png) no-repeat center top;}
 .ion-md-bicycle{background:url(../img/calendar_icon.png) no-repeat center top;}
-.ion-md-settings{background:url(../img/setting_icon.png) no-repeat center top;}
+.ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
 .footer-icon{color:#888888;font-size:18px!important;text-align:center;padding:42px 0 0 0!important;}
 .toolbar-md-bluedark .button[icon-only]{height:inherit;margin:0;}
 .toolbar-md-bluedark .button-inner{height:80px;}
@@ -295,6 +295,7 @@ ion-footer .toolbar-md-bluedark{min-height:auto;}
 }
 //addalarm
 page-addalarm {
+ .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
     .notificationcount{
   color: white;
     border-radius: 50px;
@@ -403,6 +404,7 @@ ion-navbar ion-buttons{margin-right:15px;}
 //addcalendar
 
 page-addcalendar {
+ .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
     .notificationcount{
   color: white;
     border-radius: 50px;
@@ -514,6 +516,7 @@ ion-navbar ion-buttons{margin-right:15px;}
 //addcommentsinfo
 
 page-addcommentsinfo {
+     .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
     .notificationcount{
   color: white;
     border-radius: 50px;
@@ -871,6 +874,7 @@ ion-navbar ion-buttons{margin-right:15px;}
 
 
 page-addcompanygroup {
+     .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
     .item-md.item-block .item-inner{padding-right:0;}
     .notificationcount{
   color: white;
@@ -990,6 +994,7 @@ line-height: 37px;}
 //addenginedetails
 
 page-addenginedetail {
+      .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
     .notificationcount{
   color: white;
     border-radius: 50px;
@@ -1099,6 +1104,7 @@ ion-navbar ion-buttons{margin-right:15px;}
 
 
 page-addorgchartone {
+      .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
     .notificationcount{
   color: white;
     border-radius: 50px;
@@ -1213,6 +1219,7 @@ ion-navbar ion-buttons{margin-right:15px;}
 
 
 page-addorgcharttwo {
+      .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
     .notificationcount{
   color: white;
     border-radius: 50px;
@@ -1322,6 +1329,7 @@ ion-navbar ion-buttons{margin-right:15px;}
 //addreporttemplate
 
 page-addreporttemplate {
+      .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
     .notificationcount{
   color: white;
     border-radius: 50px;
@@ -1658,6 +1666,7 @@ ion-navbar ion-buttons{margin-right:15px;}
 
 
 page-addrequestsupport  {
+     .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
     ion-app.md [padding] .scroll-content {
     padding: 8px;
 }
@@ -1889,6 +1898,7 @@ line-height: 37px;}
 //addrole
 
 page-addrole {
+    
     .notificationcount{
   color: white;
     border-radius: 50px;
@@ -2000,6 +2010,8 @@ ion-navbar ion-buttons{margin-right:15px;}
 
 
 page-addserviceinfo {
+   
+ .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
     .item-label-stacked ion-datetime, .item-label-floating ion-datetime {
     padding-left: 0;
     width: 100%;
@@ -2305,6 +2317,7 @@ line-height: 37px;}
 
 
 page-addunitgroup {
+ .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
     .ion-content{
     background-color:white;
 }
@@ -2452,6 +2465,7 @@ border: 1px solid #000;
 
 
 page-addunitsfour {
+     .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
     .item-input ion-input, .item-input ion-textarea {
     position: static;
     margin-top: 5px;
@@ -2566,6 +2580,7 @@ ion-navbar ion-buttons{margin-right:15px;}
 
 //addunitsone
 page-addunitsone {
+     .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
     .item-input ion-input, .item-input ion-textarea {
     position: static;
     margin-top: 5px;
@@ -2686,6 +2701,7 @@ line-height: 37px;}
 //adddunitsthee
 //@import "http://netdna.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css";
 page-addunitsthree {  
+     .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
     .item-input ion-input, .item-input ion-textarea {
     position: static;
     margin-top: 5px;
@@ -2938,6 +2954,7 @@ ion-navbar ion-buttons{margin-right:15px;}
 //adduser
 
 page-adduser {
+     .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
     .quick-list {
     margin: -5px auto;
     display: table;
@@ -3171,6 +3188,7 @@ ion-navbar ion-buttons{margin-right:15px;}
 
 //alarm
 page-alarm {
+     .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
      .alar
  {
      background-image:url('../img/notready.png');background-size:cover;
@@ -3306,6 +3324,7 @@ ion-navbar ion-buttons{margin-right:15px;}
 }
 //alarmdetails
 page-alarmdetails {
+     .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
      .ion-content{
     background-color:white;
 }
@@ -3502,6 +3521,7 @@ background-color: #FBE983;
 
 //calendardetails
 page-calendardetail{
+     .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
      .ion-content{
     background-color:white;
 }
@@ -3561,6 +3581,7 @@ ion-navbar ion-buttons{margin-right:15px;}
 
 //alarmlog
 page-alarmlog {
+     .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
         .alar
  {
      background-image:url('../img/notready.png');background-size:cover;
@@ -3699,7 +3720,7 @@ ion-navbar ion-buttons{margin-right:15px;}
 //calendar
 
 page-calendar {
-
+ .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
 
     .eventsClass
     {
@@ -3869,6 +3890,7 @@ ion-navbar.toolbar-md-bluedark .toolbar-background-md{background:#00569F;}
 
 
 page-commentdetails {
+     .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
  .ion-content{
     background-color:white;
 }
@@ -4114,6 +4136,7 @@ ion-navbar ion-buttons{margin-right:15px;}
 //commentsinfo
 
 page-commentsinfo {
+     .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
     .ion-content{
     background-color:white;
 }
@@ -4290,6 +4313,7 @@ line-height: 37px;}
 
 //companygroup
 page-companydetail {
+     .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
        .ion-content{
     background-color:white;
 }
@@ -4397,6 +4421,7 @@ color: #428bca;
 }
 
     page-companygroup {  
+         .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
        .ion-content{
     background-color:white;
 }
@@ -4509,6 +4534,7 @@ color: #428bca;
 
 
 page-editprofilestepone {
+     .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
 
     .ion-content{
     background-color:white;
@@ -4634,6 +4660,7 @@ ion-navbar ion-buttons{margin-right:15px;}
 //editprofiletwo
 
 page-editprofilesteptwo {
+     .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
 .ion-content{
     background-color:white;
 }
@@ -4731,6 +4758,7 @@ ion-navbar ion-buttons{margin-right:15px;}
 //email
 
 page-email {
+     .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
 .border_low{
 border:2px solid #009ACD;
  }
@@ -4869,6 +4897,7 @@ ion-navbar ion-buttons{margin-right:15px;}
 //enginedetails
 
 page-enginedetail {
+     .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
    .ion-content{
     background-color:white;
 }
@@ -5005,6 +5034,7 @@ ion-navbar ion-buttons{margin-right:15px;}
 //enginedetailview
 
 page-enginedetailview {
+     .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
 .sheader1{
  color : #000000;
  }
@@ -5261,6 +5291,7 @@ right connector from last child*/
 //engineview
 
 page-engineview {
+     .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
  .ion-content{
     background-color:white;
 }
@@ -5330,6 +5361,7 @@ ion-navbar ion-buttons{margin-right:15px;}
 //home
 
 page-home {
+     .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
     .notificationcount{
   color: white;
     border-radius: 50px;
@@ -5684,6 +5716,7 @@ background-color: #FBE983;
 //messages
 
 page-messages {
+     .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
     .text-input-md, .text-input{border:0px solid #f2f2f2;margin:8px 0;padding: 0 10px; width:calc(100% - 8px);}
 .label-md[stacked] {
     font-size: 14px;
@@ -5791,6 +5824,7 @@ ion-navbar ion-buttons{margin-right:15px;}
 //myaccount
 
 page-myaccount {
+     .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
 .quick-list {
     background-color: #fff;
 }
@@ -5942,7 +5976,7 @@ ion-footer .toolbar-md-bluedark{min-height:auto;}
 //notification
 
 page-notification {
-
+ .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
  .notificationcount{
   color: white;
     border-radius: 50px;
@@ -6024,6 +6058,7 @@ ion-navbar ion-buttons{margin-right:15px;}
 
 
 page-orgchart {
+     .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
     
 .scroll-content{overflow-x: auto;}
 .tree-outer{width:1200px;overflow:auto;}    
@@ -6289,7 +6324,7 @@ right connector from last child*/
 //reports
 
 page-reports {
-    
+     .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
     .item-label-stacked ion-datetime, .item-label-floating ion-datetime {
     padding-left: 0;
     width: 100%;
@@ -6585,6 +6620,7 @@ line-height: 37px;}
 //reporttemplate
 
 page-reporttemplate {
+     .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
 .sheader1{
  color : #000000;
  }
@@ -6728,6 +6764,7 @@ background-color: #FBE983;
 //role
 
 page-role {
+     .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
        .ion-content{
     background-color:white;
 }
@@ -6780,6 +6817,7 @@ ion-navbar ion-buttons{margin-right:15px;}
 //servicedetails
 
 page-servicedetails {
+     .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
     .item-md ion-avatar ion-img, .item-md ion-avatar img {
     border-radius: 50%;
     overflow: hidden;
@@ -7036,6 +7074,7 @@ ion-navbar ion-buttons{margin-right:15px;}
 //servicinginfo
 
 page-servicinginfo {
+     .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
     .item-md ion-avatar img {
     border-radius: 50%;
     overflow: hidden;
@@ -7218,6 +7257,7 @@ page-trendline {
 
 
 page-unitdetails {
+     .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
     .notificationcount{
   color: white;
     border-radius: 50px;
@@ -7390,7 +7430,7 @@ background-color: #FBE983;
  {
      background-image:url('../img/dot.png');background-size:cover;
  }
-}
+
 .btn-align{margin:0 auto;text-align:center;line-height:26px;font-size:11px;}
 .engine-detail{background:#21b09c;float:left;}
 .eng-icon{background:url(../img/event_detail_icon.png) no-repeat center center;width:19px;height:25px;margin-right:10px;float:left;}
@@ -7401,10 +7441,11 @@ background-color: #FBE983;
 .event-comment{background:#ff9a3e;float:right;}
 .eve-icon{background:url(../img/event_comment_icon.png) no-repeat center center;width:25px;height:21px;margin-right:10px;float:left;}
 
-
+}
 //unitgroup
 
 page-unitgroup {
+     .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
      .ion-content{
     background-color:white;
 }
@@ -7551,6 +7592,7 @@ ion-label {
 }
 //units
 page-unitgrouplist {
+     .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
   .ion-content{
     background-color:white;
 }
@@ -7735,6 +7777,7 @@ background-color: #FBE983;
  }
 }
 page-units {
+    .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
      .ion-content{
     background-color:white;
 }
@@ -7923,6 +7966,7 @@ background-color: #FBE983;
 
 //user
 page-user {
+     .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
    .ion-content{
     background-color:white;
 }
@@ -8012,6 +8056,7 @@ ion-navbar ion-buttons{margin-right:15px;}
 //ueraccount
 
 page-useraccount {
+     .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
 .notificationcount{
   color: white;
     border-radius: 50px;
@@ -8107,6 +8152,7 @@ ion-navbar ion-buttons{margin-right:15px;}
 
 
 page-userorgchart {
+     .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
 .notificationcount{
   color: white;
     border-radius: 50px;
@@ -8198,6 +8244,8 @@ ion-navbar ion-buttons{margin-right:15px;}
 //viewcompanygroup
 
 page-viewcompanygroup {
+     .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
+     .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
         .label-md[stacked]{
         font-size: 14px;
         color:black;
@@ -8233,6 +8281,7 @@ page-viewcompanygroup {
 
 // Page Repotviewtable
 page-reportviewtable {
+     .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
     
     .item-label-stacked ion-datetime, .item-label-floating ion-datetime {
     padding-left: 0;
@@ -8527,6 +8576,7 @@ line-height: 37px;}
 // Page report viewtable
 
 page-viewunits {
+     .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
      .ion-content{
     background-color:white;
 }
