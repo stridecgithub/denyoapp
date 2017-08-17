@@ -800,7 +800,7 @@ export class MapsPage {
     this.navCtrl.setRoot(MapsPage);
   }
   redirectToSettings() {
-    this.navCtrl.setRoot(MyaccountPage);
+    this.navCtrl.setRoot(OrgchartPage);
   }
 }
 

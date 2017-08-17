@@ -9,13 +9,25 @@
   <img src="{{apiServiceURL}}/staffphotos/{{photo}}" *ngIf="photo!=''">
   <img src="{{apiServiceURL}}/images/default.png" *ngIf="photo==''">
    </div>
-  <br>
+  
   <div style="text-align:center;font-weight:bold">
     {{firstname}} {{lastname}}
   </div>
-  <br>
+ 
   <div style="text-align:center">
     {{job_position}}
+  </div>
+  
+  <div style="text-align:center">
+    <b>Hashtag:</b><br>
+    {{ht}}
+  </div>
+  <div (click)="mail()" style="text-align:center">
+    <b (click)="mail()">Email:</b><br>
+    {{email}}
+  </div>
+   <div style="text-align:center">
+    <b>Contact Number:</b><br> <a href="tel: {{cn}}">{{cn}}</a>
   </div>
   <div class="algn-center">
   <button (click)="close(itemData)" style="background-color:green;color:white;"  *ngIf="EDITACCESS==1">Edit User</button>
