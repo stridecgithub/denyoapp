@@ -20,7 +20,7 @@ import { MapsPage } from '../maps/maps';
 import { ReportsPage } from '../reports/reports';
 import { CalendarPage } from '../calendar/calendar';
 import { EmailPage } from '../email/email';
-import { OrgchartPage} from '../orgchart/orgchart';
+import { OrgchartPage } from '../orgchart/orgchart';
 /**
  * Generated class for the AddserviceinfoPage page.
  *
@@ -53,7 +53,7 @@ export class AddserviceinfoPage {
   public servicemindate: any;
   public servicemaxdate: any;
   public service_subject: any;
-
+  public isFuture: any;
   public minyr;
   public minmn;
   public mindt;
@@ -91,7 +91,7 @@ export class AddserviceinfoPage {
     private file: File, private ngZone: NgZone) {
 
 
-
+    this.isFuture = 0;
 
 
 
@@ -242,8 +242,8 @@ export class AddserviceinfoPage {
     console.log("Unit Details Color Code:" + this.unitDetailData.colorcodeindications);
     this.unitDetailData.lat = localStorage.getItem("unitlat");
     this.unitDetailData.lng = localStorage.getItem("unitlng");
-     this.unitDetailData.rh=localStorage.getItem("runninghr");
-     this.unitDetailData.ns=localStorage.getItem("nsd");
+    this.unitDetailData.rh = localStorage.getItem("runninghr");
+    this.unitDetailData.ns = localStorage.getItem("nsd");
 
     if (this.NP.get("record")) {
       this.selectEntry(this.NP.get("record"));
@@ -333,7 +333,7 @@ export class AddserviceinfoPage {
     fileTransfer.upload(path, this.apiServiceURL + '/fileupload.php?micro_timestamp=' + micro_timestamp, options)
       .then((data) => {
 
-       // Upload Response is{"bytesSent":1872562,"responseCode":200,"response":"{\"error\":false,\"id\":51}","objectId":""}
+        // Upload Response is{"bytesSent":1872562,"responseCode":200,"response":"{\"error\":false,\"id\":51}","objectId":""}
 
 
         console.log("Upload Response is" + JSON.stringify(data))
@@ -347,7 +347,7 @@ export class AddserviceinfoPage {
           imgSrc: imgSrc,
           imgDateTime: new Date(),
           fileName: newFileName,
-          resouce_id:res.id
+          resouce_id: res.id
         });
 
         //loading.dismiss();
@@ -593,8 +593,7 @@ export class AddserviceinfoPage {
     this.datePicker.show({
       date: new Date(),
       mode: 'date',
-      minDate: this.minDateStr(),
-      maxDate: this.maxDateStr(),
+      maxDate: new Date(),
       allowOldDates: false,
       doneButtonColor: '#F2F3F4',
       cancelButtonColor: '#000000',
@@ -602,9 +601,22 @@ export class AddserviceinfoPage {
       androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_LIGHT
     }).then(
       date => {
+
         let monthstr = date.getMonth() + parseInt("1");
-        this.unitDetailData.nextServiceDate = date.getFullYear() + "-" + monthstr + "-" + date.getDate();
-        console.log('Got date: ', date)
+
+        console.log('Got date: ', date);
+        console.log(new Date().getTime() + "<" + date.getTime());
+        if (new Date().getTime() < date.getTime()) {
+          this.isFuture = 0;
+          this.isSubmitted = false;
+          console.log("Future Dates");
+          this.unitDetailData.nextServiceDate = date.getFullYear() + "-" + monthstr + "-" + date.getDate();
+        } else {
+          this.isFuture = 1;
+          this.isSubmitted = true;
+          console.log("Old Dates");
+          this.unitDetailData.nextServiceDate = '';
+        }
       },
       err => console.log('Error occurred while getting date: ', err)
       );
@@ -618,21 +630,19 @@ export class AddserviceinfoPage {
 
   previous() {
     this.addedServiceImgLists = [];
-    if(this.NP.get("from")=='service'){
-    this.nav.push(ServicinginfoPage, {
-      record: this.NP.get("record")
-    });
-  }
-  else if(this.NP.get("from")=='comment')
-  {
- this.nav.push(CommentsinfoPage);
-  }
-  else
-  {
- this.nav.push(ServicinginfoPage, {
-      record: this.NP.get("record")
-    });
-  }
+    if (this.NP.get("from") == 'service') {
+      this.nav.push(ServicinginfoPage, {
+        record: this.NP.get("record")
+      });
+    }
+    else if (this.NP.get("from") == 'comment') {
+      this.nav.push(CommentsinfoPage);
+    }
+    else {
+      this.nav.push(ServicinginfoPage, {
+        record: this.NP.get("record")
+      });
+    }
   }
 
 

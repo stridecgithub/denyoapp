@@ -12,8 +12,8 @@
       <ion-icon name="menu"></ion-icon>
     </button>
 
-  <ion-title  style="    text-align: center;
-    margin-top: 10px;"    class="page-title">{{unitDetailData.pageTitle}}</ion-title>
+  <ion-title style="    text-align: center;
+    margin-top: 10px;" class="page-title">{{unitDetailData.pageTitle}}</ion-title>
 
   <button style="float:left" ion-button (click)="notification()" style="position: absolute;
     right: 0%;
@@ -68,7 +68,7 @@
           <h5 style="white-space:normal">Location:{{unitDetailData.location}}</h5>
           <h5 *ngIf="unitDetailData.lat!=''">({{unitDetailData.lat}},{{unitDetailData.lng}})</h5>
           <h5 style="white-space:normal;">Next Servicing Date:{{unitDetailData.ns}}</h5>
-      <h5 style="white-space:normal;">Running Hours:{{unitDetailData.rh}} Hours</h5>
+          <h5 style="white-space:normal;">Running Hours:{{unitDetailData.rh}} Hours</h5>
 
         </div>
       </ion-item>
@@ -154,6 +154,7 @@
           <a href="#" (click)="getNextDate(0)" style="color:white;font-weight:bold;margin-top:6px">
             <ion-icon name="calendar"></ion-icon>
           </a>
+
           <!--<ion-badge item-end><a href="#" (click)="getNextDate(14)" style="color:white;font-weight:bold">2 <br>Weeks</a></ion-badge>
         <ion-badge item-end><a href="#" (click)="getNextDate(30)" style="color:white;font-weight:bold">1 <br> Months</a></ion-badge>
         <ion-badge item-end><a href="#" (click)="getNextDate(90)" style="color:white;font-weight:bold">3 <br> Months</a></ion-badge>
@@ -168,6 +169,8 @@
           </a>-->
         </ion-badge>
       </div>
+      <div style="color: red;   
+   text-align:center;" *ngIf="isFuture>0">Next service date should be future date only</div>
       <div style="clear:both"><br></div>
       <div>Next Service Date:{{unitDetailData.nextServiceDate}}</div>
       <ion-item>
@@ -207,7 +210,7 @@
     </button>
       </li>
       <li>
-        <button  style="width: 34px;"ion-button icon-only (click)="redirectToSettings()" clear>
+        <button style="width: 34px;" ion-button icon-only (click)="redirectToSettings()" clear>
     	<ion-icon name="settings" class="footer-icon">ORG</ion-icon>
     </button>
       </li>

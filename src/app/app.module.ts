@@ -70,8 +70,10 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { Deeplinks } from '@ionic-native/deeplinks';
 import { CompanydetailPage } from '../pages/companydetail/companydetail';
 import { Unitgrouplist } from '../pages/unitgrouplist/unitgrouplist';
+//import { ITimer } from '../pages/maps/itimer';
 @NgModule({
   declarations: [
+    //ITimer,
     MyApp,
     HomePage,
     AddalarmlistPage,
@@ -146,6 +148,7 @@ import { Unitgrouplist } from '../pages/unitgrouplist/unitgrouplist';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    
     HomePage,
     AddalarmlistPage,
     AlarmlistdetailPage,

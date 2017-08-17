@@ -23,7 +23,7 @@ import { ReportsPage } from '../reports/reports';
 import { CalendarPage } from '../calendar/calendar';
 import { EmailPage } from '../email/email';
 import { AlarmPage } from '../alarm/alarm';
-import { OrgchartPage} from '../orgchart/orgchart';
+import { OrgchartPage } from '../orgchart/orgchart';
 
 /**
  * Generated class for the UnitdetailsPage page.
@@ -79,6 +79,8 @@ export class UnitdetailsPage {
 
 
 	ionViewDidLoad() {
+
+
 		this.pageTitle = "Unit Detail";
 		this.colorListArr = [
 			"FBE983",
@@ -95,6 +97,10 @@ export class UnitdetailsPage {
 			"E1E1E1"
 		];
 		let editItem = this.NP.get("record");
+		/*if (this.NP.get("stopinterval")) {
+			let stopinterval = this.NP.get("stopinterval");
+			stopinterval.unsubscribe();
+		}*/
 
 		let iframeunitid = localStorage.getItem("iframeunitId");
 		console.log("iframeunitid:" + iframeunitid);
@@ -155,7 +161,7 @@ export class UnitdetailsPage {
 	}
 
 	ionViewWillEnter() {
-		 localStorage.setItem("unitdetailsclicked",'');
+		localStorage.setItem("unitdetailsclicked", '');
 		this.iframeContent = "<iframe id='filecontainer' src=" + this.apiServiceURL + "/" + this.unitDetailData.unit_id + "/1/unitdetails height=350 width=100% frameborder=0></iframe>";
 
 		//http://denyoappv2.stridecdev.com/getcount?loginid=1&unitid=2

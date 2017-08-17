@@ -14,7 +14,7 @@ import { AddcalendarPage } from '../addcalendar/addcalendar';
 import { AlarmdetailsPage } from '../alarmdetails/alarmdetails';
 import { CalendardetailPage } from '../calendardetail/calendardetail';
 import { DatePicker } from '@ionic-native/date-picker';
-import { OrgchartPage} from '../orgchart/orgchart';
+import { OrgchartPage } from '../orgchart/orgchart';
 import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitsPage } from '../units/units';
 import { NotificationPage } from '../notification/notification';
@@ -462,13 +462,8 @@ export class CalendarPage {
         event_location: this.serviceIdentify[j]['service_location'],
         event_addedby_name: this.serviceIdentify[j]['serviced_by_name'],
         event_type: 'S',
-        icon: 'alarm', // Icon of the alert. This is compulsory when using the 
-        // calendar on small screens, as the name of the event will
-        // not be displayed in the month grid. It has to be a valid
-        // IonicIcons icon name.
-        class: 'class', // Class of the item in the month grid cell
-        iconStyle: { color: 'green' }, // Style for the item's icon
-        style: { color: 'red' }, // Style for the item
+        icon: 'service',
+        class: 'service'
       });
 
     }
@@ -499,13 +494,8 @@ export class CalendarPage {
         event_location: this.alarmIdentity[k]['alarm_location'],
         event_addedby_name: this.alarmIdentity[k]['alarm_assginedby_name'],
         event_type: 'A',
-        icon: 'alarm', // Icon of the alert. This is compulsory when using the 
-        // calendar on small screens, as the name of the event will
-        // not be displayed in the month grid. It has to be a valid
-        // IonicIcons icon name.
-        class: 'class', // Class of the item in the month grid cell
-        iconStyle: { color: 'green' }, // Style for the item's icon
-        style: { color: 'red' }, // Style for the item
+        icon: 'event',
+        class: 'event'
       });
 
 
@@ -680,16 +670,8 @@ export class CalendarPage {
             startTime: startTime,
             endTime: endTime,
             allDay: true,
-            //color: this.colors.red,
-            className: ['eventsClass'],
-            icon: 'alarm', // Icon of the alert. This is compulsory when using the 
-            // calendar on small screens, as the name of the event will
-            // not be displayed in the month grid. It has to be a valid
-            // IonicIcons icon name.
-            class: 'class', // Class of the item in the month grid cell
-            iconStyle: { color: 'green' }, // Style for the item's icon
-            style: { color: 'red' }, // Style for the item
-            color: colors[Math.floor(Math.random() * colors.length)]
+            icon: 'event',
+            class: 'event'
           });
         }
 
@@ -728,16 +710,8 @@ export class CalendarPage {
             startTime: startTime,
             endTime: endTime,
             allDay: true,
-
-            className: ['eventsService'],
-            icon: 'alarm', // Icon of the alert. This is compulsory when using the 
-            // calendar on small screens, as the name of the event will
-            // not be displayed in the month grid. It has to be a valid
-            // IonicIcons icon name.
-            class: 'class', // Class of the item in the month grid cell
-            iconStyle: { color: 'green' }, // Style for the item's icon
-            style: { color: 'red' }, // Style for the item
-            color: colors[Math.floor(Math.random() * colors.length)]
+            icon: 'service',
+            class: 'service'
           });
 
         }
@@ -766,16 +740,8 @@ export class CalendarPage {
             startTime: startTime,
             endTime: endTime,
             allDay: true,
-
-            className: ['eventsAlarm'],
-            icon: 'alarm', // Icon of the alert. This is compulsory when using the 
-            // calendar on small screens, as the name of the event will
-            // not be displayed in the month grid. It has to be a valid
-            // IonicIcons icon name.
-            class: 'class', // Class of the item in the month grid cell
-            iconStyle: { color: 'green' }, // Style for the item's icon
-            style: { color: 'red' }, // Style for the item
-            color: colors[Math.floor(Math.random() * colors.length)]
+            icon: 'alarm',
+            class: 'alarm'
           });
 
         }

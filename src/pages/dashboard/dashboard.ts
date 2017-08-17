@@ -28,41 +28,41 @@ export class DashboardPage {
   goPage(page) {
     console.log(page);
     if (page == 'MapsPage') {
-      this.nav.setRoot(MapsPage);
+      this.nav.push(MapsPage);
     } else if (page == 'ReportsPage') {
-      this.nav.setRoot(ReportsPage);
+      this.nav.push(ReportsPage);
     } else if (page == 'CalendarPage') {
-      this.nav.setRoot(CalendarPage);
+      this.nav.push(CalendarPage);
     } else if (page == 'UnitsPage') {
-      this.nav.setRoot(UnitsPage);
+      this.nav.push(UnitsPage);
     }
 
   }
 
 
   pushMessagePage() {
-    this.nav.setRoot(CalendardetailPage, {
+    this.nav.push(CalendardetailPage, {
       event_id: 4,
       act: 'Push'
     });
   }
   notification() {
-    this.nav.setRoot(NotificationPage);
+    this.nav.push(NotificationPage);
   }
   redirectToUser() {
-    this.nav.setRoot(UnitsPage);
+    this.nav.push(UnitsPage);
   }
   redirectToMessage() {
-    this.nav.setRoot(EmailPage);
+    this.nav.push(EmailPage);
   }
   redirectCalendar() {
-    this.nav.setRoot(CalendarPage);
+    this.nav.push(CalendarPage);
   }
   redirectToMaps() {
-    this.nav.setRoot(MapsPage);
+    this.nav.push(MapsPage);
   }
   redirectToSettings() {
-    this.nav.setRoot(OrgchartPage);
+    this.nav.push(OrgchartPage);
   }
 
   ionViewWillEnter() {
