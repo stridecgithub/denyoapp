@@ -168,16 +168,16 @@ export class UserPage {
   }
 
   doAdd() {
-    this.nav.setRoot(AdduserPage);
+    this.nav.push(AdduserPage);
   }
   doEdit(item, act) {
     if (act == 'edit') {
-      this.nav.setRoot(AdduserPage, {
+      this.nav.push(AdduserPage, {
         record: item,
         act: act
       });
     } else {
-      this.nav.setRoot(ViewcompanygroupPage, {
+      this.nav.push(ViewcompanygroupPage, {
         record: item,
         act: act
       });
@@ -302,24 +302,24 @@ export class UserPage {
   }
 
   previous() {
-    this.nav.setRoot(MyaccountPage);
+    this.nav.push(MyaccountPage);
   }
   notification() {
-    this.nav.setRoot(NotificationPage);
+    this.nav.push(NotificationPage);
   }
   redirectToUser() {
-    this.nav.setRoot(UnitsPage);
+    this.nav.push(UnitsPage);
   }
   redirectToMessage() {
-    this.nav.setRoot(EmailPage);
+    this.nav.push(EmailPage);
   }
   redirectCalendar() {
-    this.nav.setRoot(CalendarPage);
+    this.nav.push(CalendarPage);
   }
   redirectToMaps() {
-    this.nav.setRoot(MapsPage);
+    this.nav.push(MapsPage);
   }
   redirectToSettings() {
-    this.nav.setRoot(OrgchartPage);
+    this.nav.push(OrgchartPage);
   }
 }

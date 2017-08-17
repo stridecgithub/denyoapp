@@ -257,7 +257,7 @@ export class UseraccountPage {
             this.sendNotification(data.json().msg[0].result);
           } else {
             //this.sendNotification(data.json().message);
-            this.navCtrl.setRoot(UserorgchartPage, {
+            this.navCtrl.push(UserorgchartPage, {
               accountInfo: this.userInfo
             });
           }
@@ -309,7 +309,7 @@ export class UseraccountPage {
             this.sendNotification(data.json().msg[0].result);
           } else {
             //this.sendNotification(data.json().message);
-            this.navCtrl.setRoot(UserorgchartPage, {
+            this.navCtrl.push(UserorgchartPage, {
               accountInfo: this.userInfo,
               record: this.NP.get("record")
             });
@@ -378,7 +378,7 @@ export class UseraccountPage {
       createdby: this.createdby,
 
     });
-    this.navCtrl.setRoot(AdduserPage, {
+    this.navCtrl.push(AdduserPage, {
       uservalue: this.userInfo
     });
   }
@@ -387,21 +387,21 @@ export class UseraccountPage {
     this.hashtag = "@" + val;
   }
   notification() {
-    this.navCtrl.setRoot(NotificationPage);
+    this.navCtrl.push(NotificationPage);
   }
   redirectToUser() {
-    this.navCtrl.setRoot(UnitsPage);
+    this.navCtrl.push(UnitsPage);
   }
   redirectToMessage() {
-    this.navCtrl.setRoot(EmailPage);
+    this.navCtrl.push(EmailPage);
   }
   redirectCalendar() {
-    this.navCtrl.setRoot(CalendarPage);
+    this.navCtrl.push(CalendarPage);
   }
   redirectToMaps() {
-    this.navCtrl.setRoot(MapsPage);
+    this.navCtrl.push(MapsPage);
   }
   redirectToSettings() {
-    this.navCtrl.setRoot(OrgchartPage);
+    this.navCtrl.push(OrgchartPage);
   }
 }

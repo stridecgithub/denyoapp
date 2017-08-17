@@ -223,7 +223,7 @@ export class Unitgrouplist {
   }
 
   doAdd() {
-    this.nav.setRoot(AddunitsonePage);
+    this.nav.push(AddunitsonePage);
   }
   getCheckBoxValue(item, val) {
     /*console.log("Available data" + val);
@@ -282,7 +282,7 @@ console.log(JSON.stringify(this.selectedAction));*/
         this.sendNotification("Please select Atleast One Unit")
       }
       else {
-        this.nav.setRoot(UnitdetailsPage, {
+        this.nav.push(UnitdetailsPage, {
           record: this.detailvalue
         });
         return false;
@@ -311,7 +311,7 @@ console.log(JSON.stringify(this.selectedAction));*/
             this.reportData.startindex = 0;
             this.reportData.sort = "unit_id";
             /// this.doUnit();
-            this.nav.setRoot(this.nav.getActive().component);
+            this.nav.push(this.nav.getActive().component);
           }
           // Otherwise let 'em know anyway
           else {
@@ -322,7 +322,7 @@ console.log(JSON.stringify(this.selectedAction));*/
   }
   doEdit(item, act, unitId) {
     if (act == 'edit') {
-      this.nav.setRoot(AddunitsonePage, {
+      this.nav.push(AddunitsonePage, {
         record: item,
         act: act
       });
@@ -339,12 +339,12 @@ console.log(JSON.stringify(this.selectedAction));*/
       localStorage.setItem("unitlng", item.lng);
 
 
-      this.nav.setRoot(UnitdetailsPage, {
+      this.nav.push(UnitdetailsPage, {
         record: item
       });
       return false;
     } else {
-      this.nav.setRoot(ViewcompanygroupPage, {
+      this.nav.push(ViewcompanygroupPage, {
         record: item,
         act: act
       });
@@ -471,7 +471,7 @@ console.log(JSON.stringify(this.selectedAction));*/
   }
 
   previous() {
-    this.nav.setRoot(UnitgroupPage);
+    this.nav.push(UnitgroupPage);
   }
   favorite(unit_id) {
     this.reportData.startindex = 0;
@@ -549,22 +549,22 @@ console.log(JSON.stringify(this.selectedAction));*/
   }
 
   notification() {
-    this.nav.setRoot(NotificationPage);
+    this.nav.push(NotificationPage);
   }
   redirectToUser() {
-    this.nav.setRoot(UnitsPage);
+    this.nav.push(UnitsPage);
   }
   redirectToMessage() {
-    this.nav.setRoot(EmailPage);
+    this.nav.push(EmailPage);
   }
   redirectCalendar() {
-    this.nav.setRoot(CalendarPage);
+    this.nav.push(CalendarPage);
   }
   redirectToMaps() {
-    this.nav.setRoot(MapsPage);
+    this.nav.push(MapsPage);
   }
   redirectToSettings() {
-    this.nav.setRoot(OrgchartPage);
+    this.nav.push(OrgchartPage);
   }
  
 }

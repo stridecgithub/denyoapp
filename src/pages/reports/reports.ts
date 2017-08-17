@@ -176,7 +176,7 @@ export class ReportsPage {
     }
 
 
-    this.nav.setRoot(ReportviewtablePage, {
+    this.nav.push(ReportviewtablePage, {
       selunit: selunit,
       seltemplate: seltemplate,
       seltimeframe: seltimeframe,
@@ -249,25 +249,25 @@ export class ReportsPage {
     console.log('ionViewDidLoad ReportsPage');
   }
   notification() {
-    this.navCtrl.setRoot(NotificationPage);
+    this.navCtrl.push(NotificationPage);
   }
   redirectToUser() {
-    this.navCtrl.setRoot(UnitsPage);
+    this.navCtrl.push(UnitsPage);
   }
   redirectToMessage() {
-    this.navCtrl.setRoot(EmailPage);
+    this.navCtrl.push(EmailPage);
   }
   redirectCalendar() {
-    this.navCtrl.setRoot(CalendarPage);
+    this.navCtrl.push(CalendarPage);
   }
   redirectToMaps() {
-    this.navCtrl.setRoot(MapsPage);
+    this.navCtrl.push(MapsPage);
   }
   redirectToSettings() {
-    this.navCtrl.setRoot(OrgchartPage);
+    this.navCtrl.push(OrgchartPage);
   }
   previous() {
-    this.navCtrl.setRoot(HomePage);
+    this.navCtrl.push(HomePage);
   }
 }
 

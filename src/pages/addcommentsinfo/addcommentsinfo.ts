@@ -333,7 +333,7 @@ export class AddcommentsinfoPage {
           localStorage.setItem("microtime", "");
           this.sendNotification(`Comments was successfully added`);
           localStorage.setItem("atMentionResult", '');
-          this.nav.setRoot(CommentsinfoPage, {
+          this.nav.push(CommentsinfoPage, {
             record: this.NP.get("record")
           });
         }
@@ -389,7 +389,7 @@ export class AddcommentsinfoPage {
           localStorage.setItem("microtime", "");
           this.sendNotification(`Comments was successfully updated`);
           localStorage.setItem("atMentionResult", '');
-          this.nav.setRoot(CommentsinfoPage, {
+          this.nav.push(CommentsinfoPage, {
             record: this.NP.get("record")
           });
         }
@@ -454,27 +454,27 @@ export class AddcommentsinfoPage {
 
 
   previous() {
-    this.nav.setRoot(CommentsinfoPage, {
+    this.nav.push(CommentsinfoPage, {
       record: this.NP.get("record")
     });
   }
   notification() {
-    this.nav.setRoot(NotificationPage);
+    this.nav.push(NotificationPage);
   }
   redirectToUser() {
-    this.nav.setRoot(UnitsPage);
+    this.nav.push(UnitsPage);
   }
   redirectToMessage() {
-    this.nav.setRoot(EmailPage);
+    this.nav.push(EmailPage);
   }
   redirectCalendar() {
-    this.nav.setRoot(CalendarPage);
+    this.nav.push(CalendarPage);
   }
   redirectToMaps() {
-    this.nav.setRoot(MapsPage);
+    this.nav.push(MapsPage);
   }
   redirectToSettings() {
-    this.nav.setRoot(OrgchartPage);
+    this.nav.push(OrgchartPage);
   }
 
   selectEntry(item) {

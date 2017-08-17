@@ -547,20 +547,20 @@ export class CalendarPage {
     confirm.present();
   }
   doCalendarEdit(item, type) {
-    this.navCtrl.setRoot(AddcalendarPage, {
+    this.navCtrl.push(AddcalendarPage, {
       item: item,
       type: type
     });
   }
 
   doCalendarView(event_id) {
-    this.navCtrl.setRoot(CalendardetailPage, {
+    this.navCtrl.push(CalendardetailPage, {
       event_id: event_id
     });
   }
 
   doAlarmView(event_id) {
-    this.navCtrl.setRoot(AlarmdetailsPage, {
+    this.navCtrl.push(AlarmdetailsPage, {
       record: event_id,
       act: 'Push'
     });
@@ -829,29 +829,29 @@ export class CalendarPage {
 
 
   previous() {
-    this.navCtrl.setRoot(HomePage);
+    this.navCtrl.push(HomePage);
   }
   notification() {
-    this.navCtrl.setRoot(NotificationPage);
+    this.navCtrl.push(NotificationPage);
   }
   redirectToUser() {
-    this.navCtrl.setRoot(UnitsPage);
+    this.navCtrl.push(UnitsPage);
   }
   redirectToMessage() {
-    this.navCtrl.setRoot(EmailPage);
+    this.navCtrl.push(EmailPage);
   }
   redirectCalendar() {
-    this.navCtrl.setRoot(CalendarPage);
+    this.navCtrl.push(CalendarPage);
   }
   redirectToMaps() {
-    this.navCtrl.setRoot(MapsPage);
+    this.navCtrl.push(MapsPage);
   }
   redirectToSettings() {
-    this.navCtrl.setRoot(OrgchartPage);
+    this.navCtrl.push(OrgchartPage);
   }
 
   doAdd() {
-    this.navCtrl.setRoot(AddcalendarPage);
+    this.navCtrl.push(AddcalendarPage);
   }
 
 

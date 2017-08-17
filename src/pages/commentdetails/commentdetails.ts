@@ -239,7 +239,7 @@ export class CommentdetailsPage {
     }
   }
   previous() {
-    this.nav.setRoot(CommentsinfoPage, {
+    this.nav.push(CommentsinfoPage, {
       record: this.udetails
     });
   }
@@ -247,22 +247,22 @@ export class CommentdetailsPage {
 
 
   redirectToUser() {
-    this.nav.setRoot(UnitsPage);
+    this.nav.push(UnitsPage);
   }
   redirectToMessage() {
-    this.nav.setRoot(EmailPage);
+    this.nav.push(EmailPage);
   }
   redirectCalendar() {
-    this.nav.setRoot(CalendarPage);
+    this.nav.push(CalendarPage);
   }
   redirectToMaps() {
-    this.nav.setRoot(MapsPage);
+    this.nav.push(MapsPage);
   }
   redirectToSettings() {
-    this.nav.setRoot(OrgchartPage);
+    this.nav.push(OrgchartPage);
   }
 
   redirectToRole() {
-    this.nav.setRoot(RolePage);
+    this.nav.push(RolePage);
   }
 }

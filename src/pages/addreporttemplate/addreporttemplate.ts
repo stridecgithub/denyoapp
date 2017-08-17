@@ -225,10 +225,10 @@ console.log("Selected DAta:"+JSON.stringify(this.getCheckboxData));
             console.log("Msg Results:-" + res.msg[0].result);
             if (res.msg[0].result > 0) {
               this.sendNotification(res.msg[0].result);
-              this.nav.setRoot(ReporttemplatePage);
+              this.nav.push(ReporttemplatePage);
             } else {
               this.sendNotification(res.msg[0].result);
-              this.nav.setRoot(ReporttemplatePage);
+              this.nav.push(ReporttemplatePage);
             }
           }
           // Otherwise let 'em know anyway
@@ -272,10 +272,10 @@ console.log("Selected DAta:"+JSON.stringify(this.getCheckboxData));
             console.log("Msg Results:-" + res.msg[0].result);
             if (res.msg[0].result > 0) {
               this.sendNotification(res.msg[0].result);
-              this.nav.setRoot(ReporttemplatePage);
+              this.nav.push(ReporttemplatePage);
             } else {
               this.sendNotification(res.msg[0].result);
-              this.nav.setRoot(ReporttemplatePage);
+              this.nav.push(ReporttemplatePage);
             }
           }
           // Otherwise let 'em know anyway
@@ -293,24 +293,24 @@ console.log("Selected DAta:"+JSON.stringify(this.getCheckboxData));
     notification.present();
   }
   previous() {
-    this.nav.setRoot(ReporttemplatePage);
+    this.nav.push(ReporttemplatePage);
   }
   notification() {
-    this.nav.setRoot(NotificationPage);
+    this.nav.push(NotificationPage);
   }
   redirectToUser() {
-    this.nav.setRoot(UnitsPage);
+    this.nav.push(UnitsPage);
   }
   redirectToMessage() {
-    this.nav.setRoot(EmailPage);
+    this.nav.push(EmailPage);
   }
   redirectCalendar() {
-    this.nav.setRoot(CalendarPage);
+    this.nav.push(CalendarPage);
   }
   redirectToMaps() {
-    this.nav.setRoot(MapsPage);
+    this.nav.push(MapsPage);
   }
   redirectToSettings() {
-    this.nav.setRoot(OrgchartPage);
+    this.nav.push(OrgchartPage);
   }
 }

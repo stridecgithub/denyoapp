@@ -262,7 +262,7 @@ export class AddunitstwoPage {
       latitude: this.latitude,
       longitude: this.longitude
     });
-    this.nav.setRoot(AddunitsthreePage, {
+    this.nav.push(AddunitsthreePage, {
       accountInfo: this.userInfo,
       record: this.NP.get("record")
     });
@@ -320,7 +320,7 @@ export class AddunitstwoPage {
       latitude: this.latitude,
       longitude: this.longitude
     });
-    this.nav.setRoot(AddunitsthreePage, {
+    this.nav.push(AddunitsthreePage, {
       accountInfo: this.userInfo,
       record: this.NP.get("record")
     });
@@ -439,10 +439,10 @@ export class AddunitstwoPage {
 
 
   notification() {
-    this.nav.setRoot(NotificationPage);
+    this.nav.push(NotificationPage);
   }
   previous() {
-    this.nav.setRoot(AddunitsonePage, {
+    this.nav.push(AddunitsonePage, {
       accountInfo: this.userInfo,
       record: this.NP.get("record")
     });
@@ -452,19 +452,19 @@ export class AddunitstwoPage {
 
 
   redirectToUser() {
-    this.nav.setRoot(UnitsPage);
+    this.nav.push(UnitsPage);
   }
   redirectToMessage() {
-    this.nav.setRoot(EmailPage);
+    this.nav.push(EmailPage);
   }
   redirectCalendar() {
-    this.nav.setRoot(CalendarPage);
+    this.nav.push(CalendarPage);
   }
   redirectToMaps() {
-    this.nav.setRoot(MapsPage);
+    this.nav.push(MapsPage);
   }
   redirectToSettings() {
-    this.nav.setRoot(OrgchartPage);
+    this.nav.push(OrgchartPage);
   }
 
 

@@ -63,7 +63,7 @@ export class ViewunitsPage {
   }
 exit()
 {
-    this.nav.setRoot(UnitdetailsPage, {
+    this.nav.push(UnitdetailsPage, {
       record: this.navParams.get("record")
     });
 }

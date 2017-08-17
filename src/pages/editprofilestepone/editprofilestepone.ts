@@ -169,7 +169,7 @@ export class EditprofilesteponePage {
       hashtag: this.hashtag,
       country: this.country
     });
-    this.nav.setRoot(EditprofilesteptwoPage, {
+    this.nav.push(EditprofilesteptwoPage, {
       accountInfo: this.userInfo,
       record: this.NP.get("record")
     });
@@ -282,25 +282,25 @@ export class EditprofilesteponePage {
 
 
   previous() {
-    this.nav.setRoot(MyaccountPage);
+    this.nav.push(MyaccountPage);
   }
   notification() {
-    this.nav.setRoot(NotificationPage);
+    this.nav.push(NotificationPage);
   }
   redirectToUser() {
-    this.nav.setRoot(UnitsPage);
+    this.nav.push(UnitsPage);
   }
   redirectToMessage() {
-    this.nav.setRoot(EmailPage);
+    this.nav.push(EmailPage);
   }
   redirectCalendar() {
-    this.nav.setRoot(CalendarPage);
+    this.nav.push(CalendarPage);
   }
   redirectToMaps() {
-    this.nav.setRoot(MapsPage);
+    this.nav.push(MapsPage);
   }
   redirectToSettings() {
-    this.nav.setRoot(OrgchartPage);
+    this.nav.push(OrgchartPage);
   }
 }
 

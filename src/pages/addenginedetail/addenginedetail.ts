@@ -131,7 +131,7 @@ export class AddenginedetailPage {
           this.hideForm = true;
           this.sendNotification(`successfully Updated`);
           localStorage.setItem("userPhotoFile", "");
-          this.navCtrl.setRoot(EnginedetailPage);
+          this.navCtrl.push(EnginedetailPage);
         }
         // Otherwise let 'em know anyway
         else {
@@ -160,7 +160,7 @@ export class AddenginedetailPage {
           this.hideForm = true;
           this.sendNotification(`successfully Added`);
           localStorage.setItem("userPhotoFile", "");
-          this.navCtrl.setRoot(EnginedetailPage);
+          this.navCtrl.push(EnginedetailPage);
         }
         // Otherwise let 'em know anyway
         else {
@@ -177,26 +177,26 @@ export class AddenginedetailPage {
     notification.present();
   }
  previous() {
-    this.navCtrl.setRoot(EnginedetailPage);
+    this.navCtrl.push(EnginedetailPage);
   }
 
   notification() {
-    this.navCtrl.setRoot(NotificationPage);
+    this.navCtrl.push(NotificationPage);
   }
   redirectToUser() {
-    this.navCtrl.setRoot(UnitsPage);
+    this.navCtrl.push(UnitsPage);
   }
   redirectToMessage() {
-    this.navCtrl.setRoot(EmailPage);
+    this.navCtrl.push(EmailPage);
   }
   redirectCalendar() {
-    this.navCtrl.setRoot(CalendarPage);
+    this.navCtrl.push(CalendarPage);
   }
   redirectToMaps() {
-    this.navCtrl.setRoot(MapsPage);
+    this.navCtrl.push(MapsPage);
   }
   redirectToSettings() {
-    this.navCtrl.setRoot(OrgchartPage);
+    this.navCtrl.push(OrgchartPage);
   }  
 
 }

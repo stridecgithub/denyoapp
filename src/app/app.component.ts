@@ -128,7 +128,7 @@ export class MyApp {
            timer = 1;
            console.log(JSON.stringify(clicked))
  
-           //this.nav.setRoot(HomePage);
+           //this.nav.push(HomePage);
            this.callUnitDetails(clicked);
            //this.openPage(UnitsPage);
          }
@@ -173,7 +173,7 @@ export class MyApp {
   }
 
   callUnitDetails(clicked) {
-    this.nav.setRoot(UnitdetailsPage, {
+    this.nav.push(UnitdetailsPage, {
       record: clicked
     });
   }
@@ -189,31 +189,31 @@ export class MyApp {
   }
   openPage(page) {
     if (page.component == 'UnitsPage') {
-      this.nav.setRoot(UnitsPage);
+      this.nav.push(UnitsPage);
     } else if (page.component == 'UnitgroupPage') {
-      this.nav.setRoot(UnitgroupPage);
+      this.nav.push(UnitgroupPage);
     } else if (page.component == 'MyaccountPage') {
-      this.nav.setRoot(MyaccountPage);
+      this.nav.push(MyaccountPage);
     } else if (page.component == 'UserPage') {
-      this.nav.setRoot(UserPage);
+      this.nav.push(UserPage);
     } else if (page.component == 'CompanygroupPage') {
-      this.nav.setRoot(CompanygroupPage);
+      this.nav.push(CompanygroupPage);
     } else if (page.component == 'RolePage') {
-      this.nav.setRoot(RolePage);
+      this.nav.push(RolePage);
     } else if (page.component == 'ReporttemplatePage') {
-      this.nav.setRoot(ReporttemplatePage);
+      this.nav.push(ReporttemplatePage);
     } else if (page.component == 'OrgchartPage') {
-      this.nav.setRoot(OrgchartPage);
+      this.nav.push(OrgchartPage);
     } else if (page.title == 'Message') {
       this.menuCtrl.close();
-      this.nav.setRoot(EmailPage);
+      this.nav.push(EmailPage);
     } else if (page.title == 'Logout') {
       this.logout();
       this.menuCtrl.close();
-      //this.nav.setRoot(LogoutPage);
+      //this.nav.push(LogoutPage);
     } else if (page.title == 'Dashboard') {
       this.menuCtrl.close();
-      this.nav.setRoot(HomePage);
+      this.nav.push(HomePage);
     } else if (page.title == 'Calendar') {
       this.menuCtrl.close();
       this.nav.push(CalendarPage);
@@ -222,20 +222,20 @@ export class MyApp {
       this.nav.push(MapsPage);
     } else if (page.title == 'Reports') {
       this.menuCtrl.close();
-      this.nav.setRoot(ReportsPage);
+      this.nav.push(ReportsPage);
     }
     else if (page.title == 'Alarm') {
       this.menuCtrl.close();
-      //this.nav.setRoot(AlarmPage);
+      //this.nav.push(AlarmPage);
     }
     else if (page.component == 'AddalarmPage') {
-      this.nav.setRoot(AddalarmPage);
+      this.nav.push(AddalarmPage);
     }
     else if (page.component == 'MapdemoPage') {
-      //this.nav.setRoot(MapdemoPage);
+      //this.nav.push(MapdemoPage);
     }
     else if (page.component == 'EnginedetailPage') {
-      this.nav.setRoot(EnginedetailPage);
+      this.nav.push(EnginedetailPage);
     }
   }
 
@@ -380,40 +380,40 @@ export class MyApp {
       console.log(navtypes);
 
       if (navtypes == 'M') {
-        // this.nav.setRoot(EmailPage);
+        // this.nav.push(EmailPage);
 
-        this.nav.setRoot(EmailPage, {
+        this.nav.push(EmailPage, {
           record: navids,
           act: 'Push'
         });
 
       } else if (navtypes == 'OA') {
-        this.nav.setRoot(AlarmdetailsPage, {
+        this.nav.push(AlarmdetailsPage, {
           record: navids,
           act: 'Push'
         });
       } else if (navtypes == 'A') {
-        //this.nav.setRoot(AlarmdetailsPage);
+        //this.nav.push(AlarmdetailsPage);
 
-        this.nav.setRoot(AlarmdetailsPage, {
+        this.nav.push(AlarmdetailsPage, {
           record: navids,
           act: 'Push'
         });
 
       } else if (navtypes == 'C') {
-        //this.nav.setRoot(CommentdetailsPage);
-        this.nav.setRoot(CommentdetailsPage, {
+        //this.nav.push(CommentdetailsPage);
+        this.nav.push(CommentdetailsPage, {
           record: navids,
           act: 'Push'
         });
       } else if (navtypes == 'E') {
-        this.nav.setRoot(CalendardetailPage, {
+        this.nav.push(CalendardetailPage, {
           event_id: navids,
           act: 'Push'
         });
       } else if (navtypes == 'S') {
-        // this.nav.setRoot(ServicedetailsPage);
-        this.nav.setRoot(ServicedetailsPage, {
+        // this.nav.push(ServicedetailsPage);
+        this.nav.push(ServicedetailsPage, {
           record: navids,
           act: 'Push'
         });

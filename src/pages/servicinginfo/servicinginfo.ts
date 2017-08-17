@@ -234,39 +234,39 @@ this.unitDetailData.favoriteindication = favorite;
   }
 
   notification() {
-    this.nav.setRoot(NotificationPage);
+    this.nav.push(NotificationPage);
   }
   previous() {
-    this.nav.setRoot(UnitdetailsPage, {
+    this.nav.push(UnitdetailsPage, {
       record: this.NP.get("record")
     });
   }
   redirectToUser() {
-    this.nav.setRoot(UserPage);
+    this.nav.push(UserPage);
   }
 
   redirectToUnitGroup() {
-    this.nav.setRoot(UnitgroupPage);
+    this.nav.push(UnitgroupPage);
   }
   redirectToCompanyGroup() {
-    this.nav.setRoot(CompanygroupPage);
+    this.nav.push(CompanygroupPage);
   }
   redirectToUnits() {
-    this.nav.setRoot(UnitsPage);
+    this.nav.push(UnitsPage);
   }
   redirectToMyAccount() {
-    this.nav.setRoot(MyaccountPage);
+    this.nav.push(MyaccountPage);
   }
 
   redirectToRole() {
-    this.nav.setRoot(RolePage);
+    this.nav.push(RolePage);
   }
   doAdd() {
     this.service_subject = '';
     this.service_remark = '';
     this.addedServiceImgLists = [];
     localStorage.setItem("microtime", "");
-    this.nav.setRoot(AddserviceinfoPage, {
+    this.nav.push(AddserviceinfoPage, {
       record: this.NP.get("record"),
       act: 'Add',
       unit_id: this.unit_id
@@ -279,7 +279,7 @@ this.unitDetailData.favoriteindication = favorite;
     this.service_remark = '';
     this.addedImgLists = [];
     localStorage.setItem("microtime", "");
-    this.nav.setRoot(AddrequestsupportPage, {
+    this.nav.push(AddrequestsupportPage, {
       record: this.NP.get("record"),
       act: 'Add',
       unit_id: this.unit_id
@@ -292,7 +292,7 @@ this.unitDetailData.favoriteindication = favorite;
     if(item.event_type.toLowerCase()=='s')
     {
     localStorage.setItem("microtime", "");
-    this.nav.setRoot(AddserviceinfoPage, {
+    this.nav.push(AddserviceinfoPage, {
       record: item,
       act: 'Edit',
       from:'service'
@@ -305,7 +305,7 @@ this.unitDetailData.favoriteindication = favorite;
   }
   servicedetails(item, act) {
     localStorage.setItem("microtime", "");
-    this.nav.setRoot(ServicedetailsPage, {
+    this.nav.push(ServicedetailsPage, {
       record: item,
       act: 'Edit',
       from:'service'
@@ -376,16 +376,16 @@ this.unitDetailData.favoriteindication = favorite;
   }
 
   redirectToMessage() {
-    this.nav.setRoot(EmailPage);
+    this.nav.push(EmailPage);
   }
   redirectCalendar() {
-    this.nav.setRoot(CalendarPage);
+    this.nav.push(CalendarPage);
   }
   redirectToMaps() {
-    this.nav.setRoot(MapsPage);
+    this.nav.push(MapsPage);
   }
   redirectToSettings() {
-    this.nav.setRoot(OrgchartPage);
+    this.nav.push(OrgchartPage);
   }
 
 }

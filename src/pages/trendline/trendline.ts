@@ -56,27 +56,27 @@ let alarmID=this.NP.get("alarmid");
 		console.log('Enter kannan kris thibi1');
 	}
 	previous() {
-		this.nav.setRoot(AlarmlogPage);
+		this.nav.push(AlarmlogPage);
 	}
 	redirectToUser() {
-		this.nav.setRoot(UserPage);
+		this.nav.push(UserPage);
 	}
 
 	redirectToUnitGroup() {
-		this.nav.setRoot(UnitgroupPage);
+		this.nav.push(UnitgroupPage);
 	}
 	redirectToCompanyGroup() {
-		this.nav.setRoot(CompanygroupPage);
+		this.nav.push(CompanygroupPage);
 	}
 	redirectToUnits() {
-		this.nav.setRoot(UnitsPage);
+		this.nav.push(UnitsPage);
 	}
 	redirectToMyAccount() {
-		this.nav.setRoot(OrgchartPage);
+		this.nav.push(OrgchartPage);
 	}
 
 	redirectToRole() {
-		this.nav.setRoot(RolePage);
+		this.nav.push(RolePage);
 	}
 }
 

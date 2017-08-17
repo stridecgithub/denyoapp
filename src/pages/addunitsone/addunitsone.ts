@@ -16,6 +16,7 @@ import { EmailPage } from '../email/email';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { OrgchartPage} from '../orgchart/orgchart';
 import { NativeGeocoder, NativeGeocoderForwardResult } from '@ionic-native/native-geocoder';
+
 /**
  * Generated class for the AddcompanygroupPage page.
  *
@@ -141,7 +142,7 @@ export class AddunitsonePage {
       latitude: this.lat,
       longitude: this.lang
     });
-    this.nav.setRoot(AddunitstwoPage, {
+    this.nav.push(AddunitstwoPage, {
       accountInfo: this.userInfo
     });
 
@@ -161,7 +162,7 @@ export class AddunitsonePage {
       latitude: this.lat,
       longitude: this.lang
     });
-    this.nav.setRoot(AddunitstwoPage, {
+    this.nav.push(AddunitstwoPage, {
       accountInfo: this.userInfo,
       record: this.NP.get("record")
     });
@@ -219,26 +220,26 @@ export class AddunitsonePage {
     }
   }
   previous() {
-    this.nav.setRoot(UnitsPage);
+    this.nav.push(UnitsPage);
   }
 
  notification() {
-    this.nav.setRoot(NotificationPage);
+    this.nav.push(NotificationPage);
   }
   redirectToUser() {
-    this.nav.setRoot(UnitsPage);
+    this.nav.push(UnitsPage);
   }
   redirectToMessage() {
-    this.nav.setRoot(EmailPage);
+    this.nav.push(EmailPage);
   }
   redirectCalendar() {
-    this.nav.setRoot(CalendarPage);
+    this.nav.push(CalendarPage);
   }
   redirectToMaps() {
-    this.nav.setRoot(MapsPage);
+    this.nav.push(MapsPage);
   }
   redirectToSettings() {
-    this.nav.setRoot(OrgchartPage);
+    this.nav.push(OrgchartPage);
   }
 
   getGps() {

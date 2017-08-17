@@ -218,11 +218,11 @@ export class CommentsinfoPage {
     this.presentLoading(0);
   }
   notification() {
-    this.nav.setRoot(NotificationPage);
+    this.nav.push(NotificationPage);
   }
   previous() {
 
-    this.nav.setRoot(UnitdetailsPage, {
+    this.nav.push(UnitdetailsPage, {
       record: this.NP.get("record")
     });
   }
@@ -232,7 +232,7 @@ export class CommentsinfoPage {
     this.comments = '';
     this.addedImgLists = [];
     localStorage.setItem("microtime", "");
-    this.nav.setRoot(AddcommentsinfoPage, {
+    this.nav.push(AddcommentsinfoPage, {
       record: this.NP.get("record"),
       act: 'Add',
       unit_id: this.unit_id
@@ -246,7 +246,7 @@ export class CommentsinfoPage {
     if (type.toLowerCase() == 'c') {
       console.log("comment")
       localStorage.setItem("microtime", "");
-      this.nav.setRoot(AddcommentsinfoPage, {
+      this.nav.push(AddcommentsinfoPage, {
         record: item,
         act: 'Edit'
       });
@@ -254,7 +254,7 @@ export class CommentsinfoPage {
     if (type.toLowerCase() == 's') {
       console.log("service")
       localStorage.setItem("microtime", "");
-      this.nav.setRoot(AddserviceinfoPage, {
+      this.nav.push(AddserviceinfoPage, {
         record: item,
         act: 'Edit',from:'comment'
       });
@@ -263,7 +263,7 @@ export class CommentsinfoPage {
       console.log("Alarm")
      // localStorage.setItem("microtime", "");
       if (item.alarm_assigned_to == '') {
-      this.nav.setRoot(AddalarmlistPage, {
+      this.nav.push(AddalarmlistPage, {
           record: item,
           act: act,
           from:'comment'
@@ -282,14 +282,14 @@ export class CommentsinfoPage {
   details(item, act, type) {
     if (type.toLowerCase() == 'c') {
       localStorage.setItem("microtime", "");
-      this.nav.setRoot(CommentdetailsPage, {
+      this.nav.push(CommentdetailsPage, {
         record: item,
         act: 'Edit'
       });
     }
     if (type.toLowerCase() == 's') {
       localStorage.setItem("microtime", "");
-      this.nav.setRoot(ServicedetailsPage, {
+      this.nav.push(ServicedetailsPage, {
         record: item,
         act: 'Edit',
         from:'comment'
@@ -297,7 +297,7 @@ export class CommentsinfoPage {
     }
     if (type.toLowerCase() == 'r') {
       localStorage.setItem("microtime", "");
-      this.nav.setRoot(ServicedetailsPage, {
+      this.nav.push(ServicedetailsPage, {
         record: item,
         act: 'Edit',
         from:'comment'
@@ -305,7 +305,7 @@ export class CommentsinfoPage {
     }
     if(type.toLowerCase()=='a')
     {
-      this.nav.setRoot(AlarmlistdetailPage, {
+      this.nav.push(AlarmlistdetailPage, {
         record: item,
         act: act,
         from:'comment'
@@ -460,19 +460,19 @@ export class CommentsinfoPage {
 
 
   redirectToUser() {
-    this.nav.setRoot(UnitsPage);
+    this.nav.push(UnitsPage);
   }
   redirectToMessage() {
-    this.nav.setRoot(EmailPage);
+    this.nav.push(EmailPage);
   }
   redirectCalendar() {
-    this.nav.setRoot(CalendarPage);
+    this.nav.push(CalendarPage);
   }
   redirectToMaps() {
-    this.nav.setRoot(MapsPage);
+    this.nav.push(MapsPage);
   }
   redirectToSettings() {
-    this.nav.setRoot(OrgchartPage);
+    this.nav.push(OrgchartPage);
   }
    onSegmentChanged(val) {
     let splitdata = val.split(",");

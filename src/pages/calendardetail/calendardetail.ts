@@ -62,7 +62,7 @@ export class CalendardetailPage {
     this.companyId = localStorage.getItem("userInfoCompanyId");
   }
   trendlineInfo(event_id) {
-    this.nav.setRoot(TrendlinePage, {
+    this.nav.push(TrendlinePage, {
       event_id: event_id
     });
   }
@@ -108,31 +108,31 @@ export class CalendardetailPage {
     this.event_time = item.event_time;
   }
   editalarm() {
-    this.nav.setRoot(AddalarmPage,
+    this.nav.push(AddalarmPage,
       {
         event_id: this.NP.get("event_id")
       });
   }
   previous() {
-    this.nav.setRoot(CalendarPage);
+    this.nav.push(CalendarPage);
   }
   notification() {
-    this.nav.setRoot(NotificationPage);
+    this.nav.push(NotificationPage);
   }
   redirectToUser() {
-    this.nav.setRoot(UnitsPage);
+    this.nav.push(UnitsPage);
   }
   redirectToMessage() {
-    this.nav.setRoot(EmailPage);
+    this.nav.push(EmailPage);
   }
   redirectCalendar() {
-    this.nav.setRoot(CalendarPage);
+    this.nav.push(CalendarPage);
   }
   redirectToMaps() {
-    this.nav.setRoot(MapsPage);
+    this.nav.push(MapsPage);
   }
   redirectToSettings() {
-    this.nav.setRoot(OrgchartPage);
+    this.nav.push(OrgchartPage);
   }
 }
 

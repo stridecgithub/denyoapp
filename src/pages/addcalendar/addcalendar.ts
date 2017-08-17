@@ -356,7 +356,7 @@ export class AddcalendarPage {
           } else {
             this.sendNotification(res.msg[0].result);
             localStorage.setItem("atMentionResult", '');
-            this.nav.setRoot(CalendarPage);
+            this.nav.push(CalendarPage);
           }
         }
         // Otherwise let 'em know anyway
@@ -407,7 +407,7 @@ export class AddcalendarPage {
             localStorage.setItem("atMentionResult", '');
           } else {
             this.sendNotification(res.msg[0].result);
-            this.nav.setRoot(CalendarPage);
+            this.nav.push(CalendarPage);
           }
         }
         // Otherwise let 'em know anyway
@@ -542,25 +542,25 @@ export class AddcalendarPage {
       );
   }
   previous() {
-    this.nav.setRoot(CalendarPage);
+    this.nav.push(CalendarPage);
   }
   notification() {
-    this.nav.setRoot(NotificationPage);
+    this.nav.push(NotificationPage);
   }
   redirectToUser() {
-    this.nav.setRoot(UnitsPage);
+    this.nav.push(UnitsPage);
   }
   redirectToMessage() {
-    this.nav.setRoot(EmailPage);
+    this.nav.push(EmailPage);
   }
   redirectCalendar() {
-    this.nav.setRoot(CalendarPage);
+    this.nav.push(CalendarPage);
   }
   redirectToMaps() {
-    this.nav.setRoot(MapsPage);
+    this.nav.push(MapsPage);
   }
   redirectToSettings() {
-    this.nav.setRoot(OrgchartPage);
+    this.nav.push(OrgchartPage);
   }
 
 }

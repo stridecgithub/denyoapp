@@ -88,18 +88,18 @@ export class NotificationPage {
       });
     /*
         if (nottype == 'Alarm') {
-          this.nav.setRoot(AlarmdetailsPage, {
+          this.nav.push(AlarmdetailsPage, {
             record: item
           });
         }
       
         if (nottype == 'Service') {
-          this.nav.setRoot(ServicedetailsPage, {
+          this.nav.push(ServicedetailsPage, {
             record: item
           });
         }
         if (nottype == 'Comment') {
-          this.nav.setRoot(CommentdetailsPage, {
+          this.nav.push(CommentdetailsPage, {
             record: item
           });
         }
@@ -215,7 +215,7 @@ export class NotificationPage {
 
   doAdd() {
     localStorage.setItem("microtime", "");
-    this.nav.setRoot(AddserviceinfoPage, {
+    this.nav.push(AddserviceinfoPage, {
       record: this.NP.get("record"),
       act: 'Add'
     });
@@ -224,7 +224,7 @@ export class NotificationPage {
 
   doRequest() {
     localStorage.setItem("microtime", "");
-    this.nav.setRoot(AddrequestsupportPage, {
+    this.nav.push(AddrequestsupportPage, {
       record: this.NP.get("record"),
       act: 'Add'
     });
@@ -234,7 +234,7 @@ export class NotificationPage {
 
   doEdit(item, act) {
     localStorage.setItem("microtime", "");
-    this.nav.setRoot(AddserviceinfoPage, {
+    this.nav.push(AddserviceinfoPage, {
       record: item,
       act: 'Edit'
     });
@@ -291,29 +291,29 @@ export class NotificationPage {
     notification.present();
   }
   notification() {
-    this.nav.setRoot(NotificationPage);
+    this.nav.push(NotificationPage);
   }
 
 
   previous() {
-    this.nav.setRoot(HomePage);
+    this.nav.push(HomePage);
   }
 
 
   redirectToUser() {
-    this.nav.setRoot(UnitsPage);
+    this.nav.push(UnitsPage);
   }
   redirectToMessage() {
-    this.nav.setRoot(EmailPage);
+    this.nav.push(EmailPage);
   }
   redirectCalendar() {
-    this.nav.setRoot(CalendarPage);
+    this.nav.push(CalendarPage);
   }
   redirectToMaps() {
-    this.nav.setRoot(MapsPage);
+    this.nav.push(MapsPage);
   }
   redirectToSettings() {
-    this.nav.setRoot(OrgchartPage);
+    this.nav.push(OrgchartPage);
   }
 }
 

@@ -215,7 +215,7 @@ export class AddorgcharttwoPage {
           this.hideForm = true;
           this.sendNotification(`User created was successfully added`);
           localStorage.setItem("userPhotoFile", "");
-          this.navCtrl.setRoot(OrgchartPage);
+          this.navCtrl.push(OrgchartPage);
         }
         // Otherwise let 'em know anyway
         else {
@@ -271,7 +271,7 @@ export class AddorgcharttwoPage {
         if (data.status === 200) {
           this.hideForm = true;
           this.sendNotification(`successfully updated`);
-          this.navCtrl.setRoot(OrgchartPage);
+          this.navCtrl.push(OrgchartPage);
         }
         // Otherwise let 'em know anyway
         else {
@@ -429,7 +429,7 @@ export class AddorgcharttwoPage {
   }
 
   previous() {
-    this.navCtrl.setRoot(AddorgchartonePage, {
+    this.navCtrl.push(AddorgchartonePage, {
       record: this.NP.get("record")
     });
   }
@@ -492,22 +492,22 @@ export class AddorgcharttwoPage {
   }
 
   notification() {
-    this.navCtrl.setRoot(NotificationPage);
+    this.navCtrl.push(NotificationPage);
   }
   redirectToUser() {
-    this.navCtrl.setRoot(UnitsPage);
+    this.navCtrl.push(UnitsPage);
   }
   redirectToMessage() {
-    this.navCtrl.setRoot(EmailPage);
+    this.navCtrl.push(EmailPage);
   }
   redirectCalendar() {
-    this.navCtrl.setRoot(CalendarPage);
+    this.navCtrl.push(CalendarPage);
   }
   redirectToMaps() {
-    this.navCtrl.setRoot(MapsPage);
+    this.navCtrl.push(MapsPage);
   }
   redirectToSettings() {
-    this.navCtrl.setRoot(OrgchartPage);
+    this.navCtrl.push(OrgchartPage);
   }
  onSegmentChanged() {
     console.log("ID" + this.company_group);

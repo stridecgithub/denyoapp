@@ -269,14 +269,14 @@ this.isSubmitted=true;
           this.hideForm = true;
             localStorage.setItem("atMentionResult", '');
           this.sendNotification(`Units created was successfully added`);
-          this.nav.setRoot(UnitsPage);
+          this.nav.push(UnitsPage);
         }
         // Otherwise let 'em know anyway
         else {
           this.sendNotification('Something went wrong!');
         }
       });
-    /* this.nav.setRoot(UnitsPage, {
+    /* this.nav.push(UnitsPage, {
        accountInfo: this.userInfo
      });*/
 
@@ -338,7 +338,7 @@ this.isSubmitted=true;
           this.hideForm = true;
             localStorage.setItem("atMentionResult", '');
           this.sendNotification(`Units was successfully updated`);
-          this.nav.setRoot(UnitsPage);
+          this.nav.push(UnitsPage);
         }
         // Otherwise let 'em know anyway
         else {
@@ -466,29 +466,29 @@ this.isSubmitted=true;
 
  
   previous() {
-    this.nav.setRoot(AddunitsthreePage, {
+    this.nav.push(AddunitsthreePage, {
       accountInfo: this.userInfo,
       record: this.NP.get("record")
     });
   }
 
  notification() {
-    this.nav.setRoot(NotificationPage);
+    this.nav.push(NotificationPage);
   }
   redirectToUser() {
-    this.nav.setRoot(UnitsPage);
+    this.nav.push(UnitsPage);
   }
   redirectToMessage() {
-    this.nav.setRoot(EmailPage);
+    this.nav.push(EmailPage);
   }
   redirectCalendar() {
-    this.nav.setRoot(CalendarPage);
+    this.nav.push(CalendarPage);
   }
   redirectToMaps() {
-    this.nav.setRoot(MapsPage);
+    this.nav.push(MapsPage);
   }
   redirectToSettings() {
-    this.nav.setRoot(OrgchartPage);
+    this.nav.push(OrgchartPage);
   }  
 }
 

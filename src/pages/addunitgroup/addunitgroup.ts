@@ -193,7 +193,7 @@ export class AddunitgroupPage {
             this.sendNotification(res.msg[0].result);
           } else {
             this.sendNotification(res.msg[0].result);
-            this.nav.setRoot(UnitgroupPage);
+            this.nav.push(UnitgroupPage);
           }
         }
         // Otherwise let 'em know anyway
@@ -224,7 +224,7 @@ export class AddunitgroupPage {
             this.sendNotification(res.msg[0].result);
           } else {
             this.sendNotification(res.msg[0].result);
-            this.nav.setRoot(UnitgroupPage);
+            this.nav.push(UnitgroupPage);
           }
         }
         // Otherwise let 'em know anyway
@@ -265,25 +265,25 @@ export class AddunitgroupPage {
 
 
   previous() {
-    this.nav.setRoot(UnitgroupPage);
+    this.nav.push(UnitgroupPage);
   }
 
   notification() {
-    this.nav.setRoot(NotificationPage);
+    this.nav.push(NotificationPage);
   }
   redirectToUser() {
-    this.nav.setRoot(UnitsPage);
+    this.nav.push(UnitsPage);
   }
   redirectToMessage() {
-    this.nav.setRoot(EmailPage);
+    this.nav.push(EmailPage);
   }
   redirectCalendar() {
-    this.nav.setRoot(CalendarPage);
+    this.nav.push(CalendarPage);
   }
   redirectToMaps() {
-    this.nav.setRoot(MapsPage);
+    this.nav.push(MapsPage);
   }
   redirectToSettings() {
-    this.nav.setRoot(OrgchartPage);
+    this.nav.push(OrgchartPage);
   }
 }

@@ -124,58 +124,58 @@ export class MyaccountPage {
     console.log('ionViewDidLoad My Account Page');
   }
   doEdit(userid) {
-    this.nav.setRoot(EditprofilesteponePage, {
+    this.nav.push(EditprofilesteponePage, {
       userId: userid
     });
   }
 
 
   viewOrgChart() {
-    this.nav.setRoot(OrgchartPage, {
+    this.nav.push(OrgchartPage, {
       companyId: this.companyId
     });
   }
   previous() {
-    this.nav.setRoot(HomePage);
+    this.nav.push(HomePage);
   }
 
   notification() {
-    this.nav.setRoot(NotificationPage);
+    this.nav.push(NotificationPage);
   }
   redirectToUser() {
-    this.nav.setRoot(UnitsPage);
+    this.nav.push(UnitsPage);
   }
   redirectToMessage() {
-    this.nav.setRoot(EmailPage);
+    this.nav.push(EmailPage);
   }
   redirectCalendar() {
-    this.nav.setRoot(CalendarPage);
+    this.nav.push(CalendarPage);
   }
   redirectToMaps() {
-    this.nav.setRoot(MapsPage);
+    this.nav.push(MapsPage);
   }
   redirectToSettings() {
-    this.nav.setRoot(OrgchartPage);
+    this.nav.push(OrgchartPage);
   }
 
 user()
 {
- this.nav.setRoot(UserPage);
+ this.nav.push(UserPage);
 }
 cgroup()
 {
- this.nav.setRoot(CompanygroupPage);
+ this.nav.push(CompanygroupPage);
 }
 urole()
 {
- this.nav.setRoot(RolePage);
+ this.nav.push(RolePage);
 }
 orgchart()
 {
- this.nav.setRoot(OrgchartPage);
+ this.nav.push(OrgchartPage);
 }
 report()
 {
- this.nav.setRoot(ReporttemplatePage);
+ this.nav.push(ReporttemplatePage);
 }
 }

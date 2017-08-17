@@ -60,7 +60,7 @@ export class AlarmdetailsPage {
     this.companyId = localStorage.getItem("userInfoCompanyId");
   }
   trendlineInfo(alarmid) {
-    this.nav.setRoot(TrendlinePage, {
+    this.nav.push(TrendlinePage, {
       alarmid: alarmid
     });
   }
@@ -123,30 +123,30 @@ export class AlarmdetailsPage {
 
   }
   editalarm() {
-    this.nav.setRoot(AddalarmPage,
+    this.nav.push(AddalarmPage,
       {
         record: this.NP.get("record")
       });
   }
   previous() {
-    this.nav.setRoot(AlarmlogPage);
+    this.nav.push(AlarmlogPage);
   }
   notification() {
-    this.nav.setRoot(NotificationPage);
+    this.nav.push(NotificationPage);
   }
   redirectToUser() {
-    this.nav.setRoot(UnitsPage);
+    this.nav.push(UnitsPage);
   }
   redirectToMessage() {
-    this.nav.setRoot(EmailPage);
+    this.nav.push(EmailPage);
   }
   redirectCalendar() {
-    this.nav.setRoot(CalendarPage);
+    this.nav.push(CalendarPage);
   }
   redirectToMaps() {
-    this.nav.setRoot(MapsPage);
+    this.nav.push(MapsPage);
   }
   redirectToSettings() {
-    this.nav.setRoot(OrgchartPage);
+    this.nav.push(OrgchartPage);
   }
 }

@@ -224,7 +224,7 @@ export class MapsPage {
     console.log('E');
   }
   mapunitdetail(item) {
-    this.navCtrl.setRoot(UnitdetailsPage, {
+    this.navCtrl.push(UnitdetailsPage, {
       record: item
     });
 
@@ -244,7 +244,7 @@ export class MapsPage {
         isclickedtounitdetails = 0;
       }
       if (isclickedtounitdetails > 0) {
-        this.navCtrl.setRoot(UnitdetailsPage, {
+        this.navCtrl.push(UnitdetailsPage, {
           record: clicked
         });
       }
@@ -295,7 +295,7 @@ export class MapsPage {
       }
       if (isclickedtounitdetails > 0) {
         console.log(JSON.stringify(clicked))
-        //this.nav.setRoot(HomePage);
+        //this.nav.push(HomePage);
         
         this.callUnitDetails(clicked);
         //this.openPage(UnitsPage);
@@ -317,7 +317,7 @@ export class MapsPage {
 
     localStorage.setItem("unitId", clicked);
     localStorage.setItem("iframeunitId", clicked);
-    this.navCtrl.setRoot(UnitdetailsPage, {
+    this.navCtrl.push(UnitdetailsPage, {
       record: clicked
     });
   }
@@ -470,22 +470,22 @@ export class MapsPage {
 
 
   doAdd() {
-    this.navCtrl.setRoot(AddunitsonePage);
+    this.navCtrl.push(AddunitsonePage);
   }
   doEdit(item, act) {
     if (act == 'edit') {
-      this.navCtrl.setRoot(AddunitsonePage, {
+      this.navCtrl.push(AddunitsonePage, {
         record: item,
         act: act
       });
       return false;
     } else if (act == 'detail') {
-      this.navCtrl.setRoot(UnitdetailsPage, {
+      this.navCtrl.push(UnitdetailsPage, {
         record: item
       });
       return false;
     } else {
-      this.navCtrl.setRoot(ViewcompanygroupPage, {
+      this.navCtrl.push(ViewcompanygroupPage, {
         record: item,
         act: act
       });
@@ -597,24 +597,24 @@ export class MapsPage {
 
 
   redirectToUnitGroup() {
-    this.navCtrl.setRoot(UnitgroupPage);
+    this.navCtrl.push(UnitgroupPage);
   }
   redirectToCompanyGroup() {
-    this.navCtrl.setRoot(CompanygroupPage);
+    this.navCtrl.push(CompanygroupPage);
   }
 
   redirectToUnits() {
-    this.navCtrl.setRoot(UnitsPage);
+    this.navCtrl.push(UnitsPage);
   }
   redirectToMyAccount() {
-    this.navCtrl.setRoot(OrgchartPage);
+    this.navCtrl.push(OrgchartPage);
   }
 
   redirectToRole() {
-    this.navCtrl.setRoot(RolePage);
+    this.navCtrl.push(RolePage);
   }
   previous() {
-    this.navCtrl.setRoot(HomePage);
+    this.navCtrl.push(HomePage);
   }
   favorite(unit_id) {
     this.reportData.startindex = 0;
@@ -752,7 +752,7 @@ export class MapsPage {
         localStorage.setItem("unitlng", item.lng);
         localStorage.setItem("runninghr", item.runninghr);
         localStorage.setItem("nsd", item.nextservicedate);
-        this.navCtrl.setRoot(UnitdetailsPage, {
+        this.navCtrl.push(UnitdetailsPage, {
           record: this.detailvalue
         });
         return false;
@@ -786,7 +786,7 @@ export class MapsPage {
           this.reportData.startindex = 0;
           this.reportData.sort = "unit_id";
           //this.doUser();
-          this.navCtrl.setRoot(this.navCtrl.getActive().component);
+          this.navCtrl.push(this.navCtrl.getActive().component);
 
 
         }
@@ -799,22 +799,22 @@ export class MapsPage {
 
   }
   notification() {
-    this.navCtrl.setRoot(NotificationPage);
+    this.navCtrl.push(NotificationPage);
   }
   redirectToUser() {
-    this.navCtrl.setRoot(UnitsPage);
+    this.navCtrl.push(UnitsPage);
   }
   redirectToMessage() {
-    this.navCtrl.setRoot(EmailPage);
+    this.navCtrl.push(EmailPage);
   }
   redirectCalendar() {
-    this.navCtrl.setRoot(CalendarPage);
+    this.navCtrl.push(CalendarPage);
   }
   redirectToMaps() {
-    this.navCtrl.setRoot(MapsPage);
+    this.navCtrl.push(MapsPage);
   }
   redirectToSettings() {
-    this.navCtrl.setRoot(OrgchartPage);
+    this.navCtrl.push(OrgchartPage);
   }
 }
 

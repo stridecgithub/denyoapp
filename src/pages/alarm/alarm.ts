@@ -209,7 +209,7 @@ console.log("Alarm list page unit id is"+this.unitDetailData.unit_id)
   }
   details(item, act) {
     if (act == 'edit') {
-      this.nav.setRoot(AlarmlistdetailPage, {
+      this.nav.push(AlarmlistdetailPage, {
         record: item,
         act: act,
 
@@ -221,7 +221,7 @@ console.log("Alarm list page unit id is"+this.unitDetailData.unit_id)
   doEdit(item, act) {
     if (item.alarm_assginedby_name == '') {
       if (act == 'edit') {
-        this.nav.setRoot(AddalarmlistPage, {
+        this.nav.push(AddalarmlistPage, {
           record: item,
           act: act,
           from:'alarm'
@@ -240,27 +240,27 @@ console.log("Alarm list page unit id is"+this.unitDetailData.unit_id)
     notification.present();
   }
   previous() {
-    this.nav.setRoot(UnitdetailsPage, {
+    this.nav.push(UnitdetailsPage, {
       record: this.NP.get("record")
     });
   }
 
   notification() {
-    this.nav.setRoot(NotificationPage);
+    this.nav.push(NotificationPage);
   }
   redirectToUser() {
-    this.nav.setRoot(UnitsPage);
+    this.nav.push(UnitsPage);
   }
   redirectToMessage() {
-    this.nav.setRoot(EmailPage);
+    this.nav.push(EmailPage);
   }
   redirectCalendar() {
-    this.nav.setRoot(CalendarPage);
+    this.nav.push(CalendarPage);
   }
   redirectToMaps() {
-    this.nav.setRoot(MapsPage);
+    this.nav.push(MapsPage);
   }
   redirectToSettings() {
-    this.nav.setRoot(OrgchartPage);
+    this.nav.push(OrgchartPage);
   }
 }

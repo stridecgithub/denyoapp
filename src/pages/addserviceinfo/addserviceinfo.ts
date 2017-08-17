@@ -471,7 +471,7 @@ export class AddserviceinfoPage {
           this.addedServiceImgLists = [];
           this.sendNotification(`Servicing info was successfully added`);
           localStorage.setItem("atMentionResult", '');
-          this.nav.setRoot(ServicinginfoPage, {
+          this.nav.push(ServicinginfoPage, {
             record: this.NP.get("record")
           });
         }
@@ -537,7 +537,7 @@ export class AddserviceinfoPage {
           this.addedServiceImgLists = [];
           this.sendNotification(`Servicing info  was successfully updated`);
           localStorage.setItem("atMentionResult", '');
-          this.nav.setRoot(ServicinginfoPage, {
+          this.nav.push(ServicinginfoPage, {
             record: this.NP.get("record")
           });
         }
@@ -619,17 +619,17 @@ export class AddserviceinfoPage {
   previous() {
     this.addedServiceImgLists = [];
     if(this.NP.get("from")=='service'){
-    this.nav.setRoot(ServicinginfoPage, {
+    this.nav.push(ServicinginfoPage, {
       record: this.NP.get("record")
     });
   }
   else if(this.NP.get("from")=='comment')
   {
- this.nav.setRoot(CommentsinfoPage);
+ this.nav.push(CommentsinfoPage);
   }
   else
   {
- this.nav.setRoot(ServicinginfoPage, {
+ this.nav.push(ServicinginfoPage, {
       record: this.NP.get("record")
     });
   }
@@ -755,22 +755,22 @@ export class AddserviceinfoPage {
 
 
   notification() {
-    this.nav.setRoot(NotificationPage);
+    this.nav.push(NotificationPage);
   }
   redirectToUser() {
-    this.nav.setRoot(UnitsPage);
+    this.nav.push(UnitsPage);
   }
   redirectToMessage() {
-    this.nav.setRoot(EmailPage);
+    this.nav.push(EmailPage);
   }
   redirectCalendar() {
-    this.nav.setRoot(CalendarPage);
+    this.nav.push(CalendarPage);
   }
   redirectToMaps() {
-    this.nav.setRoot(MapsPage);
+    this.nav.push(MapsPage);
   }
   redirectToSettings() {
-    this.nav.setRoot(OrgchartPage);
+    this.nav.push(OrgchartPage);
   }
 
 

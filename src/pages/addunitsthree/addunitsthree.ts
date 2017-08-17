@@ -381,7 +381,7 @@ export class AddunitsthreePage {
       latitude: this.latitude,
       longitude: this.longitude
     });
-    this.nav.setRoot(AddunitsfourPage, {
+    this.nav.push(AddunitsfourPage, {
       accountInfo: this.userInfo
     });
 
@@ -412,7 +412,7 @@ export class AddunitsthreePage {
       longitude: this.longitude
 
     });
-    this.nav.setRoot(AddunitsfourPage, {
+    this.nav.push(AddunitsfourPage, {
       accountInfo: this.userInfo,
       record: this.NP.get("record")
     });
@@ -579,7 +579,7 @@ export class AddunitsthreePage {
     }
   }
   previous() {
-    this.nav.setRoot(AddunitstwoPage, {
+    this.nav.push(AddunitstwoPage, {
       accountInfo: this.userInfo,
       record: this.NP.get("record")
     });
@@ -663,22 +663,22 @@ export class AddunitsthreePage {
 
 
   notification() {
-    this.nav.setRoot(NotificationPage);
+    this.nav.push(NotificationPage);
   }
   redirectToUser() {
-    this.nav.setRoot(UnitsPage);
+    this.nav.push(UnitsPage);
   }
   redirectToMessage() {
-    this.nav.setRoot(EmailPage);
+    this.nav.push(EmailPage);
   }
   redirectCalendar() {
-    this.nav.setRoot(CalendarPage);
+    this.nav.push(CalendarPage);
   }
   redirectToMaps() {
-    this.nav.setRoot(MapsPage);
+    this.nav.push(MapsPage);
   }
   redirectToSettings() {
-    this.nav.setRoot(OrgchartPage);
+    this.nav.push(OrgchartPage);
   }
 }
 

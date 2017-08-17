@@ -203,7 +203,7 @@ export class EditprofilesteptwoPage {
           if (!userPhotoFile) {
             localStorage.setItem("userPhotoFile", "");
             this.sendNotification(`User profile successfully updated`);
-            this.nav.setRoot(MyaccountPage);
+            this.nav.push(MyaccountPage);
           }
         }
         // Otherwise let 'em know anyway
@@ -301,7 +301,7 @@ export class EditprofilesteptwoPage {
         // Save in Backend and MysQL
 
         this.sendNotification(`User profile successfully updated`);
-        this.nav.setRoot(MyaccountPage);
+        this.nav.push(MyaccountPage);
 
       }, (err) => {
         //loading.dismiss();
@@ -342,26 +342,26 @@ export class EditprofilesteptwoPage {
 
 
   previous() {
-    this.nav.setRoot(EditprofilesteponePage);
+    this.nav.push(EditprofilesteponePage);
   }
 
   notification() {
-    this.nav.setRoot(NotificationPage);
+    this.nav.push(NotificationPage);
   }
   redirectToUser() {
-    this.nav.setRoot(UnitsPage);
+    this.nav.push(UnitsPage);
   }
   redirectToMessage() {
-    this.nav.setRoot(EmailPage);
+    this.nav.push(EmailPage);
   }
   redirectCalendar() {
-    this.nav.setRoot(CalendarPage);
+    this.nav.push(CalendarPage);
   }
   redirectToMaps() {
-    this.nav.setRoot(MapsPage);
+    this.nav.push(MapsPage);
   }
   redirectToSettings() {
-    this.nav.setRoot(OrgchartPage);
+    this.nav.push(OrgchartPage);
   }
 }
 

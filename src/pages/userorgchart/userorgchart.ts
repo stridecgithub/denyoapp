@@ -230,7 +230,7 @@ export class UserorgchartPage {
           this.hideForm = true;
           this.sendNotification(`User created was successfully added`);
           localStorage.setItem("userPhotoFile", "");
-          this.navCtrl.setRoot(UserPage);
+          this.navCtrl.push(UserPage);
         }
         // Otherwise let 'em know anyway
         else {
@@ -284,7 +284,7 @@ export class UserorgchartPage {
         if (data.status === 200) {
           this.hideForm = true;
           this.sendNotification(`User created was successfully updated`);
-          this.navCtrl.setRoot(UserPage);
+          this.navCtrl.push(UserPage);
         }
         // Otherwise let 'em know anyway
         else {
@@ -455,7 +455,7 @@ export class UserorgchartPage {
       hashtag: this.hashtag,
       role: this.role
     });
-    this.navCtrl.setRoot(UseraccountPage, {
+    this.navCtrl.push(UseraccountPage, {
       uservalue: this.userInfo
     });
   }
@@ -521,22 +521,22 @@ export class UserorgchartPage {
   //main.js:61474 firstname=Kannan&lastname=Naga&photo=undefined&email=kn@gmail.com&country_id=4&contact_number=123456789&createdby=1&updatedby=1&username=nk&password=nk&role_id=1&personalhashtag=@nk&report_to=3&company_id=13&job_position=At prg
   //main.js:61622 File Name is:1497379310688.jpg
   notification() {
-    this.navCtrl.setRoot(NotificationPage);
+    this.navCtrl.push(NotificationPage);
   }
   redirectToUser() {
-    this.navCtrl.setRoot(UnitsPage);
+    this.navCtrl.push(UnitsPage);
   }
   redirectToMessage() {
-    this.navCtrl.setRoot(EmailPage);
+    this.navCtrl.push(EmailPage);
   }
   redirectCalendar() {
-    this.navCtrl.setRoot(CalendarPage);
+    this.navCtrl.push(CalendarPage);
   }
   redirectToMaps() {
-    this.navCtrl.setRoot(MapsPage);
+    this.navCtrl.push(MapsPage);
   }
   redirectToSettings() {
-    this.navCtrl.setRoot(OrgchartPage);
+    this.navCtrl.push(OrgchartPage);
   }
   onSegmentChanged() {
     console.log("ID" + this.company_group);
