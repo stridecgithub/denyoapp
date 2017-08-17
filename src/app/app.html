@@ -10,7 +10,7 @@
         <h4>
           {{p.title}}    
         </h4>
-        <ion-list *ngIf="isLevel1Shown('idx'+i)">
+        <ion-list *ngIf="isLevel1Shown('idx'+i)" style="background: none">
           <ion-item  menuClose *ngFor="let s of p.subs; let i2=index" text-wrap (click)="toggleLevel2('idx'+i+'idx'+i2);openPage(s)" [ngClass]="{active: isLevel2Shown('idx'+i+'idx'+i2)}">
             <h4>
               {{s.title}}             

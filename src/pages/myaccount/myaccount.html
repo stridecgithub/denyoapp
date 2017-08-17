@@ -26,29 +26,50 @@
   </ion-navbar>
 </ion-header-->
 
-<ion-header>
-  <ion-navbar color="bluedark">
+<ion-header style="
+    background-color: #00569F;" color="bluedark">
+
+
+  <button style="background-color: #00569F;float:left;" ion-button menuToggle class="menu-toggle">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
+  <ion-title  style="    text-align: center;
+    margin-top: 10px;"    class="page-title">{{pageTitle}}</ion-title>
+
+  <button style="float:left" ion-button (click)="notification()" style="position: absolute;
+    right: 0%;
+    top: 1%;background: transparent;">
+  <ion-icon ios="ios-notifications-outline" md="md-notifications-outline"></ion-icon>
+   <ion-badge style="    margin-top: 5px;
+    margin-right: 7px;" item-end class="notificationcount" *ngIf="notcount>0">{{this.notcount}}</ion-badge>
+</button>
+
+  <!--ion-navbar color="bluedark" hideBackButton>
     <ion-title class="page-title">{{pageTitle}}</ion-title>
     <ion-buttons start>
       <button ion-button menuToggle class="menu-toggle">
       <ion-icon name="menu"></ion-icon>
     </button>
     </ion-buttons>
+
+
+
     <ion-buttons end>
       <button ion-button (click)="notification()">
   <ion-icon ios="ios-notifications-outline" md="md-notifications-outline"></ion-icon>
-  <ion-badge item-end class="notificationcount" *ngIf="notcount>0">{{this.notcount}}</ion-badge>
+   <ion-badge item-end class="notificationcount" *ngIf="notcount>0">{{this.notcount}}</ion-badge>
 </button>
     </ion-buttons>
-  </ion-navbar>
-  <ion-navbar class="backtoprevious-navbar">
+  </ion-navbar-->
+  <ion-navbar class="backtoprevious-navbar" hideBackButton>
     <ion-buttons start class="backtoprevious-start">
       <button ion-button icon-left class="backtoprevious-button" (click)="previous()">
  <ion-icon name="arrow-back" class="backtoprevious-icon"></ion-icon>
  Back to previous
 </button>
     </ion-buttons>
-    <ion-buttons end style="color: black;">
+    <ion-buttons end>
       Login As:{{loginas}}
     </ion-buttons>
   </ion-navbar>
