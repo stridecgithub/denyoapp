@@ -197,7 +197,8 @@ export class NotificationPage {
                 notify_to_readstatus: res.notification[notifications].notify_to_readstatus,
                 photo: usericon,
                 notify_type: res.notification[notifications].notify_type,
-                content: res.notification[notifications].content
+                content: res.notification[notifications].content,
+                 date_time: res.notification[notifications].date_time
               });
               console.log(JSON.stringify(this.notificationAllLists));
             }
