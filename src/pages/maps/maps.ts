@@ -6,7 +6,7 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { AddunitsonePage } from '../addunitsone/addunitsone';
 import { ViewcompanygroupPage } from '../viewcompanygroup/viewcompanygroup';
 import { LoadingController } from 'ionic-angular';
-import { OrgchartPage} from '../orgchart/orgchart';
+import { OrgchartPage } from '../orgchart/orgchart';
 import { UnitgroupPage } from '../unitgroup/unitgroup';
 import { CompanygroupPage } from '../companygroup/companygroup';
 import { RolePage } from '../role/role';
@@ -22,7 +22,7 @@ import { NotificationPage } from '../notification/notification';
 import { ReportsPage } from '../reports/reports';
 import { CalendarPage } from '../calendar/calendar';
 import { EmailPage } from '../email/email';
-
+import { Observable } from 'rxjs/Rx';
 @Component({
   selector: 'page-maps',
   templateUrl: 'maps.html'
@@ -35,12 +35,16 @@ export class MapsPage {
 
   //@ViewChild('mapContainer') mapContainer: ElementRef;
   //map: any;
+
+  // then start it
   public loginas: any;
   public userid: any;
   public companyid: any;
   public addressData = [];
   public detailvalue: any;
   public pageTitle: string;
+  public subscription;
+  public timeri = 0;
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   private permissionMessage: string = "Permission denied for access this page. Please contact your administrator";
   public totalCount;
@@ -89,7 +93,9 @@ export class MapsPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MapsPage');
+
   }
+
 
 
   doRefresh(refresher) {
@@ -270,14 +276,11 @@ export class MapsPage {
     this.loadMap(0);
   }
 
+  startTheIterations() {
+    this.subscription = Observable.interval(1000).subscribe(x => {
+      // the number 1000 is on miliseconds so every second is going to have an iteration of what is inside this code.
+      console.log("this.timeri" + this.timeri);
 
-  timerStart() {
-    /// Set timer for click to edit unit details page
-
-    var timer = 0;
-    let id = setInterval(() => {
-      timer++;
-      console.log("Timer value of " + timer);
       let isclickedtounitdetails = 1;
       let clicked = localStorage.getItem("unitdetailsclicked");
       console.log("Unit  " + JSON.stringify(clicked));
@@ -291,24 +294,29 @@ export class MapsPage {
         isclickedtounitdetails = 0;
       }
       if (isclickedtounitdetails > 0) {
-        timer = 1;
         console.log(JSON.stringify(clicked))
-
         //this.nav.setRoot(HomePage);
+        
         this.callUnitDetails(clicked);
         //this.openPage(UnitsPage);
       }
-
-
-    }, 1000);
-    setTimeout(function () {
-
-    }, 3000);
-
-    /// Set timer for click to edit unit details page
+      this.timeri++;
+    });
+     this.stopTheIterations();
   }
 
+  stopTheIterations() {
+    this.subscription.unsubscribe();
+  }
+
+
   callUnitDetails(clicked) {
+    this.stopTheIterations();
+   
+    console.log("Unit details redirect id is" + clicked);
+
+    localStorage.setItem("unitId", clicked);
+    localStorage.setItem("iframeunitId", clicked);
     this.navCtrl.setRoot(UnitdetailsPage, {
       record: clicked
     });
@@ -317,6 +325,9 @@ export class MapsPage {
 
   loadMap(val) {
     //this.timerStart();
+
+    this.startTheIterations();
+
     console.log(JSON.stringify(val));
     console.log(val.length);
     if (JSON.stringify(val).length > 0) {
@@ -369,6 +380,7 @@ export class MapsPage {
                 // Attaching a click event to the current marker
                 google.maps.event.addListener(marker, "click", function (e) {
                   console.log(e);
+                  //this.startTheIterations();                  
                   infoWindow.setContent(addressData[unit].title);
                   infoWindow.open(map, marker);
 
@@ -377,7 +389,7 @@ export class MapsPage {
 
             } else {
               var labeldata = '<div class="info_content">' +
-                '<h3><a href="#" onclick="unitDetailsPageNavigation( ' + res.units[unit].unit_id + ')"  data-tap-disabled="true" (click)="mapunitdetail(' + val.unit_id + ')">' + val.unitname + '</a></h3>' +
+                '<h3><a href="#" onclick="unitDetailsPageNavigation( ' + val.unit_id + ')"  data-tap-disabled="true" (click)="mapunitdetail(' + val.unit_id + ')">' + val.unitname + '</a></h3>' +
                 '<h4>' + val.projectname + '</h4>' +
                 '<p>Running Hours:' + val.runninghr + ' Hours</p>' + '</div>';
 
@@ -401,6 +413,7 @@ export class MapsPage {
               (function (marker, data, addressData) {
                 // Attaching a click event to the current marker
                 google.maps.event.addListener(marker, "click", function (e) {
+                  //this.startTheIterations();
                   infoWindow.setContent(addressData);
                   infoWindow.open(map, marker);
                 });
@@ -414,9 +427,10 @@ export class MapsPage {
               console.log('From zero for popup' + JSON.stringify(res.units))
               let unitcontent;
               unitcontent = '<div class="info_content">' +
-                '<h3><a href="#" onclick="unitDetailsPageNavigation( ' + res.units[unit].unit_id + ')"  data-tap-disabled="true" (click)="mapunitdetail(' + val.unit_id + ')">' + val.unitname + '</a></h3>' +
+                '<h3><a href="#" onclick="unitDetailsPageNavigation( ' + val.unit_id + ')"  data-tap-disabled="true" (click)="mapunitdetail(' + val.unit_id + ')">' + val.unitname + '</a></h3>' +
                 '<h4>' + val.projectname + '</h4>' +
                 '<p>Running Hours:' + val.runninghr + ' Hours</p>' + '</div>';
+              //this.startTheIterations();
               infoWindow.setContent(unitcontent);
               infoWindow.open(map, marker);
             }
@@ -593,7 +607,7 @@ export class MapsPage {
     this.navCtrl.setRoot(UnitsPage);
   }
   redirectToMyAccount() {
-     this.navCtrl.setRoot(OrgchartPage);
+    this.navCtrl.setRoot(OrgchartPage);
   }
 
   redirectToRole() {

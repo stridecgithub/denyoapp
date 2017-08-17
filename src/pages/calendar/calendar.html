@@ -5,22 +5,40 @@
   Ionic pages and navigation.
   https://www.npmjs.com/package/ionic2-calendar
 -->
-<ion-header>
-  <ion-navbar color="bluedark">
+<ion-header color="bluedark">
+
+
+  <button ion-button menuToggle class="menu-toggle">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
+  <ion-title class="page-title">{{pageTitle}}</ion-title>
+
+  <button ion-button (click)="notification()" style="position: absolute;
+    right: 0%;
+    top: 1%;background: transparent;">
+  <ion-icon ios="ios-notifications-outline" md="md-notifications-outline"></ion-icon>
+   <ion-badge item-end class="notificationcount" *ngIf="notcount>0">{{this.notcount}}</ion-badge>
+</button>
+
+  <!--ion-navbar color="bluedark" hideBackButton>
     <ion-title class="page-title">{{pageTitle}}</ion-title>
     <ion-buttons start>
       <button ion-button menuToggle class="menu-toggle">
       <ion-icon name="menu"></ion-icon>
     </button>
     </ion-buttons>
+
+
+
     <ion-buttons end>
       <button ion-button (click)="notification()">
   <ion-icon ios="ios-notifications-outline" md="md-notifications-outline"></ion-icon>
    <ion-badge item-end class="notificationcount" *ngIf="notcount>0">{{this.notcount}}</ion-badge>
 </button>
     </ion-buttons>
-  </ion-navbar>
-  <ion-navbar class="backtoprevious-navbar">
+  </ion-navbar-->
+  <ion-navbar class="backtoprevious-navbar" hideBackButton>
     <ion-buttons start class="backtoprevious-start">
       <button ion-button icon-left class="backtoprevious-button" (click)="previous()">
  <ion-icon name="arrow-back" class="backtoprevious-icon"></ion-icon>
@@ -138,7 +156,7 @@
           <div>Time:{{item.event_time}}</div>
           <div style="white-space: normal">Location:{{item.event_location}}</div>
           <div style="white-space: normal">Remarks:{{item.event_remark}}</div>
-           <div>Created By:{{item.event_addedby_name}}</div>
+          <div>Created By:{{item.event_addedby_name}}</div>
         </ion-item>
         <!--ion-item-options>
         <button class="editcolor" (click)="doEdit(item,'edit')">                      

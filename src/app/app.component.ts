@@ -216,10 +216,10 @@ export class MyApp {
       this.nav.setRoot(HomePage);
     } else if (page.title == 'Calendar') {
       this.menuCtrl.close();
-      this.nav.setRoot(CalendarPage);
+      this.nav.push(CalendarPage);
     } else if (page.title == 'Maps') {
       this.menuCtrl.close();
-      this.nav.setRoot(MapsPage);
+      this.nav.push(MapsPage);
     } else if (page.title == 'Reports') {
       this.menuCtrl.close();
       this.nav.setRoot(ReportsPage);
