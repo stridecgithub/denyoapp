@@ -326,7 +326,7 @@ export class MapsPage {
   loadMap(val) {
     //this.timerStart();
 
-    this.startTheIterations();
+   // this.startTheIterations();
 
     console.log(JSON.stringify(val));
     console.log(val.length);
