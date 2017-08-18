@@ -97,12 +97,17 @@ export class AddorgcharttwoPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddorgcharttwoPage');
+    this.pageLoad();
   }
 
   // Determine whether we adding or editing a record
   // based on any supplied navigation parameters
   ionViewWillEnter() {
-    let //body: string = "loginid=" + this.userId,
+this.pageLoad();
+  }
+  pageLoad()
+  {
+     let //body: string = "loginid=" + this.userId,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),

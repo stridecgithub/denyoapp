@@ -98,6 +98,15 @@ export class AddalarmPage {
     console.log('ionViewDidLoad AddalarmPage');
   }
   ionViewWillEnter() {
+        this.unitDetailData.unitname = localStorage.getItem("unitunitname");
+    this.unitDetailData.location = localStorage.getItem("unitlocation");
+    this.unitDetailData.projectname = localStorage.getItem("unitprojectname");
+    this.unitDetailData.colorcodeindications = localStorage.getItem("unitcolorcode");
+    console.log("Unit Details Color Code:" + this.unitDetailData.colorcodeindications);
+    this.unitDetailData.lat = localStorage.getItem("unitlat");
+    this.unitDetailData.lng = localStorage.getItem("unitlng");
+    this.unitDetailData.rh = localStorage.getItem("runninghr");
+    this.unitDetailData.ns = localStorage.getItem("nsd");
     this.getUserListData();
 
     if (this.NP.get("record")) {

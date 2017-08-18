@@ -32,6 +32,9 @@ export class AlarmdetailsPage {
   public alarm_unitid: any;
   pet: string = "ALL";
   public sortby = 2;
+   public unitDetailData: any = {
+    hashtag:''
+  }
   public userId: any;
   public alarmid: any;
   public alarm_assginedby_name: any;
@@ -68,6 +71,15 @@ export class AlarmdetailsPage {
     console.log('ionViewDidLoad AlarmdetailsPage');
   }
   ionViewWillEnter() {
+        this.unitDetailData.unitname = localStorage.getItem("unitunitname");
+    this.unitDetailData.location = localStorage.getItem("unitlocation");
+    this.unitDetailData.projectname = localStorage.getItem("unitprojectname");
+    this.unitDetailData.colorcodeindications = localStorage.getItem("unitcolorcode");
+    console.log("Unit Details Color Code:" + this.unitDetailData.colorcodeindications);
+    this.unitDetailData.lat = localStorage.getItem("unitlat");
+    this.unitDetailData.lng = localStorage.getItem("unitlng");
+    this.unitDetailData.rh = localStorage.getItem("runninghr");
+    this.unitDetailData.ns = localStorage.getItem("nsd");
     if (this.NP.get("record")) {
       if (this.NP.get("act") != 'Push') {
         console.log("Alarm Details" + JSON.stringify(this.NP.get("record")));

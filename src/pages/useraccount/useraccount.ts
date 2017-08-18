@@ -82,6 +82,7 @@ export class UseraccountPage {
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad UseraccountPage');
+    this.pageLoad();
   }
 
 
@@ -97,6 +98,12 @@ export class UseraccountPage {
     this.recordID = item.userid;
   }
   ionViewWillEnter() {
+this.pageLoad();
+
+
+  }
+  pageLoad()
+  {
     let //body: string = "loginid=" + this.userId,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
@@ -194,8 +201,6 @@ export class UseraccountPage {
       this.re_password=info[keyindex]['password'];
       this.role = info[keyindex]['role'];
     }
-
-
   }
 
   // Handle data submitted from the page's HTML form

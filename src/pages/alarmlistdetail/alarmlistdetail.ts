@@ -28,6 +28,9 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 })
 export class AlarmlistdetailPage {
  public loginas: any;
+  public unitDetailData: any = {
+    hashtag:''
+  }
   public pageTitle: string;
   public msgcount: any;
   public notcount: any;
@@ -70,6 +73,15 @@ export class AlarmlistdetailPage {
     console.log('ionViewDidLoad AlarmlistdetailPage');
   }
   ionViewWillEnter() {
+        this.unitDetailData.unitname = localStorage.getItem("unitunitname");
+    this.unitDetailData.location = localStorage.getItem("unitlocation");
+    this.unitDetailData.projectname = localStorage.getItem("unitprojectname");
+    this.unitDetailData.colorcodeindications = localStorage.getItem("unitcolorcode");
+    console.log("Unit Details Color Code:" + this.unitDetailData.colorcodeindications);
+    this.unitDetailData.lat = localStorage.getItem("unitlat");
+    this.unitDetailData.lng = localStorage.getItem("unitlng");
+    this.unitDetailData.rh = localStorage.getItem("runninghr");
+    this.unitDetailData.ns = localStorage.getItem("nsd");
     if (this.NP.get("record")) {
       console.log("Alarm Details" + JSON.stringify(this.NP.get("record")));
       console.log(this.NP.get("record").alarm_name);

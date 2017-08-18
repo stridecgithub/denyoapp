@@ -90,8 +90,13 @@ export class AddorgchartonePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddorgchartonePage');
+    this.pageLoad();
   }
   ionViewWillEnter() {
+    this.pageLoad();
+  }
+  pageLoad()
+  {
     let //body: string = "loginid=" + this.userId,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),

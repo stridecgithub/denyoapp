@@ -51,17 +51,7 @@
       Login As:{{loginas}}
     </ion-buttons>
   </ion-navbar>
-  <ion-navbar class="backtoprevious-navbar">
-    <ion-buttons start class="backtoprevious-start">
-      <button ion-button icon-left class="backtoprevious-button" (click)="previous()">
- <ion-icon name="arrow-back" class="backtoprevious-icon"></ion-icon>
- Back to previous
-</button>
-    </ion-buttons>
-    <ion-buttons end>
-      Login As:{{loginas}}
-    </ion-buttons>
-  </ion-navbar>
+ 
 
 
 </ion-header>
@@ -70,6 +60,21 @@
 <ion-content padding>
   <div>
     <form [formGroup]="form" (ngSubmit)="saveEntry()">
+       <ion-item>
+        <button class="{{unitDetailData.colorcodeindications}}" style="float: left ;width:8px;height:85px">         
+        </button>
+
+        <button class="{{unitDetailData.favoriteindication}}" style="float: right ;width:30px;height:30px;background-color:#ffffff"></button>
+        <div style="overflow: hidden; padding-left: 0.5em;padding-top: 4px">
+          <h5><b>{{unitDetailData.unitname}}</b></h5>
+          <h5>Project Name:{{unitDetailData.projectname}}</h5>
+          <h5 style="white-space:normal">Location:{{unitDetailData.location}}</h5>
+          <h5 *ngIf="unitDetailData.lat!=''">({{unitDetailData.lat}},{{unitDetailData.lng}})</h5>
+          <h5 style="white-space:normal;">Next Servicing Date:{{unitDetailData.ns}}</h5>
+          <h5 style="white-space:normal;">Running Hours:{{unitDetailData.rh}} Hours</h5>
+
+        </div>
+      </ion-item>
       <ion-item>
         <ion-label stacked>Subject<span class="mandatory" *ngIf="hideActionButton"> *</span></ion-label>
         <ion-input type="text" [disabled]=true formControlName="subject" [(ngModel)]="subject"></ion-input>

@@ -93,12 +93,17 @@ export class EditprofilesteptwoPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad EditprofilesteptwoPage');
+    this.pageLoad();
   }
 
   // Determine whether we adding or editing a record
   // based on any supplied navigation parameters
   ionViewWillEnter() {
-    this.resetFields();
+   this.pageLoad();
+  }
+   pageLoad()
+   {
+      this.resetFields();
     this.getJsonCountryListData();
     if (this.NP.get("record")) {
       console.log("User Org Chart:" + JSON.stringify(this.NP.get("record")));
@@ -138,8 +143,7 @@ export class EditprofilesteptwoPage {
       this.hashtag = info[keyindex]['hashtag'];
       this.role = info[keyindex]['role'];
     }
-  }
-
+   }
 
 
   // Assign the navigation retrieved data to properties

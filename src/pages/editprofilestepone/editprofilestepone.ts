@@ -88,12 +88,17 @@ export class EditprofilesteponePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad EditprofilesteponePage');
+    this.pageLoad();
   }
 
   // Determine whether we adding or editing a record
   // based on any supplied navigation parameters
   ionViewWillEnter() {
-
+this.pageLoad();
+  }
+pageLoad()
+{
+  
     this.resetFields();
     this.pageTitle = 'Edit Profile';
 
@@ -134,8 +139,7 @@ export class EditprofilesteponePage {
           this.photo = res.settings[0].photo_filename;
         }
       });
-  }
-
+}
 
  getPrimaryContact(ev) {
     console.log(ev.target.value);

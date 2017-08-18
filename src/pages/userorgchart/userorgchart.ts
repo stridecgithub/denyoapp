@@ -98,11 +98,17 @@ export class UserorgchartPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddcompanygroupPage');
+    this.pageLoad();
   }
 
   // Determine whether we adding or editing a record
   // based on any supplied navigation parameters
   ionViewWillEnter() {
+    this.pageLoad();
+
+  }
+  pageLoad()
+  {
     let //body: string = "loginid=" + this.userId,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
@@ -171,7 +177,6 @@ export class UserorgchartPage {
       this.hashtag = info[keyindex]['hashtag'];
       this.role = info[keyindex]['role'];
     }
-
   }
 
 

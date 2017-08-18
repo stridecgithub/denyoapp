@@ -212,7 +212,6 @@ console.log("Alarm list page unit id is"+this.unitDetailData.unit_id)
       this.nav.push(AlarmlistdetailPage, {
         record: item,
         act: act,
-
         from:'alarm'
       });
       return false;

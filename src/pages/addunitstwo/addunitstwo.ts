@@ -85,12 +85,16 @@ export class AddunitstwoPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddunitsonePage');
-
+     this.pageLoad();
   }
 
   // Determine whether we adding or editing a record
   // based on any supplied navigation parameters
   ionViewWillEnter() {
+   this.pageLoad();
+    }
+pageLoad()
+{
     let //body: string = "loginid=" + this.userId,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
@@ -171,8 +175,7 @@ export class AddunitstwoPage {
          console.log("User Information:" + JSON.stringify(this.userInfo));
          */
       }
-    }
-
+}
 
     //Static Storage
     /*let data = [
