@@ -230,7 +230,7 @@ export class MapsPage {
 
   }
   ionViewWillEnter() {
-    let i = 0;
+   /* let i = 0;
     let isclickedtounitdetails = 1;
     setTimeout(() => {
       let clicked = localStorage.getItem("unitdetailsclicked");
@@ -251,6 +251,7 @@ export class MapsPage {
       console.log(i);
       i++;
     }, 1000);
+    */
 
 
     let //body: string = "loginid=" + this.userId,
@@ -422,7 +423,7 @@ export class MapsPage {
             }
 
             // Copied from below
-            if (val != 0) {
+           if (val != 0) {
               console.log("Selected unit id is:" + JSON.stringify(val));
               console.log('From zero for popup' + JSON.stringify(res.units))
               let unitcontent;
