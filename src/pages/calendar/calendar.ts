@@ -404,11 +404,11 @@ export class CalendarPage {
     for (var i = 0; i < this.eventIdentify.length; i += 1) {
 
       //let eventdate = this.eventIdentify[i]['event_date'] + " " + this.eventIdentify[i]['event_time'];// Check Date and Time
-      let eventdate = this.eventIdentify[i]['event_date'];// Check Date only
+     // let eventdate = this.eventIdentify[i]['event_date'];// Check Date only
       this.calendarResultEvent.push({
         event_id: this.eventIdentify[i]['event_id'],
         event_title: this.eventIdentify[i]['event_title'],
-        event_date: eventdate,
+        event_date:  this.eventIdentify[i]['event_date'],
         event_time: this.eventIdentify[i]['event_time'],
         event_location: this.eventIdentify[i]['event_location'],
         event_remark: this.eventIdentify[i]['event_remark'],
@@ -439,24 +439,24 @@ export class CalendarPage {
       }
     }
     for (var j = 0; j < this.serviceIdentify.length; j += 1) {
-      let eventdate;
+     // let eventdate;
 
-      if (this.serviceIdentify[j]['serviced_datetime'] == '0000-00-00') {
-        //eventdate = this.serviceIdentify[j]['next_service_date'] + " " + this.serviceIdentify[j]['serviced_time'];// Check Date and Time
-        eventdate = this.serviceIdentify[j]['next_service_date'];// Check Date only
-      } else {
-        if (this.serviceIdentify[j]['serviced_time'] == null) {
-          eventdate = this.serviceIdentify[j]['next_service_date'];
-        } else {
-          eventdate = this.serviceIdentify[j]['serviced_datetime'];
-        }
-      }
+      // if (this.serviceIdentify[j]['serviced_datetime'] == '0000-00-00') {
+      //   //eventdate = this.serviceIdentify[j]['next_service_date'] + " " + this.serviceIdentify[j]['serviced_time'];// Check Date and Time
+      //   eventdate = this.serviceIdentify[j]['next_service_date'];// Check Date only
+      // } else {
+      //   if (this.serviceIdentify[j]['serviced_time'] == null) {
+      //     eventdate = this.serviceIdentify[j]['next_service_date'];
+      //   } else {
+      //     eventdate = this.serviceIdentify[j]['serviced_datetime'];
+      //   }
+      // }
 
       this.calendarResultEvent.push({
         event_id: this.serviceIdentify[j]['service_id'],
         event_title: this.serviceIdentify[j]['service_subject'],
         event_unitid: this.serviceIdentify[j]['service_unitid'],
-        event_date: eventdate,
+        event_date: this.serviceIdentify[j]['serviced_datetime'],
         event_time: this.serviceIdentify[j]['serviced_time'],
         event_remark: this.serviceIdentify[j]['service_remark'],
         event_location: this.serviceIdentify[j]['service_location'],
@@ -482,6 +482,7 @@ export class CalendarPage {
         this.alarmIdentity = data.json().allalarms;
       }
     }
+    console.log("ALARM date"+this.alarmIdentity[k]['alarm_received_date']);
     for (var k = 0; k < this.alarmIdentity.length; k += 1) {
 
       this.calendarResultEvent.push({
@@ -490,6 +491,7 @@ export class CalendarPage {
         event_title: this.alarmIdentity[k]['alarm_name'],
         event_unitid: this.alarmIdentity[k]['alarm_unit_id'],
         event_date: this.alarmIdentity[k]['alarm_received_date'],
+      
         event_remark: this.alarmIdentity[k]['alarm_remark'],
         event_location: this.alarmIdentity[k]['alarm_location'],
         event_addedby_name: this.alarmIdentity[k]['alarm_assginedby_name'],
@@ -658,8 +660,8 @@ export class CalendarPage {
           console.log("Date String:-" + datestr);
           var startMinute = Math.floor(Math.random() * 24 * 60);
           var endMinute = Math.floor(Math.random() * 180) + startMinute;
-          /* startTime = new Date(yearstr, monthstr, datestr, 0, 0 + startMinute);
-           endTime = new Date(yearstr, monthstr, datestr, 0, 0 + endMinute);*/
+          //  startTime = new Date(yearstr, monthstr, datestr, 0, 0 + startMinute);
+          //  endTime = new Date(yearstr, monthstr, datestr, 0, 0 + endMinute);
 
           startTime = new Date(yearstr, monthstr, datestr, 0, 0);
           endTime = new Date(yearstr, monthstr, datestr, 0, 0);
@@ -700,11 +702,11 @@ export class CalendarPage {
           var datestr = parseInt(service_date_array[2], 10);
           var startMinute = Math.floor(Math.random() * 24 * 60);
           var endMinute = Math.floor(Math.random() * 180) + startMinute;
-          /*startTime = new Date(yearstr, monthstr, datestr, 0, 0 + startMinute);
-          endTime = new Date(yearstr, monthstr, datestr, 0, 0 + endMinute);*/
+          startTime = new Date(yearstr, monthstr, datestr, 0, 0 + startMinute);
+          endTime = new Date(yearstr, monthstr, datestr, 0, 0 + endMinute);
 
-          startTime = new Date(yearstr, monthstr, datestr, 0, 0);
-          endTime = new Date(yearstr, monthstr, datestr, 0, 0);
+          // startTime = new Date(yearstr, monthstr, datestr, 0, 0);
+          // endTime = new Date(yearstr, monthstr, datestr, 0, 0);
           events.push({
             title: this.serviceIdentify[j]['service_subject'],
             startTime: startTime,
@@ -727,11 +729,11 @@ export class CalendarPage {
           var yearstr = service_date_array[0];
           var monthstr = parseInt(service_date_array[1], 10) - 1;
           var datestr = parseInt(service_date_array[2], 10);
-          var startMinute = Math.floor(Math.random() * 24 * 60);
-          var endMinute = Math.floor(Math.random() * 180) + startMinute;
+           var startMinute = Math.floor(Math.random() * 24 * 60);
+           var endMinute = Math.floor(Math.random() * 180) + startMinute;
 
-          /*startTime = new Date(yearstr, monthstr, datestr, 0, 0 + startMinute);
-          endTime = new Date(yearstr, monthstr, datestr, 0, 0 + endMinute);*/
+          // startTime = new Date(yearstr, monthstr, datestr, 0, 0 + startMinute);
+          // endTime = new Date(yearstr, monthstr, datestr, 0, 0 + endMinute);
 
           startTime = new Date(yearstr, monthstr, datestr, 0, 0);
           endTime = new Date(yearstr, monthstr, datestr, 0, 0);

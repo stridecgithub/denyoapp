@@ -93,6 +93,7 @@ export class MapsPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MapsPage');
+    this.pageLoad();
 
   }
 
@@ -230,7 +231,11 @@ export class MapsPage {
 
   }
   ionViewWillEnter() {
-   /* let i = 0;
+    this.pageLoad();
+  }
+pageLoad()
+{
+   /*
     let isclickedtounitdetails = 1;
     setTimeout(() => {
       let clicked = localStorage.getItem("unitdetailsclicked");
@@ -275,8 +280,7 @@ export class MapsPage {
     }
     // console.log(this.apiServiceURL + "/api/webview/map.php?is_mobile=1&loginid=1&startindex=0&results=8&sort=unit_id&dir=desc");
     this.loadMap(0);
-  }
-
+}
   startTheIterations() {
     this.subscription = Observable.interval(1000).subscribe(x => {
       // the number 1000 is on miliseconds so every second is going to have an iteration of what is inside this code.
