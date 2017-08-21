@@ -555,7 +555,7 @@ export class AddcommentsinfoPage {
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/" + recordID + "/removecommentresource";
+      url: any = this.apiServiceURL + "/" + recordID + "/removecommentresources";
     this.http.get(url, options)
       .subscribe(data => {
         // If the request was successful notify the user
