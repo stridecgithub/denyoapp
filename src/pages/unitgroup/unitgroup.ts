@@ -225,7 +225,7 @@ export class UnitgroupPage {
     this.nav.push(AddunitgroupPage);
   }
   previous() {
-    this.nav.push(HomePage);
+    this.nav.setRoot(HomePage);
   }
   doEdit(item, act) {
     if (act == 'edit') {
