@@ -482,7 +482,7 @@ export class CalendarPage {
         this.alarmIdentity = data.json().allalarms;
       }
     }
-    console.log("ALARM date"+this.alarmIdentity[k]['alarm_received_date']);
+   
     for (var k = 0; k < this.alarmIdentity.length; k += 1) {
 
       this.calendarResultEvent.push({
@@ -653,23 +653,27 @@ export class CalendarPage {
           var startTime;
           var endTime;
           var event_date_array = this.eventIdentify[i]['event_date'].split('-');
+          console.log("DATE FORMAT"+this.eventIdentify[i]['event_date']);
           var yearstr = event_date_array[0];
           var monthstr = parseInt(event_date_array[1], 10) - 1;
-          var datestr = parseInt(event_date_array[2], 10);
+          var datestr = parseInt(event_date_array[2],10);
           console.log("Month String:-" + monthstr);
           console.log("Date String:-" + datestr);
-          var startMinute = Math.floor(Math.random() * 24 * 60);
-          var endMinute = Math.floor(Math.random() * 180) + startMinute;
-           startTime = new Date(yearstr, monthstr, datestr, 0, 0 + startMinute);
-           endTime = new Date(yearstr, monthstr, datestr, 0, 0 + endMinute);
+        // var startMinute = Math.floor(Math.random() * 24 * 60);
+        // var endMinute = Math.floor(Math.random() * 1) + startMinute;
+         var startMinute = 20;
+           var endMinute = 10 + startMinute;
+            startTime = new Date(yearstr, monthstr, datestr, 10, 0 + startMinute);
+            endTime = new Date(yearstr, monthstr, datestr, 10, 0 + endMinute);
+            console.log("TEST CALENDAR-1"+startTime+"//"+endTime);
 
-          // startTime = new Date(yearstr, monthstr, datestr, 0, 0);
-          // endTime = new Date(yearstr, monthstr, datestr, 0, 0);
+        // startTime = new Date(event_date_array[0], event_date_array[1], event_date_array[2], 0, 0,0);
+         // endTime = new Date(event_date_array[0], event_date_array[1], event_date_array[2], 0, 0,0);
 
 
           events.push({
             title: this.eventIdentify[i]['event_title'],
-            startTime: startTime,
+            startTime:startTime,
             endTime: endTime,
             allDay: true,
             icon: 'event',
@@ -696,20 +700,22 @@ export class CalendarPage {
 
 
 
-
+  console.log("DATE FORMAT"+this.serviceIdentify[j]['serviced_datetime']);
           var yearstr = service_date_array[0];
           var monthstr = parseInt(service_date_array[1], 10) - 1;
           var datestr = parseInt(service_date_array[2], 10);
-          var startMinute = Math.floor(Math.random() * 24 * 60);
-          var endMinute = Math.floor(Math.random() * 180) + startMinute;
-          startTime = new Date(yearstr, monthstr, datestr, 0, 0 + startMinute);
-          endTime = new Date(yearstr, monthstr, datestr, 0, 0 + endMinute);
-
-          // startTime = new Date(yearstr, monthstr, datestr, 0, 0);
-          // endTime = new Date(yearstr, monthstr, datestr, 0, 0);
+         // var startMinute = Math.floor(Math.random() * 24 * 60);
+         // var endMinute = Math.floor(Math.random() * 1) + startMinute;
+          var startMinute = 20;
+           var endMinute = 10 + startMinute;
+           startTime = new Date(yearstr, monthstr, datestr, 10, 0 + startMinute);
+          endTime = new Date(yearstr, monthstr, datestr, 10, 0 + endMinute);
+  // console.log("TEST CALENDAR-2"+startTime+"//"+endTime);
+          // startTime = new Date(service_date_array[0], service_date_array[1], service_date_array[2], 0, 0,0);
+          //endTime = new Date(service_date_array[0], service_date_array[1], service_date_array[2], 0, 0,0);
           events.push({
             title: this.serviceIdentify[j]['service_subject'],
-            startTime: startTime,
+            startTime:startTime,
             endTime: endTime,
             allDay: true,
             icon: 'service',
@@ -723,23 +729,26 @@ export class CalendarPage {
         for (var k = 0; k < this.alarmIdentity.length; k += 1) {
           var startTime;
           var endTime;
-          var substrdt = this.alarmIdentity[k]['alarm_received_date'];//.substring(0, 10)
+          var substrdt = this.alarmIdentity[k]['alarm_received_date'];//.substring(0, 10)'
+ console.log("DATE FORMAT"+this.alarmIdentity[k]['alarm_received_date']);
+          
           console.log("Date Substr result" + substrdt);
           var service_date_array = substrdt.split('-');
           var yearstr = service_date_array[0];
           var monthstr = parseInt(service_date_array[1], 10) - 1;
           var datestr = parseInt(service_date_array[2], 10);
-           var startMinute = Math.floor(Math.random() * 24 * 60);
-           var endMinute = Math.floor(Math.random() * 180) + startMinute;
+           //var startMinute = Math.floor(Math.random() * 24 * 60);
+           var startMinute = 20;
+           var endMinute = 10 + startMinute;
 
-          startTime = new Date(yearstr, monthstr, datestr, 0, 0 + startMinute);
-          endTime = new Date(yearstr, monthstr, datestr, 0, 0 + endMinute);
-
-          // startTime = new Date(yearstr, monthstr, datestr, 0, 0);
-          // endTime = new Date(yearstr, monthstr, datestr, 0, 0);
+           startTime = new Date(yearstr, monthstr, datestr, 10, 0 + startMinute);
+           endTime = new Date(yearstr, monthstr, datestr, 10, 0 + endMinute);
+///console.log("TEST CALENDAR-3"+startTime+"//"+endTime);
+         // startTime = new Date(service_date_array[0], service_date_array[1], service_date_array[2], 0, 0,0);
+         // endTime = new Date(service_date_array[0], service_date_array[1], service_date_array[2], 0, 0,0);
           events.push({
             title: this.alarmIdentity[k]['alarm_name'],
-            startTime: startTime,
+            startTime:startTime,
             endTime: endTime,
             allDay: true,
             icon: 'alarm',
