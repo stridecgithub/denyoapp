@@ -2496,14 +2496,7 @@ background-color: #FBE983;
  width: 40px;
  height: 40px;
  }
- .buttoncolorgroup button:focus {
-border: 1px solid #000;
-}
- .buttoncolorgroup button.active {
-border: 1px solid #000;
-}
- /*.buttoncolorgroup button:active,.buttoncolorgroup button:focus,.buttoncolorgroup button:hover{border: 2px solid #000;}
- */.button9{
+ .button9{
  background-color: #FF877C;
  width: 40px;
  height: 40px;
@@ -2523,6 +2516,14 @@ border: 1px solid #000;
  width: 40px;
  height: 40px;
  }
+ .buttoncolorgroup button:focus {
+border: 1px solid #000;
+}
+ .buttoncolorgroup button.active {
+border: 1px solid #000;
+}
+ /*.buttoncolorgroup button:active,.buttoncolorgroup button:focus,.buttoncolorgroup button:hover{border: 2px solid #000;}
+ */
   
 .border-need{border:2px solid #000000;}
 }
@@ -3787,6 +3788,13 @@ ion-navbar ion-buttons{margin-right:15px;}
 //calendar
 
 page-calendar {
+//     .monthview-primary-with-event[_ngcontent-c1] {
+//     color: #333 !important;
+//     border-radius: 20px;
+//    /* background: #f00 !important;*/
+//    background:url(../img/dots.png) no-repeat center bottom !important;
+// }
+
  .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
 
     .eventsClass
@@ -7513,6 +7521,7 @@ background-color: #FBE983;
 //unitgroup
 
 page-unitgroup {
+    .border-need{border:2px solid #000000;}
      .ion-md-settings{background:url(../img/oc.png) no-repeat center top;}
      .ion-content{
     background-color:white;
@@ -8761,4 +8770,4 @@ background-color: #FBE983;
  .button-inner{height:inherit!important;}
 
 .quick-list li button ion-icon{font-family: "Roboto", "Helvetica Neue", sans-serif;font-style:normal;font-size:11px!important;width:inherit;height:58px;margin-top:10px;}
-
+.border-need{border:2px solid #000000;}

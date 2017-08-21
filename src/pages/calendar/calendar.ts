@@ -665,7 +665,7 @@ export class CalendarPage {
            var endMinute = 10 + startMinute;
             startTime = new Date(yearstr, monthstr, datestr, 10, 0 + startMinute);
             endTime = new Date(yearstr, monthstr, datestr, 10, 0 + endMinute);
-            console.log("TEST CALENDAR-1"+startTime+"//"+endTime);
+            //console.log("TEST CALENDAR-1"+startTime+"//"+endTime);
 
         // startTime = new Date(event_date_array[0], event_date_array[1], event_date_array[2], 0, 0,0);
          // endTime = new Date(event_date_array[0], event_date_array[1], event_date_array[2], 0, 0,0);
