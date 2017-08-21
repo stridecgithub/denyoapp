@@ -439,18 +439,18 @@ export class CalendarPage {
       }
     }
     for (var j = 0; j < this.serviceIdentify.length; j += 1) {
-     // let eventdate;
+     let eventdate;
 
-      // if (this.serviceIdentify[j]['serviced_datetime'] == '0000-00-00') {
-      //   //eventdate = this.serviceIdentify[j]['next_service_date'] + " " + this.serviceIdentify[j]['serviced_time'];// Check Date and Time
-      //   eventdate = this.serviceIdentify[j]['next_service_date'];// Check Date only
-      // } else {
-      //   if (this.serviceIdentify[j]['serviced_time'] == null) {
-      //     eventdate = this.serviceIdentify[j]['next_service_date'];
-      //   } else {
-      //     eventdate = this.serviceIdentify[j]['serviced_datetime'];
-      //   }
-      // }
+      if (this.serviceIdentify[j]['serviced_datetime'] == '0000-00-00') {
+        //eventdate = this.serviceIdentify[j]['next_service_date'] + " " + this.serviceIdentify[j]['serviced_time'];// Check Date and Time
+        eventdate = this.serviceIdentify[j]['next_service_date'];// Check Date only
+      } else {
+        if (this.serviceIdentify[j]['serviced_time'] == null) {
+          eventdate = this.serviceIdentify[j]['next_service_date'];
+        } else {
+          eventdate = this.serviceIdentify[j]['serviced_datetime'];
+        }
+      }
 
       this.calendarResultEvent.push({
         event_id: this.serviceIdentify[j]['service_id'],
@@ -660,11 +660,11 @@ export class CalendarPage {
           console.log("Date String:-" + datestr);
           var startMinute = Math.floor(Math.random() * 24 * 60);
           var endMinute = Math.floor(Math.random() * 180) + startMinute;
-          //  startTime = new Date(yearstr, monthstr, datestr, 0, 0 + startMinute);
-          //  endTime = new Date(yearstr, monthstr, datestr, 0, 0 + endMinute);
+           startTime = new Date(yearstr, monthstr, datestr, 0, 0 + startMinute);
+           endTime = new Date(yearstr, monthstr, datestr, 0, 0 + endMinute);
 
-          startTime = new Date(yearstr, monthstr, datestr, 0, 0);
-          endTime = new Date(yearstr, monthstr, datestr, 0, 0);
+          // startTime = new Date(yearstr, monthstr, datestr, 0, 0);
+          // endTime = new Date(yearstr, monthstr, datestr, 0, 0);
 
 
           events.push({
@@ -732,11 +732,11 @@ export class CalendarPage {
            var startMinute = Math.floor(Math.random() * 24 * 60);
            var endMinute = Math.floor(Math.random() * 180) + startMinute;
 
-          // startTime = new Date(yearstr, monthstr, datestr, 0, 0 + startMinute);
-          // endTime = new Date(yearstr, monthstr, datestr, 0, 0 + endMinute);
+          startTime = new Date(yearstr, monthstr, datestr, 0, 0 + startMinute);
+          endTime = new Date(yearstr, monthstr, datestr, 0, 0 + endMinute);
 
-          startTime = new Date(yearstr, monthstr, datestr, 0, 0);
-          endTime = new Date(yearstr, monthstr, datestr, 0, 0);
+          // startTime = new Date(yearstr, monthstr, datestr, 0, 0);
+          // endTime = new Date(yearstr, monthstr, datestr, 0, 0);
           events.push({
             title: this.alarmIdentity[k]['alarm_name'],
             startTime: startTime,
