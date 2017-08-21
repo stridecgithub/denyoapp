@@ -70,6 +70,9 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { Deeplinks } from '@ionic-native/deeplinks';
 import { CompanydetailPage } from '../pages/companydetail/companydetail';
 import { Unitgrouplist } from '../pages/unitgrouplist/unitgrouplist';
+//import { CalendarComponent } from '../components/calendar/calendar.component';
+//import { CalendarNewEventModal } from '../pages/calendar/calendar-new-event-modal.component';
+import { DragulaModule } from "ng2-dragula/ng2-dragula"
 //import { ITimer } from '../pages/maps/itimer';
 @NgModule({
   declarations: [
@@ -115,7 +118,7 @@ import { Unitgrouplist } from '../pages/unitgrouplist/unitgrouplist';
     AddenginedetailPage,
     EnginedetailPage,
     CalendarPage,
-     CalendardetailPage,
+    CalendardetailPage,
     AddcalendarPage,
     AlarmPage,
     AddalarmPage,
@@ -137,24 +140,27 @@ import { Unitgrouplist } from '../pages/unitgrouplist/unitgrouplist';
     EnginedetailviewPage,
     CustomFooterComponent,
     CompanydetailPage,
-    Unitgrouplist
+    Unitgrouplist,
+    //CalendarComponent,
+   // CalendarNewEventModal
   ],
   imports: [
     BrowserModule,
     NgCalendarModule,
     HttpModule,
+    DragulaModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    
+
     HomePage,
     AddalarmlistPage,
     AlarmlistdetailPage,
     DashboardPage,
     CalendarPage,
-     CalendardetailPage,
+    CalendardetailPage,
     CompanygroupPage,
     AddcompanygroupPage,
     ReportviewtablePage,
@@ -210,7 +216,9 @@ import { Unitgrouplist } from '../pages/unitgrouplist/unitgrouplist';
     CustomHeaderComponent,
     CustomFooterComponent,
     CompanydetailPage,
-    Unitgrouplist
+    Unitgrouplist,
+    //CalendarComponent,
+   // CalendarNewEventModal
   ],
   providers: [
     StatusBar,

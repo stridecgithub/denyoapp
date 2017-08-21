@@ -14,7 +14,7 @@ import { UnitgroupPage } from '../unitgroup/unitgroup';
 import { RolePage } from '../role/role';
 import { UserPage } from '../user/user';
 import { AlarmPage } from '../alarm/alarm';
-import { OrgchartPage} from '../orgchart/orgchart';
+import { OrgchartPage } from '../orgchart/orgchart';
 import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitsPage } from '../units/units';
 import { NotificationPage } from '../notification/notification';
@@ -158,8 +158,8 @@ export class AddcommentsinfoPage {
     console.log("Add Comment Color Code:" + this.unitDetailData.colorcodeindications);
     this.unitDetailData.lat = localStorage.getItem("unitlat");
     this.unitDetailData.lng = localStorage.getItem("unitlng");
-     this.unitDetailData.rh=localStorage.getItem("runninghr");
-     this.unitDetailData.ns=localStorage.getItem("nsd");
+    this.unitDetailData.rh = localStorage.getItem("runninghr");
+    this.unitDetailData.ns = localStorage.getItem("nsd");
 
 
   }
@@ -223,12 +223,16 @@ export class AddcommentsinfoPage {
     fileTransfer.onProgress(this.onProgress);
     fileTransfer.upload(path, this.apiServiceURL + '/commentupload.php?micro_timestamp=' + micro_timestamp, options)
       .then((data) => {
+        let res = JSON.parse(data.response);
+        console.log(res.id);
+        console.log(JSON.stringify(res));
         let imgSrc;
         imgSrc = this.apiServiceURL + "/commentimages" + '/' + newFileName;
         this.addedImgLists.push({
           imgSrc: imgSrc,
           imgDateTime: new Date(),
-          fileName: newFileName
+          fileName: newFileName,
+          resouce_id: res.id
         });
 
         //loading.dismiss();

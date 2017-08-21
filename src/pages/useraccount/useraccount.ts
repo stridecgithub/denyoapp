@@ -12,7 +12,7 @@ import { MapsPage } from '../maps/maps';
 import { ReportsPage } from '../reports/reports';
 import { CalendarPage } from '../calendar/calendar';
 import { EmailPage } from '../email/email';
-import { OrgchartPage} from '../orgchart/orgchart';
+import { OrgchartPage } from '../orgchart/orgchart';
 
 /**
  * Generated class for the UseraccountPage page.
@@ -27,8 +27,8 @@ import { OrgchartPage} from '../orgchart/orgchart';
 export class UseraccountPage {
   public userInfo = [];
   public first_name: any;
-  public msgcount:any;
-  public notcount:any;
+  public msgcount: any;
+  public notcount: any;
   public last_name: any;
   public email: any;
   public userId: any;
@@ -69,6 +69,43 @@ export class UseraccountPage {
       //'validator': this.isMatching
     }, { validator: this.matchingPasswords('password', 're_password') });
     //this.hashtag = this.username;
+
+
+    //getRoleListData() {
+    let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/getroles";
+
+    let res;
+    this.http.get(url, options)
+      .subscribe(data => {
+        res = data.json();
+        this.responseResultRole = res.roles;
+        console.log(JSON.stringify(this.responseResultRole));
+        if (this.responseResultRole.length > 0) {
+          for (let role in this.responseResultRole) {
+
+            if (this.roleId == '1') {
+              this.responseResultRoleDropDown.push({
+                role_id: this.responseResultRole[role].role_id,
+                role_name: this.responseResultRole[role].role_name
+              });
+            } else {
+              if (this.responseResultRole[role].role_id != '1') {
+                this.responseResultRoleDropDown.push({
+                  role_id: this.responseResultRole[role].role_id,
+                  role_name: this.responseResultRole[role].role_name
+                });
+              }
+
+            }
+
+          }
+        }
+      });
+    //}
+
   }
 
   matchingPasswords(passwordKey: string, passwordConfirmationKey: string) {
@@ -98,27 +135,26 @@ export class UseraccountPage {
     this.recordID = item.userid;
   }
   ionViewWillEnter() {
-this.pageLoad();
+    this.pageLoad();
 
 
   }
-  pageLoad()
-  {
+  pageLoad() {
     let //body: string = "loginid=" + this.userId,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
       url: any = this.apiServiceURL + "/msgnotifycount?loginid=" + this.userId;
     console.log(url);
-   // console.log(body);
+    // console.log(body);
 
     this.http.get(url, options)
       .subscribe((data) => {
         console.log("Count Response Success:" + JSON.stringify(data.json()));
-       this.msgcount=data.json().msgcount;
-        this.notcount=data.json().notifycount;
+        this.msgcount = data.json().msgcount;
+        this.notcount = data.json().notifycount;
       });
-    this.getRoleListData();
+    // this.getRoleListData();
     if (this.NP.get("record")) {
       console.log("User Account:" + JSON.stringify(this.NP.get("record")));
       this.isEdited = true;
@@ -185,20 +221,19 @@ this.pageLoad();
          */
       }
     }
-      if(this.NP.get("uservalue"))
-    {
-       let info = this.NP.get("uservalue");
-        let keyindex = info.length - 1;
-         this.first_name = info[keyindex]['first_name'];
-          this.last_name = info[keyindex]['last_name'];
-          this.email = info[keyindex]['email'];
-          this.country = info[keyindex]['country'];
-          this.contact = info[keyindex]['contact'];
-          this.photo = info[keyindex]['photo'];
-         this.username = info[keyindex]['username'];
+    if (this.NP.get("uservalue")) {
+      let info = this.NP.get("uservalue");
+      let keyindex = info.length - 1;
+      this.first_name = info[keyindex]['first_name'];
+      this.last_name = info[keyindex]['last_name'];
+      this.email = info[keyindex]['email'];
+      this.country = info[keyindex]['country'];
+      this.contact = info[keyindex]['contact'];
+      this.photo = info[keyindex]['photo'];
+      this.username = info[keyindex]['username'];
       this.password = info[keyindex]['password'];
       this.hashtag = info[keyindex]['hashtag'];
-      this.re_password=info[keyindex]['password'];
+      this.re_password = info[keyindex]['password'];
       this.role = info[keyindex]['role'];
     }
   }
@@ -328,40 +363,7 @@ this.pageLoad();
       });
   }
 
-  getRoleListData() {
-    let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
-      headers: any = new Headers({ 'Content-Type': type }),
-      options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/getroles";
 
-    let res;
-    this.http.get(url, options)
-      .subscribe(data => {
-        res = data.json();
-        this.responseResultRole = res.roles;
-        console.log(JSON.stringify(this.responseResultRole));
-        if (this.responseResultRole.length > 0) {
-          for (let role in this.responseResultRole) {
-
-            if (this.roleId == '1') {
-              this.responseResultRoleDropDown.push({
-                role_id: this.responseResultRole[role].role_id,
-                role_name: this.responseResultRole[role].role_name
-              });
-            } else {
-              if (this.responseResultRole[role].role_id != '1') {
-                this.responseResultRoleDropDown.push({
-                  role_id: this.responseResultRole[role].role_id,
-                  role_name: this.responseResultRole[role].role_name
-                });
-              }
-
-            }
-
-          }
-        }
-      });
-  }
 
   // Manage notifying the user of the outcome
   // of remote operations
@@ -373,7 +375,7 @@ this.pageLoad();
     notification.present();
   }
   previous() {
-     this.userInfo.push({
+    this.userInfo.push({
       photo: this.photo,
       first_name: this.first_name,
       last_name: this.last_name,

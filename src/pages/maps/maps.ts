@@ -93,8 +93,11 @@ export class MapsPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MapsPage');
-    this.pageLoad();
+    //this.pageLoad();
 
+  }
+  ionViewWillEnter() {
+    this.pageLoad();
   }
 
 
@@ -230,9 +233,7 @@ export class MapsPage {
     });
 
   }
-  ionViewWillEnter() {
-    this.pageLoad();
-  }
+  
 pageLoad()
 {
    /*
@@ -331,7 +332,7 @@ pageLoad()
   loadMap(val) {
     //this.timerStart();
 
-   // this.startTheIterations();
+    //this.startTheIterations();
 
     console.log(JSON.stringify(val));
     console.log(val.length);

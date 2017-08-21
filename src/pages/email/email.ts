@@ -19,7 +19,7 @@ import { MapsPage } from '../maps/maps';
 import { ReportsPage } from '../reports/reports';
 import { CalendarPage } from '../calendar/calendar';
 import { Keyboard } from '@ionic-native/keyboard';
-import { OrgchartPage} from '../orgchart/orgchart';
+import { OrgchartPage } from '../orgchart/orgchart';
 
 /**
  * Generated class for the AddserviceinfoPage page.
@@ -133,7 +133,8 @@ export class EmailPage {
     private transfer: Transfer,
     private ngZone: NgZone) {
     this.replyforward = 0;
-
+    this.priority_highclass = '';
+    this.priority_lowclass = '';
     // Authority for message send
     this.MESSAGESENTVIEWACCESS = localStorage.getItem("MESSAGE_SENT_VIEW");
     this.MESSAGESENTCREATEACCESS = localStorage.getItem("MESSAGE_SENT_CREATE");
@@ -393,14 +394,13 @@ export class EmailPage {
 
   ionViewWillEnter() {
     this.pageTitle = 'Messsage';
-    this.getPrority(1);
+    this.getPrority(0);
     this.copytome = 0;
     console.log(JSON.stringify(this.NP.get("record")));
-    this.choice='inbox';
-    if(this.NP.get("recordemail")!='')
-    {
-      this.choice='compose';
-      this.to=this.NP.get("recordemail");
+    this.choice = 'inbox';
+    if (this.NP.get("recordemail") != '') {
+      this.choice = 'compose';
+      this.to = this.NP.get("recordemail");
     }
 
     if (this.NP.get("record")) {
@@ -761,7 +761,7 @@ export class EmailPage {
           this.addedImgLists = [];
           this.to = '';
           this.copytome = 0;
-          this.getPrority(1);
+          this.getPrority(0);
           this.subject = '';
           this.choice = 'send';
           this.doSend();
@@ -783,14 +783,15 @@ export class EmailPage {
 
   getPrority(val) {
     console.log(val);
-
     this.priority_highclass = '';
     this.priority_lowclass = '';
-    if (val == "2") {
+     if (val == "2") {
       this.priority_highclass = "border_high";
-    } else {
+    }
+    if (val == "1") {
       this.priority_lowclass = "border_low";
     }
+
 
     this.message_priority = val
   }
@@ -854,7 +855,7 @@ export class EmailPage {
     this.message_priority = item.message_priority;
 
 
-
+/*
     if (this.message_priority == "1") {
       this.priority_lowclass = "border_low";
 
@@ -864,6 +865,16 @@ export class EmailPage {
     } else if (this.message_priority == "2") {
       this.priority_highclass = "border_high";
     }
+*/
+
+     if (this.message_priority == "1") {
+      this.priority_lowclass = "border_low";
+
+    } else if (this.message_priority == "2") {
+
+      this.priority_highclass = "border_high";
+    }
+
 
 
     this.serviced_by_name = item.serviced_by_name;
@@ -1025,7 +1036,7 @@ export class EmailPage {
       this.addedImgLists = [];
       console.log("Attached image for file" + JSON.stringify(this.attachedFileLists));
       this.copytome = 0;
-      this.getPrority(1);
+      this.getPrority(0);
       this.subject = this.messages_subject;
       //this.composemessagecontent = "-----Reply Message-----" + "\n" + messages_body;
       this.choice = 'compose';
@@ -1035,7 +1046,7 @@ export class EmailPage {
       this.to = this.personalhashtag;
       this.addedImgLists = [];
       this.copytome = 0;
-      this.getPrority(1);
+      this.getPrority(0);
       this.subject = this.messages_subject;
       this.composemessagecontent = "-----Reply Message-----" + "\n" + messages_body;
       this.choice = 'compose';
@@ -1048,7 +1059,7 @@ export class EmailPage {
     this.to = '';
     this.addedImgLists = [];
     this.copytome = 0;
-    this.getPrority(1);
+    this.getPrority(0);
     this.subject = this.messages_subject;
     this.composemessagecontent = "-----Forward Message-----" + "\n" + messages_body;
     this.choice = 'compose';

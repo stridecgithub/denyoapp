@@ -37,7 +37,7 @@ import { OrgchartPage } from '../orgchart/orgchart';
 })
 export class UnitdetailsPage {
 	public pageTitle: string;
-	public userId: any;
+	//public userId: any;
 	public item = [];
 	public colorListArr = [];
 	iframeContent: any;
