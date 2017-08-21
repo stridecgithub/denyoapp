@@ -265,7 +265,7 @@ export class AddunitgroupPage {
 
 
   previous() {
-    this.nav.push(UnitgroupPage);
+    this.nav.setRoot(UnitgroupPage);
   }
 
   notification() {
