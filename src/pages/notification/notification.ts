@@ -20,7 +20,8 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { AddrequestsupportPage } from '../addrequestsupport/addrequestsupport';
 import { HomePage } from '../home/home';
 import { DomSanitizer } from '@angular/platform-browser';
-import { OrgchartPage} from '../orgchart/orgchart'
+import { OrgchartPage } from '../orgchart/orgchart';
+import { CalendardetailPage } from '../calendardetail/calendardetail';
 /**
  * Generated class for the ServicinginfoPage page.
  *
@@ -104,6 +105,49 @@ export class NotificationPage {
           });
         }
     */
+
+
+
+    if (nottype == 'M') {
+      // this.nav.push(EmailPage);
+
+      this.nav.push(EmailPage, {
+        record: item.table_id,
+        act: 'Push'
+      });
+
+    } else if (nottype == 'OA') {
+      this.nav.push(AlarmdetailsPage, {
+         record: item.table_id,
+        act: 'Push'
+      });
+    } else if (nottype == 'A') {
+      //this.nav.push(AlarmdetailsPage);
+
+      this.nav.push(AlarmdetailsPage, {
+        record: item.table_id,
+        act: 'Push'
+      });
+
+    } else if (nottype == 'C') {
+      //this.nav.push(CommentdetailsPage);
+      this.nav.push(CommentdetailsPage, {
+         record: item.table_id,
+        act: 'Push'
+      });
+    } else if (nottype == 'E') {
+      this.nav.push(CalendardetailPage, {
+          record: item.table_id,
+        act: 'Push'
+      });
+    } else if (nottype == 'S') {
+      // this.nav.push(ServicedetailsPage);
+      this.nav.push(ServicedetailsPage, {
+         record: item.table_id,
+        act: 'Push'
+      });
+    }
+
   }
   ionViewWillEnter() {
 
@@ -172,7 +216,7 @@ export class NotificationPage {
     this.http.get(url, options)
       .subscribe((data) => {
         res = data.json();
-        console.log("UCS"+JSON.stringify(res))
+        console.log("UCS" + JSON.stringify(res))
         if (res.notification != undefined) {
           if (res.notification.length > 0) {
             for (let notifications in res.notification) {
@@ -187,7 +231,7 @@ export class NotificationPage {
               //   isphoto = 1;
               // }
               let usericon
-              if (res.notification[notifications].usericon !='') {
+              if (res.notification[notifications].usericon != '') {
                 usericon = this.apiServiceURL + "/staffphotos/" + res.notification[notifications].usericon;
               } else {
                 usericon = this.apiServiceURL + "/images/default.png";
@@ -198,7 +242,7 @@ export class NotificationPage {
                 photo: usericon,
                 notify_type: res.notification[notifications].notify_type,
                 content: res.notification[notifications].content,
-                 date_time: res.notification[notifications].date_time
+                date_time: res.notification[notifications].date_time
               });
               console.log(JSON.stringify(this.notificationAllLists));
             }

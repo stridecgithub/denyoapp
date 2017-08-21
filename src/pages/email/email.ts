@@ -424,7 +424,7 @@ export class EmailPage {
           headers1: any = new Headers({ 'Content-Type': type1 }),
           options1: any = new RequestOptions({ headers: headers1 }),
           url1: any = this.apiServiceURL + "/getmessagedetails";
-        console.log(url1);
+        console.log(url1 + '?' + bodymessage);
         this.http.post(url1, bodymessage, options1)
           //this.http.get(url1, options1)
           .subscribe((data) => {
@@ -785,7 +785,7 @@ export class EmailPage {
     console.log(val);
     this.priority_highclass = '';
     this.priority_lowclass = '';
-     if (val == "2") {
+    if (val == "2") {
       this.priority_highclass = "border_high";
     }
     if (val == "1") {
@@ -810,7 +810,24 @@ export class EmailPage {
 
 
   previous() {
-    this.nav.push(DashboardPage);
+    console.log("A" + this.act);
+    console.log("B" + this.choice);
+    if (this.act == 'send') {
+      this.choice = 'send';
+      console.log("C" + this.choice);
+    } else if (this.act == 'inbox') {
+      console.log("D" + this.choice);
+      this.choice = 'inbox';
+    } else if (this.choice == 'inbox') {
+      console.log("E" + this.choice);
+      this.nav.push(DashboardPage);
+    } else if (this.choice == 'send') {
+      console.log("F" + this.choice);
+      this.nav.push(DashboardPage);
+    } else {
+      console.log("G" + this.choice);
+      this.nav.push(DashboardPage);
+    }
   }
 
 
@@ -855,19 +872,19 @@ export class EmailPage {
     this.message_priority = item.message_priority;
 
 
-/*
+    /*
+        if (this.message_priority == "1") {
+          this.priority_lowclass = "border_low";
+    
+        } else if (this.message_priority == "0") {
+          this.priority_lowclass = "border_low";
+    
+        } else if (this.message_priority == "2") {
+          this.priority_highclass = "border_high";
+        }
+    */
+
     if (this.message_priority == "1") {
-      this.priority_lowclass = "border_low";
-
-    } else if (this.message_priority == "0") {
-      this.priority_lowclass = "border_low";
-
-    } else if (this.message_priority == "2") {
-      this.priority_highclass = "border_high";
-    }
-*/
-
-     if (this.message_priority == "1") {
       this.priority_lowclass = "border_low";
 
     } else if (this.message_priority == "2") {

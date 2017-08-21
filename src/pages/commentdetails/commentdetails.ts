@@ -245,7 +245,9 @@ export class CommentdetailsPage {
   }
 
 
-
+ notification() {
+    this.nav.push(NotificationPage);
+  }
   redirectToUser() {
     this.nav.push(UnitsPage);
   }
