@@ -72,7 +72,7 @@ import { CompanydetailPage } from '../pages/companydetail/companydetail';
 import { Unitgrouplist } from '../pages/unitgrouplist/unitgrouplist';
 //import { CalendarComponent } from '../components/calendar/calendar.component';
 //import { CalendarNewEventModal } from '../pages/calendar/calendar-new-event-modal.component';
-import { DragulaModule } from "ng2-dragula/ng2-dragula"
+//import { DragulaModule } from "ng2-dragula/ng2-dragula"
 //import { ITimer } from '../pages/maps/itimer';
 @NgModule({
   declarations: [
@@ -148,7 +148,7 @@ import { DragulaModule } from "ng2-dragula/ng2-dragula"
     BrowserModule,
     NgCalendarModule,
     HttpModule,
-    DragulaModule,
+    
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
