@@ -48,6 +48,7 @@ export class UnitdetailsPage {
 	public commentCount;
 	public msgcount: any;
 	public notcount: any;
+	public chk:any;
 
 
 
@@ -161,6 +162,8 @@ export class UnitdetailsPage {
 	}
 
 	ionViewWillEnter() {
+		this.chk=localStorage.getItem("viewlist")
+
 		localStorage.setItem("unitdetailsclicked", '');
 		this.iframeContent = "<iframe id='filecontainer' src=" + this.apiServiceURL + "/" + this.unitDetailData.unit_id + "/1/unitdetails height=350 width=100% frameborder=0></iframe>";
 

@@ -134,6 +134,7 @@ exit()
               alarmnotificationto: res.unitdetails[unit].alarmnotificationto,
               lat: res.unitdetails[unit].lat,
               lng: res.unitdetails[unit].lng,
+              genstatus: res.unitdetails[unit].genstatus,
               favoriteindication: favorite
             });
           }

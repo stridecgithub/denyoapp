@@ -19,27 +19,20 @@
   <ion-list *ngIf="totalCount!=0">
     
 
-      <ion-item *ngFor="let item of reportAllLists;">
-        <div class="item-checkbox">
-          <label class="checkbox">
-                    <input type="checkbox" style="width: 20px;
-    height: 20px;
-    position: absolute;
-    top: 51px;
-    left: 0px;" (click)="getCheckBoxValue(item,item.unit_id)" value="1">
-                </label>
-        </div>
-        <button class="{{item.colorcodeindications}}" style="float: left ;width:8px;height:100px">
+      <ion-item style="margin-bottom: -4px;" *ngFor="let item of reportAllLists;">
+     
+        <button class="{{item.colorcodeindications}}" style="float: left ;width:8px;height:68px">
          
         </button>
-
-        <button (click)="favorite(item.unit_id)" class="{{item.favoriteindication}}" style="float: right ;width:50px;height:50px;background-color:#ffffff"></button>
+<button  class="{{item.genstatus}}" style="float:left ;width:30px;height:30px;margin-left: 6px;margin-top: 12px;background-color:#ffffff"></button>
+        <button (click)="favorite(item.unit_id)" class="{{item.favoriteindication}}" style="margin-left: -25px;float: right ;width:30px;height:30px;margin-top: 13px;background-color:#ffffff"></button>
         
-        <div style="overflow: hidden; padding-left: .5em;">
-          <h2 (click)="doEdit(item,'detail')"><b>{{item.unitname}}</b></h2>
-          <h2 (click)="doEdit(item,'detail')"><b>{{item.projectname}}</b></h2>
-          <h2 (click)="doEdit(item,'detail')"><b>Gen Status:</b>{{item.gen_status}}</h2>
-          <h2 (click)="doEdit(item,'detail')"><b>Next Servicing:</b>{{item.nextservicedate}}</h2>
+        
+        <div style="overflow: hidden; padding-left: 2.7em;padding-top: 4px">
+          <h5 (click)="doEdit(item,'detail',item.unit_id)"><b style="font-size: 14px;">{{item.unitname}}</b></h5>
+          <h5 (click)="doEdit(item,'detail',item.unit_id)"><b style="font-size: 14px;">{{item.projectname}}</b></h5>
+          <h6 (click)="doEdit(item,'detail',item.unit_id)"><b style="font-size: 14px;">Gen Status:</b>{{item.genstatus}}</h6>
+          <h6 (click)="doEdit(item,'detail',item.unit_id)"><b style="font-size: 14px;">Next Servicing:</b>{{item.nextservicedate}}</h6>
         </div>
       </ion-item>
 

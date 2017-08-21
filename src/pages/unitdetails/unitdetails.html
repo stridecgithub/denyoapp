@@ -56,7 +56,7 @@
   <ion-item>
     <button class="{{unitDetailData.colorcodeindications}}" style="float: left ;width:8px;height:70px">         
         </button>
-    <button class="dot" (click)="viewunit()" style="float: right ;width: 30px;
+    <button *ngIf="chk!=''" class="dot" (click)="viewunit()" style="float: right ;width: 30px;
     height: 30px;
     margin-top: 23px;
     margin-left: 0px;
