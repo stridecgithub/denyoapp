@@ -106,7 +106,26 @@
                       <h3>{{gchild.firstname}}</h3>
                       <h3>{{gchild.lastname}}</h3>
                       <h4>{{gchild.job_position}}</h4>
+                       <ul>
+                       <li *ngFor="let ggchild of gchild.grantgrandchilds; let i=index">
+                      <img src="{{apiServiceURL}}/staffphotos/{{ggchild.photo}}" (click)="presentPopover($event,ggchild)" *ngIf="ggchild.photo!=''">
+                      <img src="{{apiServiceURL}}/images/default.png" (click)="presentPopover($event,ggchild)" *ngIf="ggchild.photo==''">
+                      <h3>{{ggchild.firstname}}</h3>
+                      <h3>{{ggchild.lastname}}</h3>
+                      <h4>{{ggchild.job_position}}</h4>
+                      <ul>
+                         <li *ngFor="let gggchild of ggchild.lastgrandchilds; let i=index">
+                      <img src="{{apiServiceURL}}/staffphotos/{{gggchild.photo}}" (click)="presentPopover($event,gggchild)" *ngIf="gggchild.photo!=''">
+                      <img src="{{apiServiceURL}}/images/default.png" (click)="presentPopover($event,gggchild)" *ngIf="gggchild.photo==''">
+                      <h3>{{gggchild.firstname}}</h3>
+                      <h3>{{gggchild.lastname}}</h3>
+                      <h4>{{gggchild.job_position}}</h4>
+                         </li>
+                      </ul>
                     </li>
+                    </ul>
+                    </li>
+                   
                   </ul>
                 </li>
               </ul>
