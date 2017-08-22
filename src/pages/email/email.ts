@@ -810,18 +810,18 @@ export class EmailPage {
 
 
   previous() {
-    console.log("A" + this.act);
-    console.log("B" + this.choice);
-    if (this.act == 'send') {
+    console.log("A" + this.act); // inbox
+    console.log("B" + this.choice); // details
+    if (this.act == 'send'  && this.choice=='details') {
       this.choice = 'send';
       console.log("C" + this.choice);
-    } else if (this.act == 'inbox') {
+    } else if (this.act == 'inbox' && this.choice=='details') {
       console.log("D" + this.choice);
       this.choice = 'inbox';
-    } else if (this.choice == 'inbox') {
+    } else if (this.act == 'inbox'  && this.choice=='inbox') {
       console.log("E" + this.choice);
       this.nav.push(DashboardPage);
-    } else if (this.choice == 'send') {
+    } else if (this.choice == 'send' && this.act == 'send'  ) {
       console.log("F" + this.choice);
       this.nav.push(DashboardPage);
     } else {
