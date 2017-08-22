@@ -47,7 +47,7 @@ export class UnitgroupPage {
     sort: 'unitgroup_id',
     sortascdesc: 'asc',
     startindex: 0,
-    results: 8
+    results: 50
   }
   public reportAllLists = [];
   public colorListArr: any;

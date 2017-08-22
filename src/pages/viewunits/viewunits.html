@@ -28,11 +28,11 @@
         <button (click)="favorite(item.unit_id)" class="{{item.favoriteindication}}" style="margin-left: -25px;float: right ;width:30px;height:30px;margin-top: 13px;background-color:#ffffff"></button>
         
         
-        <div style="overflow: hidden; padding-left: 2.7em;padding-top: 4px">
+        <div style="overflow: hidden; padding-left: 0.7em;padding-top: 4px">
           <h5 (click)="doEdit(item,'detail',item.unit_id)"><b style="font-size: 14px;">{{item.unitname}}</b></h5>
           <h5 (click)="doEdit(item,'detail',item.unit_id)"><b style="font-size: 14px;">{{item.projectname}}</b></h5>
-          <h6 (click)="doEdit(item,'detail',item.unit_id)"><b style="font-size: 14px;">Gen Status:</b>{{item.genstatus}}</h6>
-          <h6 (click)="doEdit(item,'detail',item.unit_id)"><b style="font-size: 14px;">Next Servicing:</b>{{item.nextservicedate}}</h6>
+          <h6 (click)="doEdit(item,'detail',item.unit_id)"><b style="font-size: 14px;margin-left: 38px;">Gen Status:</b>{{item.genstatus}}</h6>
+          <h6 (click)="doEdit(item,'detail',item.unit_id)"><b style="font-size: 14px;margin-left: 38px;">Next Servicing:</b>{{item.nextservicedate}}</h6>
         </div>
       </ion-item>
 

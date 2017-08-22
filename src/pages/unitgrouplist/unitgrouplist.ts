@@ -63,7 +63,7 @@ export class Unitgrouplist {
     sort: 'unit_id',
     sortascdesc: 'asc',
     startindex: 0,
-    results: 8
+    results: 50
   }
   public reportAllLists = [];
   constructor(public http: Http, public nav: NavController,

@@ -49,7 +49,7 @@ export class ServicinginfoPage {
     sort: 'companygroup_id',
     sortascdesc: 'asc',
     startindex: 0,
-    results: 8
+    results: 50
   }
   public unitDetailData: any = {
     userId: '',
