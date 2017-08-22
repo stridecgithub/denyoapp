@@ -22,9 +22,9 @@
     <b>Hashtag:</b><br>
     {{ht}}
   </div>
-  <div (click)="mail()" style="text-align:center">
-    <b (click)="mail()">Email:</b><br>
-    {{email}}
+  <div  style="text-align:center">
+    <b >Email:</b><br>
+    <a data-rel="external" href="mailto:{{email}}">{{email}}</a>
   </div>
    <div style="text-align:center">
     <b>Contact Number:</b><br> <a href="tel: {{cn}}">{{cn}}</a>

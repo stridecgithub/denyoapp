@@ -402,7 +402,8 @@ export class CalendarPage {
       }
     }
     for (var i = 0; i < this.eventIdentify.length; i += 1) {
-
+      $('.monthview-primary-with-event').removeClass('monthview-primary-with-event[_ngcontent-c1]');
+      $('.monthview-primary-with-event').addClass('eventclass');
       //let eventdate = this.eventIdentify[i]['event_date'] + " " + this.eventIdentify[i]['event_time'];// Check Date and Time
      // let eventdate = this.eventIdentify[i]['event_date'];// Check Date only
       this.calendarResultEvent.push({
@@ -418,9 +419,9 @@ export class CalendarPage {
         // calendar on small screens, as the name of the event will
         // not be displayed in the month grid. It has to be a valid
         // IonicIcons icon name.
-        class: 'class', // Class of the item in the month grid cell
-        iconStyle: { color: 'green' }, // Style for the item's icon
-        style: { color: 'red' }, // Style for the item
+        class: 'eventclass', // Class of the item in the month grid cell
+        iconStyle: { color: 'green' } // Style for the item's icon
+        //style: { color: 'red' }, // Style for the item
       });
     }
 
@@ -495,6 +496,7 @@ export class CalendarPage {
         event_remark: this.alarmIdentity[k]['alarm_remark'],
         event_location: this.alarmIdentity[k]['alarm_location'],
         event_addedby_name: this.alarmIdentity[k]['alarm_assginedby_name'],
+        event_t: this.alarmIdentity[k]['date_time'],
         event_type: 'A',
         icon: 'event',
         class: 'event'
@@ -727,6 +729,8 @@ export class CalendarPage {
 
         this.alarmIdentity = res.allalarms;
         for (var k = 0; k < this.alarmIdentity.length; k += 1) {
+          $('.monthview-primary-with-event').removeClass('monthview-primary-with-event[_ngcontent-c1]');
+      $('.monthview-primary-with-event').addClass('eventclass');
           var startTime;
           var endTime;
           var substrdt = this.alarmIdentity[k]['alarm_received_date'];//.substring(0, 10)'

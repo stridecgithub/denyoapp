@@ -82,6 +82,7 @@ export class AlarmlistdetailPage {
     this.unitDetailData.lng = localStorage.getItem("unitlng");
     this.unitDetailData.rh = localStorage.getItem("runninghr");
     this.unitDetailData.ns = localStorage.getItem("nsd");
+     this.unitDetailData.favoriteindication = localStorage.getItem("unitfav");
     if (this.NP.get("record")) {
       console.log("Alarm Details" + JSON.stringify(this.NP.get("record")));
       console.log(this.NP.get("record").alarm_name);
