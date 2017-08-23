@@ -1,13 +1,15 @@
 <div class="ionic2-calendar" [ngClass]="sizeClass">
   <div class="ionic2-cal-topnav">
     <div class="month-selection" style="background-color:#00569F;color:white">
-      <button class="switch-month-button" (click)="plusMonth(-1)"><ion-icon name="arrow-back"></ion-icon></button>
-      <div style="width: 85%;position: relative;margin-left: 30%;">
+      <button style=" background:url(img/left_arrow.png) no-repeat center ;width:40px;height:40px;" class="switch-month-button"
+        (click)="plusMonth(-1)"></button>
+      <div style="width: 80%;height: 40px;position: relative;margin-left: 28%;top: 10px;">
         <!--ion-select (ngModelChange)="setDateSelectionMonth($event)" [(ngModel)]="ctrl.selectedMonth">
           <ion-option *ngFor="let m of months" [value]="m">{{m}}</ion-option>
         </ion-select-->{{monthTitle}} - {{yearTitle}}
       </div>
-      <button class="switch-month-button" (tap)="plusMonth(1)"><ion-icon name="arrow-forward"></ion-icon></button>
+      <button style=" background:url(img/right_arrow.png) no-repeat center ;width:40px;height:40px;" class="switch-month-button"
+        (tap)="plusMonth(1)"></button>
     </div>
   </div>
   <div class="main-view">
@@ -43,11 +45,77 @@
           {{e.alarmlength}}-->
 <!--{{e.startDate.getDate()}}
 {{d.date.date()}}-->
-           <span class="event-continued-ellipsis" *ngIf="e.eventlength>0" style="font-size:32pt;color:rgb(91,192,220);">.</span>
+<p *ngFor="let h of e.highlightdots; let i = index">
+  <!--Date:{{h.date}}
+  Calendar Date: {{d.date.year()}} - {{d.date.month()}} -{{d.date.date()}}
+  Highlighted date:{{h.date}}
+  Highlighted class:{{h.class}}--> 
+<!-- 1 Alarm , Service and Events alarm_service_event --  >
+<span class="{{h.class}}" *ngIf="h.class=='alarm_service_event' && i==0" style="font-size:32pt;color:rgb(90,192,217);">.</span><!-- Event-->
+<!-- <span class="{{h.class}}" *ngIf="h.class=='alarm_service_event' && i==0"  style="font-size:32pt;color:rgb(63,139,197);"></span>Service-->
+<!-- <span class="{{h.class}}" *ngIf="h.class=='alarm_service_event' && i==0"style="font-size:32pt;color:#ECAE4B;"></span>Alarm-->
+<!-- 1 Alarm , Service and Events-->
+
+
+<!-- 2 Alarm and Service alarm_service -->
+<span class="{{h.class}}" *ngIf="h.class=='alarm_service' && i==0"  style="font-size:32pt;color:rgb(63,139,197);">.</span><!-- Service-->
+<!-- <span class="{{h.class}}" *ngIf="h.class=='alarm_service' && i==0"style="font-size:32pt;color:#ECAE4B;"></span>Alarm-->
+<!-- 2 Alarm and Service-->
+
+
+
+<!-- 3 Alarm and Event alarm_event --  >
+<span class="{{h.class}}" *ngIf="h.class=='alarm_event' && i==0" style="font-size:32pt;color:rgb(90,192,217);">.</span><!-- Event-->
+<!-- <span class="{{h.class}}" *ngIf="h.class=='alarm_event' && i==0"style="font-size:32pt;color:#ECAE4B;"></span>Alarm-->
+<!-- 3  Alarm and Event -->
+
+
+
+<!-- 4 Event and Service-->
+<span class="{{h.class}}" *ngIf="h.class=='service_event' && i==0" style="font-size:32pt;color:rgb(90,192,217);">.</span><!-- Event-->
+<!-- <span class="{{h.class}}" *ngIf="h.class=='service_event' && i==0"  style="font-size:32pt;color:rgb(63,139,197);"></span>Service-->
+<!-- 4 Event and Service-->
+
+<!--{{d.date.year()-d.date.month()-d.date.date()}}-->
+<!-- 5 Alarm Only-->
+<span class="{{h.class}}" *ngIf="h.class=='alarm' && i==0" style="font-size:32pt;color:#ECAE4B;">.</span><!-- Alarm-->
+<!-- 5 Alarm Only-->
+
+
+<!-- 6 Service Only-->
+<span class="{{h.class}}" *ngIf="h.class=='service' && i==0"  style="font-size:32pt;color:rgb(63,139,197);">.</span><!-- Service-->
+<!-- 6 Service Only-->
+
+
+
+<!-- 7  Event Only-->
+<span class="event-continued-ellipsis" *ngIf="h.class=='event' && i==0" style="font-size:32pt;color:rgb(90,192,217);">.</span><!-- Event-->
+<!-- 7 Event Only-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</p>
+           <!--span class="event-continued-ellipsis" *ngIf="e.eventlength>0" style="font-size:32pt;color:rgb(91,192,220);">.</span>
 
             <span class="event-continued-ellipsis" *ngIf="e.servicelength>0"  style="font-size:32pt;color:rgb(65,139,200);">.</span>
 
-             <span class="event-continued-ellipsis" *ngIf="e.alarmlength>0"  style="font-size:32pt;color:rgb(239,173,77);">.</span>
+             <span class="event-continued-ellipsis" *ngIf="e.alarmlength>0"  style="font-size:32pt;color:rgb(239,173,77);">.</span-->
 
           <!--span class="event-name" [ngClass]="e?.class" [ngStyle]="e?.style"> {{e.name}}</span-->
           <!--span class="event-continued-ellipsis" *ngIf="e.endDate.getDate() !== d.date.date()">...</span-->

@@ -56,9 +56,16 @@
 
 </ion-header>
 <ion-content>
-  <ionic2-calendar [calEvents]="calEvents" 
+  <!--ionic2-calendar [calEvents]="calEvents" 
     (afterEventMove)="afterEventMoved($event)"
-    (onEventTap)="onEventTap($event)"></ionic2-calendar>  
+    (onEventTap)="onEventTap($event)" step="30"></ionic2-calendar-->  
+
+    <ionic2-calendar [calEvents]="calEvents" 
+    (afterEventMove)="afterEventMoved($event)"
+    (onEventTap)="onEventTap($event)"
+    (onEventDoubletap)="onEventDoubleTap($event)"
+    (onEventPress)="onEventPress($event)"></ionic2-calendar>
+    
 </ion-content>
 
 <ion-footer color="bluedark">

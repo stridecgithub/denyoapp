@@ -73,6 +73,7 @@ interface CalendarControl {
 export class CalendarComponent {
   public totalCountEventDateWise: any;
   noeventtitle: any;
+  highlightdots: any;
   public EVENTVIEWACCESS: any;
   public EVENTCREATEACCESS: any;
   public EVENTEDITACCESS: any;
@@ -171,6 +172,11 @@ export class CalendarComponent {
       }
     }
   }
+
+  ionViewWillEnter() {
+    console.log("Ionview will enter function calling....");
+    this.calEvents = [];
+  }
   private onDrop(args) {
     let [e, el] = args;
     var droppedOnGridItem = el.parentElement.parentElement;
@@ -254,6 +260,7 @@ export class CalendarComponent {
   }
 
   ngOnInit() {
+
     // this.defaultDevent('2017-08-22');
     this.addMissingIds();
     this.ctrl = {
@@ -276,12 +283,15 @@ export class CalendarComponent {
         selectedDate: null
       }
     };
-    this.makeDaysInMonthViewList();
+
     console.log("ngOnInit" + JSON.stringify(this.ctrl));
     let currentDate = this.ctrl.selectedYear + "-" + moment().month() + "-" + this.ctrl.selectedDay
-    this.defaultDevent(currentDate);
+
     this.monthTitle = this.months[moment().month()];
     this.yearTitle = moment().year();
+    let monthstr = this.monthTitle + "-" + this.yearTitle;
+    this.defaultDevent(currentDate, monthstr);
+    this.makeDaysInMonthViewList();
   }
 
   ngAfterViewInit() {
@@ -324,11 +334,13 @@ export class CalendarComponent {
   }
 
   plusMonth = function (amount: number) {
+
     this.ctrl.dateSelection.add(amount, 'month');
     this.ctrl.selectedMonth = this.monthNum2monthStr(this.ctrl.dateSelection.month());
     console.log("plusMonth" + JSON.stringify(this.ctrl));
-    let currentDate = this.ctrl.selectedYear + "-" + this.ctrl.dateSelection.month() + "-" + this.ctrl.selectedDay
-    this.defaultDevent(currentDate);
+    let currentDate = this.ctrl.selectedYear + "-" + this.ctrl.dateSelection.month() + "-" + this.ctrl.selectedDay;
+    let monthStr = this.ctrl.selectedMonth + "-" + this.ctrl.selectedYear;
+    this.defaultDevent(currentDate, monthStr);
     this.updateMainView();
     this.selectedYear = this.ctrl.selectedYear;
     this.selectedMonth = this.ctrl.dateSelection.month();
@@ -341,17 +353,30 @@ export class CalendarComponent {
   }
 
   setDateSelectionMonth($event) {
-    console.log('change', $event);
+    console.log('Calling setDateSelectionMonth');
+    console.log('change A:', $event);
+    console.log('change B:', JSON.stringify($event));
     this.makeDaysInMonthViewList();
+    console.log('setDateSelectionMonth function end');
   }
 
   makeDaysInMonthViewList() {
+
+    console.log("calling makeDaysInMonthViewList function");
     // List is 6x7, first need to find which day of the week the first is and then prepend from previous:
     // Must fill 42 cells, have n cells in this month...
+    console.log("A");
     this.ctrl.monthView.numberOfDaysThisMonth = this.ctrl.dateSelection.daysInMonth();
     this.ctrl.monthView.firstDayOfMonth = moment(this.ctrl.dateSelection).startOf('month');
     this.ctrl.monthView.lastDayOfMonth = moment(this.ctrl.dateSelection).endOf('month');
     var firstDayOfMonthAsWeekday = this.ctrl.monthView.firstDayOfMonth.isoWeekday();
+    console.log("B");
+    console.log("this.ctrl.dateSelection.daysInMonth()" + this.ctrl.dateSelection.daysInMonth());
+    console.log("this.ctrl.monthView.firstDayOfMonth" + this.ctrl.monthView.firstDayOfMonth);
+    console.log("this.ctrl.monthView.lastDayOfMonth " + this.ctrl.monthView.lastDayOfMonth);
+    console.log("firstDayOfMonthAsWeekday " + firstDayOfMonthAsWeekday);
+    console.log("C");
+
     //var lastDayOfMonthAsWeekday = this.ctrl.monthView.lastDayOfMonth.isoWeekday();
     var firstDayInViewOfPreviousMonth = moment(this.ctrl.monthView.firstDayOfMonth).subtract(firstDayOfMonthAsWeekday - 1, 'days');
     //    console.log('lastDayOfMonthAsWeekday', lastDayOfMonthAsWeekday, 'firstDayInViewOfPreviousMonth', firstDayInViewOfPreviousMonth);
@@ -563,12 +588,12 @@ export class CalendarComponent {
 
 
 
-  defaultDevent(currentdate) {
+  defaultDevent(currentdate, monthstr) {
     let
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/calendar? is_mobile=1&loginid=" + this.userId + "&date=" + currentdate + "&companyid=" + this.companyId;
+      url: any = this.apiServiceURL + "/calendar? is_mobile=1&loginid=" + this.userId + "&date=" + currentdate + "&month=" + monthstr + "&companyid=" + this.companyId;
     console.log("All Events calling API URL" + url);
 
     // console.log(url);
@@ -577,6 +602,35 @@ export class CalendarComponent {
       .subscribe((data) => {
         let res = data.json();
         this.eventIdentify = res.allevents;
+        this.highlightdots = res.highlightdots;
+
+
+        this.highlightdots = [
+          { "date": "2017-08-06", "class": "alarm_service" },
+          { "date": "2017-08-07", "class": "alarm_service" },
+          { "date": "2017-08-08", "class": "alarm_service" },
+          { "date": "2017-08-09", "class": "service" },
+          { "date": "2017-08-10", "class": "service" },
+          { "date": "2017-08-11", "class": "alarm_service_event" },
+          { "date": "2017-08-12", "class": "service" },
+          { "date": "2017-08-13", "class": "service" },
+          { "date": "2017-08-14", "class": "alarm_service" },
+          { "date": "2017-08-15", "class": "service" },
+          { "date": "2017-08-16", "class": "service" },
+          { "date": "2017-08-17", "class": "service" },
+          { "date": "2017-08-18", "class": "alarm_service" },
+          { "date": "2017-08-20", "class": "service" },
+          { "date": "2017-08-21", "class": "alarm_service" },
+          { "date": "2017-08-21", "class": "service" },
+        ];
+
+
+
+
+
+
+
+        console.log("Highlight dot" + JSON.stringify(this.highlightdots));
         let eventcountindication;
         for (var i = 0; i < this.eventIdentify.length; i += 1) {
           console.log('i increment:' + i);
@@ -634,6 +688,7 @@ export class CalendarComponent {
             event_location: this.eventIdentify[i]['event_location'],
             event_remark: this.eventIdentify[i]['event_remark'],
             event_addedby_name: this.eventIdentify[i]['event_addedby_name'],
+            highlightdots: this.highlightdots
           });
         }
 
@@ -681,7 +736,7 @@ export class CalendarComponent {
             icon: 'service',
             class: 'service'
           });
-*/
+        */
 
           this.calEvents.push({
             data: {},
@@ -703,6 +758,7 @@ export class CalendarComponent {
             event_remark: this.serviceIdentify[j]['service_remark'],
             event_location: this.serviceIdentify[j]['service_location'],
             event_addedby_name: this.serviceIdentify[j]['serviced_by_name'],
+            highlightdots: this.highlightdots
           });
 
 
@@ -742,7 +798,7 @@ export class CalendarComponent {
              icon: 'alarm',
              class: 'alarm'
            });
- */
+        */
 
           this.calEvents.push({
             data: {},
@@ -764,6 +820,7 @@ export class CalendarComponent {
             event_remark: this.alarmIdentity[k]['alarm_remark'],
             event_location: this.alarmIdentity[k]['alarm_location'],
             event_addedby_name: this.alarmIdentity[k]['alarm_assginedby_name'],
+            highlightdots: this.highlightdots
           });
 
 

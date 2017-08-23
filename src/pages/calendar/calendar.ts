@@ -25,7 +25,7 @@ import { AddcalendarPage } from '../addcalendar/addcalendar';
 @Component({
   //templateUrl: 'build/pages/calendar/calendar.html',
   // directives: [CalendarComponent]
-//Static Events:-[{"data":{},"icon":"alarm","class":"class","iconStyle":{"color":"green"},"style":{"color":"red"},"name":"Item 1","type":"event","startDate":"2017-08-22T22:41:26.675Z","endDate":"2017-08-22T23:41:26.675Z","allDay":false},{"data":{},"class":"class","icon":"jet","name":"Item 2","type":"event","startDate":"2017-08-23T01:41:26.675Z","endDate":"2017-08-26T02:41:26.675Z","allDay":false},{"data":{},"class":"class","icon":"globe","name":"Item 3","type":"event","startDate":"2017-08-23T22:41:26.675Z","endDate":"2017-08-25T01:41:26.675Z","allDay":false}]
+  //Static Events:-[{"data":{},"icon":"alarm","class":"class","iconStyle":{"color":"green"},"style":{"color":"red"},"name":"Item 1","type":"event","startDate":"2017-08-22T22:41:26.675Z","endDate":"2017-08-22T23:41:26.675Z","allDay":false},{"data":{},"class":"class","icon":"jet","name":"Item 2","type":"event","startDate":"2017-08-23T01:41:26.675Z","endDate":"2017-08-26T02:41:26.675Z","allDay":false},{"data":{},"class":"class","icon":"globe","name":"Item 3","type":"event","startDate":"2017-08-23T22:41:26.675Z","endDate":"2017-08-25T01:41:26.675Z","allDay":false}]
   selector: 'page-calendar',
   templateUrl: 'calendar.html',
 
@@ -48,8 +48,8 @@ export class CalendarPage {
   millisInHour: number = 1000 * 60 * 60;
   millisInDay: number = this.millisInHour * 24;
 
-  //calEvents = [];
-  calEvents = [
+  calEvents = [];
+  /*calEvents = [
     {
       data: {},
       icon: 'alarm',
@@ -98,7 +98,7 @@ export class CalendarPage {
       allDay: false
     }
   ];
-
+*/
   constructor(private nav: NavController, public events: Events, private http: Http, public navCtrl: NavController) {
     console.log("Static Events:-" + JSON.stringify(this.calEvents));
     this.loginas = localStorage.getItem("userInfoName");
