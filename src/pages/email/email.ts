@@ -118,7 +118,7 @@ export class EmailPage {
     sort: 'messages_id',
     sortascdesc: 'asc',
     startindex: 0,
-    results: 8
+    results: 50
   }
   public sendData: any =
   {
@@ -126,7 +126,7 @@ export class EmailPage {
     sort: 'messages_id',
     sortascdesc: 'asc',
     startindex: 0,
-    results: 8
+    results: 50
   }
   public hideActionButton = true;
   constructor(public actionSheetCtrl: ActionSheetController, public keyboard: Keyboard, private file: File, public http: Http, public loadingCtrl: LoadingController, public alertCtrl: AlertController, public NP: NavParams, public nav: NavController, public toastCtrl: ToastController, public navParams: NavParams, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera, private filechooser: FileChooser,

@@ -51,7 +51,7 @@ export class AlarmPage {
     sort: 'alarm_id',
     sortascdesc: 'asc',
     startindex: 0,
-    results: 8
+    results: 50
   }
   public unitDetailData: any = {
     userId: '',
