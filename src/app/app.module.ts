@@ -70,9 +70,9 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { Deeplinks } from '@ionic-native/deeplinks';
 import { CompanydetailPage } from '../pages/companydetail/companydetail';
 import { Unitgrouplist } from '../pages/unitgrouplist/unitgrouplist';
-//import { CalendarComponent } from '../components/calendar/calendar.component';
+import { CalendarComponent } from '../components/calendar/calendar.component';
 //import { CalendarNewEventModal } from '../pages/calendar/calendar-new-event-modal.component';
-//import { DragulaModule } from "ng2-dragula/ng2-dragula"
+import { DragulaModule } from "ng2-dragula/ng2-dragula"
 //import { ITimer } from '../pages/maps/itimer';
 @NgModule({
   declarations: [
@@ -141,14 +141,14 @@ import { Unitgrouplist } from '../pages/unitgrouplist/unitgrouplist';
     CustomFooterComponent,
     CompanydetailPage,
     Unitgrouplist,
-    //CalendarComponent,
+    CalendarComponent,
    // CalendarNewEventModal
   ],
   imports: [
     BrowserModule,
     NgCalendarModule,
     HttpModule,
-    
+    DragulaModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -217,7 +217,7 @@ import { Unitgrouplist } from '../pages/unitgrouplist/unitgrouplist';
     CustomFooterComponent,
     CompanydetailPage,
     Unitgrouplist,
-    //CalendarComponent,
+    CalendarComponent,
    // CalendarNewEventModal
   ],
   providers: [

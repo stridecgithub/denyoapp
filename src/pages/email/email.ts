@@ -700,7 +700,10 @@ export class EmailPage {
     if (copytome == true) {
       copytome = '1';
     }
-    to = localStorage.getItem("atMentionResult");
+    if (localStorage.getItem("atMentionResult") != '') {
+      to = localStorage.getItem("atMentionResult");
+    }
+    console.log("atMentionResult" + to);
     //http://denyoappv2.stridecdev.com/messages/replyforward?&submit=Reply&forwardmsgid=16
     let param;
     let urlstring;
