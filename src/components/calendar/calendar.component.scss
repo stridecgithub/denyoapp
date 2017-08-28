@@ -189,23 +189,27 @@
 
 
 .alarm_service_event{
-background:url('../img/alarm_service_event.png') no-repeat center top;
+background:url('../img/alarm_service_event.png') no-repeat center;
 }
 .alarm_service{
-background:url('../img/alarm_service.png') no-repeat center top;
+background:url('../img/alarm_service.png') no-repeat center;
 }
 .alarm_event{
-background:url('../img/alarm_event.png') no-repeat center top;
+background:url('../img/alarm_event.png') no-repeat center;
 }
 .alarm{
-background:url('../img/alarm_dot.png') no-repeat center top;
+background:url('../img/alarm_dot.png') no-repeat center;
 }
 .service_event{
-background:url('../img/service_event.png') no-repeat center top;
+background:url('../img/service_event.png') no-repeat center;
 }
 .service{
-background:url('../img/service.png') no-repeat center top;
+background:url('../img/service.png') no-repeat center;
 }
 .event{
-background:url('../img/event.png') no-repeat center top;
+background:url('../img/event.png') no-repeat center;
+}
+
+.currentDataHighlights{
+background-color:#3C91B9;color:white
 }

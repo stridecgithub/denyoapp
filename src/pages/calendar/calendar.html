@@ -13,8 +13,8 @@
       <ion-icon name="menu"></ion-icon>
     </button>
 
-  <ion-title  style="    text-align: center;
-    margin-top: 10px;"    class="page-title">{{pageTitle}}</ion-title>
+  <ion-title style="    text-align: center;
+    margin-top: 10px;" class="page-title">{{pageTitle}}</ion-title>
 
   <button style="float:left" ion-button (click)="notification()" style="position: absolute;
     right: 0%;
@@ -53,19 +53,23 @@
     </ion-buttons>
   </ion-navbar>
 
-
+  
 </ion-header>
-<ion-content>
-  <!--ionic2-calendar [calEvents]="calEvents" 
-    (afterEventMove)="afterEventMoved($event)"
-    (onEventTap)="onEventTap($event)" step="30"></ionic2-calendar-->  
 
-    <ionic2-calendar [calEvents]="calEvents" 
-    (afterEventMove)="afterEventMoved($event)"
-    (onEventTap)="onEventTap($event)"
-    (onEventDoubletap)="onEventDoubleTap($event)"
-    (onEventPress)="onEventPress($event)"></ionic2-calendar>
-    
+
+<ion-content>
+<!--ion-select style="padding: 1px 1px 6px 1px;position: relative;
+    margin-top: 16px;" [(ngModel)]="pet" (ionChange)="onSegmentChanged(pet)">
+    <ion-option value="ALL" selected=true>All</ion-option>
+    <ion-option value="SERVICE">Service</ion-option>
+    <ion-option value="EVENT">Event</ion-option>
+    <ion-option value="ALARM">Alarm</ion-option>
+  </ion-select-->
+
+
+  <ionic2-calendar [calEvents]="calEvents" (afterEventMove)="afterEventMoved($event)" (onEventTap)="onEventTap($event)" (onEventDoubletap)="onEventDoubleTap($event)"
+    (onEventPress)="onEventPress($event)" (swipe)="callingSwipe($event)"></ionic2-calendar>
+
 </ion-content>
 
 <ion-footer color="bluedark">

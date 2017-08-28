@@ -71,6 +71,22 @@ interface CalendarControl {
 })
 
 export class CalendarComponent {
+  allselected: any;
+  serviceselected: any;
+  alarmselected: any;
+  eventsselected: any;
+  dateHeaderTitle: any;
+  petselection: any;
+  pet: string = "ALL";
+  public currentCalendarDate: any;
+  public currentDate: any;
+  public currentMonth: any;
+  public currentYear: any;
+  calendarResultAll: any;
+  daySession: any;
+  calendarResultService: any;
+  calendarResultEvent: any;
+  calendarResultAlarm: any;
   public totalCountEventDateWise: any;
   noeventtitle: any;
   highlightdots: any;
@@ -88,6 +104,7 @@ export class CalendarComponent {
   public eventIdentify = [];
   public serviceIdentify = [];
   public alarmIdentity = [];
+  public highlighteddata = [];
   public userId: any;
   public monthTitle: any;
   public yearTitle: any;
@@ -111,6 +128,15 @@ export class CalendarComponent {
   constructor(private dragulaService: DragulaService, public navCtrl: NavController,
     private calendarElement: ElementRef,
     public events: Events, private http: Http, public toastCtrl: ToastController, public alertCtrl: AlertController) {
+    let currentDate = new Date();
+    this.currentDate = currentDate.getDate();
+    this.currentMonth = currentDate.getMonth() + 1;
+    if (this.getlength(this.currentMonth) == 1) {
+      this.currentMonth = '0' + this.currentMonth;
+    } else {
+      this.currentMonth = this.currentMonth;
+    }
+    this.currentYear = currentDate.getFullYear();
     this.userId = localStorage.getItem("userInfoId");
     this.userId = localStorage.getItem("userInfoId");
     this.companyId = localStorage.getItem("userInfoCompanyId");
@@ -154,7 +180,9 @@ export class CalendarComponent {
   //    let [bagName, el, target] = args;
   //    console.log('OnDropModel', bagName, el, target);
   //  }
-
+  getlength(number) {
+    return number.toString().length;
+  }
   private onDrag(args) {
     let [e, el] = args;
     console.log('dragging', e, el);
@@ -287,8 +315,8 @@ export class CalendarComponent {
     console.log("ngOnInit" + JSON.stringify(this.ctrl));
     let currentDate = this.ctrl.selectedYear + "-" + moment().month() + "-" + this.ctrl.selectedDay
 
-    this.monthTitle = this.months[moment().month()];
-    this.yearTitle = moment().year();
+    this.monthTitle = this.ctrl.selectedMonth;
+    this.yearTitle = this.ctrl.selectedYear;
     let monthstr = this.monthTitle + "-" + this.yearTitle;
     this.defaultDevent(currentDate, monthstr);
     this.makeDaysInMonthViewList();
@@ -333,24 +361,44 @@ export class CalendarComponent {
     }
   }
 
-  plusMonth = function (amount: number) {
+  /* plusMonth = function (amount: number) {
+ 
+     this.ctrl.dateSelection.add(amount, 'month');
+     this.ctrl.selectedMonth = this.monthNum2monthStr(this.ctrl.dateSelection.month());
+     console.log("plusMonth" + JSON.stringify(this.ctrl));
+     let currentDate = this.ctrl.selectedYear + "-" + this.ctrl.dateSelection.month() + "-" + this.ctrl.selectedDay;
+     let monthStr = this.ctrl.selectedMonth + "-" + this.ctrl.selectedYear;
+     this.defaultDevent(currentDate, monthStr);
+     this.updateMainView();
+     this.selectedYear = this.ctrl.selectedYear;
+     this.selectedMonth = this.ctrl.dateSelection.month();
+ 
+ 
+     this.monthTitle = this.ctrl.selectedMonth;
+     this.yearTitle = moment().year();
+ 
+ 
+   }*/
 
+
+  plusMonth = function (amount: number) {
     this.ctrl.dateSelection.add(amount, 'month');
     this.ctrl.selectedMonth = this.monthNum2monthStr(this.ctrl.dateSelection.month());
-    console.log("plusMonth" + JSON.stringify(this.ctrl));
-    let currentDate = this.ctrl.selectedYear + "-" + this.ctrl.dateSelection.month() + "-" + this.ctrl.selectedDay;
-    let monthStr = this.ctrl.selectedMonth + "-" + this.ctrl.selectedYear;
-    this.defaultDevent(currentDate, monthStr);
-    this.updateMainView();
-    this.selectedYear = this.ctrl.selectedYear;
-    this.selectedMonth = this.ctrl.dateSelection.month();
+    console.log("Plus Month Function calling..." + JSON.stringify(this.ctrl));
+    //let datesplitT = this.ctrl.dateSelection.split("T");
+    //this.yearTitle =datesplitT[0]
+    //this.yearTitle = moment().year();
+    //this.monthTitle = this.monthNum2monthStr(datesplitT[1]);
 
+
+    let currentDate = this.ctrl.selectedYear + "-" + moment().month() + "-" + this.ctrl.selectedDay;
 
     this.monthTitle = this.ctrl.selectedMonth;
-    this.yearTitle = moment().year();
-
-
+    this.yearTitle = this.ctrl.selectedYear;
+    let monthstr = this.monthTitle + "-" + this.yearTitle;
+    this.updateMainView();
   }
+
 
   setDateSelectionMonth($event) {
     console.log('Calling setDateSelectionMonth');
@@ -598,39 +646,53 @@ export class CalendarComponent {
 
     // console.log(url);
     let colors: string[] = ['primary', 'warning', 'danger', 'success'];
+
     this.http.get(url, options)
       .subscribe((data) => {
         let res = data.json();
         this.eventIdentify = res.allevents;
-        this.highlightdots = res.highlightdots;
+        let highlightdots = res.highlightdots;
+
+        if (res.highlightdots.length > 0) {
+          for (let hlgts in res.highlightdots) {
+            let splitdatehypen = res.highlightdots[hlgts].date.split("-");
+            this.highlighteddata.push({
+              date: res.highlightdots[hlgts].date,
+              class: res.highlightdots[hlgts].class,
+              dte: parseInt(splitdatehypen[2]),
+              mne: parseInt(splitdatehypen[1]),
+              yrd: splitdatehypen[0],
+              cdate: this.currentYear + "-" + this.currentMonth + "-" + this.currentDate
+            });
+          }
+          console.log("Highlight data:" + JSON.stringify(this.highlighteddata))
+        }
+        /* this.highlightdots = [
+           { "date": "2017-08-06", "class": "alarm_service" },
+           { "date": "2017-08-07", "class": "alarm_service" },
+           { "date": "2017-08-08", "class": "alarm_service" },
+           { "date": "2017-08-09", "class": "service" },
+           { "date": "2017-08-10", "class": "service" },
+           { "date": "2017-08-11", "class": "alarm_service_event" },
+           { "date": "2017-08-12", "class": "service" },
+           { "date": "2017-08-13", "class": "service" },
+           { "date": "2017-08-14", "class": "alarm_service" },
+           { "date": "2017-08-15", "class": "service" },
+           { "date": "2017-08-16", "class": "service" },
+           { "date": "2017-08-17", "class": "service" },
+           { "date": "2017-08-18", "class": "alarm_service" },
+           { "date": "2017-08-20", "class": "service" },
+           { "date": "2017-08-21", "class": "alarm_service" },
+           { "date": "2017-08-21", "class": "service" },
+         ];*/
 
 
-        this.highlightdots = [
-          { "date": "2017-08-06", "class": "alarm_service" },
-          { "date": "2017-08-07", "class": "alarm_service" },
-          { "date": "2017-08-08", "class": "alarm_service" },
-          { "date": "2017-08-09", "class": "service" },
-          { "date": "2017-08-10", "class": "service" },
-          { "date": "2017-08-11", "class": "alarm_service_event" },
-          { "date": "2017-08-12", "class": "service" },
-          { "date": "2017-08-13", "class": "service" },
-          { "date": "2017-08-14", "class": "alarm_service" },
-          { "date": "2017-08-15", "class": "service" },
-          { "date": "2017-08-16", "class": "service" },
-          { "date": "2017-08-17", "class": "service" },
-          { "date": "2017-08-18", "class": "alarm_service" },
-          { "date": "2017-08-20", "class": "service" },
-          { "date": "2017-08-21", "class": "alarm_service" },
-          { "date": "2017-08-21", "class": "service" },
-        ];
 
 
 
 
 
 
-
-        console.log("Highlight dot" + JSON.stringify(this.highlightdots));
         let eventcountindication;
         for (var i = 0; i < this.eventIdentify.length; i += 1) {
           console.log('i increment:' + i);
@@ -677,9 +739,9 @@ export class CalendarComponent {
             name: this.eventIdentify[i]['event_title'],
             type: 'event',
             event_type: 'E',
-            allDay: false,
+            allDay: true,
             icon: 'clock',
-            class: 'eventclass',
+            class: 'event',
             iconStyle: { color: 'green' },
             style: { color: 'red' },
             eventlength: this.eventIdentify.length,
@@ -687,8 +749,7 @@ export class CalendarComponent {
             event_time: this.eventIdentify[i]['event_time'],
             event_location: this.eventIdentify[i]['event_location'],
             event_remark: this.eventIdentify[i]['event_remark'],
-            event_addedby_name: this.eventIdentify[i]['event_addedby_name'],
-            highlightdots: this.highlightdots
+            event_addedby_name: this.eventIdentify[i]['event_addedby_name']
           });
         }
 
@@ -746,10 +807,10 @@ export class CalendarComponent {
             endDate: endTime,
             name: this.serviceIdentify[j]['service_subject'],
             type: 'event',
-            allDay: false,
+            allDay: true,
             icon: 'camera',
             event_type: 'S',
-            class: 'serviceclass',
+            class: 'service',
             iconStyle: { color: 'green' },
             style: { color: 'green' },
             servicelength: this.serviceIdentify.length,
@@ -757,8 +818,7 @@ export class CalendarComponent {
             event_time: this.serviceIdentify[j]['serviced_time'],
             event_remark: this.serviceIdentify[j]['service_remark'],
             event_location: this.serviceIdentify[j]['service_location'],
-            event_addedby_name: this.serviceIdentify[j]['serviced_by_name'],
-            highlightdots: this.highlightdots
+            event_addedby_name: this.serviceIdentify[j]['serviced_by_name']
           });
 
 
@@ -808,19 +868,16 @@ export class CalendarComponent {
             endDate: endTime,
             name: this.alarmIdentity[k]['alarm_name'],
             type: 'event',
-            allDay: false,
+            allDay: true,
             event_type: 'A',
             icon: 'alarm',
-            class: 'alarmclass',
+            class: 'alarm',
             iconStyle: { color: 'orange' },
             style: { color: 'orange' },
             alarmlength: this.alarmIdentity.length,
-            //alarmlength: alarmcountindication,
-
             event_remark: this.alarmIdentity[k]['alarm_remark'],
             event_location: this.alarmIdentity[k]['alarm_location'],
-            event_addedby_name: this.alarmIdentity[k]['alarm_assginedby_name'],
-            highlightdots: this.highlightdots
+            event_addedby_name: this.alarmIdentity[k]['alarm_assginedby_name']
           });
 
 
@@ -843,7 +900,7 @@ export class CalendarComponent {
         if (this.totalCountEventDateWise == 0) {
           this.noeventtitle = 'There is no events';
         }
-
+        this.makeDaysInMonthViewList();
         console.log("Calendar response:" + JSON.stringify(this.calEvents));
       });
   }
@@ -942,6 +999,311 @@ export class CalendarComponent {
     });
     notification.present();
   }
+  onTimeSelected(year, month, date, ev) {
+    console.log(year + "-" + month + "-" + date);
 
+    this.currentCalendarDate = ev;
+    this.calendarResultAll = [];
+    this.calendarResultService = [];
+    this.calendarResultEvent = [];
+    this.calendarResultAlarm = [];
+
+    // this.createRandomEvents();
+    let dateStr;
+
+
+    if (ev != '') {
+      //this.pet = '';
+      this.petselection = '';
+      this.calendarResultAll = [];
+      this.calendarResultService = [];
+      this.calendarResultEvent = [];
+      this.calendarResultAlarm = [];
+
+
+      if (ev.selectedTime == undefined) {
+
+        month = month + 1;
+        year = year;
+        date = date;
+      } else {
+
+        month = month + 1;
+        year = year;
+        date = date;
+      }
+      console.log("Month Vlue" + month);
+      console.log("Month Length" + month.length);
+      if (this.getlength(month) == 1) {
+        month = '0' + month;
+      } else {
+        month = month;
+      }
+
+      console.log("Date Length" + date.length);
+      if (this.getlength(date) == 1) {
+        date = '0' + date
+      } else {
+        date = date;
+      }
+
+      dateStr = "&date=" + year + "-" + month + "-" + date;
+    } else {
+      dateStr = "";
+    }
+    console.log("Date Selection:" + dateStr);
+    let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/calendar?is_mobile=1&loginid=" + this.userId + "&companyid=" + this.companyId + "" + dateStr;
+    console.log(url);
+    this.http.get(url, options)
+      .subscribe((data) => {
+        let currentDateArr = new Date();
+        let cmonth = currentDateArr.getMonth() + 1;
+        let mnstr;
+        let dtstr;
+        console.log("cmonth.toLocaleString.length" + cmonth.toLocaleString.length);
+        console.log("cmonth" + cmonth)
+        if (cmonth > 9) {
+          cmonth = cmonth;
+          mnstr = '';
+          console.log("Less than 9 below 10")
+
+        } else {
+          console.log("Greater than 9 reach 10")
+          cmonth = cmonth;
+          mnstr = '0';
+
+        }
+
+        if (currentDateArr.getDate().toLocaleString.length == 1) {
+          dtstr = '0';
+        } else {
+          dtstr = '';
+
+        }
+        let curDate = currentDateArr.getFullYear() + "-" + mnstr + cmonth + "-" + dtstr + currentDateArr.getDate();
+
+        let months = { '01': 'January', '02': 'February', '03': 'March', '04': 'April', '05': 'May', '06': 'June', '07': 'July', '08': 'August', '09': 'September', '10': 'October', '11': 'November', '12': 'December' };
+
+        let selDate = year + "-" + month + "-" + date;
+        let selectdate = year + "-" + month + "-" + date;
+        if (year != undefined)
+          this.dateHeaderTitle = months[month] + " " + year;
+        if (ev != '') {
+          console.log("curDate:" + curDate);
+          console.log("selDate:" + selDate);
+          localStorage.setItem("sdate", selectdate);
+          if (curDate == selDate) {
+            this.daySession = 'Todays  Event';
+            console.log(this.daySession);
+          } else {
+            this.daySession = selDate;
+          }
+        } else {
+          this.daySession = "";
+        }
+        console.log("Pet:======>" + this.petselection);
+        this.calendarResultEvent = [];
+        if (this.petselection == 'ALL') {
+          console.log('ALL');
+          this.doCalendarResult(data, 0, 0, 0, 'all')
+        } else if (this.petselection == 'SERVICE') {
+          console.log('SERVICE');
+          this.doCalendarResult(data, 0, 0, 0, 'service');//JsonData,Event,Service,Alarm
+        } else if (this.petselection == 'EVENT') {
+          console.log('EVENT');
+          this.doCalendarResult(data, 0, 0, 0, 'event');//JsonData,Event,Service,Alarm
+        } else if (this.petselection == 'ALARM') {
+          console.log('ALARM');
+          this.doCalendarResult(data, 0, 0, 0, 'alarm');//JsonData,Event,Service,Alarm
+        } else {
+          console.log('EV' + ev);
+          if (ev != '') {
+            this.doCalendarResult(data, 1, 1, 1, '')//JsonData,Event,Service,Alarm
+          }
+
+        }
+
+      });
+  }
+
+  doCalendarResult(data, event, service, alarm, type) {//JsonData,Event,Service,Alarm
+    this.serviceIdentify = [];
+    this.eventIdentify = [];
+    this.alarmIdentity = [];
+    if (event > 0 && type == '') {
+      console.log("A");
+      this.eventIdentify = data.json().events;
+    } else {
+      console.log("B");
+      if (type == 'event') {
+        console.log("C");
+        this.eventIdentify = data.json().allevents;
+      }
+      if (type == 'all') {
+        console.log("D");
+        this.eventIdentify = data.json().allevents;
+      }
+    }
+    for (var i = 0; i < this.eventIdentify.length; i += 1) {
+      //  $('.monthview-primary-with-event').removeClass('monthview-primary-with-event[_ngcontent-c1]');
+      // $('.monthview-primary-with-event').addClass('eventclass');
+      //let eventdate = this.eventIdentify[i]['event_date'] + " " + this.eventIdentify[i]['event_time'];// Check Date and Time
+      // let eventdate = this.eventIdentify[i]['event_date'];// Check Date only
+      this.calendarResultEvent.push({
+        event_id: this.eventIdentify[i]['event_id'],
+        event_title: this.eventIdentify[i]['event_title'],
+        event_date: this.eventIdentify[i]['event_date'],
+        event_time: this.eventIdentify[i]['event_time'],
+        event_location: this.eventIdentify[i]['event_location'],
+        event_remark: this.eventIdentify[i]['event_remark'],
+        event_addedby_name: this.eventIdentify[i]['event_addedby_name'],
+        event_type: 'E',
+        icon: 'alarm', // Icon of the alert. This is compulsory when using the 
+        // calendar on small screens, as the name of the event will
+        // not be displayed in the month grid. It has to be a valid
+        // IonicIcons icon name.
+        class: 'eventclass', // Class of the item in the month grid cell
+        iconStyle: { color: 'green' } // Style for the item's icon
+        //style: { color: 'red' }, // Style for the item
+      });
+    }
+
+    if (service > 0 && type == '') {
+      console.log("E");
+      this.serviceIdentify = data.json().services;
+    } else {
+      console.log("F");
+      if (type == 'service') {
+        console.log("G");
+        this.serviceIdentify = data.json().allservices;
+      }
+      if (type == 'all') {
+        console.log("H");
+        this.serviceIdentify = data.json().allservices;
+      }
+    }
+    for (var j = 0; j < this.serviceIdentify.length; j += 1) {
+      let eventdate;
+
+      if (this.serviceIdentify[j]['serviced_datetime'] == '0000-00-00') {
+        //eventdate = this.serviceIdentify[j]['next_service_date'] + " " + this.serviceIdentify[j]['serviced_time'];// Check Date and Time
+        eventdate = this.serviceIdentify[j]['next_service_date'];// Check Date only
+      } else {
+        if (this.serviceIdentify[j]['serviced_time'] == null) {
+          eventdate = this.serviceIdentify[j]['next_service_date'];
+        } else {
+          eventdate = this.serviceIdentify[j]['serviced_datetime'];
+        }
+      }
+
+      this.calendarResultEvent.push({
+        event_id: this.serviceIdentify[j]['service_id'],
+        event_title: this.serviceIdentify[j]['service_subject'],
+        event_unitid: this.serviceIdentify[j]['service_unitid'],
+        event_date: this.serviceIdentify[j]['serviced_datetime'],
+        event_time: this.serviceIdentify[j]['serviced_time'],
+        event_remark: this.serviceIdentify[j]['service_remark'],
+        event_location: this.serviceIdentify[j]['service_location'],
+        event_addedby_name: this.serviceIdentify[j]['serviced_by_name'],
+        event_type: 'S',
+        icon: 'service',
+        class: 'service'
+      });
+
+    }
+
+    if (alarm > 0 && type == '') {
+      console.log("I");
+      this.alarmIdentity = data.json().alarms;
+    } else {
+      console.log("J");
+      if (type == 'alarm') {
+        console.log("K");
+        this.alarmIdentity = data.json().allalarms;
+      }
+      if (type == 'all') {
+        console.log("L");
+        this.alarmIdentity = data.json().allalarms;
+      }
+    }
+
+    for (var k = 0; k < this.alarmIdentity.length; k += 1) {
+
+      this.calendarResultEvent.push({
+
+        event_id: this.alarmIdentity[k]['alarm_id'],
+        event_title: this.alarmIdentity[k]['alarm_name'],
+        event_unitid: this.alarmIdentity[k]['alarm_unit_id'],
+        event_date: this.alarmIdentity[k]['alarm_received_date'],
+
+        event_remark: this.alarmIdentity[k]['alarm_remark'],
+        event_location: this.alarmIdentity[k]['alarm_location'],
+        event_addedby_name: this.alarmIdentity[k]['alarm_assginedby_name'],
+        event_t: this.alarmIdentity[k]['date_time'],
+        event_type: 'A',
+        icon: 'event',
+        class: 'event'
+      });
+
+
+    }
+    this.totalCountEventDateWise = this.calendarResultEvent.length;
+    console.log("Date wise selection calendar response:" + JSON.stringify(this.calendarResultEvent));
+    console.log("totalCountEventDateWise++" + this.totalCountEventDateWise);
+    if (this.totalCountEventDateWise == 0) {
+      this.noeventtitle = 'There is no events';
+    }
+  }
+
+
+  /**********************************/
+  /* Dropdown Filter onchange event */
+  /**********************************/
+  onSegmentChanged(val) {
+    this.noeventtitle = '';
+    this.calendarResultEvent = [];
+    this.calendarResultAll = [];
+    this.calendarResultService = [];
+    this.calendarResultAlarm = [];
+    if (val == "ALL") {
+      // this.reportData.status = "DRAFT";
+      // this.reportData.startindex = 0;
+      this.calendarResultAll = [];
+      this.petselection = 'ALL';
+      this.allselected = true;
+      this.pet = 'ALL';
+
+    } else if (val == "SERVICE") {
+      this.serviceselected = true;
+
+      //this.reportData.status = val;
+      //this.reportData.startindex = 0;
+      this.calendarResultService = [];
+      this.petselection = 'SERVICE';
+      this.pet = 'SERVICE';
+    } else if (val == "EVENT") {
+
+      this.eventsselected = true;
+      //this.reportData.status = val;
+      //this.reportData.startindex = 0;
+      this.calendarResultEvent = [];
+      this.petselection = 'EVENT';
+      this.pet = 'EVENT';
+    } else if (val == "ALARM") {
+      this.alarmselected = true;
+      //this.reportData.status = val;
+      //this.reportData.startindex = 0;
+      this.calendarResultAlarm = [];
+      this.petselection = 'ALARM';
+      this.pet = 'ALARM';
+    }
+
+    //this.doReport();
+
+    this.onTimeSelected('', '', '', '');
+  }
 
 }
