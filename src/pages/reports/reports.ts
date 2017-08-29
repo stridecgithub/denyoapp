@@ -15,7 +15,7 @@ import { CalendarPage } from '../calendar/calendar';
 import { EmailPage } from '../email/email';
 import { DatePicker } from '@ionic-native/date-picker';
 import { ReportviewtablePage } from '../reportviewtable/reportviewtable';
-import { OrgchartPage} from '../orgchart/orgchart';
+import { OrgchartPage } from '../orgchart/orgchart';
 @Component({
   selector: 'page-reports',
   templateUrl: 'reports.html',
@@ -43,7 +43,8 @@ export class ReportsPage {
   public button1: any;
   public button2: any;
   public datevalidaton: any;
-
+  public start_date = 'Start Date';
+  public end_date = 'End Date';
 
   public responseResultTimeFrame = [];
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
@@ -104,10 +105,12 @@ export class ReportsPage {
         if (val == '1') {
           this.from = date.getFullYear() + "-" + monthstr + "-" + date.getDate();
           console.log('From date: ', this.from);
+          this.start_date=this.from;
         }
         if (val == '2') {
           this.to = date.getFullYear() + "-" + monthstr + "-" + date.getDate();
           console.log('To date: ', this.to);
+          this.end_date=this.to;
         }
       },
       err => console.log('Error occurred while getting date: ', err)

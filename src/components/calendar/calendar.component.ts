@@ -141,15 +141,9 @@ export class CalendarComponent {
     this.userId = localStorage.getItem("userInfoId");
     this.companyId = localStorage.getItem("userInfoCompanyId");
     this.EVENTVIEWACCESS = localStorage.getItem("CALENDAR_EVENTS_VIEW");
-    console.log("Role Authority for Unit Listing View:" + this.EVENTVIEWACCESS);
     this.EVENTCREATEACCESS = localStorage.getItem("CALENDAR_EVENTS_CREATE");
-    console.log("Role Authority for Unit Listing Create:" + this.EVENTCREATEACCESS);
     this.EVENTEDITACCESS = localStorage.getItem("CALENDAR_EVENTS_EDIT");
-    console.log("Role Authority for Unit Listing Edit:" + this.EVENTEDITACCESS);
     this.EVENTDELETEACCESS = localStorage.getItem("CALENDAR_EVENTS_DELETE");
-    console.log("Role Authority for Unit Listing Delete:" + this.EVENTDELETEACCESS);
-
-
     this.ALARMVIEWACCESS = localStorage.getItem("UNITS_ALARM_VIEW");
     this.ALARMDELETEACCESS = localStorage.getItem("UNITS_ALARM_DELETE");
 
@@ -361,41 +355,16 @@ export class CalendarComponent {
     }
   }
 
-  /* plusMonth = function (amount: number) {
- 
-     this.ctrl.dateSelection.add(amount, 'month');
-     this.ctrl.selectedMonth = this.monthNum2monthStr(this.ctrl.dateSelection.month());
-     console.log("plusMonth" + JSON.stringify(this.ctrl));
-     let currentDate = this.ctrl.selectedYear + "-" + this.ctrl.dateSelection.month() + "-" + this.ctrl.selectedDay;
-     let monthStr = this.ctrl.selectedMonth + "-" + this.ctrl.selectedYear;
-     this.defaultDevent(currentDate, monthStr);
-     this.updateMainView();
-     this.selectedYear = this.ctrl.selectedYear;
-     this.selectedMonth = this.ctrl.dateSelection.month();
- 
- 
-     this.monthTitle = this.ctrl.selectedMonth;
-     this.yearTitle = moment().year();
- 
- 
-   }*/
-
-
   plusMonth = function (amount: number) {
     this.ctrl.dateSelection.add(amount, 'month');
     this.ctrl.selectedMonth = this.monthNum2monthStr(this.ctrl.dateSelection.month());
     console.log("Plus Month Function calling..." + JSON.stringify(this.ctrl));
-    //let datesplitT = this.ctrl.dateSelection.split("T");
-    //this.yearTitle =datesplitT[0]
-    //this.yearTitle = moment().year();
-    //this.monthTitle = this.monthNum2monthStr(datesplitT[1]);
-
-
     let currentDate = this.ctrl.selectedYear + "-" + moment().month() + "-" + this.ctrl.selectedDay;
 
     this.monthTitle = this.ctrl.selectedMonth;
     this.yearTitle = this.ctrl.selectedYear;
     let monthstr = this.monthTitle + "-" + this.yearTitle;
+
     this.defaultDevent(currentDate, monthstr);
     this.updateMainView();
 
@@ -639,6 +608,7 @@ export class CalendarComponent {
 
 
   defaultDevent(currentdate, monthstr) {
+    this.highlighteddata = [];
     let
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
@@ -704,12 +674,9 @@ export class CalendarComponent {
           var startTime;
           var endTime;
           var event_date_array = this.eventIdentify[i]['event_date'].split('-');
-          console.log("DATE FORMAT" + this.eventIdentify[i]['event_date']);
           var yearstr = event_date_array[0];
           var monthstr = parseInt(event_date_array[1], 10) - 1;
           var datestr = parseInt(event_date_array[2], 10);
-          console.log("Month String:-" + monthstr);
-          console.log("Date String:-" + datestr);
           // var startMinute = Math.floor(Math.random() * 24 * 60);
           // var endMinute = Math.floor(Math.random() * 1) + startMinute;
           var startMinute = 20;
@@ -774,11 +741,6 @@ export class CalendarComponent {
               service_date_array = this.serviceIdentify[j]['serviced_datetime'].split('-');
             }
           }
-
-
-
-
-          console.log("DATE FORMAT" + this.serviceIdentify[j]['serviced_datetime']);
           var yearstr = service_date_array[0];
           var monthstr = parseInt(service_date_array[1], 10) - 1;
           var datestr = parseInt(service_date_array[2], 10);
@@ -788,18 +750,6 @@ export class CalendarComponent {
           var endMinute = 10 + startMinute;
           startTime = new Date(yearstr, monthstr, datestr, 10, 0 + startMinute);
           endTime = new Date(yearstr, monthstr, datestr, 10, 0 + endMinute);
-          // console.log("TEST CALENDAR-2"+startTime+"//"+endTime);
-          // startTime = new Date(service_date_array[0], service_date_array[1], service_date_array[2], 0, 0,0);
-          //endTime = new Date(service_date_array[0], service_date_array[1], service_date_array[2], 0, 0,0);
-          /*this.calEvents.push({
-            title: this.serviceIdentify[j]['service_subject'],
-            startTime: startTime,
-            endTime: endTime,
-            allDay: true,
-            icon: 'service',
-            class: 'service'
-          });
-        */
 
           this.calEvents.push({
             data: {},
@@ -816,7 +766,6 @@ export class CalendarComponent {
             iconStyle: { color: 'green' },
             style: { color: 'green' },
             servicelength: this.serviceIdentify.length,
-            //servicelength: servicecountindication,
             event_time: this.serviceIdentify[j]['serviced_time'],
             event_remark: this.serviceIdentify[j]['service_remark'],
             event_location: this.serviceIdentify[j]['service_location'],
@@ -843,24 +792,11 @@ export class CalendarComponent {
           var yearstr = service_date_array[0];
           var monthstr = parseInt(service_date_array[1], 10) - 1;
           var datestr = parseInt(service_date_array[2], 10);
-          //var startMinute = Math.floor(Math.random() * 24 * 60);
           var startMinute = 20;
           var endMinute = 10 + startMinute;
 
           startTime = new Date(yearstr, monthstr, datestr, 10, 0 + startMinute);
           endTime = new Date(yearstr, monthstr, datestr, 10, 0 + endMinute);
-          ///console.log("TEST CALENDAR-3"+startTime+"//"+endTime);
-          // startTime = new Date(service_date_array[0], service_date_array[1], service_date_array[2], 0, 0,0);
-          // endTime = new Date(service_date_array[0], service_date_array[1], service_date_array[2], 0, 0,0);
-          /* this.calEvents.push({
-             title: this.alarmIdentity[k]['alarm_name'],
-             startTime: startTime,
-             endTime: endTime,
-             allDay: true,
-             icon: 'alarm',
-             class: 'alarm'
-           });
-        */
 
           this.calEvents.push({
             data: {},
@@ -1034,15 +970,14 @@ export class CalendarComponent {
         year = year;
         date = date;
       }
-      console.log("Month Vlue" + month);
-      console.log("Month Length" + month.length);
+
       if (this.getlength(month) == 1) {
         month = '0' + month;
       } else {
         month = month;
       }
 
-      console.log("Date Length" + date.length);
+
       if (this.getlength(date) == 1) {
         date = '0' + date
       } else {
@@ -1053,7 +988,7 @@ export class CalendarComponent {
     } else {
       dateStr = "";
     }
-    console.log("Date Selection:" + dateStr);
+
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
