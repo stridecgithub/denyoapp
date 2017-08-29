@@ -396,7 +396,9 @@ export class CalendarComponent {
     this.monthTitle = this.ctrl.selectedMonth;
     this.yearTitle = this.ctrl.selectedYear;
     let monthstr = this.monthTitle + "-" + this.yearTitle;
+    this.defaultDevent(currentDate, monthstr);
     this.updateMainView();
+
   }
 
 
