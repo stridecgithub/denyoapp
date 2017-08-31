@@ -109,7 +109,7 @@ export class NotificationPage {
 
 
     if (nottype == 'M') {
-      // this.nav.push(EmailPage);
+      // this.nav.setRoot(EmailPage);
 
       this.nav.push(EmailPage, {
         record: item.table_id,
@@ -260,7 +260,7 @@ export class NotificationPage {
 
   doAdd() {
     localStorage.setItem("microtime", "");
-    this.nav.push(AddserviceinfoPage, {
+    this.nav.setRoot(AddserviceinfoPage, {
       record: this.NP.get("record"),
       act: 'Add'
     });
@@ -279,7 +279,7 @@ export class NotificationPage {
 
   doEdit(item, act) {
     localStorage.setItem("microtime", "");
-    this.nav.push(AddserviceinfoPage, {
+    this.nav.setRoot(AddserviceinfoPage, {
       record: item,
       act: 'Edit'
     });
@@ -349,13 +349,13 @@ export class NotificationPage {
     this.nav.push(UnitsPage);
   }
   redirectToMessage() {
-    this.nav.push(EmailPage);
+    this.nav.setRoot(EmailPage);
   }
   redirectCalendar() {
     this.nav.push(CalendarPage);
   }
   redirectToMaps() {
-    this.nav.push(MapsPage);
+    this.nav.setRoot(MapsPage);
   }
   redirectToSettings() {
     this.nav.push(OrgchartPage);

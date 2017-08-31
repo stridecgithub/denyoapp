@@ -17,7 +17,7 @@ import { ReportsPage } from '../reports/reports';
 import { CalendarPage } from '../calendar/calendar';
 import { EmailPage } from '../email/email';
 import { MapsPage } from '../maps/maps';
-import { OrgchartPage} from '../orgchart/orgchart';
+import { OrgchartPage } from '../orgchart/orgchart';
 
 /**
  * Generated class for the UserPage page.
@@ -177,7 +177,7 @@ export class UnitsPage {
               genstatus: res.units[unit].genstatus,
               lat: res.units[unit].lat,
               lng: res.units[unit].lng,
-              runninghr:res.units[unit].runninghr,
+              runninghr: res.units[unit].runninghr,
               favoriteindication: favorite
             });
           }
@@ -236,6 +236,7 @@ export class UnitsPage {
   }
 
   doAdd() {
+    localStorage.setItem("location", '');
     this.nav.push(AddunitsonePage);
   }
   getCheckBoxValue(item, val) {
@@ -266,8 +267,8 @@ console.log(JSON.stringify(this.selectedAction));*/
     localStorage.setItem("unitcolorcode", item.colorcodeindications);
     localStorage.setItem("unitlat", item.lat);
     localStorage.setItem("unitlng", item.lng);
-    localStorage.setItem("runninghr",item.runninghr);
-      localStorage.setItem("nsd",item.nextservicedate);
+    localStorage.setItem("runninghr", item.runninghr);
+    localStorage.setItem("nsd", item.nextservicedate);
     console.log(this.str + "//" + JSON.stringify(this.detailvalue));
     localStorage.setItem("viewlist", this.str);
   }
@@ -299,16 +300,16 @@ console.log(JSON.stringify(this.selectedAction));*/
       else {
         let item;
         item = this.detailvalue;
-         localStorage.setItem("unitId", item.unit_id);
-      localStorage.setItem("iframeunitId", item.unit_id);
-      localStorage.setItem("unitunitname", item.unitname);
-      localStorage.setItem("unitlocation", item.location);
-      localStorage.setItem("unitprojectname", item.projectname);
-      localStorage.setItem("unitcolorcode", item.colorcodeindications);
-      localStorage.setItem("unitlat", item.lat);
-      localStorage.setItem("unitlng", item.lng);
-      localStorage.setItem("runninghr",item.runninghr);
-      localStorage.setItem("nsd",item.nextservicedate);
+        localStorage.setItem("unitId", item.unit_id);
+        localStorage.setItem("iframeunitId", item.unit_id);
+        localStorage.setItem("unitunitname", item.unitname);
+        localStorage.setItem("unitlocation", item.location);
+        localStorage.setItem("unitprojectname", item.projectname);
+        localStorage.setItem("unitcolorcode", item.colorcodeindications);
+        localStorage.setItem("unitlat", item.lat);
+        localStorage.setItem("unitlng", item.lng);
+        localStorage.setItem("runninghr", item.runninghr);
+        localStorage.setItem("nsd", item.nextservicedate);
 
         this.nav.push(UnitdetailsPage, {
           record: this.detailvalue
@@ -365,9 +366,9 @@ console.log(JSON.stringify(this.selectedAction));*/
       localStorage.setItem("unitcolorcode", item.colorcodeindications);
       localStorage.setItem("unitlat", item.lat);
       localStorage.setItem("unitlng", item.lng);
-      localStorage.setItem("runninghr",item.runninghr);
-      console.log("RHR"+item.runninghr);
-      localStorage.setItem("nsd",item.nextservicedate);
+      localStorage.setItem("runninghr", item.runninghr);
+      console.log("RHR" + item.runninghr);
+      localStorage.setItem("nsd", item.nextservicedate);
 
 
       this.nav.push(UnitdetailsPage, {
@@ -586,13 +587,13 @@ console.log(JSON.stringify(this.selectedAction));*/
     this.nav.push(UnitsPage);
   }
   redirectToMessage() {
-    this.nav.push(EmailPage);
+    this.nav.setRoot(EmailPage);
   }
   redirectCalendar() {
     this.nav.push(CalendarPage);
   }
   redirectToMaps() {
-    this.nav.push(MapsPage);
+    this.nav.setRoot(MapsPage);
   }
   redirectToSettings() {
     this.nav.push(OrgchartPage);

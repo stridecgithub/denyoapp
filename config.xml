@@ -83,7 +83,6 @@
     <plugin name="cordova-plugin-datepicker" spec="^0.9.3" />
     <plugin name="cordova-plugin-device" spec="^1.1.4" />
     <plugin name="cordova-plugin-file" spec="^4.0.0" />
-    <plugin name="cordova-plugin-file-transfer" spec="^1.6.3" />
     <plugin name="cordova-plugin-filechooser" spec="^1.0.1" />
     <plugin name="cordova-plugin-http" spec="^1.2.0" />
     <plugin name="cordova-plugin-nativegeocoder" spec="^1.0.2" />
@@ -91,13 +90,6 @@
     <plugin name="cordova-plugin-statusbar" spec="^2.2.2" />
     <plugin name="cordova-plugin-whitelist" spec="^1.3.1" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
-    <plugin name="phonegap-plugin-push" spec="~2.0.0-rc5">
-        <variable name="SENDER_ID" value="218019355699" />
-    </plugin>
-    <plugin name="plugin.google.maps" spec="~1.3.9">
-        <variable name="API_KEY_FOR_ANDROID" value="AIzaSyCbvwOWwex4xcDVJKlfPsJiz5fmmsEB9KA" />
-        <variable name="API_KEY_FOR_IOS" value="YOUR_IOS_API_KEY_IS_HERE" />
-    </plugin>
     <plugin name="cordova-plugin-geolocation" spec="~2.4.3" />
     <plugin name="ionic-plugin-deeplinks" spec="~1.0.15">
         <variable name="URL_SCHEME" value="myapp" />
@@ -118,6 +110,16 @@
         <variable name="DEEPLINK_5_HOST" value=" " />
     </plugin>
     <plugin name="cordova-plugin-splashscreen" spec="~4.0.3" />
-    <engine name="android" spec="~6.1.2" />
     <plugin name="de.appplant.cordova.plugin.local-notification" spec="~0.8.5" />
+    <plugin name="cordova-plugin-document-viewer" spec="~0.9.5" />
+    <plugin name="cordova-plugin-file-opener2" spec="~2.0.19" />
+    <plugin name="cordova-plugin-file-transfer" spec="~1.6.3" />
+    <plugin name="cordova-plugin-googlemaps" spec="https://github.com/mapsplugin/cordova-plugin-googlemaps#multiple_maps">
+        <variable name="API_KEY_FOR_ANDROID" value="AIzaSyD8xmwUm5wwzurbi6N99FyF9_e2traeDcA" />
+        <variable name="API_KEY_FOR_IOS" value="YOUR_IOS_API_KEY_IS_HERE" />
+    </plugin>
+    <engine name="android" spec="~6.1.2" />
+    <plugin name="phonegap-plugin-push" spec="~2.0.0-rc5">
+        <variable name="SENDER_ID" value="218019355699" />
+    </plugin>
 </widget>

@@ -212,7 +212,7 @@ export class AlarmlogPage {
     if(item.alarm_assginedby_name == '')
     {
     if (act == 'edit') {
-      this.nav.push(AddalarmPage, {
+      this.nav.setRoot(AddalarmPage, {
         record: item,
         act: act
       });
@@ -245,13 +245,13 @@ export class AlarmlogPage {
     this.nav.push(UnitsPage);
   }
   redirectToMessage() {
-    this.nav.push(EmailPage);
+    this.nav.setRoot(EmailPage);
   }
   redirectCalendar() {
     this.nav.push(CalendarPage);
   }
   redirectToMaps() {
-    this.nav.push(MapsPage);
+    this.nav.setRoot(MapsPage);
   }
   redirectToSettings() {
     this.nav.push(OrgchartPage);

@@ -12,8 +12,8 @@
       <ion-icon name="menu"></ion-icon>
     </button>
 
-  <ion-title  style="    text-align: center;
-    margin-top: 10px;"    class="page-title">{{pageTitle}}</ion-title>
+  <ion-title style="    text-align: center;
+    margin-top: 10px;" class="page-title">{{pageTitle}}</ion-title>
 
   <button style="float:left" ion-button (click)="notification()" style="position: absolute;
     right: 0%;
@@ -53,30 +53,53 @@
   </ion-navbar>
 </ion-header>
 
+
 <ion-content padding class="ion-content">
-  <div class="error" *ngIf="reportAllLists.length==0" style="color:red;text-align:center">No report entries found</div>
-  <ion-grid  *ngIf="reportAllLists.length>0">
+  <div class="error" *ngIf="success==1" style="color:red;text-align:center">Request report generated successfully.kindly check your valid email address</div>
+  <div class="error" *ngIf="reportAllLists.length==0" style="color:red;text-align:center">{{noentrymsg}}</div>
+  <ion-grid *ngIf="reportAllLists.length>0">
     <ion-row style="color: white;
     background-color: gray;
     font-size: 12px;">
-      <ion-col><b>Date</b></ion-col>
-      <ion-col><b>Fuel Level</b></ion-col>
-      <ion-col><b>Loadpower Factor</b></ion-col>
-      <ion-col><b>Freq</b></ion-col>
-      <ion-col><b>Engine State</b></ion-col>
-      <ion-col><b>Coolant Temp</b></ion-col>
+
+      <ion-col>DATEANDTIME</ion-col>
+      <ion-col>FUELLEVEL</ion-col>
+      <ion-col>LOADPOWERFACTOR</ion-col>
+      <ion-col>CURRENT1</ion-col>
+      <ion-col>FREQ</ion-col>
+      <ion-col>ENGINESTATE</ion-col>
+      <ion-col>COLLANTTEMP</ion-col>
+      <ion-col>VOLT1</ion-col>
+      <ion-col>BATTERYVOLTAGE</ion-col>
+      <ion-col>OILPRESSURE</ion-col>
+      <ion-col>RUNNINGHR</ion-col>
+      <ion-col>ENGSPEED</ion-col>
+
     </ion-row>
-    <ion-row *ngFor="let item of reportAllLists;" style="color: blue;
+    <ion-row *ngFor="let item  of reportAllLists" style="color: blue;
     background-color: lightblue;
     font-size: 12px;">
       <ion-col>{{item.DATEANDTIME}}</ion-col>
       <ion-col>{{item.FUELLEVEL}}</ion-col>
       <ion-col>{{item.LOADPOWERFACTOR}}</ion-col>
+      <ion-col>{{item.CURRENT1}}</ion-col>
       <ion-col>{{item.FREQ}}</ion-col>
       <ion-col>{{item.ENGINESTATE}}</ion-col>
       <ion-col>{{item.COLLANTTEMP}}</ion-col>
+      <ion-col>{{item.VOLT1}}</ion-col>
+      <ion-col>{{item.BATTERYVOLTAGE}}</ion-col>
+      <ion-col>{{item.OILPRESSURE}}</ion-col>
+      <ion-col>{{item.RUNNINGHR}}</ion-col>
+      <ion-col>{{item.ENGSPEED}}</ion-col>
     </ion-row>
   </ion-grid>
+
+  <div [innerHTML]="sanitizer.bypassSecurityTrustHtml(iframeContent)" *ngIf="graphview>0"></div>
+
+  <div *ngIf="pdfdownloadview>0">Report generated successfully as PDF format. <!--click here to below link<br> <a href="{{pdfDownloadLink}}">Download</a--></div>
+  <!--br>
+    <a href="{{pdfDownloadLink}}">Download</a-->
+
 </ion-content>
 <ion-footer color="bluedark">
   <ion-toolbar color="bluedark">

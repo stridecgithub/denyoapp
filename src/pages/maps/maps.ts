@@ -1,5 +1,5 @@
 
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController, ToastController, AlertController, NavParams, Platform } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 import { Http, Headers, RequestOptions } from '@angular/http';
@@ -23,14 +23,24 @@ import { ReportsPage } from '../reports/reports';
 import { CalendarPage } from '../calendar/calendar';
 import { EmailPage } from '../email/email';
 import { Observable } from 'rxjs/Rx';
+import {
+  GoogleMaps,
+  GoogleMap,
+  GoogleMapsEvent,
+  GoogleMapOptions,
+  CameraPosition,
+  MarkerOptions,
+  Marker
+} from '@ionic-native/google-maps';
+import { Geolocation } from '@ionic-native/geolocation'
 @Component({
   selector: 'page-maps',
   templateUrl: 'maps.html'
 })
 export class MapsPage {
+  map: GoogleMap;
+  mapElement: HTMLElement;
 
-  @ViewChild('map') mapElement: ElementRef;
-  @ViewChild('pleaseConnect') pleaseConnect: ElementRef;
 
 
   //@ViewChild('mapContainer') mapContainer: ElementRef;
@@ -69,7 +79,7 @@ export class MapsPage {
     results: 8
   }
   public reportAllLists = [];
-  constructor(public platform: Platform, public http: Http, public navCtrl: NavController,
+  constructor(public platform: Platform, private googleMaps: GoogleMaps, public http: Http, public navCtrl: NavController,
     public toastCtrl: ToastController, private sanitizer: DomSanitizer, public alertCtrl: AlertController, public navParams: NavParams, public loadingCtrl: LoadingController) {
     /* Role Authority Start */
     this.VIEWACCESS = localStorage.getItem("DASHBOARD_MAP_VIEW");
@@ -87,17 +97,21 @@ export class MapsPage {
     this.companyid = localStorage.getItem("userInfoCompanyId");
 
 
+    this.platform.ready().then(() => {
+      this.loadMap(0);
+    });
 
 
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MapsPage');
-    //this.pageLoad();
-
+    this.pageLoad();
+    this.loadMap(0);
   }
   ionViewWillEnter() {
-    this.pageLoad();
+    console.log('ionViewWillEnter MapsPage');
+    //this.pageLoad();
   }
 
 
@@ -233,31 +247,30 @@ export class MapsPage {
     });
 
   }
-  
-pageLoad()
-{
-   /*
-    let isclickedtounitdetails = 1;
-    setTimeout(() => {
-      let clicked = localStorage.getItem("unitdetailsclicked");
-      if (clicked == undefined) {
-        isclickedtounitdetails = 0;
-      }
-      if (clicked == 'undefined') {
-        isclickedtounitdetails = 0;
-      }
-      if (clicked == '') {
-        isclickedtounitdetails = 0;
-      }
-      if (isclickedtounitdetails > 0) {
-        this.navCtrl.push(UnitdetailsPage, {
-          record: clicked
-        });
-      }
-      console.log(i);
-      i++;
-    }, 1000);
-    */
+
+  pageLoad() {
+    /*
+     let isclickedtounitdetails = 1;
+     setTimeout(() => {
+       let clicked = localStorage.getItem("unitdetailsclicked");
+       if (clicked == undefined) {
+         isclickedtounitdetails = 0;
+       }
+       if (clicked == 'undefined') {
+         isclickedtounitdetails = 0;
+       }
+       if (clicked == '') {
+         isclickedtounitdetails = 0;
+       }
+       if (isclickedtounitdetails > 0) {
+         this.navCtrl.push(UnitdetailsPage, {
+           record: clicked
+         });
+       }
+       console.log(i);
+       i++;
+     }, 1000);
+     */
 
 
     let //body: string = "loginid=" + this.userId,
@@ -281,7 +294,7 @@ pageLoad()
     }
     // console.log(this.apiServiceURL + "/api/webview/map.php?is_mobile=1&loginid=1&startindex=0&results=8&sort=unit_id&dir=desc");
     this.loadMap(0);
-}
+  }
   startTheIterations() {
     this.subscription = Observable.interval(1000).subscribe(x => {
       // the number 1000 is on miliseconds so every second is going to have an iteration of what is inside this code.
@@ -302,13 +315,13 @@ pageLoad()
       if (isclickedtounitdetails > 0) {
         console.log(JSON.stringify(clicked))
         //this.nav.push(HomePage);
-        
+
         this.callUnitDetails(clicked);
         //this.openPage(UnitsPage);
       }
       this.timeri++;
     });
-     this.stopTheIterations();
+    this.stopTheIterations();
   }
 
   stopTheIterations() {
@@ -318,7 +331,7 @@ pageLoad()
 
   callUnitDetails(clicked) {
     this.stopTheIterations();
-   
+
     console.log("Unit details redirect id is" + clicked);
 
     localStorage.setItem("unitId", clicked);
@@ -328,153 +341,602 @@ pageLoad()
     });
   }
 
+  /*
+    loadMap(val) {
+      console.log("A" + JSON.stringify(val));
+      console.log("B" + val.length);
+      if (JSON.stringify(val).length > 0) {
+        this.reportData.startindex = 0;
+        this.reportData.results = 8;
+      }
+      var typestr: string = "application/x-www-form-urlencoded; charset=UTF-8",
+        headersstr: any = new Headers({ 'Content-Type': typestr }),
+        optionsstr: any = new RequestOptions({ headers: headersstr }),
+        urlstr: any = this.apiServiceURL + "/dashboard?is_mobile=1&startindex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc + "&loginid=" + this.userid + "&company_id=" + this.companyid;
+      console.log("Map Marker api url:" + urlstr);
+        var res;
+        var latLng
+        this.http.get(urlstr, optionsstr)
+          .subscribe(data => {
+            res = data.json();
+    
+            if (res.totalCount > 0) {
+              for (var unit in res.units) {
+              if (val == 0) {
+                var labeldata = '<div class="info_content"><!--input type="button" value="Ok" id="Ok">&nbsp;<input type="button" value="Cancel" id="Cancel"-->' +
+                  '<h3><a href="#" onclick="unitDetailsPageNavigation( ' + res.units[unit].unit_id + ')" (click)="mapunitdetail(' + res.units[unit].unit_id + ')">' + res.units[unit].unitname + '</a></h3>' +
+                  '<h4>' + res.units[unit].projectname + '</h4>' +
+                  '<p>Running Hours:' + res.units[unit].runninghr + ' Hours</p>' + '<!--a href="#" id="Ok">Ok</a><a href="#"  id="Cancel">Cancel</a--></div>';
+                this.addressData.push({
+                  title: labeldata
+                });
+                latLng = new google.maps.LatLng(res.units[unit].latitude, res.units[unit].longtitude);
+  
+                // Creating a marker and putting it on the map
+                var marker = new google.maps.Marker({
+                  position: latLng,
+                  map: map,
+                  title: res.units[unit].unitname,
+                  infoContent: labeldata,
+                  icon: this.apiServiceURL + "/images/completed.png"
+                });
+                var infoWindow = new google.maps.InfoWindow();
+                (function (marker, data, unit, addressData) {
+                  // Attaching a click event to the current marker
+                  google.maps.event.addListener(marker, "click", function (e) {
+                    console.log(e);
+                    //this.startTheIterations();                  
+                    infoWindow.setContent(addressData[unit].title);
+                    infoWindow.open(map, marker);
+  
+                  });
+                })(marker, data, unit, this.addressData);
+  
+                 google.maps.event.addListener(infoWindow, "**domready**", function () {
+                  var Cancel = document.getElementById("Cancel");
+                  var Ok = document.getElementById("Ok");
+  
+                  google.maps.event.addDomListener(Cancel, "click", function () {
+                    this.mapunitdetail(val);
+                    infoWindow.close();
+                  });
+  
+                  google.maps.event.addDomListener(Ok, "click", function () {
+                    this.mapunitdetail(val);
+                    infoWindow.close();
+  
+                  });
+                });
+  
+                 google.maps.event.addListener(infoWindow, "domready", function () {
+                  var Cancel = document.getElementById("Cancel");
+                  var Ok = document.getElementById("Ok");
+  
+                  google.maps.event.addDomListener(Cancel, "click", function () {
+                    this.mapunitdetail(val);
+                    infoWindow.close();
+                  });
+  
+                  google.maps.event.addDomListener(Ok, "click", function () {
+                    this.mapunitdetail(val);
+                    infoWindow.close();
+  
+                  });
+                });
+  
+              } else {
+                var labeldata = '<div class="info_content"><!--input type="button" value="Ok" id="Ok">&nbsp;<input type="button" value="Cancel" id="Cancel"-->' +
+                  '<h3><a href="#" onclick="unitDetailsPageNavigation( ' + val.unit_id + ')"  data-tap-disabled="true" (click)="mapunitdetail(' + val.unit_id + ')">' + val.unitname + '</a></h3>' +
+                  '<h4>' + val.projectname + '</h4>' +
+                  '<p>Running Hours:' + val.runninghr + ' Hours</p>' + '<!--a href="#" id="Ok">Ok</a><a href="#"  id="Cancel">Cancel</a--></div>';
+                latLng = new google.maps.LatLng(val.latitude, val.longtitude);
+                // Creating a marker and putting it on the map
+                var marker = new google.maps.Marker({
+                  position: latLng,
+                  map: map,
+                  title: val.unitname,
+                  infoContent: labeldata,
+                  //  icon: iconBase + 'parking_lot_maps.png'
+  
+                  icon: this.apiServiceURL + "/images/completed.png"
+                });
+                var infoWindow = new google.maps.InfoWindow();
+                (function (marker, data, addressData) {
+                  // Attaching a click event to the current marker
+                  google.maps.event.addListener(marker, "click", function (e) {
+                    //this.startTheIterations();
+                    infoWindow.setContent(addressData);
+                    infoWindow.open(map, marker);
+                  });
+  
+                })(marker, data, labeldata);
+  
+                google.maps.event.addListener(infoWindow, "**domready**", function () {
+                  var Cancel = document.getElementById("Cancel");
+                  var Ok = document.getElementById("Ok");
+  
+                  google.maps.event.addDomListener(Cancel, "click", function () {
+                    this.mapunitdetail(val);
+                    infoWindow.close();
+                  });
+  
+                  google.maps.event.addDomListener(Ok, "click", function () {
+                    this.mapunitdetail(val);
+                    infoWindow.close();
+  
+                  });
+                });
+  
+                google.maps.event.addListener(infoWindow, "domready", function () {
+                  var Cancel = document.getElementById("Cancel");
+                  var Ok = document.getElementById("Ok");
+  
+                  google.maps.event.addDomListener(Cancel, "click", function () {
+                    this.mapunitdetail(val);
+                    infoWindow.close();
+                  });
+  
+                  google.maps.event.addDomListener(Ok, "click", function () {
+                    this.mapunitdetail(val);
+                    infoWindow.close();
+  
+                  });
+                });
+              }
+  
+              // Copied from below
+              if (val != 0) {
+                console.log("Selected unit id is:" + JSON.stringify(val));
+                console.log('From zero for popup' + JSON.stringify(res.units))
+                let unitcontent;
+                unitcontent = '<div class="info_content"><!--input type="button" value="Ok" id="Ok">&nbsp;<input type="button" value="Cancel" id="Cancel"-->' +
+                  '<h3><a href="#" onclick="unitDetailsPageNavigation( ' + val.unit_id + ')"  data-tap-disabled="true" (click)="mapunitdetail(' + val.unit_id + ')">' + val.unitname + '</a></h3>' +
+                  '<h4>' + val.projectname + '</h4>' +
+                  '<p>Running Hours:' + val.runninghr + ' Hours</p>' + '<!--a href="#" id="Ok">Ok</a><a href="#"  id="Cancel">Cancel</a--></div>';
+                //this.startTheIterations();
+                infoWindow.setContent(unitcontent);
+                infoWindow.open(map, marker);
+  
+  
+  
+  
+  
+                google.maps.event.addListener(infoWindow, "**domready**", function () {
+                  var Cancel = document.getElementById("Cancel");
+                  var Ok = document.getElementById("Ok");
+  
+                  google.maps.event.addDomListener(Cancel, "click", function () {
+                    this.mapunitdetail(val);
+                    infoWindow.close();
+                  });
+  
+                  google.maps.event.addDomListener(Ok, "click", function () {
+                    this.mapunitdetail(val);
+                    infoWindow.close();
+  
+                  });
+                });
+  
+                google.maps.event.addListener(infoWindow, "domready", function () {
+                  var Cancel = document.getElementById("Cancel");
+                  var Ok = document.getElementById("Ok");
+  
+                  google.maps.event.addDomListener(Cancel, "click", function () {
+                    this.mapunitdetail(val);
+                    infoWindow.close();
+                  });
+  
+                  google.maps.event.addDomListener(Ok, "click", function () {
+                    this.mapunitdetail(val);
+                    infoWindow.close();
+  
+                  });
+                });
+              }
+              // Copied from below
+            }
+          }
+        },
+        err => {
+          console.log("Map error:-" + JSON.stringify(err));
+        });
+  
+      // Creating a new map
+  
+      if (val == 0) {
+        console.log("Default Loading...");
+        var map = new google.maps.Map(document.getElementById("map"), {
+          center: new google.maps.LatLng(1.3249773, 103.70307100000002),
+          zoom: 11,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+      } else {
+  
+        console.log("Selected Unit...");
+        var map = new google.maps.Map(document.getElementById("map"), {
+          center: new google.maps.LatLng(val.latitude, val.longtitude),
+          zoom: 16,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+  
+      }
+    }*/
+
 
   loadMap(val) {
-    //this.timerStart();
 
-    //this.startTheIterations();
 
-    console.log(JSON.stringify(val));
-    console.log(val.length);
+    // Now you can use all methods safely.
+
+
+    /* this.map.addMarker({
+       title: 'Contact',
+       icon: 'blue',
+       animation: 'DROP',
+       position: {
+         lat: 43.0741904,
+         lng: -89.3809802
+       }
+     })
+       .then(marker => {
+         marker.on(GoogleMapsEvent.MARKER_CLICK)
+           .subscribe((data) => {
+             console.log(JSON.stringify(data));
+             //alert('marker clicked');
+           });
+ 
+         marker.on(GoogleMapsEvent.INFO_CLICK)
+           .subscribe((data) => {
+             console.log(JSON.stringify(data));
+             this.goAboutPage();
+           });
+ 
+       });*/
+
+
+    console.log("A" + JSON.stringify(val));
+    console.log("B" + val.length);
     if (JSON.stringify(val).length > 0) {
       this.reportData.startindex = 0;
       this.reportData.results = 8;
     }
-    var typestr: string = "application/x-www-form-urlencoded; charset=UTF-8",
+    let typestr: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headersstr: any = new Headers({ 'Content-Type': typestr }),
       optionsstr: any = new RequestOptions({ headers: headersstr }),
       urlstr: any = this.apiServiceURL + "/dashboard?is_mobile=1&startindex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc + "&loginid=" + this.userid + "&company_id=" + this.companyid;
     console.log("Map Marker api url:" + urlstr);
-    var res;
-    var latLng
+    let res;
+    let latLng
     this.http.get(urlstr, optionsstr)
       .subscribe(data => {
+
+        this.mapElement = document.getElementById('map');
+
+        /*let mapOptions: GoogleMapOptions = {
+          camera: {
+            target: {
+              lat: 1.3249773,
+              lng: 103.70307100000002
+            },
+            zoom: 18,
+            tilt: 30
+          }
+        };
+        */
+
+
+        // Creating a new map
+
+        if (val == 0) {
+          console.log("Default Loading...");
+          /*var map = new google.maps.Map(document.getElementById("map"), {
+             center: new google.maps.LatLng(1.3249773, 103.70307100000002),
+             zoom: 11,
+             mapTypeId: google.maps.MapTypeId.ROADMAP
+           });
+           */
+
+          let mapOptions: GoogleMapOptions = {
+            camera: {
+              target: {
+                lat: 1.3249773,
+                lng: 103.70307100000002
+              },
+              zoom: 11,
+              tilt: 30
+            }
+          };
+          this.map = this.googleMaps.create(this.mapElement, mapOptions);
+        } else {
+
+          console.log("Selected Unit...");
+          /*var map = new google.maps.Map(document.getElementById("map"), {
+            center: new google.maps.LatLng(val.latitude, val.longtitude),
+            zoom: 16,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+          });
+*/
+          let mapOptions: GoogleMapOptions = {
+            camera: {
+              target: {
+                lat: val.latitude,
+                lng: val.longtitude
+              },
+              zoom: 16,
+              tilt: 30
+            }
+          };
+          this.map = this.googleMaps.create(this.mapElement, mapOptions);
+        }
+
+
+
+        // Wait the MAP_READY before using any methods.
+
         res = data.json();
-        /* if (res.msg[0].Error > 0) {
-           res.units = [];
-         }*/
+
         if (res.totalCount > 0) {
           for (var unit in res.units) {
             if (val == 0) {
-              var labeldata = '<div class="info_content">' +
-                '<h3><a href="#" onclick="unitDetailsPageNavigation( ' + res.units[unit].unit_id + ')" (click)="mapunitdetail(' + res.units[unit].unit_id + ')">' + res.units[unit].unitname + '</a></h3>' +
-                '<h4>' + res.units[unit].projectname + '</h4>' +
-                '<p>Running Hours:' + res.units[unit].runninghr + ' Hours</p>' + '</div>';
+              //Google Map Start
+              this.map.one(GoogleMapsEvent.MAP_READY)
+                .then(() => {
+                  console.log('Map is ready!');
+                  //Google Map Start
 
-              /* var labeldata = '<div class="info_content">' +
-              '<h3><a href="/unitdetails/">' + res.units[unit].unitname + '</a></h3>' +
-              '<h4>' + res.units[unit].projectname + '</h4>' +
-              '<p>Running Hours:' + res.units[unit].runninghr + '</p>' + '</div>';*/
+                  console.log('P');
+                  /*var labeldata = '<div class="info_content"><!--input type="button" value="Ok" id="Ok">&nbsp;<input type="button" value="Cancel" id="Cancel"-->' +
+                    '<h3><a href="#" onclick="unitDetailsPageNavigation( ' + res.units[unit].unit_id + ')" (click)="mapunitdetail(' + res.units[unit].unit_id + ')">' + res.units[unit].unitname + '</a></h3>' +
+                    '<h4>' + res.units[unit].projectname + '</h4>' +
+                    '<p>Running Hours:' + res.units[unit].runninghr + ' Hours</p>' + '<!--a href="#" id="Ok">Ok</a><a href="#"  id="Cancel">Cancel</a--></div>';
+                  this.addressData.push({
+                    title: labeldata
+                  });
+                  latLng = new google.maps.LatLng(res.units[unit].latitude, res.units[unit].longtitude);
+
+                  // Creating a marker and putting it on the map
+                  var marker = new google.maps.Marker({
+                    position: latLng,
+                    map: map,
+                    title: res.units[unit].unitname,
+                    infoContent: labeldata,
+                    icon: this.apiServiceURL + "/images/completed.png"
+                  });
+                  var infoWindow = new google.maps.InfoWindow();
+                  (function (marker, data, unit, addressData) {
+                    // Attaching a click event to the current marker
+                    google.maps.event.addListener(marker, "click", function (e) {
+                      console.log(e);
+                      //this.startTheIterations();                  
+                      infoWindow.setContent(addressData[unit].title);
+                      infoWindow.open(map, marker);
+
+                    });
+                  })(marker, data, unit, this.addressData);
+
+                */
+
+                  let labeldata = '<div class="info_content"><!--input type="button" value="Ok" id="Ok">&nbsp;<input type="button" value="Cancel" id="Cancel"-->' +
+                    '<h3><a href="#" onclick="unitDetailsPageNavigation( ' + res.units[unit].unit_id + ')" (click)="mapunitdetail(' + res.units[unit].unit_id + ')">' + res.units[unit].unitname + '</a></h3>' +
+                    '<h4>' + res.units[unit].projectname + '</h4>' +
+                    '<p>Running Hours:' + res.units[unit].runninghr + ' Hours</p>' + '<!--a href="#" id="Ok">Ok</a><a href="#"  id="Cancel">Cancel</a--></div>';
 
 
+                  // this.addMarkerList(labeldata, res.units[unit].latitude, res.units[unit].longtitude, res.units[unit]);
+                  console.log("Title:" + res.units[unit].unitname);
+                  console.log("Lat:" + res.units[unit].latitude);
+                  console.log("Long:" + res.units[unit].longtitude);
+                  console.log("Marker Data:" + JSON.stringify(res.units[unit]));
+                  this.map.addMarker({
+                    title: res.units[unit].unitname,
+                    icon: 'blue',
+                    animation: 'DROP',
+                    position: {
+                      lat: res.units[unit].latitude,
+                      lng: res.units[unit].longtitude
+                    }
+                  })
+                    .then(marker => {
+                      marker.on(GoogleMapsEvent.MARKER_CLICK)
+                        .subscribe((data) => {
+                          console.log(JSON.stringify(data));
+                          //alert('marker clicked');
+                        });
 
-              this.addressData.push({
-                title: labeldata
-              });
-              latLng = new google.maps.LatLng(res.units[unit].latitude, res.units[unit].longtitude);
+                      marker.on(GoogleMapsEvent.INFO_CLICK)
+                        .subscribe((data) => {
+                          console.log(JSON.stringify(data));
+                          this.mapunitdetail(res.units[unit].unit_id);
+                        });
 
-              // Creating a marker and putting it on the map
-              var marker = new google.maps.Marker({
-                position: latLng,
-                map: map,
-                title: res.units[unit].unitname,
-                infoContent: labeldata,
-                icon: this.apiServiceURL + "/images/completed.png"
-              });
-              var infoWindow = new google.maps.InfoWindow();
-              (function (marker, data, unit, addressData) {
-                // Attaching a click event to the current marker
-                google.maps.event.addListener(marker, "click", function (e) {
-                  console.log(e);
-                  //this.startTheIterations();                  
-                  infoWindow.setContent(addressData[unit].title);
-                  infoWindow.open(map, marker);
-
+                    });
+                  // Google Map End
+                
                 });
-              })(marker, data, unit, this.addressData);
-
+              // Google Map End
             } else {
-              var labeldata = '<div class="info_content">' +
-                '<h3><a href="#" onclick="unitDetailsPageNavigation( ' + val.unit_id + ')"  data-tap-disabled="true" (click)="mapunitdetail(' + val.unit_id + ')">' + val.unitname + '</a></h3>' +
-                '<h4>' + val.projectname + '</h4>' +
-                '<p>Running Hours:' + val.runninghr + ' Hours</p>' + '</div>';
+              //Google Map Start
+              this.map.one(GoogleMapsEvent.MAP_READY)
+                .then(() => {
+                  console.log('Map is ready!');
+                  //Google Map Start
 
+                  console.log('Q');
+                  /*var labeldata = '<div class="info_content"><!--input type="button" value="Ok" id="Ok">&nbsp;<input type="button" value="Cancel" id="Cancel"-->' +
+                     '<h3><a href="#" onclick="unitDetailsPageNavigation( ' + val.unit_id + ')"  data-tap-disabled="true" (click)="mapunitdetail(' + val.unit_id + ')">' + val.unitname + '</a></h3>' +
+                     '<h4>' + val.projectname + '</h4>' +
+                     '<p>Running Hours:' + val.runninghr + ' Hours</p>' + '<!--a href="#" id="Ok">Ok</a><a href="#"  id="Cancel">Cancel</a--></div>';
+                   latLng = new google.maps.LatLng(val.latitude, val.longtitude);
+                   // Creating a marker and putting it on the map
+                   var marker = new google.maps.Marker({
+                     position: latLng,
+                     map: map,
+                     title: val.unitname,
+                     infoContent: labeldata,
+                     //  icon: iconBase + 'parking_lot_maps.png'
+     
+                     icon: this.apiServiceURL + "/images/completed.png"
+                   });
+                   var infoWindow = new google.maps.InfoWindow();
+                   (function (marker, data, addressData) {
+                     // Attaching a click event to the current marker
+                     google.maps.event.addListener(marker, "click", function (e) {
+                       //this.startTheIterations();
+                       infoWindow.setContent(addressData);
+                       infoWindow.open(map, marker);
+                     });
+     
+                   })(marker, data, labeldata);
+    */
 
-              /* var labeldata = '<div class="info_content">' +
-               '<h3><a href="./email">' + res.units[unit].unitname + '</a></h3>' +
-               '<h4>' + res.units[unit].projectname + '</h4>' +
-               '<p>Running Hours:' + res.units[unit].runninghr + '</p>' + '</div>';*/
-              latLng = new google.maps.LatLng(val.latitude, val.longtitude);
-              // Creating a marker and putting it on the map
-              var marker = new google.maps.Marker({
-                position: latLng,
-                map: map,
-                title: val.unitname,
-                infoContent: labeldata,
-                //  icon: iconBase + 'parking_lot_maps.png'
+                  let labeldata = '<div class="info_content"><!--input type="button" value="Ok" id="Ok">&nbsp;<input type="button" value="Cancel" id="Cancel"-->' +
+                    '<h3><a href="#" onclick="unitDetailsPageNavigation( ' + val.unit_id + ')"  data-tap-disabled="true" (click)="mapunitdetail(' + val.unit_id + ')">' + val.unitname + '</a></h3>' +
+                    '<h4>' + val.projectname + '</h4>' +
+                    '<p>Running Hours:' + val.runninghr + ' Hours</p>' + '<!--a href="#" id="Ok">Ok</a><a href="#"  id="Cancel">Cancel</a--></div>';
 
-                icon: this.apiServiceURL + "/images/completed.png"
-              });
-              var infoWindow = new google.maps.InfoWindow();
-              (function (marker, data, addressData) {
-                // Attaching a click event to the current marker
-                google.maps.event.addListener(marker, "click", function (e) {
-                  //this.startTheIterations();
-                  infoWindow.setContent(addressData);
-                  infoWindow.open(map, marker);
+                  //this.addMarkerList(labeldata, val.lat, val.lng, val);
+                  console.log("Title:" + val.unit_name);
+                  console.log("Lat:" + val.latitude);
+                  console.log("Long:" + val.longtitude);
+                  console.log("Marker Data:" + JSON.stringify(val));
+                  this.map.addMarker({
+                    title: 'Generator Name',
+                    icon: 'blue',
+                    animation: 'DROP',
+                    position: {
+                      lat: val.latitude,
+                      lng: val.longtitude
+                    }
+                  })
+                    .then(marker => {
+                      marker.on(GoogleMapsEvent.MARKER_CLICK)
+                        .subscribe((data) => {
+                          console.log(JSON.stringify(data));
+                          //alert('marker clicked');
+                        });
+
+                      marker.on(GoogleMapsEvent.INFO_CLICK)
+                        .subscribe((data) => {
+                          console.log(JSON.stringify(data));
+                          this.mapunitdetail(val.unit_id);
+                        });
+
+                    });
+                  // Google Map End
                 });
-
-              })(marker, data, labeldata);
+              // Google Map End
             }
 
             // Copied from below
-           if (val != 0) {
-              console.log("Selected unit id is:" + JSON.stringify(val));
-              console.log('From zero for popup' + JSON.stringify(res.units))
-              let unitcontent;
-              unitcontent = '<div class="info_content">' +
-                '<h3><a href="#" onclick="unitDetailsPageNavigation( ' + val.unit_id + ')"  data-tap-disabled="true" (click)="mapunitdetail(' + val.unit_id + ')">' + val.unitname + '</a></h3>' +
-                '<h4>' + val.projectname + '</h4>' +
-                '<p>Running Hours:' + val.runninghr + ' Hours</p>' + '</div>';
-              //this.startTheIterations();
-              infoWindow.setContent(unitcontent);
-              infoWindow.open(map, marker);
+            if (val != 0) {
+              //Google Map Start
+              this.map.one(GoogleMapsEvent.MAP_READY)
+                .then(() => {
+                  console.log('Map is ready!');
+                  //Google Map Start
+                  console.log('R');
+                  /* console.log("Selected unit id is:" + JSON.stringify(val));
+                   console.log('From zero for popup' + JSON.stringify(res.units))
+                   let unitcontent;
+                   unitcontent = '<div class="info_content"><!--input type="button" value="Ok" id="Ok">&nbsp;<input type="button" value="Cancel" id="Cancel"-->' +
+                     '<h3><a href="#" onclick="unitDetailsPageNavigation( ' + val.unit_id + ')"  data-tap-disabled="true" (click)="mapunitdetail(' + val.unit_id + ')">' + val.unitname + '</a></h3>' +
+                     '<h4>' + val.projectname + '</h4>' +
+                     '<p>Running Hours:' + val.runninghr + ' Hours</p>' + '<!--a href="#" id="Ok">Ok</a><a href="#"  id="Cancel">Cancel</a--></div>';
+                   //this.startTheIterations();
+                   infoWindow.setContent(unitcontent);
+                   infoWindow.open(map, marker);
+    */
+
+                  let unitcontent;
+                  unitcontent = '<div class="info_content"><!--input type="button" value="Ok" id="Ok">&nbsp;<input type="button" value="Cancel" id="Cancel"-->' +
+                    '<h3><a href="#" onclick="unitDetailsPageNavigation( ' + val.unit_id + ')"  data-tap-disabled="true" (click)="mapunitdetail(' + val.unit_id + ')">' + val.unitname + '</a></h3>' +
+                    '<h4>' + val.projectname + '</h4>' +
+                    '<p>Running Hours:' + val.runninghr + ' Hours</p>' + '<!--a href="#" id="Ok">Ok</a><a href="#"  id="Cancel">Cancel</a--></div>';
+
+                  //this.addMarkerList(unitcontent, val.lat, val.lng, val);
+
+                  console.log("Title:" + val.unit_name);
+                  console.log("Lat:" + val.latitude);
+                  console.log("Long:" + val.longtitude);
+                  console.log("Marker Data:" + JSON.stringify(val));
+                  this.map.addMarker({
+                    title: 'Generator Name',
+                    icon: 'blue',
+                    animation: 'DROP',
+                    position: {
+                      lat: val.latitude,
+                      lng: val.longtitude
+                    }
+                  })
+                    .then(marker => {
+                      marker.on(GoogleMapsEvent.MARKER_CLICK)
+                        .subscribe((data) => {
+                          console.log(JSON.stringify(data));
+                          //alert('marker clicked');
+                        });
+
+                      marker.on(GoogleMapsEvent.INFO_CLICK)
+                        .subscribe((data) => {
+                          console.log(JSON.stringify(data));
+                          this.mapunitdetail(val.unit_id);
+                        });
+
+                    });
+
+
+
+
+                  // Google Map End
+                });
+              // Google Map End
+
             }
             // Copied from below
           }
         }
+
+
+
+
+
+
+
+
       },
       err => {
         console.log("Map error:-" + JSON.stringify(err));
       });
-
-    // Creating a new map
-
-    if (val == 0) {
-      console.log("Default Loading...");
-      var map = new google.maps.Map(document.getElementById("map"), {
-        center: new google.maps.LatLng(1.3249773, 103.70307100000002),
-        zoom: 11,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-      });
-    } else {
-      /* console.log("Selected one:"+val.latitude+" "+val.longtitude);
-       var map = new google.maps.Map(document.getElementById("map"), {
-         center: new google.maps.LatLng(val.latitude, val.longtitude),
-         zoom: 14,
-         mapTypeId: google.maps.MapTypeId.ROADMAP
-       });*/
-      console.log("Selected Unit...");
-      var map = new google.maps.Map(document.getElementById("map"), {
-        center: new google.maps.LatLng(val.latitude, val.longtitude),
-        zoom: 16,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-      });
-
-    }
   }
 
+  /*addMarkerList(title, lat, lng, item) {
+    console.log("Title:" + title);
+    console.log("Lat:" + lat);
+    console.log("Long:" + lng);
+    console.log("Marker Data:" + JSON.stringify(item));
+    this.map.addMarker({
+      title: 'Generator Name',    
+      icon: 'blue',
+      animation: 'DROP',
+      position: {
+        lat: lat,
+        lng: lng
+      }
+    })
+      .then(marker => {
+        marker.on(GoogleMapsEvent.MARKER_CLICK)
+          .subscribe((data) => {
+            console.log(JSON.stringify(data));
+            //alert('marker clicked');
+          });
 
+        marker.on(GoogleMapsEvent.INFO_CLICK)
+          .subscribe((data) => {
+            console.log(JSON.stringify(data));
+            this.mapunitdetail(item.unit_id);
+          });
+
+      });
+  }*/
   doAdd() {
     this.navCtrl.push(AddunitsonePage);
   }
@@ -821,6 +1283,9 @@ pageLoad()
   }
   redirectToSettings() {
     this.navCtrl.push(OrgchartPage);
+  }
+  goAboutPage() {
+    this.navCtrl.push(UnitdetailsPage);
   }
 }
 

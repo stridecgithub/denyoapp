@@ -15,7 +15,7 @@ import { ReportsPage } from '../reports/reports';
 import { CalendarPage } from '../calendar/calendar';
 import { EmailPage } from '../email/email';
 import { DatePicker } from '@ionic-native/date-picker';
-import { OrgchartPage} from '../orgchart/orgchart';
+import { OrgchartPage } from '../orgchart/orgchart';
 /**
  * Generated class for the AddcompanygroupPage page.
  *
@@ -42,8 +42,10 @@ export class AddcalendarPage {
   public event_time: any;
   public msgcount: any;
   public notcount: any;
+  public month1: any;
+  public date1: any;
   public event_title: any;
-   public isSubmitted: boolean =false;
+  public isSubmitted: boolean = false;
   public event_type: any;
   public event_notes: any;
   public service_remark: any;
@@ -72,11 +74,12 @@ export class AddcalendarPage {
     public NP: NavParams,
     public fb: FormBuilder,
     public toastCtrl: ToastController) {
-    let curDateStr = new Date();
-    this.event_date = curDateStr.getMonth() + "/" + curDateStr.getDate() + "/" + curDateStr.getFullYear();
+    // let curDateStr = new Date();
+    // this.event_date = curDateStr.getMonth() + "/" + curDateStr.getDate() + "/" + curDateStr.getFullYear();
+    //console.log("Top Current Date:"+this.event_date);
     // this.event_date ="07/17/2017";
-    this.event_date = "2017-07-17";
-    console.log("Current Date is:" + this.event_date);
+    //this.event_date = "2017-07-17";
+    //console.log("Current Date is:" + this.event_date);
     this.loginas = localStorage.getItem("userInfoName");
     // Create form builder validation rules
     this.form = fb.group({
@@ -93,7 +96,7 @@ export class AddcalendarPage {
     this.disunit = false;
     this.userId = localStorage.getItem("userInfoId");
     this.companyId = localStorage.getItem("userInfoCompanyId");
-   
+
 
 
     /*for (let am = 600; am <= 1145; am++) {
@@ -204,10 +207,38 @@ export class AddcalendarPage {
         time_name: '12:45 PM'
       });
     let dateStr = new Date();
-    let month = dateStr.getMonth() + 1;
-    this.event_date = dateStr.getFullYear() + "-" + month + "-" + dateStr.getDate();
-  }
 
+
+
+
+    this.month1 = dateStr.getUTCMonth() + 1;
+
+
+    if (this.getlength(this.month1) == 1) {
+      this.month1 = '0' + this.month1;
+    } else {
+      this.month1 = this.month1;
+    }
+
+
+    this.date1 = dateStr.getDate();
+
+
+    if (this.getlength(this.date1) == 1) {
+      this.date1 = '0' + this.date1;
+    } else {
+      this.date1 = this.date1;
+    }
+
+
+
+    this.event_date = dateStr.getFullYear() + "-" + this.month1 + "-" + this.date1;
+    console.log("Bottom UTC Format Current Date:" + this.event_date);
+
+  }
+  getlength(number) {
+    return number.toString().length;
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad  AddcalendarPage');
   }
@@ -230,7 +261,7 @@ export class AddcalendarPage {
   // Determine whether we adding or editing a record
   // based on any supplied navigation parameters
   ionViewWillEnter() {
-      let //body: string = "loginid=" + this.userId,
+    let //body: string = "loginid=" + this.userId,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
@@ -244,7 +275,7 @@ export class AddcalendarPage {
         this.msgcount = data.json().msgcount;
         this.notcount = data.json().notifycount;
       });
-    this.event_date=localStorage.getItem("sdate");
+    //this.event_date=localStorage.getItem("sdate");
     this.getUnitListData();
     this.resetFields();
     if (this.NP.get("item")) {
@@ -254,31 +285,29 @@ export class AddcalendarPage {
       this.pageTitle = 'Edit Calendar';
       this.readOnly = false;
       this.hideActionButton = true;
-      if(this.NP.get("type").toLowerCase()=='event')
-      {
-         this.responseResultType.push({
-      id: '1',
-      type_name: 'Event',
-    }
-      );
-    }
-    else
-    {
-          this.responseResultType.push({
-      id: '1',
-      type_name: 'Service',
-    }
-      );
-    }
+      if (this.NP.get("type").toLowerCase() == 'event') {
+        this.responseResultType.push({
+          id: '1',
+          type_name: 'Event',
+        }
+        );
+      }
+      else {
+        this.responseResultType.push({
+          id: '1',
+          type_name: 'Service',
+        }
+        );
+      }
     }
     else {
-       this.responseResultType.push({
-      id: '1',
-      type_name: 'Service',
-    }, {
-        id: '2',
-        type_name: 'Event'
-      });
+      this.responseResultType.push({
+        id: '1',
+        type_name: 'Service',
+      }, {
+          id: '2',
+          type_name: 'Event'
+        });
       this.isEdited = false;
       this.pageTitle = 'Add Calendar';
     }
@@ -296,7 +325,7 @@ export class AddcalendarPage {
     /*console.log("Event Date Split:" + item.event_date.split("-"));
     console.log("Event Date Split:" + item.event_date.split("-"));*/
     //this.event_date = item.event_date;
-    this.event_date =item.event_date.substr(0, 10);
+    this.event_date = item.event_date.substr(0, 10);
     this.event_time = item.event_time;
     this.event_location = item.event_location
     this.event_notes = item.event_remark;
@@ -328,7 +357,7 @@ export class AddcalendarPage {
   // for the record data
   createEntry(type_name, event_project, event_subject, event_unitid, event_time, event_location, service_remark, createdby) {
     //let updatedby = createdby;
-     this.isSubmitted=true;
+    this.isSubmitted = true;
     service_remark = localStorage.getItem("atMentionResult");
     let field;
     if (type_name == 'Service') {
@@ -377,7 +406,7 @@ export class AddcalendarPage {
   //http://denyoappv2.stridecdev.com/calendar/update?is_mobile=1&event_type=Event&event_title=sfd&event_location=london&event_date=2017-07-07&event_time=6:00 AM&ses_login_id=2&event_remark=@vignesh&id=1
 
   updateEntry(type_name, event_project, event_subject, event_unitid, event_time, event_location, service_remark, createdby) {
-     this.isSubmitted=true;
+    this.isSubmitted = true;
     if (localStorage.getItem("atMentionResult") != '') {
       service_remark = localStorage.getItem("atMentionResult");
     }
@@ -388,7 +417,7 @@ export class AddcalendarPage {
       field = "&event_title=" + event_subject;
     }
     let body: string = "is_mobile=1&event_type="
-      + type_name + field + "&event_date=" + this.event_date + "&event_time=" + event_time +"&service_unitid=" + event_unitid + "&event_location=" + event_location + "&event_remark=" + service_remark + "&ses_login_id=" + createdby + "&id=" + this.recordID,
+      + type_name + field + "&event_date=" + this.event_date + "&event_time=" + event_time + "&service_unitid=" + event_unitid + "&event_location=" + event_location + "&event_remark=" + service_remark + "&ses_login_id=" + createdby + "&id=" + this.recordID,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
@@ -551,13 +580,13 @@ export class AddcalendarPage {
     this.nav.push(UnitsPage);
   }
   redirectToMessage() {
-    this.nav.push(EmailPage);
+    this.nav.setRoot(EmailPage);
   }
   redirectCalendar() {
     this.nav.push(CalendarPage);
   }
   redirectToMaps() {
-    this.nav.push(MapsPage);
+    this.nav.setRoot(MapsPage);
   }
   redirectToSettings() {
     this.nav.push(OrgchartPage);

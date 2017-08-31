@@ -228,8 +228,7 @@ function unit(ev) {
 }
 function setct(obj) { insertAtCaret("to", obj.innerHTML); if (e("suschoise")) { e("suschoise").style.display = "none"; } }
 
-function address1get(val) {
-	console.log(val);
+function address1get(val) {	
 	localStorage.setItem("atMentionResult", val);
 }
 function sptionshide() { setTimeout(function () { if (e("suschoise")) { e("suschoise").style.display = "none"; } }, 150); }

@@ -220,7 +220,7 @@ console.log("Alarm list page unit id is"+this.unitDetailData.unit_id)
   doEdit(item, act) {
     if (item.alarm_assginedby_name == '') {
       if (act == 'edit') {
-        this.nav.push(AddalarmlistPage, {
+        this.nav.setRoot(AddalarmlistPage, {
           record: item,
           act: act,
           from:'alarm'
@@ -251,13 +251,13 @@ console.log("Alarm list page unit id is"+this.unitDetailData.unit_id)
     this.nav.push(UnitsPage);
   }
   redirectToMessage() {
-    this.nav.push(EmailPage);
+    this.nav.setRoot(EmailPage);
   }
   redirectCalendar() {
     this.nav.push(CalendarPage);
   }
   redirectToMaps() {
-    this.nav.push(MapsPage);
+    this.nav.setRoot(MapsPage);
   }
   redirectToSettings() {
     this.nav.push(OrgchartPage);

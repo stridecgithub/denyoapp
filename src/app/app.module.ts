@@ -70,10 +70,13 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { Deeplinks } from '@ionic-native/deeplinks';
 import { CompanydetailPage } from '../pages/companydetail/companydetail';
 import { Unitgrouplist } from '../pages/unitgrouplist/unitgrouplist';
+import { DashboardmapPage } from '../pages/dashboardmap/dashboardmap';
+import { AddMap } from '../pages/add-map/add-map';
 import { CalendarComponent } from '../components/calendar/calendar.component';
 //import { CalendarNewEventModal } from '../pages/calendar/calendar-new-event-modal.component';
 import { DragulaModule } from "ng2-dragula/ng2-dragula"
 //import { ITimer } from '../pages/maps/itimer';
+import { GoogleMaps } from '@ionic-native/google-maps';
 @NgModule({
   declarations: [
     //ITimer,
@@ -142,6 +145,8 @@ import { DragulaModule } from "ng2-dragula/ng2-dragula"
     CompanydetailPage,
     Unitgrouplist,
     CalendarComponent,
+    DashboardmapPage,
+    AddMap
    // CalendarNewEventModal
   ],
   imports: [
@@ -218,12 +223,15 @@ import { DragulaModule } from "ng2-dragula/ng2-dragula"
     CompanydetailPage,
     Unitgrouplist,
     CalendarComponent,
+    DashboardmapPage,
+    AddMap
    // CalendarNewEventModal
   ],
   providers: [
     StatusBar,
     Deeplinks,
     SplashScreen,
+    GoogleMaps,
     Geolocation,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     DataServiceProvider

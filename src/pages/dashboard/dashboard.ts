@@ -4,11 +4,13 @@ import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitsPage } from '../units/units';
 import { NotificationPage } from '../notification/notification';
 import { MapsPage } from '../maps/maps';
+import { DashboardmapPage } from '../dashboardmap/dashboardmap';
+import { AddMap } from '../add-map/add-map';
 import { ReportsPage } from '../reports/reports';
 import { CalendarPage } from '../calendar/calendar';
 import { CalendardetailPage } from '../calendardetail/calendardetail';
 import { EmailPage } from '../email/email';
-import { OrgchartPage} from '../orgchart/orgchart';
+import { OrgchartPage } from '../orgchart/orgchart';
 import { Http, Headers, RequestOptions } from '@angular/http';
 @Component({
   selector: 'page-dashboard',
@@ -28,7 +30,8 @@ export class DashboardPage {
   goPage(page) {
     console.log(page);
     if (page == 'MapsPage') {
-      this.nav.push(MapsPage);
+    // this.nav.setRoot(MapsPage);
+    this.nav.push(DashboardmapPage);
     } else if (page == 'ReportsPage') {
       this.nav.push(ReportsPage);
     } else if (page == 'CalendarPage') {
@@ -53,13 +56,14 @@ export class DashboardPage {
     this.nav.push(UnitsPage);
   }
   redirectToMessage() {
-    this.nav.push(EmailPage);
+    this.nav.setRoot(EmailPage);
   }
   redirectCalendar() {
     this.nav.push(CalendarPage);
   }
   redirectToMaps() {
-    this.nav.push(MapsPage);
+     this.nav.setRoot(MapsPage);
+    //this.nav.push(DashboardmapPage);
   }
   redirectToSettings() {
     this.nav.push(OrgchartPage);

@@ -506,7 +506,7 @@ export class CalendarComponent {
   @HostListener('window:resize')
   updateSize() {
     var wkds;
-    console.log('this.calendarElement.nativeElement.clientWidth', this.calendarElement.nativeElement.clientWidth);
+    //console.log('this.calendarElement.nativeElement.clientWidth', this.calendarElement.nativeElement.clientWidth);
     if (this.calendarElement.nativeElement.clientWidth < 400) {
       wkds = moment.weekdaysMin();
       if (this.sizeClass !== 'extra-small') {
@@ -844,7 +844,7 @@ export class CalendarComponent {
   }
 
   doAdd() {
-    this.navCtrl.push(AddcalendarPage);
+    this.navCtrl.setRoot(AddcalendarPage);
   }
 
   doCalendarDelete(item, action) {
@@ -870,7 +870,7 @@ export class CalendarComponent {
     confirm.present();
   }
   doCalendarEdit(item, type) {
-    this.navCtrl.push(AddcalendarPage, {
+    this.navCtrl.setRoot(AddcalendarPage, {
       item: item,
       type: type
     });

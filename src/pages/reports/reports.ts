@@ -46,6 +46,9 @@ export class ReportsPage {
   public start_date = 'Start Date';
   public end_date = 'End Date';
 
+  /* public start_date = '2017-08-02';
+  public end_date = '2017-08-02';
+*/
   public responseResultTimeFrame = [];
   private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
   constructor(private datePicker: DatePicker, public NP: NavParams,
@@ -83,8 +86,8 @@ export class ReportsPage {
       });
 
     this.responseResultTimeFrame.push({
-      id: 'onetime',
-      time_name: '1 Time',
+      id: '1time',
+      time_name: '1 Time/Day',
     }, {
         id: 'continues',
         time_name: 'Continues'
@@ -105,12 +108,12 @@ export class ReportsPage {
         if (val == '1') {
           this.from = date.getFullYear() + "-" + monthstr + "-" + date.getDate();
           console.log('From date: ', this.from);
-          this.start_date=this.from;
+          this.start_date = this.from;
         }
         if (val == '2') {
           this.to = date.getFullYear() + "-" + monthstr + "-" + date.getDate();
           console.log('To date: ', this.to);
-          this.end_date=this.to;
+          this.end_date = this.to;
         }
       },
       err => console.log('Error occurred while getting date: ', err)
@@ -138,8 +141,8 @@ export class ReportsPage {
     //this.from = "2017-08-09";
     //this.to = "2017-08-09";
 
-    this.exportto = 'table';
-    this.seltype = 0; // 0 for TABLE 1 for PDF
+    //this.exportto = 'table';
+    //this.seltype = 0; // 0 for TABLE 1 for PDF
 
 
     // Statically
@@ -208,6 +211,7 @@ export class ReportsPage {
 
   getFormat(format) {
     console.log(format);
+    this.exportto = format;
   }
 
   getDropDownDataUnits() {

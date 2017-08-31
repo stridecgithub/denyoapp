@@ -232,7 +232,7 @@ export class CommentsinfoPage {
     this.comments = '';
     this.addedImgLists = [];
     localStorage.setItem("microtime", "");
-    this.nav.push(AddcommentsinfoPage, {
+    this.nav.setRoot(AddcommentsinfoPage, {
       record: this.NP.get("record"),
       act: 'Add',
       unit_id: this.unit_id
@@ -246,7 +246,7 @@ export class CommentsinfoPage {
     if (type.toLowerCase() == 'c') {
       console.log("comment")
       localStorage.setItem("microtime", "");
-      this.nav.push(AddcommentsinfoPage, {
+      this.nav.setRoot(AddcommentsinfoPage, {
         record: item,
         act: 'Edit'
       });
@@ -254,7 +254,7 @@ export class CommentsinfoPage {
     if (type.toLowerCase() == 's') {
       console.log("service")
       localStorage.setItem("microtime", "");
-      this.nav.push(AddserviceinfoPage, {
+      this.nav.setRoot(AddserviceinfoPage, {
         record: item,
         act: 'Edit',from:'comment'
       });
@@ -263,7 +263,7 @@ export class CommentsinfoPage {
       console.log("Alarm")
      // localStorage.setItem("microtime", "");
       if (item.alarm_assigned_to == '') {
-      this.nav.push(AddalarmlistPage, {
+      this.nav.setRoot(AddalarmlistPage, {
           record: item,
           act: act,
           from:'comment'
@@ -463,13 +463,13 @@ export class CommentsinfoPage {
     this.nav.push(UnitsPage);
   }
   redirectToMessage() {
-    this.nav.push(EmailPage);
+    this.nav.setRoot(EmailPage);
   }
   redirectCalendar() {
     this.nav.push(CalendarPage);
   }
   redirectToMaps() {
-    this.nav.push(MapsPage);
+    this.nav.setRoot(MapsPage);
   }
   redirectToSettings() {
     this.nav.push(OrgchartPage);

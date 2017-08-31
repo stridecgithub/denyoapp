@@ -108,7 +108,7 @@ export class CalendardetailPage {
     this.event_time = item.event_time;
   }
   editalarm() {
-    this.nav.push(AddalarmPage,
+    this.nav.setRoot(AddalarmPage,
       {
         event_id: this.NP.get("event_id")
       });
@@ -123,13 +123,13 @@ export class CalendardetailPage {
     this.nav.push(UnitsPage);
   }
   redirectToMessage() {
-    this.nav.push(EmailPage);
+    this.nav.setRoot(EmailPage);
   }
   redirectCalendar() {
     this.nav.push(CalendarPage);
   }
   redirectToMaps() {
-    this.nav.push(MapsPage);
+    this.nav.setRoot(MapsPage);
   }
   redirectToSettings() {
     this.nav.push(OrgchartPage);

@@ -148,7 +148,7 @@ foreach($dashboardunits as $units) {
 	  //mdv
 
 </script> 
-<script async defer src="https://maps.googleapis.com/maps/api/js?v=3&key= AIzaSyCbvwOWwex4xcDVJKlfPsJiz5fmmsEB9KA&callback=initMap"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyD8xmwUm5wwzurbi6N99FyF9_e2traeDcA&callback=initMap"></script>
 
 
 

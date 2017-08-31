@@ -266,7 +266,7 @@ this.unitDetailData.favoriteindication = favorite;
     this.service_remark = '';
     this.addedServiceImgLists = [];
     localStorage.setItem("microtime", "");
-    this.nav.push(AddserviceinfoPage, {
+    this.nav.setRoot(AddserviceinfoPage, {
       record: this.NP.get("record"),
       act: 'Add',
       unit_id: this.unit_id
@@ -292,7 +292,7 @@ this.unitDetailData.favoriteindication = favorite;
     if(item.event_type.toLowerCase()=='s')
     {
     localStorage.setItem("microtime", "");
-    this.nav.push(AddserviceinfoPage, {
+    this.nav.setRoot(AddserviceinfoPage, {
       record: item,
       act: 'Edit',
       from:'service'
@@ -376,13 +376,13 @@ this.unitDetailData.favoriteindication = favorite;
   }
 
   redirectToMessage() {
-    this.nav.push(EmailPage);
+    this.nav.setRoot(EmailPage);
   }
   redirectCalendar() {
     this.nav.push(CalendarPage);
   }
   redirectToMaps() {
-    this.nav.push(MapsPage);
+    this.nav.setRoot(MapsPage);
   }
   redirectToSettings() {
     this.nav.push(OrgchartPage);

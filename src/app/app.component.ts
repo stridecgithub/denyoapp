@@ -37,9 +37,11 @@ import { ForgotpasswordPage } from '../pages/forgotpassword/forgotpassword';
 //import { TrendlinePage } from '../pages/trendline/trendline';
 import { DataServiceProvider } from '../providers/data-service/data-service';
 import { ViewunitsPage } from '../pages/viewunits/viewunits';
+import { DashboardmapPage } from '../pages/dashboardmap/dashboardmap';
 import { Push, PushObject, PushOptions } from '@ionic-native/push';
 import { Network } from '@ionic-native/network';
 import { LocalNotifications } from '@ionic-native/local-notifications';
+import { AddMap } from '../pages/add-map/add-map';
 @Component({
   templateUrl: 'app.html',
   providers: [Push, Network, LocalNotifications]
@@ -49,6 +51,7 @@ export class MyApp {
   @ViewChild('content') navCtrl: NavController;
   rootPage: any = HomePage;
   pages: any;
+  alert: any;
   showLevel1 = null;
   showLevel2 = null;
   ///private push: Push,
@@ -99,6 +102,19 @@ export class MyApp {
 
   initializeApp() {
     this.platform.ready().then(() => {
+
+      this.platform.registerBackButtonAction(() => {
+        if (this.nav.canGoBack()) {
+          this.nav.pop();
+        } else {
+          if (this.alert) {
+            this.alert.dismiss();
+            this.alert = null;
+          } else {
+            this.showAlertExist();
+          }
+        }
+      });
       this.initPushNotification();
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -206,7 +222,7 @@ export class MyApp {
       this.nav.push(OrgchartPage);
     } else if (page.title == 'Message') {
       this.menuCtrl.close();
-      this.nav.push(EmailPage);
+      this.nav.setRoot(EmailPage);
     } else if (page.title == 'Logout') {
       this.logout();
       this.menuCtrl.close();
@@ -219,7 +235,7 @@ export class MyApp {
       this.nav.push(CalendarPage);
     } else if (page.title == 'Maps') {
       this.menuCtrl.close();
-      this.nav.push(MapsPage);
+      this.nav.setRoot(MapsPage);
     } else if (page.title == 'Reports') {
       this.menuCtrl.close();
       this.nav.push(ReportsPage);
@@ -229,7 +245,7 @@ export class MyApp {
       //this.nav.push(AlarmPage);
     }
     else if (page.component == 'AddalarmPage') {
-      this.nav.push(AddalarmPage);
+      this.nav.setRoot(AddalarmPage);
     }
     else if (page.component == 'MapdemoPage') {
       //this.nav.push(MapdemoPage);
@@ -353,6 +369,29 @@ export class MyApp {
     alert.present();
   }
 
+
+  showAlertExist() {
+    this.alert = this.alertCtrl.create({
+      title: 'Exit?',
+      message: 'Do you want to exit the app?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            this.alert = null;
+          }
+        },
+        {
+          text: 'Exit',
+          handler: () => {
+            this.platform.exitApp();
+          }
+        }
+      ]
+    });
+    this.alert.present();
+  }
   public schedule(notification) {
     this.localNotifications.schedule({
       title: notification.title,
@@ -380,9 +419,9 @@ export class MyApp {
       console.log(navtypes);
 
       if (navtypes == 'M') {
-        // this.nav.push(EmailPage);
+        // this.nav.setRoot(EmailPage);
 
-        this.nav.push(EmailPage, {
+        this.nav.setRoot(EmailPage, {
           record: navids,
           act: 'Push'
         });
