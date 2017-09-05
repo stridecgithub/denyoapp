@@ -1097,6 +1097,7 @@ export class CalendarComponent {
         event_location: this.eventIdentify[i]['event_location'],
         event_remark: this.eventIdentify[i]['event_remark'],
         event_addedby_name: this.eventIdentify[i]['event_addedby_name'],
+         formatted_datetime: this.eventIdentify[i]['formatted_datetime'],
         event_type: 'E',
         icon: 'alarm', // Icon of the alert. This is compulsory when using the 
         // calendar on small screens, as the name of the event will
@@ -1145,6 +1146,7 @@ export class CalendarComponent {
         event_remark: this.serviceIdentify[j]['service_remark'],
         event_location: this.serviceIdentify[j]['service_location'],
         event_addedby_name: this.serviceIdentify[j]['serviced_by_name'],
+         formatted_datetime: this.serviceIdentify[j]['formatted_datetime'],
         event_type: 'S',
         icon: 'service',
         class: 'service'
@@ -1180,6 +1182,7 @@ export class CalendarComponent {
         event_location: this.alarmIdentity[k]['alarm_location'],
         event_addedby_name: this.alarmIdentity[k]['alarm_assginedby_name'],
         event_t: this.alarmIdentity[k]['date_time'],
+         formatted_datetime: this.alarmIdentity[k]['formatted_datetime'],
         event_type: 'A',
         icon: 'event',
         class: 'event'

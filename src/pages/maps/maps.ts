@@ -105,8 +105,8 @@ export class MapsPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MapsPage');
-    this.pageLoad();
-    this.loadMap(0);
+    //this.pageLoad();
+    //this.loadMap(0);
   }
   ionViewWillEnter() {
     console.log('ionViewWillEnter MapsPage');
@@ -893,23 +893,22 @@ export class MapsPage {
         // Creating a new map
 
         if (val == 0) {
-          console.log("Default Loading...");
-
+          console.log("Default Loading  Map Defined...");
 
           let mapOptions: GoogleMapOptions = {
             camera: {
               target: {
                 lat: 1.3249773,
                 lng: 103.70307100000002
-              },
-              zoom: 18,
+              },             
+              zoom: 11,
               tilt: 30
             }
           };
           this.map = this.googleMaps.create(this.mapElement, mapOptions);
         } else {
 
-          console.log("Selected Unit...");
+          console.log("Selected Unit Map Defined..." + "val.latitude:" + val.latitude + "val.longtitude" + val.longtitude);
 
           let mapOptions: GoogleMapOptions = {
             camera: {
@@ -917,8 +916,8 @@ export class MapsPage {
                 lat: val.latitude,
                 lng: val.longtitude
               },
-              zoom: 18,
-              tilt: 30
+              zoom: 16,
+              tilt: 30,
             }
           };
           this.map = this.googleMaps.create(this.mapElement, mapOptions);
@@ -936,37 +935,27 @@ export class MapsPage {
               //Google Map Start
               this.map.one(GoogleMapsEvent.MAP_READY)
                 .then(() => {
-                  console.log('Map is ready!');
                   //Google Map Start
-
-                  console.log('P');
-
-
+                  console.log("Default Unit..." + "val.latitude:" + res.units[unit].latitude + "val.longtitude" + res.units[unit].longtitude);
                   let labeldata = '<div class="info_content">' +
                     '<h3>' + res.units[unit].unitname + '</h3>' +
                     '<h4>' + res.units[unit].projectname + '</h4>' +
                     '<p>Running Hours:' + res.units[unit].runninghr + ' Hours</p>' + '</div>';
-
-
                   this.addMarkerList(labeldata, res.units[unit].latitude, res.units[unit].longtitude, res.units[unit]);
-
                   // Google Map End
 
                 });
               // Google Map End
             } else {
               //Google Map Start
+
+              console.log("Selected Unit..." + "val.latitude:" + val.latitude + "val.longtitude" + val.longtitude);
               this.map.one(GoogleMapsEvent.MAP_READY)
                 .then(() => {
-                  console.log('Map is ready!');
                   //Google Map Start
-
-                  console.log('Q');
-
-
                   let labeldata = '<div class="info_content">' +
-                    '<h3>' + val.unitname + '</h3>' +
-                    '<h4>' + val.projectname + '</h4>' +
+                    '<h3>' + val.unitname + '</h3>\n' +
+                    '<h4>' + val.projectname + '</h4>\n' +
                     '<p>Running Hours:' + val.runninghr + ' Hours</p>' + '</div>';
 
                   this.addMarkerList(labeldata, val.lat, val.lng, val);
@@ -974,37 +963,7 @@ export class MapsPage {
                   // Google Map End
                 });
               // Google Map End
-            }
-
-            // Copied from below
-            if (val != 0) {
-              //Google Map Start
-              this.map.one(GoogleMapsEvent.MAP_READY)
-                .then(() => {
-                  console.log('Map is ready!');
-                  //Google Map Start
-                  console.log('R');
-
-
-                  let unitcontent;
-                  unitcontent = '<div class="info_content">' +
-                    '<h3>' + val.unitname + '</h3>' +
-                    '<h4>' + val.projectname + '</h4>' +
-                    '<p>Running Hours:' + val.runninghr + ' Hours</p>' + '</div>';
-
-                  this.addMarkerList(unitcontent, val.lat, val.lng, val);
-
-
-
-
-
-
-                  // Google Map End
-                });
-              // Google Map End
-
-            }
-            // Copied from below
+            }          
           }
         }
       },
@@ -1014,25 +973,32 @@ export class MapsPage {
   }
 
 
-  addMarkerList(title, lat, lng, dataunit) {
+  addMarkerList(title, lat, lng, dataunit) {    
     console.log("Calling.... Marker Display Function");
     console.log("Title:" + title);
     console.log("Latitude:" + lat);
     console.log("Longtitude:" + lng);
     console.log("Unit Data:" + dataunit);
-    let labeldata = 'Unit Name:' + dataunit.unitname + '-' +
-      'Project Name:' + dataunit.projectname + '-' +
+    let labeldata = 'Unit Name:' + dataunit.unitname + '\n' +
+      'Project Name:' + dataunit.projectname + '\n' +
       'Running Hours:' + dataunit.runninghr + ' Hour';
     this.map.addMarker({
-      //title: labeldata,
-      title: title,
-      // icon: this.apiServiceURL + "/images/completed.png",
-      icon: 'blue',
+      title: labeldata,
+      //title: title,
+      icon: "img/completed.png",
+      //icon: 'blue',
       animation: 'DROP',
       position: {
         lat: lat,
         lng: lng
-      }
+      },
+      'styles': {
+        'text-align': 'center',
+        'font-weight': 'bold',
+        'color': 'blue'
+      },
+      'flat': true,
+      'draggable': true
     })
       .then(marker => {
         marker.on(GoogleMapsEvent.MARKER_CLICK)
