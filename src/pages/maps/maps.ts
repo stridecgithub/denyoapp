@@ -817,59 +817,58 @@ export class MapsPage {
 
   }*/
 
-
-  loadMap(val) { // sample ionic 
-
-    this.mapElement = document.getElementById('map');
-
-    let mapOptions: GoogleMapOptions = {
-      camera: {
-        target: {
-          lat: 43.0741904,
-          lng: -89.3809802
-        },
-        zoom: 18,
-        tilt: 30
-      }
-    };
-
-    this.map = this.googleMaps.create(this.mapElement, mapOptions);
-
-    // Wait the MAP_READY before using any methods.
-    this.map.one(GoogleMapsEvent.MAP_READY)
-      .then(() => {
-        console.log('Map is ready!');
-
-        // Now you can use all methods safely.
-        this.map.addMarker({
-          title: 'Ionic',
-          icon: 'blue',
-          animation: 'DROP',
-          position: {
+  /*
+    loadMap(val) { // sample ionic 
+  
+      this.mapElement = document.getElementById('map');
+  
+      let mapOptions: GoogleMapOptions = {
+        camera: {
+          target: {
             lat: 43.0741904,
             lng: -89.3809802
-          }
-        })
-          .then(marker => {
-            marker.on(GoogleMapsEvent.MARKER_CLICK)
-              .subscribe(() => {
-                alert('clicked');
-              });
-          });
+          },
+          zoom: 18,
+          tilt: 30
+        }
+      };
+  
+      this.map = this.googleMaps.create(this.mapElement, mapOptions);
+  
+      // Wait the MAP_READY before using any methods.
+      this.map.one(GoogleMapsEvent.MAP_READY)
+        .then(() => {
+          console.log('Map is ready!');
+  
+          // Now you can use all methods safely.
+          this.map.addMarker({
+            title: 'Ionic',
+            icon: 'blue',
+            animation: 'DROP',
+            position: {
+              lat: 43.0741904,
+              lng: -89.3809802
+            }
+          })
+            .then(marker => {
+              marker.on(GoogleMapsEvent.MARKER_CLICK)
+                .subscribe(() => {
+                  alert('clicked');
+                });
+            });
+  
+        });
+    }*/
 
-      });
-  }
 
-
-/*
   loadMap(val) {
- 
- 
+
+
     // Now you can use all methods safely.
- 
- 
- 
- 
+
+
+
+
     console.log("A" + JSON.stringify(val));
     console.log("B" + val.length);
     if (JSON.stringify(val).length > 0) {
@@ -885,18 +884,18 @@ export class MapsPage {
     let latLng
     this.http.get(urlstr, optionsstr)
       .subscribe(data => {
- 
+
         this.mapElement = document.getElementById('map');
- 
- 
- 
- 
+
+
+
+
         // Creating a new map
- 
+
         if (val == 0) {
           console.log("Default Loading...");
- 
- 
+
+
           let mapOptions: GoogleMapOptions = {
             camera: {
               target: {
@@ -909,9 +908,9 @@ export class MapsPage {
           };
           this.map = this.googleMaps.create(this.mapElement, mapOptions);
         } else {
- 
+
           console.log("Selected Unit...");
- 
+
           let mapOptions: GoogleMapOptions = {
             camera: {
               target: {
@@ -924,13 +923,13 @@ export class MapsPage {
           };
           this.map = this.googleMaps.create(this.mapElement, mapOptions);
         }
- 
- 
- 
+
+
+
         // Wait the MAP_READY before using any methods.
- 
+
         res = data.json();
- 
+
         if (res.totalCount > 0) {
           for (var unit in res.units) {
             if (val == 0) {
@@ -939,20 +938,20 @@ export class MapsPage {
                 .then(() => {
                   console.log('Map is ready!');
                   //Google Map Start
- 
+
                   console.log('P');
- 
- 
+
+
                   let labeldata = '<div class="info_content">' +
                     '<h3>' + res.units[unit].unitname + '</h3>' +
                     '<h4>' + res.units[unit].projectname + '</h4>' +
                     '<p>Running Hours:' + res.units[unit].runninghr + ' Hours</p>' + '</div>';
- 
- 
+
+
                   this.addMarkerList(labeldata, res.units[unit].latitude, res.units[unit].longtitude, res.units[unit]);
- 
+
                   // Google Map End
- 
+
                 });
               // Google Map End
             } else {
@@ -961,22 +960,22 @@ export class MapsPage {
                 .then(() => {
                   console.log('Map is ready!');
                   //Google Map Start
- 
+
                   console.log('Q');
- 
- 
+
+
                   let labeldata = '<div class="info_content">' +
                     '<h3>' + val.unitname + '</h3>' +
                     '<h4>' + val.projectname + '</h4>' +
                     '<p>Running Hours:' + val.runninghr + ' Hours</p>' + '</div>';
- 
+
                   this.addMarkerList(labeldata, val.lat, val.lng, val);
- 
+
                   // Google Map End
                 });
               // Google Map End
             }
- 
+
             // Copied from below
             if (val != 0) {
               //Google Map Start
@@ -985,25 +984,25 @@ export class MapsPage {
                   console.log('Map is ready!');
                   //Google Map Start
                   console.log('R');
- 
- 
+
+
                   let unitcontent;
                   unitcontent = '<div class="info_content">' +
                     '<h3>' + val.unitname + '</h3>' +
                     '<h4>' + val.projectname + '</h4>' +
                     '<p>Running Hours:' + val.runninghr + ' Hours</p>' + '</div>';
- 
+
                   this.addMarkerList(unitcontent, val.lat, val.lng, val);
- 
- 
- 
- 
- 
- 
+
+
+
+
+
+
                   // Google Map End
                 });
               // Google Map End
- 
+
             }
             // Copied from below
           }
@@ -1013,388 +1012,388 @@ export class MapsPage {
         console.log("Map error:-" + JSON.stringify(err));
       });
   }
-  */
 
-addMarkerList(title, lat, lng, dataunit) {
-  console.log("Calling.... Marker Display Function");
-  console.log("Title:" + title);
-  console.log("Latitude:" + lat);
-  console.log("Longtitude:" + lng);
-  console.log("Unit Data:" + dataunit);
-  let labeldata = 'Unit Name:' + dataunit.unitname + '-' +
-    'Project Name:' + dataunit.projectname + '-' +
-    'Running Hours:' + dataunit.runninghr + ' Hour';
-  this.map.addMarker({
-    //title: labeldata,
-    title: title,
-    icon: this.apiServiceURL + "/images/completed.png",
-    //icon: 'blue',
-    animation: 'DROP',
-    position: {
-      lat: lat,
-      lng: lng
-    }
-  })
-    .then(marker => {
-      marker.on(GoogleMapsEvent.MARKER_CLICK)
-        .subscribe(() => {
-          //this.mapunitdetail(data);
-        });
 
-      marker.on(GoogleMapsEvent.INFO_CLICK)
-        .subscribe((data) => {
-          console.log(JSON.stringify(data));
-          this.mapunitdetail(dataunit);
-        });
-
-    });
-}
-doAdd() {
-  this.navCtrl.setRoot(AddunitsonePage);
-}
-doEdit(item, act) {
-  if (act == 'edit') {
-    this.navCtrl.setRoot(AddunitsonePage, {
-      record: item,
-      act: act
-    });
-    return false;
-  } else if (act == 'detail') {
-    this.navCtrl.setRoot(UnitdetailsPage, {
-      record: item
-    });
-    return false;
-  } else {
-    this.navCtrl.setRoot(ViewcompanygroupPage, {
-      record: item,
-      act: act
-    });
-    return false;
-  }
-}
-/******************************************/
-/* @doConfirm called for alert dialog box **/
-/******************************************/
-doConfirm(id, item) {
-  console.log("Deleted Id" + id);
-  let confirm = this.alertCtrl.create({
-    message: 'Are you sure you want to delete this user?',
-    buttons: [{
-      text: 'Yes',
-      handler: () => {
-
-        for (let q: number = 0; q < this.reportAllLists.length; q++) {
-          if (this.reportAllLists[q] == item) {
-            this.reportAllLists.splice(q, 1);
-          }
-        }
+  addMarkerList(title, lat, lng, dataunit) {
+    console.log("Calling.... Marker Display Function");
+    console.log("Title:" + title);
+    console.log("Latitude:" + lat);
+    console.log("Longtitude:" + lng);
+    console.log("Unit Data:" + dataunit);
+    let labeldata = 'Unit Name:' + dataunit.unitname + '-' +
+      'Project Name:' + dataunit.projectname + '-' +
+      'Running Hours:' + dataunit.runninghr + ' Hour';
+    this.map.addMarker({
+      //title: labeldata,
+      title: title,
+      // icon: this.apiServiceURL + "/images/completed.png",
+      icon: 'blue',
+      animation: 'DROP',
+      position: {
+        lat: lat,
+        lng: lng
       }
-    },
-    {
-      text: 'No',
-      handler: () => { }
-    }]
-  });
-  confirm.present();
-}
-
-// Remove an existing record that has been selected in the page's HTML form
-// Use angular's http post method to submit the record data
-// to our remote PHP script (note the body variable we have created which
-// supplies a variable of key with a value of delete followed by the key/value pairs
-// for the record ID we want to remove from the remote database
-
-// Manage notifying the user of the outcome
-// of remote operations
-sendNotification(message): void {
-  let notification = this.toastCtrl.create({
-    message: message,
-    duration: 3000
-  });
-  notification.present();
-}
-
-
-
-onSegmentChanged(val) {
-  let splitdata = val.split(",");
-  this.reportData.sort = splitdata[0];
-  this.reportData.sortascdesc = splitdata[1];
-  //this.reportData.status = "ALL";
-  this.reportData.startindex = 0;
-  this.reportAllLists = [];
-  this.doUser();
-}
-
-/********************/
-/* Sorting function */
-/********************/
-doSort(val) {
-  console.log('1');
-  this.reportAllLists = [];
-  this.reportData.startindex = 0;
-  console.log('2');
-  this.sortby = 1;
-  if (this.vendorsort == "asc") {
-    this.reportData.sortascdesc = "desc";
-    this.vendorsort = "desc";
-    this.ascending = false;
-    console.log('3');
-  }
-  else {
-    console.log('4');
-    this.reportData.sortascdesc = "asc";
-    this.vendorsort = "asc";
-    this.ascending = true;
-  }
-  console.log('5');
-  this.reportData.sort = val;
-  this.doUser();
-  console.log('6');
-}
-/*presentLoading(parm) {
-  let loader;
-  loader = this.loadingCtrl.create({
-    content: "Please wait...",
-    duration: 3000
-  });
-  if (parm > 0) {
-    loader.present();
-  } else {
-    loader.dismiss();
-  }
-}*/
-
-
-
-
-
-
-
-redirectToUnitGroup() {
-  this.navCtrl.setRoot(UnitgroupPage);
-}
-redirectToCompanyGroup() {
-  this.navCtrl.setRoot(CompanygroupPage);
-}
-
-redirectToUnits() {
-  this.navCtrl.setRoot(UnitsPage);
-}
-redirectToMyAccount() {
-  this.navCtrl.setRoot(OrgchartPage);
-}
-
-redirectToRole() {
-  this.navCtrl.setRoot(RolePage);
-}
-previous() {
-  this.navCtrl.setRoot(HomePage);
-}
-favorite(unit_id) {
-  this.reportData.startindex = 0;
-  this.reportAllLists = [];
-  let body: string = "unitid=" + unit_id + "&is_mobile=1" + "&loginid=" + this.userid,
-    type: string = "application/x-www-form-urlencoded; charset=UTF-8",
-    headers: any = new Headers({ 'Content-Type': type }),
-    options: any = new RequestOptions({ headers: headers }),
-    url: any = this.apiServiceURL + "/setunitfavorite";
-  console.log(url);
-  console.log(body);
-  this.http.post(url, body, options)
-    .subscribe(data => {
-      console.log(data);
-      let res = data.json();
-      console.log(res.msg[0].Error);
-      console.log(res.msg[0].result);
-      if (res.msg[0] == 0) {
-        console.log("Favorite");
-      } else {
-        console.log("Un Favorite");
-      }
-
-      if (res.units.length > 0) {
-        for (let unit in res.units) {
-          let colorcode;
-          let favorite;
-          let index = this.colorListArr.indexOf(res.units[unit].colorcode); // 1
-          console.log("Color Index:" + index);
-          let colorvalincrmentone = index + 1;
-          colorcode = "button" + colorvalincrmentone;
-          console.log("Color is" + colorcode);
-          if (res.units[unit].favorite == 1) {
-            favorite = "favorite";
-          }
-          else {
-            favorite = "unfavorite";
-
-          }
-          this.reportAllLists.push({
-            unit_id: res.units[unit].unit_id,
-            unitname: res.units[unit].unitname,
-            location: res.units[unit].location,
-            contacts: res.units[unit].contacts,
-            projectname: res.units[unit].projectname,
-            colorcode: res.units[unit].colorcode,
-            nextservicedate: res.units[unit].nextservicedate,
-            colorcodeindications: colorcode,
-            controllerid: res.units[unit].controllerid,
-            neaplateno: res.units[unit].neaplateno,
-            companys_id: res.units[unit].companys_id,
-            unitgroups_id: res.units[unit].unitgroups_id,
-            models_id: res.units[unit].models_id,
-            alarmnotificationto: res.units[unit].alarmnotificationto,
-            viewonid: res.units[unit].viewonid,
-            favoriteindication: favorite,
-            latitude: res.units[unit].latitude,
-            longtitude: res.units[unit].longtitude
+    })
+      .then(marker => {
+        marker.on(GoogleMapsEvent.MARKER_CLICK)
+          .subscribe(() => {
+            //this.mapunitdetail(data);
           });
-        }
-        //this.reportAllLists = res.units;
-        this.totalCount = res.totalCount;
-        this.reportData.startindex += this.reportData.results;
-      } else {
-        this.totalCount = 0;
-      }
 
-      // If the request was successful notify the user
-      if (data.status === 200) {
-        this.sendNotification(res.msg[0].result);
-      }
-      // Otherwise let 'em know anyway
-      else {
-        this.sendNotification('Something went wrong!');
-      }
-    });
-  this.doUser();
-}
-getCheckBoxValue(item, val, val1) {
-  /*console.log("Available data" + val);
-  this.getCheckboxData.push({
-    availabledata: val
-  })*/
+        marker.on(GoogleMapsEvent.INFO_CLICK)
+          .subscribe((data) => {
+            console.log(JSON.stringify(data));
+            this.mapunitdetail(dataunit);
+          });
 
-
-  /*console.log("Available data" + name);
-this.selectedAction.push({
-availabledata: name
-})
-console.log(JSON.stringify(this.selectedAction));*/
-  if (val != '') {
-    if (this.str == '') {
-      this.str = val;
-    } else {
-      this.str = this.str + "," + val;
-    }
+      });
   }
-  if (val1 != '') {
-    if (this.str1 == '') {
-      this.str1 = val1;
-    } else {
-      this.str1 = this.str1 + "," + val1;
-    }
+  doAdd() {
+    this.navCtrl.setRoot(AddunitsonePage);
   }
-  console.log(this.str + "//" + this.str1);
-  this.detailvalue = item;
-  localStorage.setItem("unitunitname", item.unitname);
-  localStorage.setItem("unitlocation", item.location);
-  localStorage.setItem("unitprojectname", item.projectname);
-  localStorage.setItem("unitcolorcode", item.colorcodeindications);
-  localStorage.setItem("unitlat", item.lat);
-  localStorage.setItem("unitlng", item.lng);
-  localStorage.setItem("runninghr", item.runninghr);
-  localStorage.setItem("nsd", item.nextservicedate);
-  console.log(this.str + "//" + JSON.stringify(this.detailvalue));
-  localStorage.setItem("viewlist", this.str);
-
-}
-onAction(act) {
-  let urlstr;
-  if (act == 'view') {
-    if (this.str == '') {
-      this.sendNotification("Please select Atleast One Unit")
-    }
-    else {
-      let item;
-      item = this.detailvalue;
-      localStorage.setItem("unitId", item.unit_id);
-      localStorage.setItem("iframeunitId", item.unit_id);
-      localStorage.setItem("unitunitname", item.unitname);
-      localStorage.setItem("unitlocation", item.location);
-      localStorage.setItem("unitprojectname", item.projectname);
-      localStorage.setItem("unitcolorcode", item.colorcodeindications);
-      localStorage.setItem("unitlat", item.lat);
-      localStorage.setItem("unitlng", item.lng);
-      localStorage.setItem("runninghr", item.runninghr);
-      localStorage.setItem("nsd", item.nextservicedate);
+  doEdit(item, act) {
+    if (act == 'edit') {
+      this.navCtrl.setRoot(AddunitsonePage, {
+        record: item,
+        act: act
+      });
+      return false;
+    } else if (act == 'detail') {
       this.navCtrl.setRoot(UnitdetailsPage, {
-        record: this.detailvalue
+        record: item
+      });
+      return false;
+    } else {
+      this.navCtrl.setRoot(ViewcompanygroupPage, {
+        record: item,
+        act: act
       });
       return false;
     }
   }
-  if (act == 'hide') {
-    if (this.str == '') {
-      this.sendNotification("Please select Atleast One Unit")
+  /******************************************/
+  /* @doConfirm called for alert dialog box **/
+  /******************************************/
+  doConfirm(id, item) {
+    console.log("Deleted Id" + id);
+    let confirm = this.alertCtrl.create({
+      message: 'Are you sure you want to delete this user?',
+      buttons: [{
+        text: 'Yes',
+        handler: () => {
+
+          for (let q: number = 0; q < this.reportAllLists.length; q++) {
+            if (this.reportAllLists[q] == item) {
+              this.reportAllLists.splice(q, 1);
+            }
+          }
+        }
+      },
+      {
+        text: 'No',
+        handler: () => { }
+      }]
+    });
+    confirm.present();
+  }
+
+  // Remove an existing record that has been selected in the page's HTML form
+  // Use angular's http post method to submit the record data
+  // to our remote PHP script (note the body variable we have created which
+  // supplies a variable of key with a value of delete followed by the key/value pairs
+  // for the record ID we want to remove from the remote database
+
+  // Manage notifying the user of the outcome
+  // of remote operations
+  sendNotification(message): void {
+    let notification = this.toastCtrl.create({
+      message: message,
+      duration: 3000
+    });
+    notification.present();
+  }
+
+
+
+  onSegmentChanged(val) {
+    let splitdata = val.split(",");
+    this.reportData.sort = splitdata[0];
+    this.reportData.sortascdesc = splitdata[1];
+    //this.reportData.status = "ALL";
+    this.reportData.startindex = 0;
+    this.reportAllLists = [];
+    this.doUser();
+  }
+
+  /********************/
+  /* Sorting function */
+  /********************/
+  doSort(val) {
+    console.log('1');
+    this.reportAllLists = [];
+    this.reportData.startindex = 0;
+    console.log('2');
+    this.sortby = 1;
+    if (this.vendorsort == "asc") {
+      this.reportData.sortascdesc = "desc";
+      this.vendorsort = "desc";
+      this.ascending = false;
+      console.log('3');
     }
     else {
-      urlstr = "/dashboardaction?id=" + this.str1 + "&action=hide&is_mobile=1&loginid=" + this.userid;
+      console.log('4');
+      this.reportData.sortascdesc = "asc";
+      this.vendorsort = "asc";
+      this.ascending = true;
     }
+    console.log('5');
+    this.reportData.sort = val;
+    this.doUser();
+    console.log('6');
+  }
+  /*presentLoading(parm) {
+    let loader;
+    loader = this.loadingCtrl.create({
+      content: "Please wait...",
+      duration: 3000
+    });
+    if (parm > 0) {
+      loader.present();
+    } else {
+      loader.dismiss();
+    }
+  }*/
+
+
+
+
+
+
+
+  redirectToUnitGroup() {
+    this.navCtrl.setRoot(UnitgroupPage);
+  }
+  redirectToCompanyGroup() {
+    this.navCtrl.setRoot(CompanygroupPage);
+  }
+
+  redirectToUnits() {
+    this.navCtrl.setRoot(UnitsPage);
+  }
+  redirectToMyAccount() {
+    this.navCtrl.setRoot(OrgchartPage);
+  }
+
+  redirectToRole() {
+    this.navCtrl.setRoot(RolePage);
+  }
+  previous() {
+    this.navCtrl.setRoot(HomePage);
+  }
+  favorite(unit_id) {
+    this.reportData.startindex = 0;
+    this.reportAllLists = [];
+    let body: string = "unitid=" + unit_id + "&is_mobile=1" + "&loginid=" + this.userid,
+      type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + "/setunitfavorite";
+    console.log(url);
+    console.log(body);
+    this.http.post(url, body, options)
+      .subscribe(data => {
+        console.log(data);
+        let res = data.json();
+        console.log(res.msg[0].Error);
+        console.log(res.msg[0].result);
+        if (res.msg[0] == 0) {
+          console.log("Favorite");
+        } else {
+          console.log("Un Favorite");
+        }
+
+        if (res.units.length > 0) {
+          for (let unit in res.units) {
+            let colorcode;
+            let favorite;
+            let index = this.colorListArr.indexOf(res.units[unit].colorcode); // 1
+            console.log("Color Index:" + index);
+            let colorvalincrmentone = index + 1;
+            colorcode = "button" + colorvalincrmentone;
+            console.log("Color is" + colorcode);
+            if (res.units[unit].favorite == 1) {
+              favorite = "favorite";
+            }
+            else {
+              favorite = "unfavorite";
+
+            }
+            this.reportAllLists.push({
+              unit_id: res.units[unit].unit_id,
+              unitname: res.units[unit].unitname,
+              location: res.units[unit].location,
+              contacts: res.units[unit].contacts,
+              projectname: res.units[unit].projectname,
+              colorcode: res.units[unit].colorcode,
+              nextservicedate: res.units[unit].nextservicedate,
+              colorcodeindications: colorcode,
+              controllerid: res.units[unit].controllerid,
+              neaplateno: res.units[unit].neaplateno,
+              companys_id: res.units[unit].companys_id,
+              unitgroups_id: res.units[unit].unitgroups_id,
+              models_id: res.units[unit].models_id,
+              alarmnotificationto: res.units[unit].alarmnotificationto,
+              viewonid: res.units[unit].viewonid,
+              favoriteindication: favorite,
+              latitude: res.units[unit].latitude,
+              longtitude: res.units[unit].longtitude
+            });
+          }
+          //this.reportAllLists = res.units;
+          this.totalCount = res.totalCount;
+          this.reportData.startindex += this.reportData.results;
+        } else {
+          this.totalCount = 0;
+        }
+
+        // If the request was successful notify the user
+        if (data.status === 200) {
+          this.sendNotification(res.msg[0].result);
+        }
+        // Otherwise let 'em know anyway
+        else {
+          this.sendNotification('Something went wrong!');
+        }
+      });
+    this.doUser();
+  }
+  getCheckBoxValue(item, val, val1) {
+    /*console.log("Available data" + val);
+    this.getCheckboxData.push({
+      availabledata: val
+    })*/
+
+
+    /*console.log("Available data" + name);
+  this.selectedAction.push({
+  availabledata: name
+  })
+  console.log(JSON.stringify(this.selectedAction));*/
+    if (val != '') {
+      if (this.str == '') {
+        this.str = val;
+      } else {
+        this.str = this.str + "," + val;
+      }
+    }
+    if (val1 != '') {
+      if (this.str1 == '') {
+        this.str1 = val1;
+      } else {
+        this.str1 = this.str1 + "," + val1;
+      }
+    }
+    console.log(this.str + "//" + this.str1);
+    this.detailvalue = item;
+    localStorage.setItem("unitunitname", item.unitname);
+    localStorage.setItem("unitlocation", item.location);
+    localStorage.setItem("unitprojectname", item.projectname);
+    localStorage.setItem("unitcolorcode", item.colorcodeindications);
+    localStorage.setItem("unitlat", item.lat);
+    localStorage.setItem("unitlng", item.lng);
+    localStorage.setItem("runninghr", item.runninghr);
+    localStorage.setItem("nsd", item.nextservicedate);
+    console.log(this.str + "//" + JSON.stringify(this.detailvalue));
+    localStorage.setItem("viewlist", this.str);
 
   }
-  let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
-    headers: any = new Headers({ 'Content-Type': type }),
-    options: any = new RequestOptions({ headers: headers }),
-    url: any = this.apiServiceURL + urlstr;
-  console.log(url);
-
-  this.http.get(url, options)
-    .subscribe((data) => {
-      console.log("Count Response Success:" + JSON.stringify(data.json()));
-      if (act == 'hide') {
-
-        this.sendNotification(`Dashboard hide action successfully updated`);
+  onAction(act) {
+    let urlstr;
+    if (act == 'view') {
+      if (this.str == '') {
+        this.sendNotification("Please select Atleast One Unit")
       }
-      // If the request was successful notify the user
-      if (data.status === 200) {
-        //this.loadMap(0);
-        this.reportData.startindex = 0;
-        this.reportData.sort = "unit_id";
-        //this.doUser();
-        this.pageLoad();
-        this.navCtrl.setRoot(this.navCtrl.getActive().component);
-
-
-      }
-      // Otherwise let 'em know anyway
       else {
-        // this.sendNotification('Something went wrong!');
+        let item;
+        item = this.detailvalue;
+        localStorage.setItem("unitId", item.unit_id);
+        localStorage.setItem("iframeunitId", item.unit_id);
+        localStorage.setItem("unitunitname", item.unitname);
+        localStorage.setItem("unitlocation", item.location);
+        localStorage.setItem("unitprojectname", item.projectname);
+        localStorage.setItem("unitcolorcode", item.colorcodeindications);
+        localStorage.setItem("unitlat", item.lat);
+        localStorage.setItem("unitlng", item.lng);
+        localStorage.setItem("runninghr", item.runninghr);
+        localStorage.setItem("nsd", item.nextservicedate);
+        this.navCtrl.setRoot(UnitdetailsPage, {
+          record: this.detailvalue
+        });
+        return false;
       }
-    });
+    }
+    if (act == 'hide') {
+      if (this.str == '') {
+        this.sendNotification("Please select Atleast One Unit")
+      }
+      else {
+        urlstr = "/dashboardaction?id=" + this.str1 + "&action=hide&is_mobile=1&loginid=" + this.userid;
+      }
+
+    }
+    let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
+      headers: any = new Headers({ 'Content-Type': type }),
+      options: any = new RequestOptions({ headers: headers }),
+      url: any = this.apiServiceURL + urlstr;
+    console.log(url);
+
+    this.http.get(url, options)
+      .subscribe((data) => {
+        console.log("Count Response Success:" + JSON.stringify(data.json()));
+        if (act == 'hide') {
+
+          this.sendNotification(`Dashboard hide action successfully updated`);
+        }
+        // If the request was successful notify the user
+        if (data.status === 200) {
+          //this.loadMap(0);
+          this.reportData.startindex = 0;
+          this.reportData.sort = "unit_id";
+          //this.doUser();
+          this.pageLoad();
+          this.navCtrl.setRoot(this.navCtrl.getActive().component);
 
 
-}
-notification() {
-  this.navCtrl.setRoot(NotificationPage);
-}
-redirectToUser() {
-  this.navCtrl.setRoot(UnitsPage);
-}
-redirectToMessage() {
-  this.navCtrl.setRoot(EmailPage);
-}
-redirectCalendar() {
-  this.navCtrl.setRoot(CalendarPage);
-}
-redirectToMaps() {
-  this.navCtrl.setRoot(MapsPage);
-}
-redirectToSettings() {
-  this.navCtrl.setRoot(OrgchartPage);
-}
-goAboutPage() {
-  this.navCtrl.setRoot(EmailPage);
-}
+        }
+        // Otherwise let 'em know anyway
+        else {
+          // this.sendNotification('Something went wrong!');
+        }
+      });
+
+
+  }
+  notification() {
+    this.navCtrl.setRoot(NotificationPage);
+  }
+  redirectToUser() {
+    this.navCtrl.setRoot(UnitsPage);
+  }
+  redirectToMessage() {
+    this.navCtrl.setRoot(EmailPage);
+  }
+  redirectCalendar() {
+    this.navCtrl.setRoot(CalendarPage);
+  }
+  redirectToMaps() {
+    this.navCtrl.setRoot(MapsPage);
+  }
+  redirectToSettings() {
+    this.navCtrl.setRoot(OrgchartPage);
+  }
+  goAboutPage() {
+    this.navCtrl.setRoot(EmailPage);
+  }
 }
 
 
