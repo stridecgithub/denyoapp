@@ -143,26 +143,26 @@ this.unitDetailData.favoriteindication = favorite;
     this.iframeContent = "<iframe src=" + "http://denyoappv2.stridecdev.com/"+this.unitid+"/1/enginedetails height=350 frameborder=0></iframe>";
   }
    notification() {
-    this.nav.push(NotificationPage);
+    this.nav.setRoot(NotificationPage);
   }
   redirectToUser() {
-    this.nav.push(UnitsPage);
+    this.nav.setRoot(UnitsPage);
   }
   redirectToMessage() {
     this.nav.setRoot(EmailPage);
   }
   redirectCalendar() {
-    this.nav.push(CalendarPage);
+    this.nav.setRoot(CalendarPage);
   }
   redirectToMaps() {
     this.nav.setRoot(MapsPage);
   }
   redirectToSettings() {
-    this.nav.push(OrgchartPage);
+    this.nav.setRoot(OrgchartPage);
   }
   previous()
   {
-     this.nav.push(UnitdetailsPage, {
+     this.nav.setRoot(UnitdetailsPage, {
       record: this.NP.get("record")
     });
   }

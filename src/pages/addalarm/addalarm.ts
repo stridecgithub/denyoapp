@@ -180,7 +180,7 @@ export class AddalarmPage {
           this.hideForm = true;
           this.sendNotification(`successfully Assigned`);
           localStorage.setItem("userPhotoFile", "");
-          this.nav.push(AlarmlogPage);
+         this.nav.setRoot(AlarmlogPage);
         }
         // Otherwise let 'em know anyway
         else {
@@ -200,27 +200,27 @@ export class AddalarmPage {
     this.unitDetailData.hashtag = hashtag;
   }
   previous() {
-    this.nav.push(AlarmdetailsPage,
+   this.nav.setRoot(AlarmdetailsPage,
     {
       record: this.NP.get("record")
     });
   }
   notification() {
-    this.nav.push(NotificationPage);
+   this.nav.setRoot(NotificationPage);
   }
   redirectToUser() {
-    this.nav.push(UnitsPage);
+   this.nav.setRoot(UnitsPage);
   }
   redirectToMessage() {
     this.nav.setRoot(EmailPage);
   }
   redirectCalendar() {
-    this.nav.push(CalendarPage);
+   this.nav.setRoot(CalendarPage);
   }
   redirectToMaps() {
     this.nav.setRoot(MapsPage);
   }
   redirectToSettings() {
-    this.nav.push(OrgchartPage);
+   this.nav.setRoot(OrgchartPage);
   }
 }

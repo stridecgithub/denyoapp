@@ -121,7 +121,7 @@ ionViewWillEnter() {
 edit()
 {
 let comid=this.NP.get("record");
- this.nav.push(AddcompanygroupPage, {
+ this.nav.setRoot(AddcompanygroupPage, {
         record:comid
       
       });
@@ -186,7 +186,7 @@ delete()
 
 
 this.sendNotification(`Congratulations the company group name was successfully deleted`);
-this.nav.push(CompanygroupPage);
+this.nav.setRoot(CompanygroupPage);
         }
         // Otherwise let 'em know anyway
         else {
@@ -202,24 +202,24 @@ this.nav.push(CompanygroupPage);
     notification.present();
   }
  previous() {
-    this.nav.push(CompanygroupPage);
+    this.nav.setRoot(CompanygroupPage);
   }
   notification() {
-    this.nav.push(NotificationPage);
+    this.nav.setRoot(NotificationPage);
   }
   redirectToUser() {
-    this.nav.push(UnitsPage);
+    this.nav.setRoot(UnitsPage);
   }
   redirectToMessage() {
     this.nav.setRoot(EmailPage);
   }
   redirectCalendar() {
-    this.nav.push(CalendarPage);
+    this.nav.setRoot(CalendarPage);
   }
   redirectToMaps() {
     this.nav.setRoot(MapsPage);
   }
   redirectToSettings() {
-    this.nav.push(OrgchartPage);
+    this.nav.setRoot(OrgchartPage);
   }  
 }

@@ -231,12 +231,12 @@ export class UnitdetailsPage {
 					console.log("Something went wrong!");
 				}
 			});
-		this.nav.push(ServicinginfoPage, {
+		this.nav.setRoot(ServicinginfoPage, {
 			record: this.NP.get("record")
 		});
 	}
 	alamInfo() {
-		this.nav.push(AlarmPage, {
+		this.nav.setRoot(AlarmPage, {
 			record: this.NP.get("record")
 		});
 	}
@@ -265,43 +265,43 @@ export class UnitdetailsPage {
 				}
 			});
 
-		this.nav.push(CommentsinfoPage, {
+		this.nav.setRoot(CommentsinfoPage, {
 			record: this.NP.get("record")
 		});
 	}
 	alarm() {
-		this.nav.push(AlarmlogPage, {
+		this.nav.setRoot(AlarmlogPage, {
 			record: this.NP.get("record")
 		});
 	}
 	enginedetail() {
-		this.nav.push(EnginedetailviewPage, {
+		this.nav.setRoot(EnginedetailviewPage, {
 			record: this.NP.get("record")
 		});
 	}
 	previous() {
-		this.nav.push(UnitsPage);
+		this.nav.setRoot(UnitsPage);
 	}
 	notification() {
-		this.nav.push(NotificationPage);
+		this.nav.setRoot(NotificationPage);
 	}
 	redirectToUser() {
-		this.nav.push(UnitsPage);
+		this.nav.setRoot(UnitsPage);
 	}
 	redirectToMessage() {
 		this.nav.setRoot(EmailPage);
 	}
 	redirectCalendar() {
-		this.nav.push(CalendarPage);
+		this.nav.setRoot(CalendarPage);
 	}
 	redirectToMaps() {
 		this.nav.setRoot(MapsPage);
 	}
 	redirectToSettings() {
-		this.nav.push(OrgchartPage);
+		this.nav.setRoot(OrgchartPage);
 	}
 	viewunit() {
-		this.nav.push(ViewunitsPage, {
+		this.nav.setRoot(ViewunitsPage, {
 			record: this.NP.get("record")
 		});
 	}

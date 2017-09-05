@@ -187,14 +187,14 @@ export class AddalarmlistPage {
           localStorage.setItem("userPhotoFile", "");
           if(this.NP.get("record")=='alarm')
     {
-    this.nav.push(AlarmPage,
+    this.nav.setRoot(AlarmPage,
     {
       record: this.NP.get("record")
     });
   }
   else
   {
- this.nav.push(CommentsinfoPage);
+ this.nav.setRoot(CommentsinfoPage);
   }
         }
         // Otherwise let 'em know anyway
@@ -213,32 +213,32 @@ export class AddalarmlistPage {
   previous() {
     if(this.NP.get("from")=='alarm')
     {
-    this.nav.push(AlarmlistdetailPage,
+    this.nav.setRoot(AlarmlistdetailPage,
     {
       record: this.NP.get("record")
     });
   }
   else
   {
- this.nav.push(CommentsinfoPage);
+ this.nav.setRoot(CommentsinfoPage);
   }
   }
   notification() {
-    this.nav.push(NotificationPage);
+    this.nav.setRoot(NotificationPage);
   }
   redirectToUser() {
-    this.nav.push(UnitsPage);
+    this.nav.setRoot(UnitsPage);
   }
   redirectToMessage() {
     this.nav.setRoot(EmailPage);
   }
   redirectCalendar() {
-    this.nav.push(CalendarPage);
+    this.nav.setRoot(CalendarPage);
   }
   redirectToMaps() {
     this.nav.setRoot(MapsPage);
   }
   redirectToSettings() {
-    this.nav.push(OrgchartPage);
+    this.nav.setRoot(OrgchartPage);
   }
 }

@@ -239,32 +239,32 @@ export class CommentdetailsPage {
     }
   }
   previous() {
-    this.nav.push(CommentsinfoPage, {
+    this.nav.setRoot(CommentsinfoPage, {
       record: this.udetails
     });
   }
 
 
  notification() {
-    this.nav.push(NotificationPage);
+    this.nav.setRoot(NotificationPage);
   }
   redirectToUser() {
-    this.nav.push(UnitsPage);
+    this.nav.setRoot(UnitsPage);
   }
   redirectToMessage() {
     this.nav.setRoot(EmailPage);
   }
   redirectCalendar() {
-    this.nav.push(CalendarPage);
+    this.nav.setRoot(CalendarPage);
   }
   redirectToMaps() {
     this.nav.setRoot(MapsPage);
   }
   redirectToSettings() {
-    this.nav.push(OrgchartPage);
+    this.nav.setRoot(OrgchartPage);
   }
 
   redirectToRole() {
-    this.nav.push(RolePage);
+    this.nav.setRoot(RolePage);
   }
 }

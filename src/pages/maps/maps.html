@@ -12,8 +12,8 @@
       <ion-icon name="menu"></ion-icon>
     </button>
 
-  <ion-title  style="    text-align: center;
-    margin-top: 10px;"    class="page-title">{{pageTitle}}</ion-title>
+  <ion-title style="    text-align: center;
+    margin-top: 10px;" class="page-title">{{pageTitle}}</ion-title>
 
   <button style="float:left" ion-button (click)="notification()" style="position: absolute;
     right: 0%;
@@ -65,14 +65,16 @@
     font-size: 12pt;">{{permissionMessage}}</p>
 </ion-content>
 <ion-content padding class="ion-content" *ngIf="VIEWACCESS==1">
-   <!--button ion-button (click)="startTheIterations()">Start</button>
+  <!--button ion-button (click)="startTheIterations()">Start</button>
    <button ion-button (click)="stopTheIterations()">Stop</button>
   {{timeri}}-->
   <div #map id="map" style="position: relative;
     overflow: hidden;
     height: 55%;"></div>
-    <!--div #map id="map" style="height:100%"></div-->
-  <!--div [innerHTML]="sanitizer.bypassSecurityTrustHtml(iframeContent)"></div-->
+
+  <!--div #map id="map" style="height:75%"></div-->
+
+
 
   <div class="error" *ngIf="reportAllLists.length==0">No unit entries found</div>
   <div class="separator-line" *ngIf="totalCount!=0">&nbsp;</div>

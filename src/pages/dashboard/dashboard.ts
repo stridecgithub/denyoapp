@@ -4,8 +4,6 @@ import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitsPage } from '../units/units';
 import { NotificationPage } from '../notification/notification';
 import { MapsPage } from '../maps/maps';
-import { DashboardmapPage } from '../dashboardmap/dashboardmap';
-import { AddMap } from '../add-map/add-map';
 import { ReportsPage } from '../reports/reports';
 import { CalendarPage } from '../calendar/calendar';
 import { CalendardetailPage } from '../calendardetail/calendardetail';
@@ -30,43 +28,42 @@ export class DashboardPage {
   goPage(page) {
     console.log(page);
     if (page == 'MapsPage') {
-    // this.nav.setRoot(MapsPage);
-    this.nav.push(DashboardmapPage);
+    this.nav.setRoot(MapsPage);    
     } else if (page == 'ReportsPage') {
-      this.nav.push(ReportsPage);
+      this.nav.setRoot(ReportsPage);
     } else if (page == 'CalendarPage') {
-      this.nav.push(CalendarPage);
+      this.nav.setRoot(CalendarPage);
     } else if (page == 'UnitsPage') {
-      this.nav.push(UnitsPage);
+      this.nav.setRoot(UnitsPage);
     }
 
   }
 
 
   pushMessagePage() {
-    this.nav.push(CalendardetailPage, {
+    this.nav.setRoot(CalendardetailPage, {
       event_id: 4,
       act: 'Push'
     });
   }
   notification() {
-    this.nav.push(NotificationPage);
+    this.nav.setRoot(NotificationPage);
   }
   redirectToUser() {
-    this.nav.push(UnitsPage);
+    this.nav.setRoot(UnitsPage);
   }
   redirectToMessage() {
     this.nav.setRoot(EmailPage);
   }
   redirectCalendar() {
-    this.nav.push(CalendarPage);
+    this.nav.setRoot(CalendarPage);
   }
   redirectToMaps() {
      this.nav.setRoot(MapsPage);
-    //this.nav.push(DashboardmapPage);
+    //this.nav.setRoot(DashboardmapPage);
   }
   redirectToSettings() {
-    this.nav.push(OrgchartPage);
+    this.nav.setRoot(OrgchartPage);
   }
 
   ionViewWillEnter() {

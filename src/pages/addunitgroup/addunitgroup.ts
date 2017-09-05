@@ -82,6 +82,9 @@ export class AddunitgroupPage {
       this.hideActionButton = true;
     }
     else {
+      document.getElementById("FBE983").classList.add("border-need");
+      // console.log("Hi");
+      this.ccode = "FBE983";
       this.isEdited = false;
       this.pageTitle = 'Add Unit Group';
     }
@@ -193,7 +196,7 @@ export class AddunitgroupPage {
             this.sendNotification(res.msg[0].result);
           } else {
             this.sendNotification(res.msg[0].result);
-            this.nav.push(UnitgroupPage);
+            this.nav.setRoot(UnitgroupPage);
           }
         }
         // Otherwise let 'em know anyway
@@ -224,7 +227,7 @@ export class AddunitgroupPage {
             this.sendNotification(res.msg[0].result);
           } else {
             this.sendNotification(res.msg[0].result);
-            this.nav.push(UnitgroupPage);
+            this.nav.setRoot(UnitgroupPage);
           }
         }
         // Otherwise let 'em know anyway
@@ -253,12 +256,16 @@ export class AddunitgroupPage {
 
 
   getColor(colorCodeValue) {
-    if (this.nccode != colorCodeValue) {
-      document.getElementById(this.nccode);
-    }
+     document.getElementById(colorCodeValue).classList.add("border-need");
+     if(this.ccode !=colorCodeValue)
+     {
+        document.getElementById(this.ccode).classList.remove("border-need");
+     }
+     
+   
+ 
     console.log(colorCodeValue);
     this.ccode = colorCodeValue;
-    // document.getElementById("colorcode").classList.remove("border-need");
   }
 
 
@@ -269,21 +276,21 @@ export class AddunitgroupPage {
   }
 
   notification() {
-    this.nav.push(NotificationPage);
+    this.nav.setRoot(NotificationPage);
   }
   redirectToUser() {
-    this.nav.push(UnitsPage);
+    this.nav.setRoot(UnitsPage);
   }
   redirectToMessage() {
     this.nav.setRoot(EmailPage);
   }
   redirectCalendar() {
-    this.nav.push(CalendarPage);
+    this.nav.setRoot(CalendarPage);
   }
   redirectToMaps() {
     this.nav.setRoot(MapsPage);
   }
   redirectToSettings() {
-    this.nav.push(OrgchartPage);
+    this.nav.setRoot(OrgchartPage);
   }
 }

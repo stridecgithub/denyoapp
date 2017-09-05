@@ -237,7 +237,7 @@ export class UnitsPage {
 
   doAdd() {
     localStorage.setItem("location", '');
-    this.nav.push(AddunitsonePage);
+    this.nav.setRoot(AddunitsonePage);
   }
   getCheckBoxValue(item, val) {
     /*console.log("Available data" + val);
@@ -282,7 +282,7 @@ console.log(JSON.stringify(this.selectedAction));*/
         this.sendNotification("Please select Atleast One Unit")
       }
       else {
-        urlstr = "/unitlistaction/" + this.str + "/1/delete";
+        urlstr = "/unitlistaction?action=delete&unitid="+this.str+"&is_mobile=1&loginid="+this.userId;
       }
     }
     if (actpet == 'viewdashboard') {
@@ -290,7 +290,7 @@ console.log(JSON.stringify(this.selectedAction));*/
         this.sendNotification("Please select Atleast One Unit")
       }
       else {
-        urlstr = "/unitlistaction/" + this.str + "/1/dashboard?ses_login_id=" + this.userId;
+        urlstr = "/unitlistaction?action=dashboard&unitid="+this.str+"&is_mobile=1&loginid="+this.userId
       }
     }
     if (actpet == 'view') {
@@ -311,7 +311,7 @@ console.log(JSON.stringify(this.selectedAction));*/
         localStorage.setItem("runninghr", item.runninghr);
         localStorage.setItem("nsd", item.nextservicedate);
 
-        this.nav.push(UnitdetailsPage, {
+        this.nav.setRoot(UnitdetailsPage, {
           record: this.detailvalue
         });
         return false;
@@ -340,7 +340,7 @@ console.log(JSON.stringify(this.selectedAction));*/
             this.reportData.startindex = 0;
             this.reportData.sort = "unit_id";
             /// this.doUnit();
-            this.nav.push(this.nav.getActive().component);
+            this.nav.setRoot(this.nav.getActive().component);
           }
           // Otherwise let 'em know anyway
           else {
@@ -351,7 +351,7 @@ console.log(JSON.stringify(this.selectedAction));*/
   }
   doEdit(item, act, unitId) {
     if (act == 'edit') {
-      this.nav.push(AddunitsonePage, {
+      this.nav.setRoot(AddunitsonePage, {
         record: item,
         act: act
       });
@@ -371,12 +371,12 @@ console.log(JSON.stringify(this.selectedAction));*/
       localStorage.setItem("nsd", item.nextservicedate);
 
 
-      this.nav.push(UnitdetailsPage, {
+      this.nav.setRoot(UnitdetailsPage, {
         record: item
       });
       return false;
     } else {
-      this.nav.push(ViewcompanygroupPage, {
+      this.nav.setRoot(ViewcompanygroupPage, {
         record: item,
         act: act
       });
@@ -425,8 +425,8 @@ console.log(JSON.stringify(this.selectedAction));*/
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/units/" + recordID + "/1/delete";
-
+     // url: any = this.apiServiceURL + "/units/" + recordID + "/1/delete";
+       url: any = this.apiServiceURL + "/unitlistaction?action=delete&unitid="+recordID+"&is_mobile=1&loginid="+this.userId;
     this.http.get(url, options)
       .subscribe(data => {
         // If the request was successful notify the user
@@ -503,7 +503,7 @@ console.log(JSON.stringify(this.selectedAction));*/
   }
 
   previous() {
-    this.nav.push(HomePage);
+    this.nav.setRoot(HomePage);
   }
   favorite(unit_id) {
     this.reportData.startindex = 0;
@@ -581,21 +581,21 @@ console.log(JSON.stringify(this.selectedAction));*/
   }
 
   notification() {
-    this.nav.push(NotificationPage);
+    this.nav.setRoot(NotificationPage);
   }
   redirectToUser() {
-    this.nav.push(UnitsPage);
+    this.nav.setRoot(UnitsPage);
   }
   redirectToMessage() {
     this.nav.setRoot(EmailPage);
   }
   redirectCalendar() {
-    this.nav.push(CalendarPage);
+    this.nav.setRoot(CalendarPage);
   }
   redirectToMaps() {
     this.nav.setRoot(MapsPage);
   }
   redirectToSettings() {
-    this.nav.push(OrgchartPage);
+    this.nav.setRoot(OrgchartPage);
   }
 }

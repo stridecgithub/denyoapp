@@ -129,10 +129,10 @@ export class EnginedetailPage {
     this.presentLoading(0);
   }
  previous() {
-    this.nav.push(HomePage);
+    this.nav.setRoot(HomePage);
   }
   doAdd() {
-    this.nav.push(AddenginedetailPage);
+    this.nav.setRoot(AddenginedetailPage);
   }
    doInfinite(infiniteScroll) {
     console.log('InfinitScroll function calling...');
@@ -213,7 +213,7 @@ export class EnginedetailPage {
   }
 doEdit(item, act) {
     if (act == 'edit') {
-      this.nav.push(AddenginedetailPage, {
+      this.nav.setRoot(AddenginedetailPage, {
         record: item,
         act: act
       });
@@ -222,7 +222,7 @@ doEdit(item, act) {
   doView(item,act)
   {
      if (act == 'detail') {
-      this.nav.push(EngineviewPage, {
+      this.nav.setRoot(EngineviewPage, {
         record: item
       });
       return false;
@@ -230,21 +230,21 @@ doEdit(item, act) {
   }
   
  notification() {
-    this.nav.push(NotificationPage);
+    this.nav.setRoot(NotificationPage);
   }
   redirectToUser() {
-    this.nav.push(UnitsPage);
+    this.nav.setRoot(UnitsPage);
   }
   redirectToMessage() {
     this.nav.setRoot(EmailPage);
   }
   redirectCalendar() {
-    this.nav.push(CalendarPage);
+    this.nav.setRoot(CalendarPage);
   }
   redirectToMaps() {
     this.nav.setRoot(MapsPage);
   }
   redirectToSettings() {
-    this.nav.push(OrgchartPage);
+    this.nav.setRoot(OrgchartPage);
   }
 }

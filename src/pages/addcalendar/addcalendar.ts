@@ -190,21 +190,6 @@ export class AddcalendarPage {
       }, {
         id: '11.45PM',
         time_name: '11:45 PM'
-      }, {
-        id: '11.45PM',
-        time_name: '11:45 PM'
-      }, {
-        id: '12.00PM',
-        time_name: '12:00 PM'
-      }, {
-        id: '12.15PM',
-        time_name: '12:15 PM'
-      }, {
-        id: '12.30PM',
-        time_name: '12:30 PM'
-      }, {
-        id: '12.45PM',
-        time_name: '12:45 PM'
       });
     let dateStr = new Date();
 
@@ -385,7 +370,7 @@ export class AddcalendarPage {
           } else {
             this.sendNotification(res.msg[0].result);
             localStorage.setItem("atMentionResult", '');
-            this.nav.push(CalendarPage);
+            this.nav.setRoot(CalendarPage);
           }
         }
         // Otherwise let 'em know anyway
@@ -436,7 +421,7 @@ export class AddcalendarPage {
             localStorage.setItem("atMentionResult", '');
           } else {
             this.sendNotification(res.msg[0].result);
-            this.nav.push(CalendarPage);
+            this.nav.setRoot(CalendarPage);
           }
         }
         // Otherwise let 'em know anyway
@@ -571,25 +556,25 @@ export class AddcalendarPage {
       );
   }
   previous() {
-    this.nav.push(CalendarPage);
+    this.nav.setRoot(CalendarPage);
   }
   notification() {
-    this.nav.push(NotificationPage);
+    this.nav.setRoot(NotificationPage);
   }
   redirectToUser() {
-    this.nav.push(UnitsPage);
+    this.nav.setRoot(UnitsPage);
   }
   redirectToMessage() {
     this.nav.setRoot(EmailPage);
   }
   redirectCalendar() {
-    this.nav.push(CalendarPage);
+    this.nav.setRoot(CalendarPage);
   }
   redirectToMaps() {
     this.nav.setRoot(MapsPage);
   }
   redirectToSettings() {
-    this.nav.push(OrgchartPage);
+    this.nav.setRoot(OrgchartPage);
   }
 
 }

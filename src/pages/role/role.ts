@@ -143,11 +143,11 @@ export class RolePage {
   }
 
   doAdd() {
-    this.nav.push(AddrolePage);
+    this.nav.setRoot(AddrolePage);
   }
   doEdit(item, act) {
     if (act == 'edit') {
-      this.nav.push(AddrolePage, {
+      this.nav.setRoot(AddrolePage, {
         record: item,
         act: act
       });
@@ -270,25 +270,25 @@ export class RolePage {
     }
   }
   notification() {
-    this.nav.push(NotificationPage);
+    this.nav.setRoot(NotificationPage);
   }
   redirectToUser() {
-    this.nav.push(UnitsPage);
+    this.nav.setRoot(UnitsPage);
   }
   redirectToMessage() {
     this.nav.setRoot(EmailPage);
   }
   redirectCalendar() {
-    this.nav.push(CalendarPage);
+    this.nav.setRoot(CalendarPage);
   }
   redirectToMaps() {
     this.nav.setRoot(MapsPage);
   }
   redirectToSettings() {
-    this.nav.push(OrgchartPage);
+    this.nav.setRoot(OrgchartPage);
   }
   previous() {
-    this.nav.push(MyaccountPage);
+    this.nav.setRoot(MyaccountPage);
 
 
   }

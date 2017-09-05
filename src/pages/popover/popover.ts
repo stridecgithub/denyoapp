@@ -51,7 +51,7 @@ export class PopoverPage {
   mail()
   {
     console.log("HELLO"+this.email);
-     this.nav.push(EmailPage, {
+     this.nav.setRoot(EmailPage, {
       recordemail:this.email
      
      

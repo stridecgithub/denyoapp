@@ -220,7 +220,7 @@ this.pageLoad();
           this.hideForm = true;
           this.sendNotification(`User created was successfully added`);
           localStorage.setItem("userPhotoFile", "");
-          this.navCtrl.push(OrgchartPage);
+          this.navCtrl.setRoot(OrgchartPage);
         }
         // Otherwise let 'em know anyway
         else {
@@ -276,7 +276,7 @@ this.pageLoad();
         if (data.status === 200) {
           this.hideForm = true;
           this.sendNotification(`successfully updated`);
-          this.navCtrl.push(OrgchartPage);
+          this.navCtrl.setRoot(OrgchartPage);
         }
         // Otherwise let 'em know anyway
         else {
@@ -434,7 +434,7 @@ this.pageLoad();
   }
 
   previous() {
-    this.navCtrl.push(AddorgchartonePage, {
+    this.navCtrl.setRoot(AddorgchartonePage, {
       record: this.NP.get("record")
     });
   }
@@ -497,22 +497,22 @@ this.pageLoad();
   }
 
   notification() {
-    this.navCtrl.push(NotificationPage);
+    this.navCtrl.setRoot(NotificationPage);
   }
   redirectToUser() {
-    this.navCtrl.push(UnitsPage);
+    this.navCtrl.setRoot(UnitsPage);
   }
   redirectToMessage() {
-    this.navCtrl.push(EmailPage);
+    this.navCtrl.setRoot(EmailPage);
   }
   redirectCalendar() {
-    this.navCtrl.push(CalendarPage);
+    this.navCtrl.setRoot(CalendarPage);
   }
   redirectToMaps() {
-    this.navCtrl.push(MapsPage);
+    this.navCtrl.setRoot(MapsPage);
   }
   redirectToSettings() {
-    this.navCtrl.push(OrgchartPage);
+    this.navCtrl.setRoot(OrgchartPage);
   }
  onSegmentChanged() {
     console.log("ID" + this.company_group);

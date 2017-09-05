@@ -877,13 +877,13 @@ export class CalendarComponent {
   }
 
   doCalendarView(event_id) {
-    this.navCtrl.push(CalendardetailPage, {
+    this.navCtrl.setRoot(CalendardetailPage, {
       event_id: event_id
     });
   }
 
   doAlarmView(event_id) {
-    this.navCtrl.push(AlarmdetailsPage, {
+    this.navCtrl.setRoot(AlarmdetailsPage, {
       record: event_id,
       act: 'Push'
     });

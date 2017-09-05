@@ -243,36 +243,36 @@ export class OrgchartPage {
   }
 
   doAdd() {
-    this.nav.push(AddorgchartonePage);
+    this.nav.setRoot(AddorgchartonePage);
   }
   previous() {
-    this.nav.push(MyaccountPage);
+    this.nav.setRoot(MyaccountPage);
   }
   doEdit(item, act) {
     if (act == 'edit') {
-      this.nav.push(AddorgchartonePage, {
+      this.nav.setRoot(AddorgchartonePage, {
         record: item,
         act: act
       });
     }
   }
   notification() {
-    this.nav.push(NotificationPage);
+    this.nav.setRoot(NotificationPage);
   }
   redirectToUser() {
-    this.nav.push(UnitsPage);
+    this.nav.setRoot(UnitsPage);
   }
   redirectToMessage() {
     this.nav.setRoot(EmailPage);
   }
   redirectCalendar() {
-    this.nav.push(CalendarPage);
+    this.nav.setRoot(CalendarPage);
   }
   redirectToMaps() {
     this.nav.setRoot(MapsPage);
   }
   redirectToSettings() {
-    //this.nav.push(OrgchartPage);
+    //this.nav.setRoot(OrgchartPage);
   }
 }
 

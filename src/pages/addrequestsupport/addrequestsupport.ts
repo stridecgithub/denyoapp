@@ -330,7 +330,7 @@ export class AddrequestsupportPage {
           localStorage.setItem("microtime", "");
           this.sendNotification(`Servicing info was successfully added`);
           localStorage.setItem("atMentionResult", '');
-          this.nav.push(ServicinginfoPage, {
+          this.nav.setRoot(ServicinginfoPage, {
             record: this.NP.get("record")
           });
         }
@@ -374,7 +374,7 @@ export class AddrequestsupportPage {
           localStorage.setItem("microtime", "");
           this.sendNotification(`Servicing info  was successfully updated`);
           localStorage.setItem("atMentionResult", '');
-          this.nav.push(ServicinginfoPage, {
+          this.nav.setRoot(ServicinginfoPage, {
             record: this.NP.get("record")
           });
         }
@@ -510,27 +510,27 @@ export class AddrequestsupportPage {
       });
   }
   previous() {
-    this.nav.push(ServicinginfoPage, {
+    this.nav.setRoot(ServicinginfoPage, {
       record: this.NP.get("record")
     });
   }
   notification() {
-    this.nav.push(NotificationPage);
+    this.nav.setRoot(NotificationPage);
   }
   redirectToUser() {
-    this.nav.push(UnitsPage);
+    this.nav.setRoot(UnitsPage);
   }
   redirectToMessage() {
     this.nav.setRoot(EmailPage);
   }
   redirectCalendar() {
-    this.nav.push(CalendarPage);
+    this.nav.setRoot(CalendarPage);
   }
   redirectToMaps() {
     this.nav.setRoot(MapsPage);
   }
   redirectToSettings() {
-    this.nav.push(OrgchartPage);
+    this.nav.setRoot(OrgchartPage);
   }
 
   showConfirm() {

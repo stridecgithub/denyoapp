@@ -24,7 +24,7 @@ import { OrgchartPage } from '../orgchart/orgchart';
 export class TrendlinePage {
 	public pageTitle: string;
 	iframeContent: any;
-	
+	public userid: any;
 	public loginas: any;
 	//private _inputpdf: string = '<iframe src="http://denyoappv2.stridecdev.com/2/1/unitdetails" height="350" frameborder="0"></iframe>';
 	private apiServiceURL: string = "http://denyoappv2.stridecdev.com";
@@ -32,26 +32,21 @@ export class TrendlinePage {
 
 	constructor(private sanitizer: DomSanitizer, public NP: NavParams, public navCtrl: NavController, public navParams: NavParams, public nav: NavController) {
 
- this.loginas = localStorage.getItem("userInfoName");
-
+		this.loginas = localStorage.getItem("userInfoName");
+		this.userid = localStorage.getItem("userInfoId");
 	}
 
 
 
 	ionViewDidLoad() {
-		 this.pageTitle = "Trendline";
+		this.pageTitle = "Trendline";
 		console.log('ionViewDidLoad TrendlinePage');
 	}
 
 	ionViewWillEnter() {
 		console.log("Alaram Id" + this.NP.get("alarmid"));
 		let alarmID = this.NP.get("alarmid");
-		//$('#loadExternalURL').load('http://www.google.com');
-
-
-		this.iframeContent = "<iframe id='filecontainer' src=" + this.apiServiceURL + "/" + alarmID + "/FUELLEVEL/1/showgraph height=350 width=100% frameborder=0></iframe>";
-
-
+		this.iframeContent = "<iframe id='filecontainer' src=" + this.apiServiceURL + "/" + "alarmlogtrendline?loginid=" + this.userid + "&alarm_id=" + alarmID + " height=350 width=100% frameborder=0></iframe > ";
 
 	}
 
@@ -59,27 +54,27 @@ export class TrendlinePage {
 		console.log('Enter kannan kris thibi1');
 	}
 	previous() {
-		this.nav.push(AlarmlogPage);
+		this.nav.setRoot(AlarmlogPage);
 	}
 	redirectToUser() {
-		this.nav.push(UserPage);
+		this.nav.setRoot(UserPage);
 	}
 
 	redirectToUnitGroup() {
-		this.nav.push(UnitgroupPage);
+		this.nav.setRoot(UnitgroupPage);
 	}
 	redirectToCompanyGroup() {
-		this.nav.push(CompanygroupPage);
+		this.nav.setRoot(CompanygroupPage);
 	}
 	redirectToUnits() {
-		this.nav.push(UnitsPage);
+		this.nav.setRoot(UnitsPage);
 	}
 	redirectToMyAccount() {
-		this.nav.push(OrgchartPage);
+		this.nav.setRoot(OrgchartPage);
 	}
 
 	redirectToRole() {
-		this.nav.push(RolePage);
+		this.nav.setRoot(RolePage);
 	}
 }
 

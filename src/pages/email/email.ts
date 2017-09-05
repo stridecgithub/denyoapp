@@ -823,13 +823,13 @@ export class EmailPage {
       this.choice = 'inbox';
     } else if (this.act == 'inbox'  && this.choice=='inbox') {
       console.log("E" + this.choice);
-      this.nav.push(DashboardPage);
+      this.nav.setRoot(DashboardPage);
     } else if (this.choice == 'send' && this.act == 'send'  ) {
       console.log("F" + this.choice);
-      this.nav.push(DashboardPage);
+      this.nav.setRoot(DashboardPage);
     } else {
       console.log("G" + this.choice);
-      this.nav.push(DashboardPage);
+      this.nav.setRoot(DashboardPage);
     }
   }
 
@@ -837,22 +837,22 @@ export class EmailPage {
 
 
   notification() {
-    this.nav.push(NotificationPage);
+    this.nav.setRoot(NotificationPage);
   }
   redirectToUser() {
-    this.nav.push(UnitsPage);
+    this.nav.setRoot(UnitsPage);
   }
   redirectToMessage() {
     this.nav.setRoot(EmailPage);
   }
   redirectCalendar() {
-    this.nav.push(CalendarPage);
+    this.nav.setRoot(CalendarPage);
   }
   redirectToMaps() {
     this.nav.setRoot(MapsPage);
   }
   redirectToSettings() {
-    this.nav.push(OrgchartPage);
+    this.nav.setRoot(OrgchartPage);
   }
   selectEntry(item) {
     console.log(JSON.stringify(item));

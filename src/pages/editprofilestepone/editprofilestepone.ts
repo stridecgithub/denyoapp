@@ -173,7 +173,7 @@ pageLoad()
       hashtag: this.hashtag,
       country: this.country
     });
-    this.nav.push(EditprofilesteptwoPage, {
+    this.nav.setRoot(EditprofilesteptwoPage, {
       accountInfo: this.userInfo,
       record: this.NP.get("record")
     });
@@ -286,25 +286,25 @@ pageLoad()
 
 
   previous() {
-    this.nav.push(MyaccountPage);
+    this.nav.setRoot(MyaccountPage);
   }
   notification() {
-    this.nav.push(NotificationPage);
+    this.nav.setRoot(NotificationPage);
   }
   redirectToUser() {
-    this.nav.push(UnitsPage);
+    this.nav.setRoot(UnitsPage);
   }
   redirectToMessage() {
     this.nav.setRoot(EmailPage);
   }
   redirectCalendar() {
-    this.nav.push(CalendarPage);
+    this.nav.setRoot(CalendarPage);
   }
   redirectToMaps() {
     this.nav.setRoot(MapsPage);
   }
   redirectToSettings() {
-    this.nav.push(OrgchartPage);
+    this.nav.setRoot(OrgchartPage);
   }
 }
 

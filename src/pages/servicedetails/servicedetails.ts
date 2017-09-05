@@ -309,35 +309,35 @@ export class ServicedetailsPage {
     if(this.NP.get("from")=='service')
     {
 
-    this.nav.push(ServicinginfoPage, {
+    this.nav.setRoot(ServicinginfoPage, {
       record: this.NP.get("record")
     });
   }
   else
   {
- this.nav.push(CommentsinfoPage, {
+ this.nav.setRoot(CommentsinfoPage, {
       record: this.NP.get("record")
     });
   }
   }
   redirectToUser() {
-    this.nav.push(UserPage);
+    this.nav.setRoot(UserPage);
   }
 
   redirectToUnitGroup() {
-    this.nav.push(UnitgroupPage);
+    this.nav.setRoot(UnitgroupPage);
   }
   redirectToCompanyGroup() {
-    this.nav.push(CompanygroupPage);
+    this.nav.setRoot(CompanygroupPage);
   }
   redirectToUnits() {
-    this.nav.push(UnitsPage);
+    this.nav.setRoot(UnitsPage);
   }
   redirectToMyAccount() {
-    this.nav.push(OrgchartPage);
+    this.nav.setRoot(OrgchartPage);
   }
 
   redirectToRole() {
-    this.nav.push(RolePage);
+    this.nav.setRoot(RolePage);
   }
 }

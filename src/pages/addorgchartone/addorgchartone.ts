@@ -185,7 +185,7 @@ export class AddorgchartonePage {
       createdby: createdby,
 
     });
-    this.nav.push(AddorgcharttwoPage, {
+    this.nav.setRoot(AddorgcharttwoPage, {
       accountInfo: this.userInfo
     });
   }
@@ -201,7 +201,7 @@ export class AddorgchartonePage {
       createdby: createdby,
 
     });
-    this.nav.push(AddorgcharttwoPage, {
+    this.nav.setRoot(AddorgcharttwoPage, {
       accountInfo: this.userInfo,
       record: this.NP.get("record")
     });
@@ -343,25 +343,25 @@ export class AddorgchartonePage {
     notification.present();
   }
   previous() {
-    this.nav.push(OrgchartPage);
+    this.nav.setRoot(OrgchartPage);
   }
   notification() {
-    this.nav.push(NotificationPage);
+    this.nav.setRoot(NotificationPage);
   }
   redirectToUser() {
-    this.nav.push(UnitsPage);
+    this.nav.setRoot(UnitsPage);
   }
   redirectToMessage() {
     this.nav.setRoot(EmailPage);
   }
   redirectCalendar() {
-    this.nav.push(CalendarPage);
+    this.nav.setRoot(CalendarPage);
   }
   redirectToMaps() {
     this.nav.setRoot(MapsPage);
   }
   redirectToSettings() {
-    this.nav.push(OrgchartPage);
+    this.nav.setRoot(OrgchartPage);
   }
 
 }

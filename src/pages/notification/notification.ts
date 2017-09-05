@@ -89,18 +89,18 @@ export class NotificationPage {
       });
     /*
         if (nottype == 'Alarm') {
-          this.nav.push(AlarmdetailsPage, {
+          this.nav.setRoot(AlarmdetailsPage, {
             record: item
           });
         }
       
         if (nottype == 'Service') {
-          this.nav.push(ServicedetailsPage, {
+          this.nav.setRoot(ServicedetailsPage, {
             record: item
           });
         }
         if (nottype == 'Comment') {
-          this.nav.push(CommentdetailsPage, {
+          this.nav.setRoot(CommentdetailsPage, {
             record: item
           });
         }
@@ -111,38 +111,38 @@ export class NotificationPage {
     if (nottype == 'M') {
       // this.nav.setRoot(EmailPage);
 
-      this.nav.push(EmailPage, {
+      this.nav.setRoot(EmailPage, {
         record: item.table_id,
         act: 'Push'
       });
 
     } else if (nottype == 'OA') {
-      this.nav.push(AlarmdetailsPage, {
+      this.nav.setRoot(AlarmdetailsPage, {
          record: item.table_id,
         act: 'Push'
       });
     } else if (nottype == 'A') {
-      //this.nav.push(AlarmdetailsPage);
+      //this.nav.setRoot(AlarmdetailsPage);
 
-      this.nav.push(AlarmdetailsPage, {
+      this.nav.setRoot(AlarmdetailsPage, {
         record: item.table_id,
         act: 'Push'
       });
 
     } else if (nottype == 'C') {
-      //this.nav.push(CommentdetailsPage);
-      this.nav.push(CommentdetailsPage, {
+      //this.nav.setRoot(CommentdetailsPage);
+      this.nav.setRoot(CommentdetailsPage, {
          record: item.table_id,
         act: 'Push'
       });
     } else if (nottype == 'E') {
-      this.nav.push(CalendardetailPage, {
+      this.nav.setRoot(CalendardetailPage, {
           record: item.table_id,
         act: 'Push'
       });
     } else if (nottype == 'S') {
-      // this.nav.push(ServicedetailsPage);
-      this.nav.push(ServicedetailsPage, {
+      // this.nav.setRoot(ServicedetailsPage);
+      this.nav.setRoot(ServicedetailsPage, {
          record: item.table_id,
         act: 'Push'
       });
@@ -269,7 +269,7 @@ export class NotificationPage {
 
   doRequest() {
     localStorage.setItem("microtime", "");
-    this.nav.push(AddrequestsupportPage, {
+    this.nav.setRoot(AddrequestsupportPage, {
       record: this.NP.get("record"),
       act: 'Add'
     });
@@ -336,29 +336,29 @@ export class NotificationPage {
     notification.present();
   }
   notification() {
-    this.nav.push(NotificationPage);
+    this.nav.setRoot(NotificationPage);
   }
 
 
   previous() {
-    this.nav.push(HomePage);
+    this.nav.setRoot(HomePage);
   }
 
 
   redirectToUser() {
-    this.nav.push(UnitsPage);
+    this.nav.setRoot(UnitsPage);
   }
   redirectToMessage() {
     this.nav.setRoot(EmailPage);
   }
   redirectCalendar() {
-    this.nav.push(CalendarPage);
+    this.nav.setRoot(CalendarPage);
   }
   redirectToMaps() {
     this.nav.setRoot(MapsPage);
   }
   redirectToSettings() {
-    this.nav.push(OrgchartPage);
+    this.nav.setRoot(OrgchartPage);
   }
 }
 

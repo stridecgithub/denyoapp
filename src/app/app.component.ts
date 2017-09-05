@@ -37,11 +37,11 @@ import { ForgotpasswordPage } from '../pages/forgotpassword/forgotpassword';
 //import { TrendlinePage } from '../pages/trendline/trendline';
 import { DataServiceProvider } from '../providers/data-service/data-service';
 import { ViewunitsPage } from '../pages/viewunits/viewunits';
-import { DashboardmapPage } from '../pages/dashboardmap/dashboardmap';
+
 import { Push, PushObject, PushOptions } from '@ionic-native/push';
 import { Network } from '@ionic-native/network';
 import { LocalNotifications } from '@ionic-native/local-notifications';
-import { AddMap } from '../pages/add-map/add-map';
+
 @Component({
   templateUrl: 'app.html',
   providers: [Push, Network, LocalNotifications]
@@ -144,7 +144,7 @@ export class MyApp {
            timer = 1;
            console.log(JSON.stringify(clicked))
  
-           //this.nav.push(HomePage);
+           //this.nav.setRoot(HomePage);
            this.callUnitDetails(clicked);
            //this.openPage(UnitsPage);
          }
@@ -189,7 +189,7 @@ export class MyApp {
   }
 
   callUnitDetails(clicked) {
-    this.nav.push(UnitdetailsPage, {
+    this.nav.setRoot(UnitdetailsPage, {
       record: clicked
     });
   }
@@ -205,53 +205,53 @@ export class MyApp {
   }
   openPage(page) {
     if (page.component == 'UnitsPage') {
-      this.nav.push(UnitsPage);
+      this.nav.setRoot(UnitsPage);
     } else if (page.component == 'UnitgroupPage') {
-      this.nav.push(UnitgroupPage);
+      this.nav.setRoot(UnitgroupPage);
     } else if (page.component == 'MyaccountPage') {
-      this.nav.push(MyaccountPage);
+      this.nav.setRoot(MyaccountPage);
     } else if (page.component == 'UserPage') {
-      this.nav.push(UserPage);
+      this.nav.setRoot(UserPage);
     } else if (page.component == 'CompanygroupPage') {
-      this.nav.push(CompanygroupPage);
+      this.nav.setRoot(CompanygroupPage);
     } else if (page.component == 'RolePage') {
-      this.nav.push(RolePage);
+      this.nav.setRoot(RolePage);
     } else if (page.component == 'ReporttemplatePage') {
-      this.nav.push(ReporttemplatePage);
+      this.nav.setRoot(ReporttemplatePage);
     } else if (page.component == 'OrgchartPage') {
-      this.nav.push(OrgchartPage);
+      this.nav.setRoot(OrgchartPage);
     } else if (page.title == 'Message') {
       this.menuCtrl.close();
       this.nav.setRoot(EmailPage);
     } else if (page.title == 'Logout') {
       this.logout();
       this.menuCtrl.close();
-      //this.nav.push(LogoutPage);
+      //this.nav.setRoot(LogoutPage);
     } else if (page.title == 'Dashboard') {
       this.menuCtrl.close();
-      this.nav.push(HomePage);
+      this.nav.setRoot(HomePage);
     } else if (page.title == 'Calendar') {
       this.menuCtrl.close();
-      this.nav.push(CalendarPage);
+      this.nav.setRoot(CalendarPage);
     } else if (page.title == 'Maps') {
       this.menuCtrl.close();
       this.nav.setRoot(MapsPage);
     } else if (page.title == 'Reports') {
       this.menuCtrl.close();
-      this.nav.push(ReportsPage);
+      this.nav.setRoot(ReportsPage);
     }
     else if (page.title == 'Alarm') {
       this.menuCtrl.close();
-      //this.nav.push(AlarmPage);
+      //this.nav.setRoot(AlarmPage);
     }
     else if (page.component == 'AddalarmPage') {
       this.nav.setRoot(AddalarmPage);
     }
     else if (page.component == 'MapdemoPage') {
-      //this.nav.push(MapdemoPage);
+      //this.nav.setRoot(MapdemoPage);
     }
     else if (page.component == 'EnginedetailPage') {
-      this.nav.push(EnginedetailPage);
+      this.nav.setRoot(EnginedetailPage);
     }
   }
 
@@ -303,7 +303,7 @@ export class MyApp {
     localStorage.setItem("DASHBOARD_UNITS_HIDE", '');
 
 
-    this.nav.push(HomePage);
+    this.nav.setRoot(HomePage);
   }
   initPushNotification() {
     // to check if we have permission
@@ -427,32 +427,32 @@ export class MyApp {
         });
 
       } else if (navtypes == 'OA') {
-        this.nav.push(AlarmdetailsPage, {
+        this.nav.setRoot(AlarmdetailsPage, {
           record: navids,
           act: 'Push'
         });
       } else if (navtypes == 'A') {
-        //this.nav.push(AlarmdetailsPage);
+        //this.nav.setRoot(AlarmdetailsPage);
 
-        this.nav.push(AlarmdetailsPage, {
+        this.nav.setRoot(AlarmdetailsPage, {
           record: navids,
           act: 'Push'
         });
 
       } else if (navtypes == 'C') {
-        //this.nav.push(CommentdetailsPage);
-        this.nav.push(CommentdetailsPage, {
+        //this.nav.setRoot(CommentdetailsPage);
+        this.nav.setRoot(CommentdetailsPage, {
           record: navids,
           act: 'Push'
         });
       } else if (navtypes == 'E') {
-        this.nav.push(CalendardetailPage, {
+        this.nav.setRoot(CalendardetailPage, {
           event_id: navids,
           act: 'Push'
         });
       } else if (navtypes == 'S') {
-        // this.nav.push(ServicedetailsPage);
-        this.nav.push(ServicedetailsPage, {
+        // this.nav.setRoot(ServicedetailsPage);
+        this.nav.setRoot(ServicedetailsPage, {
           record: navids,
           act: 'Push'
         });

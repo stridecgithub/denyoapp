@@ -75,25 +75,25 @@ model_id: '',
     this.iframeContent = "<iframe id='filecontainer' src=" + this.apiServiceURL + "/webview_enginedetails/"+editItem.model_id + " height=500px width=100% frameborder=0></iframe>";
   }
  notification() {
-    this.nav.push(NotificationPage);
+    this.navCtrl.setRoot(NotificationPage);
   }
   redirectToUser() {
-    this.nav.push(UnitsPage);
+    this.navCtrl.setRoot(UnitsPage);
   }
   redirectToMessage() {
     this.nav.setRoot(EmailPage);
   }
   redirectCalendar() {
-    this.nav.push(CalendarPage);
+    this.navCtrl.setRoot(CalendarPage);
   }
   redirectToMaps() {
     this.nav.setRoot(MapsPage);
   }
   redirectToSettings() {
-    this.nav.push(OrgchartPage);
+    this.navCtrl.setRoot(OrgchartPage);
   }
 
    previous() {
-    this.navCtrl.push(EnginedetailPage);
+    this.navCtrl.setRoot(EnginedetailPage);
   }
 }

@@ -187,7 +187,7 @@ export class ReporttemplatePage {
     notification.present();
   }
   doAdd(availableheading) {
-    this.nav.push(AddreporttemplatePage, {
+    this.nav.setRoot(AddreporttemplatePage, {
       availableheading: availableheading
     });
   }
@@ -235,7 +235,7 @@ export class ReporttemplatePage {
   }
   doEdit(item, act, availableheading) {
     if (act == 'edit') {
-      this.nav.push(AddreporttemplatePage, {
+      this.nav.setRoot(AddreporttemplatePage, {
         record: item,
         act: act,
         availableheading: availableheading
@@ -245,25 +245,25 @@ export class ReporttemplatePage {
 
 
   previous() {
-    this.nav.push(MyaccountPage);
+    this.nav.setRoot(MyaccountPage);
   }
   notification() {
-    this.nav.push(NotificationPage);
+    this.nav.setRoot(NotificationPage);
   }
   redirectToUser() {
-    this.nav.push(UnitsPage);
+    this.nav.setRoot(UnitsPage);
   }
   redirectToMessage() {
     this.nav.setRoot(EmailPage);
   }
   redirectCalendar() {
-    this.nav.push(CalendarPage);
+    this.nav.setRoot(CalendarPage);
   }
   redirectToMaps() {
     this.nav.setRoot(MapsPage);
   }
   redirectToSettings() {
-    this.nav.push(OrgchartPage);
+    this.nav.setRoot(OrgchartPage);
   }
 
 }

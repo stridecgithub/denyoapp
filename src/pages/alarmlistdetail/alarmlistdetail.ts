@@ -65,7 +65,7 @@ export class AlarmlistdetailPage {
     this.companyId = localStorage.getItem("userInfoCompanyId");
   }
   trendlineInfo(alarmid) {
-    this.nav.push(TrendlinePage, {
+    this.nav.setRoot(TrendlinePage, {
       alarmid: alarmid
     });
   }
@@ -125,32 +125,32 @@ export class AlarmlistdetailPage {
   {
       if(this.NP.get("record")=='alarm')
     {
-    this.nav.push(AlarmPage,
+    this.nav.setRoot(AlarmPage,
     {
       record: this.NP.get("record")
     });
   }
   else
   {
- this.nav.push(CommentsinfoPage);
+ this.nav.setRoot(CommentsinfoPage);
   }
   }
   notification() {
-    this.nav.push(NotificationPage);
+    this.nav.setRoot(NotificationPage);
   }
   redirectToUser() {
-    this.nav.push(UnitsPage);
+    this.nav.setRoot(UnitsPage);
   }
   redirectToMessage() {
     this.nav.setRoot(EmailPage);
   }
   redirectCalendar() {
-    this.nav.push(CalendarPage);
+    this.nav.setRoot(CalendarPage);
   }
   redirectToMaps() {
     this.nav.setRoot(MapsPage);
   }
   redirectToSettings() {
-    this.nav.push(OrgchartPage);
+    this.nav.setRoot(OrgchartPage);
   }
 }

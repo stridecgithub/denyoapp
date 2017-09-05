@@ -62,21 +62,21 @@ export class ViewcompanygroupPage {
    
   }
    notification() {
-    this.navCtrl.push(NotificationPage);
+    this.navCtrl.setRoot(NotificationPage);
   }
   redirectToUser() {
-    this.navCtrl.push(UnitsPage);
+    this.navCtrl.setRoot(UnitsPage);
   }
   redirectToMessage() {
-    this.navCtrl.push(EmailPage);
+    this.navCtrl.setRoot(EmailPage);
   }
   redirectCalendar() {
-    this.navCtrl.push(CalendarPage);
+    this.navCtrl.setRoot(CalendarPage);
   }
   redirectToMaps() {
-    this.navCtrl.push(MapsPage);
+    this.navCtrl.setRoot(MapsPage);
   }
   redirectToSettings() {
-    this.navCtrl.push(OrgchartPage);
+    this.navCtrl.setRoot(OrgchartPage);
   }
 }

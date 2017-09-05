@@ -271,7 +271,7 @@ export class AdduserPage {
       createdby: createdby,
 
     });
-    this.nav.push(UseraccountPage, {
+    this.nav.setRoot(UseraccountPage, {
       accountInfo: this.userInfo
     });
     /*
@@ -293,7 +293,7 @@ export class AdduserPage {
                 this.sendNotification(data.json().message);
               } else {
                 //this.sendNotification(data.json().message);
-                this.nav.push(UseraccountPage, {
+                this.nav.setRoot(UseraccountPage, {
                   accountInfo: this.userInfo
                 });
               }
@@ -325,7 +325,7 @@ export class AdduserPage {
       createdby: createdby,
 
     });
-    this.nav.push(UseraccountPage, {
+    this.nav.setRoot(UseraccountPage, {
       accountInfo: this.userInfo,
       record: this.NP.get("record")
     });
@@ -523,26 +523,26 @@ export class AdduserPage {
 
 
   notification() {
-    this.nav.push(NotificationPage);
+    this.nav.setRoot(NotificationPage);
   }
   previous() {
-    this.nav.push(UserPage);
+    this.nav.setRoot(UserPage);
   }
 
   redirectToUser() {
-    this.nav.push(UnitsPage);
+    this.nav.setRoot(UnitsPage);
   }
   redirectToMessage() {
     this.nav.setRoot(EmailPage);
   }
   redirectCalendar() {
-    this.nav.push(CalendarPage);
+    this.nav.setRoot(CalendarPage);
   }
   redirectToMaps() {
     this.nav.setRoot(MapsPage);
   }
   redirectToSettings() {
-    this.nav.push(OrgchartPage);
+    this.nav.setRoot(OrgchartPage);
   }
 
 }

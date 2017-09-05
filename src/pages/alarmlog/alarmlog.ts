@@ -204,7 +204,7 @@ export class AlarmlogPage {
     }
   }
   previous() {
-    this.nav.push(UnitdetailsPage, {
+    this.nav.setRoot(UnitdetailsPage, {
       record: this.NP.get("record")
     });
   }
@@ -231,7 +231,7 @@ export class AlarmlogPage {
   }
   details(item, act) {
     if (act == 'edit') {
-      this.nav.push(AlarmdetailsPage, {
+      this.nav.setRoot(AlarmdetailsPage, {
         record: item,
         act: act
       });
@@ -239,21 +239,21 @@ export class AlarmlogPage {
     }
   }
   notification() {
-    this.nav.push(NotificationPage);
+    this.nav.setRoot(NotificationPage);
   }
   redirectToUser() {
-    this.nav.push(UnitsPage);
+    this.nav.setRoot(UnitsPage);
   }
   redirectToMessage() {
     this.nav.setRoot(EmailPage);
   }
   redirectCalendar() {
-    this.nav.push(CalendarPage);
+    this.nav.setRoot(CalendarPage);
   }
   redirectToMaps() {
     this.nav.setRoot(MapsPage);
   }
   redirectToSettings() {
-    this.nav.push(OrgchartPage);
+    this.nav.setRoot(OrgchartPage);
   }
 }

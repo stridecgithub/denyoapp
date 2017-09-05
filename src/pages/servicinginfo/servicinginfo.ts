@@ -234,32 +234,32 @@ this.unitDetailData.favoriteindication = favorite;
   }
 
   notification() {
-    this.nav.push(NotificationPage);
+    this.nav.setRoot(NotificationPage);
   }
   previous() {
-    this.nav.push(UnitdetailsPage, {
+    this.nav.setRoot(UnitdetailsPage, {
       record: this.NP.get("record")
     });
   }
   redirectToUser() {
-    this.nav.push(UserPage);
+    this.nav.setRoot(UserPage);
   }
 
   redirectToUnitGroup() {
-    this.nav.push(UnitgroupPage);
+    this.nav.setRoot(UnitgroupPage);
   }
   redirectToCompanyGroup() {
-    this.nav.push(CompanygroupPage);
+    this.nav.setRoot(CompanygroupPage);
   }
   redirectToUnits() {
-    this.nav.push(UnitsPage);
+    this.nav.setRoot(UnitsPage);
   }
   redirectToMyAccount() {
-    this.nav.push(MyaccountPage);
+    this.nav.setRoot(MyaccountPage);
   }
 
   redirectToRole() {
-    this.nav.push(RolePage);
+    this.nav.setRoot(RolePage);
   }
   doAdd() {
     this.service_subject = '';
@@ -279,7 +279,7 @@ this.unitDetailData.favoriteindication = favorite;
     this.service_remark = '';
     this.addedImgLists = [];
     localStorage.setItem("microtime", "");
-    this.nav.push(AddrequestsupportPage, {
+    this.nav.setRoot(AddrequestsupportPage, {
       record: this.NP.get("record"),
       act: 'Add',
       unit_id: this.unit_id
@@ -305,7 +305,7 @@ this.unitDetailData.favoriteindication = favorite;
   }
   servicedetails(item, act) {
     localStorage.setItem("microtime", "");
-    this.nav.push(ServicedetailsPage, {
+    this.nav.setRoot(ServicedetailsPage, {
       record: item,
       act: 'Edit',
       from:'service'
@@ -379,13 +379,13 @@ this.unitDetailData.favoriteindication = favorite;
     this.nav.setRoot(EmailPage);
   }
   redirectCalendar() {
-    this.nav.push(CalendarPage);
+    this.nav.setRoot(CalendarPage);
   }
   redirectToMaps() {
     this.nav.setRoot(MapsPage);
   }
   redirectToSettings() {
-    this.nav.push(OrgchartPage);
+    this.nav.setRoot(OrgchartPage);
   }
 
 }

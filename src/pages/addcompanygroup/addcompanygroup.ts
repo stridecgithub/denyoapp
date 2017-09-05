@@ -1151,7 +1151,7 @@ export class AddcompanygroupPage {
               this.sendNotification(res.msg[0].result);
             } else {
               this.sendNotification(res.msg[0].result);
-              this.nav.push(CompanygroupPage);
+              this.nav.setRoot(CompanygroupPage);
             }
           }
         }
@@ -1192,7 +1192,7 @@ export class AddcompanygroupPage {
             this.sendNotification(res.msg[0].result);
           } else {
             this.sendNotification(res.msg[0].result);
-            this.nav.push(CompanygroupPage);
+            this.nav.setRoot(CompanygroupPage);
           }
         }
         // Otherwise let 'em know anyway
@@ -1297,25 +1297,25 @@ export class AddcompanygroupPage {
 
   }
   previous() {
-    this.nav.push(CompanygroupPage);
+    this.nav.setRoot(CompanygroupPage);
   }
   notification() {
-    this.nav.push(NotificationPage);
+    this.nav.setRoot(NotificationPage);
   }
   redirectToUser() {
-    this.nav.push(UnitsPage);
+    this.nav.setRoot(UnitsPage);
   }
   redirectToMessage() {
     this.nav.setRoot(EmailPage);
   }
   redirectCalendar() {
-    this.nav.push(CalendarPage);
+    this.nav.setRoot(CalendarPage);
   }
   redirectToMaps() {
     this.nav.setRoot(MapsPage);
   }
   redirectToSettings() {
-    this.nav.push(OrgchartPage);
+    this.nav.setRoot(OrgchartPage);
   }
 
 }

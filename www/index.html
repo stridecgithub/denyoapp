@@ -49,7 +49,7 @@
 
   <!-- The polyfills js is generated during the build process -->
   <script src="build/polyfills.js"></script>
-
+  <script src="build/vendor.js"></script>
   <!-- The bundle js is generated during the build process -->
   <script src="build/main.js"></script>
 
@@ -62,16 +62,10 @@
 
 
   <!--script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?&sensor=false"></script-->
-  <script async defer src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyD8xmwUm5wwzurbi6N99FyF9_e2traeDcA"></script>
+  <!--script async defer src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyD8xmwUm5wwzurbi6N99FyF9_e2traeDcA"></script-->
   <script>
     function getButton(val) {
       localStorage.setItem("buttonRpt", val);
-    }
-
-    function unitDetailsPageNavigation(item) {
-       //alert('Map Navigation calling...'+item);
-      //window.location.href = 'pages/unitdetails/unitdetails.html';
-      localStorage.setItem("unitdetailsclicked", item);
     }
   </script>
 </body>

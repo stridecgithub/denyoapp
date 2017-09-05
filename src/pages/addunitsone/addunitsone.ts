@@ -152,7 +152,7 @@ export class AddunitsonePage {
       latitude: this.lat,
       longitude: this.lang
     });
-    this.nav.push(AddunitstwoPage, {
+    this.nav.setRoot(AddunitstwoPage, {
       accountInfo: this.userInfo
     });
 
@@ -172,7 +172,7 @@ export class AddunitsonePage {
       latitude: this.lat,
       longitude: this.lang
     });
-    this.nav.push(AddunitstwoPage, {
+    this.nav.setRoot(AddunitstwoPage, {
       accountInfo: this.userInfo,
       record: this.NP.get("record")
     });
@@ -235,26 +235,26 @@ export class AddunitsonePage {
     }
   }
   previous() {
-    this.nav.push(UnitsPage);
+    this.nav.setRoot(UnitsPage);
   }
 
   notification() {
-    this.nav.push(NotificationPage);
+    this.nav.setRoot(NotificationPage);
   }
   redirectToUser() {
-    this.nav.push(UnitsPage);
+    this.nav.setRoot(UnitsPage);
   }
   redirectToMessage() {
     this.nav.setRoot(EmailPage);
   }
   redirectCalendar() {
-    this.nav.push(CalendarPage);
+    this.nav.setRoot(CalendarPage);
   }
   redirectToMaps() {
     this.nav.setRoot(MapsPage);
   }
   redirectToSettings() {
-    this.nav.push(OrgchartPage);
+    this.nav.setRoot(OrgchartPage);
   }
 
   getGps() {

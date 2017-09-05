@@ -218,11 +218,11 @@ export class CommentsinfoPage {
     this.presentLoading(0);
   }
   notification() {
-    this.nav.push(NotificationPage);
+    this.nav.setRoot(NotificationPage);
   }
   previous() {
 
-    this.nav.push(UnitdetailsPage, {
+    this.nav.setRoot(UnitdetailsPage, {
       record: this.NP.get("record")
     });
   }
@@ -282,14 +282,14 @@ export class CommentsinfoPage {
   details(item, act, type) {
     if (type.toLowerCase() == 'c') {
       localStorage.setItem("microtime", "");
-      this.nav.push(CommentdetailsPage, {
+      this.nav.setRoot(CommentdetailsPage, {
         record: item,
         act: 'Edit'
       });
     }
     if (type.toLowerCase() == 's') {
       localStorage.setItem("microtime", "");
-      this.nav.push(ServicedetailsPage, {
+      this.nav.setRoot(ServicedetailsPage, {
         record: item,
         act: 'Edit',
         from:'comment'
@@ -297,7 +297,7 @@ export class CommentsinfoPage {
     }
     if (type.toLowerCase() == 'r') {
       localStorage.setItem("microtime", "");
-      this.nav.push(ServicedetailsPage, {
+      this.nav.setRoot(ServicedetailsPage, {
         record: item,
         act: 'Edit',
         from:'comment'
@@ -305,7 +305,7 @@ export class CommentsinfoPage {
     }
     if(type.toLowerCase()=='a')
     {
-      this.nav.push(AlarmlistdetailPage, {
+      this.nav.setRoot(AlarmlistdetailPage, {
         record: item,
         act: act,
         from:'comment'
@@ -460,19 +460,19 @@ export class CommentsinfoPage {
 
 
   redirectToUser() {
-    this.nav.push(UnitsPage);
+    this.nav.setRoot(UnitsPage);
   }
   redirectToMessage() {
     this.nav.setRoot(EmailPage);
   }
   redirectCalendar() {
-    this.nav.push(CalendarPage);
+    this.nav.setRoot(CalendarPage);
   }
   redirectToMaps() {
     this.nav.setRoot(MapsPage);
   }
   redirectToSettings() {
-    this.nav.push(OrgchartPage);
+    this.nav.setRoot(OrgchartPage);
   }
    onSegmentChanged(val) {
     let splitdata = val.split(",");

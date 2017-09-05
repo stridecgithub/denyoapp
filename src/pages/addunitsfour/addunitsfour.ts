@@ -273,14 +273,14 @@ this.isSubmitted=true;
           this.hideForm = true;
             localStorage.setItem("atMentionResult", '');
           this.sendNotification(`Units created was successfully added`);
-          this.nav.push(UnitsPage);
+          this.nav.setRoot(UnitsPage);
         }
         // Otherwise let 'em know anyway
         else {
           this.sendNotification('Something went wrong!');
         }
       });
-    /* this.nav.push(UnitsPage, {
+    /* this.nav.setRoot(UnitsPage, {
        accountInfo: this.userInfo
      });*/
 
@@ -342,7 +342,7 @@ this.isSubmitted=true;
           this.hideForm = true;
             localStorage.setItem("atMentionResult", '');
           this.sendNotification(`Units was successfully updated`);
-          this.nav.push(UnitsPage);
+          this.nav.setRoot(UnitsPage);
         }
         // Otherwise let 'em know anyway
         else {
@@ -477,22 +477,22 @@ this.isSubmitted=true;
   }
 
  notification() {
-    this.nav.push(NotificationPage);
+    this.nav.setRoot(NotificationPage);
   }
   redirectToUser() {
-    this.nav.push(UnitsPage);
+    this.nav.setRoot(UnitsPage);
   }
   redirectToMessage() {
     this.nav.setRoot(EmailPage);
   }
   redirectCalendar() {
-    this.nav.push(CalendarPage);
+    this.nav.setRoot(CalendarPage);
   }
   redirectToMaps() {
     this.nav.setRoot(MapsPage);
   }
   redirectToSettings() {
-    this.nav.push(OrgchartPage);
+    this.nav.setRoot(OrgchartPage);
   }  
 }
 

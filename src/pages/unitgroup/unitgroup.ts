@@ -222,14 +222,14 @@ export class UnitgroupPage {
     }
   }
   doAdd() {
-    this.nav.push(AddunitgroupPage);
+    this.nav.setRoot(AddunitgroupPage);
   }
   previous() {
     this.nav.setRoot(HomePage);
   }
   doEdit(item, act) {
     if (act == 'edit') {
-      this.nav.push(AddunitgroupPage, {
+      this.nav.setRoot(AddunitgroupPage, {
         record: item,
         act: act
       });
@@ -397,26 +397,26 @@ export class UnitgroupPage {
   }
 
   notification() {
-    this.nav.push(NotificationPage);
+    this.nav.setRoot(NotificationPage);
   }
   redirectToUser() {
-    this.nav.push(UnitsPage);
+    this.nav.setRoot(UnitsPage);
   }
   redirectToMessage() {
     this.nav.setRoot(EmailPage);
   }
   redirectCalendar() {
-    this.nav.push(CalendarPage);
+    this.nav.setRoot(CalendarPage);
   }
   redirectToMaps() {
     this.nav.setRoot(MapsPage);
   }
   redirectToSettings() {
-    this.nav.push(OrgchartPage);
+    this.nav.setRoot(OrgchartPage);
   }
    view(id)
   {
     localStorage.setItem("uid",id);
-    this.nav.push(Unitgrouplist);
+    this.nav.setRoot(Unitgrouplist);
   }
 }

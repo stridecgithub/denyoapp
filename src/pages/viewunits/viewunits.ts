@@ -63,7 +63,7 @@ export class ViewunitsPage {
   }
 exit()
 {
-    this.nav.push(UnitdetailsPage, {
+    this.nav.setRoot(UnitdetailsPage, {
       record: this.navParams.get("record")
     });
 }
@@ -92,7 +92,8 @@ exit()
     let type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
       options: any = new RequestOptions({ headers: headers }),
-      url: any = this.apiServiceURL + "/unitlistaction/"+this.ulist+"/1/view";
+    //  http://denyoappv2.stridecdev.com/unitlistaction?action=view&unitid=1,2&is_mobile=1&loginid=4
+      url: any = this.apiServiceURL + "/unitlistaction?action=view&unitid="+this.ulist+"&is_mobile=1&loginid="+this.userId;
     let res;
     console.log(url);
     this.http.get(url, options)

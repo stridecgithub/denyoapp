@@ -442,10 +442,10 @@ pageLoad()
 
 
   notification() {
-    this.nav.push(NotificationPage);
+    this.nav.setRoot(NotificationPage);
   }
   previous() {
-    this.nav.push(AddunitsonePage, {
+    this.nav.setRoot(AddunitsonePage, {
       accountInfo: this.userInfo,
       record: this.NP.get("record")
     });
@@ -455,19 +455,19 @@ pageLoad()
 
 
   redirectToUser() {
-    this.nav.push(UnitsPage);
+    this.nav.setRoot(UnitsPage);
   }
   redirectToMessage() {
     this.nav.setRoot(EmailPage);
   }
   redirectCalendar() {
-    this.nav.push(CalendarPage);
+    this.nav.setRoot(CalendarPage);
   }
   redirectToMaps() {
     this.nav.setRoot(MapsPage);
   }
   redirectToSettings() {
-    this.nav.push(OrgchartPage);
+    this.nav.setRoot(OrgchartPage);
   }
 
 

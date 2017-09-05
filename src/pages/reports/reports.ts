@@ -63,9 +63,10 @@ export class ReportsPage {
       "seltemplate": ["", Validators.required],
       "seltimeframe": ["", Validators.required]
     });
-
+    this.responseResultTimeFrame = [];
   }
   ionViewWillEnter() {
+    this.responseResultTimeFrame = [];
     this.datevalidaton = 0;
     this.getFormat('table');
     this.getDropDownDataTemplate();
@@ -182,7 +183,7 @@ export class ReportsPage {
     }
 
 
-    this.nav.push(ReportviewtablePage, {
+    this.nav.setRoot(ReportviewtablePage, {
       selunit: selunit,
       seltemplate: seltemplate,
       seltimeframe: seltimeframe,
@@ -196,11 +197,6 @@ export class ReportsPage {
   }
 
 
-  createEntry(selunit, seltemplate, seltimeframe) {
-
-
-
-  }
 
 
 
@@ -220,17 +216,13 @@ export class ReportsPage {
       options: any = new RequestOptions({ headers: headers }),
       //url: any = this.apiServiceURL + "/units?is_mobile=1&startindex=0&results=300&sort=unit_id&dir=asc&company_id=" + this.companyId + "&loginid=" + this.userId;
       url: any = this.apiServiceURL + "/reports?is_mobile=1&companyid=" + this.companyid + "&loginid=" + this.userid;
-
     let res;
     console.log("URL" + url);
     this.http.get(url, options)
       .subscribe(data => {
         res = data.json();
-
-
         this.responseUnit = res.units;
       });
-
   }
 
   getDropDownDataTemplate() {
@@ -239,7 +231,6 @@ export class ReportsPage {
       options: any = new RequestOptions({ headers: headers }),
       //url: any = this.apiServiceURL + "/units?is_mobile=1&startindex=0&results=300&sort=unit_id&dir=asc&company_id=" + this.companyId + "&loginid=" + this.userId;
       url: any = this.apiServiceURL + "/reports?is_mobile=1&companyid=" + this.companyid + "&loginid=" + this.userid;
-
     let res;
     console.log("URL" + url);
     this.http.get(url, options)
@@ -256,25 +247,25 @@ export class ReportsPage {
     console.log('ionViewDidLoad ReportsPage');
   }
   notification() {
-    this.navCtrl.push(NotificationPage);
+    this.navCtrl.setRoot(NotificationPage);
   }
   redirectToUser() {
-    this.navCtrl.push(UnitsPage);
+    this.navCtrl.setRoot(UnitsPage);
   }
   redirectToMessage() {
-    this.navCtrl.push(EmailPage);
+    this.navCtrl.setRoot(EmailPage);
   }
   redirectCalendar() {
-    this.navCtrl.push(CalendarPage);
+    this.navCtrl.setRoot(CalendarPage);
   }
   redirectToMaps() {
-    this.navCtrl.push(MapsPage);
+    this.navCtrl.setRoot(MapsPage);
   }
   redirectToSettings() {
-    this.navCtrl.push(OrgchartPage);
+    this.navCtrl.setRoot(OrgchartPage);
   }
   previous() {
-    this.navCtrl.push(HomePage);
+    this.navCtrl.setRoot(HomePage);
   }
 }
 
