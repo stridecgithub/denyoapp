@@ -57,7 +57,7 @@ export class HomePage {
     }
 
     this.platform.ready().then(() => {
-      this.loadMap(0);
+      //this.loadMap(0);
     });
   }
 

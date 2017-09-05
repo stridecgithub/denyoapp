@@ -13,7 +13,7 @@ import { RolePage } from '../role/role';
 import { HomePage } from '../home/home';
 
 import { UnitdetailsPage } from '../unitdetails/unitdetails';
-declare var google;
+//declare var google;
 import { DomSanitizer } from '@angular/platform-browser';
 import { MyaccountPage } from '../myaccount/myaccount';
 import { UnitsPage } from '../units/units';
