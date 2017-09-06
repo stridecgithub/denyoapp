@@ -28,10 +28,11 @@
         {{wd}}
       </div>
       <!-- Data attribute idx should be enough, cause then we can retrieve the date, etc from the idx... -->
-      <button class="ionic2-cal-item  {{currentDate == d.date.date() ? 'currentDataHighlights' : ''}} " [attr.data-idx]="i" [attr.data-dayofmonth]="d.date.date()"
+       <!-- [ngClass]="{'out-of-current-month': (d.date.isBefore(ctrl.monthView.firstDayOfMonth) || d.date.isAfter(ctrl.monthView.lastDayOfMonth))}"
+       -->
+      <button class="ionic2-cal-item {{(d.date.year() == currentYear) && (d.date.month() == currentMonth) && (d.date.date() == currentDate) ? 'currentDataHighlights' : ''}}" [attr.data-idx]="i" [attr.data-dayofmonth]="d.date.date()"
         [attr.data-month]="d.date.month()" [attr.data-year]="d.date.year()" [id]="'month-grid-day-' + i" *ngFor="let d of ctrl.monthView.days; let i = index"
-        [ngClass]="{'out-of-current-month': (d.date.isBefore(ctrl.monthView.firstDayOfMonth) || d.date.isAfter(ctrl.monthView.lastDayOfMonth))}"
-        (tap)="selectDate(d, $event)" (press)="monthDayGridCellOnPress(d, $event)">
+       (tap)="selectDate(d, $event)" (press)="monthDayGridCellOnPress(d, $event)">
             <ul class="event-list" [dragula]='"first-bag"' [dragulaModel]='d.events'>
         <button 
           class="event-list-item 
@@ -66,7 +67,7 @@
         </button>
       </ul>
 
-      <p *ngFor="let h of highlighteddata; let i = index">
+      <p *ngFor="let h of highlighteddata; let i = index" class="{{currentDate == d.date.date() ? 'currentDataHighlights' : ''}}">
         <!--Date:{{h.date}}
   Calendar Date: {{d.date.year()}} - {{d.date.month()}} -{{d.date.date()}}
   Highlighted date:{{h.date}}
@@ -109,8 +110,8 @@
         <!-- Event-->
         <!-- 7 Event Only-->
       </p>
-      <span class="ionic2-cal-day-of-month" *ngIf="currentDate != d.date.date()" (click)="onTimeSelected(d.date.year(),d.date.month(),d.date.date(),'1')">{{d.date.date()}}</span>
-      <span class="ionic2-cal-day-of-month" *ngIf="currentDate == d.date.date()" (click)="onTimeSelected(d.date.year(),d.date.month(),d.date.date(),'1')">{{d.date.date()}}</span>
+      <span class="ionic2-cal-day-of-month {{currentDate == d.date.date() ? 'currentDataHighlights' : ''}}" *ngIf="currentDate != d.date.date()" (click)="onTimeSelected(d.date.year(),d.date.month(),d.date.date(),'1')">{{d.date.date()}}</span>
+      <span class="ionic2-cal-day-of-month {{currentDate == d.date.date() ? 'currentDataHighlights' : ''}}" *ngIf="currentDate == d.date.date()" (click)="onTimeSelected(d.date.year(),d.date.month(),d.date.date(),'1')">{{d.date.date()}}</span>
 
       </button>
     </div>
