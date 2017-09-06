@@ -87,6 +87,7 @@ export class CalendarComponent {
   calendarResultService: any;
   calendarResultEvent: any;
   calendarResultAlarm: any;
+  currentDataHighlights: any;
   public totalCountEventDateWise: any;
   noeventtitle: any;
   highlightdots: any;
@@ -129,6 +130,7 @@ export class CalendarComponent {
     private calendarElement: ElementRef,
     public events: Events, private http: Http, public toastCtrl: ToastController, public alertCtrl: AlertController) {
     let currentDate = new Date();
+    this.currentDataHighlights = '';
     this.currentDate = currentDate.getDate();
     this.currentMonth = currentDate.getMonth() + 1;
     if (this.getlength(this.currentMonth) == 1) {
@@ -333,6 +335,8 @@ export class CalendarComponent {
   }
 
   selectDate(date) {
+    console.log("Select date function" + date);
+    console.log("Select date function" + JSON.stringify(date));
     this.events.publish('calendar-event:month-grid-cell-tap', date);
     this.ctrl.dateSelection = date.date;
     this.ctrl.monthView.selectedDate = date;
@@ -539,6 +543,7 @@ export class CalendarComponent {
 
   tmpTapCount = 0;
   eventOnClick(item: CalendarEvent, $event) {
+    console.log("eventOnClick" + JSON.stringify($event));
     $event.srcEvent.stopPropagation(); // <-- Doesn't seem to work
     this.tmpTapCount = $event.tapCount;
     setTimeout(() => {
@@ -566,6 +571,7 @@ export class CalendarComponent {
   stopPressPropagation = false; // <-- Fix to stop mothDayGrid press event to
   //     get triggered too.
   eventOnPress(item: CalendarEvent, $event) {
+    console.log("eventOnPress" + JSON.stringify($event));
     $event.srcEvent.stopImmediatePropagation();
     $event.srcEvent.stopPropagation();
     this.stopPressPropagation = true;
@@ -584,6 +590,8 @@ export class CalendarComponent {
   }
 
   monthDayGridCellOnPress(item: CalendarEvent, $event) {
+    console.log("monthDayGridCellOnPress function" + $event);
+    console.log("monthDayGridCellOnPress function" + JSON.stringify($event));
     $event.srcEvent.stopPropagation(); // <-- Doesn't seem to work
     if (this.draggingItem === null && this.tmpTapCount === 0 && !this.stopPressPropagation) {
       this.events.publish('calendar-event:month-grid-cell-press - calendar.components', item);
@@ -940,7 +948,14 @@ export class CalendarComponent {
   onTimeSelected(year, month, date, ev) {
     console.log(year + "-" + month + "-" + date);
     this.currentDate = date;
-    console.log("One time selected date is:"+this.currentDate);
+    this.currentYear = year;
+    this.currentMonth = month;
+    console.log("One time selected date is:" + this.currentDate);
+    console.log("Current Year is:" + this.currentYear);
+    console.log("Current Date is:" + this.currentDate);
+    console.log("Current Month is:" + this.currentMonth);
+
+
     this.currentCalendarDate = ev;
     this.calendarResultAll = [];
     this.calendarResultService = [];

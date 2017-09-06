@@ -42,6 +42,8 @@ export class ReportviewtablePage {
   public msgcount: any;
   public notcount: any;
   public from: any;
+  public requestsuccess: any;
+  requestsuccessview:any;
   public to: any;
   public noentrymsg: any;
   public responseTemplate: any;
@@ -54,7 +56,9 @@ export class ReportviewtablePage {
     public fb: FormBuilder, public http: Http, public navCtrl: NavController, public nav: NavController, public loadingCtrl: LoadingController) {
     this.pageTitle = 'Reports Preview & Download';
     this.graphview = 0;
+    this.requestsuccess = '';
     this.pdfdownloadview = 0;
+    this.requestsuccessview=0;
     this.loginas = localStorage.getItem("userInfoName");
     this.userid = localStorage.getItem("userInfoId");
     this.companyid = localStorage.getItem("userInfoCompanyId");
@@ -67,6 +71,8 @@ export class ReportviewtablePage {
   }
   ionViewWillEnter() {
     this.success = 0;
+    this.requestsuccess = '';
+    this.requestsuccessview=0;
     let //body: string = "loginid=" + this.userId,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
@@ -80,7 +86,9 @@ export class ReportviewtablePage {
       });
   }
   ionViewDidLoad() {
+    this.requestsuccess = '';
     this.success = 0;
+    this.requestsuccessview=0;
     let seltypeBtn = localStorage.getItem("buttonRpt");
     console.log("Select Type Button Submit" + seltypeBtn);
     let action;
@@ -104,6 +112,7 @@ export class ReportviewtablePage {
 
 
     if (seltypeBtn != '3' && this.graphview == 0) {
+      console.log("Block A");
       let info = this.NP.get("selunit");
       console.log(JSON.stringify(info));
       let body: string = "is_mobile=1" +
@@ -163,6 +172,7 @@ export class ReportviewtablePage {
 
 
     } else if (seltypeBtn == '3' && this.graphview == 0) {
+      console.log("Block B");
       // PDF Viewer Calling      
       let body: string = "is_mobile=1" +
         "&selunit=" + this.NP.get("selunit") +
@@ -233,18 +243,27 @@ export class ReportviewtablePage {
 
 
     } else if (this.graphview > 0) {
-      this.iframeContent = "<iframe  src=http://denyoappv2.stridecdev.com/reports/viewreport?is_mobile=1" +
-        "&selunit=" + this.NP.get("selunit") +
-        "&seltimeframe=" + this.NP.get("seltimeframe") +
-        "&seltemplate=" + this.NP.get("seltemplate") +
-        "&from=" + this.NP.get("from") +
-        "&to=" + this.NP.get("to") +
-        "&exportto=" + this.NP.get("exportto") +
-        "&seltype=" + seltype +
-        "&action=" + action +
-        "&loginid=" + this.userid +
-        "&companyid=" + this.companyid +
-        "&datacodes='' height=350 width=100% frameborder=0></iframe>";
+      console.log("Block C");
+
+      if (seltypeBtn == '1') {
+        this.graphview = 0;
+        this.requestsuccessview=1;
+        this.requestsuccess = 'Request successfully sent';
+        console.log(this.requestsuccess);
+      } else {
+        this.iframeContent = "<iframe  src=http://denyoappv2.stridecdev.com/reports/viewreport?is_mobile=1" +
+          "&selunit=" + this.NP.get("selunit") +
+          "&seltimeframe=" + this.NP.get("seltimeframe") +
+          "&seltemplate=" + this.NP.get("seltemplate") +
+          "&from=" + this.NP.get("from") +
+          "&to=" + this.NP.get("to") +
+          "&exportto=" + this.NP.get("exportto") +
+          "&seltype=" + seltype +
+          "&action=" + action +
+          "&loginid=" + this.userid +
+          "&companyid=" + this.companyid +
+          "&datacodes='' height=350 width=100% frameborder=0></iframe>";
+      }
     }
 
   }

@@ -241,6 +241,19 @@ export class MapsPage {
     console.log('E');
   }
   mapunitdetail(item) {
+
+    localStorage.setItem("unitId", item.unit_id);
+    localStorage.setItem("iframeunitId",  item.unit_id);
+    localStorage.setItem("unitunitname", item.unitname);
+    localStorage.setItem("unitlocation", item.location);
+    localStorage.setItem("unitprojectname", item.projectname);
+    localStorage.setItem("unitcolorcode", item.colorcodeindications);
+    localStorage.setItem("unitlat", item.lat);
+    localStorage.setItem("unitlng", item.lng);
+    localStorage.setItem("runninghr", item.runninghr);
+    console.log("RHR" + item.runninghr);
+    localStorage.setItem("nsd", item.nextservicedate);
+
     this.navCtrl.setRoot(UnitdetailsPage, {
       record: item
     });
@@ -1005,6 +1018,7 @@ export class MapsPage {
     // Creating a new map
 
     if (val == 0) {
+      console.log("Block A");
       console.log("Default Loading  Map Defined...");
 
       let mapOptions: GoogleMapOptions = {
@@ -1020,6 +1034,7 @@ export class MapsPage {
       this.map = this.googleMaps.create(this.mapElement, mapOptions);
     }
     else if (val == 'undefined') {
+       console.log("Block B");
       console.log("Undefined calling");
       console.log("Selected Unit Map Defined..." + "val.latitude:" + val.latitude + "val.longtitude" + val.longtitude);
 
@@ -1029,13 +1044,13 @@ export class MapsPage {
             lat: val.latitude,
             lng: val.longtitude
           },
-          zoom: 18,
+          zoom: 16,
           tilt: 30,
         }
       };
       this.map = this.googleMaps.create(this.mapElement, mapOptions);
     } else {
-
+ console.log("Block C");
       console.log("Selected Unit Map Defined..." + "val.latitude:" + val.latitude + "val.longtitude" + val.longtitude);
 
       let mapOptions: GoogleMapOptions = {
@@ -1061,6 +1076,7 @@ export class MapsPage {
             if (res.totalCount > 0) {
               for (var unit in res.units) {
                 if (val == 0) {
+                   console.log("Block D");
                   //Google Map Start
 
                   //Google Map Start
@@ -1076,7 +1092,7 @@ export class MapsPage {
                   // Google Map End
                 } else if (val == 'undefined') {
                   //Google Map Start
-
+ console.log("Block E");
                   console.log("Selected Unit..." + "val.latitude:" + val.latitude + "val.longtitude" + val.longtitude);
                   this.map.one(GoogleMapsEvent.MAP_READY)
                     .then(() => {
@@ -1093,7 +1109,7 @@ export class MapsPage {
                   // Google Map End
                 } else {
                   //Google Map Start
-
+ console.log("Block F");
                   console.log("Selected Unit..." + "val.latitude:" + val.latitude + "val.longtitude" + val.longtitude);
                   this.map.one(GoogleMapsEvent.MAP_READY)
                     .then(() => {
@@ -1103,7 +1119,7 @@ export class MapsPage {
                         '<h4>' + val.projectname + '</h4>\n' +
                         '<p>Running Hours:' + val.runninghr + ' Hours</p>' + '</div>';
 
-                      this.addMarkerList(labeldata,  val.latitude, val.longtitude, val);
+                      this.addMarkerList(labeldata, val.latitude, val.longtitude, val);
 
                       // Google Map End
                     });
