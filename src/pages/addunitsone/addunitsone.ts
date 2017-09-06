@@ -117,9 +117,9 @@ export class AddunitsonePage {
     }
 
     // Get local
-    if (localStorage.getItem("location")) {
+   /* if (localStorage.getItem("location")) {
       this.location = localStorage.getItem("location");
-    }
+    }*/
     //
   }
   // Determine whether we adding or editing a record
@@ -187,7 +187,7 @@ export class AddunitsonePage {
     let location: string = this.form.controls["location"].value;
 
     // Local Storage for Back to Previous for handled that data
-    localStorage.setItem("location", location);
+   // localStorage.setItem("location", location);
     // Local Storage for Back to Previous for handled that data
 
     console.log(this.form.controls);

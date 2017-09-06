@@ -860,6 +860,120 @@ export class MapsPage {
         });
     }*/
 
+  /*
+    loadMap(val) {
+  
+  
+      // Now you can use all methods safely.
+  
+  
+  
+  
+      console.log("A" + JSON.stringify(val));
+      console.log("B" + val.length);
+      if (JSON.stringify(val).length > 0) {
+        this.reportData.startindex = 0;
+        this.reportData.results = 8;
+      }
+      let typestr: string = "application/x-www-form-urlencoded; charset=UTF-8",
+        headersstr: any = new Headers({ 'Content-Type': typestr }),
+        optionsstr: any = new RequestOptions({ headers: headersstr }),
+        urlstr: any = this.apiServiceURL + "/dashboard?is_mobile=1&startindex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc + "&loginid=" + this.userid + "&company_id=" + this.companyid;
+      console.log("Map Marker api url:" + urlstr);
+      let res;
+      let latLng
+      this.http.get(urlstr, optionsstr)
+        .subscribe(data => {
+  
+          this.mapElement = document.getElementById('map');
+  
+  
+  
+  
+          // Creating a new map
+  
+          if (val == 0) {
+            console.log("Default Loading  Map Defined...");
+  
+            let mapOptions: GoogleMapOptions = {
+              camera: {
+                target: {
+                  lat: 1.3249773,
+                  lng: 103.70307100000002
+                },             
+                zoom: 11,
+                tilt: 30
+              }
+            };
+            this.map = this.googleMaps.create(this.mapElement, mapOptions);
+          } else {
+  
+            console.log("Selected Unit Map Defined..." + "val.latitude:" + val.latitude + "val.longtitude" + val.longtitude);
+  
+            let mapOptions: GoogleMapOptions = {
+              camera: {
+                target: {
+                  lat: val.latitude,
+                  lng: val.longtitude
+                },
+                zoom: 16,
+                tilt: 30,
+              }
+            };
+            this.map = this.googleMaps.create(this.mapElement, mapOptions);
+          }
+  
+  
+  
+          // Wait the MAP_READY before using any methods.
+  
+          res = data.json();
+  
+          if (res.totalCount > 0) {
+            for (var unit in res.units) {
+              if (val == 0) {
+                //Google Map Start
+                this.map.one(GoogleMapsEvent.MAP_READY)
+                  .then(() => {
+                    //Google Map Start
+                    console.log("Default Unit..." + "val.latitude:" + res.units[unit].latitude + "val.longtitude" + res.units[unit].longtitude);
+                    let labeldata = '<div class="info_content">' +
+                      '<h3>' + res.units[unit].unitname + '</h3>' +
+                      '<h4>' + res.units[unit].projectname + '</h4>' +
+                      '<p>Running Hours:' + res.units[unit].runninghr + ' Hours</p>' + '</div>';
+                    this.addMarkerList(labeldata, res.units[unit].latitude, res.units[unit].longtitude, res.units[unit]);
+                    // Google Map End
+  
+                  });
+                // Google Map End
+              } else {
+                //Google Map Start
+  
+                console.log("Selected Unit..." + "val.latitude:" + val.latitude + "val.longtitude" + val.longtitude);
+                this.map.one(GoogleMapsEvent.MAP_READY)
+                  .then(() => {
+                    //Google Map Start
+                    let labeldata = '<div class="info_content">' +
+                      '<h3>' + val.unitname + '</h3>\n' +
+                      '<h4>' + val.projectname + '</h4>\n' +
+                      '<p>Running Hours:' + val.runninghr + ' Hours</p>' + '</div>';
+  
+                    this.addMarkerList(labeldata, val.lat, val.lng, val);
+  
+                    // Google Map End
+                  });
+                // Google Map End
+              }          
+            }
+          }
+        },
+        err => {
+          console.log("Map error:-" + JSON.stringify(err));
+        });
+    }
+  
+  */
+
 
   loadMap(val) {
 
@@ -881,60 +995,74 @@ export class MapsPage {
       urlstr: any = this.apiServiceURL + "/dashboard?is_mobile=1&startindex=" + this.reportData.startindex + "&results=" + this.reportData.results + "&sort=" + this.reportData.sort + "&dir=" + this.reportData.sortascdesc + "&loginid=" + this.userid + "&company_id=" + this.companyid;
     console.log("Map Marker api url:" + urlstr);
     let res;
-    let latLng
-    this.http.get(urlstr, optionsstr)
-      .subscribe(data => {
+    let latLng;
 
-        this.mapElement = document.getElementById('map');
+    this.mapElement = document.getElementById('map');
 
 
 
 
-        // Creating a new map
+    // Creating a new map
 
-        if (val == 0) {
-          console.log("Default Loading  Map Defined...");
+    if (val == 0) {
+      console.log("Default Loading  Map Defined...");
 
-          let mapOptions: GoogleMapOptions = {
-            camera: {
-              target: {
-                lat: 1.3249773,
-                lng: 103.70307100000002
-              },             
-              zoom: 11,
-              tilt: 30
-            }
-          };
-          this.map = this.googleMaps.create(this.mapElement, mapOptions);
-        } else {
-
-          console.log("Selected Unit Map Defined..." + "val.latitude:" + val.latitude + "val.longtitude" + val.longtitude);
-
-          let mapOptions: GoogleMapOptions = {
-            camera: {
-              target: {
-                lat: val.latitude,
-                lng: val.longtitude
-              },
-              zoom: 16,
-              tilt: 30,
-            }
-          };
-          this.map = this.googleMaps.create(this.mapElement, mapOptions);
+      let mapOptions: GoogleMapOptions = {
+        camera: {
+          target: {
+            lat: 1.3249773,
+            lng: 103.70307100000002
+          },
+          zoom: 11,
+          tilt: 30
         }
+      };
+      this.map = this.googleMaps.create(this.mapElement, mapOptions);
+    }
+    else if (val == 'undefined') {
+      console.log("Undefined calling");
+      console.log("Selected Unit Map Defined..." + "val.latitude:" + val.latitude + "val.longtitude" + val.longtitude);
 
+      let mapOptions: GoogleMapOptions = {
+        camera: {
+          target: {
+            lat: val.latitude,
+            lng: val.longtitude
+          },
+          zoom: 18,
+          tilt: 30,
+        }
+      };
+      this.map = this.googleMaps.create(this.mapElement, mapOptions);
+    } else {
 
+      console.log("Selected Unit Map Defined..." + "val.latitude:" + val.latitude + "val.longtitude" + val.longtitude);
 
-        // Wait the MAP_READY before using any methods.
+      let mapOptions: GoogleMapOptions = {
+        camera: {
+          target: {
+            lat: val.latitude,
+            lng: val.longtitude
+          },
+          zoom: 16,
+          tilt: 30,
+        }
+      };
+      this.map = this.googleMaps.create(this.mapElement, mapOptions);
+    }
+    this.map.one(GoogleMapsEvent.MAP_READY)
+      .then(() => {
+        this.http.get(urlstr, optionsstr)
+          .subscribe(data => {
+            // Wait the MAP_READY before using any methods.
 
-        res = data.json();
+            res = data.json();
 
-        if (res.totalCount > 0) {
-          for (var unit in res.units) {
-            if (val == 0) {
-              //Google Map Start
-              this.map.one(GoogleMapsEvent.MAP_READY)
-                .then(() => {
+            if (res.totalCount > 0) {
+              for (var unit in res.units) {
+                if (val == 0) {
+                  //Google Map Start
+
                   //Google Map Start
                   console.log("Default Unit..." + "val.latitude:" + res.units[unit].latitude + "val.longtitude" + res.units[unit].longtitude);
                   let labeldata = '<div class="info_content">' +
@@ -944,36 +1072,54 @@ export class MapsPage {
                   this.addMarkerList(labeldata, res.units[unit].latitude, res.units[unit].longtitude, res.units[unit]);
                   // Google Map End
 
-                });
-              // Google Map End
-            } else {
-              //Google Map Start
-
-              console.log("Selected Unit..." + "val.latitude:" + val.latitude + "val.longtitude" + val.longtitude);
-              this.map.one(GoogleMapsEvent.MAP_READY)
-                .then(() => {
-                  //Google Map Start
-                  let labeldata = '<div class="info_content">' +
-                    '<h3>' + val.unitname + '</h3>\n' +
-                    '<h4>' + val.projectname + '</h4>\n' +
-                    '<p>Running Hours:' + val.runninghr + ' Hours</p>' + '</div>';
-
-                  this.addMarkerList(labeldata, val.lat, val.lng, val);
 
                   // Google Map End
-                });
-              // Google Map End
-            }          
-          }
-        }
-      },
-      err => {
-        console.log("Map error:-" + JSON.stringify(err));
+                } else if (val == 'undefined') {
+                  //Google Map Start
+
+                  console.log("Selected Unit..." + "val.latitude:" + val.latitude + "val.longtitude" + val.longtitude);
+                  this.map.one(GoogleMapsEvent.MAP_READY)
+                    .then(() => {
+                      //Google Map Start
+                      let labeldata = '<div class="info_content">' +
+                        '<h3>' + val.unitname + '</h3>\n' +
+                        '<h4>' + val.projectname + '</h4>\n' +
+                        '<p>Running Hours:' + val.runninghr + ' Hours</p>' + '</div>';
+
+                      this.addMarkerList(labeldata, val.latitude, val.longtitude, val);
+
+                      // Google Map End
+                    });
+                  // Google Map End
+                } else {
+                  //Google Map Start
+
+                  console.log("Selected Unit..." + "val.latitude:" + val.latitude + "val.longtitude" + val.longtitude);
+                  this.map.one(GoogleMapsEvent.MAP_READY)
+                    .then(() => {
+                      //Google Map Start
+                      let labeldata = '<div class="info_content">' +
+                        '<h3>' + val.unitname + '</h3>\n' +
+                        '<h4>' + val.projectname + '</h4>\n' +
+                        '<p>Running Hours:' + val.runninghr + ' Hours</p>' + '</div>';
+
+                      this.addMarkerList(labeldata,  val.latitude, val.longtitude, val);
+
+                      // Google Map End
+                    });
+                  // Google Map End
+                }
+              }
+            }
+          },
+          err => {
+            console.log("Map error:-" + JSON.stringify(err));
+          });
       });
   }
 
 
-  addMarkerList(title, lat, lng, dataunit) {    
+  addMarkerList(title, lat, lng, dataunit) {
     console.log("Calling.... Marker Display Function");
     console.log("Title:" + title);
     console.log("Latitude:" + lat);

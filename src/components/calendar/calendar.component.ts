@@ -76,6 +76,7 @@ export class CalendarComponent {
   alarmselected: any;
   eventsselected: any;
   dateHeaderTitle: any;
+  currentDataHighlights: any;
   petselection: any;
   pet: string = "ALL";
   public currentCalendarDate: any;
@@ -136,6 +137,7 @@ export class CalendarComponent {
     } else {
       this.currentMonth = this.currentMonth;
     }
+    this.currentDataHighlights = '';
     this.currentYear = currentDate.getFullYear();
     this.userId = localStorage.getItem("userInfoId");
     this.userId = localStorage.getItem("userInfoId");
@@ -938,8 +940,12 @@ export class CalendarComponent {
     notification.present();
   }
   onTimeSelected(year, month, date, ev) {
+    this.currentDataHighlights = date;
+    console.log(this.currentDataHighlights);
     console.log(year + "-" + month + "-" + date);
-
+    this.currentDate = date;
+    //this.currentDataHighlights='currentDataHighlights';
+    console.log("One time selected date is:" + this.currentDate);
     this.currentCalendarDate = ev;
     this.calendarResultAll = [];
     this.calendarResultService = [];
@@ -1097,7 +1103,7 @@ export class CalendarComponent {
         event_location: this.eventIdentify[i]['event_location'],
         event_remark: this.eventIdentify[i]['event_remark'],
         event_addedby_name: this.eventIdentify[i]['event_addedby_name'],
-         formatted_datetime: this.eventIdentify[i]['formatted_datetime'],
+        formatted_datetime: this.eventIdentify[i]['formatted_datetime'],
         event_type: 'E',
         icon: 'alarm', // Icon of the alert. This is compulsory when using the 
         // calendar on small screens, as the name of the event will
@@ -1146,7 +1152,7 @@ export class CalendarComponent {
         event_remark: this.serviceIdentify[j]['service_remark'],
         event_location: this.serviceIdentify[j]['service_location'],
         event_addedby_name: this.serviceIdentify[j]['serviced_by_name'],
-         formatted_datetime: this.serviceIdentify[j]['formatted_datetime'],
+        formatted_datetime: this.serviceIdentify[j]['formatted_datetime'],
         event_type: 'S',
         icon: 'service',
         class: 'service'
@@ -1182,7 +1188,7 @@ export class CalendarComponent {
         event_location: this.alarmIdentity[k]['alarm_location'],
         event_addedby_name: this.alarmIdentity[k]['alarm_assginedby_name'],
         event_t: this.alarmIdentity[k]['date_time'],
-         formatted_datetime: this.alarmIdentity[k]['formatted_datetime'],
+        formatted_datetime: this.alarmIdentity[k]['formatted_datetime'],
         event_type: 'A',
         icon: 'event',
         class: 'event'
