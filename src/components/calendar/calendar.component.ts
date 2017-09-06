@@ -76,7 +76,6 @@ export class CalendarComponent {
   alarmselected: any;
   eventsselected: any;
   dateHeaderTitle: any;
-  currentDataHighlights: any;
   petselection: any;
   pet: string = "ALL";
   public currentCalendarDate: any;
@@ -137,7 +136,6 @@ export class CalendarComponent {
     } else {
       this.currentMonth = this.currentMonth;
     }
-    this.currentDataHighlights = '';
     this.currentYear = currentDate.getFullYear();
     this.userId = localStorage.getItem("userInfoId");
     this.userId = localStorage.getItem("userInfoId");
@@ -940,12 +938,9 @@ export class CalendarComponent {
     notification.present();
   }
   onTimeSelected(year, month, date, ev) {
-    this.currentDataHighlights = date;
-    console.log(this.currentDataHighlights);
     console.log(year + "-" + month + "-" + date);
     this.currentDate = date;
-    //this.currentDataHighlights='currentDataHighlights';
-    console.log("One time selected date is:" + this.currentDate);
+    console.log("One time selected date is:"+this.currentDate);
     this.currentCalendarDate = ev;
     this.calendarResultAll = [];
     this.calendarResultService = [];

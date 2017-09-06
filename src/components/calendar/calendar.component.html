@@ -28,7 +28,7 @@
         {{wd}}
       </div>
       <!-- Data attribute idx should be enough, cause then we can retrieve the date, etc from the idx... -->
-      <button class="ionic2-cal-item  {{currentDate == d.date.date() ? 'currentDataHighlights' : ''}} {{currentDataHighlights == d.date.date() ? 'currentDataHighlights' : ''}}" [attr.data-idx]="i" [attr.data-dayofmonth]="d.date.date()"
+      <button class="ionic2-cal-item  {{currentDate == d.date.date() ? 'currentDataHighlights' : ''}} " [attr.data-idx]="i" [attr.data-dayofmonth]="d.date.date()"
         [attr.data-month]="d.date.month()" [attr.data-year]="d.date.year()" [id]="'month-grid-day-' + i" *ngFor="let d of ctrl.monthView.days; let i = index"
         [ngClass]="{'out-of-current-month': (d.date.isBefore(ctrl.monthView.firstDayOfMonth) || d.date.isAfter(ctrl.monthView.lastDayOfMonth))}"
         (tap)="selectDate(d, $event)" (press)="monthDayGridCellOnPress(d, $event)">
@@ -66,7 +66,7 @@
         </button>
       </ul>
 
-      <p *ngFor="let h of highlighteddata; let i = index" class="{{currentDataHighlights}}">
+      <p *ngFor="let h of highlighteddata; let i = index">
         <!--Date:{{h.date}}
   Calendar Date: {{d.date.year()}} - {{d.date.month()}} -{{d.date.date()}}
   Highlighted date:{{h.date}}
