@@ -191,7 +191,7 @@ export class EmailPage {
   }
   ionViewDidEnter() {
 
-    this.pageTitle = 'Messsage';
+    this.pageTitle = 'Message';
     let //body: string = "loginid=" + this.userId,
       type: string = "application/x-www-form-urlencoded; charset=UTF-8",
       headers: any = new Headers({ 'Content-Type': type }),
